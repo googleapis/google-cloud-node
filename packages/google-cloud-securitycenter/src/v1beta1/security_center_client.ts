@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -110,41 +101,20 @@ export class SecurityCenterClient {
    *     const client = new SecurityCenterClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SecurityCenterClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'securitycenter.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +140,7 @@ export class SecurityCenterClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -184,7 +154,10 @@ export class SecurityCenterClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -214,17 +187,15 @@ export class SecurityCenterClient {
       organizationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}'
       ),
-      organizationAssetSecurityMarksPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/assets/{asset}/securityMarks'
-        ),
+      organizationAssetSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/assets/{asset}/securityMarks'
+      ),
       organizationSettingsPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/organizationSettings'
       ),
-      organizationSourceFindingSecurityMarksPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/sources/{source}/findings/{finding}/securityMarks'
-        ),
+      organizationSourceFindingSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/sources/{source}/findings/{finding}/securityMarks'
+      ),
       sourcePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/sources/{source}'
       ),
@@ -234,88 +205,47 @@ export class SecurityCenterClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      groupAssets: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'groupByResults'
-      ),
-      groupFindings: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'groupByResults'
-      ),
-      listAssets: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'listAssetsResults'
-      ),
-      listFindings: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'findings'
-      ),
-      listSources: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'sources'
-      ),
+      groupAssets:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'groupByResults'),
+      groupFindings:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'groupByResults'),
+      listAssets:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'listAssetsResults'),
+      listFindings:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'findings'),
+      listSources:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'sources')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1beta1/{name=organizations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1beta1/{name=organizations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1beta1/{name=organizations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1beta1/{name=organizations/*/operations}',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1beta1/{name=organizations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1beta1/{name=organizations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1beta1/{name=organizations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1beta1/{name=organizations/*/operations}',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const runAssetDiscoveryResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const runAssetDiscoveryMetadata = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       runAssetDiscovery: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         runAssetDiscoveryResponse.decode.bind(runAssetDiscoveryResponse),
-        runAssetDiscoveryMetadata.decode.bind(runAssetDiscoveryMetadata)
-      ),
+        runAssetDiscoveryMetadata.decode.bind(runAssetDiscoveryMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.securitycenter.v1beta1.SecurityCenter',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.securitycenter.v1beta1.SecurityCenter', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -346,53 +276,28 @@ export class SecurityCenterClient {
     // Put together the "service stub" for
     // google.cloud.securitycenter.v1beta1.SecurityCenter.
     this.securityCenterStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.securitycenter.v1beta1.SecurityCenter'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.securitycenter.v1beta1
-            .SecurityCenter,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.securitycenter.v1beta1.SecurityCenter') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.securitycenter.v1beta1.SecurityCenter,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const securityCenterStubMethods = [
-      'createSource',
-      'createFinding',
-      'getIamPolicy',
-      'getOrganizationSettings',
-      'getSource',
-      'groupAssets',
-      'groupFindings',
-      'listAssets',
-      'listFindings',
-      'listSources',
-      'runAssetDiscovery',
-      'setFindingState',
-      'setIamPolicy',
-      'testIamPermissions',
-      'updateFinding',
-      'updateOrganizationSettings',
-      'updateSource',
-      'updateSecurityMarks',
-    ];
+    const securityCenterStubMethods =
+        ['createSource', 'createFinding', 'getIamPolicy', 'getOrganizationSettings', 'getSource', 'groupAssets', 'groupFindings', 'listAssets', 'listFindings', 'listSources', 'runAssetDiscovery', 'setFindingState', 'setIamPolicy', 'testIamPermissions', 'updateFinding', 'updateOrganizationSettings', 'updateSource', 'updateSecurityMarks'];
     for (const methodName of securityCenterStubMethods) {
       const callPromise = this.securityCenterStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -417,14 +322,8 @@ export class SecurityCenterClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'securitycenter.googleapis.com';
   }
@@ -435,14 +334,8 @@ export class SecurityCenterClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'securitycenter.googleapis.com';
   }
@@ -473,7 +366,9 @@ export class SecurityCenterClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -482,9 +377,8 @@ export class SecurityCenterClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -495,1867 +389,1465 @@ export class SecurityCenterClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates a source.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the new source's parent. Its format should be
-   *   "organizations/[organization_id]".
-   * @param {google.cloud.securitycenter.v1beta1.Source} request.source
-   *   Required. The Source being created, only the display_name and description will be
-   *   used. All other fields will be ignored.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1beta1.Source|Source}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/security_center.create_source.js</caption>
-   * region_tag:securitycenter_v1beta1_generated_SecurityCenter_CreateSource_async
-   */
+/**
+ * Creates a source.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the new source's parent. Its format should be
+ *   "organizations/[organization_id]".
+ * @param {google.cloud.securitycenter.v1beta1.Source} request.source
+ *   Required. The Source being created, only the display_name and description will be
+ *   used. All other fields will be ignored.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1beta1.Source|Source}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/security_center.create_source.js</caption>
+ * region_tag:securitycenter_v1beta1_generated_SecurityCenter_CreateSource_async
+ */
   createSource(
-    request?: protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.ISource,
-      (
-        | protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.ISource,
+        protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest|undefined, {}|undefined
+      ]>;
   createSource(
-    request: protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v1beta1.ISource,
-      | protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createSource(
-    request: protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v1beta1.ISource,
-      | protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createSource(
-    request?: protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v1beta1.ISource,
-          | protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v1beta1.ISource,
-      | protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.ISource,
-      (
-        | protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  createSource(
+      request: protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v1beta1.ISource,
+          protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  createSource(
+      request?: protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v1beta1.ISource,
+          protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v1beta1.ISource,
+          protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.ISource,
+        protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createSource request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v1beta1.ISource,
-          | protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v1beta1.ISource,
+        protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createSource(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v1beta1.ISource,
-          (
-            | protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createSource response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createSource(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v1beta1.ISource,
+        protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createSource response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a finding. The corresponding source must exist for finding creation
-   * to succeed.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the new finding's parent. Its format should be
-   *   "organizations/[organization_id]/sources/[source_id]".
-   * @param {string} request.findingId
-   *   Required. Unique identifier provided by the client within the parent scope.
-   *   It must be alphanumeric and less than or equal to 32 characters and
-   *   greater than 0 characters in length.
-   * @param {google.cloud.securitycenter.v1beta1.Finding} request.finding
-   *   Required. The Finding being created. The name and security_marks will be ignored as
-   *   they are both output only fields on this resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1beta1.Finding|Finding}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/security_center.create_finding.js</caption>
-   * region_tag:securitycenter_v1beta1_generated_SecurityCenter_CreateFinding_async
-   */
+/**
+ * Creates a finding. The corresponding source must exist for finding creation
+ * to succeed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the new finding's parent. Its format should be
+ *   "organizations/[organization_id]/sources/[source_id]".
+ * @param {string} request.findingId
+ *   Required. Unique identifier provided by the client within the parent scope.
+ *   It must be alphanumeric and less than or equal to 32 characters and
+ *   greater than 0 characters in length.
+ * @param {google.cloud.securitycenter.v1beta1.Finding} request.finding
+ *   Required. The Finding being created. The name and security_marks will be ignored as
+ *   they are both output only fields on this resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1beta1.Finding|Finding}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/security_center.create_finding.js</caption>
+ * region_tag:securitycenter_v1beta1_generated_SecurityCenter_CreateFinding_async
+ */
   createFinding(
-    request?: protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.IFinding,
-      (
-        | protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.IFinding,
+        protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest|undefined, {}|undefined
+      ]>;
   createFinding(
-    request: protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v1beta1.IFinding,
-      | protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createFinding(
-    request: protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v1beta1.IFinding,
-      | protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createFinding(
-    request?: protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v1beta1.IFinding,
-          | protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v1beta1.IFinding,
-      | protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.IFinding,
-      (
-        | protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest|null|undefined,
+          {}|null|undefined>): void;
+  createFinding(
+      request: protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v1beta1.IFinding,
+          protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest|null|undefined,
+          {}|null|undefined>): void;
+  createFinding(
+      request?: protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v1beta1.IFinding,
+          protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v1beta1.IFinding,
+          protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.IFinding,
+        protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createFinding request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v1beta1.IFinding,
-          | protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v1beta1.IFinding,
+        protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createFinding response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createFinding(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v1beta1.IFinding,
-          (
-            | protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createFinding response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createFinding(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v1beta1.IFinding,
+        protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createFinding response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the access control policy on the specified Source.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/security_center.get_iam_policy.js</caption>
-   * region_tag:securitycenter_v1beta1_generated_SecurityCenter_GetIamPolicy_async
-   */
+/**
+ * Gets the access control policy on the specified Source.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.GetPolicyOptions} request.options
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/security_center.get_iam_policy.js</caption>
+ * region_tag:securitycenter_v1beta1_generated_SecurityCenter_GetIamPolicy_async
+ */
   getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the settings for an organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the organization to get organization settings for. Its format is
-   *   "organizations/[organization_id]/organizationSettings".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1beta1.OrganizationSettings|OrganizationSettings}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/security_center.get_organization_settings.js</caption>
-   * region_tag:securitycenter_v1beta1_generated_SecurityCenter_GetOrganizationSettings_async
-   */
+/**
+ * Gets the settings for an organization.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the organization to get organization settings for. Its format is
+ *   "organizations/[organization_id]/organizationSettings".
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1beta1.OrganizationSettings|OrganizationSettings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/security_center.get_organization_settings.js</caption>
+ * region_tag:securitycenter_v1beta1_generated_SecurityCenter_GetOrganizationSettings_async
+ */
   getOrganizationSettings(
-    request?: protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-      (
-        | protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+        protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest|undefined, {}|undefined
+      ]>;
   getOrganizationSettings(
-    request: protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-      | protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOrganizationSettings(
-    request: protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-      | protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOrganizationSettings(
-    request?: protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-          | protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-      | protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-      (
-        | protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getOrganizationSettings(
+      request: protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+          protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getOrganizationSettings(
+      request?: protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+          protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+          protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+        protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getOrganizationSettings request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-          | protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+        protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getOrganizationSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getOrganizationSettings(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-          (
-            | protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getOrganizationSettings response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getOrganizationSettings(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+        protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getOrganizationSettings response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a source.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Relative resource name of the source. Its format is
-   *   "organizations/[organization_id]/source/[source_id]".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1beta1.Source|Source}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/security_center.get_source.js</caption>
-   * region_tag:securitycenter_v1beta1_generated_SecurityCenter_GetSource_async
-   */
+/**
+ * Gets a source.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Relative resource name of the source. Its format is
+ *   "organizations/[organization_id]/source/[source_id]".
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1beta1.Source|Source}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/security_center.get_source.js</caption>
+ * region_tag:securitycenter_v1beta1_generated_SecurityCenter_GetSource_async
+ */
   getSource(
-    request?: protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.ISource,
-      protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.ISource,
+        protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest|undefined, {}|undefined
+      ]>;
   getSource(
-    request: protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v1beta1.ISource,
-      | protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSource(
-    request: protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v1beta1.ISource,
-      | protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSource(
-    request?: protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v1beta1.ISource,
-          | protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v1beta1.ISource,
-      | protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.ISource,
-      protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSource(
+      request: protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v1beta1.ISource,
+          protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSource(
+      request?: protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v1beta1.ISource,
+          protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v1beta1.ISource,
+          protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.ISource,
+        protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getSource request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v1beta1.ISource,
-          | protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v1beta1.ISource,
+        protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getSource(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v1beta1.ISource,
-          (
-            | protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getSource response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getSource(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v1beta1.ISource,
+        protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getSource response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the state of a finding.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The relative resource name of the finding. See:
-   *   https://cloud.google.com/apis/design/resource_names#relative_resource_name
-   *   Example:
-   *   "organizations/{organization_id}/sources/{source_id}/finding/{finding_id}".
-   * @param {google.cloud.securitycenter.v1beta1.Finding.State} request.state
-   *   Required. The desired State of the finding.
-   * @param {google.protobuf.Timestamp} request.startTime
-   *   Required. The time at which the updated state takes effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1beta1.Finding|Finding}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/security_center.set_finding_state.js</caption>
-   * region_tag:securitycenter_v1beta1_generated_SecurityCenter_SetFindingState_async
-   */
+/**
+ * Updates the state of a finding.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The relative resource name of the finding. See:
+ *   https://cloud.google.com/apis/design/resource_names#relative_resource_name
+ *   Example:
+ *   "organizations/{organization_id}/sources/{source_id}/finding/{finding_id}".
+ * @param {google.cloud.securitycenter.v1beta1.Finding.State} request.state
+ *   Required. The desired State of the finding.
+ * @param {google.protobuf.Timestamp} request.startTime
+ *   Required. The time at which the updated state takes effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1beta1.Finding|Finding}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/security_center.set_finding_state.js</caption>
+ * region_tag:securitycenter_v1beta1_generated_SecurityCenter_SetFindingState_async
+ */
   setFindingState(
-    request?: protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.IFinding,
-      (
-        | protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.IFinding,
+        protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest|undefined, {}|undefined
+      ]>;
   setFindingState(
-    request: protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v1beta1.IFinding,
-      | protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setFindingState(
-    request: protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v1beta1.IFinding,
-      | protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setFindingState(
-    request?: protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v1beta1.IFinding,
-          | protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v1beta1.IFinding,
-      | protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.IFinding,
-      (
-        | protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest|null|undefined,
+          {}|null|undefined>): void;
+  setFindingState(
+      request: protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v1beta1.IFinding,
+          protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest|null|undefined,
+          {}|null|undefined>): void;
+  setFindingState(
+      request?: protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v1beta1.IFinding,
+          protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v1beta1.IFinding,
+          protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.IFinding,
+        protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setFindingState request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v1beta1.IFinding,
-          | protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v1beta1.IFinding,
+        protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setFindingState response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setFindingState(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v1beta1.IFinding,
-          (
-            | protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('setFindingState response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setFindingState(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v1beta1.IFinding,
+        protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setFindingState response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets the access control policy on the specified Source.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
-   *   the fields in the mask will be modified. If no mask is provided, the
-   *   following default mask is used:
-   *
-   *   `paths: "bindings, etag"`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/security_center.set_iam_policy.js</caption>
-   * region_tag:securitycenter_v1beta1_generated_SecurityCenter_SetIamPolicy_async
-   */
+/**
+ * Sets the access control policy on the specified Source.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being specified.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.Policy} request.policy
+ *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+ *   the policy is limited to a few 10s of KB. An empty policy is a
+ *   valid policy but certain Cloud Platform services (such as Projects)
+ *   might reject them.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+ *   the fields in the mask will be modified. If no mask is provided, the
+ *   following default mask is used:
+ *
+ *   `paths: "bindings, etag"`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/security_center.set_iam_policy.js</caption>
+ * region_tag:securitycenter_v1beta1_generated_SecurityCenter_SetIamPolicy_async
+ */
   setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns the permissions that a caller has on the specified source.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/security_center.test_iam_permissions.js</caption>
-   * region_tag:securitycenter_v1beta1_generated_SecurityCenter_TestIamPermissions_async
-   */
+/**
+ * Returns the permissions that a caller has on the specified source.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see
+ *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/security_center.test_iam_permissions.js</caption>
+ * region_tag:securitycenter_v1beta1_generated_SecurityCenter_TestIamPermissions_async
+ */
   testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>;
   testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      callback: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('testIamPermissions request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .testIamPermissions(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('testIamPermissions response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.testIamPermissions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('testIamPermissions response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates or updates a finding. The corresponding source must exist for a
-   * finding creation to succeed.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.securitycenter.v1beta1.Finding} request.finding
-   *   Required. The finding resource to update or create if it does not already exist.
-   *   parent, security_marks, and update_time will be ignored.
-   *
-   *   In the case of creation, the finding id portion of the name must
-   *   alphanumeric and less than or equal to 32 characters and greater than 0
-   *   characters in length.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The FieldMask to use when updating the finding resource. This field should
-   *   not be specified when creating a finding.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1beta1.Finding|Finding}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/security_center.update_finding.js</caption>
-   * region_tag:securitycenter_v1beta1_generated_SecurityCenter_UpdateFinding_async
-   */
+/**
+ * Creates or updates a finding. The corresponding source must exist for a
+ * finding creation to succeed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.securitycenter.v1beta1.Finding} request.finding
+ *   Required. The finding resource to update or create if it does not already exist.
+ *   parent, security_marks, and update_time will be ignored.
+ *
+ *   In the case of creation, the finding id portion of the name must
+ *   alphanumeric and less than or equal to 32 characters and greater than 0
+ *   characters in length.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The FieldMask to use when updating the finding resource. This field should
+ *   not be specified when creating a finding.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1beta1.Finding|Finding}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/security_center.update_finding.js</caption>
+ * region_tag:securitycenter_v1beta1_generated_SecurityCenter_UpdateFinding_async
+ */
   updateFinding(
-    request?: protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.IFinding,
-      (
-        | protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.IFinding,
+        protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest|undefined, {}|undefined
+      ]>;
   updateFinding(
-    request: protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v1beta1.IFinding,
-      | protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateFinding(
-    request: protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v1beta1.IFinding,
-      | protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateFinding(
-    request?: protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v1beta1.IFinding,
-          | protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v1beta1.IFinding,
-      | protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.IFinding,
-      (
-        | protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateFinding(
+      request: protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v1beta1.IFinding,
+          protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateFinding(
+      request?: protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v1beta1.IFinding,
+          protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v1beta1.IFinding,
+          protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.IFinding,
+        protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'finding.name': request.finding!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'finding.name': request.finding!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateFinding request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v1beta1.IFinding,
-          | protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v1beta1.IFinding,
+        protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateFinding response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateFinding(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v1beta1.IFinding,
-          (
-            | protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateFinding response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateFinding(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v1beta1.IFinding,
+        protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateFinding response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates an organization's settings.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.securitycenter.v1beta1.OrganizationSettings} request.organizationSettings
-   *   Required. The organization settings resource to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The FieldMask to use when updating the settings resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1beta1.OrganizationSettings|OrganizationSettings}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/security_center.update_organization_settings.js</caption>
-   * region_tag:securitycenter_v1beta1_generated_SecurityCenter_UpdateOrganizationSettings_async
-   */
+/**
+ * Updates an organization's settings.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.securitycenter.v1beta1.OrganizationSettings} request.organizationSettings
+ *   Required. The organization settings resource to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The FieldMask to use when updating the settings resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1beta1.OrganizationSettings|OrganizationSettings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/security_center.update_organization_settings.js</caption>
+ * region_tag:securitycenter_v1beta1_generated_SecurityCenter_UpdateOrganizationSettings_async
+ */
   updateOrganizationSettings(
-    request?: protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-      (
-        | protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+        protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest|undefined, {}|undefined
+      ]>;
   updateOrganizationSettings(
-    request: protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-      | protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateOrganizationSettings(
-    request: protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-      | protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateOrganizationSettings(
-    request?: protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-          | protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-      | protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-      (
-        | protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateOrganizationSettings(
+      request: protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+          protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateOrganizationSettings(
+      request?: protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+          protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+          protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+        protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'organization_settings.name': request.organizationSettings!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'organization_settings.name': request.organizationSettings!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateOrganizationSettings request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-          | protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+        protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateOrganizationSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateOrganizationSettings(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
-          (
-            | protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateOrganizationSettings response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateOrganizationSettings(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
+        protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateOrganizationSettings response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a source.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.securitycenter.v1beta1.Source} request.source
-   *   Required. The source resource to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The FieldMask to use when updating the source resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1beta1.Source|Source}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/security_center.update_source.js</caption>
-   * region_tag:securitycenter_v1beta1_generated_SecurityCenter_UpdateSource_async
-   */
+/**
+ * Updates a source.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.securitycenter.v1beta1.Source} request.source
+ *   Required. The source resource to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The FieldMask to use when updating the source resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1beta1.Source|Source}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/security_center.update_source.js</caption>
+ * region_tag:securitycenter_v1beta1_generated_SecurityCenter_UpdateSource_async
+ */
   updateSource(
-    request?: protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.ISource,
-      (
-        | protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.ISource,
+        protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest|undefined, {}|undefined
+      ]>;
   updateSource(
-    request: protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v1beta1.ISource,
-      | protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSource(
-    request: protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v1beta1.ISource,
-      | protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSource(
-    request?: protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v1beta1.ISource,
-          | protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v1beta1.ISource,
-      | protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.ISource,
-      (
-        | protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateSource(
+      request: protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v1beta1.ISource,
+          protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateSource(
+      request?: protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v1beta1.ISource,
+          protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v1beta1.ISource,
+          protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.ISource,
+        protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'source.name': request.source!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'source.name': request.source!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateSource request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v1beta1.ISource,
-          | protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v1beta1.ISource,
+        protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateSource(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v1beta1.ISource,
-          (
-            | protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateSource response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateSource(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v1beta1.ISource,
+        protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateSource response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates security marks.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.securitycenter.v1beta1.SecurityMarks} request.securityMarks
-   *   Required. The security marks resource to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The FieldMask to use when updating the security marks resource.
-   * @param {google.protobuf.Timestamp} request.startTime
-   *   The time at which the updated SecurityMarks take effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1beta1.SecurityMarks|SecurityMarks}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/security_center.update_security_marks.js</caption>
-   * region_tag:securitycenter_v1beta1_generated_SecurityCenter_UpdateSecurityMarks_async
-   */
+/**
+ * Updates security marks.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.securitycenter.v1beta1.SecurityMarks} request.securityMarks
+ *   Required. The security marks resource to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The FieldMask to use when updating the security marks resource.
+ * @param {google.protobuf.Timestamp} request.startTime
+ *   The time at which the updated SecurityMarks take effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1beta1.SecurityMarks|SecurityMarks}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/security_center.update_security_marks.js</caption>
+ * region_tag:securitycenter_v1beta1_generated_SecurityCenter_UpdateSecurityMarks_async
+ */
   updateSecurityMarks(
-    request?: protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
-      (
-        | protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
+        protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest|undefined, {}|undefined
+      ]>;
   updateSecurityMarks(
-    request: protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
-      | protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSecurityMarks(
-    request: protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
-      | protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSecurityMarks(
-    request?: protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
-          | protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
-      | protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
-      (
-        | protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateSecurityMarks(
+      request: protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
+          protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateSecurityMarks(
+      request?: protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
+          protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
+          protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
+        protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'security_marks.name': request.securityMarks!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'security_marks.name': request.securityMarks!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateSecurityMarks request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
-          | protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
+        protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateSecurityMarks response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateSecurityMarks(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
-          (
-            | protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateSecurityMarks response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateSecurityMarks(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
+        protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateSecurityMarks response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Runs asset discovery. The discovery is tracked with a long-running
-   * operation.
-   *
-   * This API can only be called with limited frequency for an organization. If
-   * it is called too frequently the caller will receive a TOO_MANY_REQUESTS
-   * error.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the organization to run asset discovery for. Its format is
-   *   "organizations/[organization_id]".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/security_center.run_asset_discovery.js</caption>
-   * region_tag:securitycenter_v1beta1_generated_SecurityCenter_RunAssetDiscovery_async
-   */
+/**
+ * Runs asset discovery. The discovery is tracked with a long-running
+ * operation.
+ *
+ * This API can only be called with limited frequency for an organization. If
+ * it is called too frequently the caller will receive a TOO_MANY_REQUESTS
+ * error.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the organization to run asset discovery for. Its format is
+ *   "organizations/[organization_id]".
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/security_center.run_asset_discovery.js</caption>
+ * region_tag:securitycenter_v1beta1_generated_SecurityCenter_RunAssetDiscovery_async
+ */
   runAssetDiscovery(
-    request?: protos.google.cloud.securitycenter.v1beta1.IRunAssetDiscoveryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v1beta1.IRunAssetDiscoveryRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   runAssetDiscovery(
-    request: protos.google.cloud.securitycenter.v1beta1.IRunAssetDiscoveryRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.securitycenter.v1beta1.IRunAssetDiscoveryRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   runAssetDiscovery(
-    request: protos.google.cloud.securitycenter.v1beta1.IRunAssetDiscoveryRequest,
-    callback: Callback<
-      LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.securitycenter.v1beta1.IRunAssetDiscoveryRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   runAssetDiscovery(
-    request?: protos.google.cloud.securitycenter.v1beta1.IRunAssetDiscoveryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.protobuf.IEmpty
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.securitycenter.v1beta1.IRunAssetDiscoveryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.protobuf.IEmpty
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('runAssetDiscovery response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('runAssetDiscovery request %j', request);
-    return this.innerApiCalls
-      .runAssetDiscovery(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.protobuf.IEmpty
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('runAssetDiscovery response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.runAssetDiscovery(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('runAssetDiscovery response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `runAssetDiscovery()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/security_center.run_asset_discovery.js</caption>
-   * region_tag:securitycenter_v1beta1_generated_SecurityCenter_RunAssetDiscovery_async
-   */
-  async checkRunAssetDiscoveryProgress(
-    name: string
-  ): Promise<
-    LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Empty>
-  > {
+/**
+ * Check the status of the long running operation returned by `runAssetDiscovery()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/security_center.run_asset_discovery.js</caption>
+ * region_tag:securitycenter_v1beta1_generated_SecurityCenter_RunAssetDiscovery_async
+ */
+  async checkRunAssetDiscoveryProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Empty>>{
     this._log.info('runAssetDiscovery long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.runAssetDiscovery,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.protobuf.Empty
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.runAssetDiscovery, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Empty>;
   }
-  /**
-   * Filters an organization's assets and  groups them by their specified
-   * properties.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the organization to groupBy. Its format is
-   *   "organizations/[organization_id]".
-   * @param {string} request.filter
-   *   Expression that defines the filter to apply across assets.
-   *   The expression is a list of zero or more restrictions combined via logical
-   *   operators `AND` and `OR`.
-   *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
-   *
-   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
-   *   character in front of them to indicate negation. The fields map to those
-   *   defined in the Asset resource. Examples include:
-   *
-   *   * name
-   *   * security_center_properties.resource_name
-   *   * resource_properties.a_property
-   *   * security_marks.marks.marka
-   *
-   *   The supported operators are:
-   *
-   *   * `=` for all value types.
-   *   * `>`, `<`, `>=`, `<=` for integer values.
-   *   * `:`, meaning substring matching, for strings.
-   *
-   *   The supported value types are:
-   *
-   *   * string literals in quotes.
-   *   * integer literals without quotes.
-   *   * boolean literals `true` and `false` without quotes.
-   *
-   *   For example, `resource_properties.size = 100` is a valid filter string.
-   * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping. The string
-   *   value should follow SQL syntax: comma separated list of fields. For
-   *   example:
-   *   "security_center_properties.resource_project,security_center_properties.project".
-   *
-   *   The following fields are supported when compare_duration is not set:
-   *
-   *   * security_center_properties.resource_project
-   *   * security_center_properties.resource_type
-   *   * security_center_properties.resource_parent
-   *
-   *   The following fields are supported when compare_duration is set:
-   *
-   *   * security_center_properties.resource_type
-   * @param {google.protobuf.Duration} request.compareDuration
-   *   When compare_duration is set, the Asset's "state" property is updated to
-   *   indicate whether the asset was added, removed, or remained present during
-   *   the compare_duration period of time that precedes the read_time. This is
-   *   the time between (read_time - compare_duration) and read_time.
-   *
-   *   The state value is derived based on the presence of the asset at the two
-   *   points in time. Intermediate state changes between the two times don't
-   *   affect the result. For example, the results aren't affected if the asset is
-   *   removed and re-created again.
-   *
-   *   Possible "state" values when compare_duration is specified:
-   *
-   *   * "ADDED": indicates that the asset was not present before
-   *                compare_duration, but present at reference_time.
-   *   * "REMOVED": indicates that the asset was present at the start of
-   *                compare_duration, but not present at reference_time.
-   *   * "ACTIVE": indicates that the asset was present at both the
-   *                start and the end of the time period defined by
-   *                compare_duration and reference_time.
-   *
-   *   This field is ignored if `state` is not a field in `group_by`.
-   * @param {google.protobuf.Timestamp} request.readTime
-   *   Time used as a reference point when filtering assets. The filter is limited
-   *   to assets existing at the supplied time and their values are those at that
-   *   specific time. Absence of this field will default to the API's version of
-   *   NOW.
-   * @param {string} request.pageToken
-   *   The value returned by the last `GroupAssetsResponse`; indicates
-   *   that this is a continuation of a prior `GroupAssets` call, and that the
-   *   system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v1beta1.GroupResult|GroupResult}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `groupAssetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Filters an organization's assets and  groups them by their specified
+ * properties.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the organization to groupBy. Its format is
+ *   "organizations/[organization_id]".
+ * @param {string} request.filter
+ *   Expression that defines the filter to apply across assets.
+ *   The expression is a list of zero or more restrictions combined via logical
+ *   operators `AND` and `OR`.
+ *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
+ *
+ *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+ *   character in front of them to indicate negation. The fields map to those
+ *   defined in the Asset resource. Examples include:
+ *
+ *   * name
+ *   * security_center_properties.resource_name
+ *   * resource_properties.a_property
+ *   * security_marks.marks.marka
+ *
+ *   The supported operators are:
+ *
+ *   * `=` for all value types.
+ *   * `>`, `<`, `>=`, `<=` for integer values.
+ *   * `:`, meaning substring matching, for strings.
+ *
+ *   The supported value types are:
+ *
+ *   * string literals in quotes.
+ *   * integer literals without quotes.
+ *   * boolean literals `true` and `false` without quotes.
+ *
+ *   For example, `resource_properties.size = 100` is a valid filter string.
+ * @param {string} request.groupBy
+ *   Required. Expression that defines what assets fields to use for grouping. The string
+ *   value should follow SQL syntax: comma separated list of fields. For
+ *   example:
+ *   "security_center_properties.resource_project,security_center_properties.project".
+ *
+ *   The following fields are supported when compare_duration is not set:
+ *
+ *   * security_center_properties.resource_project
+ *   * security_center_properties.resource_type
+ *   * security_center_properties.resource_parent
+ *
+ *   The following fields are supported when compare_duration is set:
+ *
+ *   * security_center_properties.resource_type
+ * @param {google.protobuf.Duration} request.compareDuration
+ *   When compare_duration is set, the Asset's "state" property is updated to
+ *   indicate whether the asset was added, removed, or remained present during
+ *   the compare_duration period of time that precedes the read_time. This is
+ *   the time between (read_time - compare_duration) and read_time.
+ *
+ *   The state value is derived based on the presence of the asset at the two
+ *   points in time. Intermediate state changes between the two times don't
+ *   affect the result. For example, the results aren't affected if the asset is
+ *   removed and re-created again.
+ *
+ *   Possible "state" values when compare_duration is specified:
+ *
+ *   * "ADDED": indicates that the asset was not present before
+ *                compare_duration, but present at reference_time.
+ *   * "REMOVED": indicates that the asset was present at the start of
+ *                compare_duration, but not present at reference_time.
+ *   * "ACTIVE": indicates that the asset was present at both the
+ *                start and the end of the time period defined by
+ *                compare_duration and reference_time.
+ *
+ *   This field is ignored if `state` is not a field in `group_by`.
+ * @param {google.protobuf.Timestamp} request.readTime
+ *   Time used as a reference point when filtering assets. The filter is limited
+ *   to assets existing at the supplied time and their values are those at that
+ *   specific time. Absence of this field will default to the API's version of
+ *   NOW.
+ * @param {string} request.pageToken
+ *   The value returned by the last `GroupAssetsResponse`; indicates
+ *   that this is a continuation of a prior `GroupAssets` call, and that the
+ *   system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v1beta1.GroupResult|GroupResult}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `groupAssetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   groupAssets(
-    request?: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
-      protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest | null,
-      protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
+        protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest|null,
+        protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
+      ]>;
   groupAssets(
-    request: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
-      | protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v1beta1.IGroupResult
-    >
-  ): void;
-  groupAssets(
-    request: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
-      | protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v1beta1.IGroupResult
-    >
-  ): void;
-  groupAssets(
-    request?: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
-          | protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v1beta1.IGroupResult
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
-      | protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v1beta1.IGroupResult
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
-      protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest | null,
-      protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v1beta1.IGroupResult>): void;
+  groupAssets(
+      request: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
+          protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v1beta1.IGroupResult>): void;
+  groupAssets(
+      request?: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
+          protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v1beta1.IGroupResult>,
+      callback?: PaginationCallback<
+          protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
+          protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v1beta1.IGroupResult>):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
+        protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest|null,
+        protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
-          | protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v1beta1.IGroupResult
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
+      protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse|null|undefined,
+      protos.google.cloud.securitycenter.v1beta1.IGroupResult>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('groupAssets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2364,130 +1856,127 @@ export class SecurityCenterClient {
     this._log.info('groupAssets request %j', request);
     return this.innerApiCalls
       .groupAssets(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
-          protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest | null,
-          protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse,
-        ]) => {
-          this._log.info('groupAssets values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
+        protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest|null,
+        protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
+      ]) => {
+        this._log.info('groupAssets values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `groupAssets`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the organization to groupBy. Its format is
-   *   "organizations/[organization_id]".
-   * @param {string} request.filter
-   *   Expression that defines the filter to apply across assets.
-   *   The expression is a list of zero or more restrictions combined via logical
-   *   operators `AND` and `OR`.
-   *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
-   *
-   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
-   *   character in front of them to indicate negation. The fields map to those
-   *   defined in the Asset resource. Examples include:
-   *
-   *   * name
-   *   * security_center_properties.resource_name
-   *   * resource_properties.a_property
-   *   * security_marks.marks.marka
-   *
-   *   The supported operators are:
-   *
-   *   * `=` for all value types.
-   *   * `>`, `<`, `>=`, `<=` for integer values.
-   *   * `:`, meaning substring matching, for strings.
-   *
-   *   The supported value types are:
-   *
-   *   * string literals in quotes.
-   *   * integer literals without quotes.
-   *   * boolean literals `true` and `false` without quotes.
-   *
-   *   For example, `resource_properties.size = 100` is a valid filter string.
-   * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping. The string
-   *   value should follow SQL syntax: comma separated list of fields. For
-   *   example:
-   *   "security_center_properties.resource_project,security_center_properties.project".
-   *
-   *   The following fields are supported when compare_duration is not set:
-   *
-   *   * security_center_properties.resource_project
-   *   * security_center_properties.resource_type
-   *   * security_center_properties.resource_parent
-   *
-   *   The following fields are supported when compare_duration is set:
-   *
-   *   * security_center_properties.resource_type
-   * @param {google.protobuf.Duration} request.compareDuration
-   *   When compare_duration is set, the Asset's "state" property is updated to
-   *   indicate whether the asset was added, removed, or remained present during
-   *   the compare_duration period of time that precedes the read_time. This is
-   *   the time between (read_time - compare_duration) and read_time.
-   *
-   *   The state value is derived based on the presence of the asset at the two
-   *   points in time. Intermediate state changes between the two times don't
-   *   affect the result. For example, the results aren't affected if the asset is
-   *   removed and re-created again.
-   *
-   *   Possible "state" values when compare_duration is specified:
-   *
-   *   * "ADDED": indicates that the asset was not present before
-   *                compare_duration, but present at reference_time.
-   *   * "REMOVED": indicates that the asset was present at the start of
-   *                compare_duration, but not present at reference_time.
-   *   * "ACTIVE": indicates that the asset was present at both the
-   *                start and the end of the time period defined by
-   *                compare_duration and reference_time.
-   *
-   *   This field is ignored if `state` is not a field in `group_by`.
-   * @param {google.protobuf.Timestamp} request.readTime
-   *   Time used as a reference point when filtering assets. The filter is limited
-   *   to assets existing at the supplied time and their values are those at that
-   *   specific time. Absence of this field will default to the API's version of
-   *   NOW.
-   * @param {string} request.pageToken
-   *   The value returned by the last `GroupAssetsResponse`; indicates
-   *   that this is a continuation of a prior `GroupAssets` call, and that the
-   *   system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v1beta1.GroupResult|GroupResult} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `groupAssetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `groupAssets`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the organization to groupBy. Its format is
+ *   "organizations/[organization_id]".
+ * @param {string} request.filter
+ *   Expression that defines the filter to apply across assets.
+ *   The expression is a list of zero or more restrictions combined via logical
+ *   operators `AND` and `OR`.
+ *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
+ *
+ *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+ *   character in front of them to indicate negation. The fields map to those
+ *   defined in the Asset resource. Examples include:
+ *
+ *   * name
+ *   * security_center_properties.resource_name
+ *   * resource_properties.a_property
+ *   * security_marks.marks.marka
+ *
+ *   The supported operators are:
+ *
+ *   * `=` for all value types.
+ *   * `>`, `<`, `>=`, `<=` for integer values.
+ *   * `:`, meaning substring matching, for strings.
+ *
+ *   The supported value types are:
+ *
+ *   * string literals in quotes.
+ *   * integer literals without quotes.
+ *   * boolean literals `true` and `false` without quotes.
+ *
+ *   For example, `resource_properties.size = 100` is a valid filter string.
+ * @param {string} request.groupBy
+ *   Required. Expression that defines what assets fields to use for grouping. The string
+ *   value should follow SQL syntax: comma separated list of fields. For
+ *   example:
+ *   "security_center_properties.resource_project,security_center_properties.project".
+ *
+ *   The following fields are supported when compare_duration is not set:
+ *
+ *   * security_center_properties.resource_project
+ *   * security_center_properties.resource_type
+ *   * security_center_properties.resource_parent
+ *
+ *   The following fields are supported when compare_duration is set:
+ *
+ *   * security_center_properties.resource_type
+ * @param {google.protobuf.Duration} request.compareDuration
+ *   When compare_duration is set, the Asset's "state" property is updated to
+ *   indicate whether the asset was added, removed, or remained present during
+ *   the compare_duration period of time that precedes the read_time. This is
+ *   the time between (read_time - compare_duration) and read_time.
+ *
+ *   The state value is derived based on the presence of the asset at the two
+ *   points in time. Intermediate state changes between the two times don't
+ *   affect the result. For example, the results aren't affected if the asset is
+ *   removed and re-created again.
+ *
+ *   Possible "state" values when compare_duration is specified:
+ *
+ *   * "ADDED": indicates that the asset was not present before
+ *                compare_duration, but present at reference_time.
+ *   * "REMOVED": indicates that the asset was present at the start of
+ *                compare_duration, but not present at reference_time.
+ *   * "ACTIVE": indicates that the asset was present at both the
+ *                start and the end of the time period defined by
+ *                compare_duration and reference_time.
+ *
+ *   This field is ignored if `state` is not a field in `group_by`.
+ * @param {google.protobuf.Timestamp} request.readTime
+ *   Time used as a reference point when filtering assets. The filter is limited
+ *   to assets existing at the supplied time and their values are those at that
+ *   specific time. Absence of this field will default to the API's version of
+ *   NOW.
+ * @param {string} request.pageToken
+ *   The value returned by the last `GroupAssetsResponse`; indicates
+ *   that this is a continuation of a prior `GroupAssets` call, and that the
+ *   system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v1beta1.GroupResult|GroupResult} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `groupAssetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   groupAssetsStream(
-    request?: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['groupAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('groupAssets stream %j', request);
     return this.descriptors.page.groupAssets.createStream(
       this.innerApiCalls.groupAssets as GaxCall,
@@ -2496,121 +1985,120 @@ export class SecurityCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `groupAssets`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the organization to groupBy. Its format is
-   *   "organizations/[organization_id]".
-   * @param {string} request.filter
-   *   Expression that defines the filter to apply across assets.
-   *   The expression is a list of zero or more restrictions combined via logical
-   *   operators `AND` and `OR`.
-   *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
-   *
-   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
-   *   character in front of them to indicate negation. The fields map to those
-   *   defined in the Asset resource. Examples include:
-   *
-   *   * name
-   *   * security_center_properties.resource_name
-   *   * resource_properties.a_property
-   *   * security_marks.marks.marka
-   *
-   *   The supported operators are:
-   *
-   *   * `=` for all value types.
-   *   * `>`, `<`, `>=`, `<=` for integer values.
-   *   * `:`, meaning substring matching, for strings.
-   *
-   *   The supported value types are:
-   *
-   *   * string literals in quotes.
-   *   * integer literals without quotes.
-   *   * boolean literals `true` and `false` without quotes.
-   *
-   *   For example, `resource_properties.size = 100` is a valid filter string.
-   * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping. The string
-   *   value should follow SQL syntax: comma separated list of fields. For
-   *   example:
-   *   "security_center_properties.resource_project,security_center_properties.project".
-   *
-   *   The following fields are supported when compare_duration is not set:
-   *
-   *   * security_center_properties.resource_project
-   *   * security_center_properties.resource_type
-   *   * security_center_properties.resource_parent
-   *
-   *   The following fields are supported when compare_duration is set:
-   *
-   *   * security_center_properties.resource_type
-   * @param {google.protobuf.Duration} request.compareDuration
-   *   When compare_duration is set, the Asset's "state" property is updated to
-   *   indicate whether the asset was added, removed, or remained present during
-   *   the compare_duration period of time that precedes the read_time. This is
-   *   the time between (read_time - compare_duration) and read_time.
-   *
-   *   The state value is derived based on the presence of the asset at the two
-   *   points in time. Intermediate state changes between the two times don't
-   *   affect the result. For example, the results aren't affected if the asset is
-   *   removed and re-created again.
-   *
-   *   Possible "state" values when compare_duration is specified:
-   *
-   *   * "ADDED": indicates that the asset was not present before
-   *                compare_duration, but present at reference_time.
-   *   * "REMOVED": indicates that the asset was present at the start of
-   *                compare_duration, but not present at reference_time.
-   *   * "ACTIVE": indicates that the asset was present at both the
-   *                start and the end of the time period defined by
-   *                compare_duration and reference_time.
-   *
-   *   This field is ignored if `state` is not a field in `group_by`.
-   * @param {google.protobuf.Timestamp} request.readTime
-   *   Time used as a reference point when filtering assets. The filter is limited
-   *   to assets existing at the supplied time and their values are those at that
-   *   specific time. Absence of this field will default to the API's version of
-   *   NOW.
-   * @param {string} request.pageToken
-   *   The value returned by the last `GroupAssetsResponse`; indicates
-   *   that this is a continuation of a prior `GroupAssets` call, and that the
-   *   system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.securitycenter.v1beta1.GroupResult|GroupResult}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/security_center.group_assets.js</caption>
-   * region_tag:securitycenter_v1beta1_generated_SecurityCenter_GroupAssets_async
-   */
+/**
+ * Equivalent to `groupAssets`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the organization to groupBy. Its format is
+ *   "organizations/[organization_id]".
+ * @param {string} request.filter
+ *   Expression that defines the filter to apply across assets.
+ *   The expression is a list of zero or more restrictions combined via logical
+ *   operators `AND` and `OR`.
+ *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
+ *
+ *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+ *   character in front of them to indicate negation. The fields map to those
+ *   defined in the Asset resource. Examples include:
+ *
+ *   * name
+ *   * security_center_properties.resource_name
+ *   * resource_properties.a_property
+ *   * security_marks.marks.marka
+ *
+ *   The supported operators are:
+ *
+ *   * `=` for all value types.
+ *   * `>`, `<`, `>=`, `<=` for integer values.
+ *   * `:`, meaning substring matching, for strings.
+ *
+ *   The supported value types are:
+ *
+ *   * string literals in quotes.
+ *   * integer literals without quotes.
+ *   * boolean literals `true` and `false` without quotes.
+ *
+ *   For example, `resource_properties.size = 100` is a valid filter string.
+ * @param {string} request.groupBy
+ *   Required. Expression that defines what assets fields to use for grouping. The string
+ *   value should follow SQL syntax: comma separated list of fields. For
+ *   example:
+ *   "security_center_properties.resource_project,security_center_properties.project".
+ *
+ *   The following fields are supported when compare_duration is not set:
+ *
+ *   * security_center_properties.resource_project
+ *   * security_center_properties.resource_type
+ *   * security_center_properties.resource_parent
+ *
+ *   The following fields are supported when compare_duration is set:
+ *
+ *   * security_center_properties.resource_type
+ * @param {google.protobuf.Duration} request.compareDuration
+ *   When compare_duration is set, the Asset's "state" property is updated to
+ *   indicate whether the asset was added, removed, or remained present during
+ *   the compare_duration period of time that precedes the read_time. This is
+ *   the time between (read_time - compare_duration) and read_time.
+ *
+ *   The state value is derived based on the presence of the asset at the two
+ *   points in time. Intermediate state changes between the two times don't
+ *   affect the result. For example, the results aren't affected if the asset is
+ *   removed and re-created again.
+ *
+ *   Possible "state" values when compare_duration is specified:
+ *
+ *   * "ADDED": indicates that the asset was not present before
+ *                compare_duration, but present at reference_time.
+ *   * "REMOVED": indicates that the asset was present at the start of
+ *                compare_duration, but not present at reference_time.
+ *   * "ACTIVE": indicates that the asset was present at both the
+ *                start and the end of the time period defined by
+ *                compare_duration and reference_time.
+ *
+ *   This field is ignored if `state` is not a field in `group_by`.
+ * @param {google.protobuf.Timestamp} request.readTime
+ *   Time used as a reference point when filtering assets. The filter is limited
+ *   to assets existing at the supplied time and their values are those at that
+ *   specific time. Absence of this field will default to the API's version of
+ *   NOW.
+ * @param {string} request.pageToken
+ *   The value returned by the last `GroupAssetsResponse`; indicates
+ *   that this is a continuation of a prior `GroupAssets` call, and that the
+ *   system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.securitycenter.v1beta1.GroupResult|GroupResult}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/security_center.group_assets.js</caption>
+ * region_tag:securitycenter_v1beta1_generated_SecurityCenter_GroupAssets_async
+ */
   groupAssetsAsync(
-    request?: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.securitycenter.v1beta1.IGroupResult> {
+      request?: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.securitycenter.v1beta1.IGroupResult>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['groupAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('groupAssets iterate %j', request);
     return this.descriptors.page.groupAssets.asyncIterate(
       this.innerApiCalls['groupAssets'] as GaxCall,
@@ -2618,165 +2106,140 @@ export class SecurityCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1beta1.IGroupResult>;
   }
-  /**
-   * Filters an organization or source's findings and  groups them by their
-   * specified properties.
-   *
-   * To group across all sources provide a `-` as the source id.
-   * Example: /v1beta1/organizations/{organization_id}/sources/-/findings
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the source to groupBy. Its format is
-   *   "organizations/[organization_id]/sources/[source_id]". To groupBy across
-   *   all sources provide a source_id of `-`. For example:
-   *   organizations/{organization_id}/sources/-
-   * @param {string} request.filter
-   *   Expression that defines the filter to apply across findings.
-   *   The expression is a list of one or more restrictions combined via logical
-   *   operators `AND` and `OR`.
-   *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
-   *
-   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
-   *   character in front of them to indicate negation. Examples include:
-   *
-   *    * name
-   *    * source_properties.a_property
-   *    * security_marks.marks.marka
-   *
-   *   The supported operators are:
-   *
-   *   * `=` for all value types.
-   *   * `>`, `<`, `>=`, `<=` for integer values.
-   *   * `:`, meaning substring matching, for strings.
-   *
-   *   The supported value types are:
-   *
-   *   * string literals in quotes.
-   *   * integer literals without quotes.
-   *   * boolean literals `true` and `false` without quotes.
-   *
-   *   For example, `source_properties.size = 100` is a valid filter string.
-   * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping (including
-   *   `state`). The string value should follow SQL syntax: comma separated list
-   *   of fields. For example:
-   *   "parent,resource_name".
-   *
-   *   The following fields are supported:
-   *
-   *   * resource_name
-   *   * category
-   *   * state
-   *   * parent
-   * @param {google.protobuf.Timestamp} request.readTime
-   *   Time used as a reference point when filtering findings. The filter is
-   *   limited to findings existing at the supplied time and their values are
-   *   those at that specific time. Absence of this field will default to the
-   *   API's version of NOW.
-   * @param {string} request.pageToken
-   *   The value returned by the last `GroupFindingsResponse`; indicates
-   *   that this is a continuation of a prior `GroupFindings` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v1beta1.GroupResult|GroupResult}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `groupFindingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Filters an organization or source's findings and  groups them by their
+ * specified properties.
+ *
+ * To group across all sources provide a `-` as the source id.
+ * Example: /v1beta1/organizations/{organization_id}/sources/-/findings
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the source to groupBy. Its format is
+ *   "organizations/[organization_id]/sources/[source_id]". To groupBy across
+ *   all sources provide a source_id of `-`. For example:
+ *   organizations/{organization_id}/sources/-
+ * @param {string} request.filter
+ *   Expression that defines the filter to apply across findings.
+ *   The expression is a list of one or more restrictions combined via logical
+ *   operators `AND` and `OR`.
+ *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
+ *
+ *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+ *   character in front of them to indicate negation. Examples include:
+ *
+ *    * name
+ *    * source_properties.a_property
+ *    * security_marks.marks.marka
+ *
+ *   The supported operators are:
+ *
+ *   * `=` for all value types.
+ *   * `>`, `<`, `>=`, `<=` for integer values.
+ *   * `:`, meaning substring matching, for strings.
+ *
+ *   The supported value types are:
+ *
+ *   * string literals in quotes.
+ *   * integer literals without quotes.
+ *   * boolean literals `true` and `false` without quotes.
+ *
+ *   For example, `source_properties.size = 100` is a valid filter string.
+ * @param {string} request.groupBy
+ *   Required. Expression that defines what assets fields to use for grouping (including
+ *   `state`). The string value should follow SQL syntax: comma separated list
+ *   of fields. For example:
+ *   "parent,resource_name".
+ *
+ *   The following fields are supported:
+ *
+ *   * resource_name
+ *   * category
+ *   * state
+ *   * parent
+ * @param {google.protobuf.Timestamp} request.readTime
+ *   Time used as a reference point when filtering findings. The filter is
+ *   limited to findings existing at the supplied time and their values are
+ *   those at that specific time. Absence of this field will default to the
+ *   API's version of NOW.
+ * @param {string} request.pageToken
+ *   The value returned by the last `GroupFindingsResponse`; indicates
+ *   that this is a continuation of a prior `GroupFindings` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v1beta1.GroupResult|GroupResult}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `groupFindingsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   groupFindings(
-    request?: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
-      protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest | null,
-      protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
+        protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest|null,
+        protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
+      ]>;
   groupFindings(
-    request: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
-      | protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v1beta1.IGroupResult
-    >
-  ): void;
-  groupFindings(
-    request: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
-      | protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v1beta1.IGroupResult
-    >
-  ): void;
-  groupFindings(
-    request?: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
-          | protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v1beta1.IGroupResult
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
-      | protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v1beta1.IGroupResult
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
-      protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest | null,
-      protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v1beta1.IGroupResult>): void;
+  groupFindings(
+      request: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
+          protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v1beta1.IGroupResult>): void;
+  groupFindings(
+      request?: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
+          protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v1beta1.IGroupResult>,
+      callback?: PaginationCallback<
+          protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
+          protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v1beta1.IGroupResult>):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
+        protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest|null,
+        protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
-          | protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v1beta1.IGroupResult
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
+      protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse|null|undefined,
+      protos.google.cloud.securitycenter.v1beta1.IGroupResult>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('groupFindings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2785,105 +2248,102 @@ export class SecurityCenterClient {
     this._log.info('groupFindings request %j', request);
     return this.innerApiCalls
       .groupFindings(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
-          protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest | null,
-          protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse,
-        ]) => {
-          this._log.info('groupFindings values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
+        protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest|null,
+        protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
+      ]) => {
+        this._log.info('groupFindings values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `groupFindings`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the source to groupBy. Its format is
-   *   "organizations/[organization_id]/sources/[source_id]". To groupBy across
-   *   all sources provide a source_id of `-`. For example:
-   *   organizations/{organization_id}/sources/-
-   * @param {string} request.filter
-   *   Expression that defines the filter to apply across findings.
-   *   The expression is a list of one or more restrictions combined via logical
-   *   operators `AND` and `OR`.
-   *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
-   *
-   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
-   *   character in front of them to indicate negation. Examples include:
-   *
-   *    * name
-   *    * source_properties.a_property
-   *    * security_marks.marks.marka
-   *
-   *   The supported operators are:
-   *
-   *   * `=` for all value types.
-   *   * `>`, `<`, `>=`, `<=` for integer values.
-   *   * `:`, meaning substring matching, for strings.
-   *
-   *   The supported value types are:
-   *
-   *   * string literals in quotes.
-   *   * integer literals without quotes.
-   *   * boolean literals `true` and `false` without quotes.
-   *
-   *   For example, `source_properties.size = 100` is a valid filter string.
-   * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping (including
-   *   `state`). The string value should follow SQL syntax: comma separated list
-   *   of fields. For example:
-   *   "parent,resource_name".
-   *
-   *   The following fields are supported:
-   *
-   *   * resource_name
-   *   * category
-   *   * state
-   *   * parent
-   * @param {google.protobuf.Timestamp} request.readTime
-   *   Time used as a reference point when filtering findings. The filter is
-   *   limited to findings existing at the supplied time and their values are
-   *   those at that specific time. Absence of this field will default to the
-   *   API's version of NOW.
-   * @param {string} request.pageToken
-   *   The value returned by the last `GroupFindingsResponse`; indicates
-   *   that this is a continuation of a prior `GroupFindings` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v1beta1.GroupResult|GroupResult} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `groupFindingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `groupFindings`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the source to groupBy. Its format is
+ *   "organizations/[organization_id]/sources/[source_id]". To groupBy across
+ *   all sources provide a source_id of `-`. For example:
+ *   organizations/{organization_id}/sources/-
+ * @param {string} request.filter
+ *   Expression that defines the filter to apply across findings.
+ *   The expression is a list of one or more restrictions combined via logical
+ *   operators `AND` and `OR`.
+ *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
+ *
+ *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+ *   character in front of them to indicate negation. Examples include:
+ *
+ *    * name
+ *    * source_properties.a_property
+ *    * security_marks.marks.marka
+ *
+ *   The supported operators are:
+ *
+ *   * `=` for all value types.
+ *   * `>`, `<`, `>=`, `<=` for integer values.
+ *   * `:`, meaning substring matching, for strings.
+ *
+ *   The supported value types are:
+ *
+ *   * string literals in quotes.
+ *   * integer literals without quotes.
+ *   * boolean literals `true` and `false` without quotes.
+ *
+ *   For example, `source_properties.size = 100` is a valid filter string.
+ * @param {string} request.groupBy
+ *   Required. Expression that defines what assets fields to use for grouping (including
+ *   `state`). The string value should follow SQL syntax: comma separated list
+ *   of fields. For example:
+ *   "parent,resource_name".
+ *
+ *   The following fields are supported:
+ *
+ *   * resource_name
+ *   * category
+ *   * state
+ *   * parent
+ * @param {google.protobuf.Timestamp} request.readTime
+ *   Time used as a reference point when filtering findings. The filter is
+ *   limited to findings existing at the supplied time and their values are
+ *   those at that specific time. Absence of this field will default to the
+ *   API's version of NOW.
+ * @param {string} request.pageToken
+ *   The value returned by the last `GroupFindingsResponse`; indicates
+ *   that this is a continuation of a prior `GroupFindings` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v1beta1.GroupResult|GroupResult} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `groupFindingsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   groupFindingsStream(
-    request?: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['groupFindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('groupFindings stream %j', request);
     return this.descriptors.page.groupFindings.createStream(
       this.innerApiCalls.groupFindings as GaxCall,
@@ -2892,96 +2352,95 @@ export class SecurityCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `groupFindings`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the source to groupBy. Its format is
-   *   "organizations/[organization_id]/sources/[source_id]". To groupBy across
-   *   all sources provide a source_id of `-`. For example:
-   *   organizations/{organization_id}/sources/-
-   * @param {string} request.filter
-   *   Expression that defines the filter to apply across findings.
-   *   The expression is a list of one or more restrictions combined via logical
-   *   operators `AND` and `OR`.
-   *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
-   *
-   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
-   *   character in front of them to indicate negation. Examples include:
-   *
-   *    * name
-   *    * source_properties.a_property
-   *    * security_marks.marks.marka
-   *
-   *   The supported operators are:
-   *
-   *   * `=` for all value types.
-   *   * `>`, `<`, `>=`, `<=` for integer values.
-   *   * `:`, meaning substring matching, for strings.
-   *
-   *   The supported value types are:
-   *
-   *   * string literals in quotes.
-   *   * integer literals without quotes.
-   *   * boolean literals `true` and `false` without quotes.
-   *
-   *   For example, `source_properties.size = 100` is a valid filter string.
-   * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping (including
-   *   `state`). The string value should follow SQL syntax: comma separated list
-   *   of fields. For example:
-   *   "parent,resource_name".
-   *
-   *   The following fields are supported:
-   *
-   *   * resource_name
-   *   * category
-   *   * state
-   *   * parent
-   * @param {google.protobuf.Timestamp} request.readTime
-   *   Time used as a reference point when filtering findings. The filter is
-   *   limited to findings existing at the supplied time and their values are
-   *   those at that specific time. Absence of this field will default to the
-   *   API's version of NOW.
-   * @param {string} request.pageToken
-   *   The value returned by the last `GroupFindingsResponse`; indicates
-   *   that this is a continuation of a prior `GroupFindings` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.securitycenter.v1beta1.GroupResult|GroupResult}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/security_center.group_findings.js</caption>
-   * region_tag:securitycenter_v1beta1_generated_SecurityCenter_GroupFindings_async
-   */
+/**
+ * Equivalent to `groupFindings`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the source to groupBy. Its format is
+ *   "organizations/[organization_id]/sources/[source_id]". To groupBy across
+ *   all sources provide a source_id of `-`. For example:
+ *   organizations/{organization_id}/sources/-
+ * @param {string} request.filter
+ *   Expression that defines the filter to apply across findings.
+ *   The expression is a list of one or more restrictions combined via logical
+ *   operators `AND` and `OR`.
+ *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
+ *
+ *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+ *   character in front of them to indicate negation. Examples include:
+ *
+ *    * name
+ *    * source_properties.a_property
+ *    * security_marks.marks.marka
+ *
+ *   The supported operators are:
+ *
+ *   * `=` for all value types.
+ *   * `>`, `<`, `>=`, `<=` for integer values.
+ *   * `:`, meaning substring matching, for strings.
+ *
+ *   The supported value types are:
+ *
+ *   * string literals in quotes.
+ *   * integer literals without quotes.
+ *   * boolean literals `true` and `false` without quotes.
+ *
+ *   For example, `source_properties.size = 100` is a valid filter string.
+ * @param {string} request.groupBy
+ *   Required. Expression that defines what assets fields to use for grouping (including
+ *   `state`). The string value should follow SQL syntax: comma separated list
+ *   of fields. For example:
+ *   "parent,resource_name".
+ *
+ *   The following fields are supported:
+ *
+ *   * resource_name
+ *   * category
+ *   * state
+ *   * parent
+ * @param {google.protobuf.Timestamp} request.readTime
+ *   Time used as a reference point when filtering findings. The filter is
+ *   limited to findings existing at the supplied time and their values are
+ *   those at that specific time. Absence of this field will default to the
+ *   API's version of NOW.
+ * @param {string} request.pageToken
+ *   The value returned by the last `GroupFindingsResponse`; indicates
+ *   that this is a continuation of a prior `GroupFindings` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.securitycenter.v1beta1.GroupResult|GroupResult}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/security_center.group_findings.js</caption>
+ * region_tag:securitycenter_v1beta1_generated_SecurityCenter_GroupFindings_async
+ */
   groupFindingsAsync(
-    request?: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.securitycenter.v1beta1.IGroupResult> {
+      request?: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.securitycenter.v1beta1.IGroupResult>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['groupFindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('groupFindings iterate %j', request);
     return this.descriptors.page.groupFindings.asyncIterate(
       this.innerApiCalls['groupFindings'] as GaxCall,
@@ -2989,186 +2448,161 @@ export class SecurityCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1beta1.IGroupResult>;
   }
-  /**
-   * Lists an organization's assets.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the organization assets should belong to. Its format is
-   *   "organizations/[organization_id]".
-   * @param {string} request.filter
-   *   Expression that defines the filter to apply across assets.
-   *   The expression is a list of zero or more restrictions combined via logical
-   *   operators `AND` and `OR`.
-   *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
-   *
-   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
-   *   character in front of them to indicate negation. The fields map to those
-   *   defined in the Asset resource. Examples include:
-   *
-   *   * name
-   *   * security_center_properties.resource_name
-   *   * resource_properties.a_property
-   *   * security_marks.marks.marka
-   *
-   *   The supported operators are:
-   *
-   *   * `=` for all value types.
-   *   * `>`, `<`, `>=`, `<=` for integer values.
-   *   * `:`, meaning substring matching, for strings.
-   *
-   *   The supported value types are:
-   *
-   *   * string literals in quotes.
-   *   * integer literals without quotes.
-   *   * boolean literals `true` and `false` without quotes.
-   *
-   *   For example, `resource_properties.size = 100` is a valid filter string.
-   * @param {string} request.orderBy
-   *   Expression that defines what fields and order to use for sorting. The
-   *   string value should follow SQL syntax: comma separated list of fields. For
-   *   example: "name,resource_properties.a_property". The default sorting order
-   *   is ascending. To specify descending order for a field, a suffix " desc"
-   *   should be appended to the field name. For example: "name
-   *   desc,resource_properties.a_property". Redundant space characters in the
-   *   syntax are insignificant. "name desc,resource_properties.a_property" and "
-   *   name     desc  ,   resource_properties.a_property  " are equivalent.
-   * @param {google.protobuf.Timestamp} request.readTime
-   *   Time used as a reference point when filtering assets. The filter is limited
-   *   to assets existing at the supplied time and their values are those at that
-   *   specific time. Absence of this field will default to the API's version of
-   *   NOW.
-   * @param {google.protobuf.Duration} request.compareDuration
-   *   When compare_duration is set, the ListAssetResult's "state" attribute is
-   *   updated to indicate whether the asset was added, removed, or remained
-   *   present during the compare_duration period of time that precedes the
-   *   read_time. This is the time between (read_time -
-   *   compare_duration) and read_time.
-   *
-   *   The state value is derived based on the presence of the asset at the two
-   *   points in time. Intermediate state changes between the two times don't
-   *   affect the result. For example, the results aren't affected if the asset is
-   *   removed and re-created again.
-   *
-   *   Possible "state" values when compare_duration is specified:
-   *
-   *   * "ADDED": indicates that the asset was not present before
-   *                compare_duration, but present at read_time.
-   *   * "REMOVED": indicates that the asset was present at the start of
-   *                compare_duration, but not present at read_time.
-   *   * "ACTIVE": indicates that the asset was present at both the
-   *                start and the end of the time period defined by
-   *                compare_duration and read_time.
-   *
-   *   If compare_duration is not specified, then the only possible state is
-   *   "UNUSED", which indicates that the asset is present at read_time.
-   * @param {google.protobuf.FieldMask} [request.fieldMask]
-   *   Optional. A field mask to specify the ListAssetsResult fields to be listed in the
-   *   response.
-   *   An empty field mask will list all fields.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListAssetsResponse`; indicates
-   *   that this is a continuation of a prior `ListAssets` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.ListAssetsResult|ListAssetsResult}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAssetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists an organization's assets.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the organization assets should belong to. Its format is
+ *   "organizations/[organization_id]".
+ * @param {string} request.filter
+ *   Expression that defines the filter to apply across assets.
+ *   The expression is a list of zero or more restrictions combined via logical
+ *   operators `AND` and `OR`.
+ *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
+ *
+ *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+ *   character in front of them to indicate negation. The fields map to those
+ *   defined in the Asset resource. Examples include:
+ *
+ *   * name
+ *   * security_center_properties.resource_name
+ *   * resource_properties.a_property
+ *   * security_marks.marks.marka
+ *
+ *   The supported operators are:
+ *
+ *   * `=` for all value types.
+ *   * `>`, `<`, `>=`, `<=` for integer values.
+ *   * `:`, meaning substring matching, for strings.
+ *
+ *   The supported value types are:
+ *
+ *   * string literals in quotes.
+ *   * integer literals without quotes.
+ *   * boolean literals `true` and `false` without quotes.
+ *
+ *   For example, `resource_properties.size = 100` is a valid filter string.
+ * @param {string} request.orderBy
+ *   Expression that defines what fields and order to use for sorting. The
+ *   string value should follow SQL syntax: comma separated list of fields. For
+ *   example: "name,resource_properties.a_property". The default sorting order
+ *   is ascending. To specify descending order for a field, a suffix " desc"
+ *   should be appended to the field name. For example: "name
+ *   desc,resource_properties.a_property". Redundant space characters in the
+ *   syntax are insignificant. "name desc,resource_properties.a_property" and "
+ *   name     desc  ,   resource_properties.a_property  " are equivalent.
+ * @param {google.protobuf.Timestamp} request.readTime
+ *   Time used as a reference point when filtering assets. The filter is limited
+ *   to assets existing at the supplied time and their values are those at that
+ *   specific time. Absence of this field will default to the API's version of
+ *   NOW.
+ * @param {google.protobuf.Duration} request.compareDuration
+ *   When compare_duration is set, the ListAssetResult's "state" attribute is
+ *   updated to indicate whether the asset was added, removed, or remained
+ *   present during the compare_duration period of time that precedes the
+ *   read_time. This is the time between (read_time -
+ *   compare_duration) and read_time.
+ *
+ *   The state value is derived based on the presence of the asset at the two
+ *   points in time. Intermediate state changes between the two times don't
+ *   affect the result. For example, the results aren't affected if the asset is
+ *   removed and re-created again.
+ *
+ *   Possible "state" values when compare_duration is specified:
+ *
+ *   * "ADDED": indicates that the asset was not present before
+ *                compare_duration, but present at read_time.
+ *   * "REMOVED": indicates that the asset was present at the start of
+ *                compare_duration, but not present at read_time.
+ *   * "ACTIVE": indicates that the asset was present at both the
+ *                start and the end of the time period defined by
+ *                compare_duration and read_time.
+ *
+ *   If compare_duration is not specified, then the only possible state is
+ *   "UNUSED", which indicates that the asset is present at read_time.
+ * @param {google.protobuf.FieldMask} [request.fieldMask]
+ *   Optional. A field mask to specify the ListAssetsResult fields to be listed in the
+ *   response.
+ *   An empty field mask will list all fields.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListAssetsResponse`; indicates
+ *   that this is a continuation of a prior `ListAssets` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.ListAssetsResult|ListAssetsResult}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAssetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAssets(
-    request?: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult[],
-      protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest | null,
-      protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult[],
+        protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest|null,
+        protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse
+      ]>;
   listAssets(
-    request: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
-      | protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult
-    >
-  ): void;
-  listAssets(
-    request: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
-      | protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult
-    >
-  ): void;
-  listAssets(
-    request?: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
-          | protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
-      | protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult[],
-      protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest | null,
-      protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult>): void;
+  listAssets(
+      request: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
+          protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult>): void;
+  listAssets(
+      request?: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
+          protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult>,
+      callback?: PaginationCallback<
+          protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
+          protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult>):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult[],
+        protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest|null,
+        protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
-          | protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
+      protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse|null|undefined,
+      protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAssets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3177,130 +2611,127 @@ export class SecurityCenterClient {
     this._log.info('listAssets request %j', request);
     return this.innerApiCalls
       .listAssets(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult[],
-          protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest | null,
-          protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse,
-        ]) => {
-          this._log.info('listAssets values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult[],
+        protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest|null,
+        protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse
+      ]) => {
+        this._log.info('listAssets values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAssets`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the organization assets should belong to. Its format is
-   *   "organizations/[organization_id]".
-   * @param {string} request.filter
-   *   Expression that defines the filter to apply across assets.
-   *   The expression is a list of zero or more restrictions combined via logical
-   *   operators `AND` and `OR`.
-   *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
-   *
-   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
-   *   character in front of them to indicate negation. The fields map to those
-   *   defined in the Asset resource. Examples include:
-   *
-   *   * name
-   *   * security_center_properties.resource_name
-   *   * resource_properties.a_property
-   *   * security_marks.marks.marka
-   *
-   *   The supported operators are:
-   *
-   *   * `=` for all value types.
-   *   * `>`, `<`, `>=`, `<=` for integer values.
-   *   * `:`, meaning substring matching, for strings.
-   *
-   *   The supported value types are:
-   *
-   *   * string literals in quotes.
-   *   * integer literals without quotes.
-   *   * boolean literals `true` and `false` without quotes.
-   *
-   *   For example, `resource_properties.size = 100` is a valid filter string.
-   * @param {string} request.orderBy
-   *   Expression that defines what fields and order to use for sorting. The
-   *   string value should follow SQL syntax: comma separated list of fields. For
-   *   example: "name,resource_properties.a_property". The default sorting order
-   *   is ascending. To specify descending order for a field, a suffix " desc"
-   *   should be appended to the field name. For example: "name
-   *   desc,resource_properties.a_property". Redundant space characters in the
-   *   syntax are insignificant. "name desc,resource_properties.a_property" and "
-   *   name     desc  ,   resource_properties.a_property  " are equivalent.
-   * @param {google.protobuf.Timestamp} request.readTime
-   *   Time used as a reference point when filtering assets. The filter is limited
-   *   to assets existing at the supplied time and their values are those at that
-   *   specific time. Absence of this field will default to the API's version of
-   *   NOW.
-   * @param {google.protobuf.Duration} request.compareDuration
-   *   When compare_duration is set, the ListAssetResult's "state" attribute is
-   *   updated to indicate whether the asset was added, removed, or remained
-   *   present during the compare_duration period of time that precedes the
-   *   read_time. This is the time between (read_time -
-   *   compare_duration) and read_time.
-   *
-   *   The state value is derived based on the presence of the asset at the two
-   *   points in time. Intermediate state changes between the two times don't
-   *   affect the result. For example, the results aren't affected if the asset is
-   *   removed and re-created again.
-   *
-   *   Possible "state" values when compare_duration is specified:
-   *
-   *   * "ADDED": indicates that the asset was not present before
-   *                compare_duration, but present at read_time.
-   *   * "REMOVED": indicates that the asset was present at the start of
-   *                compare_duration, but not present at read_time.
-   *   * "ACTIVE": indicates that the asset was present at both the
-   *                start and the end of the time period defined by
-   *                compare_duration and read_time.
-   *
-   *   If compare_duration is not specified, then the only possible state is
-   *   "UNUSED", which indicates that the asset is present at read_time.
-   * @param {google.protobuf.FieldMask} [request.fieldMask]
-   *   Optional. A field mask to specify the ListAssetsResult fields to be listed in the
-   *   response.
-   *   An empty field mask will list all fields.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListAssetsResponse`; indicates
-   *   that this is a continuation of a prior `ListAssets` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.ListAssetsResult|ListAssetsResult} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAssetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAssets`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the organization assets should belong to. Its format is
+ *   "organizations/[organization_id]".
+ * @param {string} request.filter
+ *   Expression that defines the filter to apply across assets.
+ *   The expression is a list of zero or more restrictions combined via logical
+ *   operators `AND` and `OR`.
+ *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
+ *
+ *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+ *   character in front of them to indicate negation. The fields map to those
+ *   defined in the Asset resource. Examples include:
+ *
+ *   * name
+ *   * security_center_properties.resource_name
+ *   * resource_properties.a_property
+ *   * security_marks.marks.marka
+ *
+ *   The supported operators are:
+ *
+ *   * `=` for all value types.
+ *   * `>`, `<`, `>=`, `<=` for integer values.
+ *   * `:`, meaning substring matching, for strings.
+ *
+ *   The supported value types are:
+ *
+ *   * string literals in quotes.
+ *   * integer literals without quotes.
+ *   * boolean literals `true` and `false` without quotes.
+ *
+ *   For example, `resource_properties.size = 100` is a valid filter string.
+ * @param {string} request.orderBy
+ *   Expression that defines what fields and order to use for sorting. The
+ *   string value should follow SQL syntax: comma separated list of fields. For
+ *   example: "name,resource_properties.a_property". The default sorting order
+ *   is ascending. To specify descending order for a field, a suffix " desc"
+ *   should be appended to the field name. For example: "name
+ *   desc,resource_properties.a_property". Redundant space characters in the
+ *   syntax are insignificant. "name desc,resource_properties.a_property" and "
+ *   name     desc  ,   resource_properties.a_property  " are equivalent.
+ * @param {google.protobuf.Timestamp} request.readTime
+ *   Time used as a reference point when filtering assets. The filter is limited
+ *   to assets existing at the supplied time and their values are those at that
+ *   specific time. Absence of this field will default to the API's version of
+ *   NOW.
+ * @param {google.protobuf.Duration} request.compareDuration
+ *   When compare_duration is set, the ListAssetResult's "state" attribute is
+ *   updated to indicate whether the asset was added, removed, or remained
+ *   present during the compare_duration period of time that precedes the
+ *   read_time. This is the time between (read_time -
+ *   compare_duration) and read_time.
+ *
+ *   The state value is derived based on the presence of the asset at the two
+ *   points in time. Intermediate state changes between the two times don't
+ *   affect the result. For example, the results aren't affected if the asset is
+ *   removed and re-created again.
+ *
+ *   Possible "state" values when compare_duration is specified:
+ *
+ *   * "ADDED": indicates that the asset was not present before
+ *                compare_duration, but present at read_time.
+ *   * "REMOVED": indicates that the asset was present at the start of
+ *                compare_duration, but not present at read_time.
+ *   * "ACTIVE": indicates that the asset was present at both the
+ *                start and the end of the time period defined by
+ *                compare_duration and read_time.
+ *
+ *   If compare_duration is not specified, then the only possible state is
+ *   "UNUSED", which indicates that the asset is present at read_time.
+ * @param {google.protobuf.FieldMask} [request.fieldMask]
+ *   Optional. A field mask to specify the ListAssetsResult fields to be listed in the
+ *   response.
+ *   An empty field mask will list all fields.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListAssetsResponse`; indicates
+ *   that this is a continuation of a prior `ListAssets` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.ListAssetsResult|ListAssetsResult} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAssetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAssetsStream(
-    request?: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAssets stream %j', request);
     return this.descriptors.page.listAssets.createStream(
       this.innerApiCalls.listAssets as GaxCall,
@@ -3309,121 +2740,120 @@ export class SecurityCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `listAssets`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the organization assets should belong to. Its format is
-   *   "organizations/[organization_id]".
-   * @param {string} request.filter
-   *   Expression that defines the filter to apply across assets.
-   *   The expression is a list of zero or more restrictions combined via logical
-   *   operators `AND` and `OR`.
-   *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
-   *
-   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
-   *   character in front of them to indicate negation. The fields map to those
-   *   defined in the Asset resource. Examples include:
-   *
-   *   * name
-   *   * security_center_properties.resource_name
-   *   * resource_properties.a_property
-   *   * security_marks.marks.marka
-   *
-   *   The supported operators are:
-   *
-   *   * `=` for all value types.
-   *   * `>`, `<`, `>=`, `<=` for integer values.
-   *   * `:`, meaning substring matching, for strings.
-   *
-   *   The supported value types are:
-   *
-   *   * string literals in quotes.
-   *   * integer literals without quotes.
-   *   * boolean literals `true` and `false` without quotes.
-   *
-   *   For example, `resource_properties.size = 100` is a valid filter string.
-   * @param {string} request.orderBy
-   *   Expression that defines what fields and order to use for sorting. The
-   *   string value should follow SQL syntax: comma separated list of fields. For
-   *   example: "name,resource_properties.a_property". The default sorting order
-   *   is ascending. To specify descending order for a field, a suffix " desc"
-   *   should be appended to the field name. For example: "name
-   *   desc,resource_properties.a_property". Redundant space characters in the
-   *   syntax are insignificant. "name desc,resource_properties.a_property" and "
-   *   name     desc  ,   resource_properties.a_property  " are equivalent.
-   * @param {google.protobuf.Timestamp} request.readTime
-   *   Time used as a reference point when filtering assets. The filter is limited
-   *   to assets existing at the supplied time and their values are those at that
-   *   specific time. Absence of this field will default to the API's version of
-   *   NOW.
-   * @param {google.protobuf.Duration} request.compareDuration
-   *   When compare_duration is set, the ListAssetResult's "state" attribute is
-   *   updated to indicate whether the asset was added, removed, or remained
-   *   present during the compare_duration period of time that precedes the
-   *   read_time. This is the time between (read_time -
-   *   compare_duration) and read_time.
-   *
-   *   The state value is derived based on the presence of the asset at the two
-   *   points in time. Intermediate state changes between the two times don't
-   *   affect the result. For example, the results aren't affected if the asset is
-   *   removed and re-created again.
-   *
-   *   Possible "state" values when compare_duration is specified:
-   *
-   *   * "ADDED": indicates that the asset was not present before
-   *                compare_duration, but present at read_time.
-   *   * "REMOVED": indicates that the asset was present at the start of
-   *                compare_duration, but not present at read_time.
-   *   * "ACTIVE": indicates that the asset was present at both the
-   *                start and the end of the time period defined by
-   *                compare_duration and read_time.
-   *
-   *   If compare_duration is not specified, then the only possible state is
-   *   "UNUSED", which indicates that the asset is present at read_time.
-   * @param {google.protobuf.FieldMask} [request.fieldMask]
-   *   Optional. A field mask to specify the ListAssetsResult fields to be listed in the
-   *   response.
-   *   An empty field mask will list all fields.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListAssetsResponse`; indicates
-   *   that this is a continuation of a prior `ListAssets` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.ListAssetsResult|ListAssetsResult}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/security_center.list_assets.js</caption>
-   * region_tag:securitycenter_v1beta1_generated_SecurityCenter_ListAssets_async
-   */
+/**
+ * Equivalent to `listAssets`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the organization assets should belong to. Its format is
+ *   "organizations/[organization_id]".
+ * @param {string} request.filter
+ *   Expression that defines the filter to apply across assets.
+ *   The expression is a list of zero or more restrictions combined via logical
+ *   operators `AND` and `OR`.
+ *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
+ *
+ *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+ *   character in front of them to indicate negation. The fields map to those
+ *   defined in the Asset resource. Examples include:
+ *
+ *   * name
+ *   * security_center_properties.resource_name
+ *   * resource_properties.a_property
+ *   * security_marks.marks.marka
+ *
+ *   The supported operators are:
+ *
+ *   * `=` for all value types.
+ *   * `>`, `<`, `>=`, `<=` for integer values.
+ *   * `:`, meaning substring matching, for strings.
+ *
+ *   The supported value types are:
+ *
+ *   * string literals in quotes.
+ *   * integer literals without quotes.
+ *   * boolean literals `true` and `false` without quotes.
+ *
+ *   For example, `resource_properties.size = 100` is a valid filter string.
+ * @param {string} request.orderBy
+ *   Expression that defines what fields and order to use for sorting. The
+ *   string value should follow SQL syntax: comma separated list of fields. For
+ *   example: "name,resource_properties.a_property". The default sorting order
+ *   is ascending. To specify descending order for a field, a suffix " desc"
+ *   should be appended to the field name. For example: "name
+ *   desc,resource_properties.a_property". Redundant space characters in the
+ *   syntax are insignificant. "name desc,resource_properties.a_property" and "
+ *   name     desc  ,   resource_properties.a_property  " are equivalent.
+ * @param {google.protobuf.Timestamp} request.readTime
+ *   Time used as a reference point when filtering assets. The filter is limited
+ *   to assets existing at the supplied time and their values are those at that
+ *   specific time. Absence of this field will default to the API's version of
+ *   NOW.
+ * @param {google.protobuf.Duration} request.compareDuration
+ *   When compare_duration is set, the ListAssetResult's "state" attribute is
+ *   updated to indicate whether the asset was added, removed, or remained
+ *   present during the compare_duration period of time that precedes the
+ *   read_time. This is the time between (read_time -
+ *   compare_duration) and read_time.
+ *
+ *   The state value is derived based on the presence of the asset at the two
+ *   points in time. Intermediate state changes between the two times don't
+ *   affect the result. For example, the results aren't affected if the asset is
+ *   removed and re-created again.
+ *
+ *   Possible "state" values when compare_duration is specified:
+ *
+ *   * "ADDED": indicates that the asset was not present before
+ *                compare_duration, but present at read_time.
+ *   * "REMOVED": indicates that the asset was present at the start of
+ *                compare_duration, but not present at read_time.
+ *   * "ACTIVE": indicates that the asset was present at both the
+ *                start and the end of the time period defined by
+ *                compare_duration and read_time.
+ *
+ *   If compare_duration is not specified, then the only possible state is
+ *   "UNUSED", which indicates that the asset is present at read_time.
+ * @param {google.protobuf.FieldMask} [request.fieldMask]
+ *   Optional. A field mask to specify the ListAssetsResult fields to be listed in the
+ *   response.
+ *   An empty field mask will list all fields.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListAssetsResponse`; indicates
+ *   that this is a continuation of a prior `ListAssets` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.ListAssetsResult|ListAssetsResult}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/security_center.list_assets.js</caption>
+ * region_tag:securitycenter_v1beta1_generated_SecurityCenter_ListAssets_async
+ */
   listAssetsAsync(
-    request?: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult> {
+      request?: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAssets iterate %j', request);
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
@@ -3431,164 +2861,139 @@ export class SecurityCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult>;
   }
-  /**
-   * Lists an organization or source's findings.
-   *
-   * To list across all sources provide a `-` as the source id.
-   * Example: /v1beta1/organizations/{organization_id}/sources/-/findings
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the source the findings belong to. Its format is
-   *   "organizations/[organization_id]/sources/[source_id]". To list across all
-   *   sources provide a source_id of `-`. For example:
-   *   organizations/{organization_id}/sources/-
-   * @param {string} request.filter
-   *   Expression that defines the filter to apply across findings.
-   *   The expression is a list of one or more restrictions combined via logical
-   *   operators `AND` and `OR`.
-   *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
-   *
-   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
-   *   character in front of them to indicate negation. Examples include:
-   *
-   *    * name
-   *    * source_properties.a_property
-   *    * security_marks.marks.marka
-   *
-   *   The supported operators are:
-   *
-   *   * `=` for all value types.
-   *   * `>`, `<`, `>=`, `<=` for integer values.
-   *   * `:`, meaning substring matching, for strings.
-   *
-   *   The supported value types are:
-   *
-   *   * string literals in quotes.
-   *   * integer literals without quotes.
-   *   * boolean literals `true` and `false` without quotes.
-   *
-   *   For example, `source_properties.size = 100` is a valid filter string.
-   * @param {string} request.orderBy
-   *   Expression that defines what fields and order to use for sorting. The
-   *   string value should follow SQL syntax: comma separated list of fields. For
-   *   example: "name,resource_properties.a_property". The default sorting order
-   *   is ascending. To specify descending order for a field, a suffix " desc"
-   *   should be appended to the field name. For example: "name
-   *   desc,source_properties.a_property". Redundant space characters in the
-   *   syntax are insignificant. "name desc,source_properties.a_property" and "
-   *   name     desc  ,   source_properties.a_property  " are equivalent.
-   * @param {google.protobuf.Timestamp} request.readTime
-   *   Time used as a reference point when filtering findings. The filter is
-   *   limited to findings existing at the supplied time and their values are
-   *   those at that specific time. Absence of this field will default to the
-   *   API's version of NOW.
-   * @param {google.protobuf.FieldMask} [request.fieldMask]
-   *   Optional. A field mask to specify the Finding fields to be listed in the response.
-   *   An empty field mask will list all fields.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListFindingsResponse`; indicates
-   *   that this is a continuation of a prior `ListFindings` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v1beta1.Finding|Finding}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listFindingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists an organization or source's findings.
+ *
+ * To list across all sources provide a `-` as the source id.
+ * Example: /v1beta1/organizations/{organization_id}/sources/-/findings
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the source the findings belong to. Its format is
+ *   "organizations/[organization_id]/sources/[source_id]". To list across all
+ *   sources provide a source_id of `-`. For example:
+ *   organizations/{organization_id}/sources/-
+ * @param {string} request.filter
+ *   Expression that defines the filter to apply across findings.
+ *   The expression is a list of one or more restrictions combined via logical
+ *   operators `AND` and `OR`.
+ *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
+ *
+ *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+ *   character in front of them to indicate negation. Examples include:
+ *
+ *    * name
+ *    * source_properties.a_property
+ *    * security_marks.marks.marka
+ *
+ *   The supported operators are:
+ *
+ *   * `=` for all value types.
+ *   * `>`, `<`, `>=`, `<=` for integer values.
+ *   * `:`, meaning substring matching, for strings.
+ *
+ *   The supported value types are:
+ *
+ *   * string literals in quotes.
+ *   * integer literals without quotes.
+ *   * boolean literals `true` and `false` without quotes.
+ *
+ *   For example, `source_properties.size = 100` is a valid filter string.
+ * @param {string} request.orderBy
+ *   Expression that defines what fields and order to use for sorting. The
+ *   string value should follow SQL syntax: comma separated list of fields. For
+ *   example: "name,resource_properties.a_property". The default sorting order
+ *   is ascending. To specify descending order for a field, a suffix " desc"
+ *   should be appended to the field name. For example: "name
+ *   desc,source_properties.a_property". Redundant space characters in the
+ *   syntax are insignificant. "name desc,source_properties.a_property" and "
+ *   name     desc  ,   source_properties.a_property  " are equivalent.
+ * @param {google.protobuf.Timestamp} request.readTime
+ *   Time used as a reference point when filtering findings. The filter is
+ *   limited to findings existing at the supplied time and their values are
+ *   those at that specific time. Absence of this field will default to the
+ *   API's version of NOW.
+ * @param {google.protobuf.FieldMask} [request.fieldMask]
+ *   Optional. A field mask to specify the Finding fields to be listed in the response.
+ *   An empty field mask will list all fields.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListFindingsResponse`; indicates
+ *   that this is a continuation of a prior `ListFindings` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v1beta1.Finding|Finding}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listFindingsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listFindings(
-    request?: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.IFinding[],
-      protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest | null,
-      protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.IFinding[],
+        protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest|null,
+        protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse
+      ]>;
   listFindings(
-    request: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
-      | protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v1beta1.IFinding
-    >
-  ): void;
-  listFindings(
-    request: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
-      | protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v1beta1.IFinding
-    >
-  ): void;
-  listFindings(
-    request?: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
-          | protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v1beta1.IFinding
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
-      | protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v1beta1.IFinding
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.IFinding[],
-      protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest | null,
-      protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v1beta1.IFinding>): void;
+  listFindings(
+      request: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
+          protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v1beta1.IFinding>): void;
+  listFindings(
+      request?: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
+          protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v1beta1.IFinding>,
+      callback?: PaginationCallback<
+          protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
+          protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v1beta1.IFinding>):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.IFinding[],
+        protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest|null,
+        protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
-          | protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v1beta1.IFinding
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
+      protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse|null|undefined,
+      protos.google.cloud.securitycenter.v1beta1.IFinding>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listFindings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3597,105 +3002,102 @@ export class SecurityCenterClient {
     this._log.info('listFindings request %j', request);
     return this.innerApiCalls
       .listFindings(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.securitycenter.v1beta1.IFinding[],
-          protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest | null,
-          protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse,
-        ]) => {
-          this._log.info('listFindings values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.securitycenter.v1beta1.IFinding[],
+        protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest|null,
+        protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse
+      ]) => {
+        this._log.info('listFindings values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listFindings`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the source the findings belong to. Its format is
-   *   "organizations/[organization_id]/sources/[source_id]". To list across all
-   *   sources provide a source_id of `-`. For example:
-   *   organizations/{organization_id}/sources/-
-   * @param {string} request.filter
-   *   Expression that defines the filter to apply across findings.
-   *   The expression is a list of one or more restrictions combined via logical
-   *   operators `AND` and `OR`.
-   *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
-   *
-   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
-   *   character in front of them to indicate negation. Examples include:
-   *
-   *    * name
-   *    * source_properties.a_property
-   *    * security_marks.marks.marka
-   *
-   *   The supported operators are:
-   *
-   *   * `=` for all value types.
-   *   * `>`, `<`, `>=`, `<=` for integer values.
-   *   * `:`, meaning substring matching, for strings.
-   *
-   *   The supported value types are:
-   *
-   *   * string literals in quotes.
-   *   * integer literals without quotes.
-   *   * boolean literals `true` and `false` without quotes.
-   *
-   *   For example, `source_properties.size = 100` is a valid filter string.
-   * @param {string} request.orderBy
-   *   Expression that defines what fields and order to use for sorting. The
-   *   string value should follow SQL syntax: comma separated list of fields. For
-   *   example: "name,resource_properties.a_property". The default sorting order
-   *   is ascending. To specify descending order for a field, a suffix " desc"
-   *   should be appended to the field name. For example: "name
-   *   desc,source_properties.a_property". Redundant space characters in the
-   *   syntax are insignificant. "name desc,source_properties.a_property" and "
-   *   name     desc  ,   source_properties.a_property  " are equivalent.
-   * @param {google.protobuf.Timestamp} request.readTime
-   *   Time used as a reference point when filtering findings. The filter is
-   *   limited to findings existing at the supplied time and their values are
-   *   those at that specific time. Absence of this field will default to the
-   *   API's version of NOW.
-   * @param {google.protobuf.FieldMask} [request.fieldMask]
-   *   Optional. A field mask to specify the Finding fields to be listed in the response.
-   *   An empty field mask will list all fields.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListFindingsResponse`; indicates
-   *   that this is a continuation of a prior `ListFindings` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v1beta1.Finding|Finding} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listFindingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listFindings`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the source the findings belong to. Its format is
+ *   "organizations/[organization_id]/sources/[source_id]". To list across all
+ *   sources provide a source_id of `-`. For example:
+ *   organizations/{organization_id}/sources/-
+ * @param {string} request.filter
+ *   Expression that defines the filter to apply across findings.
+ *   The expression is a list of one or more restrictions combined via logical
+ *   operators `AND` and `OR`.
+ *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
+ *
+ *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+ *   character in front of them to indicate negation. Examples include:
+ *
+ *    * name
+ *    * source_properties.a_property
+ *    * security_marks.marks.marka
+ *
+ *   The supported operators are:
+ *
+ *   * `=` for all value types.
+ *   * `>`, `<`, `>=`, `<=` for integer values.
+ *   * `:`, meaning substring matching, for strings.
+ *
+ *   The supported value types are:
+ *
+ *   * string literals in quotes.
+ *   * integer literals without quotes.
+ *   * boolean literals `true` and `false` without quotes.
+ *
+ *   For example, `source_properties.size = 100` is a valid filter string.
+ * @param {string} request.orderBy
+ *   Expression that defines what fields and order to use for sorting. The
+ *   string value should follow SQL syntax: comma separated list of fields. For
+ *   example: "name,resource_properties.a_property". The default sorting order
+ *   is ascending. To specify descending order for a field, a suffix " desc"
+ *   should be appended to the field name. For example: "name
+ *   desc,source_properties.a_property". Redundant space characters in the
+ *   syntax are insignificant. "name desc,source_properties.a_property" and "
+ *   name     desc  ,   source_properties.a_property  " are equivalent.
+ * @param {google.protobuf.Timestamp} request.readTime
+ *   Time used as a reference point when filtering findings. The filter is
+ *   limited to findings existing at the supplied time and their values are
+ *   those at that specific time. Absence of this field will default to the
+ *   API's version of NOW.
+ * @param {google.protobuf.FieldMask} [request.fieldMask]
+ *   Optional. A field mask to specify the Finding fields to be listed in the response.
+ *   An empty field mask will list all fields.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListFindingsResponse`; indicates
+ *   that this is a continuation of a prior `ListFindings` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v1beta1.Finding|Finding} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listFindingsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listFindingsStream(
-    request?: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listFindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listFindings stream %j', request);
     return this.descriptors.page.listFindings.createStream(
       this.innerApiCalls.listFindings as GaxCall,
@@ -3704,96 +3106,95 @@ export class SecurityCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `listFindings`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the source the findings belong to. Its format is
-   *   "organizations/[organization_id]/sources/[source_id]". To list across all
-   *   sources provide a source_id of `-`. For example:
-   *   organizations/{organization_id}/sources/-
-   * @param {string} request.filter
-   *   Expression that defines the filter to apply across findings.
-   *   The expression is a list of one or more restrictions combined via logical
-   *   operators `AND` and `OR`.
-   *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
-   *
-   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
-   *   character in front of them to indicate negation. Examples include:
-   *
-   *    * name
-   *    * source_properties.a_property
-   *    * security_marks.marks.marka
-   *
-   *   The supported operators are:
-   *
-   *   * `=` for all value types.
-   *   * `>`, `<`, `>=`, `<=` for integer values.
-   *   * `:`, meaning substring matching, for strings.
-   *
-   *   The supported value types are:
-   *
-   *   * string literals in quotes.
-   *   * integer literals without quotes.
-   *   * boolean literals `true` and `false` without quotes.
-   *
-   *   For example, `source_properties.size = 100` is a valid filter string.
-   * @param {string} request.orderBy
-   *   Expression that defines what fields and order to use for sorting. The
-   *   string value should follow SQL syntax: comma separated list of fields. For
-   *   example: "name,resource_properties.a_property". The default sorting order
-   *   is ascending. To specify descending order for a field, a suffix " desc"
-   *   should be appended to the field name. For example: "name
-   *   desc,source_properties.a_property". Redundant space characters in the
-   *   syntax are insignificant. "name desc,source_properties.a_property" and "
-   *   name     desc  ,   source_properties.a_property  " are equivalent.
-   * @param {google.protobuf.Timestamp} request.readTime
-   *   Time used as a reference point when filtering findings. The filter is
-   *   limited to findings existing at the supplied time and their values are
-   *   those at that specific time. Absence of this field will default to the
-   *   API's version of NOW.
-   * @param {google.protobuf.FieldMask} [request.fieldMask]
-   *   Optional. A field mask to specify the Finding fields to be listed in the response.
-   *   An empty field mask will list all fields.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListFindingsResponse`; indicates
-   *   that this is a continuation of a prior `ListFindings` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.securitycenter.v1beta1.Finding|Finding}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/security_center.list_findings.js</caption>
-   * region_tag:securitycenter_v1beta1_generated_SecurityCenter_ListFindings_async
-   */
+/**
+ * Equivalent to `listFindings`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the source the findings belong to. Its format is
+ *   "organizations/[organization_id]/sources/[source_id]". To list across all
+ *   sources provide a source_id of `-`. For example:
+ *   organizations/{organization_id}/sources/-
+ * @param {string} request.filter
+ *   Expression that defines the filter to apply across findings.
+ *   The expression is a list of one or more restrictions combined via logical
+ *   operators `AND` and `OR`.
+ *   Parentheses are not supported, and `OR` has higher precedence than `AND`.
+ *
+ *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+ *   character in front of them to indicate negation. Examples include:
+ *
+ *    * name
+ *    * source_properties.a_property
+ *    * security_marks.marks.marka
+ *
+ *   The supported operators are:
+ *
+ *   * `=` for all value types.
+ *   * `>`, `<`, `>=`, `<=` for integer values.
+ *   * `:`, meaning substring matching, for strings.
+ *
+ *   The supported value types are:
+ *
+ *   * string literals in quotes.
+ *   * integer literals without quotes.
+ *   * boolean literals `true` and `false` without quotes.
+ *
+ *   For example, `source_properties.size = 100` is a valid filter string.
+ * @param {string} request.orderBy
+ *   Expression that defines what fields and order to use for sorting. The
+ *   string value should follow SQL syntax: comma separated list of fields. For
+ *   example: "name,resource_properties.a_property". The default sorting order
+ *   is ascending. To specify descending order for a field, a suffix " desc"
+ *   should be appended to the field name. For example: "name
+ *   desc,source_properties.a_property". Redundant space characters in the
+ *   syntax are insignificant. "name desc,source_properties.a_property" and "
+ *   name     desc  ,   source_properties.a_property  " are equivalent.
+ * @param {google.protobuf.Timestamp} request.readTime
+ *   Time used as a reference point when filtering findings. The filter is
+ *   limited to findings existing at the supplied time and their values are
+ *   those at that specific time. Absence of this field will default to the
+ *   API's version of NOW.
+ * @param {google.protobuf.FieldMask} [request.fieldMask]
+ *   Optional. A field mask to specify the Finding fields to be listed in the response.
+ *   An empty field mask will list all fields.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListFindingsResponse`; indicates
+ *   that this is a continuation of a prior `ListFindings` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.securitycenter.v1beta1.Finding|Finding}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/security_center.list_findings.js</caption>
+ * region_tag:securitycenter_v1beta1_generated_SecurityCenter_ListFindings_async
+ */
   listFindingsAsync(
-    request?: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.securitycenter.v1beta1.IFinding> {
+      request?: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.securitycenter.v1beta1.IFinding>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listFindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listFindings iterate %j', request);
     return this.descriptors.page.listFindings.asyncIterate(
       this.innerApiCalls['listFindings'] as GaxCall,
@@ -3801,116 +3202,91 @@ export class SecurityCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1beta1.IFinding>;
   }
-  /**
-   * Lists all sources belonging to an organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the parent of sources to list. Its format should be
-   *   "organizations/[organization_id]".
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListSourcesResponse`; indicates
-   *   that this is a continuation of a prior `ListSources` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v1beta1.Source|Source}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listSourcesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all sources belonging to an organization.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the parent of sources to list. Its format should be
+ *   "organizations/[organization_id]".
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListSourcesResponse`; indicates
+ *   that this is a continuation of a prior `ListSources` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v1beta1.Source|Source}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listSourcesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSources(
-    request?: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.ISource[],
-      protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest | null,
-      protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.ISource[],
+        protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest|null,
+        protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse
+      ]>;
   listSources(
-    request: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
-      | protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v1beta1.ISource
-    >
-  ): void;
-  listSources(
-    request: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
-      | protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v1beta1.ISource
-    >
-  ): void;
-  listSources(
-    request?: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
-          | protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v1beta1.ISource
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
-      | protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v1beta1.ISource
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v1beta1.ISource[],
-      protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest | null,
-      protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse|null|undefined,
+          protos.google.cloud.securitycenter.v1beta1.ISource>): void;
+  listSources(
+      request: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
+          protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse|null|undefined,
+          protos.google.cloud.securitycenter.v1beta1.ISource>): void;
+  listSources(
+      request?: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
+          protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse|null|undefined,
+          protos.google.cloud.securitycenter.v1beta1.ISource>,
+      callback?: PaginationCallback<
+          protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
+          protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse|null|undefined,
+          protos.google.cloud.securitycenter.v1beta1.ISource>):
+      Promise<[
+        protos.google.cloud.securitycenter.v1beta1.ISource[],
+        protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest|null,
+        protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
-          | protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v1beta1.ISource
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
+      protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse|null|undefined,
+      protos.google.cloud.securitycenter.v1beta1.ISource>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSources values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3919,60 +3295,57 @@ export class SecurityCenterClient {
     this._log.info('listSources request %j', request);
     return this.innerApiCalls
       .listSources(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.securitycenter.v1beta1.ISource[],
-          protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest | null,
-          protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse,
-        ]) => {
-          this._log.info('listSources values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.securitycenter.v1beta1.ISource[],
+        protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest|null,
+        protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse
+      ]) => {
+        this._log.info('listSources values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listSources`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the parent of sources to list. Its format should be
-   *   "organizations/[organization_id]".
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListSourcesResponse`; indicates
-   *   that this is a continuation of a prior `ListSources` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v1beta1.Source|Source} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listSourcesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listSources`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the parent of sources to list. Its format should be
+ *   "organizations/[organization_id]".
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListSourcesResponse`; indicates
+ *   that this is a continuation of a prior `ListSources` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v1beta1.Source|Source} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listSourcesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSourcesStream(
-    request?: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSources stream %j', request);
     return this.descriptors.page.listSources.createStream(
       this.innerApiCalls.listSources as GaxCall,
@@ -3981,51 +3354,50 @@ export class SecurityCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `listSources`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the parent of sources to list. Its format should be
-   *   "organizations/[organization_id]".
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListSourcesResponse`; indicates
-   *   that this is a continuation of a prior `ListSources` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.securitycenter.v1beta1.Source|Source}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/security_center.list_sources.js</caption>
-   * region_tag:securitycenter_v1beta1_generated_SecurityCenter_ListSources_async
-   */
+/**
+ * Equivalent to `listSources`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the parent of sources to list. Its format should be
+ *   "organizations/[organization_id]".
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListSourcesResponse`; indicates
+ *   that this is a continuation of a prior `ListSources` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.securitycenter.v1beta1.Source|Source}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/security_center.list_sources.js</caption>
+ * region_tag:securitycenter_v1beta1_generated_SecurityCenter_ListSources_async
+ */
   listSourcesAsync(
-    request?: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.securitycenter.v1beta1.ISource> {
+      request?: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.securitycenter.v1beta1.ISource>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSources iterate %j', request);
     return this.descriptors.page.listSources.asyncIterate(
       this.innerApiCalls['listSources'] as GaxCall,
@@ -4044,7 +3416,7 @@ export class SecurityCenterClient {
    * @param {string} asset
    * @returns {string} Resource name string.
    */
-  assetPath(organization: string, asset: string) {
+  assetPath(organization:string,asset:string) {
     return this.pathTemplates.assetPathTemplate.render({
       organization: organization,
       asset: asset,
@@ -4081,7 +3453,7 @@ export class SecurityCenterClient {
    * @param {string} finding
    * @returns {string} Resource name string.
    */
-  findingPath(organization: string, source: string, finding: string) {
+  findingPath(organization:string,source:string,finding:string) {
     return this.pathTemplates.findingPathTemplate.render({
       organization: organization,
       source: source,
@@ -4097,8 +3469,7 @@ export class SecurityCenterClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromFindingName(findingName: string) {
-    return this.pathTemplates.findingPathTemplate.match(findingName)
-      .organization;
+    return this.pathTemplates.findingPathTemplate.match(findingName).organization;
   }
 
   /**
@@ -4129,7 +3500,7 @@ export class SecurityCenterClient {
    * @param {string} organization
    * @returns {string} Resource name string.
    */
-  organizationPath(organization: string) {
+  organizationPath(organization:string) {
     return this.pathTemplates.organizationPathTemplate.render({
       organization: organization,
     });
@@ -4143,8 +3514,7 @@ export class SecurityCenterClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationName(organizationName: string) {
-    return this.pathTemplates.organizationPathTemplate.match(organizationName)
-      .organization;
+    return this.pathTemplates.organizationPathTemplate.match(organizationName).organization;
   }
 
   /**
@@ -4154,13 +3524,11 @@ export class SecurityCenterClient {
    * @param {string} asset
    * @returns {string} Resource name string.
    */
-  organizationAssetSecurityMarksPath(organization: string, asset: string) {
-    return this.pathTemplates.organizationAssetSecurityMarksPathTemplate.render(
-      {
-        organization: organization,
-        asset: asset,
-      }
-    );
+  organizationAssetSecurityMarksPath(organization:string,asset:string) {
+    return this.pathTemplates.organizationAssetSecurityMarksPathTemplate.render({
+      organization: organization,
+      asset: asset,
+    });
   }
 
   /**
@@ -4170,12 +3538,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_asset_securityMarks resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationAssetSecurityMarksName(
-    organizationAssetSecurityMarksName: string
-  ) {
-    return this.pathTemplates.organizationAssetSecurityMarksPathTemplate.match(
-      organizationAssetSecurityMarksName
-    ).organization;
+  matchOrganizationFromOrganizationAssetSecurityMarksName(organizationAssetSecurityMarksName: string) {
+    return this.pathTemplates.organizationAssetSecurityMarksPathTemplate.match(organizationAssetSecurityMarksName).organization;
   }
 
   /**
@@ -4185,12 +3549,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_asset_securityMarks resource.
    * @returns {string} A string representing the asset.
    */
-  matchAssetFromOrganizationAssetSecurityMarksName(
-    organizationAssetSecurityMarksName: string
-  ) {
-    return this.pathTemplates.organizationAssetSecurityMarksPathTemplate.match(
-      organizationAssetSecurityMarksName
-    ).asset;
+  matchAssetFromOrganizationAssetSecurityMarksName(organizationAssetSecurityMarksName: string) {
+    return this.pathTemplates.organizationAssetSecurityMarksPathTemplate.match(organizationAssetSecurityMarksName).asset;
   }
 
   /**
@@ -4199,7 +3559,7 @@ export class SecurityCenterClient {
    * @param {string} organization
    * @returns {string} Resource name string.
    */
-  organizationSettingsPath(organization: string) {
+  organizationSettingsPath(organization:string) {
     return this.pathTemplates.organizationSettingsPathTemplate.render({
       organization: organization,
     });
@@ -4212,12 +3572,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing OrganizationSettings resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationSettingsName(
-    organizationSettingsName: string
-  ) {
-    return this.pathTemplates.organizationSettingsPathTemplate.match(
-      organizationSettingsName
-    ).organization;
+  matchOrganizationFromOrganizationSettingsName(organizationSettingsName: string) {
+    return this.pathTemplates.organizationSettingsPathTemplate.match(organizationSettingsName).organization;
   }
 
   /**
@@ -4228,18 +3584,12 @@ export class SecurityCenterClient {
    * @param {string} finding
    * @returns {string} Resource name string.
    */
-  organizationSourceFindingSecurityMarksPath(
-    organization: string,
-    source: string,
-    finding: string
-  ) {
-    return this.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.render(
-      {
-        organization: organization,
-        source: source,
-        finding: finding,
-      }
-    );
+  organizationSourceFindingSecurityMarksPath(organization:string,source:string,finding:string) {
+    return this.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.render({
+      organization: organization,
+      source: source,
+      finding: finding,
+    });
   }
 
   /**
@@ -4249,12 +3599,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_source_finding_securityMarks resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationSourceFindingSecurityMarksName(
-    organizationSourceFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(
-      organizationSourceFindingSecurityMarksName
-    ).organization;
+  matchOrganizationFromOrganizationSourceFindingSecurityMarksName(organizationSourceFindingSecurityMarksName: string) {
+    return this.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(organizationSourceFindingSecurityMarksName).organization;
   }
 
   /**
@@ -4264,12 +3610,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_source_finding_securityMarks resource.
    * @returns {string} A string representing the source.
    */
-  matchSourceFromOrganizationSourceFindingSecurityMarksName(
-    organizationSourceFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(
-      organizationSourceFindingSecurityMarksName
-    ).source;
+  matchSourceFromOrganizationSourceFindingSecurityMarksName(organizationSourceFindingSecurityMarksName: string) {
+    return this.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(organizationSourceFindingSecurityMarksName).source;
   }
 
   /**
@@ -4279,12 +3621,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_source_finding_securityMarks resource.
    * @returns {string} A string representing the finding.
    */
-  matchFindingFromOrganizationSourceFindingSecurityMarksName(
-    organizationSourceFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(
-      organizationSourceFindingSecurityMarksName
-    ).finding;
+  matchFindingFromOrganizationSourceFindingSecurityMarksName(organizationSourceFindingSecurityMarksName: string) {
+    return this.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(organizationSourceFindingSecurityMarksName).finding;
   }
 
   /**
@@ -4294,7 +3632,7 @@ export class SecurityCenterClient {
    * @param {string} source
    * @returns {string} Resource name string.
    */
-  sourcePath(organization: string, source: string) {
+  sourcePath(organization:string,source:string) {
     return this.pathTemplates.sourcePathTemplate.render({
       organization: organization,
       source: source,

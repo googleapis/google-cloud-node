@@ -22,7 +22,7 @@ import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallba
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -192,17 +192,17 @@ export class SecretManagerServiceClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
-      projectLocationSecretPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/secrets/{secret}'
-      ),
       projectLocationSecretSecretVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/secrets/{secret}/versions/{secret_version}'
       ),
-      projectSecretPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/secrets/{secret}'
+      projectLocationSecretsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/secrets/{secret}'
       ),
       projectSecretSecretVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/secrets/{secret}/versions/{secret_version}'
+      ),
+      projectSecretsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/secrets/{secret}'
       ),
       topicPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/topics/{topic}'
@@ -464,6 +464,12 @@ export class SecretManagerServiceClient {
       ]) => {
         this._log.info('createSecret response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -561,6 +567,12 @@ export class SecretManagerServiceClient {
       ]) => {
         this._log.info('addSecretVersion response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -652,6 +664,12 @@ export class SecretManagerServiceClient {
       ]) => {
         this._log.info('getSecret response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -744,6 +762,12 @@ export class SecretManagerServiceClient {
       ]) => {
         this._log.info('updateSecret response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -838,6 +862,12 @@ export class SecretManagerServiceClient {
       ]) => {
         this._log.info('deleteSecret response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -938,6 +968,12 @@ export class SecretManagerServiceClient {
       ]) => {
         this._log.info('getSecretVersion response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1039,6 +1075,12 @@ export class SecretManagerServiceClient {
       ]) => {
         this._log.info('accessSecretVersion response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1140,6 +1182,12 @@ export class SecretManagerServiceClient {
       ]) => {
         this._log.info('disableSecretVersion response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1241,6 +1289,12 @@ export class SecretManagerServiceClient {
       ]) => {
         this._log.info('enableSecretVersion response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1343,6 +1397,12 @@ export class SecretManagerServiceClient {
       ]) => {
         this._log.info('destroySecretVersion response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1449,6 +1509,12 @@ export class SecretManagerServiceClient {
       ]) => {
         this._log.info('setIamPolicy response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1542,6 +1608,12 @@ export class SecretManagerServiceClient {
       ]) => {
         this._log.info('getIamPolicy response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1642,6 +1714,12 @@ export class SecretManagerServiceClient {
       ]) => {
         this._log.info('testIamPermissions response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 
@@ -2203,55 +2281,6 @@ export class SecretManagerServiceClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationSecret resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} secret
-   * @returns {string} Resource name string.
-   */
-  projectLocationSecretPath(project:string,location:string,secret:string) {
-    return this.pathTemplates.projectLocationSecretPathTemplate.render({
-      project: project,
-      location: location,
-      secret: secret,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectLocationSecret resource.
-   *
-   * @param {string} projectLocationSecretName
-   *   A fully-qualified path representing project_location_secret resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectLocationSecretName(projectLocationSecretName: string) {
-    return this.pathTemplates.projectLocationSecretPathTemplate.match(projectLocationSecretName).project;
-  }
-
-  /**
-   * Parse the location from ProjectLocationSecret resource.
-   *
-   * @param {string} projectLocationSecretName
-   *   A fully-qualified path representing project_location_secret resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromProjectLocationSecretName(projectLocationSecretName: string) {
-    return this.pathTemplates.projectLocationSecretPathTemplate.match(projectLocationSecretName).location;
-  }
-
-  /**
-   * Parse the secret from ProjectLocationSecret resource.
-   *
-   * @param {string} projectLocationSecretName
-   *   A fully-qualified path representing project_location_secret resource.
-   * @returns {string} A string representing the secret.
-   */
-  matchSecretFromProjectLocationSecretName(projectLocationSecretName: string) {
-    return this.pathTemplates.projectLocationSecretPathTemplate.match(projectLocationSecretName).secret;
-  }
-
-  /**
    * Return a fully-qualified projectLocationSecretSecretVersion resource name string.
    *
    * @param {string} project
@@ -2314,39 +2343,52 @@ export class SecretManagerServiceClient {
   }
 
   /**
-   * Return a fully-qualified projectSecret resource name string.
+   * Return a fully-qualified projectLocationSecrets resource name string.
    *
    * @param {string} project
+   * @param {string} location
    * @param {string} secret
    * @returns {string} Resource name string.
    */
-  projectSecretPath(project:string,secret:string) {
-    return this.pathTemplates.projectSecretPathTemplate.render({
+  projectLocationSecretsPath(project:string,location:string,secret:string) {
+    return this.pathTemplates.projectLocationSecretsPathTemplate.render({
       project: project,
+      location: location,
       secret: secret,
     });
   }
 
   /**
-   * Parse the project from ProjectSecret resource.
+   * Parse the project from ProjectLocationSecrets resource.
    *
-   * @param {string} projectSecretName
-   *   A fully-qualified path representing project_secret resource.
+   * @param {string} projectLocationSecretsName
+   *   A fully-qualified path representing project_location_secrets resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectSecretName(projectSecretName: string) {
-    return this.pathTemplates.projectSecretPathTemplate.match(projectSecretName).project;
+  matchProjectFromProjectLocationSecretsName(projectLocationSecretsName: string) {
+    return this.pathTemplates.projectLocationSecretsPathTemplate.match(projectLocationSecretsName).project;
   }
 
   /**
-   * Parse the secret from ProjectSecret resource.
+   * Parse the location from ProjectLocationSecrets resource.
    *
-   * @param {string} projectSecretName
-   *   A fully-qualified path representing project_secret resource.
+   * @param {string} projectLocationSecretsName
+   *   A fully-qualified path representing project_location_secrets resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationSecretsName(projectLocationSecretsName: string) {
+    return this.pathTemplates.projectLocationSecretsPathTemplate.match(projectLocationSecretsName).location;
+  }
+
+  /**
+   * Parse the secret from ProjectLocationSecrets resource.
+   *
+   * @param {string} projectLocationSecretsName
+   *   A fully-qualified path representing project_location_secrets resource.
    * @returns {string} A string representing the secret.
    */
-  matchSecretFromProjectSecretName(projectSecretName: string) {
-    return this.pathTemplates.projectSecretPathTemplate.match(projectSecretName).secret;
+  matchSecretFromProjectLocationSecretsName(projectLocationSecretsName: string) {
+    return this.pathTemplates.projectLocationSecretsPathTemplate.match(projectLocationSecretsName).secret;
   }
 
   /**
@@ -2396,6 +2438,42 @@ export class SecretManagerServiceClient {
    */
   matchSecretVersionFromProjectSecretSecretVersionName(projectSecretSecretVersionName: string) {
     return this.pathTemplates.projectSecretSecretVersionPathTemplate.match(projectSecretSecretVersionName).secret_version;
+  }
+
+  /**
+   * Return a fully-qualified projectSecrets resource name string.
+   *
+   * @param {string} project
+   * @param {string} secret
+   * @returns {string} Resource name string.
+   */
+  projectSecretsPath(project:string,secret:string) {
+    return this.pathTemplates.projectSecretsPathTemplate.render({
+      project: project,
+      secret: secret,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectSecrets resource.
+   *
+   * @param {string} projectSecretsName
+   *   A fully-qualified path representing project_secrets resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectSecretsName(projectSecretsName: string) {
+    return this.pathTemplates.projectSecretsPathTemplate.match(projectSecretsName).project;
+  }
+
+  /**
+   * Parse the secret from ProjectSecrets resource.
+   *
+   * @param {string} projectSecretsName
+   *   A fully-qualified path representing project_secrets resource.
+   * @returns {string} A string representing the secret.
+   */
+  matchSecretFromProjectSecretsName(projectSecretsName: string) {
+    return this.pathTemplates.projectSecretsPathTemplate.match(projectSecretsName).secret;
   }
 
   /**

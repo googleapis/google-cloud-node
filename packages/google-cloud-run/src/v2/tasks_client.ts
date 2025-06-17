@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -110,41 +101,20 @@ export class TasksClient {
    *     const client = new TasksClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof TasksClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'run.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +140,7 @@ export class TasksClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -186,9 +156,13 @@ export class TasksClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -239,20 +213,14 @@ export class TasksClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listTasks: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'tasks'
-      ),
+      listTasks:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'tasks')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.run.v2.Tasks',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.run.v2.Tasks', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -283,35 +251,32 @@ export class TasksClient {
     // Put together the "service stub" for
     // google.cloud.run.v2.Tasks.
     this.tasksStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.run.v2.Tasks'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.run.v2.Tasks') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.run.v2.Tasks,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const tasksStubMethods = ['getTask', 'listTasks'];
+    const tasksStubMethods =
+        ['getTask', 'listTasks'];
     for (const methodName of tasksStubMethods) {
       const callPromise = this.tasksStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -331,14 +296,8 @@ export class TasksClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'run.googleapis.com';
   }
@@ -349,14 +308,8 @@ export class TasksClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'run.googleapis.com';
   }
@@ -387,7 +340,9 @@ export class TasksClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -396,9 +351,8 @@ export class TasksClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -409,219 +363,190 @@ export class TasksClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets information about a Task.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The full name of the Task.
-   *   Format:
-   *   projects/{project}/locations/{location}/jobs/{job}/executions/{execution}/tasks/{task}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.run.v2.Task|Task}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/tasks.get_task.js</caption>
-   * region_tag:run_v2_generated_Tasks_GetTask_async
-   */
+/**
+ * Gets information about a Task.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The full name of the Task.
+ *   Format:
+ *   projects/{project}/locations/{location}/jobs/{job}/executions/{execution}/tasks/{task}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.run.v2.Task|Task}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/tasks.get_task.js</caption>
+ * region_tag:run_v2_generated_Tasks_GetTask_async
+ */
   getTask(
-    request?: protos.google.cloud.run.v2.IGetTaskRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.run.v2.ITask,
-      protos.google.cloud.run.v2.IGetTaskRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.run.v2.IGetTaskRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.run.v2.ITask,
+        protos.google.cloud.run.v2.IGetTaskRequest|undefined, {}|undefined
+      ]>;
   getTask(
-    request: protos.google.cloud.run.v2.IGetTaskRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.run.v2.ITask,
-      protos.google.cloud.run.v2.IGetTaskRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTask(
-    request: protos.google.cloud.run.v2.IGetTaskRequest,
-    callback: Callback<
-      protos.google.cloud.run.v2.ITask,
-      protos.google.cloud.run.v2.IGetTaskRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTask(
-    request?: protos.google.cloud.run.v2.IGetTaskRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.run.v2.IGetTaskRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.run.v2.ITask,
-          protos.google.cloud.run.v2.IGetTaskRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.run.v2.ITask,
-      protos.google.cloud.run.v2.IGetTaskRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.run.v2.ITask,
-      protos.google.cloud.run.v2.IGetTaskRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.run.v2.IGetTaskRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTask(
+      request: protos.google.cloud.run.v2.IGetTaskRequest,
+      callback: Callback<
+          protos.google.cloud.run.v2.ITask,
+          protos.google.cloud.run.v2.IGetTaskRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTask(
+      request?: protos.google.cloud.run.v2.IGetTaskRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.run.v2.ITask,
+          protos.google.cloud.run.v2.IGetTaskRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.run.v2.ITask,
+          protos.google.cloud.run.v2.IGetTaskRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.run.v2.ITask,
+        protos.google.cloud.run.v2.IGetTaskRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getTask request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.run.v2.ITask,
-          protos.google.cloud.run.v2.IGetTaskRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.run.v2.ITask,
+        protos.google.cloud.run.v2.IGetTaskRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getTask response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getTask(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.run.v2.ITask,
-          protos.google.cloud.run.v2.IGetTaskRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getTask response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getTask(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.run.v2.ITask,
+        protos.google.cloud.run.v2.IGetTaskRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getTask response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists Tasks from an Execution of a Job.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The Execution from which the Tasks should be listed.
-   *   To list all Tasks across Executions of a Job, use "-" instead of Execution
-   *   name. To list all Tasks across Jobs, use "-" instead of Job name. Format:
-   *   projects/{project}/locations/{location}/jobs/{job}/executions/{execution}
-   * @param {number} request.pageSize
-   *   Maximum number of Tasks to return in this call.
-   * @param {string} request.pageToken
-   *   A page token received from a previous call to ListTasks.
-   *   All other parameters must match.
-   * @param {boolean} request.showDeleted
-   *   If true, returns deleted (but unexpired) resources along with active ones.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.run.v2.Task|Task}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listTasksAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Tasks from an Execution of a Job.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The Execution from which the Tasks should be listed.
+ *   To list all Tasks across Executions of a Job, use "-" instead of Execution
+ *   name. To list all Tasks across Jobs, use "-" instead of Job name. Format:
+ *   projects/{project}/locations/{location}/jobs/{job}/executions/{execution}
+ * @param {number} request.pageSize
+ *   Maximum number of Tasks to return in this call.
+ * @param {string} request.pageToken
+ *   A page token received from a previous call to ListTasks.
+ *   All other parameters must match.
+ * @param {boolean} request.showDeleted
+ *   If true, returns deleted (but unexpired) resources along with active ones.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.run.v2.Task|Task}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listTasksAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTasks(
-    request?: protos.google.cloud.run.v2.IListTasksRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.run.v2.ITask[],
-      protos.google.cloud.run.v2.IListTasksRequest | null,
-      protos.google.cloud.run.v2.IListTasksResponse,
-    ]
-  >;
+      request?: protos.google.cloud.run.v2.IListTasksRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.run.v2.ITask[],
+        protos.google.cloud.run.v2.IListTasksRequest|null,
+        protos.google.cloud.run.v2.IListTasksResponse
+      ]>;
   listTasks(
-    request: protos.google.cloud.run.v2.IListTasksRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.run.v2.IListTasksRequest,
-      protos.google.cloud.run.v2.IListTasksResponse | null | undefined,
-      protos.google.cloud.run.v2.ITask
-    >
-  ): void;
-  listTasks(
-    request: protos.google.cloud.run.v2.IListTasksRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.run.v2.IListTasksRequest,
-      protos.google.cloud.run.v2.IListTasksResponse | null | undefined,
-      protos.google.cloud.run.v2.ITask
-    >
-  ): void;
-  listTasks(
-    request?: protos.google.cloud.run.v2.IListTasksRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.run.v2.IListTasksRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.run.v2.IListTasksRequest,
-          protos.google.cloud.run.v2.IListTasksResponse | null | undefined,
-          protos.google.cloud.run.v2.ITask
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.run.v2.IListTasksRequest,
-      protos.google.cloud.run.v2.IListTasksResponse | null | undefined,
-      protos.google.cloud.run.v2.ITask
-    >
-  ): Promise<
-    [
-      protos.google.cloud.run.v2.ITask[],
-      protos.google.cloud.run.v2.IListTasksRequest | null,
-      protos.google.cloud.run.v2.IListTasksResponse,
-    ]
-  > | void {
+          protos.google.cloud.run.v2.IListTasksResponse|null|undefined,
+          protos.google.cloud.run.v2.ITask>): void;
+  listTasks(
+      request: protos.google.cloud.run.v2.IListTasksRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.run.v2.IListTasksRequest,
+          protos.google.cloud.run.v2.IListTasksResponse|null|undefined,
+          protos.google.cloud.run.v2.ITask>): void;
+  listTasks(
+      request?: protos.google.cloud.run.v2.IListTasksRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.run.v2.IListTasksRequest,
+          protos.google.cloud.run.v2.IListTasksResponse|null|undefined,
+          protos.google.cloud.run.v2.ITask>,
+      callback?: PaginationCallback<
+          protos.google.cloud.run.v2.IListTasksRequest,
+          protos.google.cloud.run.v2.IListTasksResponse|null|undefined,
+          protos.google.cloud.run.v2.ITask>):
+      Promise<[
+        protos.google.cloud.run.v2.ITask[],
+        protos.google.cloud.run.v2.IListTasksRequest|null,
+        protos.google.cloud.run.v2.IListTasksResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.run.v2.IListTasksRequest,
-          protos.google.cloud.run.v2.IListTasksResponse | null | undefined,
-          protos.google.cloud.run.v2.ITask
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.run.v2.IListTasksRequest,
+      protos.google.cloud.run.v2.IListTasksResponse|null|undefined,
+      protos.google.cloud.run.v2.ITask>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listTasks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -630,62 +555,59 @@ export class TasksClient {
     this._log.info('listTasks request %j', request);
     return this.innerApiCalls
       .listTasks(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.run.v2.ITask[],
-          protos.google.cloud.run.v2.IListTasksRequest | null,
-          protos.google.cloud.run.v2.IListTasksResponse,
-        ]) => {
-          this._log.info('listTasks values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.run.v2.ITask[],
+        protos.google.cloud.run.v2.IListTasksRequest|null,
+        protos.google.cloud.run.v2.IListTasksResponse
+      ]) => {
+        this._log.info('listTasks values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listTasks`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The Execution from which the Tasks should be listed.
-   *   To list all Tasks across Executions of a Job, use "-" instead of Execution
-   *   name. To list all Tasks across Jobs, use "-" instead of Job name. Format:
-   *   projects/{project}/locations/{location}/jobs/{job}/executions/{execution}
-   * @param {number} request.pageSize
-   *   Maximum number of Tasks to return in this call.
-   * @param {string} request.pageToken
-   *   A page token received from a previous call to ListTasks.
-   *   All other parameters must match.
-   * @param {boolean} request.showDeleted
-   *   If true, returns deleted (but unexpired) resources along with active ones.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.run.v2.Task|Task} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listTasksAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listTasks`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The Execution from which the Tasks should be listed.
+ *   To list all Tasks across Executions of a Job, use "-" instead of Execution
+ *   name. To list all Tasks across Jobs, use "-" instead of Job name. Format:
+ *   projects/{project}/locations/{location}/jobs/{job}/executions/{execution}
+ * @param {number} request.pageSize
+ *   Maximum number of Tasks to return in this call.
+ * @param {string} request.pageToken
+ *   A page token received from a previous call to ListTasks.
+ *   All other parameters must match.
+ * @param {boolean} request.showDeleted
+ *   If true, returns deleted (but unexpired) resources along with active ones.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.run.v2.Task|Task} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listTasksAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTasksStream(
-    request?: protos.google.cloud.run.v2.IListTasksRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.run.v2.IListTasksRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTasks stream %j', request);
     return this.descriptors.page.listTasks.createStream(
       this.innerApiCalls.listTasks as GaxCall,
@@ -694,53 +616,52 @@ export class TasksClient {
     );
   }
 
-  /**
-   * Equivalent to `listTasks`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The Execution from which the Tasks should be listed.
-   *   To list all Tasks across Executions of a Job, use "-" instead of Execution
-   *   name. To list all Tasks across Jobs, use "-" instead of Job name. Format:
-   *   projects/{project}/locations/{location}/jobs/{job}/executions/{execution}
-   * @param {number} request.pageSize
-   *   Maximum number of Tasks to return in this call.
-   * @param {string} request.pageToken
-   *   A page token received from a previous call to ListTasks.
-   *   All other parameters must match.
-   * @param {boolean} request.showDeleted
-   *   If true, returns deleted (but unexpired) resources along with active ones.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.run.v2.Task|Task}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/tasks.list_tasks.js</caption>
-   * region_tag:run_v2_generated_Tasks_ListTasks_async
-   */
+/**
+ * Equivalent to `listTasks`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The Execution from which the Tasks should be listed.
+ *   To list all Tasks across Executions of a Job, use "-" instead of Execution
+ *   name. To list all Tasks across Jobs, use "-" instead of Job name. Format:
+ *   projects/{project}/locations/{location}/jobs/{job}/executions/{execution}
+ * @param {number} request.pageSize
+ *   Maximum number of Tasks to return in this call.
+ * @param {string} request.pageToken
+ *   A page token received from a previous call to ListTasks.
+ *   All other parameters must match.
+ * @param {boolean} request.showDeleted
+ *   If true, returns deleted (but unexpired) resources along with active ones.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.run.v2.Task|Task}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/tasks.list_tasks.js</caption>
+ * region_tag:run_v2_generated_Tasks_ListTasks_async
+ */
   listTasksAsync(
-    request?: protos.google.cloud.run.v2.IListTasksRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.run.v2.ITask> {
+      request?: protos.google.cloud.run.v2.IListTasksRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.run.v2.ITask>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTasks iterate %j', request);
     return this.descriptors.page.listTasks.asyncIterate(
       this.innerApiCalls['listTasks'] as GaxCall,
@@ -748,7 +669,7 @@ export class TasksClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.run.v2.ITask>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -788,7 +709,7 @@ export class TasksClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -839,12 +760,7 @@ export class TasksClient {
    * @param {string} crypto_key
    * @returns {string} Resource name string.
    */
-  cryptoKeyPath(
-    project: string,
-    location: string,
-    keyRing: string,
-    cryptoKey: string
-  ) {
+  cryptoKeyPath(project:string,location:string,keyRing:string,cryptoKey:string) {
     return this.pathTemplates.cryptoKeyPathTemplate.render({
       project: project,
       location: location,
@@ -861,8 +777,7 @@ export class TasksClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .project;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).project;
   }
 
   /**
@@ -873,8 +788,7 @@ export class TasksClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .location;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).location;
   }
 
   /**
@@ -885,8 +799,7 @@ export class TasksClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .key_ring;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).key_ring;
   }
 
   /**
@@ -897,8 +810,7 @@ export class TasksClient {
    * @returns {string} A string representing the crypto_key.
    */
   matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .crypto_key;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).crypto_key;
   }
 
   /**
@@ -910,12 +822,7 @@ export class TasksClient {
    * @param {string} execution
    * @returns {string} Resource name string.
    */
-  executionPath(
-    project: string,
-    location: string,
-    job: string,
-    execution: string
-  ) {
+  executionPath(project:string,location:string,job:string,execution:string) {
     return this.pathTemplates.executionPathTemplate.render({
       project: project,
       location: location,
@@ -932,8 +839,7 @@ export class TasksClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .project;
+    return this.pathTemplates.executionPathTemplate.match(executionName).project;
   }
 
   /**
@@ -944,8 +850,7 @@ export class TasksClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .location;
+    return this.pathTemplates.executionPathTemplate.match(executionName).location;
   }
 
   /**
@@ -967,8 +872,7 @@ export class TasksClient {
    * @returns {string} A string representing the execution.
    */
   matchExecutionFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .execution;
+    return this.pathTemplates.executionPathTemplate.match(executionName).execution;
   }
 
   /**
@@ -979,7 +883,7 @@ export class TasksClient {
    * @param {string} job
    * @returns {string} Resource name string.
    */
-  jobPath(project: string, location: string, job: string) {
+  jobPath(project:string,location:string,job:string) {
     return this.pathTemplates.jobPathTemplate.render({
       project: project,
       location: location,
@@ -1027,7 +931,7 @@ export class TasksClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1062,7 +966,7 @@ export class TasksClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -1088,12 +992,7 @@ export class TasksClient {
    * @param {string} revision
    * @returns {string} Resource name string.
    */
-  revisionPath(
-    project: string,
-    location: string,
-    service: string,
-    revision: string
-  ) {
+  revisionPath(project:string,location:string,service:string,revision:string) {
     return this.pathTemplates.revisionPathTemplate.render({
       project: project,
       location: location,
@@ -1154,7 +1053,7 @@ export class TasksClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  servicePath(project: string, location: string, service: string) {
+  servicePath(project:string,location:string,service:string) {
     return this.pathTemplates.servicePathTemplate.render({
       project: project,
       location: location,
@@ -1205,13 +1104,7 @@ export class TasksClient {
    * @param {string} task
    * @returns {string} Resource name string.
    */
-  taskPath(
-    project: string,
-    location: string,
-    job: string,
-    execution: string,
-    task: string
-  ) {
+  taskPath(project:string,location:string,job:string,execution:string,task:string) {
     return this.pathTemplates.taskPathTemplate.render({
       project: project,
       location: location,
@@ -1288,9 +1181,7 @@ export class TasksClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
       });
     }
     return Promise.resolve();

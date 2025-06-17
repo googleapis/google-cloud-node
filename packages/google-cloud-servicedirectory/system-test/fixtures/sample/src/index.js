@@ -16,13 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const servicedirectory = require('@google-cloud/service-directory');
 
 function main() {
   const lookupServiceClient = new servicedirectory.LookupServiceClient();
-  const registrationServiceClient =
-    new servicedirectory.RegistrationServiceClient();
+  const registrationServiceClient = new servicedirectory.RegistrationServiceClient();
 }
 
 main();

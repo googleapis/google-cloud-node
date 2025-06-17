@@ -16,16 +16,10 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  CaseAttachmentServiceClient,
-  CaseServiceClient,
-  CommentServiceClient,
-} from '@google-cloud/support';
+import {CaseAttachmentServiceClient, CaseServiceClient, CommentServiceClient} from '@google-cloud/support';
 
 // check that the client class type name can be used
-function doStuffWithCaseAttachmentServiceClient(
-  client: CaseAttachmentServiceClient
-) {
+function doStuffWithCaseAttachmentServiceClient(client: CaseAttachmentServiceClient) {
   client.close();
 }
 function doStuffWithCaseServiceClient(client: CaseServiceClient) {

@@ -27,1556 +27,1244 @@ import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.CloudShellServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'cloudshell.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          cloudshellserviceModule.v1.CloudShellServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'cloudshell.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          cloudshellserviceModule.v1.CloudShellServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'cloudshell.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudshell.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudshell.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new cloudshellserviceModule.v1.CloudShellServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'cloudshell.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'cloudshell.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new cloudshellserviceModule.v1.CloudShellServiceClient(
-            {universeDomain: 'configured.example.com'}
-          );
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'cloudshell.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new cloudshellserviceModule.v1.CloudShellServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = cloudshellserviceModule.v1.CloudShellServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = cloudshellserviceModule.v1.CloudShellServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'cloudshell.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.cloudShellServiceStub, undefined);
-      await client.initialize();
-      assert(client.cloudShellServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.cloudShellServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.cloudShellServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getEnvironment', () => {
-    it('invokes getEnvironment without error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.shell.v1.GetEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.shell.v1.GetEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.shell.v1.Environment()
-      );
-      client.innerApiCalls.getEnvironment = stubSimpleCall(expectedResponse);
-      const [response] = await client.getEnvironment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEnvironment without error using callback', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.shell.v1.GetEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.shell.v1.GetEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.shell.v1.Environment()
-      );
-      client.innerApiCalls.getEnvironment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getEnvironment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.shell.v1.IEnvironment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEnvironment with error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.shell.v1.GetEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.shell.v1.GetEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getEnvironment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getEnvironment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEnvironment with closed client', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.shell.v1.GetEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.shell.v1.GetEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getEnvironment(request), expectedError);
-    });
-  });
-
-  describe('startEnvironment', () => {
-    it('invokes startEnvironment without error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.shell.v1.StartEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.shell.v1.StartEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.startEnvironment =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.startEnvironment(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.startEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.startEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes startEnvironment without error using callback', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.shell.v1.StartEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.shell.v1.StartEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.startEnvironment =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.startEnvironment(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.shell.v1.IStartEnvironmentResponse,
-              protos.google.cloud.shell.v1.IStartEnvironmentMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.shell.v1.IStartEnvironmentResponse,
-        protos.google.cloud.shell.v1.IStartEnvironmentMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.startEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.startEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes startEnvironment with call error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.shell.v1.StartEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.shell.v1.StartEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.startEnvironment = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.startEnvironment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.startEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.startEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes startEnvironment with LRO error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.shell.v1.StartEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.shell.v1.StartEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.startEnvironment = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.startEnvironment(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.startEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.startEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkStartEnvironmentProgress without error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkStartEnvironmentProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkStartEnvironmentProgress with error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkStartEnvironmentProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('authorizeEnvironment', () => {
-    it('invokes authorizeEnvironment without error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.shell.v1.AuthorizeEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.shell.v1.AuthorizeEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.authorizeEnvironment =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.authorizeEnvironment(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.authorizeEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.authorizeEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes authorizeEnvironment without error using callback', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.shell.v1.AuthorizeEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.shell.v1.AuthorizeEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.authorizeEnvironment =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.authorizeEnvironment(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.shell.v1.IAuthorizeEnvironmentResponse,
-              protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.shell.v1.IAuthorizeEnvironmentResponse,
-        protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.authorizeEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.authorizeEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes authorizeEnvironment with call error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.shell.v1.AuthorizeEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.shell.v1.AuthorizeEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.authorizeEnvironment = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.authorizeEnvironment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.authorizeEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.authorizeEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes authorizeEnvironment with LRO error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.shell.v1.AuthorizeEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.shell.v1.AuthorizeEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.authorizeEnvironment = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.authorizeEnvironment(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.authorizeEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.authorizeEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkAuthorizeEnvironmentProgress without error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkAuthorizeEnvironmentProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkAuthorizeEnvironmentProgress with error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkAuthorizeEnvironmentProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('addPublicKey', () => {
-    it('invokes addPublicKey without error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.shell.v1.AddPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.shell.v1.AddPublicKeyRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.addPublicKey = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.addPublicKey(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.addPublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addPublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addPublicKey without error using callback', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.shell.v1.AddPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.shell.v1.AddPublicKeyRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.addPublicKey =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.addPublicKey(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.shell.v1.IAddPublicKeyResponse,
-              protos.google.cloud.shell.v1.IAddPublicKeyMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.shell.v1.IAddPublicKeyResponse,
-        protos.google.cloud.shell.v1.IAddPublicKeyMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.addPublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addPublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addPublicKey with call error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.shell.v1.AddPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.shell.v1.AddPublicKeyRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.addPublicKey = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.addPublicKey(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.addPublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addPublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addPublicKey with LRO error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.shell.v1.AddPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.shell.v1.AddPublicKeyRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.addPublicKey = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.addPublicKey(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.addPublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addPublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkAddPublicKeyProgress without error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkAddPublicKeyProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkAddPublicKeyProgress with error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkAddPublicKeyProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('removePublicKey', () => {
-    it('invokes removePublicKey without error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.shell.v1.RemovePublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.shell.v1.RemovePublicKeyRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.removePublicKey =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.removePublicKey(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.removePublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removePublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removePublicKey without error using callback', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.shell.v1.RemovePublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.shell.v1.RemovePublicKeyRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.removePublicKey =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.removePublicKey(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.shell.v1.IRemovePublicKeyResponse,
-              protos.google.cloud.shell.v1.IRemovePublicKeyMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.shell.v1.IRemovePublicKeyResponse,
-        protos.google.cloud.shell.v1.IRemovePublicKeyMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.removePublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removePublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removePublicKey with call error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.shell.v1.RemovePublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.shell.v1.RemovePublicKeyRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.removePublicKey = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.removePublicKey(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.removePublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removePublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removePublicKey with LRO error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.shell.v1.RemovePublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.shell.v1.RemovePublicKeyRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.removePublicKey = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.removePublicKey(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.removePublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removePublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkRemovePublicKeyProgress without error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkRemovePublicKeyProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkRemovePublicKeyProgress with error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkRemovePublicKeyProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-    it('invokes getOperation with error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
-    });
-    it('invokes cancelOperation with error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = cloudshellserviceModule.v1.CloudShellServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'cloudshell.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudshell.example.com');
+        });
+
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudshell.example.com');
+        });
+
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new cloudshellserviceModule.v1.CloudShellServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudshell.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new cloudshellserviceModule.v1.CloudShellServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudshell.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new cloudshellserviceModule.v1.CloudShellServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
+
+        it('has port', () => {
+            const port = cloudshellserviceModule.v1.CloudShellServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.cloudShellServiceStub, undefined);
+            await client.initialize();
+            assert(client.cloudShellServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.cloudShellServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.cloudShellServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
-  });
 
-  describe('Path templates', () => {
-    describe('environment', async () => {
-      const fakePath = '/rendered/path/environment';
-      const expectedParameters = {
-        user: 'userValue',
-        environment: 'environmentValue',
-      };
-      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.environmentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.environmentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('getEnvironment', () => {
+        it('invokes getEnvironment without error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.shell.v1.GetEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.shell.v1.GetEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.shell.v1.Environment()
+            );
+            client.innerApiCalls.getEnvironment = stubSimpleCall(expectedResponse);
+            const [response] = await client.getEnvironment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('environmentPath', () => {
-        const result = client.environmentPath('userValue', 'environmentValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.environmentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes getEnvironment without error using callback', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.shell.v1.GetEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.shell.v1.GetEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.shell.v1.Environment()
+            );
+            client.innerApiCalls.getEnvironment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getEnvironment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.shell.v1.IEnvironment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchUserFromEnvironmentName', () => {
-        const result = client.matchUserFromEnvironmentName(fakePath);
-        assert.strictEqual(result, 'userValue');
-        assert(
-          (client.pathTemplates.environmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getEnvironment with error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.shell.v1.GetEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.shell.v1.GetEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getEnvironment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getEnvironment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchEnvironmentFromEnvironmentName', () => {
-        const result = client.matchEnvironmentFromEnvironmentName(fakePath);
-        assert.strictEqual(result, 'environmentValue');
-        assert(
-          (client.pathTemplates.environmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getEnvironment with closed client', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.shell.v1.GetEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.shell.v1.GetEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getEnvironment(request), expectedError);
+        });
     });
-  });
+
+    describe('startEnvironment', () => {
+        it('invokes startEnvironment without error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.shell.v1.StartEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.shell.v1.StartEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.startEnvironment = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.startEnvironment(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.startEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.startEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes startEnvironment without error using callback', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.shell.v1.StartEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.shell.v1.StartEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.startEnvironment = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.startEnvironment(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.shell.v1.IStartEnvironmentResponse, protos.google.cloud.shell.v1.IStartEnvironmentMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.shell.v1.IStartEnvironmentResponse, protos.google.cloud.shell.v1.IStartEnvironmentMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.startEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.startEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes startEnvironment with call error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.shell.v1.StartEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.shell.v1.StartEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.startEnvironment = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.startEnvironment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.startEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.startEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes startEnvironment with LRO error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.shell.v1.StartEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.shell.v1.StartEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.startEnvironment = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.startEnvironment(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.startEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.startEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkStartEnvironmentProgress without error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkStartEnvironmentProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkStartEnvironmentProgress with error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkStartEnvironmentProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('authorizeEnvironment', () => {
+        it('invokes authorizeEnvironment without error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.shell.v1.AuthorizeEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.shell.v1.AuthorizeEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.authorizeEnvironment = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.authorizeEnvironment(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.authorizeEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.authorizeEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes authorizeEnvironment without error using callback', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.shell.v1.AuthorizeEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.shell.v1.AuthorizeEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.authorizeEnvironment = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.authorizeEnvironment(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.shell.v1.IAuthorizeEnvironmentResponse, protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.shell.v1.IAuthorizeEnvironmentResponse, protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.authorizeEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.authorizeEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes authorizeEnvironment with call error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.shell.v1.AuthorizeEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.shell.v1.AuthorizeEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.authorizeEnvironment = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.authorizeEnvironment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.authorizeEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.authorizeEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes authorizeEnvironment with LRO error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.shell.v1.AuthorizeEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.shell.v1.AuthorizeEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.authorizeEnvironment = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.authorizeEnvironment(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.authorizeEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.authorizeEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkAuthorizeEnvironmentProgress without error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkAuthorizeEnvironmentProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkAuthorizeEnvironmentProgress with error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkAuthorizeEnvironmentProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('addPublicKey', () => {
+        it('invokes addPublicKey without error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.shell.v1.AddPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.shell.v1.AddPublicKeyRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.addPublicKey = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.addPublicKey(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.addPublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addPublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addPublicKey without error using callback', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.shell.v1.AddPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.shell.v1.AddPublicKeyRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.addPublicKey = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.addPublicKey(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.shell.v1.IAddPublicKeyResponse, protos.google.cloud.shell.v1.IAddPublicKeyMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.shell.v1.IAddPublicKeyResponse, protos.google.cloud.shell.v1.IAddPublicKeyMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.addPublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addPublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addPublicKey with call error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.shell.v1.AddPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.shell.v1.AddPublicKeyRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.addPublicKey = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.addPublicKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.addPublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addPublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addPublicKey with LRO error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.shell.v1.AddPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.shell.v1.AddPublicKeyRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.addPublicKey = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.addPublicKey(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.addPublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addPublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkAddPublicKeyProgress without error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkAddPublicKeyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkAddPublicKeyProgress with error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkAddPublicKeyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('removePublicKey', () => {
+        it('invokes removePublicKey without error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.shell.v1.RemovePublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.shell.v1.RemovePublicKeyRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.removePublicKey = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.removePublicKey(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.removePublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removePublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removePublicKey without error using callback', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.shell.v1.RemovePublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.shell.v1.RemovePublicKeyRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.removePublicKey = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.removePublicKey(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.shell.v1.IRemovePublicKeyResponse, protos.google.cloud.shell.v1.IRemovePublicKeyMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.shell.v1.IRemovePublicKeyResponse, protos.google.cloud.shell.v1.IRemovePublicKeyMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.removePublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removePublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removePublicKey with call error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.shell.v1.RemovePublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.shell.v1.RemovePublicKeyRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.removePublicKey = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.removePublicKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.removePublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removePublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removePublicKey with LRO error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.shell.v1.RemovePublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.shell.v1.RemovePublicKeyRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.removePublicKey = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.removePublicKey(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.removePublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removePublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkRemovePublicKeyProgress without error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkRemovePublicKeyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkRemovePublicKeyProgress with error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkRemovePublicKeyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('environment', async () => {
+            const fakePath = "/rendered/path/environment";
+            const expectedParameters = {
+                user: "userValue",
+                environment: "environmentValue",
+            };
+            const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.environmentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.environmentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('environmentPath', () => {
+                const result = client.environmentPath("userValue", "environmentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.environmentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchUserFromEnvironmentName', () => {
+                const result = client.matchUserFromEnvironmentName(fakePath);
+                assert.strictEqual(result, "userValue");
+                assert((client.pathTemplates.environmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEnvironmentFromEnvironmentName', () => {
+                const result = client.matchEnvironmentFromEnvironmentName(fakePath);
+                assert.strictEqual(result, "environmentValue");
+                assert((client.pathTemplates.environmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

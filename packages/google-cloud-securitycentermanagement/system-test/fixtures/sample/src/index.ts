@@ -19,9 +19,7 @@
 import {SecurityCenterManagementClient} from '@google-cloud/securitycentermanagement';
 
 // check that the client class type name can be used
-function doStuffWithSecurityCenterManagementClient(
-  client: SecurityCenterManagementClient
-) {
+function doStuffWithSecurityCenterManagementClient(client: SecurityCenterManagementClient) {
   client.close();
 }
 

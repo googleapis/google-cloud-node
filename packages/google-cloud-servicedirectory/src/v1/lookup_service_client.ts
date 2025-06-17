@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, LocationsClient, LocationProtos} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -108,41 +101,20 @@ export class LookupServiceClient {
    *     const client = new LookupServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof LookupServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'servicedirectory.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +140,7 @@ export class LookupServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -184,9 +156,13 @@ export class LookupServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -220,11 +196,8 @@ export class LookupServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.servicedirectory.v1.LookupService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.servicedirectory.v1.LookupService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -255,35 +228,31 @@ export class LookupServiceClient {
     // Put together the "service stub" for
     // google.cloud.servicedirectory.v1.LookupService.
     this.lookupServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.servicedirectory.v1.LookupService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.servicedirectory.v1.LookupService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.servicedirectory.v1.LookupService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const lookupServiceStubMethods = ['resolveService'];
+    const lookupServiceStubMethods =
+        ['resolveService'];
     for (const methodName of lookupServiceStubMethods) {
       const callPromise = this.lookupServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -303,14 +272,8 @@ export class LookupServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'servicedirectory.googleapis.com';
   }
@@ -321,14 +284,8 @@ export class LookupServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'servicedirectory.googleapis.com';
   }
@@ -359,7 +316,9 @@ export class LookupServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -368,9 +327,8 @@ export class LookupServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -381,178 +339,145 @@ export class LookupServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Returns a {@link protos.google.cloud.servicedirectory.v1.Service|service} and its
-   * associated endpoints.
-   * Resolving a service is not considered an active developer method.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the service to resolve.
-   * @param {number} [request.maxEndpoints]
-   *   Optional. The maximum number of endpoints to return. Defaults to 25.
-   *   Maximum is 100. If a value less than one is specified, the Default is used.
-   *   If a value greater than the Maximum is specified, the Maximum is used.
-   * @param {string} [request.endpointFilter]
-   *   Optional. The filter applied to the endpoints of the resolved service.
-   *
-   *   General `filter` string syntax:
-   *   `<field> <operator> <value> (<logical connector>)`
-   *
-   *   *   `<field>` can be `name`, `address`, `port`, or `annotations.<key>` for
-   *       map field
-   *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
-   *       means `HAS`, and is roughly the same as `=`
-   *   *   `<value>` must be the same data type as field
-   *   *   `<logical connector>` can be `AND`, `OR`, `NOT`
-   *
-   *   Examples of valid filters:
-   *
-   *   *   `annotations.owner` returns endpoints that have a annotation with the
-   *       key `owner`, this is the same as `annotations:owner`
-   *   *   `annotations.protocol=gRPC` returns endpoints that have key/value
-   *       `protocol=gRPC`
-   *   *   `address=192.108.1.105` returns endpoints that have this address
-   *   *   `port>8080` returns endpoints that have port number larger than 8080
-   *   *
-   *   `name>projects/my-project/locations/us-east1/namespaces/my-namespace/services/my-service/endpoints/endpoint-c`
-   *       returns endpoints that have name that is alphabetically later than the
-   *       string, so "endpoint-e" is returned but "endpoint-a" is not
-   *   *
-   *   `name=projects/my-project/locations/us-central1/namespaces/my-namespace/services/my-service/endpoints/ep-1`
-   *        returns the endpoint that has an endpoint_id equal to `ep-1`
-   *   *   `annotations.owner!=sd AND annotations.foo=bar` returns endpoints that
-   *       have `owner` in annotation key but value is not `sd` AND have
-   *       key/value `foo=bar`
-   *   *   `doesnotexist.foo=bar` returns an empty list. Note that endpoint
-   *       doesn't have a field called "doesnotexist". Since the filter does not
-   *       match any endpoint, it returns no results
-   *
-   *   For more information about filtering, see
-   *   [API Filtering](https://aip.dev/160).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.servicedirectory.v1.ResolveServiceResponse|ResolveServiceResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/lookup_service.resolve_service.js</caption>
-   * region_tag:servicedirectory_v1_generated_LookupService_ResolveService_async
-   */
+/**
+ * Returns a {@link protos.google.cloud.servicedirectory.v1.Service|service} and its
+ * associated endpoints.
+ * Resolving a service is not considered an active developer method.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the service to resolve.
+ * @param {number} [request.maxEndpoints]
+ *   Optional. The maximum number of endpoints to return. Defaults to 25.
+ *   Maximum is 100. If a value less than one is specified, the Default is used.
+ *   If a value greater than the Maximum is specified, the Maximum is used.
+ * @param {string} [request.endpointFilter]
+ *   Optional. The filter applied to the endpoints of the resolved service.
+ *
+ *   General `filter` string syntax:
+ *   `<field> <operator> <value> (<logical connector>)`
+ *
+ *   *   `<field>` can be `name`, `address`, `port`, or `annotations.<key>` for
+ *       map field
+ *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
+ *       means `HAS`, and is roughly the same as `=`
+ *   *   `<value>` must be the same data type as field
+ *   *   `<logical connector>` can be `AND`, `OR`, `NOT`
+ *
+ *   Examples of valid filters:
+ *
+ *   *   `annotations.owner` returns endpoints that have a annotation with the
+ *       key `owner`, this is the same as `annotations:owner`
+ *   *   `annotations.protocol=gRPC` returns endpoints that have key/value
+ *       `protocol=gRPC`
+ *   *   `address=192.108.1.105` returns endpoints that have this address
+ *   *   `port>8080` returns endpoints that have port number larger than 8080
+ *   *
+ *   `name>projects/my-project/locations/us-east1/namespaces/my-namespace/services/my-service/endpoints/endpoint-c`
+ *       returns endpoints that have name that is alphabetically later than the
+ *       string, so "endpoint-e" is returned but "endpoint-a" is not
+ *   *
+ *   `name=projects/my-project/locations/us-central1/namespaces/my-namespace/services/my-service/endpoints/ep-1`
+ *        returns the endpoint that has an endpoint_id equal to `ep-1`
+ *   *   `annotations.owner!=sd AND annotations.foo=bar` returns endpoints that
+ *       have `owner` in annotation key but value is not `sd` AND have
+ *       key/value `foo=bar`
+ *   *   `doesnotexist.foo=bar` returns an empty list. Note that endpoint
+ *       doesn't have a field called "doesnotexist". Since the filter does not
+ *       match any endpoint, it returns no results
+ *
+ *   For more information about filtering, see
+ *   [API Filtering](https://aip.dev/160).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.servicedirectory.v1.ResolveServiceResponse|ResolveServiceResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/lookup_service.resolve_service.js</caption>
+ * region_tag:servicedirectory_v1_generated_LookupService_ResolveService_async
+ */
   resolveService(
-    request?: protos.google.cloud.servicedirectory.v1.IResolveServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.IResolveServiceResponse,
-      (
-        | protos.google.cloud.servicedirectory.v1.IResolveServiceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.servicedirectory.v1.IResolveServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.IResolveServiceResponse,
+        protos.google.cloud.servicedirectory.v1.IResolveServiceRequest|undefined, {}|undefined
+      ]>;
   resolveService(
-    request: protos.google.cloud.servicedirectory.v1.IResolveServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1.IResolveServiceResponse,
-      | protos.google.cloud.servicedirectory.v1.IResolveServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resolveService(
-    request: protos.google.cloud.servicedirectory.v1.IResolveServiceRequest,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1.IResolveServiceResponse,
-      | protos.google.cloud.servicedirectory.v1.IResolveServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resolveService(
-    request?: protos.google.cloud.servicedirectory.v1.IResolveServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.servicedirectory.v1.IResolveServiceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.servicedirectory.v1.IResolveServiceResponse,
-          | protos.google.cloud.servicedirectory.v1.IResolveServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.servicedirectory.v1.IResolveServiceResponse,
-      | protos.google.cloud.servicedirectory.v1.IResolveServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.IResolveServiceResponse,
-      (
-        | protos.google.cloud.servicedirectory.v1.IResolveServiceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.servicedirectory.v1.IResolveServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  resolveService(
+      request: protos.google.cloud.servicedirectory.v1.IResolveServiceRequest,
+      callback: Callback<
+          protos.google.cloud.servicedirectory.v1.IResolveServiceResponse,
+          protos.google.cloud.servicedirectory.v1.IResolveServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  resolveService(
+      request?: protos.google.cloud.servicedirectory.v1.IResolveServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.servicedirectory.v1.IResolveServiceResponse,
+          protos.google.cloud.servicedirectory.v1.IResolveServiceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.servicedirectory.v1.IResolveServiceResponse,
+          protos.google.cloud.servicedirectory.v1.IResolveServiceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.IResolveServiceResponse,
+        protos.google.cloud.servicedirectory.v1.IResolveServiceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('resolveService request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.servicedirectory.v1.IResolveServiceResponse,
-          | protos.google.cloud.servicedirectory.v1.IResolveServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.servicedirectory.v1.IResolveServiceResponse,
+        protos.google.cloud.servicedirectory.v1.IResolveServiceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('resolveService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .resolveService(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.servicedirectory.v1.IResolveServiceResponse,
-          (
-            | protos.google.cloud.servicedirectory.v1.IResolveServiceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('resolveService response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.resolveService(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.servicedirectory.v1.IResolveServiceResponse,
+        protos.google.cloud.servicedirectory.v1.IResolveServiceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('resolveService response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -592,7 +517,7 @@ export class LookupServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -644,13 +569,7 @@ export class LookupServiceClient {
    * @param {string} endpoint
    * @returns {string} Resource name string.
    */
-  endpointPath(
-    project: string,
-    location: string,
-    namespace: string,
-    service: string,
-    endpoint: string
-  ) {
+  endpointPath(project:string,location:string,namespace:string,service:string,endpoint:string) {
     return this.pathTemplates.endpointPathTemplate.render({
       project: project,
       location: location,
@@ -690,8 +609,7 @@ export class LookupServiceClient {
    * @returns {string} A string representing the namespace.
    */
   matchNamespaceFromEndpointName(endpointName: string) {
-    return this.pathTemplates.endpointPathTemplate.match(endpointName)
-      .namespace;
+    return this.pathTemplates.endpointPathTemplate.match(endpointName).namespace;
   }
 
   /**
@@ -724,7 +642,7 @@ export class LookupServiceClient {
    * @param {string} namespace
    * @returns {string} Resource name string.
    */
-  namespacePath(project: string, location: string, namespace: string) {
+  namespacePath(project:string,location:string,namespace:string) {
     return this.pathTemplates.namespacePathTemplate.render({
       project: project,
       location: location,
@@ -740,8 +658,7 @@ export class LookupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNamespaceName(namespaceName: string) {
-    return this.pathTemplates.namespacePathTemplate.match(namespaceName)
-      .project;
+    return this.pathTemplates.namespacePathTemplate.match(namespaceName).project;
   }
 
   /**
@@ -752,8 +669,7 @@ export class LookupServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNamespaceName(namespaceName: string) {
-    return this.pathTemplates.namespacePathTemplate.match(namespaceName)
-      .location;
+    return this.pathTemplates.namespacePathTemplate.match(namespaceName).location;
   }
 
   /**
@@ -764,8 +680,7 @@ export class LookupServiceClient {
    * @returns {string} A string representing the namespace.
    */
   matchNamespaceFromNamespaceName(namespaceName: string) {
-    return this.pathTemplates.namespacePathTemplate.match(namespaceName)
-      .namespace;
+    return this.pathTemplates.namespacePathTemplate.match(namespaceName).namespace;
   }
 
   /**
@@ -777,12 +692,7 @@ export class LookupServiceClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  servicePath(
-    project: string,
-    location: string,
-    namespace: string,
-    service: string
-  ) {
+  servicePath(project:string,location:string,namespace:string,service:string) {
     return this.pathTemplates.servicePathTemplate.render({
       project: project,
       location: location,
@@ -847,9 +757,7 @@ export class LookupServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
       });
     }
     return Promise.resolve();

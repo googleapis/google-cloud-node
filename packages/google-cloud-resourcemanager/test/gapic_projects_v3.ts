@@ -29,2825 +29,2241 @@ import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v3.ProjectsClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new projectsModule.v3.ProjectsClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'cloudresourcemanager.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new projectsModule.v3.ProjectsClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath = projectsModule.v3.ProjectsClient.servicePath;
-        assert.strictEqual(servicePath, 'cloudresourcemanager.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint = projectsModule.v3.ProjectsClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'cloudresourcemanager.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudresourcemanager.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudresourcemanager.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new projectsModule.v3.ProjectsClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'cloudresourcemanager.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new projectsModule.v3.ProjectsClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'cloudresourcemanager.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new projectsModule.v3.ProjectsClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'cloudresourcemanager.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new projectsModule.v3.ProjectsClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new projectsModule.v3.ProjectsClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = projectsModule.v3.ProjectsClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new projectsModule.v3.ProjectsClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.projectsStub, undefined);
-      await client.initialize();
-      assert(client.projectsStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.projectsStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.projectsStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getProject', () => {
-    it('invokes getProject without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.GetProjectRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.GetProjectRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.Project()
-      );
-      client.innerApiCalls.getProject = stubSimpleCall(expectedResponse);
-      const [response] = await client.getProject(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getProject as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getProject as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getProject without error using callback', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.GetProjectRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.GetProjectRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.Project()
-      );
-      client.innerApiCalls.getProject =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getProject(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.resourcemanager.v3.IProject | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getProject as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getProject as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getProject with error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.GetProjectRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.GetProjectRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getProject = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getProject(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getProject as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getProject as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getProject with closed client', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.GetProjectRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.GetProjectRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getProject(request), expectedError);
-    });
-  });
-
-  describe('getIamPolicy', () => {
-    it('invokes getIamPolicy without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.getIamPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy without error using callback', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.getIamPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getIamPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.IPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy with error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getIamPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getIamPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy with closed client', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getIamPolicy(request), expectedError);
-    });
-  });
-
-  describe('setIamPolicy', () => {
-    it('invokes setIamPolicy without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.setIamPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy without error using callback', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.setIamPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setIamPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.IPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy with error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setIamPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setIamPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy with closed client', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.setIamPolicy(request), expectedError);
-    });
-  });
-
-  describe('testIamPermissions', () => {
-    it('invokes testIamPermissions without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.innerApiCalls.testIamPermissions =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.testIamPermissions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions without error using callback', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.innerApiCalls.testIamPermissions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.testIamPermissions(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.ITestIamPermissionsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions with error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.testIamPermissions(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions with closed client', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.testIamPermissions(request), expectedError);
-    });
-  });
-
-  describe('createProject', () => {
-    it('invokes createProject without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.CreateProjectRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createProject =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createProject(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes createProject without error using callback', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.CreateProjectRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createProject =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createProject(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.resourcemanager.v3.IProject,
-              protos.google.cloud.resourcemanager.v3.ICreateProjectMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.resourcemanager.v3.IProject,
-        protos.google.cloud.resourcemanager.v3.ICreateProjectMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes createProject with call error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.CreateProjectRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createProject = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createProject(request), expectedError);
-    });
-
-    it('invokes createProject with LRO error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.CreateProjectRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createProject = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createProject(request);
-      await assert.rejects(operation.promise(), expectedError);
-    });
-
-    it('invokes checkCreateProjectProgress without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateProjectProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateProjectProgress with error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateProjectProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateProject', () => {
-    it('invokes updateProject without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.UpdateProjectRequest()
-      );
-      request.project ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.UpdateProjectRequest',
-        ['project', 'name']
-      );
-      request.project.name = defaultValue1;
-      const expectedHeaderRequestParams = `project.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateProject =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateProject(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateProject as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateProject as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateProject without error using callback', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.UpdateProjectRequest()
-      );
-      request.project ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.UpdateProjectRequest',
-        ['project', 'name']
-      );
-      request.project.name = defaultValue1;
-      const expectedHeaderRequestParams = `project.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateProject =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateProject(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.resourcemanager.v3.IProject,
-              protos.google.cloud.resourcemanager.v3.IUpdateProjectMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.resourcemanager.v3.IProject,
-        protos.google.cloud.resourcemanager.v3.IUpdateProjectMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateProject as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateProject as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateProject with call error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.UpdateProjectRequest()
-      );
-      request.project ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.UpdateProjectRequest',
-        ['project', 'name']
-      );
-      request.project.name = defaultValue1;
-      const expectedHeaderRequestParams = `project.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateProject = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateProject(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateProject as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateProject as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateProject with LRO error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.UpdateProjectRequest()
-      );
-      request.project ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.UpdateProjectRequest',
-        ['project', 'name']
-      );
-      request.project.name = defaultValue1;
-      const expectedHeaderRequestParams = `project.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateProject = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateProject(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateProject as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateProject as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateProjectProgress without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateProjectProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateProjectProgress with error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateProjectProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('moveProject', () => {
-    it('invokes moveProject without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.MoveProjectRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.MoveProjectRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.moveProject = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.moveProject(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.moveProject as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.moveProject as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes moveProject without error using callback', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.MoveProjectRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.MoveProjectRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.moveProject =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.moveProject(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.resourcemanager.v3.IProject,
-              protos.google.cloud.resourcemanager.v3.IMoveProjectMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.resourcemanager.v3.IProject,
-        protos.google.cloud.resourcemanager.v3.IMoveProjectMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.moveProject as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.moveProject as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes moveProject with call error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.MoveProjectRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.MoveProjectRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.moveProject = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.moveProject(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.moveProject as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.moveProject as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes moveProject with LRO error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.MoveProjectRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.MoveProjectRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.moveProject = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.moveProject(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.moveProject as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.moveProject as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkMoveProjectProgress without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkMoveProjectProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkMoveProjectProgress with error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkMoveProjectProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteProject', () => {
-    it('invokes deleteProject without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.DeleteProjectRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.DeleteProjectRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteProject =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteProject(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteProject as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteProject as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteProject without error using callback', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.DeleteProjectRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.DeleteProjectRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteProject =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteProject(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.resourcemanager.v3.IProject,
-              protos.google.cloud.resourcemanager.v3.IDeleteProjectMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.resourcemanager.v3.IProject,
-        protos.google.cloud.resourcemanager.v3.IDeleteProjectMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteProject as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteProject as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteProject with call error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.DeleteProjectRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.DeleteProjectRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteProject = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteProject(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteProject as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteProject as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteProject with LRO error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.DeleteProjectRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.DeleteProjectRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteProject = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteProject(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteProject as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteProject as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteProjectProgress without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteProjectProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteProjectProgress with error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteProjectProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('undeleteProject', () => {
-    it('invokes undeleteProject without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.UndeleteProjectRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.UndeleteProjectRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.undeleteProject =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.undeleteProject(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.undeleteProject as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.undeleteProject as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes undeleteProject without error using callback', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.UndeleteProjectRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.UndeleteProjectRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.undeleteProject =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.undeleteProject(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.resourcemanager.v3.IProject,
-              protos.google.cloud.resourcemanager.v3.IUndeleteProjectMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.resourcemanager.v3.IProject,
-        protos.google.cloud.resourcemanager.v3.IUndeleteProjectMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.undeleteProject as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.undeleteProject as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes undeleteProject with call error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.UndeleteProjectRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.UndeleteProjectRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.undeleteProject = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.undeleteProject(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.undeleteProject as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.undeleteProject as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes undeleteProject with LRO error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.UndeleteProjectRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.UndeleteProjectRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.undeleteProject = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.undeleteProject(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.undeleteProject as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.undeleteProject as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUndeleteProjectProgress without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUndeleteProjectProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUndeleteProjectProgress with error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUndeleteProjectProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listProjects', () => {
-    it('invokes listProjects without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.ListProjectsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-      ];
-      client.innerApiCalls.listProjects = stubSimpleCall(expectedResponse);
-      const [response] = await client.listProjects(request);
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes listProjects without error using callback', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.ListProjectsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-      ];
-      client.innerApiCalls.listProjects =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listProjects(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.resourcemanager.v3.IProject[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes listProjects with error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.ListProjectsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listProjects = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listProjects(request), expectedError);
-    });
-
-    it('invokes listProjectsStream without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.ListProjectsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-      ];
-      client.descriptors.page.listProjects.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listProjectsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.resourcemanager.v3.Project[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.resourcemanager.v3.Project) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listProjects.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listProjects, request)
-      );
-    });
-
-    it('invokes listProjectsStream with error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.ListProjectsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.descriptors.page.listProjects.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listProjectsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.resourcemanager.v3.Project[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.resourcemanager.v3.Project) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listProjects.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listProjects, request)
-      );
-    });
-
-    it('uses async iteration with listProjects without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.ListProjectsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-      ];
-      client.descriptors.page.listProjects.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.resourcemanager.v3.IProject[] = [];
-      const iterable = client.listProjectsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listProjects.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-
-    it('uses async iteration with listProjects with error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.ListProjectsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.descriptors.page.listProjects.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listProjectsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.resourcemanager.v3.IProject[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = projectsModule.v3.ProjectsClient.servicePath;
+                assert.strictEqual(servicePath, 'cloudresourcemanager.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = projectsModule.v3.ProjectsClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'cloudresourcemanager.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listProjects.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('searchProjects', () => {
-    it('invokes searchProjects without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.SearchProjectsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-      ];
-      client.innerApiCalls.searchProjects = stubSimpleCall(expectedResponse);
-      const [response] = await client.searchProjects(request);
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes searchProjects without error using callback', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.SearchProjectsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-      ];
-      client.innerApiCalls.searchProjects =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.searchProjects(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.resourcemanager.v3.IProject[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes searchProjects with error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.SearchProjectsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.searchProjects = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.searchProjects(request), expectedError);
-    });
-
-    it('invokes searchProjectsStream without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.SearchProjectsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-      ];
-      client.descriptors.page.searchProjects.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.searchProjectsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.resourcemanager.v3.Project[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.resourcemanager.v3.Project) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new projectsModule.v3.ProjectsClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudresourcemanager.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.searchProjects.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.searchProjects, request)
-      );
-    });
 
-    it('invokes searchProjectsStream with error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.SearchProjectsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.descriptors.page.searchProjects.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.searchProjectsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.resourcemanager.v3.Project[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.resourcemanager.v3.Project) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new projectsModule.v3.ProjectsClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudresourcemanager.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.searchProjects.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.searchProjects, request)
-      );
-    });
 
-    it('uses async iteration with searchProjects without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.SearchProjectsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.Project()
-        ),
-      ];
-      client.descriptors.page.searchProjects.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.resourcemanager.v3.IProject[] = [];
-      const iterable = client.searchProjectsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchProjects.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new projectsModule.v3.ProjectsClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudresourcemanager.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with searchProjects with error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.SearchProjectsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.descriptors.page.searchProjects.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.searchProjectsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.resourcemanager.v3.IProject[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new projectsModule.v3.ProjectsClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudresourcemanager.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchProjects.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new projectsModule.v3.ProjectsClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
+
+        it('has port', () => {
+            const port = projectsModule.v3.ProjectsClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new projectsModule.v3.ProjectsClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new projectsModule.v3.ProjectsClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.projectsStub, undefined);
+            await client.initialize();
+            assert(client.projectsStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.projectsStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.projectsStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+
+    describe('getProject', () => {
+        it('invokes getProject without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.GetProjectRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.GetProjectRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.Project()
+            );
+            client.innerApiCalls.getProject = stubSimpleCall(expectedResponse);
+            const [response] = await client.getProject(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getProject as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getProject as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getProject without error using callback', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.GetProjectRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.GetProjectRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.Project()
+            );
+            client.innerApiCalls.getProject = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getProject(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.resourcemanager.v3.IProject|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getProject as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getProject as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getProject with error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.GetProjectRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.GetProjectRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getProject = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getProject(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getProject as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getProject as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getProject with closed client', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.GetProjectRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.GetProjectRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getProject(request), expectedError);
+        });
     });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+    describe('getIamPolicy', () => {
+        it('invokes getIamPolicy without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.getIamPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy without error using callback', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getIamPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.IPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy with error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getIamPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy with closed client', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getIamPolicy(request), expectedError);
+        });
+    });
+
+    describe('setIamPolicy', () => {
+        it('invokes setIamPolicy without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.setIamPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy without error using callback', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setIamPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.IPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy with error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setIamPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy with closed client', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setIamPolicy(request), expectedError);
+        });
+    });
+
+    describe('testIamPermissions', () => {
+        it('invokes testIamPermissions without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.innerApiCalls.testIamPermissions = stubSimpleCall(expectedResponse);
+            const [response] = await client.testIamPermissions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions without error using callback', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.testIamPermissions(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.ITestIamPermissionsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions with error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.testIamPermissions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.testIamPermissions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions with closed client', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.testIamPermissions(request), expectedError);
+        });
+    });
+
+    describe('createProject', () => {
+        it('invokes createProject without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.CreateProjectRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createProject = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createProject(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes createProject without error using callback', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.CreateProjectRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createProject = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createProject(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.resourcemanager.v3.IProject, protos.google.cloud.resourcemanager.v3.ICreateProjectMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.resourcemanager.v3.IProject, protos.google.cloud.resourcemanager.v3.ICreateProjectMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes createProject with call error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.CreateProjectRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createProject = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createProject(request), expectedError);
+        });
+
+        it('invokes createProject with LRO error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.CreateProjectRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createProject = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createProject(request);
+            await assert.rejects(operation.promise(), expectedError);
+        });
+
+        it('invokes checkCreateProjectProgress without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateProjectProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateProjectProgress with error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateProjectProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateProject', () => {
+        it('invokes updateProject without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.UpdateProjectRequest()
+            );
+            request.project ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.UpdateProjectRequest', ['project', 'name']);
+            request.project.name = defaultValue1;
+            const expectedHeaderRequestParams = `project.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateProject = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateProject(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateProject as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateProject as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateProject without error using callback', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.UpdateProjectRequest()
+            );
+            request.project ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.UpdateProjectRequest', ['project', 'name']);
+            request.project.name = defaultValue1;
+            const expectedHeaderRequestParams = `project.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateProject = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateProject(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.resourcemanager.v3.IProject, protos.google.cloud.resourcemanager.v3.IUpdateProjectMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.resourcemanager.v3.IProject, protos.google.cloud.resourcemanager.v3.IUpdateProjectMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateProject as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateProject as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateProject with call error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.UpdateProjectRequest()
+            );
+            request.project ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.UpdateProjectRequest', ['project', 'name']);
+            request.project.name = defaultValue1;
+            const expectedHeaderRequestParams = `project.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateProject = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateProject(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateProject as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateProject as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateProject with LRO error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.UpdateProjectRequest()
+            );
+            request.project ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.UpdateProjectRequest', ['project', 'name']);
+            request.project.name = defaultValue1;
+            const expectedHeaderRequestParams = `project.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateProject = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateProject(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateProject as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateProject as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateProjectProgress without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateProjectProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateProjectProgress with error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateProjectProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('moveProject', () => {
+        it('invokes moveProject without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.MoveProjectRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.MoveProjectRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.moveProject = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.moveProject(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.moveProject as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.moveProject as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes moveProject without error using callback', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.MoveProjectRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.MoveProjectRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.moveProject = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.moveProject(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.resourcemanager.v3.IProject, protos.google.cloud.resourcemanager.v3.IMoveProjectMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.resourcemanager.v3.IProject, protos.google.cloud.resourcemanager.v3.IMoveProjectMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.moveProject as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.moveProject as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes moveProject with call error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.MoveProjectRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.MoveProjectRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.moveProject = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.moveProject(request), expectedError);
+            const actualRequest = (client.innerApiCalls.moveProject as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.moveProject as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes moveProject with LRO error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.MoveProjectRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.MoveProjectRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.moveProject = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.moveProject(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.moveProject as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.moveProject as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkMoveProjectProgress without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkMoveProjectProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkMoveProjectProgress with error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkMoveProjectProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteProject', () => {
+        it('invokes deleteProject without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.DeleteProjectRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.DeleteProjectRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteProject = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteProject(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteProject as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteProject as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteProject without error using callback', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.DeleteProjectRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.DeleteProjectRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteProject = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteProject(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.resourcemanager.v3.IProject, protos.google.cloud.resourcemanager.v3.IDeleteProjectMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.resourcemanager.v3.IProject, protos.google.cloud.resourcemanager.v3.IDeleteProjectMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteProject as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteProject as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteProject with call error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.DeleteProjectRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.DeleteProjectRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteProject = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteProject(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteProject as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteProject as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteProject with LRO error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.DeleteProjectRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.DeleteProjectRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteProject = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteProject(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteProject as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteProject as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteProjectProgress without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteProjectProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteProjectProgress with error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteProjectProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('undeleteProject', () => {
+        it('invokes undeleteProject without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.UndeleteProjectRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.UndeleteProjectRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.undeleteProject = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.undeleteProject(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.undeleteProject as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.undeleteProject as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes undeleteProject without error using callback', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.UndeleteProjectRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.UndeleteProjectRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.undeleteProject = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.undeleteProject(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.resourcemanager.v3.IProject, protos.google.cloud.resourcemanager.v3.IUndeleteProjectMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.resourcemanager.v3.IProject, protos.google.cloud.resourcemanager.v3.IUndeleteProjectMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.undeleteProject as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.undeleteProject as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes undeleteProject with call error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.UndeleteProjectRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.UndeleteProjectRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.undeleteProject = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.undeleteProject(request), expectedError);
+            const actualRequest = (client.innerApiCalls.undeleteProject as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.undeleteProject as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes undeleteProject with LRO error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.UndeleteProjectRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.UndeleteProjectRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.undeleteProject = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.undeleteProject(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.undeleteProject as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.undeleteProject as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUndeleteProjectProgress without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUndeleteProjectProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUndeleteProjectProgress with error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUndeleteProjectProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listProjects', () => {
+        it('invokes listProjects without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.ListProjectsRequest()
+            );const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+            ];
+            client.innerApiCalls.listProjects = stubSimpleCall(expectedResponse);
+            const [response] = await client.listProjects(request);
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes listProjects without error using callback', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.ListProjectsRequest()
+            );const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+            ];
+            client.innerApiCalls.listProjects = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listProjects(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.resourcemanager.v3.IProject[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes listProjects with error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.ListProjectsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listProjects = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listProjects(request), expectedError);
+        });
+
+        it('invokes listProjectsStream without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.ListProjectsRequest()
+            );
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+            ];
+            client.descriptors.page.listProjects.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listProjectsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.resourcemanager.v3.Project[] = [];
+                stream.on('data', (response: protos.google.cloud.resourcemanager.v3.Project) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listProjects.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listProjects, request));
+        });
+
+        it('invokes listProjectsStream with error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.ListProjectsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.descriptors.page.listProjects.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listProjectsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.resourcemanager.v3.Project[] = [];
+                stream.on('data', (response: protos.google.cloud.resourcemanager.v3.Project) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listProjects.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listProjects, request));
+        });
+
+        it('uses async iteration with listProjects without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.ListProjectsRequest()
+            );
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+            ];
+            client.descriptors.page.listProjects.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.resourcemanager.v3.IProject[] = [];
+            const iterable = client.listProjectsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listProjects.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+
+        it('uses async iteration with listProjects with error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.ListProjectsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.descriptors.page.listProjects.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listProjectsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.resourcemanager.v3.IProject[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listProjects.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
-    it('invokes getOperation with error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+    describe('searchProjects', () => {
+        it('invokes searchProjects without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.SearchProjectsRequest()
+            );const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+            ];
+            client.innerApiCalls.searchProjects = stubSimpleCall(expectedResponse);
+            const [response] = await client.searchProjects(request);
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes searchProjects without error using callback', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.SearchProjectsRequest()
+            );const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+            ];
+            client.innerApiCalls.searchProjects = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.searchProjects(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.resourcemanager.v3.IProject[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes searchProjects with error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.SearchProjectsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.searchProjects = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.searchProjects(request), expectedError);
+        });
+
+        it('invokes searchProjectsStream without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.SearchProjectsRequest()
+            );
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+            ];
+            client.descriptors.page.searchProjects.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.searchProjectsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.resourcemanager.v3.Project[] = [];
+                stream.on('data', (response: protos.google.cloud.resourcemanager.v3.Project) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.searchProjects.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.searchProjects, request));
+        });
+
+        it('invokes searchProjectsStream with error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.SearchProjectsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.descriptors.page.searchProjects.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.searchProjectsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.resourcemanager.v3.Project[] = [];
+                stream.on('data', (response: protos.google.cloud.resourcemanager.v3.Project) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.searchProjects.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.searchProjects, request));
+        });
+
+        it('uses async iteration with searchProjects without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.SearchProjectsRequest()
+            );
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.Project()),
+            ];
+            client.descriptors.page.searchProjects.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.resourcemanager.v3.IProject[] = [];
+            const iterable = client.searchProjectsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.searchProjects.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+
+        it('uses async iteration with searchProjects with error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.SearchProjectsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.descriptors.page.searchProjects.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.searchProjectsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.resourcemanager.v3.IProject[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.searchProjects.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
-    it('invokes cancelOperation with error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('folder', async () => {
-      const fakePath = '/rendered/path/folder';
-      const expectedParameters = {
-        folder: 'folderValue',
-      };
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('folderPath', () => {
-        const result = client.folderPath('folderValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.folderPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderName', () => {
-        const result = client.matchFolderFromFolderName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (client.pathTemplates.folderPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new projectsModule.v3.ProjectsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    describe('organization', async () => {
-      const fakePath = '/rendered/path/organization';
-      const expectedParameters = {
-        organization: 'organizationValue',
-      };
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('organizationPath', () => {
-        const result = client.organizationPath('organizationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.organizationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('folder', async () => {
+            const fakePath = "/rendered/path/folder";
+            const expectedParameters = {
+                folder: "folderValue",
+            };
+            const client = new projectsModule.v3.ProjectsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchOrganizationFromOrganizationName', () => {
-        const result = client.matchOrganizationFromOrganizationName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (client.pathTemplates.organizationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('folderPath', () => {
+                const result = client.folderPath("folderValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderName', () => {
+                const result = client.matchFolderFromFolderName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organization', async () => {
+            const fakePath = "/rendered/path/organization";
+            const expectedParameters = {
+                organization: "organizationValue",
+            };
+            const client = new projectsModule.v3.ProjectsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationPath', () => {
+                const result = client.organizationPath("organizationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationName', () => {
+                const result = client.matchOrganizationFromOrganizationName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new projectsModule.v3.ProjectsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tagBinding', async () => {
+            const fakePath = "/rendered/path/tagBinding";
+            const expectedParameters = {
+                tag_binding: "tagBindingValue",
+            };
+            const client = new projectsModule.v3.ProjectsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tagBindingPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tagBindingPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tagBindingPath', () => {
+                const result = client.tagBindingPath("tagBindingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tagBindingPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchTagBindingFromTagBindingName', () => {
+                const result = client.matchTagBindingFromTagBindingName(fakePath);
+                assert.strictEqual(result, "tagBindingValue");
+                assert((client.pathTemplates.tagBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tagHold', async () => {
+            const fakePath = "/rendered/path/tagHold";
+            const expectedParameters = {
+                tag_value: "tagValueValue",
+                tag_hold: "tagHoldValue",
+            };
+            const client = new projectsModule.v3.ProjectsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tagHoldPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tagHoldPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tagHoldPath', () => {
+                const result = client.tagHoldPath("tagValueValue", "tagHoldValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tagHoldPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchTagValueFromTagHoldName', () => {
+                const result = client.matchTagValueFromTagHoldName(fakePath);
+                assert.strictEqual(result, "tagValueValue");
+                assert((client.pathTemplates.tagHoldPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTagHoldFromTagHoldName', () => {
+                const result = client.matchTagHoldFromTagHoldName(fakePath);
+                assert.strictEqual(result, "tagHoldValue");
+                assert((client.pathTemplates.tagHoldPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tagKey', async () => {
+            const fakePath = "/rendered/path/tagKey";
+            const expectedParameters = {
+                tag_key: "tagKeyValue",
+            };
+            const client = new projectsModule.v3.ProjectsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tagKeyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tagKeyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tagKeyPath', () => {
+                const result = client.tagKeyPath("tagKeyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tagKeyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchTagKeyFromTagKeyName', () => {
+                const result = client.matchTagKeyFromTagKeyName(fakePath);
+                assert.strictEqual(result, "tagKeyValue");
+                assert((client.pathTemplates.tagKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tagValue', async () => {
+            const fakePath = "/rendered/path/tagValue";
+            const expectedParameters = {
+                tag_value: "tagValueValue",
+            };
+            const client = new projectsModule.v3.ProjectsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tagValuePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tagValuePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tagValuePath', () => {
+                const result = client.tagValuePath("tagValueValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tagValuePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchTagValueFromTagValueName', () => {
+                const result = client.matchTagValueFromTagValueName(fakePath);
+                assert.strictEqual(result, "tagValueValue");
+                assert((client.pathTemplates.tagValuePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('tagBinding', async () => {
-      const fakePath = '/rendered/path/tagBinding';
-      const expectedParameters = {
-        tag_binding: 'tagBindingValue',
-      };
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.tagBindingPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.tagBindingPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('tagBindingPath', () => {
-        const result = client.tagBindingPath('tagBindingValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.tagBindingPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchTagBindingFromTagBindingName', () => {
-        const result = client.matchTagBindingFromTagBindingName(fakePath);
-        assert.strictEqual(result, 'tagBindingValue');
-        assert(
-          (client.pathTemplates.tagBindingPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('tagHold', async () => {
-      const fakePath = '/rendered/path/tagHold';
-      const expectedParameters = {
-        tag_value: 'tagValueValue',
-        tag_hold: 'tagHoldValue',
-      };
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.tagHoldPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.tagHoldPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('tagHoldPath', () => {
-        const result = client.tagHoldPath('tagValueValue', 'tagHoldValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.tagHoldPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchTagValueFromTagHoldName', () => {
-        const result = client.matchTagValueFromTagHoldName(fakePath);
-        assert.strictEqual(result, 'tagValueValue');
-        assert(
-          (client.pathTemplates.tagHoldPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTagHoldFromTagHoldName', () => {
-        const result = client.matchTagHoldFromTagHoldName(fakePath);
-        assert.strictEqual(result, 'tagHoldValue');
-        assert(
-          (client.pathTemplates.tagHoldPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('tagKey', async () => {
-      const fakePath = '/rendered/path/tagKey';
-      const expectedParameters = {
-        tag_key: 'tagKeyValue',
-      };
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.tagKeyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.tagKeyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('tagKeyPath', () => {
-        const result = client.tagKeyPath('tagKeyValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.tagKeyPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchTagKeyFromTagKeyName', () => {
-        const result = client.matchTagKeyFromTagKeyName(fakePath);
-        assert.strictEqual(result, 'tagKeyValue');
-        assert(
-          (client.pathTemplates.tagKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('tagValue', async () => {
-      const fakePath = '/rendered/path/tagValue';
-      const expectedParameters = {
-        tag_value: 'tagValueValue',
-      };
-      const client = new projectsModule.v3.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.tagValuePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.tagValuePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('tagValuePath', () => {
-        const result = client.tagValuePath('tagValueValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.tagValuePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchTagValueFromTagValueName', () => {
-        const result = client.matchTagValueFromTagValueName(fakePath);
-        assert.strictEqual(result, 'tagValueValue');
-        assert(
-          (client.pathTemplates.tagValuePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

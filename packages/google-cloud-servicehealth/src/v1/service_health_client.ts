@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -110,41 +101,20 @@ export class ServiceHealthClient {
    *     const client = new ServiceHealthClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ServiceHealthClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'servicehealth.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +140,7 @@ export class ServiceHealthClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -186,9 +156,13 @@ export class ServiceHealthClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -224,30 +198,18 @@ export class ServiceHealthClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listEvents: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'events'
-      ),
-      listOrganizationEvents: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'organizationEvents'
-      ),
-      listOrganizationImpacts: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'organizationImpacts'
-      ),
+      listEvents:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'events'),
+      listOrganizationEvents:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'organizationEvents'),
+      listOrganizationImpacts:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'organizationImpacts')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.servicehealth.v1.ServiceHealth',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.servicehealth.v1.ServiceHealth', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -278,42 +240,32 @@ export class ServiceHealthClient {
     // Put together the "service stub" for
     // google.cloud.servicehealth.v1.ServiceHealth.
     this.serviceHealthStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.servicehealth.v1.ServiceHealth'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.servicehealth.v1.ServiceHealth') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.servicehealth.v1.ServiceHealth,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const serviceHealthStubMethods = [
-      'listEvents',
-      'getEvent',
-      'listOrganizationEvents',
-      'getOrganizationEvent',
-      'listOrganizationImpacts',
-      'getOrganizationImpact',
-    ];
+    const serviceHealthStubMethods =
+        ['listEvents', 'getEvent', 'listOrganizationEvents', 'getOrganizationEvent', 'listOrganizationImpacts', 'getOrganizationImpact'];
     for (const methodName of serviceHealthStubMethods) {
       const callPromise = this.serviceHealthStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -333,14 +285,8 @@ export class ServiceHealthClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'servicehealth.googleapis.com';
   }
@@ -351,14 +297,8 @@ export class ServiceHealthClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'servicehealth.googleapis.com';
   }
@@ -389,7 +329,9 @@ export class ServiceHealthClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -398,9 +340,8 @@ export class ServiceHealthClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -411,536 +352,427 @@ export class ServiceHealthClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Retrieves a resource containing information about an event.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Unique name of the event in this scope including project
-   *   and location using the form
-   *   `projects/{project_id}/locations/{location}/events/{event_id}`.
-   *
-   *   `project_id` - Project ID of the project that contains the event. <br>
-   *   `location` - The location to get the service health events from. <br>
-   *   `event_id` - Event ID to retrieve.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.servicehealth.v1.Event|Event}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_health.get_event.js</caption>
-   * region_tag:servicehealth_v1_generated_ServiceHealth_GetEvent_async
-   */
+/**
+ * Retrieves a resource containing information about an event.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Unique name of the event in this scope including project
+ *   and location using the form
+ *   `projects/{project_id}/locations/{location}/events/{event_id}`.
+ *
+ *   `project_id` - Project ID of the project that contains the event. <br>
+ *   `location` - The location to get the service health events from. <br>
+ *   `event_id` - Event ID to retrieve.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.servicehealth.v1.Event|Event}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_health.get_event.js</caption>
+ * region_tag:servicehealth_v1_generated_ServiceHealth_GetEvent_async
+ */
   getEvent(
-    request?: protos.google.cloud.servicehealth.v1.IGetEventRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.servicehealth.v1.IEvent,
-      protos.google.cloud.servicehealth.v1.IGetEventRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.servicehealth.v1.IGetEventRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.servicehealth.v1.IEvent,
+        protos.google.cloud.servicehealth.v1.IGetEventRequest|undefined, {}|undefined
+      ]>;
   getEvent(
-    request: protos.google.cloud.servicehealth.v1.IGetEventRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.servicehealth.v1.IEvent,
-      protos.google.cloud.servicehealth.v1.IGetEventRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEvent(
-    request: protos.google.cloud.servicehealth.v1.IGetEventRequest,
-    callback: Callback<
-      protos.google.cloud.servicehealth.v1.IEvent,
-      protos.google.cloud.servicehealth.v1.IGetEventRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEvent(
-    request?: protos.google.cloud.servicehealth.v1.IGetEventRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.servicehealth.v1.IGetEventRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.servicehealth.v1.IEvent,
-          | protos.google.cloud.servicehealth.v1.IGetEventRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.servicehealth.v1.IEvent,
-      protos.google.cloud.servicehealth.v1.IGetEventRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.servicehealth.v1.IEvent,
-      protos.google.cloud.servicehealth.v1.IGetEventRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.servicehealth.v1.IGetEventRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEvent(
+      request: protos.google.cloud.servicehealth.v1.IGetEventRequest,
+      callback: Callback<
+          protos.google.cloud.servicehealth.v1.IEvent,
+          protos.google.cloud.servicehealth.v1.IGetEventRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEvent(
+      request?: protos.google.cloud.servicehealth.v1.IGetEventRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.servicehealth.v1.IEvent,
+          protos.google.cloud.servicehealth.v1.IGetEventRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.servicehealth.v1.IEvent,
+          protos.google.cloud.servicehealth.v1.IGetEventRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.servicehealth.v1.IEvent,
+        protos.google.cloud.servicehealth.v1.IGetEventRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getEvent request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.servicehealth.v1.IEvent,
-          | protos.google.cloud.servicehealth.v1.IGetEventRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.servicehealth.v1.IEvent,
+        protos.google.cloud.servicehealth.v1.IGetEventRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEvent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getEvent(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.servicehealth.v1.IEvent,
-          protos.google.cloud.servicehealth.v1.IGetEventRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getEvent response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getEvent(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.servicehealth.v1.IEvent,
+        protos.google.cloud.servicehealth.v1.IGetEventRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getEvent response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Retrieves a resource containing information about an event affecting an
-   * organization .
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Unique name of the event in this scope including organization and
-   *   event ID using the form
-   *   `organizations/{organization_id}/locations/locations/global/organizationEvents/{event_id}`.
-   *
-   *   `organization_id` - ID (number) of the project that contains the event. To
-   *   get your `organization_id`, see
-   *   [Getting your organization resource
-   *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).<br>
-   *   `event_id` - Organization event ID to retrieve.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.servicehealth.v1.OrganizationEvent|OrganizationEvent}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_health.get_organization_event.js</caption>
-   * region_tag:servicehealth_v1_generated_ServiceHealth_GetOrganizationEvent_async
-   */
+/**
+ * Retrieves a resource containing information about an event affecting an
+ * organization .
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Unique name of the event in this scope including organization and
+ *   event ID using the form
+ *   `organizations/{organization_id}/locations/locations/global/organizationEvents/{event_id}`.
+ *
+ *   `organization_id` - ID (number) of the project that contains the event. To
+ *   get your `organization_id`, see
+ *   [Getting your organization resource
+ *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).<br>
+ *   `event_id` - Organization event ID to retrieve.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.servicehealth.v1.OrganizationEvent|OrganizationEvent}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_health.get_organization_event.js</caption>
+ * region_tag:servicehealth_v1_generated_ServiceHealth_GetOrganizationEvent_async
+ */
   getOrganizationEvent(
-    request?: protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.servicehealth.v1.IOrganizationEvent,
-      (
-        | protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.servicehealth.v1.IOrganizationEvent,
+        protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest|undefined, {}|undefined
+      ]>;
   getOrganizationEvent(
-    request: protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.servicehealth.v1.IOrganizationEvent,
-      | protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOrganizationEvent(
-    request: protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest,
-    callback: Callback<
-      protos.google.cloud.servicehealth.v1.IOrganizationEvent,
-      | protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOrganizationEvent(
-    request?: protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.servicehealth.v1.IOrganizationEvent,
-          | protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.servicehealth.v1.IOrganizationEvent,
-      | protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.servicehealth.v1.IOrganizationEvent,
-      (
-        | protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest|null|undefined,
+          {}|null|undefined>): void;
+  getOrganizationEvent(
+      request: protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest,
+      callback: Callback<
+          protos.google.cloud.servicehealth.v1.IOrganizationEvent,
+          protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest|null|undefined,
+          {}|null|undefined>): void;
+  getOrganizationEvent(
+      request?: protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.servicehealth.v1.IOrganizationEvent,
+          protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.servicehealth.v1.IOrganizationEvent,
+          protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.servicehealth.v1.IOrganizationEvent,
+        protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getOrganizationEvent request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.servicehealth.v1.IOrganizationEvent,
-          | protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.servicehealth.v1.IOrganizationEvent,
+        protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getOrganizationEvent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getOrganizationEvent(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.servicehealth.v1.IOrganizationEvent,
-          (
-            | protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getOrganizationEvent response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getOrganizationEvent(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.servicehealth.v1.IOrganizationEvent,
+        protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getOrganizationEvent response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Retrieves a resource containing information about impact to an asset under
-   * an organization affected by a service health event.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource using the form
-   *   `organizations/{organization_id}/locations/global/organizationImpacts/{organization_impact_id}`.
-   *
-   *   `organization_id` - ID (number) of the organization that contains the
-   *   event. To get your `organization_id`, see
-   *   [Getting your organization resource
-   *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).<br>
-   *   `organization_impact_id` - ID of the [OrganizationImpact
-   *   resource](/service-health/docs/reference/rest/v1beta/organizations.locations.organizationImpacts#OrganizationImpact).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.servicehealth.v1.OrganizationImpact|OrganizationImpact}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_health.get_organization_impact.js</caption>
-   * region_tag:servicehealth_v1_generated_ServiceHealth_GetOrganizationImpact_async
-   */
+/**
+ * Retrieves a resource containing information about impact to an asset under
+ * an organization affected by a service health event.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource using the form
+ *   `organizations/{organization_id}/locations/global/organizationImpacts/{organization_impact_id}`.
+ *
+ *   `organization_id` - ID (number) of the organization that contains the
+ *   event. To get your `organization_id`, see
+ *   [Getting your organization resource
+ *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).<br>
+ *   `organization_impact_id` - ID of the [OrganizationImpact
+ *   resource](/service-health/docs/reference/rest/v1beta/organizations.locations.organizationImpacts#OrganizationImpact).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.servicehealth.v1.OrganizationImpact|OrganizationImpact}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_health.get_organization_impact.js</caption>
+ * region_tag:servicehealth_v1_generated_ServiceHealth_GetOrganizationImpact_async
+ */
   getOrganizationImpact(
-    request?: protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.servicehealth.v1.IOrganizationImpact,
-      (
-        | protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.servicehealth.v1.IOrganizationImpact,
+        protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest|undefined, {}|undefined
+      ]>;
   getOrganizationImpact(
-    request: protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.servicehealth.v1.IOrganizationImpact,
-      | protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOrganizationImpact(
-    request: protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest,
-    callback: Callback<
-      protos.google.cloud.servicehealth.v1.IOrganizationImpact,
-      | protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOrganizationImpact(
-    request?: protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.servicehealth.v1.IOrganizationImpact,
-          | protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.servicehealth.v1.IOrganizationImpact,
-      | protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.servicehealth.v1.IOrganizationImpact,
-      (
-        | protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest|null|undefined,
+          {}|null|undefined>): void;
+  getOrganizationImpact(
+      request: protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest,
+      callback: Callback<
+          protos.google.cloud.servicehealth.v1.IOrganizationImpact,
+          protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest|null|undefined,
+          {}|null|undefined>): void;
+  getOrganizationImpact(
+      request?: protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.servicehealth.v1.IOrganizationImpact,
+          protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.servicehealth.v1.IOrganizationImpact,
+          protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.servicehealth.v1.IOrganizationImpact,
+        protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getOrganizationImpact request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.servicehealth.v1.IOrganizationImpact,
-          | protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.servicehealth.v1.IOrganizationImpact,
+        protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getOrganizationImpact response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getOrganizationImpact(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.servicehealth.v1.IOrganizationImpact,
-          (
-            | protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getOrganizationImpact response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getOrganizationImpact(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.servicehealth.v1.IOrganizationImpact,
+        protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getOrganizationImpact response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists events under a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value using the form
-   *   `projects/{project_id}/locations/{location}/events`.
-   *
-   *   `project_id` - ID of the project for which to list service health
-   *   events.
-   *   `location` - The location to get the service health events from.
-   *   To retrieve service health events of category = INCIDENT, use `location` =
-   *   `global`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of events that should be returned.  Acceptable
-   *   values are 1 to 100, inclusive. (The default value is 10.) If more results
-   *   are available, the service returns a next_page_token that you can use to
-   *   get the next page of results in subsequent list requests. The service may
-   *   return fewer events than the requested page_size.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   *   Provide Page token returned by a previous `ListEvents` call to retrieve the
-   *   next page of results. When paginating, all other parameters provided to
-   *   `ListEvents` must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. A filter expression that filters resources listed in the
-   *   response. The expression takes the following forms: <br>
-   *   *   field=value for `category` and `state`<br>
-   *   *   field &lt;, >, &lt;=, or >= value for `update_time` <br>
-   *   Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`,
-   *   `event_impacts.product.product_name:"Eventarc"`
-   *   <br>
-   *
-   *   Multiple filter queries are separated by spaces. Example:
-   *   `category=INCIDENT state=ACTIVE`.
-   *
-   *   By default, each expression is an AND expression. However, you can include
-   *   AND and OR expressions explicitly.
-   *
-   *   Filter is supported for the following fields: `category`, `state`,
-   *   `update_time`, `event_impacts.product.product_name`
-   * @param {google.cloud.servicehealth.v1.EventView} [request.view]
-   *   Optional. Event fields to include in response.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.servicehealth.v1.Event|Event}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listEventsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists events under a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value using the form
+ *   `projects/{project_id}/locations/{location}/events`.
+ *
+ *   `project_id` - ID of the project for which to list service health
+ *   events.
+ *   `location` - The location to get the service health events from.
+ *   To retrieve service health events of category = INCIDENT, use `location` =
+ *   `global`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of events that should be returned.  Acceptable
+ *   values are 1 to 100, inclusive. (The default value is 10.) If more results
+ *   are available, the service returns a next_page_token that you can use to
+ *   get the next page of results in subsequent list requests. The service may
+ *   return fewer events than the requested page_size.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ *   Provide Page token returned by a previous `ListEvents` call to retrieve the
+ *   next page of results. When paginating, all other parameters provided to
+ *   `ListEvents` must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. A filter expression that filters resources listed in the
+ *   response. The expression takes the following forms: <br>
+ *   *   field=value for `category` and `state`<br>
+ *   *   field &lt;, >, &lt;=, or >= value for `update_time` <br>
+ *   Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`,
+ *   `event_impacts.product.product_name:"Eventarc"`
+ *   <br>
+ *
+ *   Multiple filter queries are separated by spaces. Example:
+ *   `category=INCIDENT state=ACTIVE`.
+ *
+ *   By default, each expression is an AND expression. However, you can include
+ *   AND and OR expressions explicitly.
+ *
+ *   Filter is supported for the following fields: `category`, `state`,
+ *   `update_time`, `event_impacts.product.product_name`
+ * @param {google.cloud.servicehealth.v1.EventView} [request.view]
+ *   Optional. Event fields to include in response.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.servicehealth.v1.Event|Event}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listEventsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEvents(
-    request?: protos.google.cloud.servicehealth.v1.IListEventsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.servicehealth.v1.IEvent[],
-      protos.google.cloud.servicehealth.v1.IListEventsRequest | null,
-      protos.google.cloud.servicehealth.v1.IListEventsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.servicehealth.v1.IListEventsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.servicehealth.v1.IEvent[],
+        protos.google.cloud.servicehealth.v1.IListEventsRequest|null,
+        protos.google.cloud.servicehealth.v1.IListEventsResponse
+      ]>;
   listEvents(
-    request: protos.google.cloud.servicehealth.v1.IListEventsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.servicehealth.v1.IListEventsRequest,
-      | protos.google.cloud.servicehealth.v1.IListEventsResponse
-      | null
-      | undefined,
-      protos.google.cloud.servicehealth.v1.IEvent
-    >
-  ): void;
-  listEvents(
-    request: protos.google.cloud.servicehealth.v1.IListEventsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.servicehealth.v1.IListEventsRequest,
-      | protos.google.cloud.servicehealth.v1.IListEventsResponse
-      | null
-      | undefined,
-      protos.google.cloud.servicehealth.v1.IEvent
-    >
-  ): void;
-  listEvents(
-    request?: protos.google.cloud.servicehealth.v1.IListEventsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.servicehealth.v1.IListEventsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.servicehealth.v1.IListEventsRequest,
-          | protos.google.cloud.servicehealth.v1.IListEventsResponse
-          | null
-          | undefined,
-          protos.google.cloud.servicehealth.v1.IEvent
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.servicehealth.v1.IListEventsRequest,
-      | protos.google.cloud.servicehealth.v1.IListEventsResponse
-      | null
-      | undefined,
-      protos.google.cloud.servicehealth.v1.IEvent
-    >
-  ): Promise<
-    [
-      protos.google.cloud.servicehealth.v1.IEvent[],
-      protos.google.cloud.servicehealth.v1.IListEventsRequest | null,
-      protos.google.cloud.servicehealth.v1.IListEventsResponse,
-    ]
-  > | void {
+          protos.google.cloud.servicehealth.v1.IListEventsResponse|null|undefined,
+          protos.google.cloud.servicehealth.v1.IEvent>): void;
+  listEvents(
+      request: protos.google.cloud.servicehealth.v1.IListEventsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.servicehealth.v1.IListEventsRequest,
+          protos.google.cloud.servicehealth.v1.IListEventsResponse|null|undefined,
+          protos.google.cloud.servicehealth.v1.IEvent>): void;
+  listEvents(
+      request?: protos.google.cloud.servicehealth.v1.IListEventsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.servicehealth.v1.IListEventsRequest,
+          protos.google.cloud.servicehealth.v1.IListEventsResponse|null|undefined,
+          protos.google.cloud.servicehealth.v1.IEvent>,
+      callback?: PaginationCallback<
+          protos.google.cloud.servicehealth.v1.IListEventsRequest,
+          protos.google.cloud.servicehealth.v1.IListEventsResponse|null|undefined,
+          protos.google.cloud.servicehealth.v1.IEvent>):
+      Promise<[
+        protos.google.cloud.servicehealth.v1.IEvent[],
+        protos.google.cloud.servicehealth.v1.IListEventsRequest|null,
+        protos.google.cloud.servicehealth.v1.IListEventsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.servicehealth.v1.IListEventsRequest,
-          | protos.google.cloud.servicehealth.v1.IListEventsResponse
-          | null
-          | undefined,
-          protos.google.cloud.servicehealth.v1.IEvent
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.servicehealth.v1.IListEventsRequest,
+      protos.google.cloud.servicehealth.v1.IListEventsResponse|null|undefined,
+      protos.google.cloud.servicehealth.v1.IEvent>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listEvents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -949,89 +781,86 @@ export class ServiceHealthClient {
     this._log.info('listEvents request %j', request);
     return this.innerApiCalls
       .listEvents(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.servicehealth.v1.IEvent[],
-          protos.google.cloud.servicehealth.v1.IListEventsRequest | null,
-          protos.google.cloud.servicehealth.v1.IListEventsResponse,
-        ]) => {
-          this._log.info('listEvents values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.servicehealth.v1.IEvent[],
+        protos.google.cloud.servicehealth.v1.IListEventsRequest|null,
+        protos.google.cloud.servicehealth.v1.IListEventsResponse
+      ]) => {
+        this._log.info('listEvents values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listEvents`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value using the form
-   *   `projects/{project_id}/locations/{location}/events`.
-   *
-   *   `project_id` - ID of the project for which to list service health
-   *   events.
-   *   `location` - The location to get the service health events from.
-   *   To retrieve service health events of category = INCIDENT, use `location` =
-   *   `global`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of events that should be returned.  Acceptable
-   *   values are 1 to 100, inclusive. (The default value is 10.) If more results
-   *   are available, the service returns a next_page_token that you can use to
-   *   get the next page of results in subsequent list requests. The service may
-   *   return fewer events than the requested page_size.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   *   Provide Page token returned by a previous `ListEvents` call to retrieve the
-   *   next page of results. When paginating, all other parameters provided to
-   *   `ListEvents` must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. A filter expression that filters resources listed in the
-   *   response. The expression takes the following forms: <br>
-   *   *   field=value for `category` and `state`<br>
-   *   *   field &lt;, >, &lt;=, or >= value for `update_time` <br>
-   *   Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`,
-   *   `event_impacts.product.product_name:"Eventarc"`
-   *   <br>
-   *
-   *   Multiple filter queries are separated by spaces. Example:
-   *   `category=INCIDENT state=ACTIVE`.
-   *
-   *   By default, each expression is an AND expression. However, you can include
-   *   AND and OR expressions explicitly.
-   *
-   *   Filter is supported for the following fields: `category`, `state`,
-   *   `update_time`, `event_impacts.product.product_name`
-   * @param {google.cloud.servicehealth.v1.EventView} [request.view]
-   *   Optional. Event fields to include in response.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.servicehealth.v1.Event|Event} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listEventsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listEvents`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value using the form
+ *   `projects/{project_id}/locations/{location}/events`.
+ *
+ *   `project_id` - ID of the project for which to list service health
+ *   events.
+ *   `location` - The location to get the service health events from.
+ *   To retrieve service health events of category = INCIDENT, use `location` =
+ *   `global`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of events that should be returned.  Acceptable
+ *   values are 1 to 100, inclusive. (The default value is 10.) If more results
+ *   are available, the service returns a next_page_token that you can use to
+ *   get the next page of results in subsequent list requests. The service may
+ *   return fewer events than the requested page_size.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ *   Provide Page token returned by a previous `ListEvents` call to retrieve the
+ *   next page of results. When paginating, all other parameters provided to
+ *   `ListEvents` must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. A filter expression that filters resources listed in the
+ *   response. The expression takes the following forms: <br>
+ *   *   field=value for `category` and `state`<br>
+ *   *   field &lt;, >, &lt;=, or >= value for `update_time` <br>
+ *   Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`,
+ *   `event_impacts.product.product_name:"Eventarc"`
+ *   <br>
+ *
+ *   Multiple filter queries are separated by spaces. Example:
+ *   `category=INCIDENT state=ACTIVE`.
+ *
+ *   By default, each expression is an AND expression. However, you can include
+ *   AND and OR expressions explicitly.
+ *
+ *   Filter is supported for the following fields: `category`, `state`,
+ *   `update_time`, `event_impacts.product.product_name`
+ * @param {google.cloud.servicehealth.v1.EventView} [request.view]
+ *   Optional. Event fields to include in response.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.servicehealth.v1.Event|Event} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listEventsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEventsStream(
-    request?: protos.google.cloud.servicehealth.v1.IListEventsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.servicehealth.v1.IListEventsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEvents stream %j', request);
     return this.descriptors.page.listEvents.createStream(
       this.innerApiCalls.listEvents as GaxCall,
@@ -1040,80 +869,79 @@ export class ServiceHealthClient {
     );
   }
 
-  /**
-   * Equivalent to `listEvents`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value using the form
-   *   `projects/{project_id}/locations/{location}/events`.
-   *
-   *   `project_id` - ID of the project for which to list service health
-   *   events.
-   *   `location` - The location to get the service health events from.
-   *   To retrieve service health events of category = INCIDENT, use `location` =
-   *   `global`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of events that should be returned.  Acceptable
-   *   values are 1 to 100, inclusive. (The default value is 10.) If more results
-   *   are available, the service returns a next_page_token that you can use to
-   *   get the next page of results in subsequent list requests. The service may
-   *   return fewer events than the requested page_size.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   *   Provide Page token returned by a previous `ListEvents` call to retrieve the
-   *   next page of results. When paginating, all other parameters provided to
-   *   `ListEvents` must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. A filter expression that filters resources listed in the
-   *   response. The expression takes the following forms: <br>
-   *   *   field=value for `category` and `state`<br>
-   *   *   field &lt;, >, &lt;=, or >= value for `update_time` <br>
-   *   Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`,
-   *   `event_impacts.product.product_name:"Eventarc"`
-   *   <br>
-   *
-   *   Multiple filter queries are separated by spaces. Example:
-   *   `category=INCIDENT state=ACTIVE`.
-   *
-   *   By default, each expression is an AND expression. However, you can include
-   *   AND and OR expressions explicitly.
-   *
-   *   Filter is supported for the following fields: `category`, `state`,
-   *   `update_time`, `event_impacts.product.product_name`
-   * @param {google.cloud.servicehealth.v1.EventView} [request.view]
-   *   Optional. Event fields to include in response.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.servicehealth.v1.Event|Event}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_health.list_events.js</caption>
-   * region_tag:servicehealth_v1_generated_ServiceHealth_ListEvents_async
-   */
+/**
+ * Equivalent to `listEvents`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value using the form
+ *   `projects/{project_id}/locations/{location}/events`.
+ *
+ *   `project_id` - ID of the project for which to list service health
+ *   events.
+ *   `location` - The location to get the service health events from.
+ *   To retrieve service health events of category = INCIDENT, use `location` =
+ *   `global`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of events that should be returned.  Acceptable
+ *   values are 1 to 100, inclusive. (The default value is 10.) If more results
+ *   are available, the service returns a next_page_token that you can use to
+ *   get the next page of results in subsequent list requests. The service may
+ *   return fewer events than the requested page_size.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ *   Provide Page token returned by a previous `ListEvents` call to retrieve the
+ *   next page of results. When paginating, all other parameters provided to
+ *   `ListEvents` must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. A filter expression that filters resources listed in the
+ *   response. The expression takes the following forms: <br>
+ *   *   field=value for `category` and `state`<br>
+ *   *   field &lt;, >, &lt;=, or >= value for `update_time` <br>
+ *   Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`,
+ *   `event_impacts.product.product_name:"Eventarc"`
+ *   <br>
+ *
+ *   Multiple filter queries are separated by spaces. Example:
+ *   `category=INCIDENT state=ACTIVE`.
+ *
+ *   By default, each expression is an AND expression. However, you can include
+ *   AND and OR expressions explicitly.
+ *
+ *   Filter is supported for the following fields: `category`, `state`,
+ *   `update_time`, `event_impacts.product.product_name`
+ * @param {google.cloud.servicehealth.v1.EventView} [request.view]
+ *   Optional. Event fields to include in response.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.servicehealth.v1.Event|Event}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_health.list_events.js</caption>
+ * region_tag:servicehealth_v1_generated_ServiceHealth_ListEvents_async
+ */
   listEventsAsync(
-    request?: protos.google.cloud.servicehealth.v1.IListEventsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.servicehealth.v1.IEvent> {
+      request?: protos.google.cloud.servicehealth.v1.IListEventsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.servicehealth.v1.IEvent>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEvents iterate %j', request);
     return this.descriptors.page.listEvents.asyncIterate(
       this.innerApiCalls['listEvents'] as GaxCall,
@@ -1121,150 +949,125 @@ export class ServiceHealthClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.servicehealth.v1.IEvent>;
   }
-  /**
-   * Lists organization events under a given organization and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value using the form
-   *   `organizations/{organization_id}/locations/{location}/organizationEvents`.
-   *
-   *   `organization_id` - ID (number) of the project that contains the event. To
-   *   get your `organization_id`, see
-   *   [Getting your organization resource
-   *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).<br>
-   *   `location` - The location to get the service health events from. To
-   *   retrieve service health events of category = INCIDENT, use `location` =
-   *   `global`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of events that should be returned.  Acceptable
-   *   values are `1` to `100`, inclusive. (The default value is `10`.) If more
-   *   results are available, the service returns a `next_page_token` that you can
-   *   use to get the next page of results in subsequent list requests. The
-   *   service may return fewer events than the requested `page_size`.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   *
-   *   Provide Page token returned by a previous `ListOrganizationEvents` call to
-   *   retrieve the next page of results.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListOrganizationEvents` must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. A filter expression that filters resources listed in the
-   *   response. The expression takes the following forms:
-   *
-   *   *   field=value for `category` and `state`
-   *   *   field &lt;, >, &lt;=, or >= value for `update_time`
-   *
-   *   Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`
-   *
-   *   Multiple filter queries are space-separated. Example:
-   *   `category=INCIDENT state=ACTIVE`.
-   *
-   *   By default, each expression is an AND expression. However, you can include
-   *   AND and OR expressions explicitly.
-   *
-   *   Filter is supported for the following fields: `category`, `state`,
-   *   `update_time`
-   * @param {google.cloud.servicehealth.v1.OrganizationEventView} [request.view]
-   *   Optional. OrganizationEvent fields to include in response.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.servicehealth.v1.OrganizationEvent|OrganizationEvent}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listOrganizationEventsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists organization events under a given organization and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value using the form
+ *   `organizations/{organization_id}/locations/{location}/organizationEvents`.
+ *
+ *   `organization_id` - ID (number) of the project that contains the event. To
+ *   get your `organization_id`, see
+ *   [Getting your organization resource
+ *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).<br>
+ *   `location` - The location to get the service health events from. To
+ *   retrieve service health events of category = INCIDENT, use `location` =
+ *   `global`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of events that should be returned.  Acceptable
+ *   values are `1` to `100`, inclusive. (The default value is `10`.) If more
+ *   results are available, the service returns a `next_page_token` that you can
+ *   use to get the next page of results in subsequent list requests. The
+ *   service may return fewer events than the requested `page_size`.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ *
+ *   Provide Page token returned by a previous `ListOrganizationEvents` call to
+ *   retrieve the next page of results.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListOrganizationEvents` must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. A filter expression that filters resources listed in the
+ *   response. The expression takes the following forms:
+ *
+ *   *   field=value for `category` and `state`
+ *   *   field &lt;, >, &lt;=, or >= value for `update_time`
+ *
+ *   Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`
+ *
+ *   Multiple filter queries are space-separated. Example:
+ *   `category=INCIDENT state=ACTIVE`.
+ *
+ *   By default, each expression is an AND expression. However, you can include
+ *   AND and OR expressions explicitly.
+ *
+ *   Filter is supported for the following fields: `category`, `state`,
+ *   `update_time`
+ * @param {google.cloud.servicehealth.v1.OrganizationEventView} [request.view]
+ *   Optional. OrganizationEvent fields to include in response.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.servicehealth.v1.OrganizationEvent|OrganizationEvent}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listOrganizationEventsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listOrganizationEvents(
-    request?: protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.servicehealth.v1.IOrganizationEvent[],
-      protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest | null,
-      protos.google.cloud.servicehealth.v1.IListOrganizationEventsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.servicehealth.v1.IOrganizationEvent[],
+        protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest|null,
+        protos.google.cloud.servicehealth.v1.IListOrganizationEventsResponse
+      ]>;
   listOrganizationEvents(
-    request: protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
-      | protos.google.cloud.servicehealth.v1.IListOrganizationEventsResponse
-      | null
-      | undefined,
-      protos.google.cloud.servicehealth.v1.IOrganizationEvent
-    >
-  ): void;
-  listOrganizationEvents(
-    request: protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
-      | protos.google.cloud.servicehealth.v1.IListOrganizationEventsResponse
-      | null
-      | undefined,
-      protos.google.cloud.servicehealth.v1.IOrganizationEvent
-    >
-  ): void;
-  listOrganizationEvents(
-    request?: protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
-          | protos.google.cloud.servicehealth.v1.IListOrganizationEventsResponse
-          | null
-          | undefined,
-          protos.google.cloud.servicehealth.v1.IOrganizationEvent
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
-      | protos.google.cloud.servicehealth.v1.IListOrganizationEventsResponse
-      | null
-      | undefined,
-      protos.google.cloud.servicehealth.v1.IOrganizationEvent
-    >
-  ): Promise<
-    [
-      protos.google.cloud.servicehealth.v1.IOrganizationEvent[],
-      protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest | null,
-      protos.google.cloud.servicehealth.v1.IListOrganizationEventsResponse,
-    ]
-  > | void {
+          protos.google.cloud.servicehealth.v1.IListOrganizationEventsResponse|null|undefined,
+          protos.google.cloud.servicehealth.v1.IOrganizationEvent>): void;
+  listOrganizationEvents(
+      request: protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
+          protos.google.cloud.servicehealth.v1.IListOrganizationEventsResponse|null|undefined,
+          protos.google.cloud.servicehealth.v1.IOrganizationEvent>): void;
+  listOrganizationEvents(
+      request?: protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
+          protos.google.cloud.servicehealth.v1.IListOrganizationEventsResponse|null|undefined,
+          protos.google.cloud.servicehealth.v1.IOrganizationEvent>,
+      callback?: PaginationCallback<
+          protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
+          protos.google.cloud.servicehealth.v1.IListOrganizationEventsResponse|null|undefined,
+          protos.google.cloud.servicehealth.v1.IOrganizationEvent>):
+      Promise<[
+        protos.google.cloud.servicehealth.v1.IOrganizationEvent[],
+        protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest|null,
+        protos.google.cloud.servicehealth.v1.IListOrganizationEventsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
-          | protos.google.cloud.servicehealth.v1.IListOrganizationEventsResponse
-          | null
-          | undefined,
-          protos.google.cloud.servicehealth.v1.IOrganizationEvent
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
+      protos.google.cloud.servicehealth.v1.IListOrganizationEventsResponse|null|undefined,
+      protos.google.cloud.servicehealth.v1.IOrganizationEvent>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listOrganizationEvents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1273,94 +1076,91 @@ export class ServiceHealthClient {
     this._log.info('listOrganizationEvents request %j', request);
     return this.innerApiCalls
       .listOrganizationEvents(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.servicehealth.v1.IOrganizationEvent[],
-          protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest | null,
-          protos.google.cloud.servicehealth.v1.IListOrganizationEventsResponse,
-        ]) => {
-          this._log.info('listOrganizationEvents values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.servicehealth.v1.IOrganizationEvent[],
+        protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest|null,
+        protos.google.cloud.servicehealth.v1.IListOrganizationEventsResponse
+      ]) => {
+        this._log.info('listOrganizationEvents values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listOrganizationEvents`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value using the form
-   *   `organizations/{organization_id}/locations/{location}/organizationEvents`.
-   *
-   *   `organization_id` - ID (number) of the project that contains the event. To
-   *   get your `organization_id`, see
-   *   [Getting your organization resource
-   *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).<br>
-   *   `location` - The location to get the service health events from. To
-   *   retrieve service health events of category = INCIDENT, use `location` =
-   *   `global`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of events that should be returned.  Acceptable
-   *   values are `1` to `100`, inclusive. (The default value is `10`.) If more
-   *   results are available, the service returns a `next_page_token` that you can
-   *   use to get the next page of results in subsequent list requests. The
-   *   service may return fewer events than the requested `page_size`.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   *
-   *   Provide Page token returned by a previous `ListOrganizationEvents` call to
-   *   retrieve the next page of results.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListOrganizationEvents` must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. A filter expression that filters resources listed in the
-   *   response. The expression takes the following forms:
-   *
-   *   *   field=value for `category` and `state`
-   *   *   field &lt;, >, &lt;=, or >= value for `update_time`
-   *
-   *   Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`
-   *
-   *   Multiple filter queries are space-separated. Example:
-   *   `category=INCIDENT state=ACTIVE`.
-   *
-   *   By default, each expression is an AND expression. However, you can include
-   *   AND and OR expressions explicitly.
-   *
-   *   Filter is supported for the following fields: `category`, `state`,
-   *   `update_time`
-   * @param {google.cloud.servicehealth.v1.OrganizationEventView} [request.view]
-   *   Optional. OrganizationEvent fields to include in response.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.servicehealth.v1.OrganizationEvent|OrganizationEvent} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listOrganizationEventsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listOrganizationEvents`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value using the form
+ *   `organizations/{organization_id}/locations/{location}/organizationEvents`.
+ *
+ *   `organization_id` - ID (number) of the project that contains the event. To
+ *   get your `organization_id`, see
+ *   [Getting your organization resource
+ *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).<br>
+ *   `location` - The location to get the service health events from. To
+ *   retrieve service health events of category = INCIDENT, use `location` =
+ *   `global`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of events that should be returned.  Acceptable
+ *   values are `1` to `100`, inclusive. (The default value is `10`.) If more
+ *   results are available, the service returns a `next_page_token` that you can
+ *   use to get the next page of results in subsequent list requests. The
+ *   service may return fewer events than the requested `page_size`.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ *
+ *   Provide Page token returned by a previous `ListOrganizationEvents` call to
+ *   retrieve the next page of results.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListOrganizationEvents` must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. A filter expression that filters resources listed in the
+ *   response. The expression takes the following forms:
+ *
+ *   *   field=value for `category` and `state`
+ *   *   field &lt;, >, &lt;=, or >= value for `update_time`
+ *
+ *   Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`
+ *
+ *   Multiple filter queries are space-separated. Example:
+ *   `category=INCIDENT state=ACTIVE`.
+ *
+ *   By default, each expression is an AND expression. However, you can include
+ *   AND and OR expressions explicitly.
+ *
+ *   Filter is supported for the following fields: `category`, `state`,
+ *   `update_time`
+ * @param {google.cloud.servicehealth.v1.OrganizationEventView} [request.view]
+ *   Optional. OrganizationEvent fields to include in response.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.servicehealth.v1.OrganizationEvent|OrganizationEvent} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listOrganizationEventsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listOrganizationEventsStream(
-    request?: protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listOrganizationEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listOrganizationEvents stream %j', request);
     return this.descriptors.page.listOrganizationEvents.createStream(
       this.innerApiCalls.listOrganizationEvents as GaxCall,
@@ -1369,85 +1169,84 @@ export class ServiceHealthClient {
     );
   }
 
-  /**
-   * Equivalent to `listOrganizationEvents`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value using the form
-   *   `organizations/{organization_id}/locations/{location}/organizationEvents`.
-   *
-   *   `organization_id` - ID (number) of the project that contains the event. To
-   *   get your `organization_id`, see
-   *   [Getting your organization resource
-   *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).<br>
-   *   `location` - The location to get the service health events from. To
-   *   retrieve service health events of category = INCIDENT, use `location` =
-   *   `global`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of events that should be returned.  Acceptable
-   *   values are `1` to `100`, inclusive. (The default value is `10`.) If more
-   *   results are available, the service returns a `next_page_token` that you can
-   *   use to get the next page of results in subsequent list requests. The
-   *   service may return fewer events than the requested `page_size`.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   *
-   *   Provide Page token returned by a previous `ListOrganizationEvents` call to
-   *   retrieve the next page of results.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListOrganizationEvents` must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. A filter expression that filters resources listed in the
-   *   response. The expression takes the following forms:
-   *
-   *   *   field=value for `category` and `state`
-   *   *   field &lt;, >, &lt;=, or >= value for `update_time`
-   *
-   *   Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`
-   *
-   *   Multiple filter queries are space-separated. Example:
-   *   `category=INCIDENT state=ACTIVE`.
-   *
-   *   By default, each expression is an AND expression. However, you can include
-   *   AND and OR expressions explicitly.
-   *
-   *   Filter is supported for the following fields: `category`, `state`,
-   *   `update_time`
-   * @param {google.cloud.servicehealth.v1.OrganizationEventView} [request.view]
-   *   Optional. OrganizationEvent fields to include in response.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.servicehealth.v1.OrganizationEvent|OrganizationEvent}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_health.list_organization_events.js</caption>
-   * region_tag:servicehealth_v1_generated_ServiceHealth_ListOrganizationEvents_async
-   */
+/**
+ * Equivalent to `listOrganizationEvents`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value using the form
+ *   `organizations/{organization_id}/locations/{location}/organizationEvents`.
+ *
+ *   `organization_id` - ID (number) of the project that contains the event. To
+ *   get your `organization_id`, see
+ *   [Getting your organization resource
+ *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).<br>
+ *   `location` - The location to get the service health events from. To
+ *   retrieve service health events of category = INCIDENT, use `location` =
+ *   `global`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of events that should be returned.  Acceptable
+ *   values are `1` to `100`, inclusive. (The default value is `10`.) If more
+ *   results are available, the service returns a `next_page_token` that you can
+ *   use to get the next page of results in subsequent list requests. The
+ *   service may return fewer events than the requested `page_size`.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ *
+ *   Provide Page token returned by a previous `ListOrganizationEvents` call to
+ *   retrieve the next page of results.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListOrganizationEvents` must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. A filter expression that filters resources listed in the
+ *   response. The expression takes the following forms:
+ *
+ *   *   field=value for `category` and `state`
+ *   *   field &lt;, >, &lt;=, or >= value for `update_time`
+ *
+ *   Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`
+ *
+ *   Multiple filter queries are space-separated. Example:
+ *   `category=INCIDENT state=ACTIVE`.
+ *
+ *   By default, each expression is an AND expression. However, you can include
+ *   AND and OR expressions explicitly.
+ *
+ *   Filter is supported for the following fields: `category`, `state`,
+ *   `update_time`
+ * @param {google.cloud.servicehealth.v1.OrganizationEventView} [request.view]
+ *   Optional. OrganizationEvent fields to include in response.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.servicehealth.v1.OrganizationEvent|OrganizationEvent}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_health.list_organization_events.js</caption>
+ * region_tag:servicehealth_v1_generated_ServiceHealth_ListOrganizationEvents_async
+ */
   listOrganizationEventsAsync(
-    request?: protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.servicehealth.v1.IOrganizationEvent> {
+      request?: protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.servicehealth.v1.IOrganizationEvent>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listOrganizationEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listOrganizationEvents iterate %j', request);
     return this.descriptors.page.listOrganizationEvents.asyncIterate(
       this.innerApiCalls['listOrganizationEvents'] as GaxCall,
@@ -1455,149 +1254,124 @@ export class ServiceHealthClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.servicehealth.v1.IOrganizationEvent>;
   }
-  /**
-   * Lists assets impacted by organization events under a given organization and
-   * location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value using the form
-   *   `organizations/{organization_id}/locations/{location}/organizationImpacts`.
-   *
-   *   `organization_id` - ID (number) of the project that contains the event. To
-   *   get your `organization_id`, see
-   *   [Getting your organization resource
-   *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of events that should be returned. Acceptable
-   *   values are `1` to `100`, inclusive. The default value is `10`.
-   *
-   *    If more results are available, the service returns a
-   *   `next_page_token` that can be used to get the next page of results in
-   *   subsequent list requests. The service may return fewer
-   *   [impacts](/service-health/docs/reference/rest/v1beta/organizations.locations.organizationImpacts#OrganizationImpact)
-   *   than the requested `page_size`.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   *
-   *   Provide `page_token` returned by a previous `ListOrganizationImpacts` call
-   *   to retrieve the next page of results.
-   *
-   *   When paginating, all other parameters provided to `ListOrganizationImpacts`
-   *   must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. A filter expression that filters resources listed in the
-   *   response. The expression is in the form of `field:value` for checking if a
-   *   repeated field contains a value.
-   *
-   *   Example:
-   *   `events:organizations%2F{organization_id}%2Flocations%2Fglobal%2ForganizationEvents%2Fevent-id`
-   *
-   *   To get your `{organization_id}`, see
-   *   [Getting your organization resource
-   *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
-   *
-   *   Multiple filter queries are separated by spaces.
-   *
-   *   By default, each expression is an AND expression. However, you can include
-   *   AND and OR expressions explicitly.
-   *   Filter is supported for the following fields: `events`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.servicehealth.v1.OrganizationImpact|OrganizationImpact}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listOrganizationImpactsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists assets impacted by organization events under a given organization and
+ * location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value using the form
+ *   `organizations/{organization_id}/locations/{location}/organizationImpacts`.
+ *
+ *   `organization_id` - ID (number) of the project that contains the event. To
+ *   get your `organization_id`, see
+ *   [Getting your organization resource
+ *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of events that should be returned. Acceptable
+ *   values are `1` to `100`, inclusive. The default value is `10`.
+ *
+ *    If more results are available, the service returns a
+ *   `next_page_token` that can be used to get the next page of results in
+ *   subsequent list requests. The service may return fewer
+ *   [impacts](/service-health/docs/reference/rest/v1beta/organizations.locations.organizationImpacts#OrganizationImpact)
+ *   than the requested `page_size`.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ *
+ *   Provide `page_token` returned by a previous `ListOrganizationImpacts` call
+ *   to retrieve the next page of results.
+ *
+ *   When paginating, all other parameters provided to `ListOrganizationImpacts`
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. A filter expression that filters resources listed in the
+ *   response. The expression is in the form of `field:value` for checking if a
+ *   repeated field contains a value.
+ *
+ *   Example:
+ *   `events:organizations%2F{organization_id}%2Flocations%2Fglobal%2ForganizationEvents%2Fevent-id`
+ *
+ *   To get your `{organization_id}`, see
+ *   [Getting your organization resource
+ *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
+ *
+ *   Multiple filter queries are separated by spaces.
+ *
+ *   By default, each expression is an AND expression. However, you can include
+ *   AND and OR expressions explicitly.
+ *   Filter is supported for the following fields: `events`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.servicehealth.v1.OrganizationImpact|OrganizationImpact}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listOrganizationImpactsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listOrganizationImpacts(
-    request?: protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.servicehealth.v1.IOrganizationImpact[],
-      protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest | null,
-      protos.google.cloud.servicehealth.v1.IListOrganizationImpactsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.servicehealth.v1.IOrganizationImpact[],
+        protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest|null,
+        protos.google.cloud.servicehealth.v1.IListOrganizationImpactsResponse
+      ]>;
   listOrganizationImpacts(
-    request: protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
-      | protos.google.cloud.servicehealth.v1.IListOrganizationImpactsResponse
-      | null
-      | undefined,
-      protos.google.cloud.servicehealth.v1.IOrganizationImpact
-    >
-  ): void;
-  listOrganizationImpacts(
-    request: protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
-      | protos.google.cloud.servicehealth.v1.IListOrganizationImpactsResponse
-      | null
-      | undefined,
-      protos.google.cloud.servicehealth.v1.IOrganizationImpact
-    >
-  ): void;
-  listOrganizationImpacts(
-    request?: protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
-          | protos.google.cloud.servicehealth.v1.IListOrganizationImpactsResponse
-          | null
-          | undefined,
-          protos.google.cloud.servicehealth.v1.IOrganizationImpact
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
-      | protos.google.cloud.servicehealth.v1.IListOrganizationImpactsResponse
-      | null
-      | undefined,
-      protos.google.cloud.servicehealth.v1.IOrganizationImpact
-    >
-  ): Promise<
-    [
-      protos.google.cloud.servicehealth.v1.IOrganizationImpact[],
-      protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest | null,
-      protos.google.cloud.servicehealth.v1.IListOrganizationImpactsResponse,
-    ]
-  > | void {
+          protos.google.cloud.servicehealth.v1.IListOrganizationImpactsResponse|null|undefined,
+          protos.google.cloud.servicehealth.v1.IOrganizationImpact>): void;
+  listOrganizationImpacts(
+      request: protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
+          protos.google.cloud.servicehealth.v1.IListOrganizationImpactsResponse|null|undefined,
+          protos.google.cloud.servicehealth.v1.IOrganizationImpact>): void;
+  listOrganizationImpacts(
+      request?: protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
+          protos.google.cloud.servicehealth.v1.IListOrganizationImpactsResponse|null|undefined,
+          protos.google.cloud.servicehealth.v1.IOrganizationImpact>,
+      callback?: PaginationCallback<
+          protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
+          protos.google.cloud.servicehealth.v1.IListOrganizationImpactsResponse|null|undefined,
+          protos.google.cloud.servicehealth.v1.IOrganizationImpact>):
+      Promise<[
+        protos.google.cloud.servicehealth.v1.IOrganizationImpact[],
+        protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest|null,
+        protos.google.cloud.servicehealth.v1.IListOrganizationImpactsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
-          | protos.google.cloud.servicehealth.v1.IListOrganizationImpactsResponse
-          | null
-          | undefined,
-          protos.google.cloud.servicehealth.v1.IOrganizationImpact
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
+      protos.google.cloud.servicehealth.v1.IListOrganizationImpactsResponse|null|undefined,
+      protos.google.cloud.servicehealth.v1.IOrganizationImpact>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listOrganizationImpacts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1606,92 +1380,89 @@ export class ServiceHealthClient {
     this._log.info('listOrganizationImpacts request %j', request);
     return this.innerApiCalls
       .listOrganizationImpacts(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.servicehealth.v1.IOrganizationImpact[],
-          protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest | null,
-          protos.google.cloud.servicehealth.v1.IListOrganizationImpactsResponse,
-        ]) => {
-          this._log.info('listOrganizationImpacts values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.servicehealth.v1.IOrganizationImpact[],
+        protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest|null,
+        protos.google.cloud.servicehealth.v1.IListOrganizationImpactsResponse
+      ]) => {
+        this._log.info('listOrganizationImpacts values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listOrganizationImpacts`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value using the form
-   *   `organizations/{organization_id}/locations/{location}/organizationImpacts`.
-   *
-   *   `organization_id` - ID (number) of the project that contains the event. To
-   *   get your `organization_id`, see
-   *   [Getting your organization resource
-   *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of events that should be returned. Acceptable
-   *   values are `1` to `100`, inclusive. The default value is `10`.
-   *
-   *    If more results are available, the service returns a
-   *   `next_page_token` that can be used to get the next page of results in
-   *   subsequent list requests. The service may return fewer
-   *   [impacts](/service-health/docs/reference/rest/v1beta/organizations.locations.organizationImpacts#OrganizationImpact)
-   *   than the requested `page_size`.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   *
-   *   Provide `page_token` returned by a previous `ListOrganizationImpacts` call
-   *   to retrieve the next page of results.
-   *
-   *   When paginating, all other parameters provided to `ListOrganizationImpacts`
-   *   must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. A filter expression that filters resources listed in the
-   *   response. The expression is in the form of `field:value` for checking if a
-   *   repeated field contains a value.
-   *
-   *   Example:
-   *   `events:organizations%2F{organization_id}%2Flocations%2Fglobal%2ForganizationEvents%2Fevent-id`
-   *
-   *   To get your `{organization_id}`, see
-   *   [Getting your organization resource
-   *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
-   *
-   *   Multiple filter queries are separated by spaces.
-   *
-   *   By default, each expression is an AND expression. However, you can include
-   *   AND and OR expressions explicitly.
-   *   Filter is supported for the following fields: `events`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.servicehealth.v1.OrganizationImpact|OrganizationImpact} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listOrganizationImpactsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listOrganizationImpacts`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value using the form
+ *   `organizations/{organization_id}/locations/{location}/organizationImpacts`.
+ *
+ *   `organization_id` - ID (number) of the project that contains the event. To
+ *   get your `organization_id`, see
+ *   [Getting your organization resource
+ *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of events that should be returned. Acceptable
+ *   values are `1` to `100`, inclusive. The default value is `10`.
+ *
+ *    If more results are available, the service returns a
+ *   `next_page_token` that can be used to get the next page of results in
+ *   subsequent list requests. The service may return fewer
+ *   [impacts](/service-health/docs/reference/rest/v1beta/organizations.locations.organizationImpacts#OrganizationImpact)
+ *   than the requested `page_size`.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ *
+ *   Provide `page_token` returned by a previous `ListOrganizationImpacts` call
+ *   to retrieve the next page of results.
+ *
+ *   When paginating, all other parameters provided to `ListOrganizationImpacts`
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. A filter expression that filters resources listed in the
+ *   response. The expression is in the form of `field:value` for checking if a
+ *   repeated field contains a value.
+ *
+ *   Example:
+ *   `events:organizations%2F{organization_id}%2Flocations%2Fglobal%2ForganizationEvents%2Fevent-id`
+ *
+ *   To get your `{organization_id}`, see
+ *   [Getting your organization resource
+ *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
+ *
+ *   Multiple filter queries are separated by spaces.
+ *
+ *   By default, each expression is an AND expression. However, you can include
+ *   AND and OR expressions explicitly.
+ *   Filter is supported for the following fields: `events`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.servicehealth.v1.OrganizationImpact|OrganizationImpact} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listOrganizationImpactsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listOrganizationImpactsStream(
-    request?: protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listOrganizationImpacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listOrganizationImpacts stream %j', request);
     return this.descriptors.page.listOrganizationImpacts.createStream(
       this.innerApiCalls.listOrganizationImpacts as GaxCall,
@@ -1700,83 +1471,82 @@ export class ServiceHealthClient {
     );
   }
 
-  /**
-   * Equivalent to `listOrganizationImpacts`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value using the form
-   *   `organizations/{organization_id}/locations/{location}/organizationImpacts`.
-   *
-   *   `organization_id` - ID (number) of the project that contains the event. To
-   *   get your `organization_id`, see
-   *   [Getting your organization resource
-   *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of events that should be returned. Acceptable
-   *   values are `1` to `100`, inclusive. The default value is `10`.
-   *
-   *    If more results are available, the service returns a
-   *   `next_page_token` that can be used to get the next page of results in
-   *   subsequent list requests. The service may return fewer
-   *   [impacts](/service-health/docs/reference/rest/v1beta/organizations.locations.organizationImpacts#OrganizationImpact)
-   *   than the requested `page_size`.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   *
-   *   Provide `page_token` returned by a previous `ListOrganizationImpacts` call
-   *   to retrieve the next page of results.
-   *
-   *   When paginating, all other parameters provided to `ListOrganizationImpacts`
-   *   must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. A filter expression that filters resources listed in the
-   *   response. The expression is in the form of `field:value` for checking if a
-   *   repeated field contains a value.
-   *
-   *   Example:
-   *   `events:organizations%2F{organization_id}%2Flocations%2Fglobal%2ForganizationEvents%2Fevent-id`
-   *
-   *   To get your `{organization_id}`, see
-   *   [Getting your organization resource
-   *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
-   *
-   *   Multiple filter queries are separated by spaces.
-   *
-   *   By default, each expression is an AND expression. However, you can include
-   *   AND and OR expressions explicitly.
-   *   Filter is supported for the following fields: `events`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.servicehealth.v1.OrganizationImpact|OrganizationImpact}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_health.list_organization_impacts.js</caption>
-   * region_tag:servicehealth_v1_generated_ServiceHealth_ListOrganizationImpacts_async
-   */
+/**
+ * Equivalent to `listOrganizationImpacts`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value using the form
+ *   `organizations/{organization_id}/locations/{location}/organizationImpacts`.
+ *
+ *   `organization_id` - ID (number) of the project that contains the event. To
+ *   get your `organization_id`, see
+ *   [Getting your organization resource
+ *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of events that should be returned. Acceptable
+ *   values are `1` to `100`, inclusive. The default value is `10`.
+ *
+ *    If more results are available, the service returns a
+ *   `next_page_token` that can be used to get the next page of results in
+ *   subsequent list requests. The service may return fewer
+ *   [impacts](/service-health/docs/reference/rest/v1beta/organizations.locations.organizationImpacts#OrganizationImpact)
+ *   than the requested `page_size`.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ *
+ *   Provide `page_token` returned by a previous `ListOrganizationImpacts` call
+ *   to retrieve the next page of results.
+ *
+ *   When paginating, all other parameters provided to `ListOrganizationImpacts`
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. A filter expression that filters resources listed in the
+ *   response. The expression is in the form of `field:value` for checking if a
+ *   repeated field contains a value.
+ *
+ *   Example:
+ *   `events:organizations%2F{organization_id}%2Flocations%2Fglobal%2ForganizationEvents%2Fevent-id`
+ *
+ *   To get your `{organization_id}`, see
+ *   [Getting your organization resource
+ *   ID](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
+ *
+ *   Multiple filter queries are separated by spaces.
+ *
+ *   By default, each expression is an AND expression. However, you can include
+ *   AND and OR expressions explicitly.
+ *   Filter is supported for the following fields: `events`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.servicehealth.v1.OrganizationImpact|OrganizationImpact}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_health.list_organization_impacts.js</caption>
+ * region_tag:servicehealth_v1_generated_ServiceHealth_ListOrganizationImpacts_async
+ */
   listOrganizationImpactsAsync(
-    request?: protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.servicehealth.v1.IOrganizationImpact> {
+      request?: protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.servicehealth.v1.IOrganizationImpact>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listOrganizationImpacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listOrganizationImpacts iterate %j', request);
     return this.descriptors.page.listOrganizationImpacts.asyncIterate(
       this.innerApiCalls['listOrganizationImpacts'] as GaxCall,
@@ -1784,7 +1554,7 @@ export class ServiceHealthClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.servicehealth.v1.IOrganizationImpact>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1824,7 +1594,7 @@ export class ServiceHealthClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1874,7 +1644,7 @@ export class ServiceHealthClient {
    * @param {string} event
    * @returns {string} Resource name string.
    */
-  eventPath(project: string, location: string, event: string) {
+  eventPath(project:string,location:string,event:string) {
     return this.pathTemplates.eventPathTemplate.render({
       project: project,
       location: location,
@@ -1923,7 +1693,7 @@ export class ServiceHealthClient {
    * @param {string} event
    * @returns {string} Resource name string.
    */
-  organizationEventPath(organization: string, location: string, event: string) {
+  organizationEventPath(organization:string,location:string,event:string) {
     return this.pathTemplates.organizationEventPathTemplate.render({
       organization: organization,
       location: location,
@@ -1939,9 +1709,7 @@ export class ServiceHealthClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationEventName(organizationEventName: string) {
-    return this.pathTemplates.organizationEventPathTemplate.match(
-      organizationEventName
-    ).organization;
+    return this.pathTemplates.organizationEventPathTemplate.match(organizationEventName).organization;
   }
 
   /**
@@ -1952,9 +1720,7 @@ export class ServiceHealthClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromOrganizationEventName(organizationEventName: string) {
-    return this.pathTemplates.organizationEventPathTemplate.match(
-      organizationEventName
-    ).location;
+    return this.pathTemplates.organizationEventPathTemplate.match(organizationEventName).location;
   }
 
   /**
@@ -1965,9 +1731,7 @@ export class ServiceHealthClient {
    * @returns {string} A string representing the event.
    */
   matchEventFromOrganizationEventName(organizationEventName: string) {
-    return this.pathTemplates.organizationEventPathTemplate.match(
-      organizationEventName
-    ).event;
+    return this.pathTemplates.organizationEventPathTemplate.match(organizationEventName).event;
   }
 
   /**
@@ -1978,11 +1742,7 @@ export class ServiceHealthClient {
    * @param {string} organization_impact
    * @returns {string} Resource name string.
    */
-  organizationImpactPath(
-    organization: string,
-    location: string,
-    organizationImpact: string
-  ) {
+  organizationImpactPath(organization:string,location:string,organizationImpact:string) {
     return this.pathTemplates.organizationImpactPathTemplate.render({
       organization: organization,
       location: location,
@@ -1998,9 +1758,7 @@ export class ServiceHealthClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationImpactName(organizationImpactName: string) {
-    return this.pathTemplates.organizationImpactPathTemplate.match(
-      organizationImpactName
-    ).organization;
+    return this.pathTemplates.organizationImpactPathTemplate.match(organizationImpactName).organization;
   }
 
   /**
@@ -2011,9 +1769,7 @@ export class ServiceHealthClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromOrganizationImpactName(organizationImpactName: string) {
-    return this.pathTemplates.organizationImpactPathTemplate.match(
-      organizationImpactName
-    ).location;
+    return this.pathTemplates.organizationImpactPathTemplate.match(organizationImpactName).location;
   }
 
   /**
@@ -2023,12 +1779,8 @@ export class ServiceHealthClient {
    *   A fully-qualified path representing OrganizationImpact resource.
    * @returns {string} A string representing the organization_impact.
    */
-  matchOrganizationImpactFromOrganizationImpactName(
-    organizationImpactName: string
-  ) {
-    return this.pathTemplates.organizationImpactPathTemplate.match(
-      organizationImpactName
-    ).organization_impact;
+  matchOrganizationImpactFromOrganizationImpactName(organizationImpactName: string) {
+    return this.pathTemplates.organizationImpactPathTemplate.match(organizationImpactName).organization_impact;
   }
 
   /**
@@ -2043,9 +1795,7 @@ export class ServiceHealthClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
       });
     }
     return Promise.resolve();

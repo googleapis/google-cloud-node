@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -110,41 +101,20 @@ export class SecurityCenterClient {
    *     const client = new SecurityCenterClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SecurityCenterClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'securitycenter.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +140,7 @@ export class SecurityCenterClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -184,7 +154,10 @@ export class SecurityCenterClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -211,280 +184,202 @@ export class SecurityCenterClient {
       folderConstraintNamePathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/policies/{constraint_name}'
       ),
-      folderLocationExportPathTemplate: new this._gaxModule.PathTemplate(
+      folderLocationBigQueryExportsPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/locations/{location}/bigQueryExports/{export}'
       ),
-      folderLocationMuteConfigPathTemplate: new this._gaxModule.PathTemplate(
+      folderLocationMuteConfigsPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/locations/{location}/muteConfigs/{mute_config}'
       ),
-      folderLocationNotificationConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'folders/{folder}/locations/{location}/notificationConfigs/{notification_config}'
-        ),
-      folderMuteConfigPathTemplate: new this._gaxModule.PathTemplate(
+      folderLocationNotificationConfigsPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/locations/{location}/notificationConfigs/{notification_config}'
+      ),
+      folderMuteConfigsPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/muteConfigs/{mute_config}'
       ),
       folderSourcePathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/sources/{source}'
       ),
-      folderSourceFindingPathTemplate: new this._gaxModule.PathTemplate(
+      folderSourceFindingExternalsystemPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/sources/{source}/findings/{finding}/externalSystems/{externalsystem}'
+      ),
+      folderSourceFindingSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/sources/{source}/findings/{finding}/securityMarks'
+      ),
+      folderSourceFindingsPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/sources/{source}/findings/{finding}'
       ),
-      folderSourceFindingExternalsystemPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'folders/{folder}/sources/{source}/findings/{finding}/externalSystems/{externalsystem}'
-        ),
-      folderSourceFindingSecurityMarksPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'folders/{folder}/sources/{source}/findings/{finding}/securityMarks'
-        ),
-      folderSourceLocationFindingPathTemplate: new this._gaxModule.PathTemplate(
+      folderSourceLocationFindingExternalsystemPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/sources/{source}/locations/{location}/findings/{finding}/externalSystems/{externalsystem}'
+      ),
+      folderSourceLocationFindingSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/sources/{source}/locations/{location}/findings/{finding}/securityMarks'
+      ),
+      folderSourceLocationFindingsPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/sources/{source}/locations/{location}/findings/{finding}'
       ),
-      folderSourceLocationFindingExternalsystemPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'folders/{folder}/sources/{source}/locations/{location}/findings/{finding}/externalSystems/{externalsystem}'
-        ),
-      folderSourceLocationFindingSecurityMarksPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'folders/{folder}/sources/{source}/locations/{location}/findings/{finding}/securityMarks'
-        ),
       organizationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}'
       ),
-      organizationAssetSecurityMarksPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/assets/{asset}/securityMarks'
-        ),
+      organizationAssetSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/assets/{asset}/securityMarks'
+      ),
       organizationConstraintNamePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/policies/{constraint_name}'
       ),
       organizationLocationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}'
       ),
-      organizationLocationExportPathTemplate: new this._gaxModule.PathTemplate(
+      organizationLocationBigQueryExportsPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}/bigQueryExports/{export}'
       ),
-      organizationLocationMuteConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/muteConfigs/{mute_config}'
-        ),
-      organizationLocationNotificationConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/notificationConfigs/{notification_config}'
-        ),
-      organizationLocationResourceValueConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/resourceValueConfigs/{resource_value_config}'
-        ),
-      organizationLocationSimluationPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/simulations/{simluation}'
-        ),
-      organizationLocationSimluationValuedResourcePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/simulations/{simluation}/valuedResources/{valued_resource}'
-        ),
-      organizationLocationSimulationValuedResourceAttackPathPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/simulations/{simulation}/valuedResources/{valued_resource}/attackPaths/{attack_path}'
-        ),
-      organizationMuteConfigPathTemplate: new this._gaxModule.PathTemplate(
+      organizationLocationMuteConfigsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/muteConfigs/{mute_config}'
+      ),
+      organizationLocationNotificationConfigsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/notificationConfigs/{notification_config}'
+      ),
+      organizationLocationResourceValueConfigsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/resourceValueConfigs/{resource_value_config}'
+      ),
+      organizationLocationSimluationValuedResourcesPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/simulations/{simluation}/valuedResources/{valued_resource}'
+      ),
+      organizationLocationSimulationValuedResourceAttackPathsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/simulations/{simulation}/valuedResources/{valued_resource}/attackPaths/{attack_path}'
+      ),
+      organizationLocationSimulationsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/simulations/{simluation}'
+      ),
+      organizationMuteConfigsPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/muteConfigs/{mute_config}'
       ),
-      organizationResourceValueConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/resourceValueConfigs/{resource_value_config}'
-        ),
-      organizationSimulationPathTemplate: new this._gaxModule.PathTemplate(
+      organizationResourceValueConfigsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/resourceValueConfigs/{resource_value_config}'
+      ),
+      organizationSimulationValuedResourceAttackPathsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}/attackPaths/{attack_path}'
+      ),
+      organizationSimulationValuedResourcesPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}'
+      ),
+      organizationSimulationsPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/simulations/{simulation}'
       ),
-      organizationSimulationValuedResourcePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}'
-        ),
-      organizationSimulationValuedResourceAttackPathPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}/attackPaths/{attack_path}'
-        ),
       organizationSourcePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/sources/{source}'
       ),
-      organizationSourceFindingPathTemplate: new this._gaxModule.PathTemplate(
+      organizationSourceFindingExternalsystemPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/sources/{source}/findings/{finding}/externalSystems/{externalsystem}'
+      ),
+      organizationSourceFindingSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/sources/{source}/findings/{finding}/securityMarks'
+      ),
+      organizationSourceFindingsPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/sources/{source}/findings/{finding}'
       ),
-      organizationSourceFindingExternalsystemPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/sources/{source}/findings/{finding}/externalSystems/{externalsystem}'
-        ),
-      organizationSourceFindingSecurityMarksPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/sources/{source}/findings/{finding}/securityMarks'
-        ),
-      organizationSourceLocationFindingPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/sources/{source}/locations/{location}/findings/{finding}'
-        ),
-      organizationSourceLocationFindingExternalsystemPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/sources/{source}/locations/{location}/findings/{finding}/externalSystems/{externalsystem}'
-        ),
-      organizationSourceLocationFindingSecurityMarksPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/sources/{source}/locations/{location}/findings/{finding}/securityMarks'
-        ),
+      organizationSourceLocationFindingExternalsystemPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/sources/{source}/locations/{location}/findings/{finding}/externalSystems/{externalsystem}'
+      ),
+      organizationSourceLocationFindingSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/sources/{source}/locations/{location}/findings/{finding}/securityMarks'
+      ),
+      organizationSourceLocationFindingsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/sources/{source}/locations/{location}/findings/{finding}'
+      ),
       projectAssetSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/assets/{asset}/securityMarks'
       ),
       projectConstraintNamePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/policies/{constraint_name}'
       ),
-      projectLocationExportPathTemplate: new this._gaxModule.PathTemplate(
+      projectLocationBigQueryExportsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/bigQueryExports/{export}'
       ),
-      projectLocationMuteConfigPathTemplate: new this._gaxModule.PathTemplate(
+      projectLocationMuteConfigsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/muteConfigs/{mute_config}'
       ),
-      projectLocationNotificationConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/notificationConfigs/{notification_config}'
-        ),
-      projectMuteConfigPathTemplate: new this._gaxModule.PathTemplate(
+      projectLocationNotificationConfigsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/notificationConfigs/{notification_config}'
+      ),
+      projectMuteConfigsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/muteConfigs/{mute_config}'
       ),
       projectSourcePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/sources/{source}'
       ),
-      projectSourceFindingPathTemplate: new this._gaxModule.PathTemplate(
+      projectSourceFindingExternalsystemPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/sources/{source}/findings/{finding}/externalSystems/{externalsystem}'
+      ),
+      projectSourceFindingSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/sources/{source}/findings/{finding}/securityMarks'
+      ),
+      projectSourceFindingsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/sources/{source}/findings/{finding}'
       ),
-      projectSourceFindingExternalsystemPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/sources/{source}/findings/{finding}/externalSystems/{externalsystem}'
-        ),
-      projectSourceFindingSecurityMarksPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/sources/{source}/findings/{finding}/securityMarks'
-        ),
-      projectSourceLocationFindingPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/sources/{source}/locations/{location}/findings/{finding}'
-        ),
-      projectSourceLocationFindingExternalsystemPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/sources/{source}/locations/{location}/findings/{finding}/externalSystems/{externalsystem}'
-        ),
-      projectSourceLocationFindingSecurityMarksPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/sources/{source}/locations/{location}/findings/{finding}/securityMarks'
-        ),
+      projectSourceLocationFindingExternalsystemPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/sources/{source}/locations/{location}/findings/{finding}/externalSystems/{externalsystem}'
+      ),
+      projectSourceLocationFindingSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/sources/{source}/locations/{location}/findings/{finding}/securityMarks'
+      ),
+      projectSourceLocationFindingsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/sources/{source}/locations/{location}/findings/{finding}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      groupFindings: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'groupByResults'
-      ),
-      listAttackPaths: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'attackPaths'
-      ),
-      listBigQueryExports: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'bigQueryExports'
-      ),
-      listFindings: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'listFindingsResults'
-      ),
-      listMuteConfigs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'muteConfigs'
-      ),
-      listNotificationConfigs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'notificationConfigs'
-      ),
-      listResourceValueConfigs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'resourceValueConfigs'
-      ),
-      listSources: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'sources'
-      ),
-      listValuedResources: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'valuedResources'
-      ),
+      groupFindings:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'groupByResults'),
+      listAttackPaths:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'attackPaths'),
+      listBigQueryExports:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'bigQueryExports'),
+      listFindings:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'listFindingsResults'),
+      listMuteConfigs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'muteConfigs'),
+      listNotificationConfigs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'notificationConfigs'),
+      listResourceValueConfigs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'resourceValueConfigs'),
+      listSources:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'sources'),
+      listValuedResources:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'valuedResources')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v2/{name=organizations/*/operations/*}:cancel',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v2/{name=organizations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v2/{name=organizations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v2/{name=organizations/*/operations}',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.CancelOperation',post: '/v2/{name=organizations/*/operations/*}:cancel',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v2/{name=organizations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v2/{name=organizations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v2/{name=organizations/*/operations}',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const bulkMuteFindingsResponse = protoFilesRoot.lookup(
-      '.google.cloud.securitycenter.v2.BulkMuteFindingsResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.securitycenter.v2.BulkMuteFindingsResponse') as gax.protobuf.Type;
     const bulkMuteFindingsMetadata = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       bulkMuteFindings: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         bulkMuteFindingsResponse.decode.bind(bulkMuteFindingsResponse),
-        bulkMuteFindingsMetadata.decode.bind(bulkMuteFindingsMetadata)
-      ),
+        bulkMuteFindingsMetadata.decode.bind(bulkMuteFindingsMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.securitycenter.v2.SecurityCenter',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.securitycenter.v2.SecurityCenter', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -515,74 +410,28 @@ export class SecurityCenterClient {
     // Put together the "service stub" for
     // google.cloud.securitycenter.v2.SecurityCenter.
     this.securityCenterStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.securitycenter.v2.SecurityCenter'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.securitycenter.v2.SecurityCenter') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.securitycenter.v2.SecurityCenter,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const securityCenterStubMethods = [
-      'batchCreateResourceValueConfigs',
-      'bulkMuteFindings',
-      'createBigQueryExport',
-      'createFinding',
-      'createMuteConfig',
-      'createNotificationConfig',
-      'createSource',
-      'deleteBigQueryExport',
-      'deleteMuteConfig',
-      'deleteNotificationConfig',
-      'deleteResourceValueConfig',
-      'getBigQueryExport',
-      'getSimulation',
-      'getValuedResource',
-      'getIamPolicy',
-      'getMuteConfig',
-      'getNotificationConfig',
-      'getResourceValueConfig',
-      'getSource',
-      'groupFindings',
-      'listAttackPaths',
-      'listBigQueryExports',
-      'listFindings',
-      'listMuteConfigs',
-      'listNotificationConfigs',
-      'listResourceValueConfigs',
-      'listSources',
-      'listValuedResources',
-      'setFindingState',
-      'setIamPolicy',
-      'setMute',
-      'testIamPermissions',
-      'updateBigQueryExport',
-      'updateExternalSystem',
-      'updateFinding',
-      'updateMuteConfig',
-      'updateNotificationConfig',
-      'updateResourceValueConfig',
-      'updateSecurityMarks',
-      'updateSource',
-    ];
+    const securityCenterStubMethods =
+        ['batchCreateResourceValueConfigs', 'bulkMuteFindings', 'createBigQueryExport', 'createFinding', 'createMuteConfig', 'createNotificationConfig', 'createSource', 'deleteBigQueryExport', 'deleteMuteConfig', 'deleteNotificationConfig', 'deleteResourceValueConfig', 'getBigQueryExport', 'getSimulation', 'getValuedResource', 'getIamPolicy', 'getMuteConfig', 'getNotificationConfig', 'getResourceValueConfig', 'getSource', 'groupFindings', 'listAttackPaths', 'listBigQueryExports', 'listFindings', 'listMuteConfigs', 'listNotificationConfigs', 'listResourceValueConfigs', 'listSources', 'listValuedResources', 'setFindingState', 'setIamPolicy', 'setMute', 'testIamPermissions', 'updateBigQueryExport', 'updateExternalSystem', 'updateFinding', 'updateMuteConfig', 'updateNotificationConfig', 'updateResourceValueConfig', 'updateSecurityMarks', 'updateSource'];
     for (const methodName of securityCenterStubMethods) {
       const callPromise = this.securityCenterStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -607,14 +456,8 @@ export class SecurityCenterClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'securitycenter.googleapis.com';
   }
@@ -625,14 +468,8 @@ export class SecurityCenterClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'securitycenter.googleapis.com';
   }
@@ -663,7 +500,9 @@ export class SecurityCenterClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -672,9 +511,8 @@ export class SecurityCenterClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -685,4495 +523,3483 @@ export class SecurityCenterClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates a ResourceValueConfig for an organization. Maps user's tags to
-   * difference resource values for use by the attack path simulation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the new ResourceValueConfig's parent.
-   *   The parent field in the CreateResourceValueConfigRequest
-   *   messages must either be empty or match this field.
-   * @param {number[]} request.requests
-   *   Required. The resource value configs to be created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsResponse|BatchCreateResourceValueConfigsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.batch_create_resource_value_configs.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_BatchCreateResourceValueConfigs_async
-   */
+/**
+ * Creates a ResourceValueConfig for an organization. Maps user's tags to
+ * difference resource values for use by the attack path simulation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the new ResourceValueConfig's parent.
+ *   The parent field in the CreateResourceValueConfigRequest
+ *   messages must either be empty or match this field.
+ * @param {number[]} request.requests
+ *   Required. The resource value configs to be created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsResponse|BatchCreateResourceValueConfigsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.batch_create_resource_value_configs.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_BatchCreateResourceValueConfigs_async
+ */
   batchCreateResourceValueConfigs(
-    request?: protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsResponse,
-      (
-        | protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsResponse,
+        protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest|undefined, {}|undefined
+      ]>;
   batchCreateResourceValueConfigs(
-    request: protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsResponse,
-      | protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchCreateResourceValueConfigs(
-    request: protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsResponse,
-      | protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchCreateResourceValueConfigs(
-    request?: protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsResponse,
-          | protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsResponse,
-      | protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsResponse,
-      (
-        | protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateResourceValueConfigs(
+      request: protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsResponse,
+          protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateResourceValueConfigs(
+      request?: protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsResponse,
+          protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsResponse,
+          protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsResponse,
+        protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('batchCreateResourceValueConfigs request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsResponse,
-          | protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsResponse,
+        protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
-            'batchCreateResourceValueConfigs response %j',
-            response
-          );
+          this._log.info('batchCreateResourceValueConfigs response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .batchCreateResourceValueConfigs(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsResponse,
-          (
-            | protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'batchCreateResourceValueConfigs response %j',
-            response
-          );
-          return [response, options, rawResponse];
+    return this.innerApiCalls.batchCreateResourceValueConfigs(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsResponse,
+        protos.google.cloud.securitycenter.v2.IBatchCreateResourceValueConfigsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchCreateResourceValueConfigs response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a BigQuery export.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource of the new BigQuery export. Its
-   *   format is `organizations/[organization_id]/locations/[location_id]`,
-   *   `folders/[folder_id]/locations/[location_id]`, or
-   *   `projects/[project_id]/locations/[location_id]`.
-   * @param {google.cloud.securitycenter.v2.BigQueryExport} request.bigQueryExport
-   *   Required. The BigQuery export being created.
-   * @param {string} request.bigQueryExportId
-   *   Required. Unique identifier provided by the client within the parent scope.
-   *   It must consist of only lowercase letters, numbers, and hyphens, must start
-   *   with a letter, must end with either a letter or a number, and must be 63
-   *   characters or less.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.BigQueryExport|BigQueryExport}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.create_big_query_export.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_CreateBigQueryExport_async
-   */
+/**
+ * Creates a BigQuery export.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource of the new BigQuery export. Its
+ *   format is `organizations/[organization_id]/locations/[location_id]`,
+ *   `folders/[folder_id]/locations/[location_id]`, or
+ *   `projects/[project_id]/locations/[location_id]`.
+ * @param {google.cloud.securitycenter.v2.BigQueryExport} request.bigQueryExport
+ *   Required. The BigQuery export being created.
+ * @param {string} request.bigQueryExportId
+ *   Required. Unique identifier provided by the client within the parent scope.
+ *   It must consist of only lowercase letters, numbers, and hyphens, must start
+ *   with a letter, must end with either a letter or a number, and must be 63
+ *   characters or less.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.BigQueryExport|BigQueryExport}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.create_big_query_export.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_CreateBigQueryExport_async
+ */
   createBigQueryExport(
-    request?: protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IBigQueryExport,
-      (
-        | protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IBigQueryExport,
+        protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest|undefined, {}|undefined
+      ]>;
   createBigQueryExport(
-    request: protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IBigQueryExport,
-      | protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createBigQueryExport(
-    request: protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IBigQueryExport,
-      | protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createBigQueryExport(
-    request?: protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.IBigQueryExport,
-          | protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.IBigQueryExport,
-      | protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IBigQueryExport,
-      (
-        | protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest|null|undefined,
+          {}|null|undefined>): void;
+  createBigQueryExport(
+      request: protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.IBigQueryExport,
+          protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest|null|undefined,
+          {}|null|undefined>): void;
+  createBigQueryExport(
+      request?: protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.IBigQueryExport,
+          protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.IBigQueryExport,
+          protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IBigQueryExport,
+        protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createBigQueryExport request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.IBigQueryExport,
-          | protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.IBigQueryExport,
+        protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createBigQueryExport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createBigQueryExport(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.IBigQueryExport,
-          (
-            | protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createBigQueryExport response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createBigQueryExport(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.IBigQueryExport,
+        protos.google.cloud.securitycenter.v2.ICreateBigQueryExportRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createBigQueryExport response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a finding in a location. The corresponding source must exist for
-   * finding creation to succeed.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the new finding's parent. The following list
-   *   shows some examples of the format:
-   *   +
-   *   `organizations/[organization_id]/sources/[source_id]`
-   *   +
-   *   `organizations/[organization_id]/sources/[source_id]/locations/[location_id]`
-   * @param {string} request.findingId
-   *   Required. Unique identifier provided by the client within the parent scope.
-   *   It must be alphanumeric and less than or equal to 32 characters and
-   *   greater than 0 characters in length.
-   * @param {google.cloud.securitycenter.v2.Finding} request.finding
-   *   Required. The Finding being created. The name and security_marks will be
-   *   ignored as they are both output only fields on this resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.Finding|Finding}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.create_finding.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_CreateFinding_async
-   */
+/**
+ * Creates a finding in a location. The corresponding source must exist for
+ * finding creation to succeed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the new finding's parent. The following list
+ *   shows some examples of the format:
+ *   +
+ *   `organizations/[organization_id]/sources/[source_id]`
+ *   +
+ *   `organizations/[organization_id]/sources/[source_id]/locations/[location_id]`
+ * @param {string} request.findingId
+ *   Required. Unique identifier provided by the client within the parent scope.
+ *   It must be alphanumeric and less than or equal to 32 characters and
+ *   greater than 0 characters in length.
+ * @param {google.cloud.securitycenter.v2.Finding} request.finding
+ *   Required. The Finding being created. The name and security_marks will be
+ *   ignored as they are both output only fields on this resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.Finding|Finding}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.create_finding.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_CreateFinding_async
+ */
   createFinding(
-    request?: protos.google.cloud.securitycenter.v2.ICreateFindingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IFinding,
-      protos.google.cloud.securitycenter.v2.ICreateFindingRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.ICreateFindingRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IFinding,
+        protos.google.cloud.securitycenter.v2.ICreateFindingRequest|undefined, {}|undefined
+      ]>;
   createFinding(
-    request: protos.google.cloud.securitycenter.v2.ICreateFindingRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IFinding,
-      | protos.google.cloud.securitycenter.v2.ICreateFindingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createFinding(
-    request: protos.google.cloud.securitycenter.v2.ICreateFindingRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IFinding,
-      | protos.google.cloud.securitycenter.v2.ICreateFindingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createFinding(
-    request?: protos.google.cloud.securitycenter.v2.ICreateFindingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.ICreateFindingRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.IFinding,
-          | protos.google.cloud.securitycenter.v2.ICreateFindingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.IFinding,
-      | protos.google.cloud.securitycenter.v2.ICreateFindingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IFinding,
-      protos.google.cloud.securitycenter.v2.ICreateFindingRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.ICreateFindingRequest|null|undefined,
+          {}|null|undefined>): void;
+  createFinding(
+      request: protos.google.cloud.securitycenter.v2.ICreateFindingRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.IFinding,
+          protos.google.cloud.securitycenter.v2.ICreateFindingRequest|null|undefined,
+          {}|null|undefined>): void;
+  createFinding(
+      request?: protos.google.cloud.securitycenter.v2.ICreateFindingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.IFinding,
+          protos.google.cloud.securitycenter.v2.ICreateFindingRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.IFinding,
+          protos.google.cloud.securitycenter.v2.ICreateFindingRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IFinding,
+        protos.google.cloud.securitycenter.v2.ICreateFindingRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createFinding request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.IFinding,
-          | protos.google.cloud.securitycenter.v2.ICreateFindingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.IFinding,
+        protos.google.cloud.securitycenter.v2.ICreateFindingRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createFinding response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createFinding(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.IFinding,
-          (
-            | protos.google.cloud.securitycenter.v2.ICreateFindingRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createFinding response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createFinding(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.IFinding,
+        protos.google.cloud.securitycenter.v2.ICreateFindingRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createFinding response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a mute config.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the new mute configs's parent. Its format is
-   *   `organizations/[organization_id]/locations/[location_id]`,
-   *   `folders/[folder_id]/locations/[location_id]`, or
-   *   `projects/[project_id]/locations/[location_id]`.
-   * @param {google.cloud.securitycenter.v2.MuteConfig} request.muteConfig
-   *   Required. The mute config being created.
-   * @param {string} request.muteConfigId
-   *   Required. Unique identifier provided by the client within the parent scope.
-   *   It must consist of only lowercase letters, numbers, and hyphens, must start
-   *   with a letter, must end with either a letter or a number, and must be 63
-   *   characters or less.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.MuteConfig|MuteConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.create_mute_config.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_CreateMuteConfig_async
-   */
+/**
+ * Creates a mute config.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the new mute configs's parent. Its format is
+ *   `organizations/[organization_id]/locations/[location_id]`,
+ *   `folders/[folder_id]/locations/[location_id]`, or
+ *   `projects/[project_id]/locations/[location_id]`.
+ * @param {google.cloud.securitycenter.v2.MuteConfig} request.muteConfig
+ *   Required. The mute config being created.
+ * @param {string} request.muteConfigId
+ *   Required. Unique identifier provided by the client within the parent scope.
+ *   It must consist of only lowercase letters, numbers, and hyphens, must start
+ *   with a letter, must end with either a letter or a number, and must be 63
+ *   characters or less.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.MuteConfig|MuteConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.create_mute_config.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_CreateMuteConfig_async
+ */
   createMuteConfig(
-    request?: protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IMuteConfig,
-      (
-        | protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IMuteConfig,
+        protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest|undefined, {}|undefined
+      ]>;
   createMuteConfig(
-    request: protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IMuteConfig,
-      | protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createMuteConfig(
-    request: protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IMuteConfig,
-      | protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createMuteConfig(
-    request?: protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.IMuteConfig,
-          | protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.IMuteConfig,
-      | protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IMuteConfig,
-      (
-        | protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  createMuteConfig(
+      request: protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.IMuteConfig,
+          protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  createMuteConfig(
+      request?: protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.IMuteConfig,
+          protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.IMuteConfig,
+          protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IMuteConfig,
+        protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    const routingParameter = {};
+    let routingParameter = {};
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
+        const match = fieldValue.toString().match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(RegExp('organizations/[^/]+/locations/(?<location>[^/]+)'));
+        const match = fieldValue.toString().match(RegExp('organizations/[^/]+/locations/(?<location>[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(RegExp('folders/[^/]+/locations/(?<location>[^/]+)'));
+        const match = fieldValue.toString().match(RegExp('folders/[^/]+/locations/(?<location>[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams(
+      routingParameter
+    );
+    this.initialize().catch(err => {throw err});
     this._log.info('createMuteConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.IMuteConfig,
-          | protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.IMuteConfig,
+        protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createMuteConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createMuteConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.IMuteConfig,
-          (
-            | protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createMuteConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createMuteConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.IMuteConfig,
+        protos.google.cloud.securitycenter.v2.ICreateMuteConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createMuteConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a notification config.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the new notification config's parent. Its format
-   *   is `organizations/[organization_id]/locations/[location_id]`,
-   *   `folders/[folder_id]/locations/[location_id]`, or
-   *   `projects/[project_id]/locations/[location_id]`.
-   * @param {string} request.configId
-   *   Required.
-   *   Unique identifier provided by the client within the parent scope.
-   *   It must be between 1 and 128 characters and contain alphanumeric
-   *   characters, underscores, or hyphens only.
-   * @param {google.cloud.securitycenter.v2.NotificationConfig} request.notificationConfig
-   *   Required. The notification config being created. The name and the service
-   *   account will be ignored as they are both output only fields on this
-   *   resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.NotificationConfig|NotificationConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.create_notification_config.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_CreateNotificationConfig_async
-   */
+/**
+ * Creates a notification config.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the new notification config's parent. Its format
+ *   is `organizations/[organization_id]/locations/[location_id]`,
+ *   `folders/[folder_id]/locations/[location_id]`, or
+ *   `projects/[project_id]/locations/[location_id]`.
+ * @param {string} request.configId
+ *   Required.
+ *   Unique identifier provided by the client within the parent scope.
+ *   It must be between 1 and 128 characters and contain alphanumeric
+ *   characters, underscores, or hyphens only.
+ * @param {google.cloud.securitycenter.v2.NotificationConfig} request.notificationConfig
+ *   Required. The notification config being created. The name and the service
+ *   account will be ignored as they are both output only fields on this
+ *   resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.NotificationConfig|NotificationConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.create_notification_config.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_CreateNotificationConfig_async
+ */
   createNotificationConfig(
-    request?: protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.INotificationConfig,
-      (
-        | protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.INotificationConfig,
+        protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest|undefined, {}|undefined
+      ]>;
   createNotificationConfig(
-    request: protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.INotificationConfig,
-      | protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createNotificationConfig(
-    request: protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.INotificationConfig,
-      | protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createNotificationConfig(
-    request?: protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.INotificationConfig,
-          | protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.INotificationConfig,
-      | protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.INotificationConfig,
-      (
-        | protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  createNotificationConfig(
+      request: protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.INotificationConfig,
+          protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  createNotificationConfig(
+      request?: protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.INotificationConfig,
+          protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.INotificationConfig,
+          protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.INotificationConfig,
+        protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createNotificationConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.INotificationConfig,
-          | protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.INotificationConfig,
+        protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createNotificationConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createNotificationConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.INotificationConfig,
-          (
-            | protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createNotificationConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createNotificationConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.INotificationConfig,
+        protos.google.cloud.securitycenter.v2.ICreateNotificationConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createNotificationConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a source.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the new source's parent. Its format should be
-   *   `organizations/[organization_id]`.
-   * @param {google.cloud.securitycenter.v2.Source} request.source
-   *   Required. The Source being created, only the display_name and description
-   *   will be used. All other fields will be ignored.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.Source|Source}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.create_source.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_CreateSource_async
-   */
+/**
+ * Creates a source.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the new source's parent. Its format should be
+ *   `organizations/[organization_id]`.
+ * @param {google.cloud.securitycenter.v2.Source} request.source
+ *   Required. The Source being created, only the display_name and description
+ *   will be used. All other fields will be ignored.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.Source|Source}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.create_source.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_CreateSource_async
+ */
   createSource(
-    request?: protos.google.cloud.securitycenter.v2.ICreateSourceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.ISource,
-      protos.google.cloud.securitycenter.v2.ICreateSourceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.ICreateSourceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.ISource,
+        protos.google.cloud.securitycenter.v2.ICreateSourceRequest|undefined, {}|undefined
+      ]>;
   createSource(
-    request: protos.google.cloud.securitycenter.v2.ICreateSourceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.ISource,
-      | protos.google.cloud.securitycenter.v2.ICreateSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createSource(
-    request: protos.google.cloud.securitycenter.v2.ICreateSourceRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.ISource,
-      | protos.google.cloud.securitycenter.v2.ICreateSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createSource(
-    request?: protos.google.cloud.securitycenter.v2.ICreateSourceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.ICreateSourceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.ISource,
-          | protos.google.cloud.securitycenter.v2.ICreateSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.ISource,
-      | protos.google.cloud.securitycenter.v2.ICreateSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.ISource,
-      protos.google.cloud.securitycenter.v2.ICreateSourceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.ICreateSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  createSource(
+      request: protos.google.cloud.securitycenter.v2.ICreateSourceRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.ISource,
+          protos.google.cloud.securitycenter.v2.ICreateSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  createSource(
+      request?: protos.google.cloud.securitycenter.v2.ICreateSourceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.ISource,
+          protos.google.cloud.securitycenter.v2.ICreateSourceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.ISource,
+          protos.google.cloud.securitycenter.v2.ICreateSourceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.ISource,
+        protos.google.cloud.securitycenter.v2.ICreateSourceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createSource request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.ISource,
-          | protos.google.cloud.securitycenter.v2.ICreateSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.ISource,
+        protos.google.cloud.securitycenter.v2.ICreateSourceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createSource(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.ISource,
-          (
-            | protos.google.cloud.securitycenter.v2.ICreateSourceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createSource response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createSource(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.ISource,
+        protos.google.cloud.securitycenter.v2.ICreateSourceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createSource response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes an existing BigQuery export.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the BigQuery export to delete. The following list
-   *   shows some examples of the format:
-   *
-   *   +
-   *   `organizations/{organization}/locations/{location}/bigQueryExports/{export_id}`
-   *   + `folders/{folder}/locations/{location}/bigQueryExports/{export_id}`
-   *   + `projects/{project}/locations/{location}/bigQueryExports/{export_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.delete_big_query_export.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_DeleteBigQueryExport_async
-   */
+/**
+ * Deletes an existing BigQuery export.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the BigQuery export to delete. The following list
+ *   shows some examples of the format:
+ *
+ *   +
+ *   `organizations/{organization}/locations/{location}/bigQueryExports/{export_id}`
+ *   + `folders/{folder}/locations/{location}/bigQueryExports/{export_id}`
+ *   + `projects/{project}/locations/{location}/bigQueryExports/{export_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.delete_big_query_export.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_DeleteBigQueryExport_async
+ */
   deleteBigQueryExport(
-    request?: protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest|undefined, {}|undefined
+      ]>;
   deleteBigQueryExport(
-    request: protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteBigQueryExport(
-    request: protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteBigQueryExport(
-    request?: protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteBigQueryExport(
+      request: protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteBigQueryExport(
+      request?: protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteBigQueryExport request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteBigQueryExport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteBigQueryExport(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteBigQueryExport response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteBigQueryExport(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securitycenter.v2.IDeleteBigQueryExportRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteBigQueryExport response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes an existing mute config. If no location is specified, default is
-   * global.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the mute config to delete. The following list shows some
-   *   examples of the format:
-   *
-   *   + `organizations/{organization}/muteConfigs/{config_id}`
-   *   +
-   *   `organizations/{organization}/locations/{location}/muteConfigs/{config_id}`
-   *   + `folders/{folder}/muteConfigs/{config_id}`
-   *   + `folders/{folder}/locations/{location}/muteConfigs/{config_id}`
-   *   + `projects/{project}/muteConfigs/{config_id}`
-   *   + `projects/{project}/locations/{location}/muteConfigs/{config_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.delete_mute_config.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_DeleteMuteConfig_async
-   */
+/**
+ * Deletes an existing mute config. If no location is specified, default is
+ * global.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the mute config to delete. The following list shows some
+ *   examples of the format:
+ *
+ *   + `organizations/{organization}/muteConfigs/{config_id}`
+ *   +
+ *   `organizations/{organization}/locations/{location}/muteConfigs/{config_id}`
+ *   + `folders/{folder}/muteConfigs/{config_id}`
+ *   + `folders/{folder}/locations/{location}/muteConfigs/{config_id}`
+ *   + `projects/{project}/muteConfigs/{config_id}`
+ *   + `projects/{project}/locations/{location}/muteConfigs/{config_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.delete_mute_config.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_DeleteMuteConfig_async
+ */
   deleteMuteConfig(
-    request?: protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest|undefined, {}|undefined
+      ]>;
   deleteMuteConfig(
-    request: protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteMuteConfig(
-    request: protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteMuteConfig(
-    request?: protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteMuteConfig(
+      request: protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteMuteConfig(
+      request?: protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    const routingParameter = {};
+    let routingParameter = {};
     {
       const fieldValue = request.name;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(
-            RegExp(
-              'projects/[^/]+/locations/(?<location>[^/]+)/muteConfigs/[^/]+'
-            )
-          );
+        const match = fieldValue.toString().match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)/muteConfigs/[^/]+'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
     {
       const fieldValue = request.name;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(
-            RegExp(
-              'organizations/[^/]+/locations/(?<location>[^/]+)/muteConfigs/[^/]+'
-            )
-          );
+        const match = fieldValue.toString().match(RegExp('organizations/[^/]+/locations/(?<location>[^/]+)/muteConfigs/[^/]+'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
     {
       const fieldValue = request.name;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(
-            RegExp(
-              'folders/[^/]+/locations/(?<location>[^/]+)/muteConfigs/[^/]+'
-            )
-          );
+        const match = fieldValue.toString().match(RegExp('folders/[^/]+/locations/(?<location>[^/]+)/muteConfigs/[^/]+'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams(
+      routingParameter
+    );
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteMuteConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteMuteConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteMuteConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteMuteConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteMuteConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securitycenter.v2.IDeleteMuteConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteMuteConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a notification config.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the notification config to delete. The following list
-   *   shows some examples of the format:
-   *
-   *   +
-   *   `organizations/[organization_id]/locations/[location_id]/notificationConfigs/[config_id]`
-   *   +
-   *   `folders/[folder_id]/locations/[location_id]notificationConfigs/[config_id]`
-   *   +
-   *   `projects/[project_id]/locations/[location_id]notificationConfigs/[config_id]`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.delete_notification_config.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_DeleteNotificationConfig_async
-   */
+/**
+ * Deletes a notification config.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the notification config to delete. The following list
+ *   shows some examples of the format:
+ *
+ *   +
+ *   `organizations/[organization_id]/locations/[location_id]/notificationConfigs/[config_id]`
+ *   +
+ *   `folders/[folder_id]/locations/[location_id]notificationConfigs/[config_id]`
+ *   +
+ *   `projects/[project_id]/locations/[location_id]notificationConfigs/[config_id]`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.delete_notification_config.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_DeleteNotificationConfig_async
+ */
   deleteNotificationConfig(
-    request?: protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest|undefined, {}|undefined
+      ]>;
   deleteNotificationConfig(
-    request: protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteNotificationConfig(
-    request: protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteNotificationConfig(
-    request?: protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteNotificationConfig(
+      request: protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteNotificationConfig(
+      request?: protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteNotificationConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteNotificationConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteNotificationConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteNotificationConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteNotificationConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securitycenter.v2.IDeleteNotificationConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteNotificationConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a ResourceValueConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the ResourceValueConfig to delete
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.delete_resource_value_config.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_DeleteResourceValueConfig_async
-   */
+/**
+ * Deletes a ResourceValueConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the ResourceValueConfig to delete
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.delete_resource_value_config.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_DeleteResourceValueConfig_async
+ */
   deleteResourceValueConfig(
-    request?: protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest|undefined, {}|undefined
+      ]>;
   deleteResourceValueConfig(
-    request: protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteResourceValueConfig(
-    request: protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteResourceValueConfig(
-    request?: protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteResourceValueConfig(
+      request: protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteResourceValueConfig(
+      request?: protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteResourceValueConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteResourceValueConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteResourceValueConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteResourceValueConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteResourceValueConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securitycenter.v2.IDeleteResourceValueConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteResourceValueConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a BigQuery export.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the BigQuery export to retrieve. The following list shows
-   *   some examples of the format:
-   *
-   *   +
-   *   `organizations/{organization}/locations/{location}/bigQueryExports/{export_id}`
-   *   + `folders/{folder}/locations/{location}/bigQueryExports/{export_id}`
-   *   + `projects/{project}locations/{location}//bigQueryExports/{export_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.BigQueryExport|BigQueryExport}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.get_big_query_export.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_GetBigQueryExport_async
-   */
+/**
+ * Gets a BigQuery export.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the BigQuery export to retrieve. The following list shows
+ *   some examples of the format:
+ *
+ *   +
+ *   `organizations/{organization}/locations/{location}/bigQueryExports/{export_id}`
+ *   + `folders/{folder}/locations/{location}/bigQueryExports/{export_id}`
+ *   + `projects/{project}locations/{location}//bigQueryExports/{export_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.BigQueryExport|BigQueryExport}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.get_big_query_export.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_GetBigQueryExport_async
+ */
   getBigQueryExport(
-    request?: protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IBigQueryExport,
-      (
-        | protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IBigQueryExport,
+        protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest|undefined, {}|undefined
+      ]>;
   getBigQueryExport(
-    request: protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IBigQueryExport,
-      | protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getBigQueryExport(
-    request: protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IBigQueryExport,
-      | protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getBigQueryExport(
-    request?: protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.IBigQueryExport,
-          | protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.IBigQueryExport,
-      | protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IBigQueryExport,
-      (
-        | protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest|null|undefined,
+          {}|null|undefined>): void;
+  getBigQueryExport(
+      request: protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.IBigQueryExport,
+          protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest|null|undefined,
+          {}|null|undefined>): void;
+  getBigQueryExport(
+      request?: protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.IBigQueryExport,
+          protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.IBigQueryExport,
+          protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IBigQueryExport,
+        protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getBigQueryExport request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.IBigQueryExport,
-          | protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.IBigQueryExport,
+        protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getBigQueryExport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getBigQueryExport(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.IBigQueryExport,
-          (
-            | protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getBigQueryExport response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getBigQueryExport(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.IBigQueryExport,
+        protos.google.cloud.securitycenter.v2.IGetBigQueryExportRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getBigQueryExport response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Get the simulation by name or the latest simulation for the given
-   * organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The organization name or simulation name of this simulation
-   *
-   *   Valid format:
-   *   `organizations/{organization}/simulations/latest`
-   *   `organizations/{organization}/simulations/{simulation}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.Simulation|Simulation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.get_simulation.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_GetSimulation_async
-   */
+/**
+ * Get the simulation by name or the latest simulation for the given
+ * organization.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The organization name or simulation name of this simulation
+ *
+ *   Valid format:
+ *   `organizations/{organization}/simulations/latest`
+ *   `organizations/{organization}/simulations/{simulation}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.Simulation|Simulation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.get_simulation.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_GetSimulation_async
+ */
   getSimulation(
-    request?: protos.google.cloud.securitycenter.v2.IGetSimulationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.ISimulation,
-      protos.google.cloud.securitycenter.v2.IGetSimulationRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IGetSimulationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.ISimulation,
+        protos.google.cloud.securitycenter.v2.IGetSimulationRequest|undefined, {}|undefined
+      ]>;
   getSimulation(
-    request: protos.google.cloud.securitycenter.v2.IGetSimulationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.ISimulation,
-      | protos.google.cloud.securitycenter.v2.IGetSimulationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSimulation(
-    request: protos.google.cloud.securitycenter.v2.IGetSimulationRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.ISimulation,
-      | protos.google.cloud.securitycenter.v2.IGetSimulationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSimulation(
-    request?: protos.google.cloud.securitycenter.v2.IGetSimulationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.IGetSimulationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.ISimulation,
-          | protos.google.cloud.securitycenter.v2.IGetSimulationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.ISimulation,
-      | protos.google.cloud.securitycenter.v2.IGetSimulationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.ISimulation,
-      protos.google.cloud.securitycenter.v2.IGetSimulationRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IGetSimulationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSimulation(
+      request: protos.google.cloud.securitycenter.v2.IGetSimulationRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.ISimulation,
+          protos.google.cloud.securitycenter.v2.IGetSimulationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSimulation(
+      request?: protos.google.cloud.securitycenter.v2.IGetSimulationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.ISimulation,
+          protos.google.cloud.securitycenter.v2.IGetSimulationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.ISimulation,
+          protos.google.cloud.securitycenter.v2.IGetSimulationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.ISimulation,
+        protos.google.cloud.securitycenter.v2.IGetSimulationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getSimulation request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.ISimulation,
-          | protos.google.cloud.securitycenter.v2.IGetSimulationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.ISimulation,
+        protos.google.cloud.securitycenter.v2.IGetSimulationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSimulation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getSimulation(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.ISimulation,
-          (
-            | protos.google.cloud.securitycenter.v2.IGetSimulationRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getSimulation response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getSimulation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.ISimulation,
+        protos.google.cloud.securitycenter.v2.IGetSimulationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getSimulation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Get the valued resource by name
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of this valued resource
-   *
-   *   Valid format:
-   *   `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.ValuedResource|ValuedResource}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.get_valued_resource.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_GetValuedResource_async
-   */
+/**
+ * Get the valued resource by name
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of this valued resource
+ *
+ *   Valid format:
+ *   `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.ValuedResource|ValuedResource}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.get_valued_resource.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_GetValuedResource_async
+ */
   getValuedResource(
-    request?: protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IValuedResource,
-      (
-        | protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IValuedResource,
+        protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest|undefined, {}|undefined
+      ]>;
   getValuedResource(
-    request: protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IValuedResource,
-      | protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getValuedResource(
-    request: protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IValuedResource,
-      | protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getValuedResource(
-    request?: protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.IValuedResource,
-          | protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.IValuedResource,
-      | protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IValuedResource,
-      (
-        | protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getValuedResource(
+      request: protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.IValuedResource,
+          protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getValuedResource(
+      request?: protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.IValuedResource,
+          protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.IValuedResource,
+          protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IValuedResource,
+        protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getValuedResource request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.IValuedResource,
-          | protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.IValuedResource,
+        protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getValuedResource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getValuedResource(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.IValuedResource,
-          (
-            | protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getValuedResource response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getValuedResource(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.IValuedResource,
+        protos.google.cloud.securitycenter.v2.IGetValuedResourceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getValuedResource response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the access control policy on the specified Source.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.get_iam_policy.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_GetIamPolicy_async
-   */
+/**
+ * Gets the access control policy on the specified Source.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.GetPolicyOptions} request.options
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.get_iam_policy.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_GetIamPolicy_async
+ */
   getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a mute config. If no location is specified, default is
-   * global.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the mute config to retrieve. The following list shows
-   *   some examples of the format:
-   *
-   *   + `organizations/{organization}/muteConfigs/{config_id}`
-   *   +
-   *   `organizations/{organization}/locations/{location}/muteConfigs/{config_id}`
-   *   + `folders/{folder}/muteConfigs/{config_id}`
-   *   + `folders/{folder}/locations/{location}/muteConfigs/{config_id}`
-   *   + `projects/{project}/muteConfigs/{config_id}`
-   *   + `projects/{project}/locations/{location}/muteConfigs/{config_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.MuteConfig|MuteConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.get_mute_config.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_GetMuteConfig_async
-   */
+/**
+ * Gets a mute config. If no location is specified, default is
+ * global.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the mute config to retrieve. The following list shows
+ *   some examples of the format:
+ *
+ *   + `organizations/{organization}/muteConfigs/{config_id}`
+ *   +
+ *   `organizations/{organization}/locations/{location}/muteConfigs/{config_id}`
+ *   + `folders/{folder}/muteConfigs/{config_id}`
+ *   + `folders/{folder}/locations/{location}/muteConfigs/{config_id}`
+ *   + `projects/{project}/muteConfigs/{config_id}`
+ *   + `projects/{project}/locations/{location}/muteConfigs/{config_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.MuteConfig|MuteConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.get_mute_config.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_GetMuteConfig_async
+ */
   getMuteConfig(
-    request?: protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IMuteConfig,
-      protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IMuteConfig,
+        protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest|undefined, {}|undefined
+      ]>;
   getMuteConfig(
-    request: protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IMuteConfig,
-      | protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getMuteConfig(
-    request: protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IMuteConfig,
-      | protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getMuteConfig(
-    request?: protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.IMuteConfig,
-          | protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.IMuteConfig,
-      | protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IMuteConfig,
-      protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getMuteConfig(
+      request: protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.IMuteConfig,
+          protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getMuteConfig(
+      request?: protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.IMuteConfig,
+          protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.IMuteConfig,
+          protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IMuteConfig,
+        protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    const routingParameter = {};
+    let routingParameter = {};
     {
       const fieldValue = request.name;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(
-            RegExp(
-              'projects/[^/]+/locations/(?<location>[^/]+)/muteConfigs/[^/]+'
-            )
-          );
+        const match = fieldValue.toString().match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)/muteConfigs/[^/]+'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
     {
       const fieldValue = request.name;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(
-            RegExp(
-              'organizations/[^/]+/locations/(?<location>[^/]+)/muteConfigs/[^/]+'
-            )
-          );
+        const match = fieldValue.toString().match(RegExp('organizations/[^/]+/locations/(?<location>[^/]+)/muteConfigs/[^/]+'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
     {
       const fieldValue = request.name;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(
-            RegExp(
-              'folders/[^/]+/locations/(?<location>[^/]+)/muteConfigs/[^/]+'
-            )
-          );
+        const match = fieldValue.toString().match(RegExp('folders/[^/]+/locations/(?<location>[^/]+)/muteConfigs/[^/]+'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams(
+      routingParameter
+    );
+    this.initialize().catch(err => {throw err});
     this._log.info('getMuteConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.IMuteConfig,
-          | protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.IMuteConfig,
+        protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getMuteConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getMuteConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.IMuteConfig,
-          (
-            | protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getMuteConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getMuteConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.IMuteConfig,
+        protos.google.cloud.securitycenter.v2.IGetMuteConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getMuteConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a notification config.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the notification config to get. The following list shows
-   *   some examples of the format:
-   *
-   *   +
-   *   `organizations/[organization_id]/locations/[location_id]/notificationConfigs/[config_id]`
-   *   +
-   *   `folders/[folder_id]/locations/[location_id]/notificationConfigs/[config_id]`
-   *   +
-   *   `projects/[project_id]/locations/[location_id]/notificationConfigs/[config_id]`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.NotificationConfig|NotificationConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.get_notification_config.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_GetNotificationConfig_async
-   */
+/**
+ * Gets a notification config.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the notification config to get. The following list shows
+ *   some examples of the format:
+ *
+ *   +
+ *   `organizations/[organization_id]/locations/[location_id]/notificationConfigs/[config_id]`
+ *   +
+ *   `folders/[folder_id]/locations/[location_id]/notificationConfigs/[config_id]`
+ *   +
+ *   `projects/[project_id]/locations/[location_id]/notificationConfigs/[config_id]`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.NotificationConfig|NotificationConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.get_notification_config.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_GetNotificationConfig_async
+ */
   getNotificationConfig(
-    request?: protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.INotificationConfig,
-      (
-        | protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.INotificationConfig,
+        protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest|undefined, {}|undefined
+      ]>;
   getNotificationConfig(
-    request: protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.INotificationConfig,
-      | protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNotificationConfig(
-    request: protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.INotificationConfig,
-      | protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNotificationConfig(
-    request?: protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.INotificationConfig,
-          | protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.INotificationConfig,
-      | protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.INotificationConfig,
-      (
-        | protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNotificationConfig(
+      request: protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.INotificationConfig,
+          protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNotificationConfig(
+      request?: protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.INotificationConfig,
+          protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.INotificationConfig,
+          protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.INotificationConfig,
+        protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getNotificationConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.INotificationConfig,
-          | protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.INotificationConfig,
+        protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getNotificationConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getNotificationConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.INotificationConfig,
-          (
-            | protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getNotificationConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getNotificationConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.INotificationConfig,
+        protos.google.cloud.securitycenter.v2.IGetNotificationConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getNotificationConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a ResourceValueConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource value config to retrieve. Its format is
-   *   organizations/{organization}/resourceValueConfigs/{config_id}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.ResourceValueConfig|ResourceValueConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.get_resource_value_config.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_GetResourceValueConfig_async
-   */
+/**
+ * Gets a ResourceValueConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource value config to retrieve. Its format is
+ *   organizations/{organization}/resourceValueConfigs/{config_id}.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.ResourceValueConfig|ResourceValueConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.get_resource_value_config.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_GetResourceValueConfig_async
+ */
   getResourceValueConfig(
-    request?: protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IResourceValueConfig,
-      (
-        | protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IResourceValueConfig,
+        protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest|undefined, {}|undefined
+      ]>;
   getResourceValueConfig(
-    request: protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IResourceValueConfig,
-      | protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getResourceValueConfig(
-    request: protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IResourceValueConfig,
-      | protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getResourceValueConfig(
-    request?: protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.IResourceValueConfig,
-          | protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.IResourceValueConfig,
-      | protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IResourceValueConfig,
-      (
-        | protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getResourceValueConfig(
+      request: protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.IResourceValueConfig,
+          protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getResourceValueConfig(
+      request?: protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.IResourceValueConfig,
+          protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.IResourceValueConfig,
+          protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IResourceValueConfig,
+        protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getResourceValueConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.IResourceValueConfig,
-          | protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.IResourceValueConfig,
+        protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getResourceValueConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getResourceValueConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.IResourceValueConfig,
-          (
-            | protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getResourceValueConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getResourceValueConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.IResourceValueConfig,
+        protos.google.cloud.securitycenter.v2.IGetResourceValueConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getResourceValueConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a source.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Relative resource name of the source. Its format is
-   *   `organizations/[organization_id]/source/[source_id]`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.Source|Source}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.get_source.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_GetSource_async
-   */
+/**
+ * Gets a source.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Relative resource name of the source. Its format is
+ *   `organizations/[organization_id]/source/[source_id]`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.Source|Source}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.get_source.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_GetSource_async
+ */
   getSource(
-    request?: protos.google.cloud.securitycenter.v2.IGetSourceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.ISource,
-      protos.google.cloud.securitycenter.v2.IGetSourceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IGetSourceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.ISource,
+        protos.google.cloud.securitycenter.v2.IGetSourceRequest|undefined, {}|undefined
+      ]>;
   getSource(
-    request: protos.google.cloud.securitycenter.v2.IGetSourceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.ISource,
-      | protos.google.cloud.securitycenter.v2.IGetSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSource(
-    request: protos.google.cloud.securitycenter.v2.IGetSourceRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.ISource,
-      | protos.google.cloud.securitycenter.v2.IGetSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSource(
-    request?: protos.google.cloud.securitycenter.v2.IGetSourceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.IGetSourceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.ISource,
-          | protos.google.cloud.securitycenter.v2.IGetSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.ISource,
-      | protos.google.cloud.securitycenter.v2.IGetSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.ISource,
-      protos.google.cloud.securitycenter.v2.IGetSourceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IGetSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSource(
+      request: protos.google.cloud.securitycenter.v2.IGetSourceRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.ISource,
+          protos.google.cloud.securitycenter.v2.IGetSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSource(
+      request?: protos.google.cloud.securitycenter.v2.IGetSourceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.ISource,
+          protos.google.cloud.securitycenter.v2.IGetSourceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.ISource,
+          protos.google.cloud.securitycenter.v2.IGetSourceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.ISource,
+        protos.google.cloud.securitycenter.v2.IGetSourceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getSource request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.ISource,
-          | protos.google.cloud.securitycenter.v2.IGetSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.ISource,
+        protos.google.cloud.securitycenter.v2.IGetSourceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getSource(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.ISource,
-          protos.google.cloud.securitycenter.v2.IGetSourceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getSource response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getSource(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.ISource,
+        protos.google.cloud.securitycenter.v2.IGetSourceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getSource response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the state of a finding. If no location is specified, finding is
-   * assumed to be in global
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The [relative resource
-   *   name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
-   *   of the finding. If no location is specified, finding is assumed to be in
-   *   global. The following list shows some examples:
-   *
-   *   +
-   *   `organizations/{organization_id}/sources/{source_id}/findings/{finding_id}`
-   *   +
-   *   `organizations/{organization_id}/sources/{source_id}/locations/{location_id}/findings/{finding_id}`
-   *   + `folders/{folder_id}/sources/{source_id}/findings/{finding_id}`
-   *   +
-   *   `folders/{folder_id}/sources/{source_id}/locations/{location_id}/findings/{finding_id}`
-   *   + `projects/{project_id}/sources/{source_id}/findings/{finding_id}`
-   *   +
-   *   `projects/{project_id}/sources/{source_id}/locations/{location_id}/findings/{finding_id}`
-   * @param {google.cloud.securitycenter.v2.Finding.State} request.state
-   *   Required. The desired State of the finding.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.Finding|Finding}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.set_finding_state.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_SetFindingState_async
-   */
+/**
+ * Updates the state of a finding. If no location is specified, finding is
+ * assumed to be in global
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The [relative resource
+ *   name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
+ *   of the finding. If no location is specified, finding is assumed to be in
+ *   global. The following list shows some examples:
+ *
+ *   +
+ *   `organizations/{organization_id}/sources/{source_id}/findings/{finding_id}`
+ *   +
+ *   `organizations/{organization_id}/sources/{source_id}/locations/{location_id}/findings/{finding_id}`
+ *   + `folders/{folder_id}/sources/{source_id}/findings/{finding_id}`
+ *   +
+ *   `folders/{folder_id}/sources/{source_id}/locations/{location_id}/findings/{finding_id}`
+ *   + `projects/{project_id}/sources/{source_id}/findings/{finding_id}`
+ *   +
+ *   `projects/{project_id}/sources/{source_id}/locations/{location_id}/findings/{finding_id}`
+ * @param {google.cloud.securitycenter.v2.Finding.State} request.state
+ *   Required. The desired State of the finding.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.Finding|Finding}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.set_finding_state.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_SetFindingState_async
+ */
   setFindingState(
-    request?: protos.google.cloud.securitycenter.v2.ISetFindingStateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IFinding,
-      protos.google.cloud.securitycenter.v2.ISetFindingStateRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.ISetFindingStateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IFinding,
+        protos.google.cloud.securitycenter.v2.ISetFindingStateRequest|undefined, {}|undefined
+      ]>;
   setFindingState(
-    request: protos.google.cloud.securitycenter.v2.ISetFindingStateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IFinding,
-      | protos.google.cloud.securitycenter.v2.ISetFindingStateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setFindingState(
-    request: protos.google.cloud.securitycenter.v2.ISetFindingStateRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IFinding,
-      | protos.google.cloud.securitycenter.v2.ISetFindingStateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setFindingState(
-    request?: protos.google.cloud.securitycenter.v2.ISetFindingStateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.ISetFindingStateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.IFinding,
-          | protos.google.cloud.securitycenter.v2.ISetFindingStateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.IFinding,
-      | protos.google.cloud.securitycenter.v2.ISetFindingStateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IFinding,
-      protos.google.cloud.securitycenter.v2.ISetFindingStateRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.ISetFindingStateRequest|null|undefined,
+          {}|null|undefined>): void;
+  setFindingState(
+      request: protos.google.cloud.securitycenter.v2.ISetFindingStateRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.IFinding,
+          protos.google.cloud.securitycenter.v2.ISetFindingStateRequest|null|undefined,
+          {}|null|undefined>): void;
+  setFindingState(
+      request?: protos.google.cloud.securitycenter.v2.ISetFindingStateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.IFinding,
+          protos.google.cloud.securitycenter.v2.ISetFindingStateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.IFinding,
+          protos.google.cloud.securitycenter.v2.ISetFindingStateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IFinding,
+        protos.google.cloud.securitycenter.v2.ISetFindingStateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setFindingState request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.IFinding,
-          | protos.google.cloud.securitycenter.v2.ISetFindingStateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.IFinding,
+        protos.google.cloud.securitycenter.v2.ISetFindingStateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setFindingState response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setFindingState(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.IFinding,
-          (
-            | protos.google.cloud.securitycenter.v2.ISetFindingStateRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('setFindingState response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setFindingState(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.IFinding,
+        protos.google.cloud.securitycenter.v2.ISetFindingStateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setFindingState response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets the access control policy on the specified Source.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
-   *   the fields in the mask will be modified. If no mask is provided, the
-   *   following default mask is used:
-   *
-   *   `paths: "bindings, etag"`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.set_iam_policy.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_SetIamPolicy_async
-   */
+/**
+ * Sets the access control policy on the specified Source.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being specified.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.Policy} request.policy
+ *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+ *   the policy is limited to a few 10s of KB. An empty policy is a
+ *   valid policy but certain Cloud Platform services (such as Projects)
+ *   might reject them.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+ *   the fields in the mask will be modified. If no mask is provided, the
+ *   following default mask is used:
+ *
+ *   `paths: "bindings, etag"`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.set_iam_policy.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_SetIamPolicy_async
+ */
   setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the mute state of a finding. If no location is specified, finding
-   * is assumed to be in global
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The [relative resource
-   *   name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
-   *   of the finding. If no location is specified, finding is assumed to be in
-   *   global. The following list shows some examples:
-   *
-   *   +
-   *   `organizations/{organization_id}/sources/{source_id}/findings/{finding_id}`
-   *   +
-   *   `organizations/{organization_id}/sources/{source_id}/locations/{location_id}/findings/{finding_id}`
-   *   + `folders/{folder_id}/sources/{source_id}/findings/{finding_id}`
-   *   +
-   *   `folders/{folder_id}/sources/{source_id}/locations/{location_id}/findings/{finding_id}`
-   *   + `projects/{project_id}/sources/{source_id}/findings/{finding_id}`
-   *   +
-   *   `projects/{project_id}/sources/{source_id}/locations/{location_id}/findings/{finding_id}`
-   * @param {google.cloud.securitycenter.v2.Finding.Mute} request.mute
-   *   Required. The desired state of the Mute.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.Finding|Finding}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.set_mute.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_SetMute_async
-   */
+/**
+ * Updates the mute state of a finding. If no location is specified, finding
+ * is assumed to be in global
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The [relative resource
+ *   name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
+ *   of the finding. If no location is specified, finding is assumed to be in
+ *   global. The following list shows some examples:
+ *
+ *   +
+ *   `organizations/{organization_id}/sources/{source_id}/findings/{finding_id}`
+ *   +
+ *   `organizations/{organization_id}/sources/{source_id}/locations/{location_id}/findings/{finding_id}`
+ *   + `folders/{folder_id}/sources/{source_id}/findings/{finding_id}`
+ *   +
+ *   `folders/{folder_id}/sources/{source_id}/locations/{location_id}/findings/{finding_id}`
+ *   + `projects/{project_id}/sources/{source_id}/findings/{finding_id}`
+ *   +
+ *   `projects/{project_id}/sources/{source_id}/locations/{location_id}/findings/{finding_id}`
+ * @param {google.cloud.securitycenter.v2.Finding.Mute} request.mute
+ *   Required. The desired state of the Mute.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.Finding|Finding}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.set_mute.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_SetMute_async
+ */
   setMute(
-    request?: protos.google.cloud.securitycenter.v2.ISetMuteRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IFinding,
-      protos.google.cloud.securitycenter.v2.ISetMuteRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.ISetMuteRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IFinding,
+        protos.google.cloud.securitycenter.v2.ISetMuteRequest|undefined, {}|undefined
+      ]>;
   setMute(
-    request: protos.google.cloud.securitycenter.v2.ISetMuteRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IFinding,
-      protos.google.cloud.securitycenter.v2.ISetMuteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setMute(
-    request: protos.google.cloud.securitycenter.v2.ISetMuteRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IFinding,
-      protos.google.cloud.securitycenter.v2.ISetMuteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setMute(
-    request?: protos.google.cloud.securitycenter.v2.ISetMuteRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.ISetMuteRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.IFinding,
-          | protos.google.cloud.securitycenter.v2.ISetMuteRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.IFinding,
-      protos.google.cloud.securitycenter.v2.ISetMuteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IFinding,
-      protos.google.cloud.securitycenter.v2.ISetMuteRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.ISetMuteRequest|null|undefined,
+          {}|null|undefined>): void;
+  setMute(
+      request: protos.google.cloud.securitycenter.v2.ISetMuteRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.IFinding,
+          protos.google.cloud.securitycenter.v2.ISetMuteRequest|null|undefined,
+          {}|null|undefined>): void;
+  setMute(
+      request?: protos.google.cloud.securitycenter.v2.ISetMuteRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.IFinding,
+          protos.google.cloud.securitycenter.v2.ISetMuteRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.IFinding,
+          protos.google.cloud.securitycenter.v2.ISetMuteRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IFinding,
+        protos.google.cloud.securitycenter.v2.ISetMuteRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setMute request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.IFinding,
-          | protos.google.cloud.securitycenter.v2.ISetMuteRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.IFinding,
+        protos.google.cloud.securitycenter.v2.ISetMuteRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setMute response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setMute(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.IFinding,
-          protos.google.cloud.securitycenter.v2.ISetMuteRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setMute response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setMute(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.IFinding,
+        protos.google.cloud.securitycenter.v2.ISetMuteRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setMute response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns the permissions that a caller has on the specified source.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.test_iam_permissions.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_TestIamPermissions_async
-   */
+/**
+ * Returns the permissions that a caller has on the specified source.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see
+ *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.test_iam_permissions.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_TestIamPermissions_async
+ */
   testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>;
   testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      callback: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('testIamPermissions request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .testIamPermissions(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('testIamPermissions response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.testIamPermissions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('testIamPermissions response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a BigQuery export.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.securitycenter.v2.BigQueryExport} request.bigQueryExport
-   *   Required. The BigQuery export being updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated.
-   *   If empty all mutable fields will be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.BigQueryExport|BigQueryExport}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.update_big_query_export.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_UpdateBigQueryExport_async
-   */
+/**
+ * Updates a BigQuery export.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.securitycenter.v2.BigQueryExport} request.bigQueryExport
+ *   Required. The BigQuery export being updated.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The list of fields to be updated.
+ *   If empty all mutable fields will be updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.BigQueryExport|BigQueryExport}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.update_big_query_export.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_UpdateBigQueryExport_async
+ */
   updateBigQueryExport(
-    request?: protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IBigQueryExport,
-      (
-        | protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IBigQueryExport,
+        protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest|undefined, {}|undefined
+      ]>;
   updateBigQueryExport(
-    request: protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IBigQueryExport,
-      | protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateBigQueryExport(
-    request: protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IBigQueryExport,
-      | protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateBigQueryExport(
-    request?: protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.IBigQueryExport,
-          | protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.IBigQueryExport,
-      | protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IBigQueryExport,
-      (
-        | protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateBigQueryExport(
+      request: protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.IBigQueryExport,
+          protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateBigQueryExport(
+      request?: protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.IBigQueryExport,
+          protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.IBigQueryExport,
+          protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IBigQueryExport,
+        protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'big_query_export.name': request.bigQueryExport!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'big_query_export.name': request.bigQueryExport!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateBigQueryExport request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.IBigQueryExport,
-          | protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.IBigQueryExport,
+        protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateBigQueryExport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateBigQueryExport(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.IBigQueryExport,
-          (
-            | protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateBigQueryExport response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateBigQueryExport(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.IBigQueryExport,
+        protos.google.cloud.securitycenter.v2.IUpdateBigQueryExportRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateBigQueryExport response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates external system. This is for a given finding. If no location is
-   * specified, finding is assumed to be in global
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.securitycenter.v2.ExternalSystem} request.externalSystem
-   *   Required. The external system resource to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The FieldMask to use when updating the external system resource.
-   *
-   *   If empty all mutable fields will be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.ExternalSystem|ExternalSystem}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.update_external_system.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_UpdateExternalSystem_async
-   */
+/**
+ * Updates external system. This is for a given finding. If no location is
+ * specified, finding is assumed to be in global
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.securitycenter.v2.ExternalSystem} request.externalSystem
+ *   Required. The external system resource to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The FieldMask to use when updating the external system resource.
+ *
+ *   If empty all mutable fields will be updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.ExternalSystem|ExternalSystem}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.update_external_system.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_UpdateExternalSystem_async
+ */
   updateExternalSystem(
-    request?: protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IExternalSystem,
-      (
-        | protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IExternalSystem,
+        protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest|undefined, {}|undefined
+      ]>;
   updateExternalSystem(
-    request: protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IExternalSystem,
-      | protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateExternalSystem(
-    request: protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IExternalSystem,
-      | protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateExternalSystem(
-    request?: protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.IExternalSystem,
-          | protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.IExternalSystem,
-      | protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IExternalSystem,
-      (
-        | protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateExternalSystem(
+      request: protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.IExternalSystem,
+          protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateExternalSystem(
+      request?: protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.IExternalSystem,
+          protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.IExternalSystem,
+          protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IExternalSystem,
+        protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'external_system.name': request.externalSystem!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'external_system.name': request.externalSystem!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateExternalSystem request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.IExternalSystem,
-          | protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.IExternalSystem,
+        protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateExternalSystem response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateExternalSystem(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.IExternalSystem,
-          (
-            | protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateExternalSystem response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateExternalSystem(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.IExternalSystem,
+        protos.google.cloud.securitycenter.v2.IUpdateExternalSystemRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateExternalSystem response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates or updates a finding. If no location is specified, finding is
-   * assumed to be in global. The corresponding source must exist for a finding
-   * creation to succeed.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.securitycenter.v2.Finding} request.finding
-   *   Required. The finding resource to update or create if it does not already
-   *   exist. parent, security_marks, and update_time will be ignored.
-   *
-   *   In the case of creation, the finding id portion of the name must be
-   *   alphanumeric and less than or equal to 32 characters and greater than 0
-   *   characters in length.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The FieldMask to use when updating the finding resource. This field should
-   *   not be specified when creating a finding.
-   *
-   *   When updating a finding, an empty mask is treated as updating all mutable
-   *   fields and replacing source_properties.  Individual source_properties can
-   *   be added/updated by using "source_properties.<property key>" in the field
-   *   mask.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.Finding|Finding}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.update_finding.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_UpdateFinding_async
-   */
+/**
+ * Creates or updates a finding. If no location is specified, finding is
+ * assumed to be in global. The corresponding source must exist for a finding
+ * creation to succeed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.securitycenter.v2.Finding} request.finding
+ *   Required. The finding resource to update or create if it does not already
+ *   exist. parent, security_marks, and update_time will be ignored.
+ *
+ *   In the case of creation, the finding id portion of the name must be
+ *   alphanumeric and less than or equal to 32 characters and greater than 0
+ *   characters in length.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The FieldMask to use when updating the finding resource. This field should
+ *   not be specified when creating a finding.
+ *
+ *   When updating a finding, an empty mask is treated as updating all mutable
+ *   fields and replacing source_properties.  Individual source_properties can
+ *   be added/updated by using "source_properties.<property key>" in the field
+ *   mask.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.Finding|Finding}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.update_finding.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_UpdateFinding_async
+ */
   updateFinding(
-    request?: protos.google.cloud.securitycenter.v2.IUpdateFindingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IFinding,
-      protos.google.cloud.securitycenter.v2.IUpdateFindingRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IUpdateFindingRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IFinding,
+        protos.google.cloud.securitycenter.v2.IUpdateFindingRequest|undefined, {}|undefined
+      ]>;
   updateFinding(
-    request: protos.google.cloud.securitycenter.v2.IUpdateFindingRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IFinding,
-      | protos.google.cloud.securitycenter.v2.IUpdateFindingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateFinding(
-    request: protos.google.cloud.securitycenter.v2.IUpdateFindingRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IFinding,
-      | protos.google.cloud.securitycenter.v2.IUpdateFindingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateFinding(
-    request?: protos.google.cloud.securitycenter.v2.IUpdateFindingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.IUpdateFindingRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.IFinding,
-          | protos.google.cloud.securitycenter.v2.IUpdateFindingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.IFinding,
-      | protos.google.cloud.securitycenter.v2.IUpdateFindingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IFinding,
-      protos.google.cloud.securitycenter.v2.IUpdateFindingRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IUpdateFindingRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateFinding(
+      request: protos.google.cloud.securitycenter.v2.IUpdateFindingRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.IFinding,
+          protos.google.cloud.securitycenter.v2.IUpdateFindingRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateFinding(
+      request?: protos.google.cloud.securitycenter.v2.IUpdateFindingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.IFinding,
+          protos.google.cloud.securitycenter.v2.IUpdateFindingRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.IFinding,
+          protos.google.cloud.securitycenter.v2.IUpdateFindingRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IFinding,
+        protos.google.cloud.securitycenter.v2.IUpdateFindingRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'finding.name': request.finding!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'finding.name': request.finding!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateFinding request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.IFinding,
-          | protos.google.cloud.securitycenter.v2.IUpdateFindingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.IFinding,
+        protos.google.cloud.securitycenter.v2.IUpdateFindingRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateFinding response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateFinding(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.IFinding,
-          (
-            | protos.google.cloud.securitycenter.v2.IUpdateFindingRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateFinding response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateFinding(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.IFinding,
+        protos.google.cloud.securitycenter.v2.IUpdateFindingRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateFinding response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a mute config. If no location is specified, default is
-   * global.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.securitycenter.v2.MuteConfig} request.muteConfig
-   *   Required. The mute config being updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated.
-   *   If empty all mutable fields will be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.MuteConfig|MuteConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.update_mute_config.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_UpdateMuteConfig_async
-   */
+/**
+ * Updates a mute config. If no location is specified, default is
+ * global.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.securitycenter.v2.MuteConfig} request.muteConfig
+ *   Required. The mute config being updated.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The list of fields to be updated.
+ *   If empty all mutable fields will be updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.MuteConfig|MuteConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.update_mute_config.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_UpdateMuteConfig_async
+ */
   updateMuteConfig(
-    request?: protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IMuteConfig,
-      (
-        | protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IMuteConfig,
+        protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest|undefined, {}|undefined
+      ]>;
   updateMuteConfig(
-    request: protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IMuteConfig,
-      | protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateMuteConfig(
-    request: protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IMuteConfig,
-      | protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateMuteConfig(
-    request?: protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.IMuteConfig,
-          | protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.IMuteConfig,
-      | protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IMuteConfig,
-      (
-        | protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateMuteConfig(
+      request: protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.IMuteConfig,
+          protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateMuteConfig(
+      request?: protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.IMuteConfig,
+          protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.IMuteConfig,
+          protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IMuteConfig,
+        protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    const routingParameter = {};
+    let routingParameter = {};
     {
       const fieldValue = request.muteConfig?.name;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(
-            RegExp(
-              'projects/[^/]+/locations/(?<location>[^/]+)/muteConfigs/[^/]+'
-            )
-          );
+        const match = fieldValue.toString().match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)/muteConfigs/[^/]+'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
     {
       const fieldValue = request.muteConfig?.name;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(
-            RegExp(
-              'organizations/[^/]+/locations/(?<location>[^/]+)/muteConfigs/[^/]+'
-            )
-          );
+        const match = fieldValue.toString().match(RegExp('organizations/[^/]+/locations/(?<location>[^/]+)/muteConfigs/[^/]+'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
     {
       const fieldValue = request.muteConfig?.name;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(
-            RegExp(
-              'folders/[^/]+/locations/(?<location>[^/]+)/muteConfigs/[^/]+'
-            )
-          );
+        const match = fieldValue.toString().match(RegExp('folders/[^/]+/locations/(?<location>[^/]+)/muteConfigs/[^/]+'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams(
+      routingParameter
+    );
+    this.initialize().catch(err => {throw err});
     this._log.info('updateMuteConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.IMuteConfig,
-          | protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.IMuteConfig,
+        protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateMuteConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateMuteConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.IMuteConfig,
-          (
-            | protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateMuteConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateMuteConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.IMuteConfig,
+        protos.google.cloud.securitycenter.v2.IUpdateMuteConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateMuteConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a notification config. The following update
-   * fields are allowed: description, pubsub_topic, streaming_config.filter
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.securitycenter.v2.NotificationConfig} request.notificationConfig
-   *   Required. The notification config to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The FieldMask to use when updating the notification config.
-   *
-   *   If empty all mutable fields will be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.NotificationConfig|NotificationConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.update_notification_config.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_UpdateNotificationConfig_async
-   */
+/**
+ * Updates a notification config. The following update
+ * fields are allowed: description, pubsub_topic, streaming_config.filter
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.securitycenter.v2.NotificationConfig} request.notificationConfig
+ *   Required. The notification config to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The FieldMask to use when updating the notification config.
+ *
+ *   If empty all mutable fields will be updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.NotificationConfig|NotificationConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.update_notification_config.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_UpdateNotificationConfig_async
+ */
   updateNotificationConfig(
-    request?: protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.INotificationConfig,
-      (
-        | protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.INotificationConfig,
+        protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest|undefined, {}|undefined
+      ]>;
   updateNotificationConfig(
-    request: protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.INotificationConfig,
-      | protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateNotificationConfig(
-    request: protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.INotificationConfig,
-      | protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateNotificationConfig(
-    request?: protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.INotificationConfig,
-          | protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.INotificationConfig,
-      | protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.INotificationConfig,
-      (
-        | protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateNotificationConfig(
+      request: protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.INotificationConfig,
+          protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateNotificationConfig(
+      request?: protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.INotificationConfig,
+          protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.INotificationConfig,
+          protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.INotificationConfig,
+        protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'notification_config.name': request.notificationConfig!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'notification_config.name': request.notificationConfig!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateNotificationConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.INotificationConfig,
-          | protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.INotificationConfig,
+        protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateNotificationConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateNotificationConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.INotificationConfig,
-          (
-            | protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateNotificationConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateNotificationConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.INotificationConfig,
+        protos.google.cloud.securitycenter.v2.IUpdateNotificationConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateNotificationConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates an existing ResourceValueConfigs with new rules.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.securitycenter.v2.ResourceValueConfig} request.resourceValueConfig
-   *   Required. The resource value config being updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated.
-   *   If empty all mutable fields will be updated.
-   *
-   *   To update nested fields, include the top level field in the mask
-   *   For example, to update gcp_metadata.resource_type, include the
-   *   "gcp_metadata" field mask
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.ResourceValueConfig|ResourceValueConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.update_resource_value_config.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_UpdateResourceValueConfig_async
-   */
+/**
+ * Updates an existing ResourceValueConfigs with new rules.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.securitycenter.v2.ResourceValueConfig} request.resourceValueConfig
+ *   Required. The resource value config being updated.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The list of fields to be updated.
+ *   If empty all mutable fields will be updated.
+ *
+ *   To update nested fields, include the top level field in the mask
+ *   For example, to update gcp_metadata.resource_type, include the
+ *   "gcp_metadata" field mask
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.ResourceValueConfig|ResourceValueConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.update_resource_value_config.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_UpdateResourceValueConfig_async
+ */
   updateResourceValueConfig(
-    request?: protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IResourceValueConfig,
-      (
-        | protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IResourceValueConfig,
+        protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest|undefined, {}|undefined
+      ]>;
   updateResourceValueConfig(
-    request: protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IResourceValueConfig,
-      | protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateResourceValueConfig(
-    request: protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.IResourceValueConfig,
-      | protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateResourceValueConfig(
-    request?: protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.IResourceValueConfig,
-          | protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.IResourceValueConfig,
-      | protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IResourceValueConfig,
-      (
-        | protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateResourceValueConfig(
+      request: protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.IResourceValueConfig,
+          protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateResourceValueConfig(
+      request?: protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.IResourceValueConfig,
+          protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.IResourceValueConfig,
+          protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IResourceValueConfig,
+        protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'resource_value_config.name': request.resourceValueConfig!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource_value_config.name': request.resourceValueConfig!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateResourceValueConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.IResourceValueConfig,
-          | protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.IResourceValueConfig,
+        protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateResourceValueConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateResourceValueConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.IResourceValueConfig,
-          (
-            | protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateResourceValueConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateResourceValueConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.IResourceValueConfig,
+        protos.google.cloud.securitycenter.v2.IUpdateResourceValueConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateResourceValueConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates security marks. For Finding Security marks, if no location is
-   * specified, finding is assumed to be in global. Assets Security Marks can
-   * only be accessed through global endpoint.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.securitycenter.v2.SecurityMarks} request.securityMarks
-   *   Required. The security marks resource to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The FieldMask to use when updating the security marks resource.
-   *
-   *   The field mask must not contain duplicate fields.
-   *   If empty or set to "marks", all marks will be replaced.  Individual
-   *   marks can be updated using "marks.<mark_key>".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.SecurityMarks|SecurityMarks}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.update_security_marks.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_UpdateSecurityMarks_async
-   */
+/**
+ * Updates security marks. For Finding Security marks, if no location is
+ * specified, finding is assumed to be in global. Assets Security Marks can
+ * only be accessed through global endpoint.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.securitycenter.v2.SecurityMarks} request.securityMarks
+ *   Required. The security marks resource to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The FieldMask to use when updating the security marks resource.
+ *
+ *   The field mask must not contain duplicate fields.
+ *   If empty or set to "marks", all marks will be replaced.  Individual
+ *   marks can be updated using "marks.<mark_key>".
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.SecurityMarks|SecurityMarks}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.update_security_marks.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_UpdateSecurityMarks_async
+ */
   updateSecurityMarks(
-    request?: protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.ISecurityMarks,
-      (
-        | protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.ISecurityMarks,
+        protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest|undefined, {}|undefined
+      ]>;
   updateSecurityMarks(
-    request: protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.ISecurityMarks,
-      | protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSecurityMarks(
-    request: protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.ISecurityMarks,
-      | protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSecurityMarks(
-    request?: protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.ISecurityMarks,
-          | protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.ISecurityMarks,
-      | protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.ISecurityMarks,
-      (
-        | protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateSecurityMarks(
+      request: protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.ISecurityMarks,
+          protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateSecurityMarks(
+      request?: protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.ISecurityMarks,
+          protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.ISecurityMarks,
+          protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.ISecurityMarks,
+        protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'security_marks.name': request.securityMarks!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'security_marks.name': request.securityMarks!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateSecurityMarks request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.ISecurityMarks,
-          | protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.ISecurityMarks,
+        protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateSecurityMarks response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateSecurityMarks(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.ISecurityMarks,
-          (
-            | protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateSecurityMarks response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateSecurityMarks(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.ISecurityMarks,
+        protos.google.cloud.securitycenter.v2.IUpdateSecurityMarksRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateSecurityMarks response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a source.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.securitycenter.v2.Source} request.source
-   *   Required. The source resource to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The FieldMask to use when updating the source resource.
-   *
-   *   If empty all mutable fields will be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.Source|Source}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.update_source.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_UpdateSource_async
-   */
+/**
+ * Updates a source.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.securitycenter.v2.Source} request.source
+ *   Required. The source resource to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The FieldMask to use when updating the source resource.
+ *
+ *   If empty all mutable fields will be updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v2.Source|Source}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.update_source.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_UpdateSource_async
+ */
   updateSource(
-    request?: protos.google.cloud.securitycenter.v2.IUpdateSourceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.ISource,
-      protos.google.cloud.securitycenter.v2.IUpdateSourceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IUpdateSourceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.ISource,
+        protos.google.cloud.securitycenter.v2.IUpdateSourceRequest|undefined, {}|undefined
+      ]>;
   updateSource(
-    request: protos.google.cloud.securitycenter.v2.IUpdateSourceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.ISource,
-      | protos.google.cloud.securitycenter.v2.IUpdateSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSource(
-    request: protos.google.cloud.securitycenter.v2.IUpdateSourceRequest,
-    callback: Callback<
-      protos.google.cloud.securitycenter.v2.ISource,
-      | protos.google.cloud.securitycenter.v2.IUpdateSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSource(
-    request?: protos.google.cloud.securitycenter.v2.IUpdateSourceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.securitycenter.v2.IUpdateSourceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.securitycenter.v2.ISource,
-          | protos.google.cloud.securitycenter.v2.IUpdateSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.securitycenter.v2.ISource,
-      | protos.google.cloud.securitycenter.v2.IUpdateSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.ISource,
-      protos.google.cloud.securitycenter.v2.IUpdateSourceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IUpdateSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateSource(
+      request: protos.google.cloud.securitycenter.v2.IUpdateSourceRequest,
+      callback: Callback<
+          protos.google.cloud.securitycenter.v2.ISource,
+          protos.google.cloud.securitycenter.v2.IUpdateSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateSource(
+      request?: protos.google.cloud.securitycenter.v2.IUpdateSourceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.securitycenter.v2.ISource,
+          protos.google.cloud.securitycenter.v2.IUpdateSourceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.securitycenter.v2.ISource,
+          protos.google.cloud.securitycenter.v2.IUpdateSourceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.ISource,
+        protos.google.cloud.securitycenter.v2.IUpdateSourceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'source.name': request.source!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'source.name': request.source!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateSource request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.securitycenter.v2.ISource,
-          | protos.google.cloud.securitycenter.v2.IUpdateSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.securitycenter.v2.ISource,
+        protos.google.cloud.securitycenter.v2.IUpdateSourceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateSource(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.securitycenter.v2.ISource,
-          (
-            | protos.google.cloud.securitycenter.v2.IUpdateSourceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateSource response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateSource(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.securitycenter.v2.ISource,
+        protos.google.cloud.securitycenter.v2.IUpdateSourceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateSource response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Kicks off an LRO to bulk mute findings for a parent based on a filter. If
-   * no location is specified, findings are muted in global. The parent
-   * can be either an organization, folder, or project. The findings matched by
-   * the filter will be muted after the LRO is done.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, at which bulk action needs to be applied. If no
-   *   location is specified, findings are updated in global. The following list
-   *   shows some examples:
-   *
-   *   + `organizations/[organization_id]`
-   *   + `organizations/[organization_id]/locations/[location_id]`
-   *   + `folders/[folder_id]`
-   *   + `folders/[folder_id]/locations/[location_id]`
-   *   + `projects/[project_id]`
-   *   + `projects/[project_id]/locations/[location_id]`
-   * @param {string} request.filter
-   *   Expression that identifies findings that should be updated.
-   *   The expression is a list of zero or more restrictions combined
-   *   via logical operators `AND` and `OR`. Parentheses are supported, and `OR`
-   *   has higher precedence than `AND`.
-   *
-   *   Restrictions have the form `<field> <operator> <value>` and may have a
-   *   `-` character in front of them to indicate negation. The fields map to
-   *   those defined in the corresponding resource.
-   *
-   *   The supported operators are:
-   *
-   *   * `=` for all value types.
-   *   * `>`, `<`, `>=`, `<=` for integer values.
-   *   * `:`, meaning substring matching, for strings.
-   *
-   *   The supported value types are:
-   *
-   *   * string literals in quotes.
-   *   * integer literals without quotes.
-   *   * boolean literals `true` and `false` without quotes.
-   * @param {google.cloud.securitycenter.v2.BulkMuteFindingsRequest.MuteState} [request.muteState]
-   *   Optional. All findings matching the given filter will have their mute state
-   *   set to this value. The default value is `MUTED`. Setting this to
-   *   `UNDEFINED` will clear the mute state on all matching findings.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.bulk_mute_findings.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_BulkMuteFindings_async
-   */
+/**
+ * Kicks off an LRO to bulk mute findings for a parent based on a filter. If
+ * no location is specified, findings are muted in global. The parent
+ * can be either an organization, folder, or project. The findings matched by
+ * the filter will be muted after the LRO is done.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, at which bulk action needs to be applied. If no
+ *   location is specified, findings are updated in global. The following list
+ *   shows some examples:
+ *
+ *   + `organizations/[organization_id]`
+ *   + `organizations/[organization_id]/locations/[location_id]`
+ *   + `folders/[folder_id]`
+ *   + `folders/[folder_id]/locations/[location_id]`
+ *   + `projects/[project_id]`
+ *   + `projects/[project_id]/locations/[location_id]`
+ * @param {string} request.filter
+ *   Expression that identifies findings that should be updated.
+ *   The expression is a list of zero or more restrictions combined
+ *   via logical operators `AND` and `OR`. Parentheses are supported, and `OR`
+ *   has higher precedence than `AND`.
+ *
+ *   Restrictions have the form `<field> <operator> <value>` and may have a
+ *   `-` character in front of them to indicate negation. The fields map to
+ *   those defined in the corresponding resource.
+ *
+ *   The supported operators are:
+ *
+ *   * `=` for all value types.
+ *   * `>`, `<`, `>=`, `<=` for integer values.
+ *   * `:`, meaning substring matching, for strings.
+ *
+ *   The supported value types are:
+ *
+ *   * string literals in quotes.
+ *   * integer literals without quotes.
+ *   * boolean literals `true` and `false` without quotes.
+ * @param {google.cloud.securitycenter.v2.BulkMuteFindingsRequest.MuteState} [request.muteState]
+ *   Optional. All findings matching the given filter will have their mute state
+ *   set to this value. The default value is `MUTED`. Setting this to
+ *   `UNDEFINED` will clear the mute state on all matching findings.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.bulk_mute_findings.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_BulkMuteFindings_async
+ */
   bulkMuteFindings(
-    request?: protos.google.cloud.securitycenter.v2.IBulkMuteFindingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.securitycenter.v2.IBulkMuteFindingsResponse,
-        protos.google.protobuf.IEmpty
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IBulkMuteFindingsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.securitycenter.v2.IBulkMuteFindingsResponse, protos.google.protobuf.IEmpty>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   bulkMuteFindings(
-    request: protos.google.cloud.securitycenter.v2.IBulkMuteFindingsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.securitycenter.v2.IBulkMuteFindingsResponse,
-        protos.google.protobuf.IEmpty
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.securitycenter.v2.IBulkMuteFindingsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.securitycenter.v2.IBulkMuteFindingsResponse, protos.google.protobuf.IEmpty>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   bulkMuteFindings(
-    request: protos.google.cloud.securitycenter.v2.IBulkMuteFindingsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.securitycenter.v2.IBulkMuteFindingsResponse,
-        protos.google.protobuf.IEmpty
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.securitycenter.v2.IBulkMuteFindingsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.securitycenter.v2.IBulkMuteFindingsResponse, protos.google.protobuf.IEmpty>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   bulkMuteFindings(
-    request?: protos.google.cloud.securitycenter.v2.IBulkMuteFindingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.securitycenter.v2.IBulkMuteFindingsResponse,
-            protos.google.protobuf.IEmpty
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.securitycenter.v2.IBulkMuteFindingsResponse,
-        protos.google.protobuf.IEmpty
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.securitycenter.v2.IBulkMuteFindingsResponse,
-        protos.google.protobuf.IEmpty
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.securitycenter.v2.IBulkMuteFindingsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.securitycenter.v2.IBulkMuteFindingsResponse, protos.google.protobuf.IEmpty>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.securitycenter.v2.IBulkMuteFindingsResponse, protos.google.protobuf.IEmpty>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.securitycenter.v2.IBulkMuteFindingsResponse, protos.google.protobuf.IEmpty>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.securitycenter.v2.IBulkMuteFindingsResponse,
-            protos.google.protobuf.IEmpty
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.securitycenter.v2.IBulkMuteFindingsResponse, protos.google.protobuf.IEmpty>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('bulkMuteFindings response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('bulkMuteFindings request %j', request);
-    return this.innerApiCalls
-      .bulkMuteFindings(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.securitycenter.v2.IBulkMuteFindingsResponse,
-            protos.google.protobuf.IEmpty
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('bulkMuteFindings response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.bulkMuteFindings(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.securitycenter.v2.IBulkMuteFindingsResponse, protos.google.protobuf.IEmpty>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('bulkMuteFindings response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `bulkMuteFindings()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.bulk_mute_findings.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_BulkMuteFindings_async
-   */
-  async checkBulkMuteFindingsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.securitycenter.v2.BulkMuteFindingsResponse,
-      protos.google.protobuf.Empty
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `bulkMuteFindings()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.bulk_mute_findings.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_BulkMuteFindings_async
+ */
+  async checkBulkMuteFindingsProgress(name: string): Promise<LROperation<protos.google.cloud.securitycenter.v2.BulkMuteFindingsResponse, protos.google.protobuf.Empty>>{
     this._log.info('bulkMuteFindings long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.bulkMuteFindings,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.securitycenter.v2.BulkMuteFindingsResponse,
-      protos.google.protobuf.Empty
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.bulkMuteFindings, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.securitycenter.v2.BulkMuteFindingsResponse, protos.google.protobuf.Empty>;
   }
-  /**
-   * Filters an organization or source's findings and groups them by their
-   * specified properties in a location. If no location is specified, findings
-   * are assumed to be in global
-   *
-   * To group across all sources provide a `-` as the source id.
-   * The following list shows some examples:
-   *
-   * + `/v2/organizations/{organization_id}/sources/-/findings`
-   * +
-   * `/v2/organizations/{organization_id}/sources/-/locations/{location_id}/findings`
-   * + `/v2/folders/{folder_id}/sources/-/findings`
-   * + `/v2/folders/{folder_id}/sources/-/locations/{location_id}/findings`
-   * + `/v2/projects/{project_id}/sources/-/findings`
-   * + `/v2/projects/{project_id}/sources/-/locations/{location_id}/findings`
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the source to groupBy. If no location is specified,
-   *   finding is assumed to be in global.
-   *    The following list shows some examples:
-   *
-   *   + `organizations/[organization_id]/sources/[source_id]`
-   *   +
-   *   `organizations/[organization_id]/sources/[source_id]/locations/[location_id]`
-   *   + `folders/[folder_id]/sources/[source_id]`
-   *   + `folders/[folder_id]/sources/[source_id]/locations/[location_id]`
-   *   + `projects/[project_id]/sources/[source_id]`
-   *   + `projects/[project_id]/sources/[source_id]/locations/[location_id]`
-   *
-   *   To groupBy across all sources provide a source_id of `-`. The following
-   *   list shows some examples:
-   *
-   *   + `organizations/{organization_id}/sources/-`
-   *   + `organizations/{organization_id}/sources/-/locations/[location_id]`
-   *   + `folders/{folder_id}/sources/-`
-   *   + `folders/{folder_id}/sources/-/locations/[location_id]`
-   *   + `projects/{project_id}/sources/-`
-   *   + `projects/{project_id}/sources/-/locations/[location_id]`
-   * @param {string} request.filter
-   *   Expression that defines the filter to apply across findings.
-   *   The expression is a list of one or more restrictions combined via logical
-   *   operators `AND` and `OR`.
-   *   Parentheses are supported, and `OR` has higher precedence than `AND`.
-   *
-   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
-   *   character in front of them to indicate negation. Examples include:
-   *
-   *    * name
-   *    * security_marks.marks.marka
-   *
-   *   The supported operators are:
-   *
-   *   * `=` for all value types.
-   *   * `>`, `<`, `>=`, `<=` for integer values.
-   *   * `:`, meaning substring matching, for strings.
-   *
-   *   The supported value types are:
-   *
-   *   * string literals in quotes.
-   *   * integer literals without quotes.
-   *   * boolean literals `true` and `false` without quotes.
-   *
-   *   The following field and operator combinations are supported:
-   *
-   *   * name: `=`
-   *   * parent: `=`, `:`
-   *   * resource_name: `=`, `:`
-   *   * state: `=`, `:`
-   *   * category: `=`, `:`
-   *   * external_uri: `=`, `:`
-   *   * event_time: `=`, `>`, `<`, `>=`, `<=`
-   *
-   *     Usage: This should be milliseconds since epoch or an RFC3339 string.
-   *     Examples:
-   *       `event_time = "2019-06-10T16:07:18-07:00"`
-   *       `event_time = 1560208038000`
-   *
-   *   * severity: `=`, `:`
-   *   * security_marks.marks: `=`, `:`
-   *   * resource:
-   *     * resource.name: `=`, `:`
-   *     * resource.parent_name: `=`, `:`
-   *     * resource.parent_display_name: `=`, `:`
-   *     * resource.project_name: `=`, `:`
-   *     * resource.project_display_name: `=`, `:`
-   *     * resource.type: `=`, `:`
-   * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping.
-   *   The string value should follow SQL syntax: comma separated list of fields.
-   *   For example: "parent,resource_name".
-   * @param {string} request.pageToken
-   *   The value returned by the last `GroupFindingsResponse`; indicates
-   *   that this is a continuation of a prior `GroupFindings` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v2.GroupResult|GroupResult}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `groupFindingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Filters an organization or source's findings and groups them by their
+ * specified properties in a location. If no location is specified, findings
+ * are assumed to be in global
+ *
+ * To group across all sources provide a `-` as the source id.
+ * The following list shows some examples:
+ *
+ * + `/v2/organizations/{organization_id}/sources/-/findings`
+ * +
+ * `/v2/organizations/{organization_id}/sources/-/locations/{location_id}/findings`
+ * + `/v2/folders/{folder_id}/sources/-/findings`
+ * + `/v2/folders/{folder_id}/sources/-/locations/{location_id}/findings`
+ * + `/v2/projects/{project_id}/sources/-/findings`
+ * + `/v2/projects/{project_id}/sources/-/locations/{location_id}/findings`
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the source to groupBy. If no location is specified,
+ *   finding is assumed to be in global.
+ *    The following list shows some examples:
+ *
+ *   + `organizations/[organization_id]/sources/[source_id]`
+ *   +
+ *   `organizations/[organization_id]/sources/[source_id]/locations/[location_id]`
+ *   + `folders/[folder_id]/sources/[source_id]`
+ *   + `folders/[folder_id]/sources/[source_id]/locations/[location_id]`
+ *   + `projects/[project_id]/sources/[source_id]`
+ *   + `projects/[project_id]/sources/[source_id]/locations/[location_id]`
+ *
+ *   To groupBy across all sources provide a source_id of `-`. The following
+ *   list shows some examples:
+ *
+ *   + `organizations/{organization_id}/sources/-`
+ *   + `organizations/{organization_id}/sources/-/locations/[location_id]`
+ *   + `folders/{folder_id}/sources/-`
+ *   + `folders/{folder_id}/sources/-/locations/[location_id]`
+ *   + `projects/{project_id}/sources/-`
+ *   + `projects/{project_id}/sources/-/locations/[location_id]`
+ * @param {string} request.filter
+ *   Expression that defines the filter to apply across findings.
+ *   The expression is a list of one or more restrictions combined via logical
+ *   operators `AND` and `OR`.
+ *   Parentheses are supported, and `OR` has higher precedence than `AND`.
+ *
+ *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+ *   character in front of them to indicate negation. Examples include:
+ *
+ *    * name
+ *    * security_marks.marks.marka
+ *
+ *   The supported operators are:
+ *
+ *   * `=` for all value types.
+ *   * `>`, `<`, `>=`, `<=` for integer values.
+ *   * `:`, meaning substring matching, for strings.
+ *
+ *   The supported value types are:
+ *
+ *   * string literals in quotes.
+ *   * integer literals without quotes.
+ *   * boolean literals `true` and `false` without quotes.
+ *
+ *   The following field and operator combinations are supported:
+ *
+ *   * name: `=`
+ *   * parent: `=`, `:`
+ *   * resource_name: `=`, `:`
+ *   * state: `=`, `:`
+ *   * category: `=`, `:`
+ *   * external_uri: `=`, `:`
+ *   * event_time: `=`, `>`, `<`, `>=`, `<=`
+ *
+ *     Usage: This should be milliseconds since epoch or an RFC3339 string.
+ *     Examples:
+ *       `event_time = "2019-06-10T16:07:18-07:00"`
+ *       `event_time = 1560208038000`
+ *
+ *   * severity: `=`, `:`
+ *   * security_marks.marks: `=`, `:`
+ *   * resource:
+ *     * resource.name: `=`, `:`
+ *     * resource.parent_name: `=`, `:`
+ *     * resource.parent_display_name: `=`, `:`
+ *     * resource.project_name: `=`, `:`
+ *     * resource.project_display_name: `=`, `:`
+ *     * resource.type: `=`, `:`
+ * @param {string} request.groupBy
+ *   Required. Expression that defines what assets fields to use for grouping.
+ *   The string value should follow SQL syntax: comma separated list of fields.
+ *   For example: "parent,resource_name".
+ * @param {string} request.pageToken
+ *   The value returned by the last `GroupFindingsResponse`; indicates
+ *   that this is a continuation of a prior `GroupFindings` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v2.GroupResult|GroupResult}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `groupFindingsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   groupFindings(
-    request?: protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IGroupResult[],
-      protos.google.cloud.securitycenter.v2.IGroupFindingsRequest | null,
-      protos.google.cloud.securitycenter.v2.IGroupFindingsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IGroupResult[],
+        protos.google.cloud.securitycenter.v2.IGroupFindingsRequest|null,
+        protos.google.cloud.securitycenter.v2.IGroupFindingsResponse
+      ]>;
   groupFindings(
-    request: protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
-      | protos.google.cloud.securitycenter.v2.IGroupFindingsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.IGroupResult
-    >
-  ): void;
-  groupFindings(
-    request: protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
-      | protos.google.cloud.securitycenter.v2.IGroupFindingsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.IGroupResult
-    >
-  ): void;
-  groupFindings(
-    request?: protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
-          | protos.google.cloud.securitycenter.v2.IGroupFindingsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v2.IGroupResult
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
-      | protos.google.cloud.securitycenter.v2.IGroupFindingsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.IGroupResult
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IGroupResult[],
-      protos.google.cloud.securitycenter.v2.IGroupFindingsRequest | null,
-      protos.google.cloud.securitycenter.v2.IGroupFindingsResponse,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IGroupFindingsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IGroupResult>): void;
+  groupFindings(
+      request: protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
+          protos.google.cloud.securitycenter.v2.IGroupFindingsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IGroupResult>): void;
+  groupFindings(
+      request?: protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
+          protos.google.cloud.securitycenter.v2.IGroupFindingsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IGroupResult>,
+      callback?: PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
+          protos.google.cloud.securitycenter.v2.IGroupFindingsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IGroupResult>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IGroupResult[],
+        protos.google.cloud.securitycenter.v2.IGroupFindingsRequest|null,
+        protos.google.cloud.securitycenter.v2.IGroupFindingsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
-          | protos.google.cloud.securitycenter.v2.IGroupFindingsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v2.IGroupResult
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
+      protos.google.cloud.securitycenter.v2.IGroupFindingsResponse|null|undefined,
+      protos.google.cloud.securitycenter.v2.IGroupResult>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('groupFindings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5182,131 +4008,128 @@ export class SecurityCenterClient {
     this._log.info('groupFindings request %j', request);
     return this.innerApiCalls
       .groupFindings(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.securitycenter.v2.IGroupResult[],
-          protos.google.cloud.securitycenter.v2.IGroupFindingsRequest | null,
-          protos.google.cloud.securitycenter.v2.IGroupFindingsResponse,
-        ]) => {
-          this._log.info('groupFindings values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.securitycenter.v2.IGroupResult[],
+        protos.google.cloud.securitycenter.v2.IGroupFindingsRequest|null,
+        protos.google.cloud.securitycenter.v2.IGroupFindingsResponse
+      ]) => {
+        this._log.info('groupFindings values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `groupFindings`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the source to groupBy. If no location is specified,
-   *   finding is assumed to be in global.
-   *    The following list shows some examples:
-   *
-   *   + `organizations/[organization_id]/sources/[source_id]`
-   *   +
-   *   `organizations/[organization_id]/sources/[source_id]/locations/[location_id]`
-   *   + `folders/[folder_id]/sources/[source_id]`
-   *   + `folders/[folder_id]/sources/[source_id]/locations/[location_id]`
-   *   + `projects/[project_id]/sources/[source_id]`
-   *   + `projects/[project_id]/sources/[source_id]/locations/[location_id]`
-   *
-   *   To groupBy across all sources provide a source_id of `-`. The following
-   *   list shows some examples:
-   *
-   *   + `organizations/{organization_id}/sources/-`
-   *   + `organizations/{organization_id}/sources/-/locations/[location_id]`
-   *   + `folders/{folder_id}/sources/-`
-   *   + `folders/{folder_id}/sources/-/locations/[location_id]`
-   *   + `projects/{project_id}/sources/-`
-   *   + `projects/{project_id}/sources/-/locations/[location_id]`
-   * @param {string} request.filter
-   *   Expression that defines the filter to apply across findings.
-   *   The expression is a list of one or more restrictions combined via logical
-   *   operators `AND` and `OR`.
-   *   Parentheses are supported, and `OR` has higher precedence than `AND`.
-   *
-   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
-   *   character in front of them to indicate negation. Examples include:
-   *
-   *    * name
-   *    * security_marks.marks.marka
-   *
-   *   The supported operators are:
-   *
-   *   * `=` for all value types.
-   *   * `>`, `<`, `>=`, `<=` for integer values.
-   *   * `:`, meaning substring matching, for strings.
-   *
-   *   The supported value types are:
-   *
-   *   * string literals in quotes.
-   *   * integer literals without quotes.
-   *   * boolean literals `true` and `false` without quotes.
-   *
-   *   The following field and operator combinations are supported:
-   *
-   *   * name: `=`
-   *   * parent: `=`, `:`
-   *   * resource_name: `=`, `:`
-   *   * state: `=`, `:`
-   *   * category: `=`, `:`
-   *   * external_uri: `=`, `:`
-   *   * event_time: `=`, `>`, `<`, `>=`, `<=`
-   *
-   *     Usage: This should be milliseconds since epoch or an RFC3339 string.
-   *     Examples:
-   *       `event_time = "2019-06-10T16:07:18-07:00"`
-   *       `event_time = 1560208038000`
-   *
-   *   * severity: `=`, `:`
-   *   * security_marks.marks: `=`, `:`
-   *   * resource:
-   *     * resource.name: `=`, `:`
-   *     * resource.parent_name: `=`, `:`
-   *     * resource.parent_display_name: `=`, `:`
-   *     * resource.project_name: `=`, `:`
-   *     * resource.project_display_name: `=`, `:`
-   *     * resource.type: `=`, `:`
-   * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping.
-   *   The string value should follow SQL syntax: comma separated list of fields.
-   *   For example: "parent,resource_name".
-   * @param {string} request.pageToken
-   *   The value returned by the last `GroupFindingsResponse`; indicates
-   *   that this is a continuation of a prior `GroupFindings` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v2.GroupResult|GroupResult} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `groupFindingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `groupFindings`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the source to groupBy. If no location is specified,
+ *   finding is assumed to be in global.
+ *    The following list shows some examples:
+ *
+ *   + `organizations/[organization_id]/sources/[source_id]`
+ *   +
+ *   `organizations/[organization_id]/sources/[source_id]/locations/[location_id]`
+ *   + `folders/[folder_id]/sources/[source_id]`
+ *   + `folders/[folder_id]/sources/[source_id]/locations/[location_id]`
+ *   + `projects/[project_id]/sources/[source_id]`
+ *   + `projects/[project_id]/sources/[source_id]/locations/[location_id]`
+ *
+ *   To groupBy across all sources provide a source_id of `-`. The following
+ *   list shows some examples:
+ *
+ *   + `organizations/{organization_id}/sources/-`
+ *   + `organizations/{organization_id}/sources/-/locations/[location_id]`
+ *   + `folders/{folder_id}/sources/-`
+ *   + `folders/{folder_id}/sources/-/locations/[location_id]`
+ *   + `projects/{project_id}/sources/-`
+ *   + `projects/{project_id}/sources/-/locations/[location_id]`
+ * @param {string} request.filter
+ *   Expression that defines the filter to apply across findings.
+ *   The expression is a list of one or more restrictions combined via logical
+ *   operators `AND` and `OR`.
+ *   Parentheses are supported, and `OR` has higher precedence than `AND`.
+ *
+ *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+ *   character in front of them to indicate negation. Examples include:
+ *
+ *    * name
+ *    * security_marks.marks.marka
+ *
+ *   The supported operators are:
+ *
+ *   * `=` for all value types.
+ *   * `>`, `<`, `>=`, `<=` for integer values.
+ *   * `:`, meaning substring matching, for strings.
+ *
+ *   The supported value types are:
+ *
+ *   * string literals in quotes.
+ *   * integer literals without quotes.
+ *   * boolean literals `true` and `false` without quotes.
+ *
+ *   The following field and operator combinations are supported:
+ *
+ *   * name: `=`
+ *   * parent: `=`, `:`
+ *   * resource_name: `=`, `:`
+ *   * state: `=`, `:`
+ *   * category: `=`, `:`
+ *   * external_uri: `=`, `:`
+ *   * event_time: `=`, `>`, `<`, `>=`, `<=`
+ *
+ *     Usage: This should be milliseconds since epoch or an RFC3339 string.
+ *     Examples:
+ *       `event_time = "2019-06-10T16:07:18-07:00"`
+ *       `event_time = 1560208038000`
+ *
+ *   * severity: `=`, `:`
+ *   * security_marks.marks: `=`, `:`
+ *   * resource:
+ *     * resource.name: `=`, `:`
+ *     * resource.parent_name: `=`, `:`
+ *     * resource.parent_display_name: `=`, `:`
+ *     * resource.project_name: `=`, `:`
+ *     * resource.project_display_name: `=`, `:`
+ *     * resource.type: `=`, `:`
+ * @param {string} request.groupBy
+ *   Required. Expression that defines what assets fields to use for grouping.
+ *   The string value should follow SQL syntax: comma separated list of fields.
+ *   For example: "parent,resource_name".
+ * @param {string} request.pageToken
+ *   The value returned by the last `GroupFindingsResponse`; indicates
+ *   that this is a continuation of a prior `GroupFindings` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v2.GroupResult|GroupResult} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `groupFindingsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   groupFindingsStream(
-    request?: protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['groupFindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('groupFindings stream %j', request);
     return this.descriptors.page.groupFindings.createStream(
       this.innerApiCalls.groupFindings as GaxCall,
@@ -5315,122 +4138,121 @@ export class SecurityCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `groupFindings`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the source to groupBy. If no location is specified,
-   *   finding is assumed to be in global.
-   *    The following list shows some examples:
-   *
-   *   + `organizations/[organization_id]/sources/[source_id]`
-   *   +
-   *   `organizations/[organization_id]/sources/[source_id]/locations/[location_id]`
-   *   + `folders/[folder_id]/sources/[source_id]`
-   *   + `folders/[folder_id]/sources/[source_id]/locations/[location_id]`
-   *   + `projects/[project_id]/sources/[source_id]`
-   *   + `projects/[project_id]/sources/[source_id]/locations/[location_id]`
-   *
-   *   To groupBy across all sources provide a source_id of `-`. The following
-   *   list shows some examples:
-   *
-   *   + `organizations/{organization_id}/sources/-`
-   *   + `organizations/{organization_id}/sources/-/locations/[location_id]`
-   *   + `folders/{folder_id}/sources/-`
-   *   + `folders/{folder_id}/sources/-/locations/[location_id]`
-   *   + `projects/{project_id}/sources/-`
-   *   + `projects/{project_id}/sources/-/locations/[location_id]`
-   * @param {string} request.filter
-   *   Expression that defines the filter to apply across findings.
-   *   The expression is a list of one or more restrictions combined via logical
-   *   operators `AND` and `OR`.
-   *   Parentheses are supported, and `OR` has higher precedence than `AND`.
-   *
-   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
-   *   character in front of them to indicate negation. Examples include:
-   *
-   *    * name
-   *    * security_marks.marks.marka
-   *
-   *   The supported operators are:
-   *
-   *   * `=` for all value types.
-   *   * `>`, `<`, `>=`, `<=` for integer values.
-   *   * `:`, meaning substring matching, for strings.
-   *
-   *   The supported value types are:
-   *
-   *   * string literals in quotes.
-   *   * integer literals without quotes.
-   *   * boolean literals `true` and `false` without quotes.
-   *
-   *   The following field and operator combinations are supported:
-   *
-   *   * name: `=`
-   *   * parent: `=`, `:`
-   *   * resource_name: `=`, `:`
-   *   * state: `=`, `:`
-   *   * category: `=`, `:`
-   *   * external_uri: `=`, `:`
-   *   * event_time: `=`, `>`, `<`, `>=`, `<=`
-   *
-   *     Usage: This should be milliseconds since epoch or an RFC3339 string.
-   *     Examples:
-   *       `event_time = "2019-06-10T16:07:18-07:00"`
-   *       `event_time = 1560208038000`
-   *
-   *   * severity: `=`, `:`
-   *   * security_marks.marks: `=`, `:`
-   *   * resource:
-   *     * resource.name: `=`, `:`
-   *     * resource.parent_name: `=`, `:`
-   *     * resource.parent_display_name: `=`, `:`
-   *     * resource.project_name: `=`, `:`
-   *     * resource.project_display_name: `=`, `:`
-   *     * resource.type: `=`, `:`
-   * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping.
-   *   The string value should follow SQL syntax: comma separated list of fields.
-   *   For example: "parent,resource_name".
-   * @param {string} request.pageToken
-   *   The value returned by the last `GroupFindingsResponse`; indicates
-   *   that this is a continuation of a prior `GroupFindings` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.securitycenter.v2.GroupResult|GroupResult}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.group_findings.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_GroupFindings_async
-   */
+/**
+ * Equivalent to `groupFindings`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the source to groupBy. If no location is specified,
+ *   finding is assumed to be in global.
+ *    The following list shows some examples:
+ *
+ *   + `organizations/[organization_id]/sources/[source_id]`
+ *   +
+ *   `organizations/[organization_id]/sources/[source_id]/locations/[location_id]`
+ *   + `folders/[folder_id]/sources/[source_id]`
+ *   + `folders/[folder_id]/sources/[source_id]/locations/[location_id]`
+ *   + `projects/[project_id]/sources/[source_id]`
+ *   + `projects/[project_id]/sources/[source_id]/locations/[location_id]`
+ *
+ *   To groupBy across all sources provide a source_id of `-`. The following
+ *   list shows some examples:
+ *
+ *   + `organizations/{organization_id}/sources/-`
+ *   + `organizations/{organization_id}/sources/-/locations/[location_id]`
+ *   + `folders/{folder_id}/sources/-`
+ *   + `folders/{folder_id}/sources/-/locations/[location_id]`
+ *   + `projects/{project_id}/sources/-`
+ *   + `projects/{project_id}/sources/-/locations/[location_id]`
+ * @param {string} request.filter
+ *   Expression that defines the filter to apply across findings.
+ *   The expression is a list of one or more restrictions combined via logical
+ *   operators `AND` and `OR`.
+ *   Parentheses are supported, and `OR` has higher precedence than `AND`.
+ *
+ *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+ *   character in front of them to indicate negation. Examples include:
+ *
+ *    * name
+ *    * security_marks.marks.marka
+ *
+ *   The supported operators are:
+ *
+ *   * `=` for all value types.
+ *   * `>`, `<`, `>=`, `<=` for integer values.
+ *   * `:`, meaning substring matching, for strings.
+ *
+ *   The supported value types are:
+ *
+ *   * string literals in quotes.
+ *   * integer literals without quotes.
+ *   * boolean literals `true` and `false` without quotes.
+ *
+ *   The following field and operator combinations are supported:
+ *
+ *   * name: `=`
+ *   * parent: `=`, `:`
+ *   * resource_name: `=`, `:`
+ *   * state: `=`, `:`
+ *   * category: `=`, `:`
+ *   * external_uri: `=`, `:`
+ *   * event_time: `=`, `>`, `<`, `>=`, `<=`
+ *
+ *     Usage: This should be milliseconds since epoch or an RFC3339 string.
+ *     Examples:
+ *       `event_time = "2019-06-10T16:07:18-07:00"`
+ *       `event_time = 1560208038000`
+ *
+ *   * severity: `=`, `:`
+ *   * security_marks.marks: `=`, `:`
+ *   * resource:
+ *     * resource.name: `=`, `:`
+ *     * resource.parent_name: `=`, `:`
+ *     * resource.parent_display_name: `=`, `:`
+ *     * resource.project_name: `=`, `:`
+ *     * resource.project_display_name: `=`, `:`
+ *     * resource.type: `=`, `:`
+ * @param {string} request.groupBy
+ *   Required. Expression that defines what assets fields to use for grouping.
+ *   The string value should follow SQL syntax: comma separated list of fields.
+ *   For example: "parent,resource_name".
+ * @param {string} request.pageToken
+ *   The value returned by the last `GroupFindingsResponse`; indicates
+ *   that this is a continuation of a prior `GroupFindings` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.securitycenter.v2.GroupResult|GroupResult}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.group_findings.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_GroupFindings_async
+ */
   groupFindingsAsync(
-    request?: protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.securitycenter.v2.IGroupResult> {
+      request?: protos.google.cloud.securitycenter.v2.IGroupFindingsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.securitycenter.v2.IGroupResult>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['groupFindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('groupFindings iterate %j', request);
     return this.descriptors.page.groupFindings.asyncIterate(
       this.innerApiCalls['groupFindings'] as GaxCall,
@@ -5438,127 +4260,102 @@ export class SecurityCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v2.IGroupResult>;
   }
-  /**
-   * Lists the attack paths for a set of simulation results or valued resources
-   * and filter.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of parent to list attack paths.
-   *
-   *   Valid formats:
-   *   `organizations/{organization}`,
-   *   `organizations/{organization}/simulations/{simulation}`
-   *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
-   *   `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
-   * @param {string} request.filter
-   *   The filter expression that filters the attack path in the response.
-   *   Supported fields:
-   *
-   *     * `valued_resources` supports =
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListAttackPathsResponse`; indicates
-   *   that this is a continuation of a prior `ListAttackPaths` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v2.AttackPath|AttackPath}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAttackPathsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the attack paths for a set of simulation results or valued resources
+ * and filter.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of parent to list attack paths.
+ *
+ *   Valid formats:
+ *   `organizations/{organization}`,
+ *   `organizations/{organization}/simulations/{simulation}`
+ *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
+ *   `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
+ * @param {string} request.filter
+ *   The filter expression that filters the attack path in the response.
+ *   Supported fields:
+ *
+ *     * `valued_resources` supports =
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListAttackPathsResponse`; indicates
+ *   that this is a continuation of a prior `ListAttackPaths` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v2.AttackPath|AttackPath}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAttackPathsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAttackPaths(
-    request?: protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IAttackPath[],
-      protos.google.cloud.securitycenter.v2.IListAttackPathsRequest | null,
-      protos.google.cloud.securitycenter.v2.IListAttackPathsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IAttackPath[],
+        protos.google.cloud.securitycenter.v2.IListAttackPathsRequest|null,
+        protos.google.cloud.securitycenter.v2.IListAttackPathsResponse
+      ]>;
   listAttackPaths(
-    request: protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
-      | protos.google.cloud.securitycenter.v2.IListAttackPathsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.IAttackPath
-    >
-  ): void;
-  listAttackPaths(
-    request: protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
-      | protos.google.cloud.securitycenter.v2.IListAttackPathsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.IAttackPath
-    >
-  ): void;
-  listAttackPaths(
-    request?: protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
-          | protos.google.cloud.securitycenter.v2.IListAttackPathsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v2.IAttackPath
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
-      | protos.google.cloud.securitycenter.v2.IListAttackPathsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.IAttackPath
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IAttackPath[],
-      protos.google.cloud.securitycenter.v2.IListAttackPathsRequest | null,
-      protos.google.cloud.securitycenter.v2.IListAttackPathsResponse,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IListAttackPathsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IAttackPath>): void;
+  listAttackPaths(
+      request: protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
+          protos.google.cloud.securitycenter.v2.IListAttackPathsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IAttackPath>): void;
+  listAttackPaths(
+      request?: protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
+          protos.google.cloud.securitycenter.v2.IListAttackPathsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IAttackPath>,
+      callback?: PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
+          protos.google.cloud.securitycenter.v2.IListAttackPathsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IAttackPath>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IAttackPath[],
+        protos.google.cloud.securitycenter.v2.IListAttackPathsRequest|null,
+        protos.google.cloud.securitycenter.v2.IListAttackPathsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
-          | protos.google.cloud.securitycenter.v2.IListAttackPathsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v2.IAttackPath
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
+      protos.google.cloud.securitycenter.v2.IListAttackPathsResponse|null|undefined,
+      protos.google.cloud.securitycenter.v2.IAttackPath>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAttackPaths values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5567,70 +4364,67 @@ export class SecurityCenterClient {
     this._log.info('listAttackPaths request %j', request);
     return this.innerApiCalls
       .listAttackPaths(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.securitycenter.v2.IAttackPath[],
-          protos.google.cloud.securitycenter.v2.IListAttackPathsRequest | null,
-          protos.google.cloud.securitycenter.v2.IListAttackPathsResponse,
-        ]) => {
-          this._log.info('listAttackPaths values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.securitycenter.v2.IAttackPath[],
+        protos.google.cloud.securitycenter.v2.IListAttackPathsRequest|null,
+        protos.google.cloud.securitycenter.v2.IListAttackPathsResponse
+      ]) => {
+        this._log.info('listAttackPaths values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAttackPaths`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of parent to list attack paths.
-   *
-   *   Valid formats:
-   *   `organizations/{organization}`,
-   *   `organizations/{organization}/simulations/{simulation}`
-   *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
-   *   `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
-   * @param {string} request.filter
-   *   The filter expression that filters the attack path in the response.
-   *   Supported fields:
-   *
-   *     * `valued_resources` supports =
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListAttackPathsResponse`; indicates
-   *   that this is a continuation of a prior `ListAttackPaths` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v2.AttackPath|AttackPath} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAttackPathsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAttackPaths`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of parent to list attack paths.
+ *
+ *   Valid formats:
+ *   `organizations/{organization}`,
+ *   `organizations/{organization}/simulations/{simulation}`
+ *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
+ *   `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
+ * @param {string} request.filter
+ *   The filter expression that filters the attack path in the response.
+ *   Supported fields:
+ *
+ *     * `valued_resources` supports =
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListAttackPathsResponse`; indicates
+ *   that this is a continuation of a prior `ListAttackPaths` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v2.AttackPath|AttackPath} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAttackPathsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAttackPathsStream(
-    request?: protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAttackPaths'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAttackPaths stream %j', request);
     return this.descriptors.page.listAttackPaths.createStream(
       this.innerApiCalls.listAttackPaths as GaxCall,
@@ -5639,61 +4433,60 @@ export class SecurityCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `listAttackPaths`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of parent to list attack paths.
-   *
-   *   Valid formats:
-   *   `organizations/{organization}`,
-   *   `organizations/{organization}/simulations/{simulation}`
-   *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
-   *   `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
-   * @param {string} request.filter
-   *   The filter expression that filters the attack path in the response.
-   *   Supported fields:
-   *
-   *     * `valued_resources` supports =
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListAttackPathsResponse`; indicates
-   *   that this is a continuation of a prior `ListAttackPaths` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.securitycenter.v2.AttackPath|AttackPath}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.list_attack_paths.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_ListAttackPaths_async
-   */
+/**
+ * Equivalent to `listAttackPaths`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of parent to list attack paths.
+ *
+ *   Valid formats:
+ *   `organizations/{organization}`,
+ *   `organizations/{organization}/simulations/{simulation}`
+ *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
+ *   `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
+ * @param {string} request.filter
+ *   The filter expression that filters the attack path in the response.
+ *   Supported fields:
+ *
+ *     * `valued_resources` supports =
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListAttackPathsResponse`; indicates
+ *   that this is a continuation of a prior `ListAttackPaths` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.securitycenter.v2.AttackPath|AttackPath}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.list_attack_paths.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_ListAttackPaths_async
+ */
   listAttackPathsAsync(
-    request?: protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.securitycenter.v2.IAttackPath> {
+      request?: protos.google.cloud.securitycenter.v2.IListAttackPathsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.securitycenter.v2.IAttackPath>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAttackPaths'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAttackPaths iterate %j', request);
     return this.descriptors.page.listAttackPaths.asyncIterate(
       this.innerApiCalls['listAttackPaths'] as GaxCall,
@@ -5701,125 +4494,100 @@ export class SecurityCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v2.IAttackPath>;
   }
-  /**
-   * Lists BigQuery exports. Note that when requesting BigQuery exports at a
-   * given level all exports under that level are also returned e.g. if
-   * requesting BigQuery exports under a folder, then all BigQuery exports
-   * immediately under the folder plus the ones created under the projects
-   * within the folder are returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns the collection of BigQuery exports. Its
-   *   format is `organizations/[organization_id]/locations/[location_id]`,
-   *   `folders/[folder_id]/locations/[location_id]`, or
-   *   `projects/[project_id]/locations/[location_id]`.
-   * @param {number} request.pageSize
-   *   The maximum number of configs to return. The service may return fewer than
-   *   this value.
-   *   If unspecified, at most 10 configs will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListBigQueryExports` call.
-   *   Provide this to retrieve the subsequent page.
-   *   When paginating, all other parameters provided to `ListBigQueryExports`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v2.BigQueryExport|BigQueryExport}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listBigQueryExportsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists BigQuery exports. Note that when requesting BigQuery exports at a
+ * given level all exports under that level are also returned e.g. if
+ * requesting BigQuery exports under a folder, then all BigQuery exports
+ * immediately under the folder plus the ones created under the projects
+ * within the folder are returned.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns the collection of BigQuery exports. Its
+ *   format is `organizations/[organization_id]/locations/[location_id]`,
+ *   `folders/[folder_id]/locations/[location_id]`, or
+ *   `projects/[project_id]/locations/[location_id]`.
+ * @param {number} request.pageSize
+ *   The maximum number of configs to return. The service may return fewer than
+ *   this value.
+ *   If unspecified, at most 10 configs will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListBigQueryExports` call.
+ *   Provide this to retrieve the subsequent page.
+ *   When paginating, all other parameters provided to `ListBigQueryExports`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v2.BigQueryExport|BigQueryExport}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listBigQueryExportsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listBigQueryExports(
-    request?: protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IBigQueryExport[],
-      protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest | null,
-      protos.google.cloud.securitycenter.v2.IListBigQueryExportsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IBigQueryExport[],
+        protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest|null,
+        protos.google.cloud.securitycenter.v2.IListBigQueryExportsResponse
+      ]>;
   listBigQueryExports(
-    request: protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
-      | protos.google.cloud.securitycenter.v2.IListBigQueryExportsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.IBigQueryExport
-    >
-  ): void;
-  listBigQueryExports(
-    request: protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
-      | protos.google.cloud.securitycenter.v2.IListBigQueryExportsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.IBigQueryExport
-    >
-  ): void;
-  listBigQueryExports(
-    request?: protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
-          | protos.google.cloud.securitycenter.v2.IListBigQueryExportsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v2.IBigQueryExport
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
-      | protos.google.cloud.securitycenter.v2.IListBigQueryExportsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.IBigQueryExport
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IBigQueryExport[],
-      protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest | null,
-      protos.google.cloud.securitycenter.v2.IListBigQueryExportsResponse,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IListBigQueryExportsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IBigQueryExport>): void;
+  listBigQueryExports(
+      request: protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
+          protos.google.cloud.securitycenter.v2.IListBigQueryExportsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IBigQueryExport>): void;
+  listBigQueryExports(
+      request?: protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
+          protos.google.cloud.securitycenter.v2.IListBigQueryExportsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IBigQueryExport>,
+      callback?: PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
+          protos.google.cloud.securitycenter.v2.IListBigQueryExportsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IBigQueryExport>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IBigQueryExport[],
+        protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest|null,
+        protos.google.cloud.securitycenter.v2.IListBigQueryExportsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
-          | protos.google.cloud.securitycenter.v2.IListBigQueryExportsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v2.IBigQueryExport
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
+      protos.google.cloud.securitycenter.v2.IListBigQueryExportsResponse|null|undefined,
+      protos.google.cloud.securitycenter.v2.IBigQueryExport>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listBigQueryExports values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5828,65 +4596,62 @@ export class SecurityCenterClient {
     this._log.info('listBigQueryExports request %j', request);
     return this.innerApiCalls
       .listBigQueryExports(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.securitycenter.v2.IBigQueryExport[],
-          protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest | null,
-          protos.google.cloud.securitycenter.v2.IListBigQueryExportsResponse,
-        ]) => {
-          this._log.info('listBigQueryExports values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.securitycenter.v2.IBigQueryExport[],
+        protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest|null,
+        protos.google.cloud.securitycenter.v2.IListBigQueryExportsResponse
+      ]) => {
+        this._log.info('listBigQueryExports values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listBigQueryExports`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns the collection of BigQuery exports. Its
-   *   format is `organizations/[organization_id]/locations/[location_id]`,
-   *   `folders/[folder_id]/locations/[location_id]`, or
-   *   `projects/[project_id]/locations/[location_id]`.
-   * @param {number} request.pageSize
-   *   The maximum number of configs to return. The service may return fewer than
-   *   this value.
-   *   If unspecified, at most 10 configs will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListBigQueryExports` call.
-   *   Provide this to retrieve the subsequent page.
-   *   When paginating, all other parameters provided to `ListBigQueryExports`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v2.BigQueryExport|BigQueryExport} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listBigQueryExportsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listBigQueryExports`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns the collection of BigQuery exports. Its
+ *   format is `organizations/[organization_id]/locations/[location_id]`,
+ *   `folders/[folder_id]/locations/[location_id]`, or
+ *   `projects/[project_id]/locations/[location_id]`.
+ * @param {number} request.pageSize
+ *   The maximum number of configs to return. The service may return fewer than
+ *   this value.
+ *   If unspecified, at most 10 configs will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListBigQueryExports` call.
+ *   Provide this to retrieve the subsequent page.
+ *   When paginating, all other parameters provided to `ListBigQueryExports`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v2.BigQueryExport|BigQueryExport} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listBigQueryExportsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listBigQueryExportsStream(
-    request?: protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listBigQueryExports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listBigQueryExports stream %j', request);
     return this.descriptors.page.listBigQueryExports.createStream(
       this.innerApiCalls.listBigQueryExports as GaxCall,
@@ -5895,56 +4660,55 @@ export class SecurityCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `listBigQueryExports`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns the collection of BigQuery exports. Its
-   *   format is `organizations/[organization_id]/locations/[location_id]`,
-   *   `folders/[folder_id]/locations/[location_id]`, or
-   *   `projects/[project_id]/locations/[location_id]`.
-   * @param {number} request.pageSize
-   *   The maximum number of configs to return. The service may return fewer than
-   *   this value.
-   *   If unspecified, at most 10 configs will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListBigQueryExports` call.
-   *   Provide this to retrieve the subsequent page.
-   *   When paginating, all other parameters provided to `ListBigQueryExports`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.securitycenter.v2.BigQueryExport|BigQueryExport}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.list_big_query_exports.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_ListBigQueryExports_async
-   */
+/**
+ * Equivalent to `listBigQueryExports`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns the collection of BigQuery exports. Its
+ *   format is `organizations/[organization_id]/locations/[location_id]`,
+ *   `folders/[folder_id]/locations/[location_id]`, or
+ *   `projects/[project_id]/locations/[location_id]`.
+ * @param {number} request.pageSize
+ *   The maximum number of configs to return. The service may return fewer than
+ *   this value.
+ *   If unspecified, at most 10 configs will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListBigQueryExports` call.
+ *   Provide this to retrieve the subsequent page.
+ *   When paginating, all other parameters provided to `ListBigQueryExports`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.securitycenter.v2.BigQueryExport|BigQueryExport}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.list_big_query_exports.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_ListBigQueryExports_async
+ */
   listBigQueryExportsAsync(
-    request?: protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.securitycenter.v2.IBigQueryExport> {
+      request?: protos.google.cloud.securitycenter.v2.IListBigQueryExportsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.securitycenter.v2.IBigQueryExport>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listBigQueryExports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listBigQueryExports iterate %j', request);
     return this.descriptors.page.listBigQueryExports.asyncIterate(
       this.innerApiCalls['listBigQueryExports'] as GaxCall,
@@ -5952,213 +4716,188 @@ export class SecurityCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v2.IBigQueryExport>;
   }
-  /**
-   * Lists an organization or source's findings.
-   *
-   * To list across all sources for a given location provide a `-` as the source
-   * id. If no location is specified, finding are assumed to be in global.
-   * The following list shows some examples:
-   *
-   * + `/v2/organizations/{organization_id}/sources/-/findings`
-   * +
-   * `/v2/organizations/{organization_id}/sources/-/locations/{location_id}/findings`
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the source the findings belong to. If no location is
-   *   specified, the default is global. The following list shows some examples:
-   *
-   *   + `organizations/[organization_id]/sources/[source_id]`
-   *   +
-   *   `organizations/[organization_id]/sources/[source_id]/locations/[location_id]`
-   *   + `folders/[folder_id]/sources/[source_id]`
-   *   + `folders/[folder_id]/sources/[source_id]/locations/[location_id]`
-   *   + `projects/[project_id]/sources/[source_id]`
-   *   + `projects/[project_id]/sources/[source_id]/locations/[location_id]`
-   *
-   *   To list across all sources provide a source_id of `-`. The following
-   *   list shows some examples:
-   *
-   *   + `organizations/{organization_id}/sources/-`
-   *   + `organizations/{organization_id}/sources/-/locations/{location_id}`
-   *   + `folders/{folder_id}/sources/-`
-   *   + `folders/{folder_id}/sources/-locations/{location_id}`
-   *   + `projects/{projects_id}/sources/-`
-   *   + `projects/{projects_id}/sources/-/locations/{location_id}`
-   * @param {string} request.filter
-   *   Expression that defines the filter to apply across findings.
-   *   The expression is a list of one or more restrictions combined via logical
-   *   operators `AND` and `OR`.
-   *   Parentheses are supported, and `OR` has higher precedence than `AND`.
-   *
-   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
-   *   character in front of them to indicate negation. Examples include:
-   *
-   *    * name
-   *    * security_marks.marks.marka
-   *
-   *   The supported operators are:
-   *
-   *   * `=` for all value types.
-   *   * `>`, `<`, `>=`, `<=` for integer values.
-   *   * `:`, meaning substring matching, for strings.
-   *
-   *   The supported value types are:
-   *
-   *   * string literals in quotes.
-   *   * integer literals without quotes.
-   *   * boolean literals `true` and `false` without quotes.
-   *
-   *   The following field and operator combinations are supported:
-   *
-   *   * name: `=`
-   *   * parent: `=`, `:`
-   *   * resource_name: `=`, `:`
-   *   * state: `=`, `:`
-   *   * category: `=`, `:`
-   *   * external_uri: `=`, `:`
-   *   * event_time: `=`, `>`, `<`, `>=`, `<=`
-   *
-   *     Usage: This should be milliseconds since epoch or an RFC3339 string.
-   *     Examples:
-   *       `event_time = "2019-06-10T16:07:18-07:00"`
-   *       `event_time = 1560208038000`
-   *
-   *   * severity: `=`, `:`
-   *   * security_marks.marks: `=`, `:`
-   *   * resource:
-   *     * resource.name: `=`, `:`
-   *     * resource.parent_name: `=`, `:`
-   *     * resource.parent_display_name: `=`, `:`
-   *     * resource.project_name: `=`, `:`
-   *     * resource.project_display_name: `=`, `:`
-   *     * resource.type: `=`, `:`
-   *     * resource.folders.resource_folder: `=`, `:`
-   *     * resource.display_name: `=`, `:`
-   * @param {string} request.orderBy
-   *   Expression that defines what fields and order to use for sorting. The
-   *   string value should follow SQL syntax: comma separated list of fields. For
-   *   example: "name,parent". The default sorting order
-   *   is ascending. To specify descending order for a field, a suffix " desc"
-   *   should be appended to the field name. For example: "name
-   *   desc,parent". Redundant space characters in the
-   *   syntax are insignificant. "name desc,parent" and "
-   *   name     desc  ,   parent  " are equivalent.
-   *
-   *   The following fields are supported:
-   *   name
-   *   parent
-   *   state
-   *   category
-   *   resource_name
-   *   event_time
-   *   security_marks.marks
-   * @param {google.protobuf.FieldMask} request.fieldMask
-   *   A field mask to specify the Finding fields to be listed in the response.
-   *   An empty field mask will list all fields.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListFindingsResponse`; indicates
-   *   that this is a continuation of a prior `ListFindings` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult|ListFindingsResult}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listFindingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists an organization or source's findings.
+ *
+ * To list across all sources for a given location provide a `-` as the source
+ * id. If no location is specified, finding are assumed to be in global.
+ * The following list shows some examples:
+ *
+ * + `/v2/organizations/{organization_id}/sources/-/findings`
+ * +
+ * `/v2/organizations/{organization_id}/sources/-/locations/{location_id}/findings`
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the source the findings belong to. If no location is
+ *   specified, the default is global. The following list shows some examples:
+ *
+ *   + `organizations/[organization_id]/sources/[source_id]`
+ *   +
+ *   `organizations/[organization_id]/sources/[source_id]/locations/[location_id]`
+ *   + `folders/[folder_id]/sources/[source_id]`
+ *   + `folders/[folder_id]/sources/[source_id]/locations/[location_id]`
+ *   + `projects/[project_id]/sources/[source_id]`
+ *   + `projects/[project_id]/sources/[source_id]/locations/[location_id]`
+ *
+ *   To list across all sources provide a source_id of `-`. The following
+ *   list shows some examples:
+ *
+ *   + `organizations/{organization_id}/sources/-`
+ *   + `organizations/{organization_id}/sources/-/locations/{location_id}`
+ *   + `folders/{folder_id}/sources/-`
+ *   + `folders/{folder_id}/sources/-locations/{location_id}`
+ *   + `projects/{projects_id}/sources/-`
+ *   + `projects/{projects_id}/sources/-/locations/{location_id}`
+ * @param {string} request.filter
+ *   Expression that defines the filter to apply across findings.
+ *   The expression is a list of one or more restrictions combined via logical
+ *   operators `AND` and `OR`.
+ *   Parentheses are supported, and `OR` has higher precedence than `AND`.
+ *
+ *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+ *   character in front of them to indicate negation. Examples include:
+ *
+ *    * name
+ *    * security_marks.marks.marka
+ *
+ *   The supported operators are:
+ *
+ *   * `=` for all value types.
+ *   * `>`, `<`, `>=`, `<=` for integer values.
+ *   * `:`, meaning substring matching, for strings.
+ *
+ *   The supported value types are:
+ *
+ *   * string literals in quotes.
+ *   * integer literals without quotes.
+ *   * boolean literals `true` and `false` without quotes.
+ *
+ *   The following field and operator combinations are supported:
+ *
+ *   * name: `=`
+ *   * parent: `=`, `:`
+ *   * resource_name: `=`, `:`
+ *   * state: `=`, `:`
+ *   * category: `=`, `:`
+ *   * external_uri: `=`, `:`
+ *   * event_time: `=`, `>`, `<`, `>=`, `<=`
+ *
+ *     Usage: This should be milliseconds since epoch or an RFC3339 string.
+ *     Examples:
+ *       `event_time = "2019-06-10T16:07:18-07:00"`
+ *       `event_time = 1560208038000`
+ *
+ *   * severity: `=`, `:`
+ *   * security_marks.marks: `=`, `:`
+ *   * resource:
+ *     * resource.name: `=`, `:`
+ *     * resource.parent_name: `=`, `:`
+ *     * resource.parent_display_name: `=`, `:`
+ *     * resource.project_name: `=`, `:`
+ *     * resource.project_display_name: `=`, `:`
+ *     * resource.type: `=`, `:`
+ *     * resource.folders.resource_folder: `=`, `:`
+ *     * resource.display_name: `=`, `:`
+ * @param {string} request.orderBy
+ *   Expression that defines what fields and order to use for sorting. The
+ *   string value should follow SQL syntax: comma separated list of fields. For
+ *   example: "name,parent". The default sorting order
+ *   is ascending. To specify descending order for a field, a suffix " desc"
+ *   should be appended to the field name. For example: "name
+ *   desc,parent". Redundant space characters in the
+ *   syntax are insignificant. "name desc,parent" and "
+ *   name     desc  ,   parent  " are equivalent.
+ *
+ *   The following fields are supported:
+ *   name
+ *   parent
+ *   state
+ *   category
+ *   resource_name
+ *   event_time
+ *   security_marks.marks
+ * @param {google.protobuf.FieldMask} request.fieldMask
+ *   A field mask to specify the Finding fields to be listed in the response.
+ *   An empty field mask will list all fields.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListFindingsResponse`; indicates
+ *   that this is a continuation of a prior `ListFindings` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult|ListFindingsResult}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listFindingsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listFindings(
-    request?: protos.google.cloud.securitycenter.v2.IListFindingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult[],
-      protos.google.cloud.securitycenter.v2.IListFindingsRequest | null,
-      protos.google.cloud.securitycenter.v2.IListFindingsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IListFindingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult[],
+        protos.google.cloud.securitycenter.v2.IListFindingsRequest|null,
+        protos.google.cloud.securitycenter.v2.IListFindingsResponse
+      ]>;
   listFindings(
-    request: protos.google.cloud.securitycenter.v2.IListFindingsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListFindingsRequest,
-      | protos.google.cloud.securitycenter.v2.IListFindingsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult
-    >
-  ): void;
-  listFindings(
-    request: protos.google.cloud.securitycenter.v2.IListFindingsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListFindingsRequest,
-      | protos.google.cloud.securitycenter.v2.IListFindingsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult
-    >
-  ): void;
-  listFindings(
-    request?: protos.google.cloud.securitycenter.v2.IListFindingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.securitycenter.v2.IListFindingsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.securitycenter.v2.IListFindingsRequest,
-          | protos.google.cloud.securitycenter.v2.IListFindingsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListFindingsRequest,
-      | protos.google.cloud.securitycenter.v2.IListFindingsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult[],
-      protos.google.cloud.securitycenter.v2.IListFindingsRequest | null,
-      protos.google.cloud.securitycenter.v2.IListFindingsResponse,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IListFindingsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult>): void;
+  listFindings(
+      request: protos.google.cloud.securitycenter.v2.IListFindingsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListFindingsRequest,
+          protos.google.cloud.securitycenter.v2.IListFindingsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult>): void;
+  listFindings(
+      request?: protos.google.cloud.securitycenter.v2.IListFindingsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListFindingsRequest,
+          protos.google.cloud.securitycenter.v2.IListFindingsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult>,
+      callback?: PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListFindingsRequest,
+          protos.google.cloud.securitycenter.v2.IListFindingsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult[],
+        protos.google.cloud.securitycenter.v2.IListFindingsRequest|null,
+        protos.google.cloud.securitycenter.v2.IListFindingsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.securitycenter.v2.IListFindingsRequest,
-          | protos.google.cloud.securitycenter.v2.IListFindingsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.securitycenter.v2.IListFindingsRequest,
+      protos.google.cloud.securitycenter.v2.IListFindingsResponse|null|undefined,
+      protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listFindings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6167,149 +4906,146 @@ export class SecurityCenterClient {
     this._log.info('listFindings request %j', request);
     return this.innerApiCalls
       .listFindings(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult[],
-          protos.google.cloud.securitycenter.v2.IListFindingsRequest | null,
-          protos.google.cloud.securitycenter.v2.IListFindingsResponse,
-        ]) => {
-          this._log.info('listFindings values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult[],
+        protos.google.cloud.securitycenter.v2.IListFindingsRequest|null,
+        protos.google.cloud.securitycenter.v2.IListFindingsResponse
+      ]) => {
+        this._log.info('listFindings values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listFindings`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the source the findings belong to. If no location is
-   *   specified, the default is global. The following list shows some examples:
-   *
-   *   + `organizations/[organization_id]/sources/[source_id]`
-   *   +
-   *   `organizations/[organization_id]/sources/[source_id]/locations/[location_id]`
-   *   + `folders/[folder_id]/sources/[source_id]`
-   *   + `folders/[folder_id]/sources/[source_id]/locations/[location_id]`
-   *   + `projects/[project_id]/sources/[source_id]`
-   *   + `projects/[project_id]/sources/[source_id]/locations/[location_id]`
-   *
-   *   To list across all sources provide a source_id of `-`. The following
-   *   list shows some examples:
-   *
-   *   + `organizations/{organization_id}/sources/-`
-   *   + `organizations/{organization_id}/sources/-/locations/{location_id}`
-   *   + `folders/{folder_id}/sources/-`
-   *   + `folders/{folder_id}/sources/-locations/{location_id}`
-   *   + `projects/{projects_id}/sources/-`
-   *   + `projects/{projects_id}/sources/-/locations/{location_id}`
-   * @param {string} request.filter
-   *   Expression that defines the filter to apply across findings.
-   *   The expression is a list of one or more restrictions combined via logical
-   *   operators `AND` and `OR`.
-   *   Parentheses are supported, and `OR` has higher precedence than `AND`.
-   *
-   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
-   *   character in front of them to indicate negation. Examples include:
-   *
-   *    * name
-   *    * security_marks.marks.marka
-   *
-   *   The supported operators are:
-   *
-   *   * `=` for all value types.
-   *   * `>`, `<`, `>=`, `<=` for integer values.
-   *   * `:`, meaning substring matching, for strings.
-   *
-   *   The supported value types are:
-   *
-   *   * string literals in quotes.
-   *   * integer literals without quotes.
-   *   * boolean literals `true` and `false` without quotes.
-   *
-   *   The following field and operator combinations are supported:
-   *
-   *   * name: `=`
-   *   * parent: `=`, `:`
-   *   * resource_name: `=`, `:`
-   *   * state: `=`, `:`
-   *   * category: `=`, `:`
-   *   * external_uri: `=`, `:`
-   *   * event_time: `=`, `>`, `<`, `>=`, `<=`
-   *
-   *     Usage: This should be milliseconds since epoch or an RFC3339 string.
-   *     Examples:
-   *       `event_time = "2019-06-10T16:07:18-07:00"`
-   *       `event_time = 1560208038000`
-   *
-   *   * severity: `=`, `:`
-   *   * security_marks.marks: `=`, `:`
-   *   * resource:
-   *     * resource.name: `=`, `:`
-   *     * resource.parent_name: `=`, `:`
-   *     * resource.parent_display_name: `=`, `:`
-   *     * resource.project_name: `=`, `:`
-   *     * resource.project_display_name: `=`, `:`
-   *     * resource.type: `=`, `:`
-   *     * resource.folders.resource_folder: `=`, `:`
-   *     * resource.display_name: `=`, `:`
-   * @param {string} request.orderBy
-   *   Expression that defines what fields and order to use for sorting. The
-   *   string value should follow SQL syntax: comma separated list of fields. For
-   *   example: "name,parent". The default sorting order
-   *   is ascending. To specify descending order for a field, a suffix " desc"
-   *   should be appended to the field name. For example: "name
-   *   desc,parent". Redundant space characters in the
-   *   syntax are insignificant. "name desc,parent" and "
-   *   name     desc  ,   parent  " are equivalent.
-   *
-   *   The following fields are supported:
-   *   name
-   *   parent
-   *   state
-   *   category
-   *   resource_name
-   *   event_time
-   *   security_marks.marks
-   * @param {google.protobuf.FieldMask} request.fieldMask
-   *   A field mask to specify the Finding fields to be listed in the response.
-   *   An empty field mask will list all fields.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListFindingsResponse`; indicates
-   *   that this is a continuation of a prior `ListFindings` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult|ListFindingsResult} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listFindingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listFindings`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the source the findings belong to. If no location is
+ *   specified, the default is global. The following list shows some examples:
+ *
+ *   + `organizations/[organization_id]/sources/[source_id]`
+ *   +
+ *   `organizations/[organization_id]/sources/[source_id]/locations/[location_id]`
+ *   + `folders/[folder_id]/sources/[source_id]`
+ *   + `folders/[folder_id]/sources/[source_id]/locations/[location_id]`
+ *   + `projects/[project_id]/sources/[source_id]`
+ *   + `projects/[project_id]/sources/[source_id]/locations/[location_id]`
+ *
+ *   To list across all sources provide a source_id of `-`. The following
+ *   list shows some examples:
+ *
+ *   + `organizations/{organization_id}/sources/-`
+ *   + `organizations/{organization_id}/sources/-/locations/{location_id}`
+ *   + `folders/{folder_id}/sources/-`
+ *   + `folders/{folder_id}/sources/-locations/{location_id}`
+ *   + `projects/{projects_id}/sources/-`
+ *   + `projects/{projects_id}/sources/-/locations/{location_id}`
+ * @param {string} request.filter
+ *   Expression that defines the filter to apply across findings.
+ *   The expression is a list of one or more restrictions combined via logical
+ *   operators `AND` and `OR`.
+ *   Parentheses are supported, and `OR` has higher precedence than `AND`.
+ *
+ *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+ *   character in front of them to indicate negation. Examples include:
+ *
+ *    * name
+ *    * security_marks.marks.marka
+ *
+ *   The supported operators are:
+ *
+ *   * `=` for all value types.
+ *   * `>`, `<`, `>=`, `<=` for integer values.
+ *   * `:`, meaning substring matching, for strings.
+ *
+ *   The supported value types are:
+ *
+ *   * string literals in quotes.
+ *   * integer literals without quotes.
+ *   * boolean literals `true` and `false` without quotes.
+ *
+ *   The following field and operator combinations are supported:
+ *
+ *   * name: `=`
+ *   * parent: `=`, `:`
+ *   * resource_name: `=`, `:`
+ *   * state: `=`, `:`
+ *   * category: `=`, `:`
+ *   * external_uri: `=`, `:`
+ *   * event_time: `=`, `>`, `<`, `>=`, `<=`
+ *
+ *     Usage: This should be milliseconds since epoch or an RFC3339 string.
+ *     Examples:
+ *       `event_time = "2019-06-10T16:07:18-07:00"`
+ *       `event_time = 1560208038000`
+ *
+ *   * severity: `=`, `:`
+ *   * security_marks.marks: `=`, `:`
+ *   * resource:
+ *     * resource.name: `=`, `:`
+ *     * resource.parent_name: `=`, `:`
+ *     * resource.parent_display_name: `=`, `:`
+ *     * resource.project_name: `=`, `:`
+ *     * resource.project_display_name: `=`, `:`
+ *     * resource.type: `=`, `:`
+ *     * resource.folders.resource_folder: `=`, `:`
+ *     * resource.display_name: `=`, `:`
+ * @param {string} request.orderBy
+ *   Expression that defines what fields and order to use for sorting. The
+ *   string value should follow SQL syntax: comma separated list of fields. For
+ *   example: "name,parent". The default sorting order
+ *   is ascending. To specify descending order for a field, a suffix " desc"
+ *   should be appended to the field name. For example: "name
+ *   desc,parent". Redundant space characters in the
+ *   syntax are insignificant. "name desc,parent" and "
+ *   name     desc  ,   parent  " are equivalent.
+ *
+ *   The following fields are supported:
+ *   name
+ *   parent
+ *   state
+ *   category
+ *   resource_name
+ *   event_time
+ *   security_marks.marks
+ * @param {google.protobuf.FieldMask} request.fieldMask
+ *   A field mask to specify the Finding fields to be listed in the response.
+ *   An empty field mask will list all fields.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListFindingsResponse`; indicates
+ *   that this is a continuation of a prior `ListFindings` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult|ListFindingsResult} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listFindingsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listFindingsStream(
-    request?: protos.google.cloud.securitycenter.v2.IListFindingsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.securitycenter.v2.IListFindingsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listFindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listFindings stream %j', request);
     return this.descriptors.page.listFindings.createStream(
       this.innerApiCalls.listFindings as GaxCall,
@@ -6318,140 +5054,139 @@ export class SecurityCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `listFindings`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the source the findings belong to. If no location is
-   *   specified, the default is global. The following list shows some examples:
-   *
-   *   + `organizations/[organization_id]/sources/[source_id]`
-   *   +
-   *   `organizations/[organization_id]/sources/[source_id]/locations/[location_id]`
-   *   + `folders/[folder_id]/sources/[source_id]`
-   *   + `folders/[folder_id]/sources/[source_id]/locations/[location_id]`
-   *   + `projects/[project_id]/sources/[source_id]`
-   *   + `projects/[project_id]/sources/[source_id]/locations/[location_id]`
-   *
-   *   To list across all sources provide a source_id of `-`. The following
-   *   list shows some examples:
-   *
-   *   + `organizations/{organization_id}/sources/-`
-   *   + `organizations/{organization_id}/sources/-/locations/{location_id}`
-   *   + `folders/{folder_id}/sources/-`
-   *   + `folders/{folder_id}/sources/-locations/{location_id}`
-   *   + `projects/{projects_id}/sources/-`
-   *   + `projects/{projects_id}/sources/-/locations/{location_id}`
-   * @param {string} request.filter
-   *   Expression that defines the filter to apply across findings.
-   *   The expression is a list of one or more restrictions combined via logical
-   *   operators `AND` and `OR`.
-   *   Parentheses are supported, and `OR` has higher precedence than `AND`.
-   *
-   *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
-   *   character in front of them to indicate negation. Examples include:
-   *
-   *    * name
-   *    * security_marks.marks.marka
-   *
-   *   The supported operators are:
-   *
-   *   * `=` for all value types.
-   *   * `>`, `<`, `>=`, `<=` for integer values.
-   *   * `:`, meaning substring matching, for strings.
-   *
-   *   The supported value types are:
-   *
-   *   * string literals in quotes.
-   *   * integer literals without quotes.
-   *   * boolean literals `true` and `false` without quotes.
-   *
-   *   The following field and operator combinations are supported:
-   *
-   *   * name: `=`
-   *   * parent: `=`, `:`
-   *   * resource_name: `=`, `:`
-   *   * state: `=`, `:`
-   *   * category: `=`, `:`
-   *   * external_uri: `=`, `:`
-   *   * event_time: `=`, `>`, `<`, `>=`, `<=`
-   *
-   *     Usage: This should be milliseconds since epoch or an RFC3339 string.
-   *     Examples:
-   *       `event_time = "2019-06-10T16:07:18-07:00"`
-   *       `event_time = 1560208038000`
-   *
-   *   * severity: `=`, `:`
-   *   * security_marks.marks: `=`, `:`
-   *   * resource:
-   *     * resource.name: `=`, `:`
-   *     * resource.parent_name: `=`, `:`
-   *     * resource.parent_display_name: `=`, `:`
-   *     * resource.project_name: `=`, `:`
-   *     * resource.project_display_name: `=`, `:`
-   *     * resource.type: `=`, `:`
-   *     * resource.folders.resource_folder: `=`, `:`
-   *     * resource.display_name: `=`, `:`
-   * @param {string} request.orderBy
-   *   Expression that defines what fields and order to use for sorting. The
-   *   string value should follow SQL syntax: comma separated list of fields. For
-   *   example: "name,parent". The default sorting order
-   *   is ascending. To specify descending order for a field, a suffix " desc"
-   *   should be appended to the field name. For example: "name
-   *   desc,parent". Redundant space characters in the
-   *   syntax are insignificant. "name desc,parent" and "
-   *   name     desc  ,   parent  " are equivalent.
-   *
-   *   The following fields are supported:
-   *   name
-   *   parent
-   *   state
-   *   category
-   *   resource_name
-   *   event_time
-   *   security_marks.marks
-   * @param {google.protobuf.FieldMask} request.fieldMask
-   *   A field mask to specify the Finding fields to be listed in the response.
-   *   An empty field mask will list all fields.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListFindingsResponse`; indicates
-   *   that this is a continuation of a prior `ListFindings` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult|ListFindingsResult}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.list_findings.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_ListFindings_async
-   */
+/**
+ * Equivalent to `listFindings`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the source the findings belong to. If no location is
+ *   specified, the default is global. The following list shows some examples:
+ *
+ *   + `organizations/[organization_id]/sources/[source_id]`
+ *   +
+ *   `organizations/[organization_id]/sources/[source_id]/locations/[location_id]`
+ *   + `folders/[folder_id]/sources/[source_id]`
+ *   + `folders/[folder_id]/sources/[source_id]/locations/[location_id]`
+ *   + `projects/[project_id]/sources/[source_id]`
+ *   + `projects/[project_id]/sources/[source_id]/locations/[location_id]`
+ *
+ *   To list across all sources provide a source_id of `-`. The following
+ *   list shows some examples:
+ *
+ *   + `organizations/{organization_id}/sources/-`
+ *   + `organizations/{organization_id}/sources/-/locations/{location_id}`
+ *   + `folders/{folder_id}/sources/-`
+ *   + `folders/{folder_id}/sources/-locations/{location_id}`
+ *   + `projects/{projects_id}/sources/-`
+ *   + `projects/{projects_id}/sources/-/locations/{location_id}`
+ * @param {string} request.filter
+ *   Expression that defines the filter to apply across findings.
+ *   The expression is a list of one or more restrictions combined via logical
+ *   operators `AND` and `OR`.
+ *   Parentheses are supported, and `OR` has higher precedence than `AND`.
+ *
+ *   Restrictions have the form `<field> <operator> <value>` and may have a `-`
+ *   character in front of them to indicate negation. Examples include:
+ *
+ *    * name
+ *    * security_marks.marks.marka
+ *
+ *   The supported operators are:
+ *
+ *   * `=` for all value types.
+ *   * `>`, `<`, `>=`, `<=` for integer values.
+ *   * `:`, meaning substring matching, for strings.
+ *
+ *   The supported value types are:
+ *
+ *   * string literals in quotes.
+ *   * integer literals without quotes.
+ *   * boolean literals `true` and `false` without quotes.
+ *
+ *   The following field and operator combinations are supported:
+ *
+ *   * name: `=`
+ *   * parent: `=`, `:`
+ *   * resource_name: `=`, `:`
+ *   * state: `=`, `:`
+ *   * category: `=`, `:`
+ *   * external_uri: `=`, `:`
+ *   * event_time: `=`, `>`, `<`, `>=`, `<=`
+ *
+ *     Usage: This should be milliseconds since epoch or an RFC3339 string.
+ *     Examples:
+ *       `event_time = "2019-06-10T16:07:18-07:00"`
+ *       `event_time = 1560208038000`
+ *
+ *   * severity: `=`, `:`
+ *   * security_marks.marks: `=`, `:`
+ *   * resource:
+ *     * resource.name: `=`, `:`
+ *     * resource.parent_name: `=`, `:`
+ *     * resource.parent_display_name: `=`, `:`
+ *     * resource.project_name: `=`, `:`
+ *     * resource.project_display_name: `=`, `:`
+ *     * resource.type: `=`, `:`
+ *     * resource.folders.resource_folder: `=`, `:`
+ *     * resource.display_name: `=`, `:`
+ * @param {string} request.orderBy
+ *   Expression that defines what fields and order to use for sorting. The
+ *   string value should follow SQL syntax: comma separated list of fields. For
+ *   example: "name,parent". The default sorting order
+ *   is ascending. To specify descending order for a field, a suffix " desc"
+ *   should be appended to the field name. For example: "name
+ *   desc,parent". Redundant space characters in the
+ *   syntax are insignificant. "name desc,parent" and "
+ *   name     desc  ,   parent  " are equivalent.
+ *
+ *   The following fields are supported:
+ *   name
+ *   parent
+ *   state
+ *   category
+ *   resource_name
+ *   event_time
+ *   security_marks.marks
+ * @param {google.protobuf.FieldMask} request.fieldMask
+ *   A field mask to specify the Finding fields to be listed in the response.
+ *   An empty field mask will list all fields.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListFindingsResponse`; indicates
+ *   that this is a continuation of a prior `ListFindings` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.securitycenter.v2.ListFindingsResponse.ListFindingsResult|ListFindingsResult}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.list_findings.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_ListFindings_async
+ */
   listFindingsAsync(
-    request?: protos.google.cloud.securitycenter.v2.IListFindingsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult> {
+      request?: protos.google.cloud.securitycenter.v2.IListFindingsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listFindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listFindings iterate %j', request);
     return this.descriptors.page.listFindings.asyncIterate(
       this.innerApiCalls['listFindings'] as GaxCall,
@@ -6459,168 +5194,131 @@ export class SecurityCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v2.ListFindingsResponse.IListFindingsResult>;
   }
-  /**
-   * Lists mute configs. If no location is specified, default is
-   * global.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns the collection of mute configs. Its format
-   *   is `organizations/[organization_id]", "folders/[folder_id]`,
-   *   `projects/[project_id]`,
-   *   `organizations/[organization_id]/locations/[location_id]`,
-   *   `folders/[folder_id]/locations/[location_id]`,
-   *   `projects/[project_id]/locations/[location_id]`.
-   * @param {number} request.pageSize
-   *   The maximum number of configs to return. The service may return fewer than
-   *   this value.
-   *   If unspecified, at most 10 configs will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListMuteConfigs` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListMuteConfigs` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v2.MuteConfig|MuteConfig}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listMuteConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists mute configs. If no location is specified, default is
+ * global.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns the collection of mute configs. Its format
+ *   is `organizations/[organization_id]", "folders/[folder_id]`,
+ *   `projects/[project_id]`,
+ *   `organizations/[organization_id]/locations/[location_id]`,
+ *   `folders/[folder_id]/locations/[location_id]`,
+ *   `projects/[project_id]/locations/[location_id]`.
+ * @param {number} request.pageSize
+ *   The maximum number of configs to return. The service may return fewer than
+ *   this value.
+ *   If unspecified, at most 10 configs will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListMuteConfigs` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListMuteConfigs` must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v2.MuteConfig|MuteConfig}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listMuteConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listMuteConfigs(
-    request?: protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IMuteConfig[],
-      protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest | null,
-      protos.google.cloud.securitycenter.v2.IListMuteConfigsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IMuteConfig[],
+        protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest|null,
+        protos.google.cloud.securitycenter.v2.IListMuteConfigsResponse
+      ]>;
   listMuteConfigs(
-    request: protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
-      | protos.google.cloud.securitycenter.v2.IListMuteConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.IMuteConfig
-    >
-  ): void;
-  listMuteConfigs(
-    request: protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
-      | protos.google.cloud.securitycenter.v2.IListMuteConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.IMuteConfig
-    >
-  ): void;
-  listMuteConfigs(
-    request?: protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
-          | protos.google.cloud.securitycenter.v2.IListMuteConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v2.IMuteConfig
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
-      | protos.google.cloud.securitycenter.v2.IListMuteConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.IMuteConfig
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IMuteConfig[],
-      protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest | null,
-      protos.google.cloud.securitycenter.v2.IListMuteConfigsResponse,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IListMuteConfigsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IMuteConfig>): void;
+  listMuteConfigs(
+      request: protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
+          protos.google.cloud.securitycenter.v2.IListMuteConfigsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IMuteConfig>): void;
+  listMuteConfigs(
+      request?: protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
+          protos.google.cloud.securitycenter.v2.IListMuteConfigsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IMuteConfig>,
+      callback?: PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
+          protos.google.cloud.securitycenter.v2.IListMuteConfigsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IMuteConfig>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IMuteConfig[],
+        protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest|null,
+        protos.google.cloud.securitycenter.v2.IListMuteConfigsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    const routingParameter = {};
+    let routingParameter = {};
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(
-            RegExp('projects/[^/]+/locations/(?<location>[^/]+)/muteConfigs')
-          );
+        const match = fieldValue.toString().match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)/muteConfigs'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(
-            RegExp(
-              'organizations/[^/]+/locations/(?<location>[^/]+)/muteConfigs'
-            )
-          );
+        const match = fieldValue.toString().match(RegExp('organizations/[^/]+/locations/(?<location>[^/]+)/muteConfigs'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(
-            RegExp('folders/[^/]+/locations/(?<location>[^/]+)/muteConfigs')
-          );
+        const match = fieldValue.toString().match(RegExp('folders/[^/]+/locations/(?<location>[^/]+)/muteConfigs'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
-          | protos.google.cloud.securitycenter.v2.IListMuteConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v2.IMuteConfig
-        >
-      | undefined = callback
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams(
+      routingParameter
+    );
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
+      protos.google.cloud.securitycenter.v2.IListMuteConfigsResponse|null|undefined,
+      protos.google.cloud.securitycenter.v2.IMuteConfig>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listMuteConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6629,111 +5327,96 @@ export class SecurityCenterClient {
     this._log.info('listMuteConfigs request %j', request);
     return this.innerApiCalls
       .listMuteConfigs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.securitycenter.v2.IMuteConfig[],
-          protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest | null,
-          protos.google.cloud.securitycenter.v2.IListMuteConfigsResponse,
-        ]) => {
-          this._log.info('listMuteConfigs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.securitycenter.v2.IMuteConfig[],
+        protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest|null,
+        protos.google.cloud.securitycenter.v2.IListMuteConfigsResponse
+      ]) => {
+        this._log.info('listMuteConfigs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listMuteConfigs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns the collection of mute configs. Its format
-   *   is `organizations/[organization_id]", "folders/[folder_id]`,
-   *   `projects/[project_id]`,
-   *   `organizations/[organization_id]/locations/[location_id]`,
-   *   `folders/[folder_id]/locations/[location_id]`,
-   *   `projects/[project_id]/locations/[location_id]`.
-   * @param {number} request.pageSize
-   *   The maximum number of configs to return. The service may return fewer than
-   *   this value.
-   *   If unspecified, at most 10 configs will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListMuteConfigs` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListMuteConfigs` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v2.MuteConfig|MuteConfig} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listMuteConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listMuteConfigs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns the collection of mute configs. Its format
+ *   is `organizations/[organization_id]", "folders/[folder_id]`,
+ *   `projects/[project_id]`,
+ *   `organizations/[organization_id]/locations/[location_id]`,
+ *   `folders/[folder_id]/locations/[location_id]`,
+ *   `projects/[project_id]/locations/[location_id]`.
+ * @param {number} request.pageSize
+ *   The maximum number of configs to return. The service may return fewer than
+ *   this value.
+ *   If unspecified, at most 10 configs will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListMuteConfigs` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListMuteConfigs` must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v2.MuteConfig|MuteConfig} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listMuteConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listMuteConfigsStream(
-    request?: protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    const routingParameter = {};
+    let routingParameter = {};
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(
-            RegExp('projects/[^/]+/locations/(?<location>[^/]+)/muteConfigs')
-          );
+        const match = fieldValue.toString().match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)/muteConfigs'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(
-            RegExp(
-              'organizations/[^/]+/locations/(?<location>[^/]+)/muteConfigs'
-            )
-          );
+        const match = fieldValue.toString().match(RegExp('organizations/[^/]+/locations/(?<location>[^/]+)/muteConfigs'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(
-            RegExp('folders/[^/]+/locations/(?<location>[^/]+)/muteConfigs')
-          );
+        const match = fieldValue.toString().match(RegExp('folders/[^/]+/locations/(?<location>[^/]+)/muteConfigs'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams(routingParameter);
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams(
+      routingParameter
+    );
     const defaultCallSettings = this._defaults['listMuteConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listMuteConfigs stream %j', request);
     return this.descriptors.page.listMuteConfigs.createStream(
       this.innerApiCalls.listMuteConfigs as GaxCall,
@@ -6742,102 +5425,89 @@ export class SecurityCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `listMuteConfigs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns the collection of mute configs. Its format
-   *   is `organizations/[organization_id]", "folders/[folder_id]`,
-   *   `projects/[project_id]`,
-   *   `organizations/[organization_id]/locations/[location_id]`,
-   *   `folders/[folder_id]/locations/[location_id]`,
-   *   `projects/[project_id]/locations/[location_id]`.
-   * @param {number} request.pageSize
-   *   The maximum number of configs to return. The service may return fewer than
-   *   this value.
-   *   If unspecified, at most 10 configs will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListMuteConfigs` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListMuteConfigs` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.securitycenter.v2.MuteConfig|MuteConfig}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.list_mute_configs.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_ListMuteConfigs_async
-   */
+/**
+ * Equivalent to `listMuteConfigs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns the collection of mute configs. Its format
+ *   is `organizations/[organization_id]", "folders/[folder_id]`,
+ *   `projects/[project_id]`,
+ *   `organizations/[organization_id]/locations/[location_id]`,
+ *   `folders/[folder_id]/locations/[location_id]`,
+ *   `projects/[project_id]/locations/[location_id]`.
+ * @param {number} request.pageSize
+ *   The maximum number of configs to return. The service may return fewer than
+ *   this value.
+ *   If unspecified, at most 10 configs will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListMuteConfigs` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListMuteConfigs` must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.securitycenter.v2.MuteConfig|MuteConfig}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.list_mute_configs.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_ListMuteConfigs_async
+ */
   listMuteConfigsAsync(
-    request?: protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.securitycenter.v2.IMuteConfig> {
+      request?: protos.google.cloud.securitycenter.v2.IListMuteConfigsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.securitycenter.v2.IMuteConfig>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    const routingParameter = {};
+    let routingParameter = {};
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(
-            RegExp('projects/[^/]+/locations/(?<location>[^/]+)/muteConfigs')
-          );
+        const match = fieldValue.toString().match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)/muteConfigs'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(
-            RegExp(
-              'organizations/[^/]+/locations/(?<location>[^/]+)/muteConfigs'
-            )
-          );
+        const match = fieldValue.toString().match(RegExp('organizations/[^/]+/locations/(?<location>[^/]+)/muteConfigs'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(
-            RegExp('folders/[^/]+/locations/(?<location>[^/]+)/muteConfigs')
-          );
+        const match = fieldValue.toString().match(RegExp('folders/[^/]+/locations/(?<location>[^/]+)/muteConfigs'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
+          Object.assign(routingParameter, { location: parameterValue });
         }
       }
     }
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams(routingParameter);
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams(
+      routingParameter
+    );
     const defaultCallSettings = this._defaults['listMuteConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listMuteConfigs iterate %j', request);
     return this.descriptors.page.listMuteConfigs.asyncIterate(
       this.innerApiCalls['listMuteConfigs'] as GaxCall,
@@ -6845,119 +5515,94 @@ export class SecurityCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v2.IMuteConfig>;
   }
-  /**
-   * Lists notification configs.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent in which to list the notification
-   *   configurations. Its format is
-   *   "organizations/[organization_id]/locations/[location_id]",
-   *   "folders/[folder_id]/locations/[location_id]", or
-   *   "projects/[project_id]/locations/[location_id]".
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListNotificationConfigsResponse`; indicates
-   *   that this is a continuation of a prior `ListNotificationConfigs` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v2.NotificationConfig|NotificationConfig}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listNotificationConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists notification configs.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent in which to list the notification
+ *   configurations. Its format is
+ *   "organizations/[organization_id]/locations/[location_id]",
+ *   "folders/[folder_id]/locations/[location_id]", or
+ *   "projects/[project_id]/locations/[location_id]".
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListNotificationConfigsResponse`; indicates
+ *   that this is a continuation of a prior `ListNotificationConfigs` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v2.NotificationConfig|NotificationConfig}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listNotificationConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listNotificationConfigs(
-    request?: protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.INotificationConfig[],
-      protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest | null,
-      protos.google.cloud.securitycenter.v2.IListNotificationConfigsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.INotificationConfig[],
+        protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest|null,
+        protos.google.cloud.securitycenter.v2.IListNotificationConfigsResponse
+      ]>;
   listNotificationConfigs(
-    request: protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
-      | protos.google.cloud.securitycenter.v2.IListNotificationConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.INotificationConfig
-    >
-  ): void;
-  listNotificationConfigs(
-    request: protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
-      | protos.google.cloud.securitycenter.v2.IListNotificationConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.INotificationConfig
-    >
-  ): void;
-  listNotificationConfigs(
-    request?: protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
-          | protos.google.cloud.securitycenter.v2.IListNotificationConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v2.INotificationConfig
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
-      | protos.google.cloud.securitycenter.v2.IListNotificationConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.INotificationConfig
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.INotificationConfig[],
-      protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest | null,
-      protos.google.cloud.securitycenter.v2.IListNotificationConfigsResponse,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IListNotificationConfigsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.INotificationConfig>): void;
+  listNotificationConfigs(
+      request: protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
+          protos.google.cloud.securitycenter.v2.IListNotificationConfigsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.INotificationConfig>): void;
+  listNotificationConfigs(
+      request?: protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
+          protos.google.cloud.securitycenter.v2.IListNotificationConfigsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.INotificationConfig>,
+      callback?: PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
+          protos.google.cloud.securitycenter.v2.IListNotificationConfigsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.INotificationConfig>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.INotificationConfig[],
+        protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest|null,
+        protos.google.cloud.securitycenter.v2.IListNotificationConfigsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
-          | protos.google.cloud.securitycenter.v2.IListNotificationConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v2.INotificationConfig
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
+      protos.google.cloud.securitycenter.v2.IListNotificationConfigsResponse|null|undefined,
+      protos.google.cloud.securitycenter.v2.INotificationConfig>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listNotificationConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6966,63 +5611,60 @@ export class SecurityCenterClient {
     this._log.info('listNotificationConfigs request %j', request);
     return this.innerApiCalls
       .listNotificationConfigs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.securitycenter.v2.INotificationConfig[],
-          protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest | null,
-          protos.google.cloud.securitycenter.v2.IListNotificationConfigsResponse,
-        ]) => {
-          this._log.info('listNotificationConfigs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.securitycenter.v2.INotificationConfig[],
+        protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest|null,
+        protos.google.cloud.securitycenter.v2.IListNotificationConfigsResponse
+      ]) => {
+        this._log.info('listNotificationConfigs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listNotificationConfigs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent in which to list the notification
-   *   configurations. Its format is
-   *   "organizations/[organization_id]/locations/[location_id]",
-   *   "folders/[folder_id]/locations/[location_id]", or
-   *   "projects/[project_id]/locations/[location_id]".
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListNotificationConfigsResponse`; indicates
-   *   that this is a continuation of a prior `ListNotificationConfigs` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v2.NotificationConfig|NotificationConfig} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listNotificationConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listNotificationConfigs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent in which to list the notification
+ *   configurations. Its format is
+ *   "organizations/[organization_id]/locations/[location_id]",
+ *   "folders/[folder_id]/locations/[location_id]", or
+ *   "projects/[project_id]/locations/[location_id]".
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListNotificationConfigsResponse`; indicates
+ *   that this is a continuation of a prior `ListNotificationConfigs` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v2.NotificationConfig|NotificationConfig} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listNotificationConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listNotificationConfigsStream(
-    request?: protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listNotificationConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listNotificationConfigs stream %j', request);
     return this.descriptors.page.listNotificationConfigs.createStream(
       this.innerApiCalls.listNotificationConfigs as GaxCall,
@@ -7031,54 +5673,53 @@ export class SecurityCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `listNotificationConfigs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent in which to list the notification
-   *   configurations. Its format is
-   *   "organizations/[organization_id]/locations/[location_id]",
-   *   "folders/[folder_id]/locations/[location_id]", or
-   *   "projects/[project_id]/locations/[location_id]".
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListNotificationConfigsResponse`; indicates
-   *   that this is a continuation of a prior `ListNotificationConfigs` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.securitycenter.v2.NotificationConfig|NotificationConfig}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.list_notification_configs.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_ListNotificationConfigs_async
-   */
+/**
+ * Equivalent to `listNotificationConfigs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent in which to list the notification
+ *   configurations. Its format is
+ *   "organizations/[organization_id]/locations/[location_id]",
+ *   "folders/[folder_id]/locations/[location_id]", or
+ *   "projects/[project_id]/locations/[location_id]".
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListNotificationConfigsResponse`; indicates
+ *   that this is a continuation of a prior `ListNotificationConfigs` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.securitycenter.v2.NotificationConfig|NotificationConfig}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.list_notification_configs.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_ListNotificationConfigs_async
+ */
   listNotificationConfigsAsync(
-    request?: protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.securitycenter.v2.INotificationConfig> {
+      request?: protos.google.cloud.securitycenter.v2.IListNotificationConfigsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.securitycenter.v2.INotificationConfig>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listNotificationConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listNotificationConfigs iterate %j', request);
     return this.descriptors.page.listNotificationConfigs.asyncIterate(
       this.innerApiCalls['listNotificationConfigs'] as GaxCall,
@@ -7086,124 +5727,99 @@ export class SecurityCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v2.INotificationConfig>;
   }
-  /**
-   * Lists all ResourceValueConfigs.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns the collection of resource value configs.
-   *   Its format is
-   *   `organizations/[organization_id]`
-   * @param {number} request.pageSize
-   *   The maximum number of configs to return. The service may return fewer than
-   *   this value.
-   *   If unspecified, at most 10 configs will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListResourceValueConfigs` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListResourceValueConfigs` must match the call that provided the
-   *   page token.
-   *
-   *   page_size can be specified, and the new page_size will be used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v2.ResourceValueConfig|ResourceValueConfig}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listResourceValueConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all ResourceValueConfigs.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns the collection of resource value configs.
+ *   Its format is
+ *   `organizations/[organization_id]`
+ * @param {number} request.pageSize
+ *   The maximum number of configs to return. The service may return fewer than
+ *   this value.
+ *   If unspecified, at most 10 configs will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListResourceValueConfigs` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListResourceValueConfigs` must match the call that provided the
+ *   page token.
+ *
+ *   page_size can be specified, and the new page_size will be used.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v2.ResourceValueConfig|ResourceValueConfig}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listResourceValueConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listResourceValueConfigs(
-    request?: protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IResourceValueConfig[],
-      protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest | null,
-      protos.google.cloud.securitycenter.v2.IListResourceValueConfigsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IResourceValueConfig[],
+        protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest|null,
+        protos.google.cloud.securitycenter.v2.IListResourceValueConfigsResponse
+      ]>;
   listResourceValueConfigs(
-    request: protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
-      | protos.google.cloud.securitycenter.v2.IListResourceValueConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.IResourceValueConfig
-    >
-  ): void;
-  listResourceValueConfigs(
-    request: protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
-      | protos.google.cloud.securitycenter.v2.IListResourceValueConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.IResourceValueConfig
-    >
-  ): void;
-  listResourceValueConfigs(
-    request?: protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
-          | protos.google.cloud.securitycenter.v2.IListResourceValueConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v2.IResourceValueConfig
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
-      | protos.google.cloud.securitycenter.v2.IListResourceValueConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.IResourceValueConfig
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IResourceValueConfig[],
-      protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest | null,
-      protos.google.cloud.securitycenter.v2.IListResourceValueConfigsResponse,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IListResourceValueConfigsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IResourceValueConfig>): void;
+  listResourceValueConfigs(
+      request: protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
+          protos.google.cloud.securitycenter.v2.IListResourceValueConfigsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IResourceValueConfig>): void;
+  listResourceValueConfigs(
+      request?: protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
+          protos.google.cloud.securitycenter.v2.IListResourceValueConfigsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IResourceValueConfig>,
+      callback?: PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
+          protos.google.cloud.securitycenter.v2.IListResourceValueConfigsResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IResourceValueConfig>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IResourceValueConfig[],
+        protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest|null,
+        protos.google.cloud.securitycenter.v2.IListResourceValueConfigsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
-          | protos.google.cloud.securitycenter.v2.IListResourceValueConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v2.IResourceValueConfig
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
+      protos.google.cloud.securitycenter.v2.IListResourceValueConfigsResponse|null|undefined,
+      protos.google.cloud.securitycenter.v2.IResourceValueConfig>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listResourceValueConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -7212,68 +5828,65 @@ export class SecurityCenterClient {
     this._log.info('listResourceValueConfigs request %j', request);
     return this.innerApiCalls
       .listResourceValueConfigs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.securitycenter.v2.IResourceValueConfig[],
-          protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest | null,
-          protos.google.cloud.securitycenter.v2.IListResourceValueConfigsResponse,
-        ]) => {
-          this._log.info('listResourceValueConfigs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.securitycenter.v2.IResourceValueConfig[],
+        protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest|null,
+        protos.google.cloud.securitycenter.v2.IListResourceValueConfigsResponse
+      ]) => {
+        this._log.info('listResourceValueConfigs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listResourceValueConfigs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns the collection of resource value configs.
-   *   Its format is
-   *   `organizations/[organization_id]`
-   * @param {number} request.pageSize
-   *   The maximum number of configs to return. The service may return fewer than
-   *   this value.
-   *   If unspecified, at most 10 configs will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListResourceValueConfigs` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListResourceValueConfigs` must match the call that provided the
-   *   page token.
-   *
-   *   page_size can be specified, and the new page_size will be used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v2.ResourceValueConfig|ResourceValueConfig} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listResourceValueConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listResourceValueConfigs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns the collection of resource value configs.
+ *   Its format is
+ *   `organizations/[organization_id]`
+ * @param {number} request.pageSize
+ *   The maximum number of configs to return. The service may return fewer than
+ *   this value.
+ *   If unspecified, at most 10 configs will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListResourceValueConfigs` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListResourceValueConfigs` must match the call that provided the
+ *   page token.
+ *
+ *   page_size can be specified, and the new page_size will be used.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v2.ResourceValueConfig|ResourceValueConfig} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listResourceValueConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listResourceValueConfigsStream(
-    request?: protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listResourceValueConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listResourceValueConfigs stream %j', request);
     return this.descriptors.page.listResourceValueConfigs.createStream(
       this.innerApiCalls.listResourceValueConfigs as GaxCall,
@@ -7282,59 +5895,58 @@ export class SecurityCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `listResourceValueConfigs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns the collection of resource value configs.
-   *   Its format is
-   *   `organizations/[organization_id]`
-   * @param {number} request.pageSize
-   *   The maximum number of configs to return. The service may return fewer than
-   *   this value.
-   *   If unspecified, at most 10 configs will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListResourceValueConfigs` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListResourceValueConfigs` must match the call that provided the
-   *   page token.
-   *
-   *   page_size can be specified, and the new page_size will be used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.securitycenter.v2.ResourceValueConfig|ResourceValueConfig}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.list_resource_value_configs.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_ListResourceValueConfigs_async
-   */
+/**
+ * Equivalent to `listResourceValueConfigs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns the collection of resource value configs.
+ *   Its format is
+ *   `organizations/[organization_id]`
+ * @param {number} request.pageSize
+ *   The maximum number of configs to return. The service may return fewer than
+ *   this value.
+ *   If unspecified, at most 10 configs will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListResourceValueConfigs` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListResourceValueConfigs` must match the call that provided the
+ *   page token.
+ *
+ *   page_size can be specified, and the new page_size will be used.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.securitycenter.v2.ResourceValueConfig|ResourceValueConfig}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.list_resource_value_configs.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_ListResourceValueConfigs_async
+ */
   listResourceValueConfigsAsync(
-    request?: protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.securitycenter.v2.IResourceValueConfig> {
+      request?: protos.google.cloud.securitycenter.v2.IListResourceValueConfigsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.securitycenter.v2.IResourceValueConfig>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listResourceValueConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listResourceValueConfigs iterate %j', request);
     return this.descriptors.page.listResourceValueConfigs.asyncIterate(
       this.innerApiCalls['listResourceValueConfigs'] as GaxCall,
@@ -7342,117 +5954,92 @@ export class SecurityCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v2.IResourceValueConfig>;
   }
-  /**
-   * Lists all sources belonging to an organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the parent of sources to list. Its format should
-   *   be `organizations/[organization_id]`, `folders/[folder_id]`, or
-   *   `projects/[project_id]`.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListSourcesResponse`; indicates
-   *   that this is a continuation of a prior `ListSources` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v2.Source|Source}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listSourcesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all sources belonging to an organization.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the parent of sources to list. Its format should
+ *   be `organizations/[organization_id]`, `folders/[folder_id]`, or
+ *   `projects/[project_id]`.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListSourcesResponse`; indicates
+ *   that this is a continuation of a prior `ListSources` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v2.Source|Source}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listSourcesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSources(
-    request?: protos.google.cloud.securitycenter.v2.IListSourcesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.ISource[],
-      protos.google.cloud.securitycenter.v2.IListSourcesRequest | null,
-      protos.google.cloud.securitycenter.v2.IListSourcesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IListSourcesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.ISource[],
+        protos.google.cloud.securitycenter.v2.IListSourcesRequest|null,
+        protos.google.cloud.securitycenter.v2.IListSourcesResponse
+      ]>;
   listSources(
-    request: protos.google.cloud.securitycenter.v2.IListSourcesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListSourcesRequest,
-      | protos.google.cloud.securitycenter.v2.IListSourcesResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.ISource
-    >
-  ): void;
-  listSources(
-    request: protos.google.cloud.securitycenter.v2.IListSourcesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListSourcesRequest,
-      | protos.google.cloud.securitycenter.v2.IListSourcesResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.ISource
-    >
-  ): void;
-  listSources(
-    request?: protos.google.cloud.securitycenter.v2.IListSourcesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.securitycenter.v2.IListSourcesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.securitycenter.v2.IListSourcesRequest,
-          | protos.google.cloud.securitycenter.v2.IListSourcesResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v2.ISource
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListSourcesRequest,
-      | protos.google.cloud.securitycenter.v2.IListSourcesResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.ISource
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.ISource[],
-      protos.google.cloud.securitycenter.v2.IListSourcesRequest | null,
-      protos.google.cloud.securitycenter.v2.IListSourcesResponse,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IListSourcesResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.ISource>): void;
+  listSources(
+      request: protos.google.cloud.securitycenter.v2.IListSourcesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListSourcesRequest,
+          protos.google.cloud.securitycenter.v2.IListSourcesResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.ISource>): void;
+  listSources(
+      request?: protos.google.cloud.securitycenter.v2.IListSourcesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListSourcesRequest,
+          protos.google.cloud.securitycenter.v2.IListSourcesResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.ISource>,
+      callback?: PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListSourcesRequest,
+          protos.google.cloud.securitycenter.v2.IListSourcesResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.ISource>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.ISource[],
+        protos.google.cloud.securitycenter.v2.IListSourcesRequest|null,
+        protos.google.cloud.securitycenter.v2.IListSourcesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.securitycenter.v2.IListSourcesRequest,
-          | protos.google.cloud.securitycenter.v2.IListSourcesResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v2.ISource
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.securitycenter.v2.IListSourcesRequest,
+      protos.google.cloud.securitycenter.v2.IListSourcesResponse|null|undefined,
+      protos.google.cloud.securitycenter.v2.ISource>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSources values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -7461,61 +6048,58 @@ export class SecurityCenterClient {
     this._log.info('listSources request %j', request);
     return this.innerApiCalls
       .listSources(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.securitycenter.v2.ISource[],
-          protos.google.cloud.securitycenter.v2.IListSourcesRequest | null,
-          protos.google.cloud.securitycenter.v2.IListSourcesResponse,
-        ]) => {
-          this._log.info('listSources values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.securitycenter.v2.ISource[],
+        protos.google.cloud.securitycenter.v2.IListSourcesRequest|null,
+        protos.google.cloud.securitycenter.v2.IListSourcesResponse
+      ]) => {
+        this._log.info('listSources values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listSources`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the parent of sources to list. Its format should
-   *   be `organizations/[organization_id]`, `folders/[folder_id]`, or
-   *   `projects/[project_id]`.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListSourcesResponse`; indicates
-   *   that this is a continuation of a prior `ListSources` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v2.Source|Source} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listSourcesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listSources`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the parent of sources to list. Its format should
+ *   be `organizations/[organization_id]`, `folders/[folder_id]`, or
+ *   `projects/[project_id]`.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListSourcesResponse`; indicates
+ *   that this is a continuation of a prior `ListSources` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v2.Source|Source} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listSourcesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSourcesStream(
-    request?: protos.google.cloud.securitycenter.v2.IListSourcesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.securitycenter.v2.IListSourcesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSources stream %j', request);
     return this.descriptors.page.listSources.createStream(
       this.innerApiCalls.listSources as GaxCall,
@@ -7524,52 +6108,51 @@ export class SecurityCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `listSources`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the parent of sources to list. Its format should
-   *   be `organizations/[organization_id]`, `folders/[folder_id]`, or
-   *   `projects/[project_id]`.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListSourcesResponse`; indicates
-   *   that this is a continuation of a prior `ListSources` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.securitycenter.v2.Source|Source}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.list_sources.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_ListSources_async
-   */
+/**
+ * Equivalent to `listSources`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the parent of sources to list. Its format should
+ *   be `organizations/[organization_id]`, `folders/[folder_id]`, or
+ *   `projects/[project_id]`.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListSourcesResponse`; indicates
+ *   that this is a continuation of a prior `ListSources` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.securitycenter.v2.Source|Source}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.list_sources.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_ListSources_async
+ */
   listSourcesAsync(
-    request?: protos.google.cloud.securitycenter.v2.IListSourcesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.securitycenter.v2.ISource> {
+      request?: protos.google.cloud.securitycenter.v2.IListSourcesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.securitycenter.v2.ISource>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSources iterate %j', request);
     return this.descriptors.page.listSources.asyncIterate(
       this.innerApiCalls['listSources'] as GaxCall,
@@ -7577,143 +6160,118 @@ export class SecurityCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v2.ISource>;
   }
-  /**
-   * Lists the valued resources for a set of simulation results and filter.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of parent to list exposed resources.
-   *
-   *   Valid formats:
-   *   `organizations/{organization}`,
-   *   `organizations/{organization}/simulations/{simulation}`
-   *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
-   * @param {string} request.filter
-   *   The filter expression that filters the valued resources in the response.
-   *   Supported fields:
-   *
-   *     * `resource_value` supports =
-   *     * `resource_type` supports =
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListValuedResourcesResponse`; indicates
-   *   that this is a continuation of a prior `ListValuedResources` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {string} [request.orderBy]
-   *   Optional. The fields by which to order the valued resources response.
-   *
-   *   Supported fields:
-   *
-   *     * `exposed_score`
-   *
-   *     * `resource_value`
-   *
-   *     * `resource_type`
-   *
-   *   Values should be a comma separated list of fields. For example:
-   *   `exposed_score,resource_value`.
-   *
-   *   The default sorting order is descending. To specify ascending or descending
-   *   order for a field, append a " ASC" or a " DESC" suffix, respectively; for
-   *   example: `exposed_score DESC`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v2.ValuedResource|ValuedResource}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listValuedResourcesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the valued resources for a set of simulation results and filter.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of parent to list exposed resources.
+ *
+ *   Valid formats:
+ *   `organizations/{organization}`,
+ *   `organizations/{organization}/simulations/{simulation}`
+ *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
+ * @param {string} request.filter
+ *   The filter expression that filters the valued resources in the response.
+ *   Supported fields:
+ *
+ *     * `resource_value` supports =
+ *     * `resource_type` supports =
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListValuedResourcesResponse`; indicates
+ *   that this is a continuation of a prior `ListValuedResources` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {string} [request.orderBy]
+ *   Optional. The fields by which to order the valued resources response.
+ *
+ *   Supported fields:
+ *
+ *     * `exposed_score`
+ *
+ *     * `resource_value`
+ *
+ *     * `resource_type`
+ *
+ *   Values should be a comma separated list of fields. For example:
+ *   `exposed_score,resource_value`.
+ *
+ *   The default sorting order is descending. To specify ascending or descending
+ *   order for a field, append a " ASC" or a " DESC" suffix, respectively; for
+ *   example: `exposed_score DESC`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v2.ValuedResource|ValuedResource}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listValuedResourcesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listValuedResources(
-    request?: protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IValuedResource[],
-      protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest | null,
-      protos.google.cloud.securitycenter.v2.IListValuedResourcesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IValuedResource[],
+        protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest|null,
+        protos.google.cloud.securitycenter.v2.IListValuedResourcesResponse
+      ]>;
   listValuedResources(
-    request: protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
-      | protos.google.cloud.securitycenter.v2.IListValuedResourcesResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.IValuedResource
-    >
-  ): void;
-  listValuedResources(
-    request: protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
-      | protos.google.cloud.securitycenter.v2.IListValuedResourcesResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.IValuedResource
-    >
-  ): void;
-  listValuedResources(
-    request?: protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
-          | protos.google.cloud.securitycenter.v2.IListValuedResourcesResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v2.IValuedResource
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
-      | protos.google.cloud.securitycenter.v2.IListValuedResourcesResponse
-      | null
-      | undefined,
-      protos.google.cloud.securitycenter.v2.IValuedResource
-    >
-  ): Promise<
-    [
-      protos.google.cloud.securitycenter.v2.IValuedResource[],
-      protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest | null,
-      protos.google.cloud.securitycenter.v2.IListValuedResourcesResponse,
-    ]
-  > | void {
+          protos.google.cloud.securitycenter.v2.IListValuedResourcesResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IValuedResource>): void;
+  listValuedResources(
+      request: protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
+          protos.google.cloud.securitycenter.v2.IListValuedResourcesResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IValuedResource>): void;
+  listValuedResources(
+      request?: protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
+          protos.google.cloud.securitycenter.v2.IListValuedResourcesResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IValuedResource>,
+      callback?: PaginationCallback<
+          protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
+          protos.google.cloud.securitycenter.v2.IListValuedResourcesResponse|null|undefined,
+          protos.google.cloud.securitycenter.v2.IValuedResource>):
+      Promise<[
+        protos.google.cloud.securitycenter.v2.IValuedResource[],
+        protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest|null,
+        protos.google.cloud.securitycenter.v2.IListValuedResourcesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
-          | protos.google.cloud.securitycenter.v2.IListValuedResourcesResponse
-          | null
-          | undefined,
-          protos.google.cloud.securitycenter.v2.IValuedResource
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
+      protos.google.cloud.securitycenter.v2.IListValuedResourcesResponse|null|undefined,
+      protos.google.cloud.securitycenter.v2.IValuedResource>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listValuedResources values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -7722,87 +6280,84 @@ export class SecurityCenterClient {
     this._log.info('listValuedResources request %j', request);
     return this.innerApiCalls
       .listValuedResources(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.securitycenter.v2.IValuedResource[],
-          protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest | null,
-          protos.google.cloud.securitycenter.v2.IListValuedResourcesResponse,
-        ]) => {
-          this._log.info('listValuedResources values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.securitycenter.v2.IValuedResource[],
+        protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest|null,
+        protos.google.cloud.securitycenter.v2.IListValuedResourcesResponse
+      ]) => {
+        this._log.info('listValuedResources values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listValuedResources`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of parent to list exposed resources.
-   *
-   *   Valid formats:
-   *   `organizations/{organization}`,
-   *   `organizations/{organization}/simulations/{simulation}`
-   *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
-   * @param {string} request.filter
-   *   The filter expression that filters the valued resources in the response.
-   *   Supported fields:
-   *
-   *     * `resource_value` supports =
-   *     * `resource_type` supports =
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListValuedResourcesResponse`; indicates
-   *   that this is a continuation of a prior `ListValuedResources` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {string} [request.orderBy]
-   *   Optional. The fields by which to order the valued resources response.
-   *
-   *   Supported fields:
-   *
-   *     * `exposed_score`
-   *
-   *     * `resource_value`
-   *
-   *     * `resource_type`
-   *
-   *   Values should be a comma separated list of fields. For example:
-   *   `exposed_score,resource_value`.
-   *
-   *   The default sorting order is descending. To specify ascending or descending
-   *   order for a field, append a " ASC" or a " DESC" suffix, respectively; for
-   *   example: `exposed_score DESC`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v2.ValuedResource|ValuedResource} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listValuedResourcesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listValuedResources`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of parent to list exposed resources.
+ *
+ *   Valid formats:
+ *   `organizations/{organization}`,
+ *   `organizations/{organization}/simulations/{simulation}`
+ *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
+ * @param {string} request.filter
+ *   The filter expression that filters the valued resources in the response.
+ *   Supported fields:
+ *
+ *     * `resource_value` supports =
+ *     * `resource_type` supports =
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListValuedResourcesResponse`; indicates
+ *   that this is a continuation of a prior `ListValuedResources` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {string} [request.orderBy]
+ *   Optional. The fields by which to order the valued resources response.
+ *
+ *   Supported fields:
+ *
+ *     * `exposed_score`
+ *
+ *     * `resource_value`
+ *
+ *     * `resource_type`
+ *
+ *   Values should be a comma separated list of fields. For example:
+ *   `exposed_score,resource_value`.
+ *
+ *   The default sorting order is descending. To specify ascending or descending
+ *   order for a field, append a " ASC" or a " DESC" suffix, respectively; for
+ *   example: `exposed_score DESC`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v2.ValuedResource|ValuedResource} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listValuedResourcesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listValuedResourcesStream(
-    request?: protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listValuedResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listValuedResources stream %j', request);
     return this.descriptors.page.listValuedResources.createStream(
       this.innerApiCalls.listValuedResources as GaxCall,
@@ -7811,78 +6366,77 @@ export class SecurityCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `listValuedResources`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of parent to list exposed resources.
-   *
-   *   Valid formats:
-   *   `organizations/{organization}`,
-   *   `organizations/{organization}/simulations/{simulation}`
-   *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
-   * @param {string} request.filter
-   *   The filter expression that filters the valued resources in the response.
-   *   Supported fields:
-   *
-   *     * `resource_value` supports =
-   *     * `resource_type` supports =
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListValuedResourcesResponse`; indicates
-   *   that this is a continuation of a prior `ListValuedResources` call, and
-   *   that the system should return the next page of data.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. Default is
-   *   10, minimum is 1, maximum is 1000.
-   * @param {string} [request.orderBy]
-   *   Optional. The fields by which to order the valued resources response.
-   *
-   *   Supported fields:
-   *
-   *     * `exposed_score`
-   *
-   *     * `resource_value`
-   *
-   *     * `resource_type`
-   *
-   *   Values should be a comma separated list of fields. For example:
-   *   `exposed_score,resource_value`.
-   *
-   *   The default sorting order is descending. To specify ascending or descending
-   *   order for a field, append a " ASC" or a " DESC" suffix, respectively; for
-   *   example: `exposed_score DESC`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.securitycenter.v2.ValuedResource|ValuedResource}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/security_center.list_valued_resources.js</caption>
-   * region_tag:securitycenter_v2_generated_SecurityCenter_ListValuedResources_async
-   */
+/**
+ * Equivalent to `listValuedResources`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of parent to list exposed resources.
+ *
+ *   Valid formats:
+ *   `organizations/{organization}`,
+ *   `organizations/{organization}/simulations/{simulation}`
+ *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
+ * @param {string} request.filter
+ *   The filter expression that filters the valued resources in the response.
+ *   Supported fields:
+ *
+ *     * `resource_value` supports =
+ *     * `resource_type` supports =
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListValuedResourcesResponse`; indicates
+ *   that this is a continuation of a prior `ListValuedResources` call, and
+ *   that the system should return the next page of data.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. Default is
+ *   10, minimum is 1, maximum is 1000.
+ * @param {string} [request.orderBy]
+ *   Optional. The fields by which to order the valued resources response.
+ *
+ *   Supported fields:
+ *
+ *     * `exposed_score`
+ *
+ *     * `resource_value`
+ *
+ *     * `resource_type`
+ *
+ *   Values should be a comma separated list of fields. For example:
+ *   `exposed_score,resource_value`.
+ *
+ *   The default sorting order is descending. To specify ascending or descending
+ *   order for a field, append a " ASC" or a " DESC" suffix, respectively; for
+ *   example: `exposed_score DESC`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.securitycenter.v2.ValuedResource|ValuedResource}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/security_center.list_valued_resources.js</caption>
+ * region_tag:securitycenter_v2_generated_SecurityCenter_ListValuedResources_async
+ */
   listValuedResourcesAsync(
-    request?: protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.securitycenter.v2.IValuedResource> {
+      request?: protos.google.cloud.securitycenter.v2.IListValuedResourcesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.securitycenter.v2.IValuedResource>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listValuedResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listValuedResources iterate %j', request);
     return this.descriptors.page.listValuedResources.asyncIterate(
       this.innerApiCalls['listValuedResources'] as GaxCall,
@@ -7890,7 +6444,7 @@ export class SecurityCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycenter.v2.IValuedResource>;
   }
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -7935,20 +6489,20 @@ export class SecurityCenterClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -7985,13 +6539,13 @@ export class SecurityCenterClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -8025,7 +6579,7 @@ export class SecurityCenterClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -8040,20 +6594,20 @@ export class SecurityCenterClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -8097,20 +6651,20 @@ export class SecurityCenterClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -8125,7 +6679,7 @@ export class SecurityCenterClient {
    * @param {string} asset
    * @returns {string} Resource name string.
    */
-  folderAssetSecurityMarksPath(folder: string, asset: string) {
+  folderAssetSecurityMarksPath(folder:string,asset:string) {
     return this.pathTemplates.folderAssetSecurityMarksPathTemplate.render({
       folder: folder,
       asset: asset,
@@ -8139,12 +6693,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing folder_asset_securityMarks resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderAssetSecurityMarksName(
-    folderAssetSecurityMarksName: string
-  ) {
-    return this.pathTemplates.folderAssetSecurityMarksPathTemplate.match(
-      folderAssetSecurityMarksName
-    ).folder;
+  matchFolderFromFolderAssetSecurityMarksName(folderAssetSecurityMarksName: string) {
+    return this.pathTemplates.folderAssetSecurityMarksPathTemplate.match(folderAssetSecurityMarksName).folder;
   }
 
   /**
@@ -8154,12 +6704,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing folder_asset_securityMarks resource.
    * @returns {string} A string representing the asset.
    */
-  matchAssetFromFolderAssetSecurityMarksName(
-    folderAssetSecurityMarksName: string
-  ) {
-    return this.pathTemplates.folderAssetSecurityMarksPathTemplate.match(
-      folderAssetSecurityMarksName
-    ).asset;
+  matchAssetFromFolderAssetSecurityMarksName(folderAssetSecurityMarksName: string) {
+    return this.pathTemplates.folderAssetSecurityMarksPathTemplate.match(folderAssetSecurityMarksName).asset;
   }
 
   /**
@@ -8169,7 +6715,7 @@ export class SecurityCenterClient {
    * @param {string} constraint_name
    * @returns {string} Resource name string.
    */
-  folderConstraintNamePath(folder: string, constraintName: string) {
+  folderConstraintNamePath(folder:string,constraintName:string) {
     return this.pathTemplates.folderConstraintNamePathTemplate.render({
       folder: folder,
       constraint_name: constraintName,
@@ -8184,9 +6730,7 @@ export class SecurityCenterClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderConstraintNameName(folderConstraintNameName: string) {
-    return this.pathTemplates.folderConstraintNamePathTemplate.match(
-      folderConstraintNameName
-    ).folder;
+    return this.pathTemplates.folderConstraintNamePathTemplate.match(folderConstraintNameName).folder;
   }
 
   /**
@@ -8196,28 +6740,20 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing folder_constraint_name resource.
    * @returns {string} A string representing the constraint_name.
    */
-  matchConstraintNameFromFolderConstraintNameName(
-    folderConstraintNameName: string
-  ) {
-    return this.pathTemplates.folderConstraintNamePathTemplate.match(
-      folderConstraintNameName
-    ).constraint_name;
+  matchConstraintNameFromFolderConstraintNameName(folderConstraintNameName: string) {
+    return this.pathTemplates.folderConstraintNamePathTemplate.match(folderConstraintNameName).constraint_name;
   }
 
   /**
-   * Return a fully-qualified folderLocationExport resource name string.
+   * Return a fully-qualified folderLocationBigQueryExports resource name string.
    *
    * @param {string} folder
    * @param {string} location
    * @param {string} exportParam
    * @returns {string} Resource name string.
    */
-  folderLocationExportPath(
-    folder: string,
-    location: string,
-    exportParam: string
-  ) {
-    return this.pathTemplates.folderLocationExportPathTemplate.render({
+  folderLocationBigQueryExportsPath(folder:string,location:string,exportParam:string) {
+    return this.pathTemplates.folderLocationBigQueryExportsPathTemplate.render({
       folder: folder,
       location: location,
       export: exportParam,
@@ -8225,58 +6761,48 @@ export class SecurityCenterClient {
   }
 
   /**
-   * Parse the folder from FolderLocationExport resource.
+   * Parse the folder from FolderLocationBigQueryExports resource.
    *
-   * @param {string} folderLocationExportName
-   *   A fully-qualified path representing folder_location_export resource.
+   * @param {string} folderLocationBigQueryExportsName
+   *   A fully-qualified path representing folder_location_bigQueryExports resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationExportName(folderLocationExportName: string) {
-    return this.pathTemplates.folderLocationExportPathTemplate.match(
-      folderLocationExportName
-    ).folder;
+  matchFolderFromFolderLocationBigQueryExportsName(folderLocationBigQueryExportsName: string) {
+    return this.pathTemplates.folderLocationBigQueryExportsPathTemplate.match(folderLocationBigQueryExportsName).folder;
   }
 
   /**
-   * Parse the location from FolderLocationExport resource.
+   * Parse the location from FolderLocationBigQueryExports resource.
    *
-   * @param {string} folderLocationExportName
-   *   A fully-qualified path representing folder_location_export resource.
+   * @param {string} folderLocationBigQueryExportsName
+   *   A fully-qualified path representing folder_location_bigQueryExports resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationExportName(folderLocationExportName: string) {
-    return this.pathTemplates.folderLocationExportPathTemplate.match(
-      folderLocationExportName
-    ).location;
+  matchLocationFromFolderLocationBigQueryExportsName(folderLocationBigQueryExportsName: string) {
+    return this.pathTemplates.folderLocationBigQueryExportsPathTemplate.match(folderLocationBigQueryExportsName).location;
   }
 
   /**
-   * Parse the export from FolderLocationExport resource.
+   * Parse the export from FolderLocationBigQueryExports resource.
    *
-   * @param {string} folderLocationExportName
-   *   A fully-qualified path representing folder_location_export resource.
+   * @param {string} folderLocationBigQueryExportsName
+   *   A fully-qualified path representing folder_location_bigQueryExports resource.
    * @returns {string} A string representing the export.
    */
-  matchExportFromFolderLocationExportName(folderLocationExportName: string) {
-    return this.pathTemplates.folderLocationExportPathTemplate.match(
-      folderLocationExportName
-    ).export;
+  matchExportFromFolderLocationBigQueryExportsName(folderLocationBigQueryExportsName: string) {
+    return this.pathTemplates.folderLocationBigQueryExportsPathTemplate.match(folderLocationBigQueryExportsName).export;
   }
 
   /**
-   * Return a fully-qualified folderLocationMuteConfig resource name string.
+   * Return a fully-qualified folderLocationMuteConfigs resource name string.
    *
    * @param {string} folder
    * @param {string} location
    * @param {string} mute_config
    * @returns {string} Resource name string.
    */
-  folderLocationMuteConfigPath(
-    folder: string,
-    location: string,
-    muteConfig: string
-  ) {
-    return this.pathTemplates.folderLocationMuteConfigPathTemplate.render({
+  folderLocationMuteConfigsPath(folder:string,location:string,muteConfig:string) {
+    return this.pathTemplates.folderLocationMuteConfigsPathTemplate.render({
       folder: folder,
       location: location,
       mute_config: muteConfig,
@@ -8284,155 +6810,121 @@ export class SecurityCenterClient {
   }
 
   /**
-   * Parse the folder from FolderLocationMuteConfig resource.
+   * Parse the folder from FolderLocationMuteConfigs resource.
    *
-   * @param {string} folderLocationMuteConfigName
-   *   A fully-qualified path representing folder_location_mute_config resource.
+   * @param {string} folderLocationMuteConfigsName
+   *   A fully-qualified path representing folder_location_muteConfigs resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationMuteConfigName(
-    folderLocationMuteConfigName: string
-  ) {
-    return this.pathTemplates.folderLocationMuteConfigPathTemplate.match(
-      folderLocationMuteConfigName
-    ).folder;
+  matchFolderFromFolderLocationMuteConfigsName(folderLocationMuteConfigsName: string) {
+    return this.pathTemplates.folderLocationMuteConfigsPathTemplate.match(folderLocationMuteConfigsName).folder;
   }
 
   /**
-   * Parse the location from FolderLocationMuteConfig resource.
+   * Parse the location from FolderLocationMuteConfigs resource.
    *
-   * @param {string} folderLocationMuteConfigName
-   *   A fully-qualified path representing folder_location_mute_config resource.
+   * @param {string} folderLocationMuteConfigsName
+   *   A fully-qualified path representing folder_location_muteConfigs resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationMuteConfigName(
-    folderLocationMuteConfigName: string
-  ) {
-    return this.pathTemplates.folderLocationMuteConfigPathTemplate.match(
-      folderLocationMuteConfigName
-    ).location;
+  matchLocationFromFolderLocationMuteConfigsName(folderLocationMuteConfigsName: string) {
+    return this.pathTemplates.folderLocationMuteConfigsPathTemplate.match(folderLocationMuteConfigsName).location;
   }
 
   /**
-   * Parse the mute_config from FolderLocationMuteConfig resource.
+   * Parse the mute_config from FolderLocationMuteConfigs resource.
    *
-   * @param {string} folderLocationMuteConfigName
-   *   A fully-qualified path representing folder_location_mute_config resource.
+   * @param {string} folderLocationMuteConfigsName
+   *   A fully-qualified path representing folder_location_muteConfigs resource.
    * @returns {string} A string representing the mute_config.
    */
-  matchMuteConfigFromFolderLocationMuteConfigName(
-    folderLocationMuteConfigName: string
-  ) {
-    return this.pathTemplates.folderLocationMuteConfigPathTemplate.match(
-      folderLocationMuteConfigName
-    ).mute_config;
+  matchMuteConfigFromFolderLocationMuteConfigsName(folderLocationMuteConfigsName: string) {
+    return this.pathTemplates.folderLocationMuteConfigsPathTemplate.match(folderLocationMuteConfigsName).mute_config;
   }
 
   /**
-   * Return a fully-qualified folderLocationNotificationConfig resource name string.
+   * Return a fully-qualified folderLocationNotificationConfigs resource name string.
    *
    * @param {string} folder
    * @param {string} location
    * @param {string} notification_config
    * @returns {string} Resource name string.
    */
-  folderLocationNotificationConfigPath(
-    folder: string,
-    location: string,
-    notificationConfig: string
-  ) {
-    return this.pathTemplates.folderLocationNotificationConfigPathTemplate.render(
-      {
-        folder: folder,
-        location: location,
-        notification_config: notificationConfig,
-      }
-    );
+  folderLocationNotificationConfigsPath(folder:string,location:string,notificationConfig:string) {
+    return this.pathTemplates.folderLocationNotificationConfigsPathTemplate.render({
+      folder: folder,
+      location: location,
+      notification_config: notificationConfig,
+    });
   }
 
   /**
-   * Parse the folder from FolderLocationNotificationConfig resource.
+   * Parse the folder from FolderLocationNotificationConfigs resource.
    *
-   * @param {string} folderLocationNotificationConfigName
-   *   A fully-qualified path representing folder_location_notification_config resource.
+   * @param {string} folderLocationNotificationConfigsName
+   *   A fully-qualified path representing folder_location_notificationConfigs resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationNotificationConfigName(
-    folderLocationNotificationConfigName: string
-  ) {
-    return this.pathTemplates.folderLocationNotificationConfigPathTemplate.match(
-      folderLocationNotificationConfigName
-    ).folder;
+  matchFolderFromFolderLocationNotificationConfigsName(folderLocationNotificationConfigsName: string) {
+    return this.pathTemplates.folderLocationNotificationConfigsPathTemplate.match(folderLocationNotificationConfigsName).folder;
   }
 
   /**
-   * Parse the location from FolderLocationNotificationConfig resource.
+   * Parse the location from FolderLocationNotificationConfigs resource.
    *
-   * @param {string} folderLocationNotificationConfigName
-   *   A fully-qualified path representing folder_location_notification_config resource.
+   * @param {string} folderLocationNotificationConfigsName
+   *   A fully-qualified path representing folder_location_notificationConfigs resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationNotificationConfigName(
-    folderLocationNotificationConfigName: string
-  ) {
-    return this.pathTemplates.folderLocationNotificationConfigPathTemplate.match(
-      folderLocationNotificationConfigName
-    ).location;
+  matchLocationFromFolderLocationNotificationConfigsName(folderLocationNotificationConfigsName: string) {
+    return this.pathTemplates.folderLocationNotificationConfigsPathTemplate.match(folderLocationNotificationConfigsName).location;
   }
 
   /**
-   * Parse the notification_config from FolderLocationNotificationConfig resource.
+   * Parse the notification_config from FolderLocationNotificationConfigs resource.
    *
-   * @param {string} folderLocationNotificationConfigName
-   *   A fully-qualified path representing folder_location_notification_config resource.
+   * @param {string} folderLocationNotificationConfigsName
+   *   A fully-qualified path representing folder_location_notificationConfigs resource.
    * @returns {string} A string representing the notification_config.
    */
-  matchNotificationConfigFromFolderLocationNotificationConfigName(
-    folderLocationNotificationConfigName: string
-  ) {
-    return this.pathTemplates.folderLocationNotificationConfigPathTemplate.match(
-      folderLocationNotificationConfigName
-    ).notification_config;
+  matchNotificationConfigFromFolderLocationNotificationConfigsName(folderLocationNotificationConfigsName: string) {
+    return this.pathTemplates.folderLocationNotificationConfigsPathTemplate.match(folderLocationNotificationConfigsName).notification_config;
   }
 
   /**
-   * Return a fully-qualified folderMuteConfig resource name string.
+   * Return a fully-qualified folderMuteConfigs resource name string.
    *
    * @param {string} folder
    * @param {string} mute_config
    * @returns {string} Resource name string.
    */
-  folderMuteConfigPath(folder: string, muteConfig: string) {
-    return this.pathTemplates.folderMuteConfigPathTemplate.render({
+  folderMuteConfigsPath(folder:string,muteConfig:string) {
+    return this.pathTemplates.folderMuteConfigsPathTemplate.render({
       folder: folder,
       mute_config: muteConfig,
     });
   }
 
   /**
-   * Parse the folder from FolderMuteConfig resource.
+   * Parse the folder from FolderMuteConfigs resource.
    *
-   * @param {string} folderMuteConfigName
-   *   A fully-qualified path representing folder_mute_config resource.
+   * @param {string} folderMuteConfigsName
+   *   A fully-qualified path representing folder_muteConfigs resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderMuteConfigName(folderMuteConfigName: string) {
-    return this.pathTemplates.folderMuteConfigPathTemplate.match(
-      folderMuteConfigName
-    ).folder;
+  matchFolderFromFolderMuteConfigsName(folderMuteConfigsName: string) {
+    return this.pathTemplates.folderMuteConfigsPathTemplate.match(folderMuteConfigsName).folder;
   }
 
   /**
-   * Parse the mute_config from FolderMuteConfig resource.
+   * Parse the mute_config from FolderMuteConfigs resource.
    *
-   * @param {string} folderMuteConfigName
-   *   A fully-qualified path representing folder_mute_config resource.
+   * @param {string} folderMuteConfigsName
+   *   A fully-qualified path representing folder_muteConfigs resource.
    * @returns {string} A string representing the mute_config.
    */
-  matchMuteConfigFromFolderMuteConfigName(folderMuteConfigName: string) {
-    return this.pathTemplates.folderMuteConfigPathTemplate.match(
-      folderMuteConfigName
-    ).mute_config;
+  matchMuteConfigFromFolderMuteConfigsName(folderMuteConfigsName: string) {
+    return this.pathTemplates.folderMuteConfigsPathTemplate.match(folderMuteConfigsName).mute_config;
   }
 
   /**
@@ -8442,7 +6934,7 @@ export class SecurityCenterClient {
    * @param {string} source
    * @returns {string} Resource name string.
    */
-  folderSourcePath(folder: string, source: string) {
+  folderSourcePath(folder:string,source:string) {
     return this.pathTemplates.folderSourcePathTemplate.render({
       folder: folder,
       source: source,
@@ -8457,8 +6949,7 @@ export class SecurityCenterClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderSourceName(folderSourceName: string) {
-    return this.pathTemplates.folderSourcePathTemplate.match(folderSourceName)
-      .folder;
+    return this.pathTemplates.folderSourcePathTemplate.match(folderSourceName).folder;
   }
 
   /**
@@ -8469,63 +6960,7 @@ export class SecurityCenterClient {
    * @returns {string} A string representing the source.
    */
   matchSourceFromFolderSourceName(folderSourceName: string) {
-    return this.pathTemplates.folderSourcePathTemplate.match(folderSourceName)
-      .source;
-  }
-
-  /**
-   * Return a fully-qualified folderSourceFinding resource name string.
-   *
-   * @param {string} folder
-   * @param {string} source
-   * @param {string} finding
-   * @returns {string} Resource name string.
-   */
-  folderSourceFindingPath(folder: string, source: string, finding: string) {
-    return this.pathTemplates.folderSourceFindingPathTemplate.render({
-      folder: folder,
-      source: source,
-      finding: finding,
-    });
-  }
-
-  /**
-   * Parse the folder from FolderSourceFinding resource.
-   *
-   * @param {string} folderSourceFindingName
-   *   A fully-qualified path representing folder_source_finding resource.
-   * @returns {string} A string representing the folder.
-   */
-  matchFolderFromFolderSourceFindingName(folderSourceFindingName: string) {
-    return this.pathTemplates.folderSourceFindingPathTemplate.match(
-      folderSourceFindingName
-    ).folder;
-  }
-
-  /**
-   * Parse the source from FolderSourceFinding resource.
-   *
-   * @param {string} folderSourceFindingName
-   *   A fully-qualified path representing folder_source_finding resource.
-   * @returns {string} A string representing the source.
-   */
-  matchSourceFromFolderSourceFindingName(folderSourceFindingName: string) {
-    return this.pathTemplates.folderSourceFindingPathTemplate.match(
-      folderSourceFindingName
-    ).source;
-  }
-
-  /**
-   * Parse the finding from FolderSourceFinding resource.
-   *
-   * @param {string} folderSourceFindingName
-   *   A fully-qualified path representing folder_source_finding resource.
-   * @returns {string} A string representing the finding.
-   */
-  matchFindingFromFolderSourceFindingName(folderSourceFindingName: string) {
-    return this.pathTemplates.folderSourceFindingPathTemplate.match(
-      folderSourceFindingName
-    ).finding;
+    return this.pathTemplates.folderSourcePathTemplate.match(folderSourceName).source;
   }
 
   /**
@@ -8537,20 +6972,13 @@ export class SecurityCenterClient {
    * @param {string} externalsystem
    * @returns {string} Resource name string.
    */
-  folderSourceFindingExternalsystemPath(
-    folder: string,
-    source: string,
-    finding: string,
-    externalsystem: string
-  ) {
-    return this.pathTemplates.folderSourceFindingExternalsystemPathTemplate.render(
-      {
-        folder: folder,
-        source: source,
-        finding: finding,
-        externalsystem: externalsystem,
-      }
-    );
+  folderSourceFindingExternalsystemPath(folder:string,source:string,finding:string,externalsystem:string) {
+    return this.pathTemplates.folderSourceFindingExternalsystemPathTemplate.render({
+      folder: folder,
+      source: source,
+      finding: finding,
+      externalsystem: externalsystem,
+    });
   }
 
   /**
@@ -8560,12 +6988,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing folder_source_finding_externalsystem resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderSourceFindingExternalsystemName(
-    folderSourceFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.folderSourceFindingExternalsystemPathTemplate.match(
-      folderSourceFindingExternalsystemName
-    ).folder;
+  matchFolderFromFolderSourceFindingExternalsystemName(folderSourceFindingExternalsystemName: string) {
+    return this.pathTemplates.folderSourceFindingExternalsystemPathTemplate.match(folderSourceFindingExternalsystemName).folder;
   }
 
   /**
@@ -8575,12 +6999,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing folder_source_finding_externalsystem resource.
    * @returns {string} A string representing the source.
    */
-  matchSourceFromFolderSourceFindingExternalsystemName(
-    folderSourceFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.folderSourceFindingExternalsystemPathTemplate.match(
-      folderSourceFindingExternalsystemName
-    ).source;
+  matchSourceFromFolderSourceFindingExternalsystemName(folderSourceFindingExternalsystemName: string) {
+    return this.pathTemplates.folderSourceFindingExternalsystemPathTemplate.match(folderSourceFindingExternalsystemName).source;
   }
 
   /**
@@ -8590,12 +7010,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing folder_source_finding_externalsystem resource.
    * @returns {string} A string representing the finding.
    */
-  matchFindingFromFolderSourceFindingExternalsystemName(
-    folderSourceFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.folderSourceFindingExternalsystemPathTemplate.match(
-      folderSourceFindingExternalsystemName
-    ).finding;
+  matchFindingFromFolderSourceFindingExternalsystemName(folderSourceFindingExternalsystemName: string) {
+    return this.pathTemplates.folderSourceFindingExternalsystemPathTemplate.match(folderSourceFindingExternalsystemName).finding;
   }
 
   /**
@@ -8605,12 +7021,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing folder_source_finding_externalsystem resource.
    * @returns {string} A string representing the externalsystem.
    */
-  matchExternalsystemFromFolderSourceFindingExternalsystemName(
-    folderSourceFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.folderSourceFindingExternalsystemPathTemplate.match(
-      folderSourceFindingExternalsystemName
-    ).externalsystem;
+  matchExternalsystemFromFolderSourceFindingExternalsystemName(folderSourceFindingExternalsystemName: string) {
+    return this.pathTemplates.folderSourceFindingExternalsystemPathTemplate.match(folderSourceFindingExternalsystemName).externalsystem;
   }
 
   /**
@@ -8621,18 +7033,12 @@ export class SecurityCenterClient {
    * @param {string} finding
    * @returns {string} Resource name string.
    */
-  folderSourceFindingSecurityMarksPath(
-    folder: string,
-    source: string,
-    finding: string
-  ) {
-    return this.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.render(
-      {
-        folder: folder,
-        source: source,
-        finding: finding,
-      }
-    );
+  folderSourceFindingSecurityMarksPath(folder:string,source:string,finding:string) {
+    return this.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.render({
+      folder: folder,
+      source: source,
+      finding: finding,
+    });
   }
 
   /**
@@ -8642,12 +7048,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing folder_source_finding_securityMarks resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderSourceFindingSecurityMarksName(
-    folderSourceFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.match(
-      folderSourceFindingSecurityMarksName
-    ).folder;
+  matchFolderFromFolderSourceFindingSecurityMarksName(folderSourceFindingSecurityMarksName: string) {
+    return this.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.match(folderSourceFindingSecurityMarksName).folder;
   }
 
   /**
@@ -8657,12 +7059,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing folder_source_finding_securityMarks resource.
    * @returns {string} A string representing the source.
    */
-  matchSourceFromFolderSourceFindingSecurityMarksName(
-    folderSourceFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.match(
-      folderSourceFindingSecurityMarksName
-    ).source;
+  matchSourceFromFolderSourceFindingSecurityMarksName(folderSourceFindingSecurityMarksName: string) {
+    return this.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.match(folderSourceFindingSecurityMarksName).source;
   }
 
   /**
@@ -8672,95 +7070,57 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing folder_source_finding_securityMarks resource.
    * @returns {string} A string representing the finding.
    */
-  matchFindingFromFolderSourceFindingSecurityMarksName(
-    folderSourceFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.match(
-      folderSourceFindingSecurityMarksName
-    ).finding;
+  matchFindingFromFolderSourceFindingSecurityMarksName(folderSourceFindingSecurityMarksName: string) {
+    return this.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.match(folderSourceFindingSecurityMarksName).finding;
   }
 
   /**
-   * Return a fully-qualified folderSourceLocationFinding resource name string.
+   * Return a fully-qualified folderSourceFindings resource name string.
    *
    * @param {string} folder
    * @param {string} source
-   * @param {string} location
    * @param {string} finding
    * @returns {string} Resource name string.
    */
-  folderSourceLocationFindingPath(
-    folder: string,
-    source: string,
-    location: string,
-    finding: string
-  ) {
-    return this.pathTemplates.folderSourceLocationFindingPathTemplate.render({
+  folderSourceFindingsPath(folder:string,source:string,finding:string) {
+    return this.pathTemplates.folderSourceFindingsPathTemplate.render({
       folder: folder,
       source: source,
-      location: location,
       finding: finding,
     });
   }
 
   /**
-   * Parse the folder from FolderSourceLocationFinding resource.
+   * Parse the folder from FolderSourceFindings resource.
    *
-   * @param {string} folderSourceLocationFindingName
-   *   A fully-qualified path representing folder_source_location_finding resource.
+   * @param {string} folderSourceFindingsName
+   *   A fully-qualified path representing folder_source_findings resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderSourceLocationFindingName(
-    folderSourceLocationFindingName: string
-  ) {
-    return this.pathTemplates.folderSourceLocationFindingPathTemplate.match(
-      folderSourceLocationFindingName
-    ).folder;
+  matchFolderFromFolderSourceFindingsName(folderSourceFindingsName: string) {
+    return this.pathTemplates.folderSourceFindingsPathTemplate.match(folderSourceFindingsName).folder;
   }
 
   /**
-   * Parse the source from FolderSourceLocationFinding resource.
+   * Parse the source from FolderSourceFindings resource.
    *
-   * @param {string} folderSourceLocationFindingName
-   *   A fully-qualified path representing folder_source_location_finding resource.
+   * @param {string} folderSourceFindingsName
+   *   A fully-qualified path representing folder_source_findings resource.
    * @returns {string} A string representing the source.
    */
-  matchSourceFromFolderSourceLocationFindingName(
-    folderSourceLocationFindingName: string
-  ) {
-    return this.pathTemplates.folderSourceLocationFindingPathTemplate.match(
-      folderSourceLocationFindingName
-    ).source;
+  matchSourceFromFolderSourceFindingsName(folderSourceFindingsName: string) {
+    return this.pathTemplates.folderSourceFindingsPathTemplate.match(folderSourceFindingsName).source;
   }
 
   /**
-   * Parse the location from FolderSourceLocationFinding resource.
+   * Parse the finding from FolderSourceFindings resource.
    *
-   * @param {string} folderSourceLocationFindingName
-   *   A fully-qualified path representing folder_source_location_finding resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromFolderSourceLocationFindingName(
-    folderSourceLocationFindingName: string
-  ) {
-    return this.pathTemplates.folderSourceLocationFindingPathTemplate.match(
-      folderSourceLocationFindingName
-    ).location;
-  }
-
-  /**
-   * Parse the finding from FolderSourceLocationFinding resource.
-   *
-   * @param {string} folderSourceLocationFindingName
-   *   A fully-qualified path representing folder_source_location_finding resource.
+   * @param {string} folderSourceFindingsName
+   *   A fully-qualified path representing folder_source_findings resource.
    * @returns {string} A string representing the finding.
    */
-  matchFindingFromFolderSourceLocationFindingName(
-    folderSourceLocationFindingName: string
-  ) {
-    return this.pathTemplates.folderSourceLocationFindingPathTemplate.match(
-      folderSourceLocationFindingName
-    ).finding;
+  matchFindingFromFolderSourceFindingsName(folderSourceFindingsName: string) {
+    return this.pathTemplates.folderSourceFindingsPathTemplate.match(folderSourceFindingsName).finding;
   }
 
   /**
@@ -8773,22 +7133,14 @@ export class SecurityCenterClient {
    * @param {string} externalsystem
    * @returns {string} Resource name string.
    */
-  folderSourceLocationFindingExternalsystemPath(
-    folder: string,
-    source: string,
-    location: string,
-    finding: string,
-    externalsystem: string
-  ) {
-    return this.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.render(
-      {
-        folder: folder,
-        source: source,
-        location: location,
-        finding: finding,
-        externalsystem: externalsystem,
-      }
-    );
+  folderSourceLocationFindingExternalsystemPath(folder:string,source:string,location:string,finding:string,externalsystem:string) {
+    return this.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.render({
+      folder: folder,
+      source: source,
+      location: location,
+      finding: finding,
+      externalsystem: externalsystem,
+    });
   }
 
   /**
@@ -8798,12 +7150,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing folder_source_location_finding_externalsystem resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderSourceLocationFindingExternalsystemName(
-    folderSourceLocationFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.match(
-      folderSourceLocationFindingExternalsystemName
-    ).folder;
+  matchFolderFromFolderSourceLocationFindingExternalsystemName(folderSourceLocationFindingExternalsystemName: string) {
+    return this.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.match(folderSourceLocationFindingExternalsystemName).folder;
   }
 
   /**
@@ -8813,12 +7161,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing folder_source_location_finding_externalsystem resource.
    * @returns {string} A string representing the source.
    */
-  matchSourceFromFolderSourceLocationFindingExternalsystemName(
-    folderSourceLocationFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.match(
-      folderSourceLocationFindingExternalsystemName
-    ).source;
+  matchSourceFromFolderSourceLocationFindingExternalsystemName(folderSourceLocationFindingExternalsystemName: string) {
+    return this.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.match(folderSourceLocationFindingExternalsystemName).source;
   }
 
   /**
@@ -8828,12 +7172,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing folder_source_location_finding_externalsystem resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderSourceLocationFindingExternalsystemName(
-    folderSourceLocationFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.match(
-      folderSourceLocationFindingExternalsystemName
-    ).location;
+  matchLocationFromFolderSourceLocationFindingExternalsystemName(folderSourceLocationFindingExternalsystemName: string) {
+    return this.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.match(folderSourceLocationFindingExternalsystemName).location;
   }
 
   /**
@@ -8843,12 +7183,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing folder_source_location_finding_externalsystem resource.
    * @returns {string} A string representing the finding.
    */
-  matchFindingFromFolderSourceLocationFindingExternalsystemName(
-    folderSourceLocationFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.match(
-      folderSourceLocationFindingExternalsystemName
-    ).finding;
+  matchFindingFromFolderSourceLocationFindingExternalsystemName(folderSourceLocationFindingExternalsystemName: string) {
+    return this.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.match(folderSourceLocationFindingExternalsystemName).finding;
   }
 
   /**
@@ -8858,12 +7194,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing folder_source_location_finding_externalsystem resource.
    * @returns {string} A string representing the externalsystem.
    */
-  matchExternalsystemFromFolderSourceLocationFindingExternalsystemName(
-    folderSourceLocationFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.match(
-      folderSourceLocationFindingExternalsystemName
-    ).externalsystem;
+  matchExternalsystemFromFolderSourceLocationFindingExternalsystemName(folderSourceLocationFindingExternalsystemName: string) {
+    return this.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.match(folderSourceLocationFindingExternalsystemName).externalsystem;
   }
 
   /**
@@ -8875,20 +7207,13 @@ export class SecurityCenterClient {
    * @param {string} finding
    * @returns {string} Resource name string.
    */
-  folderSourceLocationFindingSecurityMarksPath(
-    folder: string,
-    source: string,
-    location: string,
-    finding: string
-  ) {
-    return this.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.render(
-      {
-        folder: folder,
-        source: source,
-        location: location,
-        finding: finding,
-      }
-    );
+  folderSourceLocationFindingSecurityMarksPath(folder:string,source:string,location:string,finding:string) {
+    return this.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.render({
+      folder: folder,
+      source: source,
+      location: location,
+      finding: finding,
+    });
   }
 
   /**
@@ -8898,12 +7223,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing folder_source_location_finding_securityMarks resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderSourceLocationFindingSecurityMarksName(
-    folderSourceLocationFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.match(
-      folderSourceLocationFindingSecurityMarksName
-    ).folder;
+  matchFolderFromFolderSourceLocationFindingSecurityMarksName(folderSourceLocationFindingSecurityMarksName: string) {
+    return this.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.match(folderSourceLocationFindingSecurityMarksName).folder;
   }
 
   /**
@@ -8913,12 +7234,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing folder_source_location_finding_securityMarks resource.
    * @returns {string} A string representing the source.
    */
-  matchSourceFromFolderSourceLocationFindingSecurityMarksName(
-    folderSourceLocationFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.match(
-      folderSourceLocationFindingSecurityMarksName
-    ).source;
+  matchSourceFromFolderSourceLocationFindingSecurityMarksName(folderSourceLocationFindingSecurityMarksName: string) {
+    return this.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.match(folderSourceLocationFindingSecurityMarksName).source;
   }
 
   /**
@@ -8928,12 +7245,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing folder_source_location_finding_securityMarks resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderSourceLocationFindingSecurityMarksName(
-    folderSourceLocationFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.match(
-      folderSourceLocationFindingSecurityMarksName
-    ).location;
+  matchLocationFromFolderSourceLocationFindingSecurityMarksName(folderSourceLocationFindingSecurityMarksName: string) {
+    return this.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.match(folderSourceLocationFindingSecurityMarksName).location;
   }
 
   /**
@@ -8943,12 +7256,70 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing folder_source_location_finding_securityMarks resource.
    * @returns {string} A string representing the finding.
    */
-  matchFindingFromFolderSourceLocationFindingSecurityMarksName(
-    folderSourceLocationFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.match(
-      folderSourceLocationFindingSecurityMarksName
-    ).finding;
+  matchFindingFromFolderSourceLocationFindingSecurityMarksName(folderSourceLocationFindingSecurityMarksName: string) {
+    return this.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.match(folderSourceLocationFindingSecurityMarksName).finding;
+  }
+
+  /**
+   * Return a fully-qualified folderSourceLocationFindings resource name string.
+   *
+   * @param {string} folder
+   * @param {string} source
+   * @param {string} location
+   * @param {string} finding
+   * @returns {string} Resource name string.
+   */
+  folderSourceLocationFindingsPath(folder:string,source:string,location:string,finding:string) {
+    return this.pathTemplates.folderSourceLocationFindingsPathTemplate.render({
+      folder: folder,
+      source: source,
+      location: location,
+      finding: finding,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderSourceLocationFindings resource.
+   *
+   * @param {string} folderSourceLocationFindingsName
+   *   A fully-qualified path representing folder_source_location_findings resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderSourceLocationFindingsName(folderSourceLocationFindingsName: string) {
+    return this.pathTemplates.folderSourceLocationFindingsPathTemplate.match(folderSourceLocationFindingsName).folder;
+  }
+
+  /**
+   * Parse the source from FolderSourceLocationFindings resource.
+   *
+   * @param {string} folderSourceLocationFindingsName
+   *   A fully-qualified path representing folder_source_location_findings resource.
+   * @returns {string} A string representing the source.
+   */
+  matchSourceFromFolderSourceLocationFindingsName(folderSourceLocationFindingsName: string) {
+    return this.pathTemplates.folderSourceLocationFindingsPathTemplate.match(folderSourceLocationFindingsName).source;
+  }
+
+  /**
+   * Parse the location from FolderSourceLocationFindings resource.
+   *
+   * @param {string} folderSourceLocationFindingsName
+   *   A fully-qualified path representing folder_source_location_findings resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFolderSourceLocationFindingsName(folderSourceLocationFindingsName: string) {
+    return this.pathTemplates.folderSourceLocationFindingsPathTemplate.match(folderSourceLocationFindingsName).location;
+  }
+
+  /**
+   * Parse the finding from FolderSourceLocationFindings resource.
+   *
+   * @param {string} folderSourceLocationFindingsName
+   *   A fully-qualified path representing folder_source_location_findings resource.
+   * @returns {string} A string representing the finding.
+   */
+  matchFindingFromFolderSourceLocationFindingsName(folderSourceLocationFindingsName: string) {
+    return this.pathTemplates.folderSourceLocationFindingsPathTemplate.match(folderSourceLocationFindingsName).finding;
   }
 
   /**
@@ -8957,7 +7328,7 @@ export class SecurityCenterClient {
    * @param {string} organization
    * @returns {string} Resource name string.
    */
-  organizationPath(organization: string) {
+  organizationPath(organization:string) {
     return this.pathTemplates.organizationPathTemplate.render({
       organization: organization,
     });
@@ -8971,8 +7342,7 @@ export class SecurityCenterClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationName(organizationName: string) {
-    return this.pathTemplates.organizationPathTemplate.match(organizationName)
-      .organization;
+    return this.pathTemplates.organizationPathTemplate.match(organizationName).organization;
   }
 
   /**
@@ -8982,13 +7352,11 @@ export class SecurityCenterClient {
    * @param {string} asset
    * @returns {string} Resource name string.
    */
-  organizationAssetSecurityMarksPath(organization: string, asset: string) {
-    return this.pathTemplates.organizationAssetSecurityMarksPathTemplate.render(
-      {
-        organization: organization,
-        asset: asset,
-      }
-    );
+  organizationAssetSecurityMarksPath(organization:string,asset:string) {
+    return this.pathTemplates.organizationAssetSecurityMarksPathTemplate.render({
+      organization: organization,
+      asset: asset,
+    });
   }
 
   /**
@@ -8998,12 +7366,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_asset_securityMarks resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationAssetSecurityMarksName(
-    organizationAssetSecurityMarksName: string
-  ) {
-    return this.pathTemplates.organizationAssetSecurityMarksPathTemplate.match(
-      organizationAssetSecurityMarksName
-    ).organization;
+  matchOrganizationFromOrganizationAssetSecurityMarksName(organizationAssetSecurityMarksName: string) {
+    return this.pathTemplates.organizationAssetSecurityMarksPathTemplate.match(organizationAssetSecurityMarksName).organization;
   }
 
   /**
@@ -9013,12 +7377,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_asset_securityMarks resource.
    * @returns {string} A string representing the asset.
    */
-  matchAssetFromOrganizationAssetSecurityMarksName(
-    organizationAssetSecurityMarksName: string
-  ) {
-    return this.pathTemplates.organizationAssetSecurityMarksPathTemplate.match(
-      organizationAssetSecurityMarksName
-    ).asset;
+  matchAssetFromOrganizationAssetSecurityMarksName(organizationAssetSecurityMarksName: string) {
+    return this.pathTemplates.organizationAssetSecurityMarksPathTemplate.match(organizationAssetSecurityMarksName).asset;
   }
 
   /**
@@ -9028,7 +7388,7 @@ export class SecurityCenterClient {
    * @param {string} constraint_name
    * @returns {string} Resource name string.
    */
-  organizationConstraintNamePath(organization: string, constraintName: string) {
+  organizationConstraintNamePath(organization:string,constraintName:string) {
     return this.pathTemplates.organizationConstraintNamePathTemplate.render({
       organization: organization,
       constraint_name: constraintName,
@@ -9042,12 +7402,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_constraint_name resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationConstraintNameName(
-    organizationConstraintNameName: string
-  ) {
-    return this.pathTemplates.organizationConstraintNamePathTemplate.match(
-      organizationConstraintNameName
-    ).organization;
+  matchOrganizationFromOrganizationConstraintNameName(organizationConstraintNameName: string) {
+    return this.pathTemplates.organizationConstraintNamePathTemplate.match(organizationConstraintNameName).organization;
   }
 
   /**
@@ -9057,12 +7413,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_constraint_name resource.
    * @returns {string} A string representing the constraint_name.
    */
-  matchConstraintNameFromOrganizationConstraintNameName(
-    organizationConstraintNameName: string
-  ) {
-    return this.pathTemplates.organizationConstraintNamePathTemplate.match(
-      organizationConstraintNameName
-    ).constraint_name;
+  matchConstraintNameFromOrganizationConstraintNameName(organizationConstraintNameName: string) {
+    return this.pathTemplates.organizationConstraintNamePathTemplate.match(organizationConstraintNameName).constraint_name;
   }
 
   /**
@@ -9072,7 +7424,7 @@ export class SecurityCenterClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  organizationLocationPath(organization: string, location: string) {
+  organizationLocationPath(organization:string,location:string) {
     return this.pathTemplates.organizationLocationPathTemplate.render({
       organization: organization,
       location: location,
@@ -9086,12 +7438,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing OrganizationLocation resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationName(
-    organizationLocationName: string
-  ) {
-    return this.pathTemplates.organizationLocationPathTemplate.match(
-      organizationLocationName
-    ).organization;
+  matchOrganizationFromOrganizationLocationName(organizationLocationName: string) {
+    return this.pathTemplates.organizationLocationPathTemplate.match(organizationLocationName).organization;
   }
 
   /**
@@ -9102,25 +7450,19 @@ export class SecurityCenterClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromOrganizationLocationName(organizationLocationName: string) {
-    return this.pathTemplates.organizationLocationPathTemplate.match(
-      organizationLocationName
-    ).location;
+    return this.pathTemplates.organizationLocationPathTemplate.match(organizationLocationName).location;
   }
 
   /**
-   * Return a fully-qualified organizationLocationExport resource name string.
+   * Return a fully-qualified organizationLocationBigQueryExports resource name string.
    *
    * @param {string} organization
    * @param {string} location
    * @param {string} exportParam
    * @returns {string} Resource name string.
    */
-  organizationLocationExportPath(
-    organization: string,
-    location: string,
-    exportParam: string
-  ) {
-    return this.pathTemplates.organizationLocationExportPathTemplate.render({
+  organizationLocationBigQueryExportsPath(organization:string,location:string,exportParam:string) {
+    return this.pathTemplates.organizationLocationBigQueryExportsPathTemplate.render({
       organization: organization,
       location: location,
       export: exportParam,
@@ -9128,320 +7470,187 @@ export class SecurityCenterClient {
   }
 
   /**
-   * Parse the organization from OrganizationLocationExport resource.
+   * Parse the organization from OrganizationLocationBigQueryExports resource.
    *
-   * @param {string} organizationLocationExportName
-   *   A fully-qualified path representing organization_location_export resource.
+   * @param {string} organizationLocationBigQueryExportsName
+   *   A fully-qualified path representing organization_location_bigQueryExports resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationExportName(
-    organizationLocationExportName: string
-  ) {
-    return this.pathTemplates.organizationLocationExportPathTemplate.match(
-      organizationLocationExportName
-    ).organization;
+  matchOrganizationFromOrganizationLocationBigQueryExportsName(organizationLocationBigQueryExportsName: string) {
+    return this.pathTemplates.organizationLocationBigQueryExportsPathTemplate.match(organizationLocationBigQueryExportsName).organization;
   }
 
   /**
-   * Parse the location from OrganizationLocationExport resource.
+   * Parse the location from OrganizationLocationBigQueryExports resource.
    *
-   * @param {string} organizationLocationExportName
-   *   A fully-qualified path representing organization_location_export resource.
+   * @param {string} organizationLocationBigQueryExportsName
+   *   A fully-qualified path representing organization_location_bigQueryExports resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationExportName(
-    organizationLocationExportName: string
-  ) {
-    return this.pathTemplates.organizationLocationExportPathTemplate.match(
-      organizationLocationExportName
-    ).location;
+  matchLocationFromOrganizationLocationBigQueryExportsName(organizationLocationBigQueryExportsName: string) {
+    return this.pathTemplates.organizationLocationBigQueryExportsPathTemplate.match(organizationLocationBigQueryExportsName).location;
   }
 
   /**
-   * Parse the export from OrganizationLocationExport resource.
+   * Parse the export from OrganizationLocationBigQueryExports resource.
    *
-   * @param {string} organizationLocationExportName
-   *   A fully-qualified path representing organization_location_export resource.
+   * @param {string} organizationLocationBigQueryExportsName
+   *   A fully-qualified path representing organization_location_bigQueryExports resource.
    * @returns {string} A string representing the export.
    */
-  matchExportFromOrganizationLocationExportName(
-    organizationLocationExportName: string
-  ) {
-    return this.pathTemplates.organizationLocationExportPathTemplate.match(
-      organizationLocationExportName
-    ).export;
+  matchExportFromOrganizationLocationBigQueryExportsName(organizationLocationBigQueryExportsName: string) {
+    return this.pathTemplates.organizationLocationBigQueryExportsPathTemplate.match(organizationLocationBigQueryExportsName).export;
   }
 
   /**
-   * Return a fully-qualified organizationLocationMuteConfig resource name string.
+   * Return a fully-qualified organizationLocationMuteConfigs resource name string.
    *
    * @param {string} organization
    * @param {string} location
    * @param {string} mute_config
    * @returns {string} Resource name string.
    */
-  organizationLocationMuteConfigPath(
-    organization: string,
-    location: string,
-    muteConfig: string
-  ) {
-    return this.pathTemplates.organizationLocationMuteConfigPathTemplate.render(
-      {
-        organization: organization,
-        location: location,
-        mute_config: muteConfig,
-      }
-    );
+  organizationLocationMuteConfigsPath(organization:string,location:string,muteConfig:string) {
+    return this.pathTemplates.organizationLocationMuteConfigsPathTemplate.render({
+      organization: organization,
+      location: location,
+      mute_config: muteConfig,
+    });
   }
 
   /**
-   * Parse the organization from OrganizationLocationMuteConfig resource.
+   * Parse the organization from OrganizationLocationMuteConfigs resource.
    *
-   * @param {string} organizationLocationMuteConfigName
-   *   A fully-qualified path representing organization_location_mute_config resource.
+   * @param {string} organizationLocationMuteConfigsName
+   *   A fully-qualified path representing organization_location_muteConfigs resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationMuteConfigName(
-    organizationLocationMuteConfigName: string
-  ) {
-    return this.pathTemplates.organizationLocationMuteConfigPathTemplate.match(
-      organizationLocationMuteConfigName
-    ).organization;
+  matchOrganizationFromOrganizationLocationMuteConfigsName(organizationLocationMuteConfigsName: string) {
+    return this.pathTemplates.organizationLocationMuteConfigsPathTemplate.match(organizationLocationMuteConfigsName).organization;
   }
 
   /**
-   * Parse the location from OrganizationLocationMuteConfig resource.
+   * Parse the location from OrganizationLocationMuteConfigs resource.
    *
-   * @param {string} organizationLocationMuteConfigName
-   *   A fully-qualified path representing organization_location_mute_config resource.
+   * @param {string} organizationLocationMuteConfigsName
+   *   A fully-qualified path representing organization_location_muteConfigs resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationMuteConfigName(
-    organizationLocationMuteConfigName: string
-  ) {
-    return this.pathTemplates.organizationLocationMuteConfigPathTemplate.match(
-      organizationLocationMuteConfigName
-    ).location;
+  matchLocationFromOrganizationLocationMuteConfigsName(organizationLocationMuteConfigsName: string) {
+    return this.pathTemplates.organizationLocationMuteConfigsPathTemplate.match(organizationLocationMuteConfigsName).location;
   }
 
   /**
-   * Parse the mute_config from OrganizationLocationMuteConfig resource.
+   * Parse the mute_config from OrganizationLocationMuteConfigs resource.
    *
-   * @param {string} organizationLocationMuteConfigName
-   *   A fully-qualified path representing organization_location_mute_config resource.
+   * @param {string} organizationLocationMuteConfigsName
+   *   A fully-qualified path representing organization_location_muteConfigs resource.
    * @returns {string} A string representing the mute_config.
    */
-  matchMuteConfigFromOrganizationLocationMuteConfigName(
-    organizationLocationMuteConfigName: string
-  ) {
-    return this.pathTemplates.organizationLocationMuteConfigPathTemplate.match(
-      organizationLocationMuteConfigName
-    ).mute_config;
+  matchMuteConfigFromOrganizationLocationMuteConfigsName(organizationLocationMuteConfigsName: string) {
+    return this.pathTemplates.organizationLocationMuteConfigsPathTemplate.match(organizationLocationMuteConfigsName).mute_config;
   }
 
   /**
-   * Return a fully-qualified organizationLocationNotificationConfig resource name string.
+   * Return a fully-qualified organizationLocationNotificationConfigs resource name string.
    *
    * @param {string} organization
    * @param {string} location
    * @param {string} notification_config
    * @returns {string} Resource name string.
    */
-  organizationLocationNotificationConfigPath(
-    organization: string,
-    location: string,
-    notificationConfig: string
-  ) {
-    return this.pathTemplates.organizationLocationNotificationConfigPathTemplate.render(
-      {
-        organization: organization,
-        location: location,
-        notification_config: notificationConfig,
-      }
-    );
+  organizationLocationNotificationConfigsPath(organization:string,location:string,notificationConfig:string) {
+    return this.pathTemplates.organizationLocationNotificationConfigsPathTemplate.render({
+      organization: organization,
+      location: location,
+      notification_config: notificationConfig,
+    });
   }
 
   /**
-   * Parse the organization from OrganizationLocationNotificationConfig resource.
+   * Parse the organization from OrganizationLocationNotificationConfigs resource.
    *
-   * @param {string} organizationLocationNotificationConfigName
-   *   A fully-qualified path representing organization_location_notification_config resource.
+   * @param {string} organizationLocationNotificationConfigsName
+   *   A fully-qualified path representing organization_location_notificationConfigs resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationNotificationConfigName(
-    organizationLocationNotificationConfigName: string
-  ) {
-    return this.pathTemplates.organizationLocationNotificationConfigPathTemplate.match(
-      organizationLocationNotificationConfigName
-    ).organization;
+  matchOrganizationFromOrganizationLocationNotificationConfigsName(organizationLocationNotificationConfigsName: string) {
+    return this.pathTemplates.organizationLocationNotificationConfigsPathTemplate.match(organizationLocationNotificationConfigsName).organization;
   }
 
   /**
-   * Parse the location from OrganizationLocationNotificationConfig resource.
+   * Parse the location from OrganizationLocationNotificationConfigs resource.
    *
-   * @param {string} organizationLocationNotificationConfigName
-   *   A fully-qualified path representing organization_location_notification_config resource.
+   * @param {string} organizationLocationNotificationConfigsName
+   *   A fully-qualified path representing organization_location_notificationConfigs resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationNotificationConfigName(
-    organizationLocationNotificationConfigName: string
-  ) {
-    return this.pathTemplates.organizationLocationNotificationConfigPathTemplate.match(
-      organizationLocationNotificationConfigName
-    ).location;
+  matchLocationFromOrganizationLocationNotificationConfigsName(organizationLocationNotificationConfigsName: string) {
+    return this.pathTemplates.organizationLocationNotificationConfigsPathTemplate.match(organizationLocationNotificationConfigsName).location;
   }
 
   /**
-   * Parse the notification_config from OrganizationLocationNotificationConfig resource.
+   * Parse the notification_config from OrganizationLocationNotificationConfigs resource.
    *
-   * @param {string} organizationLocationNotificationConfigName
-   *   A fully-qualified path representing organization_location_notification_config resource.
+   * @param {string} organizationLocationNotificationConfigsName
+   *   A fully-qualified path representing organization_location_notificationConfigs resource.
    * @returns {string} A string representing the notification_config.
    */
-  matchNotificationConfigFromOrganizationLocationNotificationConfigName(
-    organizationLocationNotificationConfigName: string
-  ) {
-    return this.pathTemplates.organizationLocationNotificationConfigPathTemplate.match(
-      organizationLocationNotificationConfigName
-    ).notification_config;
+  matchNotificationConfigFromOrganizationLocationNotificationConfigsName(organizationLocationNotificationConfigsName: string) {
+    return this.pathTemplates.organizationLocationNotificationConfigsPathTemplate.match(organizationLocationNotificationConfigsName).notification_config;
   }
 
   /**
-   * Return a fully-qualified organizationLocationResourceValueConfig resource name string.
+   * Return a fully-qualified organizationLocationResourceValueConfigs resource name string.
    *
    * @param {string} organization
    * @param {string} location
    * @param {string} resource_value_config
    * @returns {string} Resource name string.
    */
-  organizationLocationResourceValueConfigPath(
-    organization: string,
-    location: string,
-    resourceValueConfig: string
-  ) {
-    return this.pathTemplates.organizationLocationResourceValueConfigPathTemplate.render(
-      {
-        organization: organization,
-        location: location,
-        resource_value_config: resourceValueConfig,
-      }
-    );
+  organizationLocationResourceValueConfigsPath(organization:string,location:string,resourceValueConfig:string) {
+    return this.pathTemplates.organizationLocationResourceValueConfigsPathTemplate.render({
+      organization: organization,
+      location: location,
+      resource_value_config: resourceValueConfig,
+    });
   }
 
   /**
-   * Parse the organization from OrganizationLocationResourceValueConfig resource.
+   * Parse the organization from OrganizationLocationResourceValueConfigs resource.
    *
-   * @param {string} organizationLocationResourceValueConfigName
-   *   A fully-qualified path representing organization_location_resource_value_config resource.
+   * @param {string} organizationLocationResourceValueConfigsName
+   *   A fully-qualified path representing organization_location_resourceValueConfigs resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationResourceValueConfigName(
-    organizationLocationResourceValueConfigName: string
-  ) {
-    return this.pathTemplates.organizationLocationResourceValueConfigPathTemplate.match(
-      organizationLocationResourceValueConfigName
-    ).organization;
+  matchOrganizationFromOrganizationLocationResourceValueConfigsName(organizationLocationResourceValueConfigsName: string) {
+    return this.pathTemplates.organizationLocationResourceValueConfigsPathTemplate.match(organizationLocationResourceValueConfigsName).organization;
   }
 
   /**
-   * Parse the location from OrganizationLocationResourceValueConfig resource.
+   * Parse the location from OrganizationLocationResourceValueConfigs resource.
    *
-   * @param {string} organizationLocationResourceValueConfigName
-   *   A fully-qualified path representing organization_location_resource_value_config resource.
+   * @param {string} organizationLocationResourceValueConfigsName
+   *   A fully-qualified path representing organization_location_resourceValueConfigs resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationResourceValueConfigName(
-    organizationLocationResourceValueConfigName: string
-  ) {
-    return this.pathTemplates.organizationLocationResourceValueConfigPathTemplate.match(
-      organizationLocationResourceValueConfigName
-    ).location;
+  matchLocationFromOrganizationLocationResourceValueConfigsName(organizationLocationResourceValueConfigsName: string) {
+    return this.pathTemplates.organizationLocationResourceValueConfigsPathTemplate.match(organizationLocationResourceValueConfigsName).location;
   }
 
   /**
-   * Parse the resource_value_config from OrganizationLocationResourceValueConfig resource.
+   * Parse the resource_value_config from OrganizationLocationResourceValueConfigs resource.
    *
-   * @param {string} organizationLocationResourceValueConfigName
-   *   A fully-qualified path representing organization_location_resource_value_config resource.
+   * @param {string} organizationLocationResourceValueConfigsName
+   *   A fully-qualified path representing organization_location_resourceValueConfigs resource.
    * @returns {string} A string representing the resource_value_config.
    */
-  matchResourceValueConfigFromOrganizationLocationResourceValueConfigName(
-    organizationLocationResourceValueConfigName: string
-  ) {
-    return this.pathTemplates.organizationLocationResourceValueConfigPathTemplate.match(
-      organizationLocationResourceValueConfigName
-    ).resource_value_config;
+  matchResourceValueConfigFromOrganizationLocationResourceValueConfigsName(organizationLocationResourceValueConfigsName: string) {
+    return this.pathTemplates.organizationLocationResourceValueConfigsPathTemplate.match(organizationLocationResourceValueConfigsName).resource_value_config;
   }
 
   /**
-   * Return a fully-qualified organizationLocationSimluation resource name string.
-   *
-   * @param {string} organization
-   * @param {string} location
-   * @param {string} simluation
-   * @returns {string} Resource name string.
-   */
-  organizationLocationSimluationPath(
-    organization: string,
-    location: string,
-    simluation: string
-  ) {
-    return this.pathTemplates.organizationLocationSimluationPathTemplate.render(
-      {
-        organization: organization,
-        location: location,
-        simluation: simluation,
-      }
-    );
-  }
-
-  /**
-   * Parse the organization from OrganizationLocationSimluation resource.
-   *
-   * @param {string} organizationLocationSimluationName
-   *   A fully-qualified path representing organization_location_simluation resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromOrganizationLocationSimluationName(
-    organizationLocationSimluationName: string
-  ) {
-    return this.pathTemplates.organizationLocationSimluationPathTemplate.match(
-      organizationLocationSimluationName
-    ).organization;
-  }
-
-  /**
-   * Parse the location from OrganizationLocationSimluation resource.
-   *
-   * @param {string} organizationLocationSimluationName
-   *   A fully-qualified path representing organization_location_simluation resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromOrganizationLocationSimluationName(
-    organizationLocationSimluationName: string
-  ) {
-    return this.pathTemplates.organizationLocationSimluationPathTemplate.match(
-      organizationLocationSimluationName
-    ).location;
-  }
-
-  /**
-   * Parse the simluation from OrganizationLocationSimluation resource.
-   *
-   * @param {string} organizationLocationSimluationName
-   *   A fully-qualified path representing organization_location_simluation resource.
-   * @returns {string} A string representing the simluation.
-   */
-  matchSimluationFromOrganizationLocationSimluationName(
-    organizationLocationSimluationName: string
-  ) {
-    return this.pathTemplates.organizationLocationSimluationPathTemplate.match(
-      organizationLocationSimluationName
-    ).simluation;
-  }
-
-  /**
-   * Return a fully-qualified organizationLocationSimluationValuedResource resource name string.
+   * Return a fully-qualified organizationLocationSimluationValuedResources resource name string.
    *
    * @param {string} organization
    * @param {string} location
@@ -9449,84 +7658,61 @@ export class SecurityCenterClient {
    * @param {string} valued_resource
    * @returns {string} Resource name string.
    */
-  organizationLocationSimluationValuedResourcePath(
-    organization: string,
-    location: string,
-    simluation: string,
-    valuedResource: string
-  ) {
-    return this.pathTemplates.organizationLocationSimluationValuedResourcePathTemplate.render(
-      {
-        organization: organization,
-        location: location,
-        simluation: simluation,
-        valued_resource: valuedResource,
-      }
-    );
+  organizationLocationSimluationValuedResourcesPath(organization:string,location:string,simluation:string,valuedResource:string) {
+    return this.pathTemplates.organizationLocationSimluationValuedResourcesPathTemplate.render({
+      organization: organization,
+      location: location,
+      simluation: simluation,
+      valued_resource: valuedResource,
+    });
   }
 
   /**
-   * Parse the organization from OrganizationLocationSimluationValuedResource resource.
+   * Parse the organization from OrganizationLocationSimluationValuedResources resource.
    *
-   * @param {string} organizationLocationSimluationValuedResourceName
-   *   A fully-qualified path representing organization_location_simluation_valued_resource resource.
+   * @param {string} organizationLocationSimluationValuedResourcesName
+   *   A fully-qualified path representing organization_location_simluation_valuedResources resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationSimluationValuedResourceName(
-    organizationLocationSimluationValuedResourceName: string
-  ) {
-    return this.pathTemplates.organizationLocationSimluationValuedResourcePathTemplate.match(
-      organizationLocationSimluationValuedResourceName
-    ).organization;
+  matchOrganizationFromOrganizationLocationSimluationValuedResourcesName(organizationLocationSimluationValuedResourcesName: string) {
+    return this.pathTemplates.organizationLocationSimluationValuedResourcesPathTemplate.match(organizationLocationSimluationValuedResourcesName).organization;
   }
 
   /**
-   * Parse the location from OrganizationLocationSimluationValuedResource resource.
+   * Parse the location from OrganizationLocationSimluationValuedResources resource.
    *
-   * @param {string} organizationLocationSimluationValuedResourceName
-   *   A fully-qualified path representing organization_location_simluation_valued_resource resource.
+   * @param {string} organizationLocationSimluationValuedResourcesName
+   *   A fully-qualified path representing organization_location_simluation_valuedResources resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationSimluationValuedResourceName(
-    organizationLocationSimluationValuedResourceName: string
-  ) {
-    return this.pathTemplates.organizationLocationSimluationValuedResourcePathTemplate.match(
-      organizationLocationSimluationValuedResourceName
-    ).location;
+  matchLocationFromOrganizationLocationSimluationValuedResourcesName(organizationLocationSimluationValuedResourcesName: string) {
+    return this.pathTemplates.organizationLocationSimluationValuedResourcesPathTemplate.match(organizationLocationSimluationValuedResourcesName).location;
   }
 
   /**
-   * Parse the simluation from OrganizationLocationSimluationValuedResource resource.
+   * Parse the simluation from OrganizationLocationSimluationValuedResources resource.
    *
-   * @param {string} organizationLocationSimluationValuedResourceName
-   *   A fully-qualified path representing organization_location_simluation_valued_resource resource.
+   * @param {string} organizationLocationSimluationValuedResourcesName
+   *   A fully-qualified path representing organization_location_simluation_valuedResources resource.
    * @returns {string} A string representing the simluation.
    */
-  matchSimluationFromOrganizationLocationSimluationValuedResourceName(
-    organizationLocationSimluationValuedResourceName: string
-  ) {
-    return this.pathTemplates.organizationLocationSimluationValuedResourcePathTemplate.match(
-      organizationLocationSimluationValuedResourceName
-    ).simluation;
+  matchSimluationFromOrganizationLocationSimluationValuedResourcesName(organizationLocationSimluationValuedResourcesName: string) {
+    return this.pathTemplates.organizationLocationSimluationValuedResourcesPathTemplate.match(organizationLocationSimluationValuedResourcesName).simluation;
   }
 
   /**
-   * Parse the valued_resource from OrganizationLocationSimluationValuedResource resource.
+   * Parse the valued_resource from OrganizationLocationSimluationValuedResources resource.
    *
-   * @param {string} organizationLocationSimluationValuedResourceName
-   *   A fully-qualified path representing organization_location_simluation_valued_resource resource.
+   * @param {string} organizationLocationSimluationValuedResourcesName
+   *   A fully-qualified path representing organization_location_simluation_valuedResources resource.
    * @returns {string} A string representing the valued_resource.
    */
-  matchValuedResourceFromOrganizationLocationSimluationValuedResourceName(
-    organizationLocationSimluationValuedResourceName: string
-  ) {
-    return this.pathTemplates.organizationLocationSimluationValuedResourcePathTemplate.match(
-      organizationLocationSimluationValuedResourceName
-    ).valued_resource;
+  matchValuedResourceFromOrganizationLocationSimluationValuedResourcesName(organizationLocationSimluationValuedResourcesName: string) {
+    return this.pathTemplates.organizationLocationSimluationValuedResourcesPathTemplate.match(organizationLocationSimluationValuedResourcesName).valued_resource;
   }
 
   /**
-   * Return a fully-qualified organizationLocationSimulationValuedResourceAttackPath resource name string.
+   * Return a fully-qualified organizationLocationSimulationValuedResourceAttackPaths resource name string.
    *
    * @param {string} organization
    * @param {string} location
@@ -9535,305 +7721,194 @@ export class SecurityCenterClient {
    * @param {string} attack_path
    * @returns {string} Resource name string.
    */
-  organizationLocationSimulationValuedResourceAttackPathPath(
-    organization: string,
-    location: string,
-    simulation: string,
-    valuedResource: string,
-    attackPath: string
-  ) {
-    return this.pathTemplates.organizationLocationSimulationValuedResourceAttackPathPathTemplate.render(
-      {
-        organization: organization,
-        location: location,
-        simulation: simulation,
-        valued_resource: valuedResource,
-        attack_path: attackPath,
-      }
-    );
+  organizationLocationSimulationValuedResourceAttackPathsPath(organization:string,location:string,simulation:string,valuedResource:string,attackPath:string) {
+    return this.pathTemplates.organizationLocationSimulationValuedResourceAttackPathsPathTemplate.render({
+      organization: organization,
+      location: location,
+      simulation: simulation,
+      valued_resource: valuedResource,
+      attack_path: attackPath,
+    });
   }
 
   /**
-   * Parse the organization from OrganizationLocationSimulationValuedResourceAttackPath resource.
+   * Parse the organization from OrganizationLocationSimulationValuedResourceAttackPaths resource.
    *
-   * @param {string} organizationLocationSimulationValuedResourceAttackPathName
-   *   A fully-qualified path representing organization_location_simulation_valued_resource_attack_path resource.
+   * @param {string} organizationLocationSimulationValuedResourceAttackPathsName
+   *   A fully-qualified path representing organization_location_simulation_valued_resource_attackPaths resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationSimulationValuedResourceAttackPathName(
-    organizationLocationSimulationValuedResourceAttackPathName: string
-  ) {
-    return this.pathTemplates.organizationLocationSimulationValuedResourceAttackPathPathTemplate.match(
-      organizationLocationSimulationValuedResourceAttackPathName
-    ).organization;
+  matchOrganizationFromOrganizationLocationSimulationValuedResourceAttackPathsName(organizationLocationSimulationValuedResourceAttackPathsName: string) {
+    return this.pathTemplates.organizationLocationSimulationValuedResourceAttackPathsPathTemplate.match(organizationLocationSimulationValuedResourceAttackPathsName).organization;
   }
 
   /**
-   * Parse the location from OrganizationLocationSimulationValuedResourceAttackPath resource.
+   * Parse the location from OrganizationLocationSimulationValuedResourceAttackPaths resource.
    *
-   * @param {string} organizationLocationSimulationValuedResourceAttackPathName
-   *   A fully-qualified path representing organization_location_simulation_valued_resource_attack_path resource.
+   * @param {string} organizationLocationSimulationValuedResourceAttackPathsName
+   *   A fully-qualified path representing organization_location_simulation_valued_resource_attackPaths resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationSimulationValuedResourceAttackPathName(
-    organizationLocationSimulationValuedResourceAttackPathName: string
-  ) {
-    return this.pathTemplates.organizationLocationSimulationValuedResourceAttackPathPathTemplate.match(
-      organizationLocationSimulationValuedResourceAttackPathName
-    ).location;
+  matchLocationFromOrganizationLocationSimulationValuedResourceAttackPathsName(organizationLocationSimulationValuedResourceAttackPathsName: string) {
+    return this.pathTemplates.organizationLocationSimulationValuedResourceAttackPathsPathTemplate.match(organizationLocationSimulationValuedResourceAttackPathsName).location;
   }
 
   /**
-   * Parse the simulation from OrganizationLocationSimulationValuedResourceAttackPath resource.
+   * Parse the simulation from OrganizationLocationSimulationValuedResourceAttackPaths resource.
    *
-   * @param {string} organizationLocationSimulationValuedResourceAttackPathName
-   *   A fully-qualified path representing organization_location_simulation_valued_resource_attack_path resource.
+   * @param {string} organizationLocationSimulationValuedResourceAttackPathsName
+   *   A fully-qualified path representing organization_location_simulation_valued_resource_attackPaths resource.
    * @returns {string} A string representing the simulation.
    */
-  matchSimulationFromOrganizationLocationSimulationValuedResourceAttackPathName(
-    organizationLocationSimulationValuedResourceAttackPathName: string
-  ) {
-    return this.pathTemplates.organizationLocationSimulationValuedResourceAttackPathPathTemplate.match(
-      organizationLocationSimulationValuedResourceAttackPathName
-    ).simulation;
+  matchSimulationFromOrganizationLocationSimulationValuedResourceAttackPathsName(organizationLocationSimulationValuedResourceAttackPathsName: string) {
+    return this.pathTemplates.organizationLocationSimulationValuedResourceAttackPathsPathTemplate.match(organizationLocationSimulationValuedResourceAttackPathsName).simulation;
   }
 
   /**
-   * Parse the valued_resource from OrganizationLocationSimulationValuedResourceAttackPath resource.
+   * Parse the valued_resource from OrganizationLocationSimulationValuedResourceAttackPaths resource.
    *
-   * @param {string} organizationLocationSimulationValuedResourceAttackPathName
-   *   A fully-qualified path representing organization_location_simulation_valued_resource_attack_path resource.
+   * @param {string} organizationLocationSimulationValuedResourceAttackPathsName
+   *   A fully-qualified path representing organization_location_simulation_valued_resource_attackPaths resource.
    * @returns {string} A string representing the valued_resource.
    */
-  matchValuedResourceFromOrganizationLocationSimulationValuedResourceAttackPathName(
-    organizationLocationSimulationValuedResourceAttackPathName: string
-  ) {
-    return this.pathTemplates.organizationLocationSimulationValuedResourceAttackPathPathTemplate.match(
-      organizationLocationSimulationValuedResourceAttackPathName
-    ).valued_resource;
+  matchValuedResourceFromOrganizationLocationSimulationValuedResourceAttackPathsName(organizationLocationSimulationValuedResourceAttackPathsName: string) {
+    return this.pathTemplates.organizationLocationSimulationValuedResourceAttackPathsPathTemplate.match(organizationLocationSimulationValuedResourceAttackPathsName).valued_resource;
   }
 
   /**
-   * Parse the attack_path from OrganizationLocationSimulationValuedResourceAttackPath resource.
+   * Parse the attack_path from OrganizationLocationSimulationValuedResourceAttackPaths resource.
    *
-   * @param {string} organizationLocationSimulationValuedResourceAttackPathName
-   *   A fully-qualified path representing organization_location_simulation_valued_resource_attack_path resource.
+   * @param {string} organizationLocationSimulationValuedResourceAttackPathsName
+   *   A fully-qualified path representing organization_location_simulation_valued_resource_attackPaths resource.
    * @returns {string} A string representing the attack_path.
    */
-  matchAttackPathFromOrganizationLocationSimulationValuedResourceAttackPathName(
-    organizationLocationSimulationValuedResourceAttackPathName: string
-  ) {
-    return this.pathTemplates.organizationLocationSimulationValuedResourceAttackPathPathTemplate.match(
-      organizationLocationSimulationValuedResourceAttackPathName
-    ).attack_path;
+  matchAttackPathFromOrganizationLocationSimulationValuedResourceAttackPathsName(organizationLocationSimulationValuedResourceAttackPathsName: string) {
+    return this.pathTemplates.organizationLocationSimulationValuedResourceAttackPathsPathTemplate.match(organizationLocationSimulationValuedResourceAttackPathsName).attack_path;
   }
 
   /**
-   * Return a fully-qualified organizationMuteConfig resource name string.
+   * Return a fully-qualified organizationLocationSimulations resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} simluation
+   * @returns {string} Resource name string.
+   */
+  organizationLocationSimulationsPath(organization:string,location:string,simluation:string) {
+    return this.pathTemplates.organizationLocationSimulationsPathTemplate.render({
+      organization: organization,
+      location: location,
+      simluation: simluation,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationSimulations resource.
+   *
+   * @param {string} organizationLocationSimulationsName
+   *   A fully-qualified path representing organization_location_simulations resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationSimulationsName(organizationLocationSimulationsName: string) {
+    return this.pathTemplates.organizationLocationSimulationsPathTemplate.match(organizationLocationSimulationsName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationSimulations resource.
+   *
+   * @param {string} organizationLocationSimulationsName
+   *   A fully-qualified path representing organization_location_simulations resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationSimulationsName(organizationLocationSimulationsName: string) {
+    return this.pathTemplates.organizationLocationSimulationsPathTemplate.match(organizationLocationSimulationsName).location;
+  }
+
+  /**
+   * Parse the simluation from OrganizationLocationSimulations resource.
+   *
+   * @param {string} organizationLocationSimulationsName
+   *   A fully-qualified path representing organization_location_simulations resource.
+   * @returns {string} A string representing the simluation.
+   */
+  matchSimluationFromOrganizationLocationSimulationsName(organizationLocationSimulationsName: string) {
+    return this.pathTemplates.organizationLocationSimulationsPathTemplate.match(organizationLocationSimulationsName).simluation;
+  }
+
+  /**
+   * Return a fully-qualified organizationMuteConfigs resource name string.
    *
    * @param {string} organization
    * @param {string} mute_config
    * @returns {string} Resource name string.
    */
-  organizationMuteConfigPath(organization: string, muteConfig: string) {
-    return this.pathTemplates.organizationMuteConfigPathTemplate.render({
+  organizationMuteConfigsPath(organization:string,muteConfig:string) {
+    return this.pathTemplates.organizationMuteConfigsPathTemplate.render({
       organization: organization,
       mute_config: muteConfig,
     });
   }
 
   /**
-   * Parse the organization from OrganizationMuteConfig resource.
+   * Parse the organization from OrganizationMuteConfigs resource.
    *
-   * @param {string} organizationMuteConfigName
-   *   A fully-qualified path representing organization_mute_config resource.
+   * @param {string} organizationMuteConfigsName
+   *   A fully-qualified path representing organization_muteConfigs resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationMuteConfigName(
-    organizationMuteConfigName: string
-  ) {
-    return this.pathTemplates.organizationMuteConfigPathTemplate.match(
-      organizationMuteConfigName
-    ).organization;
+  matchOrganizationFromOrganizationMuteConfigsName(organizationMuteConfigsName: string) {
+    return this.pathTemplates.organizationMuteConfigsPathTemplate.match(organizationMuteConfigsName).organization;
   }
 
   /**
-   * Parse the mute_config from OrganizationMuteConfig resource.
+   * Parse the mute_config from OrganizationMuteConfigs resource.
    *
-   * @param {string} organizationMuteConfigName
-   *   A fully-qualified path representing organization_mute_config resource.
+   * @param {string} organizationMuteConfigsName
+   *   A fully-qualified path representing organization_muteConfigs resource.
    * @returns {string} A string representing the mute_config.
    */
-  matchMuteConfigFromOrganizationMuteConfigName(
-    organizationMuteConfigName: string
-  ) {
-    return this.pathTemplates.organizationMuteConfigPathTemplate.match(
-      organizationMuteConfigName
-    ).mute_config;
+  matchMuteConfigFromOrganizationMuteConfigsName(organizationMuteConfigsName: string) {
+    return this.pathTemplates.organizationMuteConfigsPathTemplate.match(organizationMuteConfigsName).mute_config;
   }
 
   /**
-   * Return a fully-qualified organizationResourceValueConfig resource name string.
+   * Return a fully-qualified organizationResourceValueConfigs resource name string.
    *
    * @param {string} organization
    * @param {string} resource_value_config
    * @returns {string} Resource name string.
    */
-  organizationResourceValueConfigPath(
-    organization: string,
-    resourceValueConfig: string
-  ) {
-    return this.pathTemplates.organizationResourceValueConfigPathTemplate.render(
-      {
-        organization: organization,
-        resource_value_config: resourceValueConfig,
-      }
-    );
-  }
-
-  /**
-   * Parse the organization from OrganizationResourceValueConfig resource.
-   *
-   * @param {string} organizationResourceValueConfigName
-   *   A fully-qualified path representing organization_resource_value_config resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromOrganizationResourceValueConfigName(
-    organizationResourceValueConfigName: string
-  ) {
-    return this.pathTemplates.organizationResourceValueConfigPathTemplate.match(
-      organizationResourceValueConfigName
-    ).organization;
-  }
-
-  /**
-   * Parse the resource_value_config from OrganizationResourceValueConfig resource.
-   *
-   * @param {string} organizationResourceValueConfigName
-   *   A fully-qualified path representing organization_resource_value_config resource.
-   * @returns {string} A string representing the resource_value_config.
-   */
-  matchResourceValueConfigFromOrganizationResourceValueConfigName(
-    organizationResourceValueConfigName: string
-  ) {
-    return this.pathTemplates.organizationResourceValueConfigPathTemplate.match(
-      organizationResourceValueConfigName
-    ).resource_value_config;
-  }
-
-  /**
-   * Return a fully-qualified organizationSimulation resource name string.
-   *
-   * @param {string} organization
-   * @param {string} simulation
-   * @returns {string} Resource name string.
-   */
-  organizationSimulationPath(organization: string, simulation: string) {
-    return this.pathTemplates.organizationSimulationPathTemplate.render({
+  organizationResourceValueConfigsPath(organization:string,resourceValueConfig:string) {
+    return this.pathTemplates.organizationResourceValueConfigsPathTemplate.render({
       organization: organization,
-      simulation: simulation,
+      resource_value_config: resourceValueConfig,
     });
   }
 
   /**
-   * Parse the organization from OrganizationSimulation resource.
+   * Parse the organization from OrganizationResourceValueConfigs resource.
    *
-   * @param {string} organizationSimulationName
-   *   A fully-qualified path representing organization_simulation resource.
+   * @param {string} organizationResourceValueConfigsName
+   *   A fully-qualified path representing organization_resourceValueConfigs resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationSimulationName(
-    organizationSimulationName: string
-  ) {
-    return this.pathTemplates.organizationSimulationPathTemplate.match(
-      organizationSimulationName
-    ).organization;
+  matchOrganizationFromOrganizationResourceValueConfigsName(organizationResourceValueConfigsName: string) {
+    return this.pathTemplates.organizationResourceValueConfigsPathTemplate.match(organizationResourceValueConfigsName).organization;
   }
 
   /**
-   * Parse the simulation from OrganizationSimulation resource.
+   * Parse the resource_value_config from OrganizationResourceValueConfigs resource.
    *
-   * @param {string} organizationSimulationName
-   *   A fully-qualified path representing organization_simulation resource.
-   * @returns {string} A string representing the simulation.
+   * @param {string} organizationResourceValueConfigsName
+   *   A fully-qualified path representing organization_resourceValueConfigs resource.
+   * @returns {string} A string representing the resource_value_config.
    */
-  matchSimulationFromOrganizationSimulationName(
-    organizationSimulationName: string
-  ) {
-    return this.pathTemplates.organizationSimulationPathTemplate.match(
-      organizationSimulationName
-    ).simulation;
+  matchResourceValueConfigFromOrganizationResourceValueConfigsName(organizationResourceValueConfigsName: string) {
+    return this.pathTemplates.organizationResourceValueConfigsPathTemplate.match(organizationResourceValueConfigsName).resource_value_config;
   }
 
   /**
-   * Return a fully-qualified organizationSimulationValuedResource resource name string.
-   *
-   * @param {string} organization
-   * @param {string} simulation
-   * @param {string} valued_resource
-   * @returns {string} Resource name string.
-   */
-  organizationSimulationValuedResourcePath(
-    organization: string,
-    simulation: string,
-    valuedResource: string
-  ) {
-    return this.pathTemplates.organizationSimulationValuedResourcePathTemplate.render(
-      {
-        organization: organization,
-        simulation: simulation,
-        valued_resource: valuedResource,
-      }
-    );
-  }
-
-  /**
-   * Parse the organization from OrganizationSimulationValuedResource resource.
-   *
-   * @param {string} organizationSimulationValuedResourceName
-   *   A fully-qualified path representing organization_simulation_valued_resource resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromOrganizationSimulationValuedResourceName(
-    organizationSimulationValuedResourceName: string
-  ) {
-    return this.pathTemplates.organizationSimulationValuedResourcePathTemplate.match(
-      organizationSimulationValuedResourceName
-    ).organization;
-  }
-
-  /**
-   * Parse the simulation from OrganizationSimulationValuedResource resource.
-   *
-   * @param {string} organizationSimulationValuedResourceName
-   *   A fully-qualified path representing organization_simulation_valued_resource resource.
-   * @returns {string} A string representing the simulation.
-   */
-  matchSimulationFromOrganizationSimulationValuedResourceName(
-    organizationSimulationValuedResourceName: string
-  ) {
-    return this.pathTemplates.organizationSimulationValuedResourcePathTemplate.match(
-      organizationSimulationValuedResourceName
-    ).simulation;
-  }
-
-  /**
-   * Parse the valued_resource from OrganizationSimulationValuedResource resource.
-   *
-   * @param {string} organizationSimulationValuedResourceName
-   *   A fully-qualified path representing organization_simulation_valued_resource resource.
-   * @returns {string} A string representing the valued_resource.
-   */
-  matchValuedResourceFromOrganizationSimulationValuedResourceName(
-    organizationSimulationValuedResourceName: string
-  ) {
-    return this.pathTemplates.organizationSimulationValuedResourcePathTemplate.match(
-      organizationSimulationValuedResourceName
-    ).valued_resource;
-  }
-
-  /**
-   * Return a fully-qualified organizationSimulationValuedResourceAttackPath resource name string.
+   * Return a fully-qualified organizationSimulationValuedResourceAttackPaths resource name string.
    *
    * @param {string} organization
    * @param {string} simulation
@@ -9841,80 +7916,142 @@ export class SecurityCenterClient {
    * @param {string} attack_path
    * @returns {string} Resource name string.
    */
-  organizationSimulationValuedResourceAttackPathPath(
-    organization: string,
-    simulation: string,
-    valuedResource: string,
-    attackPath: string
-  ) {
-    return this.pathTemplates.organizationSimulationValuedResourceAttackPathPathTemplate.render(
-      {
-        organization: organization,
-        simulation: simulation,
-        valued_resource: valuedResource,
-        attack_path: attackPath,
-      }
-    );
+  organizationSimulationValuedResourceAttackPathsPath(organization:string,simulation:string,valuedResource:string,attackPath:string) {
+    return this.pathTemplates.organizationSimulationValuedResourceAttackPathsPathTemplate.render({
+      organization: organization,
+      simulation: simulation,
+      valued_resource: valuedResource,
+      attack_path: attackPath,
+    });
   }
 
   /**
-   * Parse the organization from OrganizationSimulationValuedResourceAttackPath resource.
+   * Parse the organization from OrganizationSimulationValuedResourceAttackPaths resource.
    *
-   * @param {string} organizationSimulationValuedResourceAttackPathName
-   *   A fully-qualified path representing organization_simulation_valued_resource_attack_path resource.
+   * @param {string} organizationSimulationValuedResourceAttackPathsName
+   *   A fully-qualified path representing organization_simulation_valued_resource_attackPaths resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationSimulationValuedResourceAttackPathName(
-    organizationSimulationValuedResourceAttackPathName: string
-  ) {
-    return this.pathTemplates.organizationSimulationValuedResourceAttackPathPathTemplate.match(
-      organizationSimulationValuedResourceAttackPathName
-    ).organization;
+  matchOrganizationFromOrganizationSimulationValuedResourceAttackPathsName(organizationSimulationValuedResourceAttackPathsName: string) {
+    return this.pathTemplates.organizationSimulationValuedResourceAttackPathsPathTemplate.match(organizationSimulationValuedResourceAttackPathsName).organization;
   }
 
   /**
-   * Parse the simulation from OrganizationSimulationValuedResourceAttackPath resource.
+   * Parse the simulation from OrganizationSimulationValuedResourceAttackPaths resource.
    *
-   * @param {string} organizationSimulationValuedResourceAttackPathName
-   *   A fully-qualified path representing organization_simulation_valued_resource_attack_path resource.
+   * @param {string} organizationSimulationValuedResourceAttackPathsName
+   *   A fully-qualified path representing organization_simulation_valued_resource_attackPaths resource.
    * @returns {string} A string representing the simulation.
    */
-  matchSimulationFromOrganizationSimulationValuedResourceAttackPathName(
-    organizationSimulationValuedResourceAttackPathName: string
-  ) {
-    return this.pathTemplates.organizationSimulationValuedResourceAttackPathPathTemplate.match(
-      organizationSimulationValuedResourceAttackPathName
-    ).simulation;
+  matchSimulationFromOrganizationSimulationValuedResourceAttackPathsName(organizationSimulationValuedResourceAttackPathsName: string) {
+    return this.pathTemplates.organizationSimulationValuedResourceAttackPathsPathTemplate.match(organizationSimulationValuedResourceAttackPathsName).simulation;
   }
 
   /**
-   * Parse the valued_resource from OrganizationSimulationValuedResourceAttackPath resource.
+   * Parse the valued_resource from OrganizationSimulationValuedResourceAttackPaths resource.
    *
-   * @param {string} organizationSimulationValuedResourceAttackPathName
-   *   A fully-qualified path representing organization_simulation_valued_resource_attack_path resource.
+   * @param {string} organizationSimulationValuedResourceAttackPathsName
+   *   A fully-qualified path representing organization_simulation_valued_resource_attackPaths resource.
    * @returns {string} A string representing the valued_resource.
    */
-  matchValuedResourceFromOrganizationSimulationValuedResourceAttackPathName(
-    organizationSimulationValuedResourceAttackPathName: string
-  ) {
-    return this.pathTemplates.organizationSimulationValuedResourceAttackPathPathTemplate.match(
-      organizationSimulationValuedResourceAttackPathName
-    ).valued_resource;
+  matchValuedResourceFromOrganizationSimulationValuedResourceAttackPathsName(organizationSimulationValuedResourceAttackPathsName: string) {
+    return this.pathTemplates.organizationSimulationValuedResourceAttackPathsPathTemplate.match(organizationSimulationValuedResourceAttackPathsName).valued_resource;
   }
 
   /**
-   * Parse the attack_path from OrganizationSimulationValuedResourceAttackPath resource.
+   * Parse the attack_path from OrganizationSimulationValuedResourceAttackPaths resource.
    *
-   * @param {string} organizationSimulationValuedResourceAttackPathName
-   *   A fully-qualified path representing organization_simulation_valued_resource_attack_path resource.
+   * @param {string} organizationSimulationValuedResourceAttackPathsName
+   *   A fully-qualified path representing organization_simulation_valued_resource_attackPaths resource.
    * @returns {string} A string representing the attack_path.
    */
-  matchAttackPathFromOrganizationSimulationValuedResourceAttackPathName(
-    organizationSimulationValuedResourceAttackPathName: string
-  ) {
-    return this.pathTemplates.organizationSimulationValuedResourceAttackPathPathTemplate.match(
-      organizationSimulationValuedResourceAttackPathName
-    ).attack_path;
+  matchAttackPathFromOrganizationSimulationValuedResourceAttackPathsName(organizationSimulationValuedResourceAttackPathsName: string) {
+    return this.pathTemplates.organizationSimulationValuedResourceAttackPathsPathTemplate.match(organizationSimulationValuedResourceAttackPathsName).attack_path;
+  }
+
+  /**
+   * Return a fully-qualified organizationSimulationValuedResources resource name string.
+   *
+   * @param {string} organization
+   * @param {string} simulation
+   * @param {string} valued_resource
+   * @returns {string} Resource name string.
+   */
+  organizationSimulationValuedResourcesPath(organization:string,simulation:string,valuedResource:string) {
+    return this.pathTemplates.organizationSimulationValuedResourcesPathTemplate.render({
+      organization: organization,
+      simulation: simulation,
+      valued_resource: valuedResource,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationSimulationValuedResources resource.
+   *
+   * @param {string} organizationSimulationValuedResourcesName
+   *   A fully-qualified path representing organization_simulation_valuedResources resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationSimulationValuedResourcesName(organizationSimulationValuedResourcesName: string) {
+    return this.pathTemplates.organizationSimulationValuedResourcesPathTemplate.match(organizationSimulationValuedResourcesName).organization;
+  }
+
+  /**
+   * Parse the simulation from OrganizationSimulationValuedResources resource.
+   *
+   * @param {string} organizationSimulationValuedResourcesName
+   *   A fully-qualified path representing organization_simulation_valuedResources resource.
+   * @returns {string} A string representing the simulation.
+   */
+  matchSimulationFromOrganizationSimulationValuedResourcesName(organizationSimulationValuedResourcesName: string) {
+    return this.pathTemplates.organizationSimulationValuedResourcesPathTemplate.match(organizationSimulationValuedResourcesName).simulation;
+  }
+
+  /**
+   * Parse the valued_resource from OrganizationSimulationValuedResources resource.
+   *
+   * @param {string} organizationSimulationValuedResourcesName
+   *   A fully-qualified path representing organization_simulation_valuedResources resource.
+   * @returns {string} A string representing the valued_resource.
+   */
+  matchValuedResourceFromOrganizationSimulationValuedResourcesName(organizationSimulationValuedResourcesName: string) {
+    return this.pathTemplates.organizationSimulationValuedResourcesPathTemplate.match(organizationSimulationValuedResourcesName).valued_resource;
+  }
+
+  /**
+   * Return a fully-qualified organizationSimulations resource name string.
+   *
+   * @param {string} organization
+   * @param {string} simulation
+   * @returns {string} Resource name string.
+   */
+  organizationSimulationsPath(organization:string,simulation:string) {
+    return this.pathTemplates.organizationSimulationsPathTemplate.render({
+      organization: organization,
+      simulation: simulation,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationSimulations resource.
+   *
+   * @param {string} organizationSimulationsName
+   *   A fully-qualified path representing organization_simulations resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationSimulationsName(organizationSimulationsName: string) {
+    return this.pathTemplates.organizationSimulationsPathTemplate.match(organizationSimulationsName).organization;
+  }
+
+  /**
+   * Parse the simulation from OrganizationSimulations resource.
+   *
+   * @param {string} organizationSimulationsName
+   *   A fully-qualified path representing organization_simulations resource.
+   * @returns {string} A string representing the simulation.
+   */
+  matchSimulationFromOrganizationSimulationsName(organizationSimulationsName: string) {
+    return this.pathTemplates.organizationSimulationsPathTemplate.match(organizationSimulationsName).simulation;
   }
 
   /**
@@ -9924,7 +8061,7 @@ export class SecurityCenterClient {
    * @param {string} source
    * @returns {string} Resource name string.
    */
-  organizationSourcePath(organization: string, source: string) {
+  organizationSourcePath(organization:string,source:string) {
     return this.pathTemplates.organizationSourcePathTemplate.render({
       organization: organization,
       source: source,
@@ -9939,9 +8076,7 @@ export class SecurityCenterClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationSourceName(organizationSourceName: string) {
-    return this.pathTemplates.organizationSourcePathTemplate.match(
-      organizationSourceName
-    ).organization;
+    return this.pathTemplates.organizationSourcePathTemplate.match(organizationSourceName).organization;
   }
 
   /**
@@ -9952,74 +8087,7 @@ export class SecurityCenterClient {
    * @returns {string} A string representing the source.
    */
   matchSourceFromOrganizationSourceName(organizationSourceName: string) {
-    return this.pathTemplates.organizationSourcePathTemplate.match(
-      organizationSourceName
-    ).source;
-  }
-
-  /**
-   * Return a fully-qualified organizationSourceFinding resource name string.
-   *
-   * @param {string} organization
-   * @param {string} source
-   * @param {string} finding
-   * @returns {string} Resource name string.
-   */
-  organizationSourceFindingPath(
-    organization: string,
-    source: string,
-    finding: string
-  ) {
-    return this.pathTemplates.organizationSourceFindingPathTemplate.render({
-      organization: organization,
-      source: source,
-      finding: finding,
-    });
-  }
-
-  /**
-   * Parse the organization from OrganizationSourceFinding resource.
-   *
-   * @param {string} organizationSourceFindingName
-   *   A fully-qualified path representing organization_source_finding resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromOrganizationSourceFindingName(
-    organizationSourceFindingName: string
-  ) {
-    return this.pathTemplates.organizationSourceFindingPathTemplate.match(
-      organizationSourceFindingName
-    ).organization;
-  }
-
-  /**
-   * Parse the source from OrganizationSourceFinding resource.
-   *
-   * @param {string} organizationSourceFindingName
-   *   A fully-qualified path representing organization_source_finding resource.
-   * @returns {string} A string representing the source.
-   */
-  matchSourceFromOrganizationSourceFindingName(
-    organizationSourceFindingName: string
-  ) {
-    return this.pathTemplates.organizationSourceFindingPathTemplate.match(
-      organizationSourceFindingName
-    ).source;
-  }
-
-  /**
-   * Parse the finding from OrganizationSourceFinding resource.
-   *
-   * @param {string} organizationSourceFindingName
-   *   A fully-qualified path representing organization_source_finding resource.
-   * @returns {string} A string representing the finding.
-   */
-  matchFindingFromOrganizationSourceFindingName(
-    organizationSourceFindingName: string
-  ) {
-    return this.pathTemplates.organizationSourceFindingPathTemplate.match(
-      organizationSourceFindingName
-    ).finding;
+    return this.pathTemplates.organizationSourcePathTemplate.match(organizationSourceName).source;
   }
 
   /**
@@ -10031,20 +8099,13 @@ export class SecurityCenterClient {
    * @param {string} externalsystem
    * @returns {string} Resource name string.
    */
-  organizationSourceFindingExternalsystemPath(
-    organization: string,
-    source: string,
-    finding: string,
-    externalsystem: string
-  ) {
-    return this.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.render(
-      {
-        organization: organization,
-        source: source,
-        finding: finding,
-        externalsystem: externalsystem,
-      }
-    );
+  organizationSourceFindingExternalsystemPath(organization:string,source:string,finding:string,externalsystem:string) {
+    return this.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.render({
+      organization: organization,
+      source: source,
+      finding: finding,
+      externalsystem: externalsystem,
+    });
   }
 
   /**
@@ -10054,12 +8115,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_source_finding_externalsystem resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationSourceFindingExternalsystemName(
-    organizationSourceFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.match(
-      organizationSourceFindingExternalsystemName
-    ).organization;
+  matchOrganizationFromOrganizationSourceFindingExternalsystemName(organizationSourceFindingExternalsystemName: string) {
+    return this.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.match(organizationSourceFindingExternalsystemName).organization;
   }
 
   /**
@@ -10069,12 +8126,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_source_finding_externalsystem resource.
    * @returns {string} A string representing the source.
    */
-  matchSourceFromOrganizationSourceFindingExternalsystemName(
-    organizationSourceFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.match(
-      organizationSourceFindingExternalsystemName
-    ).source;
+  matchSourceFromOrganizationSourceFindingExternalsystemName(organizationSourceFindingExternalsystemName: string) {
+    return this.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.match(organizationSourceFindingExternalsystemName).source;
   }
 
   /**
@@ -10084,12 +8137,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_source_finding_externalsystem resource.
    * @returns {string} A string representing the finding.
    */
-  matchFindingFromOrganizationSourceFindingExternalsystemName(
-    organizationSourceFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.match(
-      organizationSourceFindingExternalsystemName
-    ).finding;
+  matchFindingFromOrganizationSourceFindingExternalsystemName(organizationSourceFindingExternalsystemName: string) {
+    return this.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.match(organizationSourceFindingExternalsystemName).finding;
   }
 
   /**
@@ -10099,12 +8148,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_source_finding_externalsystem resource.
    * @returns {string} A string representing the externalsystem.
    */
-  matchExternalsystemFromOrganizationSourceFindingExternalsystemName(
-    organizationSourceFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.match(
-      organizationSourceFindingExternalsystemName
-    ).externalsystem;
+  matchExternalsystemFromOrganizationSourceFindingExternalsystemName(organizationSourceFindingExternalsystemName: string) {
+    return this.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.match(organizationSourceFindingExternalsystemName).externalsystem;
   }
 
   /**
@@ -10115,18 +8160,12 @@ export class SecurityCenterClient {
    * @param {string} finding
    * @returns {string} Resource name string.
    */
-  organizationSourceFindingSecurityMarksPath(
-    organization: string,
-    source: string,
-    finding: string
-  ) {
-    return this.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.render(
-      {
-        organization: organization,
-        source: source,
-        finding: finding,
-      }
-    );
+  organizationSourceFindingSecurityMarksPath(organization:string,source:string,finding:string) {
+    return this.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.render({
+      organization: organization,
+      source: source,
+      finding: finding,
+    });
   }
 
   /**
@@ -10136,12 +8175,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_source_finding_securityMarks resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationSourceFindingSecurityMarksName(
-    organizationSourceFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(
-      organizationSourceFindingSecurityMarksName
-    ).organization;
+  matchOrganizationFromOrganizationSourceFindingSecurityMarksName(organizationSourceFindingSecurityMarksName: string) {
+    return this.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(organizationSourceFindingSecurityMarksName).organization;
   }
 
   /**
@@ -10151,12 +8186,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_source_finding_securityMarks resource.
    * @returns {string} A string representing the source.
    */
-  matchSourceFromOrganizationSourceFindingSecurityMarksName(
-    organizationSourceFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(
-      organizationSourceFindingSecurityMarksName
-    ).source;
+  matchSourceFromOrganizationSourceFindingSecurityMarksName(organizationSourceFindingSecurityMarksName: string) {
+    return this.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(organizationSourceFindingSecurityMarksName).source;
   }
 
   /**
@@ -10166,97 +8197,57 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_source_finding_securityMarks resource.
    * @returns {string} A string representing the finding.
    */
-  matchFindingFromOrganizationSourceFindingSecurityMarksName(
-    organizationSourceFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(
-      organizationSourceFindingSecurityMarksName
-    ).finding;
+  matchFindingFromOrganizationSourceFindingSecurityMarksName(organizationSourceFindingSecurityMarksName: string) {
+    return this.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match(organizationSourceFindingSecurityMarksName).finding;
   }
 
   /**
-   * Return a fully-qualified organizationSourceLocationFinding resource name string.
+   * Return a fully-qualified organizationSourceFindings resource name string.
    *
    * @param {string} organization
    * @param {string} source
-   * @param {string} location
    * @param {string} finding
    * @returns {string} Resource name string.
    */
-  organizationSourceLocationFindingPath(
-    organization: string,
-    source: string,
-    location: string,
-    finding: string
-  ) {
-    return this.pathTemplates.organizationSourceLocationFindingPathTemplate.render(
-      {
-        organization: organization,
-        source: source,
-        location: location,
-        finding: finding,
-      }
-    );
+  organizationSourceFindingsPath(organization:string,source:string,finding:string) {
+    return this.pathTemplates.organizationSourceFindingsPathTemplate.render({
+      organization: organization,
+      source: source,
+      finding: finding,
+    });
   }
 
   /**
-   * Parse the organization from OrganizationSourceLocationFinding resource.
+   * Parse the organization from OrganizationSourceFindings resource.
    *
-   * @param {string} organizationSourceLocationFindingName
-   *   A fully-qualified path representing organization_source_location_finding resource.
+   * @param {string} organizationSourceFindingsName
+   *   A fully-qualified path representing organization_source_findings resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationSourceLocationFindingName(
-    organizationSourceLocationFindingName: string
-  ) {
-    return this.pathTemplates.organizationSourceLocationFindingPathTemplate.match(
-      organizationSourceLocationFindingName
-    ).organization;
+  matchOrganizationFromOrganizationSourceFindingsName(organizationSourceFindingsName: string) {
+    return this.pathTemplates.organizationSourceFindingsPathTemplate.match(organizationSourceFindingsName).organization;
   }
 
   /**
-   * Parse the source from OrganizationSourceLocationFinding resource.
+   * Parse the source from OrganizationSourceFindings resource.
    *
-   * @param {string} organizationSourceLocationFindingName
-   *   A fully-qualified path representing organization_source_location_finding resource.
+   * @param {string} organizationSourceFindingsName
+   *   A fully-qualified path representing organization_source_findings resource.
    * @returns {string} A string representing the source.
    */
-  matchSourceFromOrganizationSourceLocationFindingName(
-    organizationSourceLocationFindingName: string
-  ) {
-    return this.pathTemplates.organizationSourceLocationFindingPathTemplate.match(
-      organizationSourceLocationFindingName
-    ).source;
+  matchSourceFromOrganizationSourceFindingsName(organizationSourceFindingsName: string) {
+    return this.pathTemplates.organizationSourceFindingsPathTemplate.match(organizationSourceFindingsName).source;
   }
 
   /**
-   * Parse the location from OrganizationSourceLocationFinding resource.
+   * Parse the finding from OrganizationSourceFindings resource.
    *
-   * @param {string} organizationSourceLocationFindingName
-   *   A fully-qualified path representing organization_source_location_finding resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromOrganizationSourceLocationFindingName(
-    organizationSourceLocationFindingName: string
-  ) {
-    return this.pathTemplates.organizationSourceLocationFindingPathTemplate.match(
-      organizationSourceLocationFindingName
-    ).location;
-  }
-
-  /**
-   * Parse the finding from OrganizationSourceLocationFinding resource.
-   *
-   * @param {string} organizationSourceLocationFindingName
-   *   A fully-qualified path representing organization_source_location_finding resource.
+   * @param {string} organizationSourceFindingsName
+   *   A fully-qualified path representing organization_source_findings resource.
    * @returns {string} A string representing the finding.
    */
-  matchFindingFromOrganizationSourceLocationFindingName(
-    organizationSourceLocationFindingName: string
-  ) {
-    return this.pathTemplates.organizationSourceLocationFindingPathTemplate.match(
-      organizationSourceLocationFindingName
-    ).finding;
+  matchFindingFromOrganizationSourceFindingsName(organizationSourceFindingsName: string) {
+    return this.pathTemplates.organizationSourceFindingsPathTemplate.match(organizationSourceFindingsName).finding;
   }
 
   /**
@@ -10269,22 +8260,14 @@ export class SecurityCenterClient {
    * @param {string} externalsystem
    * @returns {string} Resource name string.
    */
-  organizationSourceLocationFindingExternalsystemPath(
-    organization: string,
-    source: string,
-    location: string,
-    finding: string,
-    externalsystem: string
-  ) {
-    return this.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.render(
-      {
-        organization: organization,
-        source: source,
-        location: location,
-        finding: finding,
-        externalsystem: externalsystem,
-      }
-    );
+  organizationSourceLocationFindingExternalsystemPath(organization:string,source:string,location:string,finding:string,externalsystem:string) {
+    return this.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.render({
+      organization: organization,
+      source: source,
+      location: location,
+      finding: finding,
+      externalsystem: externalsystem,
+    });
   }
 
   /**
@@ -10294,12 +8277,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_source_location_finding_externalsystem resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationSourceLocationFindingExternalsystemName(
-    organizationSourceLocationFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.match(
-      organizationSourceLocationFindingExternalsystemName
-    ).organization;
+  matchOrganizationFromOrganizationSourceLocationFindingExternalsystemName(organizationSourceLocationFindingExternalsystemName: string) {
+    return this.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.match(organizationSourceLocationFindingExternalsystemName).organization;
   }
 
   /**
@@ -10309,12 +8288,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_source_location_finding_externalsystem resource.
    * @returns {string} A string representing the source.
    */
-  matchSourceFromOrganizationSourceLocationFindingExternalsystemName(
-    organizationSourceLocationFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.match(
-      organizationSourceLocationFindingExternalsystemName
-    ).source;
+  matchSourceFromOrganizationSourceLocationFindingExternalsystemName(organizationSourceLocationFindingExternalsystemName: string) {
+    return this.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.match(organizationSourceLocationFindingExternalsystemName).source;
   }
 
   /**
@@ -10324,12 +8299,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_source_location_finding_externalsystem resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationSourceLocationFindingExternalsystemName(
-    organizationSourceLocationFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.match(
-      organizationSourceLocationFindingExternalsystemName
-    ).location;
+  matchLocationFromOrganizationSourceLocationFindingExternalsystemName(organizationSourceLocationFindingExternalsystemName: string) {
+    return this.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.match(organizationSourceLocationFindingExternalsystemName).location;
   }
 
   /**
@@ -10339,12 +8310,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_source_location_finding_externalsystem resource.
    * @returns {string} A string representing the finding.
    */
-  matchFindingFromOrganizationSourceLocationFindingExternalsystemName(
-    organizationSourceLocationFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.match(
-      organizationSourceLocationFindingExternalsystemName
-    ).finding;
+  matchFindingFromOrganizationSourceLocationFindingExternalsystemName(organizationSourceLocationFindingExternalsystemName: string) {
+    return this.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.match(organizationSourceLocationFindingExternalsystemName).finding;
   }
 
   /**
@@ -10354,12 +8321,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_source_location_finding_externalsystem resource.
    * @returns {string} A string representing the externalsystem.
    */
-  matchExternalsystemFromOrganizationSourceLocationFindingExternalsystemName(
-    organizationSourceLocationFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.match(
-      organizationSourceLocationFindingExternalsystemName
-    ).externalsystem;
+  matchExternalsystemFromOrganizationSourceLocationFindingExternalsystemName(organizationSourceLocationFindingExternalsystemName: string) {
+    return this.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.match(organizationSourceLocationFindingExternalsystemName).externalsystem;
   }
 
   /**
@@ -10371,20 +8334,13 @@ export class SecurityCenterClient {
    * @param {string} finding
    * @returns {string} Resource name string.
    */
-  organizationSourceLocationFindingSecurityMarksPath(
-    organization: string,
-    source: string,
-    location: string,
-    finding: string
-  ) {
-    return this.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.render(
-      {
-        organization: organization,
-        source: source,
-        location: location,
-        finding: finding,
-      }
-    );
+  organizationSourceLocationFindingSecurityMarksPath(organization:string,source:string,location:string,finding:string) {
+    return this.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.render({
+      organization: organization,
+      source: source,
+      location: location,
+      finding: finding,
+    });
   }
 
   /**
@@ -10394,12 +8350,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_source_location_finding_securityMarks resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationSourceLocationFindingSecurityMarksName(
-    organizationSourceLocationFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.match(
-      organizationSourceLocationFindingSecurityMarksName
-    ).organization;
+  matchOrganizationFromOrganizationSourceLocationFindingSecurityMarksName(organizationSourceLocationFindingSecurityMarksName: string) {
+    return this.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.match(organizationSourceLocationFindingSecurityMarksName).organization;
   }
 
   /**
@@ -10409,12 +8361,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_source_location_finding_securityMarks resource.
    * @returns {string} A string representing the source.
    */
-  matchSourceFromOrganizationSourceLocationFindingSecurityMarksName(
-    organizationSourceLocationFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.match(
-      organizationSourceLocationFindingSecurityMarksName
-    ).source;
+  matchSourceFromOrganizationSourceLocationFindingSecurityMarksName(organizationSourceLocationFindingSecurityMarksName: string) {
+    return this.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.match(organizationSourceLocationFindingSecurityMarksName).source;
   }
 
   /**
@@ -10424,12 +8372,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_source_location_finding_securityMarks resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationSourceLocationFindingSecurityMarksName(
-    organizationSourceLocationFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.match(
-      organizationSourceLocationFindingSecurityMarksName
-    ).location;
+  matchLocationFromOrganizationSourceLocationFindingSecurityMarksName(organizationSourceLocationFindingSecurityMarksName: string) {
+    return this.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.match(organizationSourceLocationFindingSecurityMarksName).location;
   }
 
   /**
@@ -10439,12 +8383,70 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing organization_source_location_finding_securityMarks resource.
    * @returns {string} A string representing the finding.
    */
-  matchFindingFromOrganizationSourceLocationFindingSecurityMarksName(
-    organizationSourceLocationFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.match(
-      organizationSourceLocationFindingSecurityMarksName
-    ).finding;
+  matchFindingFromOrganizationSourceLocationFindingSecurityMarksName(organizationSourceLocationFindingSecurityMarksName: string) {
+    return this.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.match(organizationSourceLocationFindingSecurityMarksName).finding;
+  }
+
+  /**
+   * Return a fully-qualified organizationSourceLocationFindings resource name string.
+   *
+   * @param {string} organization
+   * @param {string} source
+   * @param {string} location
+   * @param {string} finding
+   * @returns {string} Resource name string.
+   */
+  organizationSourceLocationFindingsPath(organization:string,source:string,location:string,finding:string) {
+    return this.pathTemplates.organizationSourceLocationFindingsPathTemplate.render({
+      organization: organization,
+      source: source,
+      location: location,
+      finding: finding,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationSourceLocationFindings resource.
+   *
+   * @param {string} organizationSourceLocationFindingsName
+   *   A fully-qualified path representing organization_source_location_findings resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationSourceLocationFindingsName(organizationSourceLocationFindingsName: string) {
+    return this.pathTemplates.organizationSourceLocationFindingsPathTemplate.match(organizationSourceLocationFindingsName).organization;
+  }
+
+  /**
+   * Parse the source from OrganizationSourceLocationFindings resource.
+   *
+   * @param {string} organizationSourceLocationFindingsName
+   *   A fully-qualified path representing organization_source_location_findings resource.
+   * @returns {string} A string representing the source.
+   */
+  matchSourceFromOrganizationSourceLocationFindingsName(organizationSourceLocationFindingsName: string) {
+    return this.pathTemplates.organizationSourceLocationFindingsPathTemplate.match(organizationSourceLocationFindingsName).source;
+  }
+
+  /**
+   * Parse the location from OrganizationSourceLocationFindings resource.
+   *
+   * @param {string} organizationSourceLocationFindingsName
+   *   A fully-qualified path representing organization_source_location_findings resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationSourceLocationFindingsName(organizationSourceLocationFindingsName: string) {
+    return this.pathTemplates.organizationSourceLocationFindingsPathTemplate.match(organizationSourceLocationFindingsName).location;
+  }
+
+  /**
+   * Parse the finding from OrganizationSourceLocationFindings resource.
+   *
+   * @param {string} organizationSourceLocationFindingsName
+   *   A fully-qualified path representing organization_source_location_findings resource.
+   * @returns {string} A string representing the finding.
+   */
+  matchFindingFromOrganizationSourceLocationFindingsName(organizationSourceLocationFindingsName: string) {
+    return this.pathTemplates.organizationSourceLocationFindingsPathTemplate.match(organizationSourceLocationFindingsName).finding;
   }
 
   /**
@@ -10454,7 +8456,7 @@ export class SecurityCenterClient {
    * @param {string} asset
    * @returns {string} Resource name string.
    */
-  projectAssetSecurityMarksPath(project: string, asset: string) {
+  projectAssetSecurityMarksPath(project:string,asset:string) {
     return this.pathTemplates.projectAssetSecurityMarksPathTemplate.render({
       project: project,
       asset: asset,
@@ -10468,12 +8470,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing project_asset_securityMarks resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectAssetSecurityMarksName(
-    projectAssetSecurityMarksName: string
-  ) {
-    return this.pathTemplates.projectAssetSecurityMarksPathTemplate.match(
-      projectAssetSecurityMarksName
-    ).project;
+  matchProjectFromProjectAssetSecurityMarksName(projectAssetSecurityMarksName: string) {
+    return this.pathTemplates.projectAssetSecurityMarksPathTemplate.match(projectAssetSecurityMarksName).project;
   }
 
   /**
@@ -10483,12 +8481,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing project_asset_securityMarks resource.
    * @returns {string} A string representing the asset.
    */
-  matchAssetFromProjectAssetSecurityMarksName(
-    projectAssetSecurityMarksName: string
-  ) {
-    return this.pathTemplates.projectAssetSecurityMarksPathTemplate.match(
-      projectAssetSecurityMarksName
-    ).asset;
+  matchAssetFromProjectAssetSecurityMarksName(projectAssetSecurityMarksName: string) {
+    return this.pathTemplates.projectAssetSecurityMarksPathTemplate.match(projectAssetSecurityMarksName).asset;
   }
 
   /**
@@ -10498,7 +8492,7 @@ export class SecurityCenterClient {
    * @param {string} constraint_name
    * @returns {string} Resource name string.
    */
-  projectConstraintNamePath(project: string, constraintName: string) {
+  projectConstraintNamePath(project:string,constraintName:string) {
     return this.pathTemplates.projectConstraintNamePathTemplate.render({
       project: project,
       constraint_name: constraintName,
@@ -10513,9 +8507,7 @@ export class SecurityCenterClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectConstraintNameName(projectConstraintNameName: string) {
-    return this.pathTemplates.projectConstraintNamePathTemplate.match(
-      projectConstraintNameName
-    ).project;
+    return this.pathTemplates.projectConstraintNamePathTemplate.match(projectConstraintNameName).project;
   }
 
   /**
@@ -10525,28 +8517,20 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing project_constraint_name resource.
    * @returns {string} A string representing the constraint_name.
    */
-  matchConstraintNameFromProjectConstraintNameName(
-    projectConstraintNameName: string
-  ) {
-    return this.pathTemplates.projectConstraintNamePathTemplate.match(
-      projectConstraintNameName
-    ).constraint_name;
+  matchConstraintNameFromProjectConstraintNameName(projectConstraintNameName: string) {
+    return this.pathTemplates.projectConstraintNamePathTemplate.match(projectConstraintNameName).constraint_name;
   }
 
   /**
-   * Return a fully-qualified projectLocationExport resource name string.
+   * Return a fully-qualified projectLocationBigQueryExports resource name string.
    *
    * @param {string} project
    * @param {string} location
    * @param {string} exportParam
    * @returns {string} Resource name string.
    */
-  projectLocationExportPath(
-    project: string,
-    location: string,
-    exportParam: string
-  ) {
-    return this.pathTemplates.projectLocationExportPathTemplate.render({
+  projectLocationBigQueryExportsPath(project:string,location:string,exportParam:string) {
+    return this.pathTemplates.projectLocationBigQueryExportsPathTemplate.render({
       project: project,
       location: location,
       export: exportParam,
@@ -10554,60 +8538,48 @@ export class SecurityCenterClient {
   }
 
   /**
-   * Parse the project from ProjectLocationExport resource.
+   * Parse the project from ProjectLocationBigQueryExports resource.
    *
-   * @param {string} projectLocationExportName
-   *   A fully-qualified path representing project_location_export resource.
+   * @param {string} projectLocationBigQueryExportsName
+   *   A fully-qualified path representing project_location_bigQueryExports resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationExportName(projectLocationExportName: string) {
-    return this.pathTemplates.projectLocationExportPathTemplate.match(
-      projectLocationExportName
-    ).project;
+  matchProjectFromProjectLocationBigQueryExportsName(projectLocationBigQueryExportsName: string) {
+    return this.pathTemplates.projectLocationBigQueryExportsPathTemplate.match(projectLocationBigQueryExportsName).project;
   }
 
   /**
-   * Parse the location from ProjectLocationExport resource.
+   * Parse the location from ProjectLocationBigQueryExports resource.
    *
-   * @param {string} projectLocationExportName
-   *   A fully-qualified path representing project_location_export resource.
+   * @param {string} projectLocationBigQueryExportsName
+   *   A fully-qualified path representing project_location_bigQueryExports resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationExportName(
-    projectLocationExportName: string
-  ) {
-    return this.pathTemplates.projectLocationExportPathTemplate.match(
-      projectLocationExportName
-    ).location;
+  matchLocationFromProjectLocationBigQueryExportsName(projectLocationBigQueryExportsName: string) {
+    return this.pathTemplates.projectLocationBigQueryExportsPathTemplate.match(projectLocationBigQueryExportsName).location;
   }
 
   /**
-   * Parse the export from ProjectLocationExport resource.
+   * Parse the export from ProjectLocationBigQueryExports resource.
    *
-   * @param {string} projectLocationExportName
-   *   A fully-qualified path representing project_location_export resource.
+   * @param {string} projectLocationBigQueryExportsName
+   *   A fully-qualified path representing project_location_bigQueryExports resource.
    * @returns {string} A string representing the export.
    */
-  matchExportFromProjectLocationExportName(projectLocationExportName: string) {
-    return this.pathTemplates.projectLocationExportPathTemplate.match(
-      projectLocationExportName
-    ).export;
+  matchExportFromProjectLocationBigQueryExportsName(projectLocationBigQueryExportsName: string) {
+    return this.pathTemplates.projectLocationBigQueryExportsPathTemplate.match(projectLocationBigQueryExportsName).export;
   }
 
   /**
-   * Return a fully-qualified projectLocationMuteConfig resource name string.
+   * Return a fully-qualified projectLocationMuteConfigs resource name string.
    *
    * @param {string} project
    * @param {string} location
    * @param {string} mute_config
    * @returns {string} Resource name string.
    */
-  projectLocationMuteConfigPath(
-    project: string,
-    location: string,
-    muteConfig: string
-  ) {
-    return this.pathTemplates.projectLocationMuteConfigPathTemplate.render({
+  projectLocationMuteConfigsPath(project:string,location:string,muteConfig:string) {
+    return this.pathTemplates.projectLocationMuteConfigsPathTemplate.render({
       project: project,
       location: location,
       mute_config: muteConfig,
@@ -10615,155 +8587,121 @@ export class SecurityCenterClient {
   }
 
   /**
-   * Parse the project from ProjectLocationMuteConfig resource.
+   * Parse the project from ProjectLocationMuteConfigs resource.
    *
-   * @param {string} projectLocationMuteConfigName
-   *   A fully-qualified path representing project_location_mute_config resource.
+   * @param {string} projectLocationMuteConfigsName
+   *   A fully-qualified path representing project_location_muteConfigs resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationMuteConfigName(
-    projectLocationMuteConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationMuteConfigPathTemplate.match(
-      projectLocationMuteConfigName
-    ).project;
+  matchProjectFromProjectLocationMuteConfigsName(projectLocationMuteConfigsName: string) {
+    return this.pathTemplates.projectLocationMuteConfigsPathTemplate.match(projectLocationMuteConfigsName).project;
   }
 
   /**
-   * Parse the location from ProjectLocationMuteConfig resource.
+   * Parse the location from ProjectLocationMuteConfigs resource.
    *
-   * @param {string} projectLocationMuteConfigName
-   *   A fully-qualified path representing project_location_mute_config resource.
+   * @param {string} projectLocationMuteConfigsName
+   *   A fully-qualified path representing project_location_muteConfigs resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationMuteConfigName(
-    projectLocationMuteConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationMuteConfigPathTemplate.match(
-      projectLocationMuteConfigName
-    ).location;
+  matchLocationFromProjectLocationMuteConfigsName(projectLocationMuteConfigsName: string) {
+    return this.pathTemplates.projectLocationMuteConfigsPathTemplate.match(projectLocationMuteConfigsName).location;
   }
 
   /**
-   * Parse the mute_config from ProjectLocationMuteConfig resource.
+   * Parse the mute_config from ProjectLocationMuteConfigs resource.
    *
-   * @param {string} projectLocationMuteConfigName
-   *   A fully-qualified path representing project_location_mute_config resource.
+   * @param {string} projectLocationMuteConfigsName
+   *   A fully-qualified path representing project_location_muteConfigs resource.
    * @returns {string} A string representing the mute_config.
    */
-  matchMuteConfigFromProjectLocationMuteConfigName(
-    projectLocationMuteConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationMuteConfigPathTemplate.match(
-      projectLocationMuteConfigName
-    ).mute_config;
+  matchMuteConfigFromProjectLocationMuteConfigsName(projectLocationMuteConfigsName: string) {
+    return this.pathTemplates.projectLocationMuteConfigsPathTemplate.match(projectLocationMuteConfigsName).mute_config;
   }
 
   /**
-   * Return a fully-qualified projectLocationNotificationConfig resource name string.
+   * Return a fully-qualified projectLocationNotificationConfigs resource name string.
    *
    * @param {string} project
    * @param {string} location
    * @param {string} notification_config
    * @returns {string} Resource name string.
    */
-  projectLocationNotificationConfigPath(
-    project: string,
-    location: string,
-    notificationConfig: string
-  ) {
-    return this.pathTemplates.projectLocationNotificationConfigPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        notification_config: notificationConfig,
-      }
-    );
+  projectLocationNotificationConfigsPath(project:string,location:string,notificationConfig:string) {
+    return this.pathTemplates.projectLocationNotificationConfigsPathTemplate.render({
+      project: project,
+      location: location,
+      notification_config: notificationConfig,
+    });
   }
 
   /**
-   * Parse the project from ProjectLocationNotificationConfig resource.
+   * Parse the project from ProjectLocationNotificationConfigs resource.
    *
-   * @param {string} projectLocationNotificationConfigName
-   *   A fully-qualified path representing project_location_notification_config resource.
+   * @param {string} projectLocationNotificationConfigsName
+   *   A fully-qualified path representing project_location_notificationConfigs resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationNotificationConfigName(
-    projectLocationNotificationConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationNotificationConfigPathTemplate.match(
-      projectLocationNotificationConfigName
-    ).project;
+  matchProjectFromProjectLocationNotificationConfigsName(projectLocationNotificationConfigsName: string) {
+    return this.pathTemplates.projectLocationNotificationConfigsPathTemplate.match(projectLocationNotificationConfigsName).project;
   }
 
   /**
-   * Parse the location from ProjectLocationNotificationConfig resource.
+   * Parse the location from ProjectLocationNotificationConfigs resource.
    *
-   * @param {string} projectLocationNotificationConfigName
-   *   A fully-qualified path representing project_location_notification_config resource.
+   * @param {string} projectLocationNotificationConfigsName
+   *   A fully-qualified path representing project_location_notificationConfigs resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationNotificationConfigName(
-    projectLocationNotificationConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationNotificationConfigPathTemplate.match(
-      projectLocationNotificationConfigName
-    ).location;
+  matchLocationFromProjectLocationNotificationConfigsName(projectLocationNotificationConfigsName: string) {
+    return this.pathTemplates.projectLocationNotificationConfigsPathTemplate.match(projectLocationNotificationConfigsName).location;
   }
 
   /**
-   * Parse the notification_config from ProjectLocationNotificationConfig resource.
+   * Parse the notification_config from ProjectLocationNotificationConfigs resource.
    *
-   * @param {string} projectLocationNotificationConfigName
-   *   A fully-qualified path representing project_location_notification_config resource.
+   * @param {string} projectLocationNotificationConfigsName
+   *   A fully-qualified path representing project_location_notificationConfigs resource.
    * @returns {string} A string representing the notification_config.
    */
-  matchNotificationConfigFromProjectLocationNotificationConfigName(
-    projectLocationNotificationConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationNotificationConfigPathTemplate.match(
-      projectLocationNotificationConfigName
-    ).notification_config;
+  matchNotificationConfigFromProjectLocationNotificationConfigsName(projectLocationNotificationConfigsName: string) {
+    return this.pathTemplates.projectLocationNotificationConfigsPathTemplate.match(projectLocationNotificationConfigsName).notification_config;
   }
 
   /**
-   * Return a fully-qualified projectMuteConfig resource name string.
+   * Return a fully-qualified projectMuteConfigs resource name string.
    *
    * @param {string} project
    * @param {string} mute_config
    * @returns {string} Resource name string.
    */
-  projectMuteConfigPath(project: string, muteConfig: string) {
-    return this.pathTemplates.projectMuteConfigPathTemplate.render({
+  projectMuteConfigsPath(project:string,muteConfig:string) {
+    return this.pathTemplates.projectMuteConfigsPathTemplate.render({
       project: project,
       mute_config: muteConfig,
     });
   }
 
   /**
-   * Parse the project from ProjectMuteConfig resource.
+   * Parse the project from ProjectMuteConfigs resource.
    *
-   * @param {string} projectMuteConfigName
-   *   A fully-qualified path representing project_mute_config resource.
+   * @param {string} projectMuteConfigsName
+   *   A fully-qualified path representing project_muteConfigs resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectMuteConfigName(projectMuteConfigName: string) {
-    return this.pathTemplates.projectMuteConfigPathTemplate.match(
-      projectMuteConfigName
-    ).project;
+  matchProjectFromProjectMuteConfigsName(projectMuteConfigsName: string) {
+    return this.pathTemplates.projectMuteConfigsPathTemplate.match(projectMuteConfigsName).project;
   }
 
   /**
-   * Parse the mute_config from ProjectMuteConfig resource.
+   * Parse the mute_config from ProjectMuteConfigs resource.
    *
-   * @param {string} projectMuteConfigName
-   *   A fully-qualified path representing project_mute_config resource.
+   * @param {string} projectMuteConfigsName
+   *   A fully-qualified path representing project_muteConfigs resource.
    * @returns {string} A string representing the mute_config.
    */
-  matchMuteConfigFromProjectMuteConfigName(projectMuteConfigName: string) {
-    return this.pathTemplates.projectMuteConfigPathTemplate.match(
-      projectMuteConfigName
-    ).mute_config;
+  matchMuteConfigFromProjectMuteConfigsName(projectMuteConfigsName: string) {
+    return this.pathTemplates.projectMuteConfigsPathTemplate.match(projectMuteConfigsName).mute_config;
   }
 
   /**
@@ -10773,7 +8711,7 @@ export class SecurityCenterClient {
    * @param {string} source
    * @returns {string} Resource name string.
    */
-  projectSourcePath(project: string, source: string) {
+  projectSourcePath(project:string,source:string) {
     return this.pathTemplates.projectSourcePathTemplate.render({
       project: project,
       source: source,
@@ -10788,8 +8726,7 @@ export class SecurityCenterClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectSourceName(projectSourceName: string) {
-    return this.pathTemplates.projectSourcePathTemplate.match(projectSourceName)
-      .project;
+    return this.pathTemplates.projectSourcePathTemplate.match(projectSourceName).project;
   }
 
   /**
@@ -10800,63 +8737,7 @@ export class SecurityCenterClient {
    * @returns {string} A string representing the source.
    */
   matchSourceFromProjectSourceName(projectSourceName: string) {
-    return this.pathTemplates.projectSourcePathTemplate.match(projectSourceName)
-      .source;
-  }
-
-  /**
-   * Return a fully-qualified projectSourceFinding resource name string.
-   *
-   * @param {string} project
-   * @param {string} source
-   * @param {string} finding
-   * @returns {string} Resource name string.
-   */
-  projectSourceFindingPath(project: string, source: string, finding: string) {
-    return this.pathTemplates.projectSourceFindingPathTemplate.render({
-      project: project,
-      source: source,
-      finding: finding,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectSourceFinding resource.
-   *
-   * @param {string} projectSourceFindingName
-   *   A fully-qualified path representing project_source_finding resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectSourceFindingName(projectSourceFindingName: string) {
-    return this.pathTemplates.projectSourceFindingPathTemplate.match(
-      projectSourceFindingName
-    ).project;
-  }
-
-  /**
-   * Parse the source from ProjectSourceFinding resource.
-   *
-   * @param {string} projectSourceFindingName
-   *   A fully-qualified path representing project_source_finding resource.
-   * @returns {string} A string representing the source.
-   */
-  matchSourceFromProjectSourceFindingName(projectSourceFindingName: string) {
-    return this.pathTemplates.projectSourceFindingPathTemplate.match(
-      projectSourceFindingName
-    ).source;
-  }
-
-  /**
-   * Parse the finding from ProjectSourceFinding resource.
-   *
-   * @param {string} projectSourceFindingName
-   *   A fully-qualified path representing project_source_finding resource.
-   * @returns {string} A string representing the finding.
-   */
-  matchFindingFromProjectSourceFindingName(projectSourceFindingName: string) {
-    return this.pathTemplates.projectSourceFindingPathTemplate.match(
-      projectSourceFindingName
-    ).finding;
+    return this.pathTemplates.projectSourcePathTemplate.match(projectSourceName).source;
   }
 
   /**
@@ -10868,20 +8749,13 @@ export class SecurityCenterClient {
    * @param {string} externalsystem
    * @returns {string} Resource name string.
    */
-  projectSourceFindingExternalsystemPath(
-    project: string,
-    source: string,
-    finding: string,
-    externalsystem: string
-  ) {
-    return this.pathTemplates.projectSourceFindingExternalsystemPathTemplate.render(
-      {
-        project: project,
-        source: source,
-        finding: finding,
-        externalsystem: externalsystem,
-      }
-    );
+  projectSourceFindingExternalsystemPath(project:string,source:string,finding:string,externalsystem:string) {
+    return this.pathTemplates.projectSourceFindingExternalsystemPathTemplate.render({
+      project: project,
+      source: source,
+      finding: finding,
+      externalsystem: externalsystem,
+    });
   }
 
   /**
@@ -10891,12 +8765,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing project_source_finding_externalsystem resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectSourceFindingExternalsystemName(
-    projectSourceFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.projectSourceFindingExternalsystemPathTemplate.match(
-      projectSourceFindingExternalsystemName
-    ).project;
+  matchProjectFromProjectSourceFindingExternalsystemName(projectSourceFindingExternalsystemName: string) {
+    return this.pathTemplates.projectSourceFindingExternalsystemPathTemplate.match(projectSourceFindingExternalsystemName).project;
   }
 
   /**
@@ -10906,12 +8776,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing project_source_finding_externalsystem resource.
    * @returns {string} A string representing the source.
    */
-  matchSourceFromProjectSourceFindingExternalsystemName(
-    projectSourceFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.projectSourceFindingExternalsystemPathTemplate.match(
-      projectSourceFindingExternalsystemName
-    ).source;
+  matchSourceFromProjectSourceFindingExternalsystemName(projectSourceFindingExternalsystemName: string) {
+    return this.pathTemplates.projectSourceFindingExternalsystemPathTemplate.match(projectSourceFindingExternalsystemName).source;
   }
 
   /**
@@ -10921,12 +8787,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing project_source_finding_externalsystem resource.
    * @returns {string} A string representing the finding.
    */
-  matchFindingFromProjectSourceFindingExternalsystemName(
-    projectSourceFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.projectSourceFindingExternalsystemPathTemplate.match(
-      projectSourceFindingExternalsystemName
-    ).finding;
+  matchFindingFromProjectSourceFindingExternalsystemName(projectSourceFindingExternalsystemName: string) {
+    return this.pathTemplates.projectSourceFindingExternalsystemPathTemplate.match(projectSourceFindingExternalsystemName).finding;
   }
 
   /**
@@ -10936,12 +8798,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing project_source_finding_externalsystem resource.
    * @returns {string} A string representing the externalsystem.
    */
-  matchExternalsystemFromProjectSourceFindingExternalsystemName(
-    projectSourceFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.projectSourceFindingExternalsystemPathTemplate.match(
-      projectSourceFindingExternalsystemName
-    ).externalsystem;
+  matchExternalsystemFromProjectSourceFindingExternalsystemName(projectSourceFindingExternalsystemName: string) {
+    return this.pathTemplates.projectSourceFindingExternalsystemPathTemplate.match(projectSourceFindingExternalsystemName).externalsystem;
   }
 
   /**
@@ -10952,18 +8810,12 @@ export class SecurityCenterClient {
    * @param {string} finding
    * @returns {string} Resource name string.
    */
-  projectSourceFindingSecurityMarksPath(
-    project: string,
-    source: string,
-    finding: string
-  ) {
-    return this.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.render(
-      {
-        project: project,
-        source: source,
-        finding: finding,
-      }
-    );
+  projectSourceFindingSecurityMarksPath(project:string,source:string,finding:string) {
+    return this.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.render({
+      project: project,
+      source: source,
+      finding: finding,
+    });
   }
 
   /**
@@ -10973,12 +8825,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing project_source_finding_securityMarks resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectSourceFindingSecurityMarksName(
-    projectSourceFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.match(
-      projectSourceFindingSecurityMarksName
-    ).project;
+  matchProjectFromProjectSourceFindingSecurityMarksName(projectSourceFindingSecurityMarksName: string) {
+    return this.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.match(projectSourceFindingSecurityMarksName).project;
   }
 
   /**
@@ -10988,12 +8836,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing project_source_finding_securityMarks resource.
    * @returns {string} A string representing the source.
    */
-  matchSourceFromProjectSourceFindingSecurityMarksName(
-    projectSourceFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.match(
-      projectSourceFindingSecurityMarksName
-    ).source;
+  matchSourceFromProjectSourceFindingSecurityMarksName(projectSourceFindingSecurityMarksName: string) {
+    return this.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.match(projectSourceFindingSecurityMarksName).source;
   }
 
   /**
@@ -11003,95 +8847,57 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing project_source_finding_securityMarks resource.
    * @returns {string} A string representing the finding.
    */
-  matchFindingFromProjectSourceFindingSecurityMarksName(
-    projectSourceFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.match(
-      projectSourceFindingSecurityMarksName
-    ).finding;
+  matchFindingFromProjectSourceFindingSecurityMarksName(projectSourceFindingSecurityMarksName: string) {
+    return this.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.match(projectSourceFindingSecurityMarksName).finding;
   }
 
   /**
-   * Return a fully-qualified projectSourceLocationFinding resource name string.
+   * Return a fully-qualified projectSourceFindings resource name string.
    *
    * @param {string} project
    * @param {string} source
-   * @param {string} location
    * @param {string} finding
    * @returns {string} Resource name string.
    */
-  projectSourceLocationFindingPath(
-    project: string,
-    source: string,
-    location: string,
-    finding: string
-  ) {
-    return this.pathTemplates.projectSourceLocationFindingPathTemplate.render({
+  projectSourceFindingsPath(project:string,source:string,finding:string) {
+    return this.pathTemplates.projectSourceFindingsPathTemplate.render({
       project: project,
       source: source,
-      location: location,
       finding: finding,
     });
   }
 
   /**
-   * Parse the project from ProjectSourceLocationFinding resource.
+   * Parse the project from ProjectSourceFindings resource.
    *
-   * @param {string} projectSourceLocationFindingName
-   *   A fully-qualified path representing project_source_location_finding resource.
+   * @param {string} projectSourceFindingsName
+   *   A fully-qualified path representing project_source_findings resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectSourceLocationFindingName(
-    projectSourceLocationFindingName: string
-  ) {
-    return this.pathTemplates.projectSourceLocationFindingPathTemplate.match(
-      projectSourceLocationFindingName
-    ).project;
+  matchProjectFromProjectSourceFindingsName(projectSourceFindingsName: string) {
+    return this.pathTemplates.projectSourceFindingsPathTemplate.match(projectSourceFindingsName).project;
   }
 
   /**
-   * Parse the source from ProjectSourceLocationFinding resource.
+   * Parse the source from ProjectSourceFindings resource.
    *
-   * @param {string} projectSourceLocationFindingName
-   *   A fully-qualified path representing project_source_location_finding resource.
+   * @param {string} projectSourceFindingsName
+   *   A fully-qualified path representing project_source_findings resource.
    * @returns {string} A string representing the source.
    */
-  matchSourceFromProjectSourceLocationFindingName(
-    projectSourceLocationFindingName: string
-  ) {
-    return this.pathTemplates.projectSourceLocationFindingPathTemplate.match(
-      projectSourceLocationFindingName
-    ).source;
+  matchSourceFromProjectSourceFindingsName(projectSourceFindingsName: string) {
+    return this.pathTemplates.projectSourceFindingsPathTemplate.match(projectSourceFindingsName).source;
   }
 
   /**
-   * Parse the location from ProjectSourceLocationFinding resource.
+   * Parse the finding from ProjectSourceFindings resource.
    *
-   * @param {string} projectSourceLocationFindingName
-   *   A fully-qualified path representing project_source_location_finding resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromProjectSourceLocationFindingName(
-    projectSourceLocationFindingName: string
-  ) {
-    return this.pathTemplates.projectSourceLocationFindingPathTemplate.match(
-      projectSourceLocationFindingName
-    ).location;
-  }
-
-  /**
-   * Parse the finding from ProjectSourceLocationFinding resource.
-   *
-   * @param {string} projectSourceLocationFindingName
-   *   A fully-qualified path representing project_source_location_finding resource.
+   * @param {string} projectSourceFindingsName
+   *   A fully-qualified path representing project_source_findings resource.
    * @returns {string} A string representing the finding.
    */
-  matchFindingFromProjectSourceLocationFindingName(
-    projectSourceLocationFindingName: string
-  ) {
-    return this.pathTemplates.projectSourceLocationFindingPathTemplate.match(
-      projectSourceLocationFindingName
-    ).finding;
+  matchFindingFromProjectSourceFindingsName(projectSourceFindingsName: string) {
+    return this.pathTemplates.projectSourceFindingsPathTemplate.match(projectSourceFindingsName).finding;
   }
 
   /**
@@ -11104,22 +8910,14 @@ export class SecurityCenterClient {
    * @param {string} externalsystem
    * @returns {string} Resource name string.
    */
-  projectSourceLocationFindingExternalsystemPath(
-    project: string,
-    source: string,
-    location: string,
-    finding: string,
-    externalsystem: string
-  ) {
-    return this.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.render(
-      {
-        project: project,
-        source: source,
-        location: location,
-        finding: finding,
-        externalsystem: externalsystem,
-      }
-    );
+  projectSourceLocationFindingExternalsystemPath(project:string,source:string,location:string,finding:string,externalsystem:string) {
+    return this.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.render({
+      project: project,
+      source: source,
+      location: location,
+      finding: finding,
+      externalsystem: externalsystem,
+    });
   }
 
   /**
@@ -11129,12 +8927,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing project_source_location_finding_externalsystem resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectSourceLocationFindingExternalsystemName(
-    projectSourceLocationFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.match(
-      projectSourceLocationFindingExternalsystemName
-    ).project;
+  matchProjectFromProjectSourceLocationFindingExternalsystemName(projectSourceLocationFindingExternalsystemName: string) {
+    return this.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.match(projectSourceLocationFindingExternalsystemName).project;
   }
 
   /**
@@ -11144,12 +8938,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing project_source_location_finding_externalsystem resource.
    * @returns {string} A string representing the source.
    */
-  matchSourceFromProjectSourceLocationFindingExternalsystemName(
-    projectSourceLocationFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.match(
-      projectSourceLocationFindingExternalsystemName
-    ).source;
+  matchSourceFromProjectSourceLocationFindingExternalsystemName(projectSourceLocationFindingExternalsystemName: string) {
+    return this.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.match(projectSourceLocationFindingExternalsystemName).source;
   }
 
   /**
@@ -11159,12 +8949,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing project_source_location_finding_externalsystem resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectSourceLocationFindingExternalsystemName(
-    projectSourceLocationFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.match(
-      projectSourceLocationFindingExternalsystemName
-    ).location;
+  matchLocationFromProjectSourceLocationFindingExternalsystemName(projectSourceLocationFindingExternalsystemName: string) {
+    return this.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.match(projectSourceLocationFindingExternalsystemName).location;
   }
 
   /**
@@ -11174,12 +8960,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing project_source_location_finding_externalsystem resource.
    * @returns {string} A string representing the finding.
    */
-  matchFindingFromProjectSourceLocationFindingExternalsystemName(
-    projectSourceLocationFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.match(
-      projectSourceLocationFindingExternalsystemName
-    ).finding;
+  matchFindingFromProjectSourceLocationFindingExternalsystemName(projectSourceLocationFindingExternalsystemName: string) {
+    return this.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.match(projectSourceLocationFindingExternalsystemName).finding;
   }
 
   /**
@@ -11189,12 +8971,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing project_source_location_finding_externalsystem resource.
    * @returns {string} A string representing the externalsystem.
    */
-  matchExternalsystemFromProjectSourceLocationFindingExternalsystemName(
-    projectSourceLocationFindingExternalsystemName: string
-  ) {
-    return this.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.match(
-      projectSourceLocationFindingExternalsystemName
-    ).externalsystem;
+  matchExternalsystemFromProjectSourceLocationFindingExternalsystemName(projectSourceLocationFindingExternalsystemName: string) {
+    return this.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.match(projectSourceLocationFindingExternalsystemName).externalsystem;
   }
 
   /**
@@ -11206,20 +8984,13 @@ export class SecurityCenterClient {
    * @param {string} finding
    * @returns {string} Resource name string.
    */
-  projectSourceLocationFindingSecurityMarksPath(
-    project: string,
-    source: string,
-    location: string,
-    finding: string
-  ) {
-    return this.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.render(
-      {
-        project: project,
-        source: source,
-        location: location,
-        finding: finding,
-      }
-    );
+  projectSourceLocationFindingSecurityMarksPath(project:string,source:string,location:string,finding:string) {
+    return this.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.render({
+      project: project,
+      source: source,
+      location: location,
+      finding: finding,
+    });
   }
 
   /**
@@ -11229,12 +9000,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing project_source_location_finding_securityMarks resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectSourceLocationFindingSecurityMarksName(
-    projectSourceLocationFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.match(
-      projectSourceLocationFindingSecurityMarksName
-    ).project;
+  matchProjectFromProjectSourceLocationFindingSecurityMarksName(projectSourceLocationFindingSecurityMarksName: string) {
+    return this.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.match(projectSourceLocationFindingSecurityMarksName).project;
   }
 
   /**
@@ -11244,12 +9011,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing project_source_location_finding_securityMarks resource.
    * @returns {string} A string representing the source.
    */
-  matchSourceFromProjectSourceLocationFindingSecurityMarksName(
-    projectSourceLocationFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.match(
-      projectSourceLocationFindingSecurityMarksName
-    ).source;
+  matchSourceFromProjectSourceLocationFindingSecurityMarksName(projectSourceLocationFindingSecurityMarksName: string) {
+    return this.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.match(projectSourceLocationFindingSecurityMarksName).source;
   }
 
   /**
@@ -11259,12 +9022,8 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing project_source_location_finding_securityMarks resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectSourceLocationFindingSecurityMarksName(
-    projectSourceLocationFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.match(
-      projectSourceLocationFindingSecurityMarksName
-    ).location;
+  matchLocationFromProjectSourceLocationFindingSecurityMarksName(projectSourceLocationFindingSecurityMarksName: string) {
+    return this.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.match(projectSourceLocationFindingSecurityMarksName).location;
   }
 
   /**
@@ -11274,12 +9033,70 @@ export class SecurityCenterClient {
    *   A fully-qualified path representing project_source_location_finding_securityMarks resource.
    * @returns {string} A string representing the finding.
    */
-  matchFindingFromProjectSourceLocationFindingSecurityMarksName(
-    projectSourceLocationFindingSecurityMarksName: string
-  ) {
-    return this.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.match(
-      projectSourceLocationFindingSecurityMarksName
-    ).finding;
+  matchFindingFromProjectSourceLocationFindingSecurityMarksName(projectSourceLocationFindingSecurityMarksName: string) {
+    return this.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.match(projectSourceLocationFindingSecurityMarksName).finding;
+  }
+
+  /**
+   * Return a fully-qualified projectSourceLocationFindings resource name string.
+   *
+   * @param {string} project
+   * @param {string} source
+   * @param {string} location
+   * @param {string} finding
+   * @returns {string} Resource name string.
+   */
+  projectSourceLocationFindingsPath(project:string,source:string,location:string,finding:string) {
+    return this.pathTemplates.projectSourceLocationFindingsPathTemplate.render({
+      project: project,
+      source: source,
+      location: location,
+      finding: finding,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectSourceLocationFindings resource.
+   *
+   * @param {string} projectSourceLocationFindingsName
+   *   A fully-qualified path representing project_source_location_findings resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectSourceLocationFindingsName(projectSourceLocationFindingsName: string) {
+    return this.pathTemplates.projectSourceLocationFindingsPathTemplate.match(projectSourceLocationFindingsName).project;
+  }
+
+  /**
+   * Parse the source from ProjectSourceLocationFindings resource.
+   *
+   * @param {string} projectSourceLocationFindingsName
+   *   A fully-qualified path representing project_source_location_findings resource.
+   * @returns {string} A string representing the source.
+   */
+  matchSourceFromProjectSourceLocationFindingsName(projectSourceLocationFindingsName: string) {
+    return this.pathTemplates.projectSourceLocationFindingsPathTemplate.match(projectSourceLocationFindingsName).source;
+  }
+
+  /**
+   * Parse the location from ProjectSourceLocationFindings resource.
+   *
+   * @param {string} projectSourceLocationFindingsName
+   *   A fully-qualified path representing project_source_location_findings resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectSourceLocationFindingsName(projectSourceLocationFindingsName: string) {
+    return this.pathTemplates.projectSourceLocationFindingsPathTemplate.match(projectSourceLocationFindingsName).location;
+  }
+
+  /**
+   * Parse the finding from ProjectSourceLocationFindings resource.
+   *
+   * @param {string} projectSourceLocationFindingsName
+   *   A fully-qualified path representing project_source_location_findings resource.
+   * @returns {string} A string representing the finding.
+   */
+  matchFindingFromProjectSourceLocationFindingsName(projectSourceLocationFindingsName: string) {
+    return this.pathTemplates.projectSourceLocationFindingsPathTemplate.match(projectSourceLocationFindingsName).finding;
   }
 
   /**

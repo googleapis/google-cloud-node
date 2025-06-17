@@ -29,1846 +29,1521 @@ import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.CloudSchedulerClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'cloudscheduler.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          cloudschedulerModule.v1.CloudSchedulerClient.servicePath;
-        assert.strictEqual(servicePath, 'cloudscheduler.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          cloudschedulerModule.v1.CloudSchedulerClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'cloudscheduler.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudscheduler.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudscheduler.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new cloudschedulerModule.v1.CloudSchedulerClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'cloudscheduler.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'cloudscheduler.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'cloudscheduler.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new cloudschedulerModule.v1.CloudSchedulerClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = cloudschedulerModule.v1.CloudSchedulerClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = cloudschedulerModule.v1.CloudSchedulerClient.servicePath;
+                assert.strictEqual(servicePath, 'cloudscheduler.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.cloudSchedulerStub, undefined);
-      await client.initialize();
-      assert(client.cloudSchedulerStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.cloudSchedulerStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.cloudSchedulerStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getJob', () => {
-    it('invokes getJob without error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.GetJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.GetJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.Job()
-      );
-      client.innerApiCalls.getJob = stubSimpleCall(expectedResponse);
-      const [response] = await client.getJob(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getJob as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJob without error using callback', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.GetJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.GetJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.Job()
-      );
-      client.innerApiCalls.getJob =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getJob(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.scheduler.v1.IJob | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getJob as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJob with error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.GetJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.GetJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getJob(request), expectedError);
-      const actualRequest = (client.innerApiCalls.getJob as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJob with closed client', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.GetJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.GetJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getJob(request), expectedError);
-    });
-  });
-
-  describe('createJob', () => {
-    it('invokes createJob without error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.CreateJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.CreateJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.Job()
-      );
-      client.innerApiCalls.createJob = stubSimpleCall(expectedResponse);
-      const [response] = await client.createJob(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createJob without error using callback', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.CreateJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.CreateJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.Job()
-      );
-      client.innerApiCalls.createJob =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createJob(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.scheduler.v1.IJob | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createJob with error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.CreateJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.CreateJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.createJob(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createJob with closed client', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.CreateJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.CreateJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createJob(request), expectedError);
-    });
-  });
-
-  describe('updateJob', () => {
-    it('invokes updateJob without error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.UpdateJobRequest()
-      );
-      request.job ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.UpdateJobRequest',
-        ['job', 'name']
-      );
-      request.job.name = defaultValue1;
-      const expectedHeaderRequestParams = `job.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.Job()
-      );
-      client.innerApiCalls.updateJob = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateJob(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateJob without error using callback', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.UpdateJobRequest()
-      );
-      request.job ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.UpdateJobRequest',
-        ['job', 'name']
-      );
-      request.job.name = defaultValue1;
-      const expectedHeaderRequestParams = `job.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.Job()
-      );
-      client.innerApiCalls.updateJob =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateJob(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.scheduler.v1.IJob | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateJob with error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.UpdateJobRequest()
-      );
-      request.job ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.UpdateJobRequest',
-        ['job', 'name']
-      );
-      request.job.name = defaultValue1;
-      const expectedHeaderRequestParams = `job.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.updateJob(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateJob with closed client', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.UpdateJobRequest()
-      );
-      request.job ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.UpdateJobRequest',
-        ['job', 'name']
-      );
-      request.job.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateJob(request), expectedError);
-    });
-  });
-
-  describe('deleteJob', () => {
-    it('invokes deleteJob without error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.DeleteJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.DeleteJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteJob = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteJob(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteJob without error using callback', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.DeleteJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.DeleteJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteJob =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteJob(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteJob with error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.DeleteJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.DeleteJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.deleteJob(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteJob with closed client', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.DeleteJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.DeleteJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteJob(request), expectedError);
-    });
-  });
-
-  describe('pauseJob', () => {
-    it('invokes pauseJob without error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.PauseJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.PauseJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.Job()
-      );
-      client.innerApiCalls.pauseJob = stubSimpleCall(expectedResponse);
-      const [response] = await client.pauseJob(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.pauseJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.pauseJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes pauseJob without error using callback', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.PauseJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.PauseJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.Job()
-      );
-      client.innerApiCalls.pauseJob =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.pauseJob(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.scheduler.v1.IJob | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.pauseJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.pauseJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes pauseJob with error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.PauseJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.PauseJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.pauseJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.pauseJob(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.pauseJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.pauseJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes pauseJob with closed client', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.PauseJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.PauseJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.pauseJob(request), expectedError);
-    });
-  });
-
-  describe('resumeJob', () => {
-    it('invokes resumeJob without error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.ResumeJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.ResumeJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.Job()
-      );
-      client.innerApiCalls.resumeJob = stubSimpleCall(expectedResponse);
-      const [response] = await client.resumeJob(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.resumeJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.resumeJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes resumeJob without error using callback', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.ResumeJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.ResumeJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.Job()
-      );
-      client.innerApiCalls.resumeJob =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.resumeJob(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.scheduler.v1.IJob | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.resumeJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.resumeJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes resumeJob with error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.ResumeJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.ResumeJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.resumeJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.resumeJob(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.resumeJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.resumeJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes resumeJob with closed client', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.ResumeJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.ResumeJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.resumeJob(request), expectedError);
-    });
-  });
-
-  describe('runJob', () => {
-    it('invokes runJob without error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.RunJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.RunJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.Job()
-      );
-      client.innerApiCalls.runJob = stubSimpleCall(expectedResponse);
-      const [response] = await client.runJob(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.runJob as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.runJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes runJob without error using callback', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.RunJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.RunJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.Job()
-      );
-      client.innerApiCalls.runJob =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.runJob(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.scheduler.v1.IJob | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.runJob as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.runJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes runJob with error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.RunJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.RunJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.runJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.runJob(request), expectedError);
-      const actualRequest = (client.innerApiCalls.runJob as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.runJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes runJob with closed client', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.RunJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.RunJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.runJob(request), expectedError);
-    });
-  });
-
-  describe('listJobs', () => {
-    it('invokes listJobs without error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
-        generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
-        generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
-      ];
-      client.innerApiCalls.listJobs = stubSimpleCall(expectedResponse);
-      const [response] = await client.listJobs(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listJobs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listJobs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listJobs without error using callback', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
-        generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
-        generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
-      ];
-      client.innerApiCalls.listJobs =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listJobs(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.scheduler.v1.IJob[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listJobs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listJobs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listJobs with error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listJobs = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.listJobs(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listJobs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listJobs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listJobsStream without error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
-        generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
-        generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
-      ];
-      client.descriptors.page.listJobs.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listJobsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.scheduler.v1.Job[] = [];
-        stream.on('data', (response: protos.google.cloud.scheduler.v1.Job) => {
-          responses.push(response);
-        });
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listJobs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listJobs, request)
-      );
-      assert(
-        (client.descriptors.page.listJobs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listJobsStream with error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listJobs.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listJobsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.scheduler.v1.Job[] = [];
-        stream.on('data', (response: protos.google.cloud.scheduler.v1.Job) => {
-          responses.push(response);
-        });
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listJobs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listJobs, request)
-      );
-      assert(
-        (client.descriptors.page.listJobs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listJobs without error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
-        generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
-        generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
-      ];
-      client.descriptors.page.listJobs.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.scheduler.v1.IJob[] = [];
-      const iterable = client.listJobsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listJobs.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listJobs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listJobs with error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.scheduler.v1.ListJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.scheduler.v1.ListJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listJobsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.scheduler.v1.IJob[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = cloudschedulerModule.v1.CloudSchedulerClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'cloudscheduler.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listJobs.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listJobs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getLocation without error using callback', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
-    });
-    it('invokes getLocation with error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-    it('uses async iteration with listLocations with error', async () => {
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudscheduler.example.com');
+        });
+
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudscheduler.example.com');
+        });
+
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new cloudschedulerModule.v1.CloudSchedulerClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudscheduler.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new cloudschedulerModule.v1.CloudSchedulerClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudscheduler.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new cloudschedulerModule.v1.CloudSchedulerClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('Path templates', () => {
-    describe('job', async () => {
-      const fakePath = '/rendered/path/job';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        job: 'jobValue',
-      };
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.jobPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.jobPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('has port', () => {
+            const port = cloudschedulerModule.v1.CloudSchedulerClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-      it('jobPath', () => {
-        const result = client.jobPath(
-          'projectValue',
-          'locationValue',
-          'jobValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.jobPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('should create a client with no option', () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient();
+            assert(client);
+        });
 
-      it('matchProjectFromJobName', () => {
-        const result = client.matchProjectFromJobName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.jobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('should create a client with gRPC fallback', () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+                fallback: true,
+            });
+            assert(client);
+        });
 
-      it('matchLocationFromJobName', () => {
-        const result = client.matchLocationFromJobName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.jobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.cloudSchedulerStub, undefined);
+            await client.initialize();
+            assert(client.cloudSchedulerStub);
+        });
 
-      it('matchJobFromJobName', () => {
-        const result = client.matchJobFromJobName(fakePath);
-        assert.strictEqual(result, 'jobValue');
-        assert(
-          (client.pathTemplates.jobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+        it('has close method for the initialized client', done => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.cloudSchedulerStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('has close method for the non-initialized client', done => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.cloudSchedulerStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
 
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new cloudschedulerModule.v1.CloudSchedulerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('getJob', () => {
+        it('invokes getJob without error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.GetJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.GetJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.Job()
+            );
+            client.innerApiCalls.getJob = stubSimpleCall(expectedResponse);
+            const [response] = await client.getJob(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes getJob without error using callback', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.GetJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.GetJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.Job()
+            );
+            client.innerApiCalls.getJob = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getJob(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.scheduler.v1.IJob|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getJob with error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.GetJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.GetJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getJob with closed client', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.GetJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.GetJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getJob(request), expectedError);
+        });
     });
-  });
+
+    describe('createJob', () => {
+        it('invokes createJob without error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.CreateJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.CreateJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.Job()
+            );
+            client.innerApiCalls.createJob = stubSimpleCall(expectedResponse);
+            const [response] = await client.createJob(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createJob without error using callback', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.CreateJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.CreateJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.Job()
+            );
+            client.innerApiCalls.createJob = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createJob(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.scheduler.v1.IJob|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createJob with error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.CreateJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.CreateJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createJob = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createJob with closed client', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.CreateJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.CreateJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createJob(request), expectedError);
+        });
+    });
+
+    describe('updateJob', () => {
+        it('invokes updateJob without error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.UpdateJobRequest()
+            );
+            request.job ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.UpdateJobRequest', ['job', 'name']);
+            request.job.name = defaultValue1;
+            const expectedHeaderRequestParams = `job.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.Job()
+            );
+            client.innerApiCalls.updateJob = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateJob(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateJob without error using callback', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.UpdateJobRequest()
+            );
+            request.job ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.UpdateJobRequest', ['job', 'name']);
+            request.job.name = defaultValue1;
+            const expectedHeaderRequestParams = `job.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.Job()
+            );
+            client.innerApiCalls.updateJob = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateJob(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.scheduler.v1.IJob|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateJob with error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.UpdateJobRequest()
+            );
+            request.job ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.UpdateJobRequest', ['job', 'name']);
+            request.job.name = defaultValue1;
+            const expectedHeaderRequestParams = `job.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateJob = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateJob with closed client', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.UpdateJobRequest()
+            );
+            request.job ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.UpdateJobRequest', ['job', 'name']);
+            request.job.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateJob(request), expectedError);
+        });
+    });
+
+    describe('deleteJob', () => {
+        it('invokes deleteJob without error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.DeleteJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.DeleteJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteJob = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteJob(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteJob without error using callback', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.DeleteJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.DeleteJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteJob = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteJob(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteJob with error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.DeleteJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.DeleteJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteJob = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteJob with closed client', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.DeleteJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.DeleteJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteJob(request), expectedError);
+        });
+    });
+
+    describe('pauseJob', () => {
+        it('invokes pauseJob without error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.PauseJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.PauseJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.Job()
+            );
+            client.innerApiCalls.pauseJob = stubSimpleCall(expectedResponse);
+            const [response] = await client.pauseJob(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.pauseJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.pauseJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes pauseJob without error using callback', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.PauseJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.PauseJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.Job()
+            );
+            client.innerApiCalls.pauseJob = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.pauseJob(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.scheduler.v1.IJob|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.pauseJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.pauseJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes pauseJob with error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.PauseJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.PauseJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.pauseJob = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.pauseJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.pauseJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.pauseJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes pauseJob with closed client', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.PauseJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.PauseJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.pauseJob(request), expectedError);
+        });
+    });
+
+    describe('resumeJob', () => {
+        it('invokes resumeJob without error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.ResumeJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.ResumeJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.Job()
+            );
+            client.innerApiCalls.resumeJob = stubSimpleCall(expectedResponse);
+            const [response] = await client.resumeJob(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.resumeJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resumeJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes resumeJob without error using callback', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.ResumeJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.ResumeJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.Job()
+            );
+            client.innerApiCalls.resumeJob = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.resumeJob(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.scheduler.v1.IJob|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.resumeJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resumeJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes resumeJob with error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.ResumeJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.ResumeJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.resumeJob = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.resumeJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.resumeJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resumeJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes resumeJob with closed client', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.ResumeJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.ResumeJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.resumeJob(request), expectedError);
+        });
+    });
+
+    describe('runJob', () => {
+        it('invokes runJob without error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.RunJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.RunJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.Job()
+            );
+            client.innerApiCalls.runJob = stubSimpleCall(expectedResponse);
+            const [response] = await client.runJob(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.runJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.runJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes runJob without error using callback', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.RunJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.RunJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.Job()
+            );
+            client.innerApiCalls.runJob = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.runJob(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.scheduler.v1.IJob|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.runJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.runJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes runJob with error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.RunJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.RunJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.runJob = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.runJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.runJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.runJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes runJob with closed client', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.RunJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.RunJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.runJob(request), expectedError);
+        });
+    });
+
+    describe('listJobs', () => {
+        it('invokes listJobs without error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
+            ];
+            client.innerApiCalls.listJobs = stubSimpleCall(expectedResponse);
+            const [response] = await client.listJobs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listJobs without error using callback', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
+            ];
+            client.innerApiCalls.listJobs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listJobs(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.scheduler.v1.IJob[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listJobs with error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listJobs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listJobs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listJobsStream without error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
+            ];
+            client.descriptors.page.listJobs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listJobsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.scheduler.v1.Job[] = [];
+                stream.on('data', (response: protos.google.cloud.scheduler.v1.Job) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listJobs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listJobs, request));
+            assert(
+                (client.descriptors.page.listJobs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listJobsStream with error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listJobs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listJobsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.scheduler.v1.Job[] = [];
+                stream.on('data', (response: protos.google.cloud.scheduler.v1.Job) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listJobs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listJobs, request));
+            assert(
+                (client.descriptors.page.listJobs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listJobs without error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
+              generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
+            ];
+            client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.scheduler.v1.IJob[] = [];
+            const iterable = client.listJobsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listJobs with error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.scheduler.v1.ListJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.scheduler.v1.ListJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listJobsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.scheduler.v1.IJob[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getLocation without error using callback', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('job', async () => {
+            const fakePath = "/rendered/path/job";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                job: "jobValue",
+            };
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.jobPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.jobPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('jobPath', () => {
+                const result = client.jobPath("projectValue", "locationValue", "jobValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.jobPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromJobName', () => {
+                const result = client.matchProjectFromJobName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.jobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromJobName', () => {
+                const result = client.matchLocationFromJobName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.jobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchJobFromJobName', () => {
+                const result = client.matchJobFromJobName(fakePath);
+                assert.strictEqual(result, "jobValue");
+                assert((client.pathTemplates.jobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new cloudschedulerModule.v1.CloudSchedulerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

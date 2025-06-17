@@ -29,3946 +29,2969 @@ import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.RegistrationServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new registrationserviceModule.v1.RegistrationServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'servicedirectory.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new registrationserviceModule.v1.RegistrationServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          registrationserviceModule.v1.RegistrationServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'servicedirectory.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          registrationserviceModule.v1.RegistrationServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'servicedirectory.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {universeDomain: 'example.com'}
-      );
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'servicedirectory.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {universe_domain: 'example.com'}
-      );
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'servicedirectory.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new registrationserviceModule.v1.RegistrationServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'servicedirectory.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'servicedirectory.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new registrationserviceModule.v1.RegistrationServiceClient({
-              universeDomain: 'configured.example.com',
+        it('has universeDomain', () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = registrationserviceModule.v1.RegistrationServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'servicedirectory.googleapis.com');
+                assert(stub.called);
+                stub.restore();
             });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'servicedirectory.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = registrationserviceModule.v1.RegistrationServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'servicedirectory.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+        }
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'servicedirectory.example.com');
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new registrationserviceModule.v1.RegistrationServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
+
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'servicedirectory.example.com');
         });
-      });
-    });
 
-    it('has port', () => {
-      const port = registrationserviceModule.v1.RegistrationServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new registrationserviceModule.v1.RegistrationServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'servicedirectory.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('should create a client with no option', () => {
-      const client =
-        new registrationserviceModule.v1.RegistrationServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          fallback: true,
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new registrationserviceModule.v1.RegistrationServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'servicedirectory.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      );
-      assert(client);
-    });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new registrationserviceModule.v1.RegistrationServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      assert.strictEqual(client.registrationServiceStub, undefined);
-      await client.initialize();
-      assert(client.registrationServiceStub);
-    });
+        it('has port', () => {
+            const port = registrationserviceModule.v1.RegistrationServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-    it('has close method for the initialized client', done => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.registrationServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+        it('should create a client with no option', () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.registrationServiceStub, undefined);
+            await client.initialize();
+            assert(client.registrationServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.registrationServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.registrationServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
         });
     });
 
-    it('has close method for the non-initialized client', done => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      assert.strictEqual(client.registrationServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+    describe('createNamespace', () => {
+        it('invokes createNamespace without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.CreateNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.CreateNamespaceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.Namespace()
+            );
+            client.innerApiCalls.createNamespace = stubSimpleCall(expectedResponse);
+            const [response] = await client.createNamespace(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createNamespace without error using callback', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.CreateNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.CreateNamespaceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.Namespace()
+            );
+            client.innerApiCalls.createNamespace = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createNamespace(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.servicedirectory.v1.INamespace|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createNamespace with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.CreateNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.CreateNamespaceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createNamespace = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createNamespace(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createNamespace with closed client', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.CreateNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.CreateNamespaceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createNamespace(request), expectedError);
         });
     });
 
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
+    describe('getNamespace', () => {
+        it('invokes getNamespace without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.GetNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.GetNamespaceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.Namespace()
+            );
+            client.innerApiCalls.getNamespace = stubSimpleCall(expectedResponse);
+            const [response] = await client.getNamespace(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
 
-  describe('createNamespace', () => {
-    it('invokes createNamespace without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.CreateNamespaceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.CreateNamespaceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.Namespace()
-      );
-      client.innerApiCalls.createNamespace = stubSimpleCall(expectedResponse);
-      const [response] = await client.createNamespace(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createNamespace as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createNamespace as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createNamespace without error using callback', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.CreateNamespaceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.CreateNamespaceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.Namespace()
-      );
-      client.innerApiCalls.createNamespace =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createNamespace(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.servicedirectory.v1.INamespace | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createNamespace as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createNamespace as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createNamespace with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.CreateNamespaceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.CreateNamespaceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createNamespace = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createNamespace(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createNamespace as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createNamespace as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createNamespace with closed client', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.CreateNamespaceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.CreateNamespaceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createNamespace(request), expectedError);
-    });
-  });
-
-  describe('getNamespace', () => {
-    it('invokes getNamespace without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.GetNamespaceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.GetNamespaceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.Namespace()
-      );
-      client.innerApiCalls.getNamespace = stubSimpleCall(expectedResponse);
-      const [response] = await client.getNamespace(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getNamespace as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getNamespace as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getNamespace without error using callback', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.GetNamespaceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.GetNamespaceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.Namespace()
-      );
-      client.innerApiCalls.getNamespace =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getNamespace(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.servicedirectory.v1.INamespace | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getNamespace as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getNamespace as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getNamespace with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.GetNamespaceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.GetNamespaceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getNamespace = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getNamespace(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getNamespace as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getNamespace as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getNamespace with closed client', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.GetNamespaceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.GetNamespaceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getNamespace(request), expectedError);
-    });
-  });
-
-  describe('updateNamespace', () => {
-    it('invokes updateNamespace without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.UpdateNamespaceRequest()
-      );
-      request.namespace ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.UpdateNamespaceRequest',
-        ['namespace', 'name']
-      );
-      request.namespace.name = defaultValue1;
-      const expectedHeaderRequestParams = `namespace.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.Namespace()
-      );
-      client.innerApiCalls.updateNamespace = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateNamespace(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateNamespace as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNamespace as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateNamespace without error using callback', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.UpdateNamespaceRequest()
-      );
-      request.namespace ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.UpdateNamespaceRequest',
-        ['namespace', 'name']
-      );
-      request.namespace.name = defaultValue1;
-      const expectedHeaderRequestParams = `namespace.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.Namespace()
-      );
-      client.innerApiCalls.updateNamespace =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateNamespace(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.servicedirectory.v1.INamespace | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateNamespace as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNamespace as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateNamespace with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.UpdateNamespaceRequest()
-      );
-      request.namespace ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.UpdateNamespaceRequest',
-        ['namespace', 'name']
-      );
-      request.namespace.name = defaultValue1;
-      const expectedHeaderRequestParams = `namespace.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateNamespace = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateNamespace(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateNamespace as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateNamespace as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateNamespace with closed client', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.UpdateNamespaceRequest()
-      );
-      request.namespace ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.UpdateNamespaceRequest',
-        ['namespace', 'name']
-      );
-      request.namespace.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateNamespace(request), expectedError);
-    });
-  });
-
-  describe('deleteNamespace', () => {
-    it('invokes deleteNamespace without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.DeleteNamespaceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.DeleteNamespaceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteNamespace = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteNamespace(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteNamespace as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteNamespace as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteNamespace without error using callback', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.DeleteNamespaceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.DeleteNamespaceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteNamespace =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteNamespace(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteNamespace as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteNamespace as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteNamespace with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.DeleteNamespaceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.DeleteNamespaceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteNamespace = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteNamespace(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteNamespace as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteNamespace as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteNamespace with closed client', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.DeleteNamespaceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.DeleteNamespaceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteNamespace(request), expectedError);
-    });
-  });
-
-  describe('createService', () => {
-    it('invokes createService without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.CreateServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.CreateServiceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.Service()
-      );
-      client.innerApiCalls.createService = stubSimpleCall(expectedResponse);
-      const [response] = await client.createService(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createService without error using callback', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.CreateServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.CreateServiceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.Service()
-      );
-      client.innerApiCalls.createService =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createService(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.servicedirectory.v1.IService | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createService with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.CreateServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.CreateServiceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createService = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createService(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createService with closed client', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.CreateServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.CreateServiceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createService(request), expectedError);
-    });
-  });
-
-  describe('getService', () => {
-    it('invokes getService without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.GetServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.GetServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.Service()
-      );
-      client.innerApiCalls.getService = stubSimpleCall(expectedResponse);
-      const [response] = await client.getService(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getService without error using callback', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.GetServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.GetServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.Service()
-      );
-      client.innerApiCalls.getService =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getService(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.servicedirectory.v1.IService | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getService with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.GetServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.GetServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getService = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getService(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getService with closed client', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.GetServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.GetServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getService(request), expectedError);
-    });
-  });
-
-  describe('updateService', () => {
-    it('invokes updateService without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.UpdateServiceRequest()
-      );
-      request.service ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.UpdateServiceRequest',
-        ['service', 'name']
-      );
-      request.service.name = defaultValue1;
-      const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.Service()
-      );
-      client.innerApiCalls.updateService = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateService(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateService without error using callback', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.UpdateServiceRequest()
-      );
-      request.service ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.UpdateServiceRequest',
-        ['service', 'name']
-      );
-      request.service.name = defaultValue1;
-      const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.Service()
-      );
-      client.innerApiCalls.updateService =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateService(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.servicedirectory.v1.IService | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateService with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.UpdateServiceRequest()
-      );
-      request.service ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.UpdateServiceRequest',
-        ['service', 'name']
-      );
-      request.service.name = defaultValue1;
-      const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateService = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateService(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateService with closed client', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.UpdateServiceRequest()
-      );
-      request.service ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.UpdateServiceRequest',
-        ['service', 'name']
-      );
-      request.service.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateService(request), expectedError);
-    });
-  });
-
-  describe('deleteService', () => {
-    it('invokes deleteService without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.DeleteServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.DeleteServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteService = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteService(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteService without error using callback', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.DeleteServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.DeleteServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteService =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteService(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteService with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.DeleteServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.DeleteServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteService = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteService(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteService with closed client', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.DeleteServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.DeleteServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteService(request), expectedError);
-    });
-  });
-
-  describe('createEndpoint', () => {
-    it('invokes createEndpoint without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.CreateEndpointRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.CreateEndpointRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.Endpoint()
-      );
-      client.innerApiCalls.createEndpoint = stubSimpleCall(expectedResponse);
-      const [response] = await client.createEndpoint(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createEndpoint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEndpoint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createEndpoint without error using callback', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.CreateEndpointRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.CreateEndpointRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.Endpoint()
-      );
-      client.innerApiCalls.createEndpoint =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createEndpoint(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.servicedirectory.v1.IEndpoint | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createEndpoint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEndpoint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createEndpoint with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.CreateEndpointRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.CreateEndpointRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createEndpoint = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createEndpoint(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createEndpoint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEndpoint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createEndpoint with closed client', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.CreateEndpointRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.CreateEndpointRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createEndpoint(request), expectedError);
-    });
-  });
-
-  describe('getEndpoint', () => {
-    it('invokes getEndpoint without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.GetEndpointRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.GetEndpointRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.Endpoint()
-      );
-      client.innerApiCalls.getEndpoint = stubSimpleCall(expectedResponse);
-      const [response] = await client.getEndpoint(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEndpoint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEndpoint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEndpoint without error using callback', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.GetEndpointRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.GetEndpointRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.Endpoint()
-      );
-      client.innerApiCalls.getEndpoint =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getEndpoint(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.servicedirectory.v1.IEndpoint | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEndpoint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEndpoint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEndpoint with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.GetEndpointRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.GetEndpointRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getEndpoint = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getEndpoint(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getEndpoint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEndpoint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEndpoint with closed client', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.GetEndpointRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.GetEndpointRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getEndpoint(request), expectedError);
-    });
-  });
-
-  describe('updateEndpoint', () => {
-    it('invokes updateEndpoint without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.UpdateEndpointRequest()
-      );
-      request.endpoint ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.UpdateEndpointRequest',
-        ['endpoint', 'name']
-      );
-      request.endpoint.name = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.Endpoint()
-      );
-      client.innerApiCalls.updateEndpoint = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateEndpoint(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateEndpoint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEndpoint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateEndpoint without error using callback', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.UpdateEndpointRequest()
-      );
-      request.endpoint ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.UpdateEndpointRequest',
-        ['endpoint', 'name']
-      );
-      request.endpoint.name = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.Endpoint()
-      );
-      client.innerApiCalls.updateEndpoint =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateEndpoint(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.servicedirectory.v1.IEndpoint | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateEndpoint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEndpoint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateEndpoint with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.UpdateEndpointRequest()
-      );
-      request.endpoint ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.UpdateEndpointRequest',
-        ['endpoint', 'name']
-      );
-      request.endpoint.name = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateEndpoint = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateEndpoint(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateEndpoint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEndpoint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateEndpoint with closed client', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.UpdateEndpointRequest()
-      );
-      request.endpoint ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.UpdateEndpointRequest',
-        ['endpoint', 'name']
-      );
-      request.endpoint.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateEndpoint(request), expectedError);
-    });
-  });
-
-  describe('deleteEndpoint', () => {
-    it('invokes deleteEndpoint without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.DeleteEndpointRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.DeleteEndpointRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteEndpoint = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteEndpoint(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteEndpoint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEndpoint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteEndpoint without error using callback', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.DeleteEndpointRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.DeleteEndpointRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteEndpoint =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteEndpoint(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteEndpoint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEndpoint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteEndpoint with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.DeleteEndpointRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.DeleteEndpointRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteEndpoint = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteEndpoint(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteEndpoint as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEndpoint as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteEndpoint with closed client', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.DeleteEndpointRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.DeleteEndpointRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteEndpoint(request), expectedError);
-    });
-  });
-
-  describe('getIamPolicy', () => {
-    it('invokes getIamPolicy without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.getIamPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy without error using callback', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.getIamPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getIamPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.IPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getIamPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getIamPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy with closed client', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getIamPolicy(request), expectedError);
-    });
-  });
-
-  describe('setIamPolicy', () => {
-    it('invokes setIamPolicy without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.setIamPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy without error using callback', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.setIamPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setIamPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.IPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setIamPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setIamPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy with closed client', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.setIamPolicy(request), expectedError);
-    });
-  });
-
-  describe('testIamPermissions', () => {
-    it('invokes testIamPermissions without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.innerApiCalls.testIamPermissions =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.testIamPermissions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions without error using callback', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.innerApiCalls.testIamPermissions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.testIamPermissions(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.ITestIamPermissionsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.testIamPermissions(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions with closed client', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.testIamPermissions(request), expectedError);
-    });
-  });
-
-  describe('listNamespaces', () => {
-    it('invokes listNamespaces without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListNamespacesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListNamespacesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Namespace()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Namespace()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Namespace()
-        ),
-      ];
-      client.innerApiCalls.listNamespaces = stubSimpleCall(expectedResponse);
-      const [response] = await client.listNamespaces(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listNamespaces as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNamespaces as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listNamespaces without error using callback', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListNamespacesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListNamespacesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Namespace()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Namespace()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Namespace()
-        ),
-      ];
-      client.innerApiCalls.listNamespaces =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listNamespaces(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.servicedirectory.v1.INamespace[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listNamespaces as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNamespaces as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listNamespaces with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListNamespacesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListNamespacesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listNamespaces = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listNamespaces(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listNamespaces as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNamespaces as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listNamespacesStream without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListNamespacesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListNamespacesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Namespace()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Namespace()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Namespace()
-        ),
-      ];
-      client.descriptors.page.listNamespaces.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listNamespacesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.servicedirectory.v1.Namespace[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.servicedirectory.v1.Namespace) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('invokes getNamespace without error using callback', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.GetNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.GetNamespaceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.Namespace()
+            );
+            client.innerApiCalls.getNamespace = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getNamespace(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.servicedirectory.v1.INamespace|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes getNamespace with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.GetNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.GetNamespaceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getNamespace = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getNamespace(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listNamespaces.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listNamespaces, request)
-      );
-      assert(
-        (client.descriptors.page.listNamespaces.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listNamespacesStream with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListNamespacesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListNamespacesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listNamespaces.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listNamespacesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.servicedirectory.v1.Namespace[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.servicedirectory.v1.Namespace) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('invokes getNamespace with closed client', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.GetNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.GetNamespaceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getNamespace(request), expectedError);
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+    });
+
+    describe('updateNamespace', () => {
+        it('invokes updateNamespace without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.UpdateNamespaceRequest()
+            );
+            request.namespace ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.UpdateNamespaceRequest', ['namespace', 'name']);
+            request.namespace.name = defaultValue1;
+            const expectedHeaderRequestParams = `namespace.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.Namespace()
+            );
+            client.innerApiCalls.updateNamespace = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateNamespace(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listNamespaces.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listNamespaces, request)
-      );
-      assert(
-        (client.descriptors.page.listNamespaces.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+
+        it('invokes updateNamespace without error using callback', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.UpdateNamespaceRequest()
+            );
+            request.namespace ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.UpdateNamespaceRequest', ['namespace', 'name']);
+            request.namespace.name = defaultValue1;
+            const expectedHeaderRequestParams = `namespace.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.Namespace()
+            );
+            client.innerApiCalls.updateNamespace = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateNamespace(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.servicedirectory.v1.INamespace|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNamespace with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.UpdateNamespaceRequest()
+            );
+            request.namespace ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.UpdateNamespaceRequest', ['namespace', 'name']);
+            request.namespace.name = defaultValue1;
+            const expectedHeaderRequestParams = `namespace.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateNamespace = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateNamespace(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNamespace with closed client', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.UpdateNamespaceRequest()
+            );
+            request.namespace ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.UpdateNamespaceRequest', ['namespace', 'name']);
+            request.namespace.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateNamespace(request), expectedError);
+        });
     });
 
-    it('uses async iteration with listNamespaces without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListNamespacesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListNamespacesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Namespace()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Namespace()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Namespace()
-        ),
-      ];
-      client.descriptors.page.listNamespaces.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.servicedirectory.v1.INamespace[] =
-        [];
-      const iterable = client.listNamespacesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listNamespaces.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listNamespaces.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+    describe('deleteNamespace', () => {
+        it('invokes deleteNamespace without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.DeleteNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.DeleteNamespaceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteNamespace = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteNamespace(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteNamespace without error using callback', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.DeleteNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.DeleteNamespaceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteNamespace = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteNamespace(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteNamespace with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.DeleteNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.DeleteNamespaceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteNamespace = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteNamespace(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteNamespace with closed client', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.DeleteNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.DeleteNamespaceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteNamespace(request), expectedError);
+        });
     });
 
-    it('uses async iteration with listNamespaces with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListNamespacesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListNamespacesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listNamespaces.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listNamespacesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.servicedirectory.v1.INamespace[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listNamespaces.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listNamespaces.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+    describe('createService', () => {
+        it('invokes createService without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.CreateServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.CreateServiceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.Service()
+            );
+            client.innerApiCalls.createService = stubSimpleCall(expectedResponse);
+            const [response] = await client.createService(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-  describe('listServices', () => {
-    it('invokes listServices without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Service()
-        ),
-      ];
-      client.innerApiCalls.listServices = stubSimpleCall(expectedResponse);
-      const [response] = await client.listServices(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listServices as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listServices as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('invokes createService without error using callback', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.CreateServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.CreateServiceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.Service()
+            );
+            client.innerApiCalls.createService = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createService(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.servicedirectory.v1.IService|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createService with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.CreateServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.CreateServiceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createService = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createService(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createService with closed client', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.CreateServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.CreateServiceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createService(request), expectedError);
+        });
     });
 
-    it('invokes listServices without error using callback', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Service()
-        ),
-      ];
-      client.innerApiCalls.listServices =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listServices(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.servicedirectory.v1.IService[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('getService', () => {
+        it('invokes getService without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.GetServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.GetServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.Service()
+            );
+            client.innerApiCalls.getService = stubSimpleCall(expectedResponse);
+            const [response] = await client.getService(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getService without error using callback', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.GetServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.GetServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.Service()
+            );
+            client.innerApiCalls.getService = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getService(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.servicedirectory.v1.IService|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getService with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.GetServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.GetServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getService = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getService(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getService with closed client', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.GetServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.GetServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getService(request), expectedError);
+        });
+    });
+
+    describe('updateService', () => {
+        it('invokes updateService without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.UpdateServiceRequest()
+            );
+            request.service ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.UpdateServiceRequest', ['service', 'name']);
+            request.service.name = defaultValue1;
+            const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.Service()
+            );
+            client.innerApiCalls.updateService = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateService(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateService without error using callback', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.UpdateServiceRequest()
+            );
+            request.service ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.UpdateServiceRequest', ['service', 'name']);
+            request.service.name = defaultValue1;
+            const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.Service()
+            );
+            client.innerApiCalls.updateService = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateService(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.servicedirectory.v1.IService|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateService with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.UpdateServiceRequest()
+            );
+            request.service ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.UpdateServiceRequest', ['service', 'name']);
+            request.service.name = defaultValue1;
+            const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateService = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateService(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateService with closed client', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.UpdateServiceRequest()
+            );
+            request.service ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.UpdateServiceRequest', ['service', 'name']);
+            request.service.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateService(request), expectedError);
+        });
+    });
+
+    describe('deleteService', () => {
+        it('invokes deleteService without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.DeleteServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.DeleteServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteService = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteService(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteService without error using callback', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.DeleteServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.DeleteServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteService = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteService(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteService with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.DeleteServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.DeleteServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteService = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteService(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteService with closed client', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.DeleteServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.DeleteServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteService(request), expectedError);
+        });
+    });
+
+    describe('createEndpoint', () => {
+        it('invokes createEndpoint without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.CreateEndpointRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.CreateEndpointRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.Endpoint()
+            );
+            client.innerApiCalls.createEndpoint = stubSimpleCall(expectedResponse);
+            const [response] = await client.createEndpoint(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createEndpoint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEndpoint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEndpoint without error using callback', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.CreateEndpointRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.CreateEndpointRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.Endpoint()
+            );
+            client.innerApiCalls.createEndpoint = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createEndpoint(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.servicedirectory.v1.IEndpoint|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createEndpoint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEndpoint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEndpoint with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.CreateEndpointRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.CreateEndpointRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createEndpoint = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createEndpoint(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createEndpoint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEndpoint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEndpoint with closed client', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.CreateEndpointRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.CreateEndpointRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createEndpoint(request), expectedError);
+        });
+    });
+
+    describe('getEndpoint', () => {
+        it('invokes getEndpoint without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.GetEndpointRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.GetEndpointRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.Endpoint()
+            );
+            client.innerApiCalls.getEndpoint = stubSimpleCall(expectedResponse);
+            const [response] = await client.getEndpoint(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEndpoint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEndpoint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEndpoint without error using callback', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.GetEndpointRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.GetEndpointRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.Endpoint()
+            );
+            client.innerApiCalls.getEndpoint = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getEndpoint(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.servicedirectory.v1.IEndpoint|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEndpoint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEndpoint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEndpoint with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.GetEndpointRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.GetEndpointRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getEndpoint = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getEndpoint(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getEndpoint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEndpoint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEndpoint with closed client', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.GetEndpointRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.GetEndpointRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getEndpoint(request), expectedError);
+        });
+    });
+
+    describe('updateEndpoint', () => {
+        it('invokes updateEndpoint without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.UpdateEndpointRequest()
+            );
+            request.endpoint ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.UpdateEndpointRequest', ['endpoint', 'name']);
+            request.endpoint.name = defaultValue1;
+            const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.Endpoint()
+            );
+            client.innerApiCalls.updateEndpoint = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateEndpoint(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateEndpoint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEndpoint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateEndpoint without error using callback', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.UpdateEndpointRequest()
+            );
+            request.endpoint ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.UpdateEndpointRequest', ['endpoint', 'name']);
+            request.endpoint.name = defaultValue1;
+            const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.Endpoint()
+            );
+            client.innerApiCalls.updateEndpoint = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateEndpoint(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.servicedirectory.v1.IEndpoint|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateEndpoint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEndpoint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateEndpoint with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.UpdateEndpointRequest()
+            );
+            request.endpoint ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.UpdateEndpointRequest', ['endpoint', 'name']);
+            request.endpoint.name = defaultValue1;
+            const expectedHeaderRequestParams = `endpoint.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateEndpoint = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateEndpoint(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateEndpoint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEndpoint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateEndpoint with closed client', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.UpdateEndpointRequest()
+            );
+            request.endpoint ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.UpdateEndpointRequest', ['endpoint', 'name']);
+            request.endpoint.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateEndpoint(request), expectedError);
+        });
+    });
+
+    describe('deleteEndpoint', () => {
+        it('invokes deleteEndpoint without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.DeleteEndpointRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.DeleteEndpointRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteEndpoint = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteEndpoint(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteEndpoint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEndpoint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEndpoint without error using callback', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.DeleteEndpointRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.DeleteEndpointRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteEndpoint = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteEndpoint(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteEndpoint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEndpoint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEndpoint with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.DeleteEndpointRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.DeleteEndpointRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteEndpoint = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteEndpoint(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteEndpoint as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEndpoint as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEndpoint with closed client', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.DeleteEndpointRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.DeleteEndpointRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteEndpoint(request), expectedError);
+        });
+    });
+
+    describe('getIamPolicy', () => {
+        it('invokes getIamPolicy without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.getIamPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy without error using callback', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getIamPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.IPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getIamPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy with closed client', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getIamPolicy(request), expectedError);
+        });
+    });
+
+    describe('setIamPolicy', () => {
+        it('invokes setIamPolicy without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.setIamPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy without error using callback', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setIamPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.IPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setIamPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy with closed client', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setIamPolicy(request), expectedError);
+        });
+    });
+
+    describe('testIamPermissions', () => {
+        it('invokes testIamPermissions without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.innerApiCalls.testIamPermissions = stubSimpleCall(expectedResponse);
+            const [response] = await client.testIamPermissions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions without error using callback', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.testIamPermissions(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.ITestIamPermissionsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.testIamPermissions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.testIamPermissions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions with closed client', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.testIamPermissions(request), expectedError);
+        });
+    });
+
+    describe('listNamespaces', () => {
+        it('invokes listNamespaces without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Namespace()),
+            ];
+            client.innerApiCalls.listNamespaces = stubSimpleCall(expectedResponse);
+            const [response] = await client.listNamespaces(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listNamespaces as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNamespaces as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listNamespaces without error using callback', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Namespace()),
+            ];
+            client.innerApiCalls.listNamespaces = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listNamespaces(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.servicedirectory.v1.INamespace[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listNamespaces as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNamespaces as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listNamespaces with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listNamespaces = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listNamespaces(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listNamespaces as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNamespaces as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listNamespacesStream without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Namespace()),
+            ];
+            client.descriptors.page.listNamespaces.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listNamespacesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.servicedirectory.v1.Namespace[] = [];
+                stream.on('data', (response: protos.google.cloud.servicedirectory.v1.Namespace) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listNamespaces.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listNamespaces, request));
+            assert(
+                (client.descriptors.page.listNamespaces.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listNamespacesStream with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listNamespaces.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listNamespacesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.servicedirectory.v1.Namespace[] = [];
+                stream.on('data', (response: protos.google.cloud.servicedirectory.v1.Namespace) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listNamespaces.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listNamespaces, request));
+            assert(
+                (client.descriptors.page.listNamespaces.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listNamespaces without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Namespace()),
+            ];
+            client.descriptors.page.listNamespaces.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.servicedirectory.v1.INamespace[] = [];
+            const iterable = client.listNamespacesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listServices as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listServices as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listServices with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listServices = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listServices(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listServices as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listServices as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listServicesStream without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Service()
-        ),
-      ];
-      client.descriptors.page.listServices.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listServicesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.servicedirectory.v1.Service[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.servicedirectory.v1.Service) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listNamespaces.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listNamespaces.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listNamespaces with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listNamespaces.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listNamespacesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.servicedirectory.v1.INamespace[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listNamespaces.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listNamespaces.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listServices.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listServices, request)
-      );
-      assert(
-        (client.descriptors.page.listServices.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listServicesStream with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listServices.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listServicesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.servicedirectory.v1.Service[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.servicedirectory.v1.Service) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listServices', () => {
+        it('invokes listServices without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Service()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Service()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Service()),
+            ];
+            client.innerApiCalls.listServices = stubSimpleCall(expectedResponse);
+            const [response] = await client.listServices(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listServices as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listServices as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listServices without error using callback', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Service()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Service()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Service()),
+            ];
+            client.innerApiCalls.listServices = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listServices(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.servicedirectory.v1.IService[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listServices as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listServices as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listServices.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listServices, request)
-      );
-      assert(
-        (client.descriptors.page.listServices.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listServices without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Service()
-        ),
-      ];
-      client.descriptors.page.listServices.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.servicedirectory.v1.IService[] = [];
-      const iterable = client.listServicesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listServices.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listServices.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listServices with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listServices = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listServices(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listServices as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listServices as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listServices with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listServices.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listServicesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.servicedirectory.v1.IService[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listServices.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listServices.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listServicesStream without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Service()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Service()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Service()),
+            ];
+            client.descriptors.page.listServices.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listServicesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.servicedirectory.v1.Service[] = [];
+                stream.on('data', (response: protos.google.cloud.servicedirectory.v1.Service) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listServices.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listServices, request));
+            assert(
+                (client.descriptors.page.listServices.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listEndpoints', () => {
-    it('invokes listEndpoints without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListEndpointsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListEndpointsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Endpoint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Endpoint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Endpoint()
-        ),
-      ];
-      client.innerApiCalls.listEndpoints = stubSimpleCall(expectedResponse);
-      const [response] = await client.listEndpoints(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listEndpoints as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEndpoints as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listServicesStream with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listServices.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listServicesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.servicedirectory.v1.Service[] = [];
+                stream.on('data', (response: protos.google.cloud.servicedirectory.v1.Service) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listServices.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listServices, request));
+            assert(
+                (client.descriptors.page.listServices.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listEndpoints without error using callback', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListEndpointsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListEndpointsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Endpoint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Endpoint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Endpoint()
-        ),
-      ];
-      client.innerApiCalls.listEndpoints =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listEndpoints(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.servicedirectory.v1.IEndpoint[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listServices without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Service()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Service()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Service()),
+            ];
+            client.descriptors.page.listServices.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.servicedirectory.v1.IService[] = [];
+            const iterable = client.listServicesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listEndpoints as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEndpoints as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEndpoints with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListEndpointsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListEndpointsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listEndpoints = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listEndpoints(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listEndpoints as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEndpoints as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEndpointsStream without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListEndpointsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListEndpointsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Endpoint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Endpoint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Endpoint()
-        ),
-      ];
-      client.descriptors.page.listEndpoints.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listEndpointsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.servicedirectory.v1.Endpoint[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.servicedirectory.v1.Endpoint) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listServices.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listServices.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listServices with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listServices.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listServicesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.servicedirectory.v1.IService[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listServices.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listServices.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listEndpoints.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listEndpoints, request)
-      );
-      assert(
-        (client.descriptors.page.listEndpoints.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listEndpointsStream with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListEndpointsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListEndpointsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listEndpoints.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listEndpointsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.servicedirectory.v1.Endpoint[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.servicedirectory.v1.Endpoint) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listEndpoints', () => {
+        it('invokes listEndpoints without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListEndpointsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListEndpointsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Endpoint()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Endpoint()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Endpoint()),
+            ];
+            client.innerApiCalls.listEndpoints = stubSimpleCall(expectedResponse);
+            const [response] = await client.listEndpoints(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listEndpoints as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEndpoints as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listEndpoints without error using callback', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListEndpointsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListEndpointsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Endpoint()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Endpoint()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Endpoint()),
+            ];
+            client.innerApiCalls.listEndpoints = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listEndpoints(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.servicedirectory.v1.IEndpoint[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listEndpoints as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEndpoints as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listEndpoints.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listEndpoints, request)
-      );
-      assert(
-        (client.descriptors.page.listEndpoints.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listEndpoints without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListEndpointsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListEndpointsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Endpoint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Endpoint()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.servicedirectory.v1.Endpoint()
-        ),
-      ];
-      client.descriptors.page.listEndpoints.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.servicedirectory.v1.IEndpoint[] = [];
-      const iterable = client.listEndpointsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEndpoints.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listEndpoints.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listEndpoints with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListEndpointsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListEndpointsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listEndpoints = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listEndpoints(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listEndpoints as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEndpoints as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listEndpoints with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.servicedirectory.v1.ListEndpointsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.servicedirectory.v1.ListEndpointsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listEndpoints.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listEndpointsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.servicedirectory.v1.IEndpoint[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEndpoints.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listEndpoints.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getLocation without error using callback', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('invokes listEndpointsStream without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListEndpointsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListEndpointsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Endpoint()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Endpoint()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Endpoint()),
+            ];
+            client.descriptors.page.listEndpoints.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listEndpointsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.servicedirectory.v1.Endpoint[] = [];
+                stream.on('data', (response: protos.google.cloud.servicedirectory.v1.Endpoint) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listEndpoints.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listEndpoints, request));
+            assert(
+                (client.descriptors.page.listEndpoints.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listEndpointsStream with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListEndpointsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListEndpointsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listEndpoints.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listEndpointsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.servicedirectory.v1.Endpoint[] = [];
+                stream.on('data', (response: protos.google.cloud.servicedirectory.v1.Endpoint) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listEndpoints.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listEndpoints, request));
+            assert(
+                (client.descriptors.page.listEndpoints.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listEndpoints without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListEndpointsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListEndpointsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Endpoint()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Endpoint()),
+              generateSampleMessage(new protos.google.cloud.servicedirectory.v1.Endpoint()),
+            ];
+            client.descriptors.page.listEndpoints.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.servicedirectory.v1.IEndpoint[] = [];
+            const iterable = client.listEndpointsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listEndpoints.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listEndpoints.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listEndpoints with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.servicedirectory.v1.ListEndpointsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.servicedirectory.v1.ListEndpointsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listEndpoints.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listEndpointsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.servicedirectory.v1.IEndpoint[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listEndpoints.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listEndpoints.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getLocation with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getLocation without error using callback', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-    it('uses async iteration with listLocations with error', async () => {
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('endpoint', async () => {
-      const fakePath = '/rendered/path/endpoint';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        namespace: 'namespaceValue',
-        service: 'serviceValue',
-        endpoint: 'endpointValue',
-      };
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.endpointPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.endpointPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('endpointPath', () => {
-        const result = client.endpointPath(
-          'projectValue',
-          'locationValue',
-          'namespaceValue',
-          'serviceValue',
-          'endpointValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.endpointPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromEndpointName', () => {
-        const result = client.matchProjectFromEndpointName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.endpointPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromEndpointName', () => {
-        const result = client.matchLocationFromEndpointName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.endpointPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchNamespaceFromEndpointName', () => {
-        const result = client.matchNamespaceFromEndpointName(fakePath);
-        assert.strictEqual(result, 'namespaceValue');
-        assert(
-          (client.pathTemplates.endpointPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceFromEndpointName', () => {
-        const result = client.matchServiceFromEndpointName(fakePath);
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (client.pathTemplates.endpointPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEndpointFromEndpointName', () => {
-        const result = client.matchEndpointFromEndpointName(fakePath);
-        assert.strictEqual(result, 'endpointValue');
-        assert(
-          (client.pathTemplates.endpointPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('endpoint', async () => {
+            const fakePath = "/rendered/path/endpoint";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                namespace: "namespaceValue",
+                service: "serviceValue",
+                endpoint: "endpointValue",
+            };
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.endpointPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.endpointPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('endpointPath', () => {
+                const result = client.endpointPath("projectValue", "locationValue", "namespaceValue", "serviceValue", "endpointValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.endpointPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromEndpointName', () => {
+                const result = client.matchProjectFromEndpointName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.endpointPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEndpointName', () => {
+                const result = client.matchLocationFromEndpointName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.endpointPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchNamespaceFromEndpointName', () => {
+                const result = client.matchNamespaceFromEndpointName(fakePath);
+                assert.strictEqual(result, "namespaceValue");
+                assert((client.pathTemplates.endpointPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromEndpointName', () => {
+                const result = client.matchServiceFromEndpointName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.endpointPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEndpointFromEndpointName', () => {
+                const result = client.matchEndpointFromEndpointName(fakePath);
+                assert.strictEqual(result, "endpointValue");
+                assert((client.pathTemplates.endpointPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('namespace', async () => {
+            const fakePath = "/rendered/path/namespace";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                namespace: "namespaceValue",
+            };
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.namespacePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.namespacePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('namespacePath', () => {
+                const result = client.namespacePath("projectValue", "locationValue", "namespaceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.namespacePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromNamespaceName', () => {
+                const result = client.matchProjectFromNamespaceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.namespacePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromNamespaceName', () => {
+                const result = client.matchLocationFromNamespaceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.namespacePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchNamespaceFromNamespaceName', () => {
+                const result = client.matchNamespaceFromNamespaceName(fakePath);
+                assert.strictEqual(result, "namespaceValue");
+                assert((client.pathTemplates.namespacePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('service', async () => {
+            const fakePath = "/rendered/path/service";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                namespace: "namespaceValue",
+                service: "serviceValue",
+            };
+            const client = new registrationserviceModule.v1.RegistrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.servicePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.servicePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('servicePath', () => {
+                const result = client.servicePath("projectValue", "locationValue", "namespaceValue", "serviceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.servicePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromServiceName', () => {
+                const result = client.matchProjectFromServiceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.servicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromServiceName', () => {
+                const result = client.matchLocationFromServiceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.servicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchNamespaceFromServiceName', () => {
+                const result = client.matchNamespaceFromServiceName(fakePath);
+                assert.strictEqual(result, "namespaceValue");
+                assert((client.pathTemplates.servicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromServiceName', () => {
+                const result = client.matchServiceFromServiceName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.servicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('namespace', async () => {
-      const fakePath = '/rendered/path/namespace';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        namespace: 'namespaceValue',
-      };
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.namespacePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.namespacePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('namespacePath', () => {
-        const result = client.namespacePath(
-          'projectValue',
-          'locationValue',
-          'namespaceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.namespacePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromNamespaceName', () => {
-        const result = client.matchProjectFromNamespaceName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.namespacePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromNamespaceName', () => {
-        const result = client.matchLocationFromNamespaceName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.namespacePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchNamespaceFromNamespaceName', () => {
-        const result = client.matchNamespaceFromNamespaceName(fakePath);
-        assert.strictEqual(result, 'namespaceValue');
-        assert(
-          (client.pathTemplates.namespacePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('service', async () => {
-      const fakePath = '/rendered/path/service';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        namespace: 'namespaceValue',
-        service: 'serviceValue',
-      };
-      const client = new registrationserviceModule.v1.RegistrationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.servicePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.servicePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('servicePath', () => {
-        const result = client.servicePath(
-          'projectValue',
-          'locationValue',
-          'namespaceValue',
-          'serviceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.servicePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromServiceName', () => {
-        const result = client.matchProjectFromServiceName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.servicePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromServiceName', () => {
-        const result = client.matchLocationFromServiceName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.servicePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchNamespaceFromServiceName', () => {
-        const result = client.matchNamespaceFromServiceName(fakePath);
-        assert.strictEqual(result, 'namespaceValue');
-        assert(
-          (client.pathTemplates.servicePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceFromServiceName', () => {
-        const result = client.matchServiceFromServiceName(fakePath);
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (client.pathTemplates.servicePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

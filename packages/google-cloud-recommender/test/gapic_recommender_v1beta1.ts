@@ -29,4696 +29,3208 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1beta1.RecommenderClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'recommender.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          recommenderModule.v1beta1.RecommenderClient.servicePath;
-        assert.strictEqual(servicePath, 'recommender.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          recommenderModule.v1beta1.RecommenderClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'recommender.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'recommender.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'recommender.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new recommenderModule.v1beta1.RecommenderClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'recommender.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'recommender.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new recommenderModule.v1beta1.RecommenderClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'recommender.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new recommenderModule.v1beta1.RecommenderClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = recommenderModule.v1beta1.RecommenderClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = recommenderModule.v1beta1.RecommenderClient.servicePath;
+                assert.strictEqual(servicePath, 'recommender.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.recommenderStub, undefined);
-      await client.initialize();
-      assert(client.recommenderStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.recommenderStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.recommenderStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getInsight', () => {
-    it('invokes getInsight without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.GetInsightRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.GetInsightRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.Insight()
-      );
-      client.innerApiCalls.getInsight = stubSimpleCall(expectedResponse);
-      const [response] = await client.getInsight(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getInsight as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getInsight as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getInsight without error using callback', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.GetInsightRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.GetInsightRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.Insight()
-      );
-      client.innerApiCalls.getInsight =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getInsight(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.recommender.v1beta1.IInsight | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getInsight as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getInsight as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getInsight with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.GetInsightRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.GetInsightRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getInsight = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getInsight(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getInsight as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getInsight as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getInsight with closed client', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.GetInsightRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.GetInsightRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getInsight(request), expectedError);
-    });
-  });
-
-  describe('markInsightAccepted', () => {
-    it('invokes markInsightAccepted without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.Insight()
-      );
-      client.innerApiCalls.markInsightAccepted =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.markInsightAccepted(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.markInsightAccepted as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.markInsightAccepted as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes markInsightAccepted without error using callback', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.Insight()
-      );
-      client.innerApiCalls.markInsightAccepted =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.markInsightAccepted(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.recommender.v1beta1.IInsight | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.markInsightAccepted as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.markInsightAccepted as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes markInsightAccepted with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.markInsightAccepted = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.markInsightAccepted(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.markInsightAccepted as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.markInsightAccepted as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes markInsightAccepted with closed client', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.markInsightAccepted(request), expectedError);
-    });
-  });
-
-  describe('getRecommendation', () => {
-    it('invokes getRecommendation without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.GetRecommendationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.GetRecommendationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.Recommendation()
-      );
-      client.innerApiCalls.getRecommendation = stubSimpleCall(expectedResponse);
-      const [response] = await client.getRecommendation(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getRecommendation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRecommendation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRecommendation without error using callback', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.GetRecommendationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.GetRecommendationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.Recommendation()
-      );
-      client.innerApiCalls.getRecommendation =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getRecommendation(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.recommender.v1beta1.IRecommendation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getRecommendation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRecommendation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRecommendation with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.GetRecommendationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.GetRecommendationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getRecommendation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getRecommendation(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getRecommendation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRecommendation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRecommendation with closed client', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.GetRecommendationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.GetRecommendationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getRecommendation(request), expectedError);
-    });
-  });
-
-  describe('markRecommendationClaimed', () => {
-    it('invokes markRecommendationClaimed without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.Recommendation()
-      );
-      client.innerApiCalls.markRecommendationClaimed =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.markRecommendationClaimed(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.markRecommendationClaimed as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.markRecommendationClaimed as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes markRecommendationClaimed without error using callback', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.Recommendation()
-      );
-      client.innerApiCalls.markRecommendationClaimed =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.markRecommendationClaimed(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.recommender.v1beta1.IRecommendation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.markRecommendationClaimed as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.markRecommendationClaimed as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes markRecommendationClaimed with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.markRecommendationClaimed = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.markRecommendationClaimed(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.markRecommendationClaimed as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.markRecommendationClaimed as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes markRecommendationClaimed with closed client', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.markRecommendationClaimed(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('markRecommendationSucceeded', () => {
-    it('invokes markRecommendationSucceeded without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.Recommendation()
-      );
-      client.innerApiCalls.markRecommendationSucceeded =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.markRecommendationSucceeded(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.markRecommendationSucceeded as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.markRecommendationSucceeded as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes markRecommendationSucceeded without error using callback', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.Recommendation()
-      );
-      client.innerApiCalls.markRecommendationSucceeded =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.markRecommendationSucceeded(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.recommender.v1beta1.IRecommendation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.markRecommendationSucceeded as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.markRecommendationSucceeded as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes markRecommendationSucceeded with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.markRecommendationSucceeded = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.markRecommendationSucceeded(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.markRecommendationSucceeded as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.markRecommendationSucceeded as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes markRecommendationSucceeded with closed client', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.markRecommendationSucceeded(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('markRecommendationFailed', () => {
-    it('invokes markRecommendationFailed without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.Recommendation()
-      );
-      client.innerApiCalls.markRecommendationFailed =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.markRecommendationFailed(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.markRecommendationFailed as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.markRecommendationFailed as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes markRecommendationFailed without error using callback', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.Recommendation()
-      );
-      client.innerApiCalls.markRecommendationFailed =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.markRecommendationFailed(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.recommender.v1beta1.IRecommendation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.markRecommendationFailed as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.markRecommendationFailed as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes markRecommendationFailed with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.markRecommendationFailed = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.markRecommendationFailed(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.markRecommendationFailed as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.markRecommendationFailed as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes markRecommendationFailed with closed client', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.markRecommendationFailed(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getRecommenderConfig', () => {
-    it('invokes getRecommenderConfig without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.RecommenderConfig()
-      );
-      client.innerApiCalls.getRecommenderConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getRecommenderConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getRecommenderConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRecommenderConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRecommenderConfig without error using callback', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.RecommenderConfig()
-      );
-      client.innerApiCalls.getRecommenderConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getRecommenderConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.recommender.v1beta1.IRecommenderConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getRecommenderConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRecommenderConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRecommenderConfig with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getRecommenderConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getRecommenderConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getRecommenderConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRecommenderConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRecommenderConfig with closed client', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getRecommenderConfig(request), expectedError);
-    });
-  });
-
-  describe('updateRecommenderConfig', () => {
-    it('invokes updateRecommenderConfig without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest()
-      );
-      request.recommenderConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest',
-        ['recommenderConfig', 'name']
-      );
-      request.recommenderConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `recommender_config.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.RecommenderConfig()
-      );
-      client.innerApiCalls.updateRecommenderConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateRecommenderConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateRecommenderConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRecommenderConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateRecommenderConfig without error using callback', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest()
-      );
-      request.recommenderConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest',
-        ['recommenderConfig', 'name']
-      );
-      request.recommenderConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `recommender_config.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.RecommenderConfig()
-      );
-      client.innerApiCalls.updateRecommenderConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateRecommenderConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.recommender.v1beta1.IRecommenderConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateRecommenderConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRecommenderConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateRecommenderConfig with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest()
-      );
-      request.recommenderConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest',
-        ['recommenderConfig', 'name']
-      );
-      request.recommenderConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `recommender_config.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateRecommenderConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateRecommenderConfig(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateRecommenderConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRecommenderConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateRecommenderConfig with closed client', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest()
-      );
-      request.recommenderConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest',
-        ['recommenderConfig', 'name']
-      );
-      request.recommenderConfig.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.updateRecommenderConfig(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getInsightTypeConfig', () => {
-    it('invokes getInsightTypeConfig without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.InsightTypeConfig()
-      );
-      client.innerApiCalls.getInsightTypeConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getInsightTypeConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getInsightTypeConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getInsightTypeConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getInsightTypeConfig without error using callback', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.InsightTypeConfig()
-      );
-      client.innerApiCalls.getInsightTypeConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getInsightTypeConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.recommender.v1beta1.IInsightTypeConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getInsightTypeConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getInsightTypeConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getInsightTypeConfig with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getInsightTypeConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getInsightTypeConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getInsightTypeConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getInsightTypeConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getInsightTypeConfig with closed client', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getInsightTypeConfig(request), expectedError);
-    });
-  });
-
-  describe('updateInsightTypeConfig', () => {
-    it('invokes updateInsightTypeConfig without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest()
-      );
-      request.insightTypeConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest',
-        ['insightTypeConfig', 'name']
-      );
-      request.insightTypeConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `insight_type_config.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.InsightTypeConfig()
-      );
-      client.innerApiCalls.updateInsightTypeConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateInsightTypeConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateInsightTypeConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateInsightTypeConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateInsightTypeConfig without error using callback', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest()
-      );
-      request.insightTypeConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest',
-        ['insightTypeConfig', 'name']
-      );
-      request.insightTypeConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `insight_type_config.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.InsightTypeConfig()
-      );
-      client.innerApiCalls.updateInsightTypeConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateInsightTypeConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.recommender.v1beta1.IInsightTypeConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateInsightTypeConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateInsightTypeConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateInsightTypeConfig with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest()
-      );
-      request.insightTypeConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest',
-        ['insightTypeConfig', 'name']
-      );
-      request.insightTypeConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `insight_type_config.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateInsightTypeConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateInsightTypeConfig(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateInsightTypeConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateInsightTypeConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateInsightTypeConfig with closed client', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest()
-      );
-      request.insightTypeConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest',
-        ['insightTypeConfig', 'name']
-      );
-      request.insightTypeConfig.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.updateInsightTypeConfig(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('listInsights', () => {
-    it('invokes listInsights without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.ListInsightsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Insight()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Insight()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Insight()
-        ),
-      ];
-      client.innerApiCalls.listInsights = stubSimpleCall(expectedResponse);
-      const [response] = await client.listInsights(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listInsights as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listInsights as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listInsights without error using callback', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.ListInsightsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Insight()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Insight()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Insight()
-        ),
-      ];
-      client.innerApiCalls.listInsights =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listInsights(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.recommender.v1beta1.IInsight[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listInsights as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listInsights as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listInsights with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.ListInsightsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listInsights = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listInsights(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listInsights as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listInsights as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listInsightsStream without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.ListInsightsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Insight()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Insight()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Insight()
-        ),
-      ];
-      client.descriptors.page.listInsights.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listInsightsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.recommender.v1beta1.Insight[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.recommender.v1beta1.Insight) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listInsights.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listInsights, request)
-      );
-      assert(
-        (client.descriptors.page.listInsights.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listInsightsStream with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.ListInsightsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listInsights.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listInsightsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.recommender.v1beta1.Insight[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.recommender.v1beta1.Insight) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listInsights.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listInsights, request)
-      );
-      assert(
-        (client.descriptors.page.listInsights.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listInsights without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.ListInsightsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Insight()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Insight()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Insight()
-        ),
-      ];
-      client.descriptors.page.listInsights.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.recommender.v1beta1.IInsight[] = [];
-      const iterable = client.listInsightsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listInsights.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listInsights.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listInsights with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.ListInsightsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listInsights.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listInsightsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.recommender.v1beta1.IInsight[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = recommenderModule.v1beta1.RecommenderClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'recommender.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listInsights.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listInsights.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listRecommendations', () => {
-    it('invokes listRecommendations without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.ListRecommendationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Recommendation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Recommendation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Recommendation()
-        ),
-      ];
-      client.innerApiCalls.listRecommendations =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listRecommendations(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listRecommendations as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRecommendations as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRecommendations without error using callback', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.ListRecommendationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Recommendation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Recommendation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Recommendation()
-        ),
-      ];
-      client.innerApiCalls.listRecommendations =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listRecommendations(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.recommender.v1beta1.IRecommendation[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listRecommendations as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRecommendations as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRecommendations with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.ListRecommendationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listRecommendations = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listRecommendations(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listRecommendations as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRecommendations as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRecommendationsStream without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.ListRecommendationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Recommendation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Recommendation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Recommendation()
-        ),
-      ];
-      client.descriptors.page.listRecommendations.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listRecommendationsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.recommender.v1beta1.Recommendation[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.recommender.v1beta1.Recommendation
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'recommender.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listRecommendations.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listRecommendations, request)
-      );
-      assert(
-        (client.descriptors.page.listRecommendations.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listRecommendationsStream with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.ListRecommendationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listRecommendations.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listRecommendationsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.recommender.v1beta1.Recommendation[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.recommender.v1beta1.Recommendation
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'recommender.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listRecommendations.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listRecommendations, request)
-      );
-      assert(
-        (client.descriptors.page.listRecommendations.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listRecommendations without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.ListRecommendationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Recommendation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Recommendation()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.Recommendation()
-        ),
-      ];
-      client.descriptors.page.listRecommendations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.recommender.v1beta1.IRecommendation[] =
-        [];
-      const iterable = client.listRecommendationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listRecommendations.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listRecommendations.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new recommenderModule.v1beta1.RecommenderClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'recommender.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listRecommendations with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1beta1.ListRecommendationsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listRecommendations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listRecommendationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.recommender.v1beta1.IRecommendation[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new recommenderModule.v1beta1.RecommenderClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'recommender.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listRecommendations.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listRecommendations.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new recommenderModule.v1beta1.RecommenderClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listRecommenders', () => {
-    it('invokes listRecommenders without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.RecommenderType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.RecommenderType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.RecommenderType()
-        ),
-      ];
-      client.innerApiCalls.listRecommenders = stubSimpleCall(expectedResponse);
-      const [response] = await client.listRecommenders(request);
-      assert.deepStrictEqual(response, expectedResponse);
+        it('has port', () => {
+            const port = recommenderModule.v1beta1.RecommenderClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.recommenderStub, undefined);
+            await client.initialize();
+            assert(client.recommenderStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.recommenderStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.recommenderStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listRecommenders without error using callback', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.RecommenderType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.RecommenderType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.RecommenderType()
-        ),
-      ];
-      client.innerApiCalls.listRecommenders =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listRecommenders(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.recommender.v1beta1.IRecommenderType[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('getInsight', () => {
+        it('invokes getInsight without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.GetInsightRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.GetInsightRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.Insight()
+            );
+            client.innerApiCalls.getInsight = stubSimpleCall(expectedResponse);
+            const [response] = await client.getInsight(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getInsight as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getInsight as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getInsight without error using callback', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.GetInsightRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.GetInsightRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.Insight()
+            );
+            client.innerApiCalls.getInsight = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getInsight(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.recommender.v1beta1.IInsight|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getInsight as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getInsight as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getInsight with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.GetInsightRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.GetInsightRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getInsight = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getInsight(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getInsight as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getInsight as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getInsight with closed client', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.GetInsightRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.GetInsightRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getInsight(request), expectedError);
+        });
+    });
+
+    describe('markInsightAccepted', () => {
+        it('invokes markInsightAccepted without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.Insight()
+            );
+            client.innerApiCalls.markInsightAccepted = stubSimpleCall(expectedResponse);
+            const [response] = await client.markInsightAccepted(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.markInsightAccepted as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.markInsightAccepted as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes markInsightAccepted without error using callback', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.Insight()
+            );
+            client.innerApiCalls.markInsightAccepted = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.markInsightAccepted(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.recommender.v1beta1.IInsight|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.markInsightAccepted as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.markInsightAccepted as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes markInsightAccepted with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.markInsightAccepted = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.markInsightAccepted(request), expectedError);
+            const actualRequest = (client.innerApiCalls.markInsightAccepted as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.markInsightAccepted as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes markInsightAccepted with closed client', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.markInsightAccepted(request), expectedError);
+        });
+    });
+
+    describe('getRecommendation', () => {
+        it('invokes getRecommendation without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.GetRecommendationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.GetRecommendationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.Recommendation()
+            );
+            client.innerApiCalls.getRecommendation = stubSimpleCall(expectedResponse);
+            const [response] = await client.getRecommendation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRecommendation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRecommendation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRecommendation without error using callback', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.GetRecommendationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.GetRecommendationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.Recommendation()
+            );
+            client.innerApiCalls.getRecommendation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getRecommendation(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.recommender.v1beta1.IRecommendation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRecommendation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRecommendation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRecommendation with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.GetRecommendationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.GetRecommendationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getRecommendation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getRecommendation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getRecommendation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRecommendation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRecommendation with closed client', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.GetRecommendationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.GetRecommendationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getRecommendation(request), expectedError);
+        });
+    });
+
+    describe('markRecommendationClaimed', () => {
+        it('invokes markRecommendationClaimed without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.Recommendation()
+            );
+            client.innerApiCalls.markRecommendationClaimed = stubSimpleCall(expectedResponse);
+            const [response] = await client.markRecommendationClaimed(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.markRecommendationClaimed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.markRecommendationClaimed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes markRecommendationClaimed without error using callback', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.Recommendation()
+            );
+            client.innerApiCalls.markRecommendationClaimed = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.markRecommendationClaimed(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.recommender.v1beta1.IRecommendation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.markRecommendationClaimed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.markRecommendationClaimed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes markRecommendationClaimed with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.markRecommendationClaimed = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.markRecommendationClaimed(request), expectedError);
+            const actualRequest = (client.innerApiCalls.markRecommendationClaimed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.markRecommendationClaimed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes markRecommendationClaimed with closed client', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.markRecommendationClaimed(request), expectedError);
+        });
+    });
+
+    describe('markRecommendationSucceeded', () => {
+        it('invokes markRecommendationSucceeded without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.Recommendation()
+            );
+            client.innerApiCalls.markRecommendationSucceeded = stubSimpleCall(expectedResponse);
+            const [response] = await client.markRecommendationSucceeded(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.markRecommendationSucceeded as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.markRecommendationSucceeded as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes markRecommendationSucceeded without error using callback', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.Recommendation()
+            );
+            client.innerApiCalls.markRecommendationSucceeded = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.markRecommendationSucceeded(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.recommender.v1beta1.IRecommendation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.markRecommendationSucceeded as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.markRecommendationSucceeded as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes markRecommendationSucceeded with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.markRecommendationSucceeded = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.markRecommendationSucceeded(request), expectedError);
+            const actualRequest = (client.innerApiCalls.markRecommendationSucceeded as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.markRecommendationSucceeded as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes markRecommendationSucceeded with closed client', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.markRecommendationSucceeded(request), expectedError);
+        });
+    });
+
+    describe('markRecommendationFailed', () => {
+        it('invokes markRecommendationFailed without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.Recommendation()
+            );
+            client.innerApiCalls.markRecommendationFailed = stubSimpleCall(expectedResponse);
+            const [response] = await client.markRecommendationFailed(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.markRecommendationFailed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.markRecommendationFailed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes markRecommendationFailed without error using callback', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.Recommendation()
+            );
+            client.innerApiCalls.markRecommendationFailed = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.markRecommendationFailed(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.recommender.v1beta1.IRecommendation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.markRecommendationFailed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.markRecommendationFailed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes markRecommendationFailed with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.markRecommendationFailed = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.markRecommendationFailed(request), expectedError);
+            const actualRequest = (client.innerApiCalls.markRecommendationFailed as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.markRecommendationFailed as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes markRecommendationFailed with closed client', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.markRecommendationFailed(request), expectedError);
+        });
+    });
+
+    describe('getRecommenderConfig', () => {
+        it('invokes getRecommenderConfig without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.RecommenderConfig()
+            );
+            client.innerApiCalls.getRecommenderConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.getRecommenderConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRecommenderConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRecommenderConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRecommenderConfig without error using callback', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.RecommenderConfig()
+            );
+            client.innerApiCalls.getRecommenderConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getRecommenderConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.recommender.v1beta1.IRecommenderConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRecommenderConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRecommenderConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRecommenderConfig with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getRecommenderConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getRecommenderConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getRecommenderConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRecommenderConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRecommenderConfig with closed client', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getRecommenderConfig(request), expectedError);
+        });
+    });
+
+    describe('updateRecommenderConfig', () => {
+        it('invokes updateRecommenderConfig without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest()
+            );
+            request.recommenderConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest', ['recommenderConfig', 'name']);
+            request.recommenderConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `recommender_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.RecommenderConfig()
+            );
+            client.innerApiCalls.updateRecommenderConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateRecommenderConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateRecommenderConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRecommenderConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRecommenderConfig without error using callback', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest()
+            );
+            request.recommenderConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest', ['recommenderConfig', 'name']);
+            request.recommenderConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `recommender_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.RecommenderConfig()
+            );
+            client.innerApiCalls.updateRecommenderConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateRecommenderConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.recommender.v1beta1.IRecommenderConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateRecommenderConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRecommenderConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRecommenderConfig with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest()
+            );
+            request.recommenderConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest', ['recommenderConfig', 'name']);
+            request.recommenderConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `recommender_config.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateRecommenderConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateRecommenderConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateRecommenderConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRecommenderConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRecommenderConfig with closed client', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest()
+            );
+            request.recommenderConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest', ['recommenderConfig', 'name']);
+            request.recommenderConfig.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateRecommenderConfig(request), expectedError);
+        });
+    });
+
+    describe('getInsightTypeConfig', () => {
+        it('invokes getInsightTypeConfig without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.InsightTypeConfig()
+            );
+            client.innerApiCalls.getInsightTypeConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.getInsightTypeConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getInsightTypeConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getInsightTypeConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getInsightTypeConfig without error using callback', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.InsightTypeConfig()
+            );
+            client.innerApiCalls.getInsightTypeConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getInsightTypeConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.recommender.v1beta1.IInsightTypeConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getInsightTypeConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getInsightTypeConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getInsightTypeConfig with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getInsightTypeConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getInsightTypeConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getInsightTypeConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getInsightTypeConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getInsightTypeConfig with closed client', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getInsightTypeConfig(request), expectedError);
+        });
+    });
+
+    describe('updateInsightTypeConfig', () => {
+        it('invokes updateInsightTypeConfig without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest()
+            );
+            request.insightTypeConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest', ['insightTypeConfig', 'name']);
+            request.insightTypeConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `insight_type_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.InsightTypeConfig()
+            );
+            client.innerApiCalls.updateInsightTypeConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateInsightTypeConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateInsightTypeConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateInsightTypeConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateInsightTypeConfig without error using callback', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest()
+            );
+            request.insightTypeConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest', ['insightTypeConfig', 'name']);
+            request.insightTypeConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `insight_type_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.InsightTypeConfig()
+            );
+            client.innerApiCalls.updateInsightTypeConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateInsightTypeConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.recommender.v1beta1.IInsightTypeConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateInsightTypeConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateInsightTypeConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateInsightTypeConfig with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest()
+            );
+            request.insightTypeConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest', ['insightTypeConfig', 'name']);
+            request.insightTypeConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `insight_type_config.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateInsightTypeConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateInsightTypeConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateInsightTypeConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateInsightTypeConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateInsightTypeConfig with closed client', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest()
+            );
+            request.insightTypeConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest', ['insightTypeConfig', 'name']);
+            request.insightTypeConfig.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateInsightTypeConfig(request), expectedError);
+        });
+    });
+
+    describe('listInsights', () => {
+        it('invokes listInsights without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.ListInsightsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Insight()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Insight()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Insight()),
+            ];
+            client.innerApiCalls.listInsights = stubSimpleCall(expectedResponse);
+            const [response] = await client.listInsights(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listInsights as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listInsights as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listInsights without error using callback', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.ListInsightsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Insight()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Insight()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Insight()),
+            ];
+            client.innerApiCalls.listInsights = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listInsights(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.recommender.v1beta1.IInsight[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listInsights as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listInsights as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listInsights with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.ListInsightsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listInsights = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listInsights(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listInsights as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listInsights as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listInsightsStream without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.ListInsightsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Insight()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Insight()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Insight()),
+            ];
+            client.descriptors.page.listInsights.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listInsightsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.recommender.v1beta1.Insight[] = [];
+                stream.on('data', (response: protos.google.cloud.recommender.v1beta1.Insight) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listInsights.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listInsights, request));
+            assert(
+                (client.descriptors.page.listInsights.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listInsightsStream with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.ListInsightsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listInsights.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listInsightsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.recommender.v1beta1.Insight[] = [];
+                stream.on('data', (response: protos.google.cloud.recommender.v1beta1.Insight) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listInsights.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listInsights, request));
+            assert(
+                (client.descriptors.page.listInsights.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listInsights without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.ListInsightsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Insight()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Insight()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Insight()),
+            ];
+            client.descriptors.page.listInsights.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.recommender.v1beta1.IInsight[] = [];
+            const iterable = client.listInsightsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes listRecommenders with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listRecommenders = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listRecommenders(request), expectedError);
-    });
-
-    it('invokes listRecommendersStream without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.RecommenderType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.RecommenderType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.RecommenderType()
-        ),
-      ];
-      client.descriptors.page.listRecommenders.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listRecommendersStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.recommender.v1beta1.RecommenderType[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.recommender.v1beta1.RecommenderType
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listInsights.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listInsights.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listInsights with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.ListInsightsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listInsights.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listInsightsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.recommender.v1beta1.IInsight[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listInsights.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listInsights.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listRecommenders.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listRecommenders, request)
-      );
     });
 
-    it('invokes listRecommendersStream with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
-      );
-      const expectedError = new Error('expected');
-      client.descriptors.page.listRecommenders.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listRecommendersStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.recommender.v1beta1.RecommenderType[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.recommender.v1beta1.RecommenderType
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listRecommendations', () => {
+        it('invokes listRecommendations without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.ListRecommendationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Recommendation()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Recommendation()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Recommendation()),
+            ];
+            client.innerApiCalls.listRecommendations = stubSimpleCall(expectedResponse);
+            const [response] = await client.listRecommendations(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listRecommendations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRecommendations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listRecommendations without error using callback', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.ListRecommendationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Recommendation()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Recommendation()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Recommendation()),
+            ];
+            client.innerApiCalls.listRecommendations = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listRecommendations(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.recommender.v1beta1.IRecommendation[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listRecommendations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRecommendations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listRecommenders.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listRecommenders, request)
-      );
-    });
 
-    it('uses async iteration with listRecommenders without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.RecommenderType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.RecommenderType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.RecommenderType()
-        ),
-      ];
-      client.descriptors.page.listRecommenders.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.recommender.v1beta1.IRecommenderType[] =
-        [];
-      const iterable = client.listRecommendersAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listRecommenders.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
+        it('invokes listRecommendations with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.ListRecommendationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listRecommendations = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listRecommendations(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listRecommendations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRecommendations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listRecommenders with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
-      );
-      const expectedError = new Error('expected');
-      client.descriptors.page.listRecommenders.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listRecommendersAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.recommender.v1beta1.IRecommenderType[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listRecommenders.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
+        it('invokes listRecommendationsStream without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.ListRecommendationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Recommendation()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Recommendation()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Recommendation()),
+            ];
+            client.descriptors.page.listRecommendations.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listRecommendationsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.recommender.v1beta1.Recommendation[] = [];
+                stream.on('data', (response: protos.google.cloud.recommender.v1beta1.Recommendation) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listRecommendations.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listRecommendations, request));
+            assert(
+                (client.descriptors.page.listRecommendations.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listInsightTypes', () => {
-    it('invokes listInsightTypes without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.InsightType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.InsightType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.InsightType()
-        ),
-      ];
-      client.innerApiCalls.listInsightTypes = stubSimpleCall(expectedResponse);
-      const [response] = await client.listInsightTypes(request);
-      assert.deepStrictEqual(response, expectedResponse);
-    });
+        it('invokes listRecommendationsStream with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.ListRecommendationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listRecommendations.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listRecommendationsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.recommender.v1beta1.Recommendation[] = [];
+                stream.on('data', (response: protos.google.cloud.recommender.v1beta1.Recommendation) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listRecommendations.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listRecommendations, request));
+            assert(
+                (client.descriptors.page.listRecommendations.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listInsightTypes without error using callback', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.InsightType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.InsightType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.InsightType()
-        ),
-      ];
-      client.innerApiCalls.listInsightTypes =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listInsightTypes(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.recommender.v1beta1.IInsightType[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listRecommendations without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.ListRecommendationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Recommendation()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Recommendation()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.Recommendation()),
+            ];
+            client.descriptors.page.listRecommendations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.recommender.v1beta1.IRecommendation[] = [];
+            const iterable = client.listRecommendationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes listInsightTypes with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listInsightTypes = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listInsightTypes(request), expectedError);
-    });
-
-    it('invokes listInsightTypesStream without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.InsightType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.InsightType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.InsightType()
-        ),
-      ];
-      client.descriptors.page.listInsightTypes.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listInsightTypesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.recommender.v1beta1.InsightType[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.recommender.v1beta1.InsightType) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listRecommendations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listRecommendations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listRecommendations with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.recommender.v1beta1.ListRecommendationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listRecommendations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listRecommendationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.recommender.v1beta1.IRecommendation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listRecommendations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listRecommendations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listInsightTypes.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listInsightTypes, request)
-      );
     });
 
-    it('invokes listInsightTypesStream with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
-      );
-      const expectedError = new Error('expected');
-      client.descriptors.page.listInsightTypes.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listInsightTypesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.recommender.v1beta1.InsightType[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.recommender.v1beta1.InsightType) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listRecommenders', () => {
+        it('invokes listRecommenders without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
+            );const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.RecommenderType()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.RecommenderType()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.RecommenderType()),
+            ];
+            client.innerApiCalls.listRecommenders = stubSimpleCall(expectedResponse);
+            const [response] = await client.listRecommenders(request);
+            assert.deepStrictEqual(response, expectedResponse);
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listRecommenders without error using callback', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
+            );const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.RecommenderType()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.RecommenderType()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.RecommenderType()),
+            ];
+            client.innerApiCalls.listRecommenders = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listRecommenders(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.recommender.v1beta1.IRecommenderType[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listInsightTypes.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listInsightTypes, request)
-      );
+
+        it('invokes listRecommenders with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listRecommenders = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listRecommenders(request), expectedError);
+        });
+
+        it('invokes listRecommendersStream without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
+            );
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.RecommenderType()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.RecommenderType()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.RecommenderType()),
+            ];
+            client.descriptors.page.listRecommenders.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listRecommendersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.recommender.v1beta1.RecommenderType[] = [];
+                stream.on('data', (response: protos.google.cloud.recommender.v1beta1.RecommenderType) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listRecommenders.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listRecommenders, request));
+        });
+
+        it('invokes listRecommendersStream with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
+            );
+            const expectedError = new Error('expected');
+            client.descriptors.page.listRecommenders.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listRecommendersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.recommender.v1beta1.RecommenderType[] = [];
+                stream.on('data', (response: protos.google.cloud.recommender.v1beta1.RecommenderType) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listRecommenders.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listRecommenders, request));
+        });
+
+        it('uses async iteration with listRecommenders without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
+            );
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.RecommenderType()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.RecommenderType()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.RecommenderType()),
+            ];
+            client.descriptors.page.listRecommenders.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.recommender.v1beta1.IRecommenderType[] = [];
+            const iterable = client.listRecommendersAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listRecommenders.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+
+        it('uses async iteration with listRecommenders with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
+            );
+            const expectedError = new Error('expected');
+            client.descriptors.page.listRecommenders.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listRecommendersAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.recommender.v1beta1.IRecommenderType[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listRecommenders.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    it('uses async iteration with listInsightTypes without error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.InsightType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.InsightType()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recommender.v1beta1.InsightType()
-        ),
-      ];
-      client.descriptors.page.listInsightTypes.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.recommender.v1beta1.IInsightType[] =
-        [];
-      const iterable = client.listInsightTypesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listInsightTypes.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
+    describe('listInsightTypes', () => {
+        it('invokes listInsightTypes without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
+            );const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.InsightType()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.InsightType()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.InsightType()),
+            ];
+            client.innerApiCalls.listInsightTypes = stubSimpleCall(expectedResponse);
+            const [response] = await client.listInsightTypes(request);
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes listInsightTypes without error using callback', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
+            );const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.InsightType()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.InsightType()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.InsightType()),
+            ];
+            client.innerApiCalls.listInsightTypes = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listInsightTypes(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.recommender.v1beta1.IInsightType[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes listInsightTypes with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listInsightTypes = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listInsightTypes(request), expectedError);
+        });
+
+        it('invokes listInsightTypesStream without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
+            );
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.InsightType()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.InsightType()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.InsightType()),
+            ];
+            client.descriptors.page.listInsightTypes.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listInsightTypesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.recommender.v1beta1.InsightType[] = [];
+                stream.on('data', (response: protos.google.cloud.recommender.v1beta1.InsightType) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listInsightTypes.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listInsightTypes, request));
+        });
+
+        it('invokes listInsightTypesStream with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
+            );
+            const expectedError = new Error('expected');
+            client.descriptors.page.listInsightTypes.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listInsightTypesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.recommender.v1beta1.InsightType[] = [];
+                stream.on('data', (response: protos.google.cloud.recommender.v1beta1.InsightType) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listInsightTypes.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listInsightTypes, request));
+        });
+
+        it('uses async iteration with listInsightTypes without error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
+            );
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.InsightType()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.InsightType()),
+              generateSampleMessage(new protos.google.cloud.recommender.v1beta1.InsightType()),
+            ];
+            client.descriptors.page.listInsightTypes.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.recommender.v1beta1.IInsightType[] = [];
+            const iterable = client.listInsightTypesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listInsightTypes.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+
+        it('uses async iteration with listInsightTypes with error', async () => {
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
+            );
+            const expectedError = new Error('expected');
+            client.descriptors.page.listInsightTypes.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listInsightTypesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.recommender.v1beta1.IInsightType[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listInsightTypes.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    it('uses async iteration with listInsightTypes with error', async () => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
-      );
-      const expectedError = new Error('expected');
-      client.descriptors.page.listInsightTypes.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listInsightTypesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.recommender.v1beta1.IInsightType[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listInsightTypes.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
+    describe('Path templates', () => {
+
+        describe('billingAccountLocationInsightType', async () => {
+            const fakePath = "/rendered/path/billingAccountLocationInsightType";
+            const expectedParameters = {
+                billing_account: "billingAccountValue",
+                location: "locationValue",
+                insight_type: "insightTypeValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.billingAccountLocationInsightTypePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.billingAccountLocationInsightTypePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('billingAccountLocationInsightTypePath', () => {
+                const result = client.billingAccountLocationInsightTypePath("billingAccountValue", "locationValue", "insightTypeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.billingAccountLocationInsightTypePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchBillingAccountFromBillingAccountLocationInsightTypeName', () => {
+                const result = client.matchBillingAccountFromBillingAccountLocationInsightTypeName(fakePath);
+                assert.strictEqual(result, "billingAccountValue");
+                assert((client.pathTemplates.billingAccountLocationInsightTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromBillingAccountLocationInsightTypeName', () => {
+                const result = client.matchLocationFromBillingAccountLocationInsightTypeName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.billingAccountLocationInsightTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInsightTypeFromBillingAccountLocationInsightTypeName', () => {
+                const result = client.matchInsightTypeFromBillingAccountLocationInsightTypeName(fakePath);
+                assert.strictEqual(result, "insightTypeValue");
+                assert((client.pathTemplates.billingAccountLocationInsightTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('billingAccountLocationInsightTypeInsight', async () => {
+            const fakePath = "/rendered/path/billingAccountLocationInsightTypeInsight";
+            const expectedParameters = {
+                billing_account: "billingAccountValue",
+                location: "locationValue",
+                insight_type: "insightTypeValue",
+                insight: "insightValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.billingAccountLocationInsightTypeInsightPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.billingAccountLocationInsightTypeInsightPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('billingAccountLocationInsightTypeInsightPath', () => {
+                const result = client.billingAccountLocationInsightTypeInsightPath("billingAccountValue", "locationValue", "insightTypeValue", "insightValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.billingAccountLocationInsightTypeInsightPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchBillingAccountFromBillingAccountLocationInsightTypeInsightName', () => {
+                const result = client.matchBillingAccountFromBillingAccountLocationInsightTypeInsightName(fakePath);
+                assert.strictEqual(result, "billingAccountValue");
+                assert((client.pathTemplates.billingAccountLocationInsightTypeInsightPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromBillingAccountLocationInsightTypeInsightName', () => {
+                const result = client.matchLocationFromBillingAccountLocationInsightTypeInsightName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.billingAccountLocationInsightTypeInsightPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInsightTypeFromBillingAccountLocationInsightTypeInsightName', () => {
+                const result = client.matchInsightTypeFromBillingAccountLocationInsightTypeInsightName(fakePath);
+                assert.strictEqual(result, "insightTypeValue");
+                assert((client.pathTemplates.billingAccountLocationInsightTypeInsightPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInsightFromBillingAccountLocationInsightTypeInsightName', () => {
+                const result = client.matchInsightFromBillingAccountLocationInsightTypeInsightName(fakePath);
+                assert.strictEqual(result, "insightValue");
+                assert((client.pathTemplates.billingAccountLocationInsightTypeInsightPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('billingAccountLocationRecommender', async () => {
+            const fakePath = "/rendered/path/billingAccountLocationRecommender";
+            const expectedParameters = {
+                billing_account: "billingAccountValue",
+                location: "locationValue",
+                recommender: "recommenderValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.billingAccountLocationRecommenderPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.billingAccountLocationRecommenderPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('billingAccountLocationRecommenderPath', () => {
+                const result = client.billingAccountLocationRecommenderPath("billingAccountValue", "locationValue", "recommenderValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.billingAccountLocationRecommenderPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchBillingAccountFromBillingAccountLocationRecommenderName', () => {
+                const result = client.matchBillingAccountFromBillingAccountLocationRecommenderName(fakePath);
+                assert.strictEqual(result, "billingAccountValue");
+                assert((client.pathTemplates.billingAccountLocationRecommenderPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromBillingAccountLocationRecommenderName', () => {
+                const result = client.matchLocationFromBillingAccountLocationRecommenderName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.billingAccountLocationRecommenderPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRecommenderFromBillingAccountLocationRecommenderName', () => {
+                const result = client.matchRecommenderFromBillingAccountLocationRecommenderName(fakePath);
+                assert.strictEqual(result, "recommenderValue");
+                assert((client.pathTemplates.billingAccountLocationRecommenderPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('billingAccountLocationRecommenderRecommendation', async () => {
+            const fakePath = "/rendered/path/billingAccountLocationRecommenderRecommendation";
+            const expectedParameters = {
+                billing_account: "billingAccountValue",
+                location: "locationValue",
+                recommender: "recommenderValue",
+                recommendation: "recommendationValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.billingAccountLocationRecommenderRecommendationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.billingAccountLocationRecommenderRecommendationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('billingAccountLocationRecommenderRecommendationPath', () => {
+                const result = client.billingAccountLocationRecommenderRecommendationPath("billingAccountValue", "locationValue", "recommenderValue", "recommendationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.billingAccountLocationRecommenderRecommendationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchBillingAccountFromBillingAccountLocationRecommenderRecommendationName', () => {
+                const result = client.matchBillingAccountFromBillingAccountLocationRecommenderRecommendationName(fakePath);
+                assert.strictEqual(result, "billingAccountValue");
+                assert((client.pathTemplates.billingAccountLocationRecommenderRecommendationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromBillingAccountLocationRecommenderRecommendationName', () => {
+                const result = client.matchLocationFromBillingAccountLocationRecommenderRecommendationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.billingAccountLocationRecommenderRecommendationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRecommenderFromBillingAccountLocationRecommenderRecommendationName', () => {
+                const result = client.matchRecommenderFromBillingAccountLocationRecommenderRecommendationName(fakePath);
+                assert.strictEqual(result, "recommenderValue");
+                assert((client.pathTemplates.billingAccountLocationRecommenderRecommendationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRecommendationFromBillingAccountLocationRecommenderRecommendationName', () => {
+                const result = client.matchRecommendationFromBillingAccountLocationRecommenderRecommendationName(fakePath);
+                assert.strictEqual(result, "recommendationValue");
+                assert((client.pathTemplates.billingAccountLocationRecommenderRecommendationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderLocationInsightType', async () => {
+            const fakePath = "/rendered/path/folderLocationInsightType";
+            const expectedParameters = {
+                folder: "folderValue",
+                location: "locationValue",
+                insight_type: "insightTypeValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderLocationInsightTypePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderLocationInsightTypePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderLocationInsightTypePath', () => {
+                const result = client.folderLocationInsightTypePath("folderValue", "locationValue", "insightTypeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderLocationInsightTypePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderLocationInsightTypeName', () => {
+                const result = client.matchFolderFromFolderLocationInsightTypeName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderLocationInsightTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFolderLocationInsightTypeName', () => {
+                const result = client.matchLocationFromFolderLocationInsightTypeName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderLocationInsightTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInsightTypeFromFolderLocationInsightTypeName', () => {
+                const result = client.matchInsightTypeFromFolderLocationInsightTypeName(fakePath);
+                assert.strictEqual(result, "insightTypeValue");
+                assert((client.pathTemplates.folderLocationInsightTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderLocationInsightTypeInsight', async () => {
+            const fakePath = "/rendered/path/folderLocationInsightTypeInsight";
+            const expectedParameters = {
+                folder: "folderValue",
+                location: "locationValue",
+                insight_type: "insightTypeValue",
+                insight: "insightValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderLocationInsightTypeInsightPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderLocationInsightTypeInsightPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderLocationInsightTypeInsightPath', () => {
+                const result = client.folderLocationInsightTypeInsightPath("folderValue", "locationValue", "insightTypeValue", "insightValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderLocationInsightTypeInsightPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderLocationInsightTypeInsightName', () => {
+                const result = client.matchFolderFromFolderLocationInsightTypeInsightName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderLocationInsightTypeInsightPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFolderLocationInsightTypeInsightName', () => {
+                const result = client.matchLocationFromFolderLocationInsightTypeInsightName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderLocationInsightTypeInsightPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInsightTypeFromFolderLocationInsightTypeInsightName', () => {
+                const result = client.matchInsightTypeFromFolderLocationInsightTypeInsightName(fakePath);
+                assert.strictEqual(result, "insightTypeValue");
+                assert((client.pathTemplates.folderLocationInsightTypeInsightPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInsightFromFolderLocationInsightTypeInsightName', () => {
+                const result = client.matchInsightFromFolderLocationInsightTypeInsightName(fakePath);
+                assert.strictEqual(result, "insightValue");
+                assert((client.pathTemplates.folderLocationInsightTypeInsightPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderLocationRecommender', async () => {
+            const fakePath = "/rendered/path/folderLocationRecommender";
+            const expectedParameters = {
+                folder: "folderValue",
+                location: "locationValue",
+                recommender: "recommenderValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderLocationRecommenderPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderLocationRecommenderPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderLocationRecommenderPath', () => {
+                const result = client.folderLocationRecommenderPath("folderValue", "locationValue", "recommenderValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderLocationRecommenderPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderLocationRecommenderName', () => {
+                const result = client.matchFolderFromFolderLocationRecommenderName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderLocationRecommenderPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFolderLocationRecommenderName', () => {
+                const result = client.matchLocationFromFolderLocationRecommenderName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderLocationRecommenderPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRecommenderFromFolderLocationRecommenderName', () => {
+                const result = client.matchRecommenderFromFolderLocationRecommenderName(fakePath);
+                assert.strictEqual(result, "recommenderValue");
+                assert((client.pathTemplates.folderLocationRecommenderPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderLocationRecommenderRecommendation', async () => {
+            const fakePath = "/rendered/path/folderLocationRecommenderRecommendation";
+            const expectedParameters = {
+                folder: "folderValue",
+                location: "locationValue",
+                recommender: "recommenderValue",
+                recommendation: "recommendationValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderLocationRecommenderRecommendationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderLocationRecommenderRecommendationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderLocationRecommenderRecommendationPath', () => {
+                const result = client.folderLocationRecommenderRecommendationPath("folderValue", "locationValue", "recommenderValue", "recommendationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderLocationRecommenderRecommendationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderLocationRecommenderRecommendationName', () => {
+                const result = client.matchFolderFromFolderLocationRecommenderRecommendationName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderLocationRecommenderRecommendationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFolderLocationRecommenderRecommendationName', () => {
+                const result = client.matchLocationFromFolderLocationRecommenderRecommendationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderLocationRecommenderRecommendationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRecommenderFromFolderLocationRecommenderRecommendationName', () => {
+                const result = client.matchRecommenderFromFolderLocationRecommenderRecommendationName(fakePath);
+                assert.strictEqual(result, "recommenderValue");
+                assert((client.pathTemplates.folderLocationRecommenderRecommendationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRecommendationFromFolderLocationRecommenderRecommendationName', () => {
+                const result = client.matchRecommendationFromFolderLocationRecommenderRecommendationName(fakePath);
+                assert.strictEqual(result, "recommendationValue");
+                assert((client.pathTemplates.folderLocationRecommenderRecommendationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('insightType', async () => {
+            const fakePath = "/rendered/path/insightType";
+            const expectedParameters = {
+                insight_type: "insightTypeValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.insightTypePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.insightTypePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('insightTypePath', () => {
+                const result = client.insightTypePath("insightTypeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.insightTypePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchInsightTypeFromInsightTypeName', () => {
+                const result = client.matchInsightTypeFromInsightTypeName(fakePath);
+                assert.strictEqual(result, "insightTypeValue");
+                assert((client.pathTemplates.insightTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationInsightType', async () => {
+            const fakePath = "/rendered/path/organizationLocationInsightType";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                insight_type: "insightTypeValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationInsightTypePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationInsightTypePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationInsightTypePath', () => {
+                const result = client.organizationLocationInsightTypePath("organizationValue", "locationValue", "insightTypeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationInsightTypePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationInsightTypeName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationInsightTypeName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationInsightTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationInsightTypeName', () => {
+                const result = client.matchLocationFromOrganizationLocationInsightTypeName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationInsightTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInsightTypeFromOrganizationLocationInsightTypeName', () => {
+                const result = client.matchInsightTypeFromOrganizationLocationInsightTypeName(fakePath);
+                assert.strictEqual(result, "insightTypeValue");
+                assert((client.pathTemplates.organizationLocationInsightTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationInsightTypeConfig', async () => {
+            const fakePath = "/rendered/path/organizationLocationInsightTypeConfig";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                insight_type: "insightTypeValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationInsightTypeConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationInsightTypeConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationInsightTypeConfigPath', () => {
+                const result = client.organizationLocationInsightTypeConfigPath("organizationValue", "locationValue", "insightTypeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationInsightTypeConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationInsightTypeConfigName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationInsightTypeConfigName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationInsightTypeConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationInsightTypeConfigName', () => {
+                const result = client.matchLocationFromOrganizationLocationInsightTypeConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationInsightTypeConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInsightTypeFromOrganizationLocationInsightTypeConfigName', () => {
+                const result = client.matchInsightTypeFromOrganizationLocationInsightTypeConfigName(fakePath);
+                assert.strictEqual(result, "insightTypeValue");
+                assert((client.pathTemplates.organizationLocationInsightTypeConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationInsightTypeInsight', async () => {
+            const fakePath = "/rendered/path/organizationLocationInsightTypeInsight";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                insight_type: "insightTypeValue",
+                insight: "insightValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationInsightTypeInsightPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationInsightTypeInsightPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationInsightTypeInsightPath', () => {
+                const result = client.organizationLocationInsightTypeInsightPath("organizationValue", "locationValue", "insightTypeValue", "insightValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationInsightTypeInsightPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationInsightTypeInsightName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationInsightTypeInsightName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationInsightTypeInsightPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationInsightTypeInsightName', () => {
+                const result = client.matchLocationFromOrganizationLocationInsightTypeInsightName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationInsightTypeInsightPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInsightTypeFromOrganizationLocationInsightTypeInsightName', () => {
+                const result = client.matchInsightTypeFromOrganizationLocationInsightTypeInsightName(fakePath);
+                assert.strictEqual(result, "insightTypeValue");
+                assert((client.pathTemplates.organizationLocationInsightTypeInsightPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInsightFromOrganizationLocationInsightTypeInsightName', () => {
+                const result = client.matchInsightFromOrganizationLocationInsightTypeInsightName(fakePath);
+                assert.strictEqual(result, "insightValue");
+                assert((client.pathTemplates.organizationLocationInsightTypeInsightPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationRecommender', async () => {
+            const fakePath = "/rendered/path/organizationLocationRecommender";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                recommender: "recommenderValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationRecommenderPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationRecommenderPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationRecommenderPath', () => {
+                const result = client.organizationLocationRecommenderPath("organizationValue", "locationValue", "recommenderValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationRecommenderPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationRecommenderName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationRecommenderName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationRecommenderPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationRecommenderName', () => {
+                const result = client.matchLocationFromOrganizationLocationRecommenderName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationRecommenderPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRecommenderFromOrganizationLocationRecommenderName', () => {
+                const result = client.matchRecommenderFromOrganizationLocationRecommenderName(fakePath);
+                assert.strictEqual(result, "recommenderValue");
+                assert((client.pathTemplates.organizationLocationRecommenderPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationRecommenderConfig', async () => {
+            const fakePath = "/rendered/path/organizationLocationRecommenderConfig";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                recommender: "recommenderValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationRecommenderConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationRecommenderConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationRecommenderConfigPath', () => {
+                const result = client.organizationLocationRecommenderConfigPath("organizationValue", "locationValue", "recommenderValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationRecommenderConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationRecommenderConfigName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationRecommenderConfigName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationRecommenderConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationRecommenderConfigName', () => {
+                const result = client.matchLocationFromOrganizationLocationRecommenderConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationRecommenderConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRecommenderFromOrganizationLocationRecommenderConfigName', () => {
+                const result = client.matchRecommenderFromOrganizationLocationRecommenderConfigName(fakePath);
+                assert.strictEqual(result, "recommenderValue");
+                assert((client.pathTemplates.organizationLocationRecommenderConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationRecommenderRecommendation', async () => {
+            const fakePath = "/rendered/path/organizationLocationRecommenderRecommendation";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                recommender: "recommenderValue",
+                recommendation: "recommendationValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationRecommenderRecommendationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationRecommenderRecommendationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationRecommenderRecommendationPath', () => {
+                const result = client.organizationLocationRecommenderRecommendationPath("organizationValue", "locationValue", "recommenderValue", "recommendationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationRecommenderRecommendationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationRecommenderRecommendationName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationRecommenderRecommendationName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationRecommenderRecommendationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationRecommenderRecommendationName', () => {
+                const result = client.matchLocationFromOrganizationLocationRecommenderRecommendationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationRecommenderRecommendationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRecommenderFromOrganizationLocationRecommenderRecommendationName', () => {
+                const result = client.matchRecommenderFromOrganizationLocationRecommenderRecommendationName(fakePath);
+                assert.strictEqual(result, "recommenderValue");
+                assert((client.pathTemplates.organizationLocationRecommenderRecommendationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRecommendationFromOrganizationLocationRecommenderRecommendationName', () => {
+                const result = client.matchRecommendationFromOrganizationLocationRecommenderRecommendationName(fakePath);
+                assert.strictEqual(result, "recommendationValue");
+                assert((client.pathTemplates.organizationLocationRecommenderRecommendationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationInsightType', async () => {
+            const fakePath = "/rendered/path/projectLocationInsightType";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                insight_type: "insightTypeValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationInsightTypePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationInsightTypePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationInsightTypePath', () => {
+                const result = client.projectLocationInsightTypePath("projectValue", "locationValue", "insightTypeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationInsightTypePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationInsightTypeName', () => {
+                const result = client.matchProjectFromProjectLocationInsightTypeName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationInsightTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationInsightTypeName', () => {
+                const result = client.matchLocationFromProjectLocationInsightTypeName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationInsightTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInsightTypeFromProjectLocationInsightTypeName', () => {
+                const result = client.matchInsightTypeFromProjectLocationInsightTypeName(fakePath);
+                assert.strictEqual(result, "insightTypeValue");
+                assert((client.pathTemplates.projectLocationInsightTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationInsightTypeConfig', async () => {
+            const fakePath = "/rendered/path/projectLocationInsightTypeConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                insight_type: "insightTypeValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationInsightTypeConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationInsightTypeConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationInsightTypeConfigPath', () => {
+                const result = client.projectLocationInsightTypeConfigPath("projectValue", "locationValue", "insightTypeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationInsightTypeConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationInsightTypeConfigName', () => {
+                const result = client.matchProjectFromProjectLocationInsightTypeConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationInsightTypeConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationInsightTypeConfigName', () => {
+                const result = client.matchLocationFromProjectLocationInsightTypeConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationInsightTypeConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInsightTypeFromProjectLocationInsightTypeConfigName', () => {
+                const result = client.matchInsightTypeFromProjectLocationInsightTypeConfigName(fakePath);
+                assert.strictEqual(result, "insightTypeValue");
+                assert((client.pathTemplates.projectLocationInsightTypeConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationInsightTypeInsight', async () => {
+            const fakePath = "/rendered/path/projectLocationInsightTypeInsight";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                insight_type: "insightTypeValue",
+                insight: "insightValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationInsightTypeInsightPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationInsightTypeInsightPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationInsightTypeInsightPath', () => {
+                const result = client.projectLocationInsightTypeInsightPath("projectValue", "locationValue", "insightTypeValue", "insightValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationInsightTypeInsightPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationInsightTypeInsightName', () => {
+                const result = client.matchProjectFromProjectLocationInsightTypeInsightName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationInsightTypeInsightPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationInsightTypeInsightName', () => {
+                const result = client.matchLocationFromProjectLocationInsightTypeInsightName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationInsightTypeInsightPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInsightTypeFromProjectLocationInsightTypeInsightName', () => {
+                const result = client.matchInsightTypeFromProjectLocationInsightTypeInsightName(fakePath);
+                assert.strictEqual(result, "insightTypeValue");
+                assert((client.pathTemplates.projectLocationInsightTypeInsightPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInsightFromProjectLocationInsightTypeInsightName', () => {
+                const result = client.matchInsightFromProjectLocationInsightTypeInsightName(fakePath);
+                assert.strictEqual(result, "insightValue");
+                assert((client.pathTemplates.projectLocationInsightTypeInsightPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationRecommender', async () => {
+            const fakePath = "/rendered/path/projectLocationRecommender";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                recommender: "recommenderValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationRecommenderPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationRecommenderPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationRecommenderPath', () => {
+                const result = client.projectLocationRecommenderPath("projectValue", "locationValue", "recommenderValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationRecommenderPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationRecommenderName', () => {
+                const result = client.matchProjectFromProjectLocationRecommenderName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationRecommenderPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationRecommenderName', () => {
+                const result = client.matchLocationFromProjectLocationRecommenderName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationRecommenderPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRecommenderFromProjectLocationRecommenderName', () => {
+                const result = client.matchRecommenderFromProjectLocationRecommenderName(fakePath);
+                assert.strictEqual(result, "recommenderValue");
+                assert((client.pathTemplates.projectLocationRecommenderPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationRecommenderConfig', async () => {
+            const fakePath = "/rendered/path/projectLocationRecommenderConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                recommender: "recommenderValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationRecommenderConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationRecommenderConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationRecommenderConfigPath', () => {
+                const result = client.projectLocationRecommenderConfigPath("projectValue", "locationValue", "recommenderValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationRecommenderConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationRecommenderConfigName', () => {
+                const result = client.matchProjectFromProjectLocationRecommenderConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationRecommenderConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationRecommenderConfigName', () => {
+                const result = client.matchLocationFromProjectLocationRecommenderConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationRecommenderConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRecommenderFromProjectLocationRecommenderConfigName', () => {
+                const result = client.matchRecommenderFromProjectLocationRecommenderConfigName(fakePath);
+                assert.strictEqual(result, "recommenderValue");
+                assert((client.pathTemplates.projectLocationRecommenderConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationRecommenderRecommendation', async () => {
+            const fakePath = "/rendered/path/projectLocationRecommenderRecommendation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                recommender: "recommenderValue",
+                recommendation: "recommendationValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationRecommenderRecommendationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationRecommenderRecommendationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationRecommenderRecommendationPath', () => {
+                const result = client.projectLocationRecommenderRecommendationPath("projectValue", "locationValue", "recommenderValue", "recommendationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationRecommenderRecommendationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationRecommenderRecommendationName', () => {
+                const result = client.matchProjectFromProjectLocationRecommenderRecommendationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationRecommenderRecommendationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationRecommenderRecommendationName', () => {
+                const result = client.matchLocationFromProjectLocationRecommenderRecommendationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationRecommenderRecommendationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRecommenderFromProjectLocationRecommenderRecommendationName', () => {
+                const result = client.matchRecommenderFromProjectLocationRecommenderRecommendationName(fakePath);
+                assert.strictEqual(result, "recommenderValue");
+                assert((client.pathTemplates.projectLocationRecommenderRecommendationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRecommendationFromProjectLocationRecommenderRecommendationName', () => {
+                const result = client.matchRecommendationFromProjectLocationRecommenderRecommendationName(fakePath);
+                assert.strictEqual(result, "recommendationValue");
+                assert((client.pathTemplates.projectLocationRecommenderRecommendationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('recommender', async () => {
+            const fakePath = "/rendered/path/recommender";
+            const expectedParameters = {
+                recommender: "recommenderValue",
+            };
+            const client = new recommenderModule.v1beta1.RecommenderClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.recommenderPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.recommenderPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('recommenderPath', () => {
+                const result = client.recommenderPath("recommenderValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.recommenderPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchRecommenderFromRecommenderName', () => {
+                const result = client.matchRecommenderFromRecommenderName(fakePath);
+                assert.strictEqual(result, "recommenderValue");
+                assert((client.pathTemplates.recommenderPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-  });
-
-  describe('Path templates', () => {
-    describe('billingAccountLocationInsightType', async () => {
-      const fakePath = '/rendered/path/billingAccountLocationInsightType';
-      const expectedParameters = {
-        billing_account: 'billingAccountValue',
-        location: 'locationValue',
-        insight_type: 'insightTypeValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.billingAccountLocationInsightTypePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.billingAccountLocationInsightTypePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('billingAccountLocationInsightTypePath', () => {
-        const result = client.billingAccountLocationInsightTypePath(
-          'billingAccountValue',
-          'locationValue',
-          'insightTypeValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.billingAccountLocationInsightTypePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchBillingAccountFromBillingAccountLocationInsightTypeName', () => {
-        const result =
-          client.matchBillingAccountFromBillingAccountLocationInsightTypeName(
-            fakePath
-          );
-        assert.strictEqual(result, 'billingAccountValue');
-        assert(
-          (
-            client.pathTemplates.billingAccountLocationInsightTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromBillingAccountLocationInsightTypeName', () => {
-        const result =
-          client.matchLocationFromBillingAccountLocationInsightTypeName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.billingAccountLocationInsightTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInsightTypeFromBillingAccountLocationInsightTypeName', () => {
-        const result =
-          client.matchInsightTypeFromBillingAccountLocationInsightTypeName(
-            fakePath
-          );
-        assert.strictEqual(result, 'insightTypeValue');
-        assert(
-          (
-            client.pathTemplates.billingAccountLocationInsightTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('billingAccountLocationInsightTypeInsight', async () => {
-      const fakePath =
-        '/rendered/path/billingAccountLocationInsightTypeInsight';
-      const expectedParameters = {
-        billing_account: 'billingAccountValue',
-        location: 'locationValue',
-        insight_type: 'insightTypeValue',
-        insight: 'insightValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.billingAccountLocationInsightTypeInsightPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.billingAccountLocationInsightTypeInsightPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('billingAccountLocationInsightTypeInsightPath', () => {
-        const result = client.billingAccountLocationInsightTypeInsightPath(
-          'billingAccountValue',
-          'locationValue',
-          'insightTypeValue',
-          'insightValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .billingAccountLocationInsightTypeInsightPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchBillingAccountFromBillingAccountLocationInsightTypeInsightName', () => {
-        const result =
-          client.matchBillingAccountFromBillingAccountLocationInsightTypeInsightName(
-            fakePath
-          );
-        assert.strictEqual(result, 'billingAccountValue');
-        assert(
-          (
-            client.pathTemplates
-              .billingAccountLocationInsightTypeInsightPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromBillingAccountLocationInsightTypeInsightName', () => {
-        const result =
-          client.matchLocationFromBillingAccountLocationInsightTypeInsightName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .billingAccountLocationInsightTypeInsightPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInsightTypeFromBillingAccountLocationInsightTypeInsightName', () => {
-        const result =
-          client.matchInsightTypeFromBillingAccountLocationInsightTypeInsightName(
-            fakePath
-          );
-        assert.strictEqual(result, 'insightTypeValue');
-        assert(
-          (
-            client.pathTemplates
-              .billingAccountLocationInsightTypeInsightPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInsightFromBillingAccountLocationInsightTypeInsightName', () => {
-        const result =
-          client.matchInsightFromBillingAccountLocationInsightTypeInsightName(
-            fakePath
-          );
-        assert.strictEqual(result, 'insightValue');
-        assert(
-          (
-            client.pathTemplates
-              .billingAccountLocationInsightTypeInsightPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('billingAccountLocationRecommender', async () => {
-      const fakePath = '/rendered/path/billingAccountLocationRecommender';
-      const expectedParameters = {
-        billing_account: 'billingAccountValue',
-        location: 'locationValue',
-        recommender: 'recommenderValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.billingAccountLocationRecommenderPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.billingAccountLocationRecommenderPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('billingAccountLocationRecommenderPath', () => {
-        const result = client.billingAccountLocationRecommenderPath(
-          'billingAccountValue',
-          'locationValue',
-          'recommenderValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.billingAccountLocationRecommenderPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchBillingAccountFromBillingAccountLocationRecommenderName', () => {
-        const result =
-          client.matchBillingAccountFromBillingAccountLocationRecommenderName(
-            fakePath
-          );
-        assert.strictEqual(result, 'billingAccountValue');
-        assert(
-          (
-            client.pathTemplates.billingAccountLocationRecommenderPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromBillingAccountLocationRecommenderName', () => {
-        const result =
-          client.matchLocationFromBillingAccountLocationRecommenderName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.billingAccountLocationRecommenderPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRecommenderFromBillingAccountLocationRecommenderName', () => {
-        const result =
-          client.matchRecommenderFromBillingAccountLocationRecommenderName(
-            fakePath
-          );
-        assert.strictEqual(result, 'recommenderValue');
-        assert(
-          (
-            client.pathTemplates.billingAccountLocationRecommenderPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('billingAccountLocationRecommenderRecommendation', async () => {
-      const fakePath =
-        '/rendered/path/billingAccountLocationRecommenderRecommendation';
-      const expectedParameters = {
-        billing_account: 'billingAccountValue',
-        location: 'locationValue',
-        recommender: 'recommenderValue',
-        recommendation: 'recommendationValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.billingAccountLocationRecommenderRecommendationPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.billingAccountLocationRecommenderRecommendationPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('billingAccountLocationRecommenderRecommendationPath', () => {
-        const result =
-          client.billingAccountLocationRecommenderRecommendationPath(
-            'billingAccountValue',
-            'locationValue',
-            'recommenderValue',
-            'recommendationValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .billingAccountLocationRecommenderRecommendationPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchBillingAccountFromBillingAccountLocationRecommenderRecommendationName', () => {
-        const result =
-          client.matchBillingAccountFromBillingAccountLocationRecommenderRecommendationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'billingAccountValue');
-        assert(
-          (
-            client.pathTemplates
-              .billingAccountLocationRecommenderRecommendationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromBillingAccountLocationRecommenderRecommendationName', () => {
-        const result =
-          client.matchLocationFromBillingAccountLocationRecommenderRecommendationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .billingAccountLocationRecommenderRecommendationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRecommenderFromBillingAccountLocationRecommenderRecommendationName', () => {
-        const result =
-          client.matchRecommenderFromBillingAccountLocationRecommenderRecommendationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'recommenderValue');
-        assert(
-          (
-            client.pathTemplates
-              .billingAccountLocationRecommenderRecommendationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRecommendationFromBillingAccountLocationRecommenderRecommendationName', () => {
-        const result =
-          client.matchRecommendationFromBillingAccountLocationRecommenderRecommendationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'recommendationValue');
-        assert(
-          (
-            client.pathTemplates
-              .billingAccountLocationRecommenderRecommendationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderLocationInsightType', async () => {
-      const fakePath = '/rendered/path/folderLocationInsightType';
-      const expectedParameters = {
-        folder: 'folderValue',
-        location: 'locationValue',
-        insight_type: 'insightTypeValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderLocationInsightTypePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderLocationInsightTypePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('folderLocationInsightTypePath', () => {
-        const result = client.folderLocationInsightTypePath(
-          'folderValue',
-          'locationValue',
-          'insightTypeValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderLocationInsightTypePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderLocationInsightTypeName', () => {
-        const result =
-          client.matchFolderFromFolderLocationInsightTypeName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationInsightTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromFolderLocationInsightTypeName', () => {
-        const result =
-          client.matchLocationFromFolderLocationInsightTypeName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationInsightTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInsightTypeFromFolderLocationInsightTypeName', () => {
-        const result =
-          client.matchInsightTypeFromFolderLocationInsightTypeName(fakePath);
-        assert.strictEqual(result, 'insightTypeValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationInsightTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderLocationInsightTypeInsight', async () => {
-      const fakePath = '/rendered/path/folderLocationInsightTypeInsight';
-      const expectedParameters = {
-        folder: 'folderValue',
-        location: 'locationValue',
-        insight_type: 'insightTypeValue',
-        insight: 'insightValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderLocationInsightTypeInsightPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.folderLocationInsightTypeInsightPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('folderLocationInsightTypeInsightPath', () => {
-        const result = client.folderLocationInsightTypeInsightPath(
-          'folderValue',
-          'locationValue',
-          'insightTypeValue',
-          'insightValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderLocationInsightTypeInsightPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderLocationInsightTypeInsightName', () => {
-        const result =
-          client.matchFolderFromFolderLocationInsightTypeInsightName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationInsightTypeInsightPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromFolderLocationInsightTypeInsightName', () => {
-        const result =
-          client.matchLocationFromFolderLocationInsightTypeInsightName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationInsightTypeInsightPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInsightTypeFromFolderLocationInsightTypeInsightName', () => {
-        const result =
-          client.matchInsightTypeFromFolderLocationInsightTypeInsightName(
-            fakePath
-          );
-        assert.strictEqual(result, 'insightTypeValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationInsightTypeInsightPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInsightFromFolderLocationInsightTypeInsightName', () => {
-        const result =
-          client.matchInsightFromFolderLocationInsightTypeInsightName(fakePath);
-        assert.strictEqual(result, 'insightValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationInsightTypeInsightPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderLocationRecommender', async () => {
-      const fakePath = '/rendered/path/folderLocationRecommender';
-      const expectedParameters = {
-        folder: 'folderValue',
-        location: 'locationValue',
-        recommender: 'recommenderValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderLocationRecommenderPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderLocationRecommenderPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('folderLocationRecommenderPath', () => {
-        const result = client.folderLocationRecommenderPath(
-          'folderValue',
-          'locationValue',
-          'recommenderValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderLocationRecommenderPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderLocationRecommenderName', () => {
-        const result =
-          client.matchFolderFromFolderLocationRecommenderName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationRecommenderPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromFolderLocationRecommenderName', () => {
-        const result =
-          client.matchLocationFromFolderLocationRecommenderName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationRecommenderPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRecommenderFromFolderLocationRecommenderName', () => {
-        const result =
-          client.matchRecommenderFromFolderLocationRecommenderName(fakePath);
-        assert.strictEqual(result, 'recommenderValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationRecommenderPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderLocationRecommenderRecommendation', async () => {
-      const fakePath = '/rendered/path/folderLocationRecommenderRecommendation';
-      const expectedParameters = {
-        folder: 'folderValue',
-        location: 'locationValue',
-        recommender: 'recommenderValue',
-        recommendation: 'recommendationValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderLocationRecommenderRecommendationPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.folderLocationRecommenderRecommendationPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('folderLocationRecommenderRecommendationPath', () => {
-        const result = client.folderLocationRecommenderRecommendationPath(
-          'folderValue',
-          'locationValue',
-          'recommenderValue',
-          'recommendationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .folderLocationRecommenderRecommendationPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderLocationRecommenderRecommendationName', () => {
-        const result =
-          client.matchFolderFromFolderLocationRecommenderRecommendationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates
-              .folderLocationRecommenderRecommendationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromFolderLocationRecommenderRecommendationName', () => {
-        const result =
-          client.matchLocationFromFolderLocationRecommenderRecommendationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .folderLocationRecommenderRecommendationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRecommenderFromFolderLocationRecommenderRecommendationName', () => {
-        const result =
-          client.matchRecommenderFromFolderLocationRecommenderRecommendationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'recommenderValue');
-        assert(
-          (
-            client.pathTemplates
-              .folderLocationRecommenderRecommendationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRecommendationFromFolderLocationRecommenderRecommendationName', () => {
-        const result =
-          client.matchRecommendationFromFolderLocationRecommenderRecommendationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'recommendationValue');
-        assert(
-          (
-            client.pathTemplates
-              .folderLocationRecommenderRecommendationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('insightType', async () => {
-      const fakePath = '/rendered/path/insightType';
-      const expectedParameters = {
-        insight_type: 'insightTypeValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.insightTypePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.insightTypePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('insightTypePath', () => {
-        const result = client.insightTypePath('insightTypeValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.insightTypePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchInsightTypeFromInsightTypeName', () => {
-        const result = client.matchInsightTypeFromInsightTypeName(fakePath);
-        assert.strictEqual(result, 'insightTypeValue');
-        assert(
-          (client.pathTemplates.insightTypePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationLocationInsightType', async () => {
-      const fakePath = '/rendered/path/organizationLocationInsightType';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        insight_type: 'insightTypeValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationLocationInsightTypePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationLocationInsightTypePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationLocationInsightTypePath', () => {
-        const result = client.organizationLocationInsightTypePath(
-          'organizationValue',
-          'locationValue',
-          'insightTypeValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationLocationInsightTypePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationLocationInsightTypeName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationLocationInsightTypeName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationInsightTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrganizationLocationInsightTypeName', () => {
-        const result =
-          client.matchLocationFromOrganizationLocationInsightTypeName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationInsightTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInsightTypeFromOrganizationLocationInsightTypeName', () => {
-        const result =
-          client.matchInsightTypeFromOrganizationLocationInsightTypeName(
-            fakePath
-          );
-        assert.strictEqual(result, 'insightTypeValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationInsightTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationLocationInsightTypeConfig', async () => {
-      const fakePath = '/rendered/path/organizationLocationInsightTypeConfig';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        insight_type: 'insightTypeValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationLocationInsightTypeConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationLocationInsightTypeConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationLocationInsightTypeConfigPath', () => {
-        const result = client.organizationLocationInsightTypeConfigPath(
-          'organizationValue',
-          'locationValue',
-          'insightTypeValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationInsightTypeConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationLocationInsightTypeConfigName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationLocationInsightTypeConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationInsightTypeConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrganizationLocationInsightTypeConfigName', () => {
-        const result =
-          client.matchLocationFromOrganizationLocationInsightTypeConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationInsightTypeConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInsightTypeFromOrganizationLocationInsightTypeConfigName', () => {
-        const result =
-          client.matchInsightTypeFromOrganizationLocationInsightTypeConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'insightTypeValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationInsightTypeConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationLocationInsightTypeInsight', async () => {
-      const fakePath = '/rendered/path/organizationLocationInsightTypeInsight';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        insight_type: 'insightTypeValue',
-        insight: 'insightValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationLocationInsightTypeInsightPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationLocationInsightTypeInsightPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationLocationInsightTypeInsightPath', () => {
-        const result = client.organizationLocationInsightTypeInsightPath(
-          'organizationValue',
-          'locationValue',
-          'insightTypeValue',
-          'insightValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationInsightTypeInsightPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationLocationInsightTypeInsightName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationLocationInsightTypeInsightName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationInsightTypeInsightPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrganizationLocationInsightTypeInsightName', () => {
-        const result =
-          client.matchLocationFromOrganizationLocationInsightTypeInsightName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationInsightTypeInsightPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInsightTypeFromOrganizationLocationInsightTypeInsightName', () => {
-        const result =
-          client.matchInsightTypeFromOrganizationLocationInsightTypeInsightName(
-            fakePath
-          );
-        assert.strictEqual(result, 'insightTypeValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationInsightTypeInsightPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInsightFromOrganizationLocationInsightTypeInsightName', () => {
-        const result =
-          client.matchInsightFromOrganizationLocationInsightTypeInsightName(
-            fakePath
-          );
-        assert.strictEqual(result, 'insightValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationInsightTypeInsightPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationLocationRecommender', async () => {
-      const fakePath = '/rendered/path/organizationLocationRecommender';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        recommender: 'recommenderValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationLocationRecommenderPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationLocationRecommenderPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationLocationRecommenderPath', () => {
-        const result = client.organizationLocationRecommenderPath(
-          'organizationValue',
-          'locationValue',
-          'recommenderValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationLocationRecommenderPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationLocationRecommenderName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationLocationRecommenderName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationRecommenderPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrganizationLocationRecommenderName', () => {
-        const result =
-          client.matchLocationFromOrganizationLocationRecommenderName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationRecommenderPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRecommenderFromOrganizationLocationRecommenderName', () => {
-        const result =
-          client.matchRecommenderFromOrganizationLocationRecommenderName(
-            fakePath
-          );
-        assert.strictEqual(result, 'recommenderValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationRecommenderPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationLocationRecommenderConfig', async () => {
-      const fakePath = '/rendered/path/organizationLocationRecommenderConfig';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        recommender: 'recommenderValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationLocationRecommenderConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationLocationRecommenderConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationLocationRecommenderConfigPath', () => {
-        const result = client.organizationLocationRecommenderConfigPath(
-          'organizationValue',
-          'locationValue',
-          'recommenderValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationRecommenderConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationLocationRecommenderConfigName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationLocationRecommenderConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationRecommenderConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrganizationLocationRecommenderConfigName', () => {
-        const result =
-          client.matchLocationFromOrganizationLocationRecommenderConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationRecommenderConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRecommenderFromOrganizationLocationRecommenderConfigName', () => {
-        const result =
-          client.matchRecommenderFromOrganizationLocationRecommenderConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'recommenderValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationRecommenderConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationLocationRecommenderRecommendation', async () => {
-      const fakePath =
-        '/rendered/path/organizationLocationRecommenderRecommendation';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        recommender: 'recommenderValue',
-        recommendation: 'recommendationValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationLocationRecommenderRecommendationPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationLocationRecommenderRecommendationPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationLocationRecommenderRecommendationPath', () => {
-        const result = client.organizationLocationRecommenderRecommendationPath(
-          'organizationValue',
-          'locationValue',
-          'recommenderValue',
-          'recommendationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationRecommenderRecommendationPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationLocationRecommenderRecommendationName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationLocationRecommenderRecommendationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationRecommenderRecommendationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrganizationLocationRecommenderRecommendationName', () => {
-        const result =
-          client.matchLocationFromOrganizationLocationRecommenderRecommendationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationRecommenderRecommendationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRecommenderFromOrganizationLocationRecommenderRecommendationName', () => {
-        const result =
-          client.matchRecommenderFromOrganizationLocationRecommenderRecommendationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'recommenderValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationRecommenderRecommendationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRecommendationFromOrganizationLocationRecommenderRecommendationName', () => {
-        const result =
-          client.matchRecommendationFromOrganizationLocationRecommenderRecommendationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'recommendationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationRecommenderRecommendationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationInsightType', async () => {
-      const fakePath = '/rendered/path/projectLocationInsightType';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        insight_type: 'insightTypeValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationInsightTypePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationInsightTypePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectLocationInsightTypePath', () => {
-        const result = client.projectLocationInsightTypePath(
-          'projectValue',
-          'locationValue',
-          'insightTypeValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationInsightTypePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationInsightTypeName', () => {
-        const result =
-          client.matchProjectFromProjectLocationInsightTypeName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationInsightTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationInsightTypeName', () => {
-        const result =
-          client.matchLocationFromProjectLocationInsightTypeName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationInsightTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInsightTypeFromProjectLocationInsightTypeName', () => {
-        const result =
-          client.matchInsightTypeFromProjectLocationInsightTypeName(fakePath);
-        assert.strictEqual(result, 'insightTypeValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationInsightTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationInsightTypeConfig', async () => {
-      const fakePath = '/rendered/path/projectLocationInsightTypeConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        insight_type: 'insightTypeValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationInsightTypeConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationInsightTypeConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationInsightTypeConfigPath', () => {
-        const result = client.projectLocationInsightTypeConfigPath(
-          'projectValue',
-          'locationValue',
-          'insightTypeValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationInsightTypeConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationInsightTypeConfigName', () => {
-        const result =
-          client.matchProjectFromProjectLocationInsightTypeConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationInsightTypeConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationInsightTypeConfigName', () => {
-        const result =
-          client.matchLocationFromProjectLocationInsightTypeConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationInsightTypeConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInsightTypeFromProjectLocationInsightTypeConfigName', () => {
-        const result =
-          client.matchInsightTypeFromProjectLocationInsightTypeConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'insightTypeValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationInsightTypeConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationInsightTypeInsight', async () => {
-      const fakePath = '/rendered/path/projectLocationInsightTypeInsight';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        insight_type: 'insightTypeValue',
-        insight: 'insightValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationInsightTypeInsightPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationInsightTypeInsightPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationInsightTypeInsightPath', () => {
-        const result = client.projectLocationInsightTypeInsightPath(
-          'projectValue',
-          'locationValue',
-          'insightTypeValue',
-          'insightValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationInsightTypeInsightPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationInsightTypeInsightName', () => {
-        const result =
-          client.matchProjectFromProjectLocationInsightTypeInsightName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationInsightTypeInsightPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationInsightTypeInsightName', () => {
-        const result =
-          client.matchLocationFromProjectLocationInsightTypeInsightName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationInsightTypeInsightPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInsightTypeFromProjectLocationInsightTypeInsightName', () => {
-        const result =
-          client.matchInsightTypeFromProjectLocationInsightTypeInsightName(
-            fakePath
-          );
-        assert.strictEqual(result, 'insightTypeValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationInsightTypeInsightPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInsightFromProjectLocationInsightTypeInsightName', () => {
-        const result =
-          client.matchInsightFromProjectLocationInsightTypeInsightName(
-            fakePath
-          );
-        assert.strictEqual(result, 'insightValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationInsightTypeInsightPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationRecommender', async () => {
-      const fakePath = '/rendered/path/projectLocationRecommender';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        recommender: 'recommenderValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationRecommenderPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationRecommenderPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectLocationRecommenderPath', () => {
-        const result = client.projectLocationRecommenderPath(
-          'projectValue',
-          'locationValue',
-          'recommenderValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationRecommenderPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationRecommenderName', () => {
-        const result =
-          client.matchProjectFromProjectLocationRecommenderName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationRecommenderPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationRecommenderName', () => {
-        const result =
-          client.matchLocationFromProjectLocationRecommenderName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationRecommenderPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRecommenderFromProjectLocationRecommenderName', () => {
-        const result =
-          client.matchRecommenderFromProjectLocationRecommenderName(fakePath);
-        assert.strictEqual(result, 'recommenderValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationRecommenderPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationRecommenderConfig', async () => {
-      const fakePath = '/rendered/path/projectLocationRecommenderConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        recommender: 'recommenderValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationRecommenderConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationRecommenderConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationRecommenderConfigPath', () => {
-        const result = client.projectLocationRecommenderConfigPath(
-          'projectValue',
-          'locationValue',
-          'recommenderValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationRecommenderConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationRecommenderConfigName', () => {
-        const result =
-          client.matchProjectFromProjectLocationRecommenderConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationRecommenderConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationRecommenderConfigName', () => {
-        const result =
-          client.matchLocationFromProjectLocationRecommenderConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationRecommenderConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRecommenderFromProjectLocationRecommenderConfigName', () => {
-        const result =
-          client.matchRecommenderFromProjectLocationRecommenderConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'recommenderValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationRecommenderConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationRecommenderRecommendation', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationRecommenderRecommendation';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        recommender: 'recommenderValue',
-        recommendation: 'recommendationValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationRecommenderRecommendationPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationRecommenderRecommendationPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationRecommenderRecommendationPath', () => {
-        const result = client.projectLocationRecommenderRecommendationPath(
-          'projectValue',
-          'locationValue',
-          'recommenderValue',
-          'recommendationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationRecommenderRecommendationPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationRecommenderRecommendationName', () => {
-        const result =
-          client.matchProjectFromProjectLocationRecommenderRecommendationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationRecommenderRecommendationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationRecommenderRecommendationName', () => {
-        const result =
-          client.matchLocationFromProjectLocationRecommenderRecommendationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationRecommenderRecommendationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRecommenderFromProjectLocationRecommenderRecommendationName', () => {
-        const result =
-          client.matchRecommenderFromProjectLocationRecommenderRecommendationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'recommenderValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationRecommenderRecommendationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRecommendationFromProjectLocationRecommenderRecommendationName', () => {
-        const result =
-          client.matchRecommendationFromProjectLocationRecommenderRecommendationName(
-            fakePath
-          );
-        assert.strictEqual(result, 'recommendationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationRecommenderRecommendationPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('recommender', async () => {
-      const fakePath = '/rendered/path/recommender';
-      const expectedParameters = {
-        recommender: 'recommenderValue',
-      };
-      const client = new recommenderModule.v1beta1.RecommenderClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.recommenderPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.recommenderPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('recommenderPath', () => {
-        const result = client.recommenderPath('recommenderValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.recommenderPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchRecommenderFromRecommenderName', () => {
-        const result = client.matchRecommenderFromRecommenderName(fakePath);
-        assert.strictEqual(result, 'recommenderValue');
-        assert(
-          (client.pathTemplates.recommenderPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

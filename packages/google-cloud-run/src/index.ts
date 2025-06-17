@@ -31,23 +31,7 @@ type ServicesClient = v2.ServicesClient;
 const TasksClient = v2.TasksClient;
 type TasksClient = v2.TasksClient;
 
-export {
-  v2,
-  BuildsClient,
-  ExecutionsClient,
-  JobsClient,
-  RevisionsClient,
-  ServicesClient,
-  TasksClient,
-};
-export default {
-  v2,
-  BuildsClient,
-  ExecutionsClient,
-  JobsClient,
-  RevisionsClient,
-  ServicesClient,
-  TasksClient,
-};
+export {v2, BuildsClient, ExecutionsClient, JobsClient, RevisionsClient, ServicesClient, TasksClient};
+export default {v2, BuildsClient, ExecutionsClient, JobsClient, RevisionsClient, ServicesClient, TasksClient};
 import * as protos from '../protos/protos';
 export {protos};

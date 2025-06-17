@@ -26,19 +26,7 @@ type CaseServiceClient = v2.CaseServiceClient;
 const CommentServiceClient = v2.CommentServiceClient;
 type CommentServiceClient = v2.CommentServiceClient;
 
-export {
-  v2,
-  v2beta,
-  CaseAttachmentServiceClient,
-  CaseServiceClient,
-  CommentServiceClient,
-};
-export default {
-  v2,
-  v2beta,
-  CaseAttachmentServiceClient,
-  CaseServiceClient,
-  CommentServiceClient,
-};
+export {v2, v2beta, CaseAttachmentServiceClient, CaseServiceClient, CommentServiceClient};
+export default {v2, v2beta, CaseAttachmentServiceClient, CaseServiceClient, CommentServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

@@ -25,4612 +25,3432 @@ import * as cloudredisclusterModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1beta1.CloudRedisClusterClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'redis.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          cloudredisclusterModule.v1beta1.CloudRedisClusterClient.servicePath;
-        assert.strictEqual(servicePath, 'redis.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          cloudredisclusterModule.v1beta1.CloudRedisClusterClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'redis.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          universeDomain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'redis.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          universe_domain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'redis.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new cloudredisclusterModule.v1beta1.CloudRedisClusterClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'redis.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'redis.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-              universeDomain: 'configured.example.com',
+        it('has universeDomain', () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = cloudredisclusterModule.v1beta1.CloudRedisClusterClient.servicePath;
+                assert.strictEqual(servicePath, 'redis.googleapis.com');
+                assert(stub.called);
+                stub.restore();
             });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'redis.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
-        });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = cloudredisclusterModule.v1beta1.CloudRedisClusterClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          fallback: true,
-        });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.cloudRedisClusterStub, undefined);
-      await client.initialize();
-      assert(client.cloudRedisClusterStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.cloudRedisClusterStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.cloudRedisClusterStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getCluster', () => {
-    it('invokes getCluster without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.GetClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.GetClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.Cluster()
-      );
-      client.innerApiCalls.getCluster = stubSimpleCall(expectedResponse);
-      const [response] = await client.getCluster(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCluster without error using callback', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.GetClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.GetClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.Cluster()
-      );
-      client.innerApiCalls.getCluster =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.redis.cluster.v1beta1.ICluster | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCluster with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.GetClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.GetClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getCluster = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCluster with closed client', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.GetClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.GetClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getCluster(request), expectedError);
-    });
-  });
-
-  describe('getClusterCertificateAuthority', () => {
-    it('invokes getClusterCertificateAuthority without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.CertificateAuthority()
-      );
-      client.innerApiCalls.getClusterCertificateAuthority =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getClusterCertificateAuthority(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getClusterCertificateAuthority as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getClusterCertificateAuthority as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getClusterCertificateAuthority without error using callback', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.CertificateAuthority()
-      );
-      client.innerApiCalls.getClusterCertificateAuthority =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getClusterCertificateAuthority(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.redis.cluster.v1beta1.ICertificateAuthority | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getClusterCertificateAuthority as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getClusterCertificateAuthority as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getClusterCertificateAuthority with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getClusterCertificateAuthority = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getClusterCertificateAuthority(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getClusterCertificateAuthority as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getClusterCertificateAuthority as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getClusterCertificateAuthority with closed client', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.getClusterCertificateAuthority(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getBackupCollection', () => {
-    it('invokes getBackupCollection without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()
-      );
-      client.innerApiCalls.getBackupCollection =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getBackupCollection(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBackupCollection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackupCollection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackupCollection without error using callback', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()
-      );
-      client.innerApiCalls.getBackupCollection =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getBackupCollection(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.redis.cluster.v1beta1.IBackupCollection | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBackupCollection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackupCollection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackupCollection with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getBackupCollection = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getBackupCollection(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getBackupCollection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackupCollection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackupCollection with closed client', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getBackupCollection(request), expectedError);
-    });
-  });
-
-  describe('getBackup', () => {
-    it('invokes getBackup without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.GetBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.GetBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.Backup()
-      );
-      client.innerApiCalls.getBackup = stubSimpleCall(expectedResponse);
-      const [response] = await client.getBackup(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackup without error using callback', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.GetBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.GetBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.Backup()
-      );
-      client.innerApiCalls.getBackup =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getBackup(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.redis.cluster.v1beta1.IBackup | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackup with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.GetBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.GetBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getBackup = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getBackup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackup with closed client', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.GetBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.GetBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getBackup(request), expectedError);
-    });
-  });
-
-  describe('updateCluster', () => {
-    it('invokes updateCluster without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.UpdateClusterRequest()
-      );
-      request.cluster ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.UpdateClusterRequest',
-        ['cluster', 'name']
-      );
-      request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateCluster =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateCluster(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCluster without error using callback', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.UpdateClusterRequest()
-      );
-      request.cluster ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.UpdateClusterRequest',
-        ['cluster', 'name']
-      );
-      request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateCluster =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.redis.cluster.v1beta1.ICluster,
-              protos.google.protobuf.IAny
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.redis.cluster.v1beta1.ICluster,
-        protos.google.protobuf.IAny
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCluster with call error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.UpdateClusterRequest()
-      );
-      request.cluster ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.UpdateClusterRequest',
-        ['cluster', 'name']
-      );
-      request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateCluster = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCluster with LRO error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.UpdateClusterRequest()
-      );
-      request.cluster ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.UpdateClusterRequest',
-        ['cluster', 'name']
-      );
-      request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateCluster = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateCluster(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateClusterProgress without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateClusterProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateClusterProgress with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateClusterProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteCluster', () => {
-    it('invokes deleteCluster without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.DeleteClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.DeleteClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteCluster =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteCluster(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCluster without error using callback', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.DeleteClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.DeleteClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteCluster =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.protobuf.IAny
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.protobuf.IAny
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCluster with call error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.DeleteClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.DeleteClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteCluster = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCluster with LRO error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.DeleteClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.DeleteClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteCluster = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteCluster(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteClusterProgress without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteClusterProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteClusterProgress with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteClusterProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createCluster', () => {
-    it('invokes createCluster without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.CreateClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.CreateClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createCluster =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createCluster(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCluster without error using callback', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.CreateClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.CreateClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createCluster =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.redis.cluster.v1beta1.ICluster,
-              protos.google.protobuf.IAny
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.redis.cluster.v1beta1.ICluster,
-        protos.google.protobuf.IAny
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCluster with call error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.CreateClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.CreateClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createCluster = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCluster with LRO error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.CreateClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.CreateClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createCluster = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createCluster(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateClusterProgress without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateClusterProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateClusterProgress with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateClusterProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('rescheduleClusterMaintenance', () => {
-    it('invokes rescheduleClusterMaintenance without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.rescheduleClusterMaintenance =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.rescheduleClusterMaintenance(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.rescheduleClusterMaintenance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.rescheduleClusterMaintenance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes rescheduleClusterMaintenance without error using callback', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.rescheduleClusterMaintenance =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.rescheduleClusterMaintenance(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.redis.cluster.v1beta1.ICluster,
-              protos.google.protobuf.IAny
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.redis.cluster.v1beta1.ICluster,
-        protos.google.protobuf.IAny
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.rescheduleClusterMaintenance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.rescheduleClusterMaintenance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes rescheduleClusterMaintenance with call error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.rescheduleClusterMaintenance = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.rescheduleClusterMaintenance(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.rescheduleClusterMaintenance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.rescheduleClusterMaintenance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes rescheduleClusterMaintenance with LRO error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.rescheduleClusterMaintenance = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.rescheduleClusterMaintenance(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.rescheduleClusterMaintenance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.rescheduleClusterMaintenance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkRescheduleClusterMaintenanceProgress without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkRescheduleClusterMaintenanceProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkRescheduleClusterMaintenanceProgress with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkRescheduleClusterMaintenanceProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteBackup', () => {
-    it('invokes deleteBackup without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.DeleteBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.DeleteBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteBackup = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteBackup(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBackup without error using callback', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.DeleteBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.DeleteBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteBackup =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteBackup(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.protobuf.IAny
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.protobuf.IAny
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBackup with call error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.DeleteBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.DeleteBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteBackup = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteBackup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBackup with LRO error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.DeleteBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.DeleteBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteBackup = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteBackup(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteBackupProgress without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteBackupProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteBackupProgress with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeleteBackupProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('exportBackup', () => {
-    it('invokes exportBackup without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ExportBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ExportBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.exportBackup = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.exportBackup(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.exportBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportBackup without error using callback', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ExportBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ExportBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.exportBackup =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.exportBackup(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.redis.cluster.v1beta1.IBackup,
-              protos.google.protobuf.IAny
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.redis.cluster.v1beta1.IBackup,
-        protos.google.protobuf.IAny
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.exportBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportBackup with call error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ExportBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ExportBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.exportBackup = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.exportBackup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.exportBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportBackup with LRO error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ExportBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ExportBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.exportBackup = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.exportBackup(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.exportBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkExportBackupProgress without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkExportBackupProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkExportBackupProgress with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkExportBackupProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('backupCluster', () => {
-    it('invokes backupCluster without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.BackupClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.BackupClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.backupCluster =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.backupCluster(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.backupCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.backupCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes backupCluster without error using callback', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.BackupClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.BackupClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.backupCluster =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.backupCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.redis.cluster.v1beta1.ICluster,
-              protos.google.protobuf.IAny
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.redis.cluster.v1beta1.ICluster,
-        protos.google.protobuf.IAny
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.backupCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.backupCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes backupCluster with call error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.BackupClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.BackupClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.backupCluster = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.backupCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.backupCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.backupCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes backupCluster with LRO error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.BackupClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.BackupClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.backupCluster = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.backupCluster(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.backupCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.backupCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkBackupClusterProgress without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkBackupClusterProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkBackupClusterProgress with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkBackupClusterProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listClusters', () => {
-    it('invokes listClusters without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Cluster()
-        ),
-      ];
-      client.innerApiCalls.listClusters = stubSimpleCall(expectedResponse);
-      const [response] = await client.listClusters(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listClusters without error using callback', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Cluster()
-        ),
-      ];
-      client.innerApiCalls.listClusters =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listClusters(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.redis.cluster.v1beta1.ICluster[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listClusters with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listClusters = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listClusters(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listClustersStream without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Cluster()
-        ),
-      ];
-      client.descriptors.page.listClusters.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listClustersStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.redis.cluster.v1beta1.Cluster[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.redis.cluster.v1beta1.Cluster) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listClusters.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listClusters, request)
-      );
-      assert(
-        (client.descriptors.page.listClusters.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listClustersStream with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listClusters.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listClustersStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.redis.cluster.v1beta1.Cluster[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.redis.cluster.v1beta1.Cluster) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listClusters.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listClusters, request)
-      );
-      assert(
-        (client.descriptors.page.listClusters.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listClusters without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Cluster()
-        ),
-      ];
-      client.descriptors.page.listClusters.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.redis.cluster.v1beta1.ICluster[] =
-        [];
-      const iterable = client.listClustersAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listClusters.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listClusters.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listClusters with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listClusters.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listClustersAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.redis.cluster.v1beta1.ICluster[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = cloudredisclusterModule.v1beta1.CloudRedisClusterClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'redis.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listClusters.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listClusters.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'redis.example.com');
+        });
 
-  describe('listBackupCollections', () => {
-    it('invokes listBackupCollections without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'redis.example.com');
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()
-        ),
-      ];
-      client.innerApiCalls.listBackupCollections =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listBackupCollections(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBackupCollections as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackupCollections as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes listBackupCollections without error using callback', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()
-        ),
-      ];
-      client.innerApiCalls.listBackupCollections =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listBackupCollections(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.redis.cluster.v1beta1.IBackupCollection[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBackupCollections as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackupCollections as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'redis.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('invokes listBackupCollections with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listBackupCollections = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listBackupCollections(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listBackupCollections as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackupCollections as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBackupCollectionsStream without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()
-        ),
-      ];
-      client.descriptors.page.listBackupCollections.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listBackupCollectionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.redis.cluster.v1beta1.BackupCollection[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.redis.cluster.v1beta1.BackupCollection
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listBackupCollections
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBackupCollections, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listBackupCollections
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('invokes listBackupCollectionsStream with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBackupCollections.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listBackupCollectionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.redis.cluster.v1beta1.BackupCollection[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.redis.cluster.v1beta1.BackupCollection
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listBackupCollections
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBackupCollections, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listBackupCollections
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listBackupCollections without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()
-        ),
-      ];
-      client.descriptors.page.listBackupCollections.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.redis.cluster.v1beta1.IBackupCollection[] =
-        [];
-      const iterable = client.listBackupCollectionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listBackupCollections
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listBackupCollections
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listBackupCollections with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBackupCollections.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listBackupCollectionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.redis.cluster.v1beta1.IBackupCollection[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'redis.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listBackupCollections
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listBackupCollections
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-
-  describe('listBackups', () => {
-    it('invokes listBackups without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Backup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Backup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Backup()
-        ),
-      ];
-      client.innerApiCalls.listBackups = stubSimpleCall(expectedResponse);
-      const [response] = await client.listBackups(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBackups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+
+        it('has port', () => {
+            const port = cloudredisclusterModule.v1beta1.CloudRedisClusterClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.cloudRedisClusterStub, undefined);
+            await client.initialize();
+            assert(client.cloudRedisClusterStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.cloudRedisClusterStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.cloudRedisClusterStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listBackups without error using callback', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('getCluster', () => {
+        it('invokes getCluster without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.GetClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.GetClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.Cluster()
+            );
+            client.innerApiCalls.getCluster = stubSimpleCall(expectedResponse);
+            const [response] = await client.getCluster(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Backup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Backup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Backup()
-        ),
-      ];
-      client.innerApiCalls.listBackups =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listBackups(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.redis.cluster.v1beta1.IBackup[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+        it('invokes getCluster without error using callback', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.GetClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.GetClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.Cluster()
+            );
+            client.innerApiCalls.getCluster = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getCluster(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.redis.cluster.v1beta1.ICluster|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getCluster with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.GetClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.GetClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getCluster = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getCluster with closed client', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.GetClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.GetClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getCluster(request), expectedError);
+        });
+    });
+
+    describe('getClusterCertificateAuthority', () => {
+        it('invokes getClusterCertificateAuthority without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.CertificateAuthority()
+            );
+            client.innerApiCalls.getClusterCertificateAuthority = stubSimpleCall(expectedResponse);
+            const [response] = await client.getClusterCertificateAuthority(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getClusterCertificateAuthority as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getClusterCertificateAuthority as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getClusterCertificateAuthority without error using callback', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.CertificateAuthority()
+            );
+            client.innerApiCalls.getClusterCertificateAuthority = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getClusterCertificateAuthority(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.redis.cluster.v1beta1.ICertificateAuthority|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getClusterCertificateAuthority as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getClusterCertificateAuthority as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getClusterCertificateAuthority with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getClusterCertificateAuthority = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getClusterCertificateAuthority(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getClusterCertificateAuthority as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getClusterCertificateAuthority as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getClusterCertificateAuthority with closed client', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getClusterCertificateAuthority(request), expectedError);
+        });
+    });
+
+    describe('getBackupCollection', () => {
+        it('invokes getBackupCollection without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()
+            );
+            client.innerApiCalls.getBackupCollection = stubSimpleCall(expectedResponse);
+            const [response] = await client.getBackupCollection(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBackupCollection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackupCollection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackupCollection without error using callback', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()
+            );
+            client.innerApiCalls.getBackupCollection = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getBackupCollection(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.redis.cluster.v1beta1.IBackupCollection|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBackupCollection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackupCollection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackupCollection with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getBackupCollection = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getBackupCollection(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getBackupCollection as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackupCollection as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackupCollection with closed client', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.GetBackupCollectionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getBackupCollection(request), expectedError);
+        });
+    });
+
+    describe('getBackup', () => {
+        it('invokes getBackup without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.GetBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.GetBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.Backup()
+            );
+            client.innerApiCalls.getBackup = stubSimpleCall(expectedResponse);
+            const [response] = await client.getBackup(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackup without error using callback', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.GetBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.GetBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.Backup()
+            );
+            client.innerApiCalls.getBackup = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getBackup(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.redis.cluster.v1beta1.IBackup|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackup with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.GetBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.GetBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getBackup = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getBackup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackup with closed client', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.GetBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.GetBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getBackup(request), expectedError);
+        });
+    });
+
+    describe('updateCluster', () => {
+        it('invokes updateCluster without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.UpdateClusterRequest()
+            );
+            request.cluster ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.UpdateClusterRequest', ['cluster', 'name']);
+            request.cluster.name = defaultValue1;
+            const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateCluster = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateCluster(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCluster without error using callback', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.UpdateClusterRequest()
+            );
+            request.cluster ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.UpdateClusterRequest', ['cluster', 'name']);
+            request.cluster.name = defaultValue1;
+            const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateCluster = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateCluster(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.redis.cluster.v1beta1.ICluster, protos.google.protobuf.IAny>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.redis.cluster.v1beta1.ICluster, protos.google.protobuf.IAny>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCluster with call error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.UpdateClusterRequest()
+            );
+            request.cluster ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.UpdateClusterRequest', ['cluster', 'name']);
+            request.cluster.name = defaultValue1;
+            const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateCluster = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCluster with LRO error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.UpdateClusterRequest()
+            );
+            request.cluster ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.UpdateClusterRequest', ['cluster', 'name']);
+            request.cluster.name = defaultValue1;
+            const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateCluster = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateCluster(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateClusterProgress without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateClusterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateClusterProgress with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateClusterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteCluster', () => {
+        it('invokes deleteCluster without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.DeleteClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.DeleteClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteCluster = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteCluster(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCluster without error using callback', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.DeleteClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.DeleteClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteCluster = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteCluster(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IAny>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IAny>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCluster with call error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.DeleteClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.DeleteClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteCluster = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCluster with LRO error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.DeleteClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.DeleteClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteCluster = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteCluster(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteClusterProgress without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteClusterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteClusterProgress with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteClusterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createCluster', () => {
+        it('invokes createCluster without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.CreateClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.CreateClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createCluster = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createCluster(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCluster without error using callback', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.CreateClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.CreateClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createCluster = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createCluster(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.redis.cluster.v1beta1.ICluster, protos.google.protobuf.IAny>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.redis.cluster.v1beta1.ICluster, protos.google.protobuf.IAny>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCluster with call error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.CreateClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.CreateClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createCluster = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCluster with LRO error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.CreateClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.CreateClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createCluster = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createCluster(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateClusterProgress without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateClusterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateClusterProgress with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateClusterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('rescheduleClusterMaintenance', () => {
+        it('invokes rescheduleClusterMaintenance without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.rescheduleClusterMaintenance = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.rescheduleClusterMaintenance(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.rescheduleClusterMaintenance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rescheduleClusterMaintenance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rescheduleClusterMaintenance without error using callback', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.rescheduleClusterMaintenance = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.rescheduleClusterMaintenance(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.redis.cluster.v1beta1.ICluster, protos.google.protobuf.IAny>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.redis.cluster.v1beta1.ICluster, protos.google.protobuf.IAny>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.rescheduleClusterMaintenance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rescheduleClusterMaintenance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rescheduleClusterMaintenance with call error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.rescheduleClusterMaintenance = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.rescheduleClusterMaintenance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.rescheduleClusterMaintenance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rescheduleClusterMaintenance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes rescheduleClusterMaintenance with LRO error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.RescheduleClusterMaintenanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.rescheduleClusterMaintenance = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.rescheduleClusterMaintenance(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.rescheduleClusterMaintenance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.rescheduleClusterMaintenance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkRescheduleClusterMaintenanceProgress without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkRescheduleClusterMaintenanceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkRescheduleClusterMaintenanceProgress with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkRescheduleClusterMaintenanceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteBackup', () => {
+        it('invokes deleteBackup without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.DeleteBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.DeleteBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteBackup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteBackup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBackup without error using callback', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.DeleteBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.DeleteBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteBackup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteBackup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IAny>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IAny>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBackup with call error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.DeleteBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.DeleteBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteBackup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteBackup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBackup with LRO error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.DeleteBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.DeleteBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteBackup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteBackup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteBackupProgress without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteBackupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteBackupProgress with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteBackupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('exportBackup', () => {
+        it('invokes exportBackup without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ExportBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ExportBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportBackup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.exportBackup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportBackup without error using callback', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ExportBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ExportBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportBackup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.exportBackup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.redis.cluster.v1beta1.IBackup, protos.google.protobuf.IAny>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.redis.cluster.v1beta1.IBackup, protos.google.protobuf.IAny>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportBackup with call error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ExportBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ExportBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportBackup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.exportBackup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.exportBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportBackup with LRO error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ExportBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ExportBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportBackup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.exportBackup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.exportBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkExportBackupProgress without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkExportBackupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkExportBackupProgress with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkExportBackupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('backupCluster', () => {
+        it('invokes backupCluster without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.BackupClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.BackupClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.backupCluster = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.backupCluster(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.backupCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.backupCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes backupCluster without error using callback', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.BackupClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.BackupClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.backupCluster = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.backupCluster(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.redis.cluster.v1beta1.ICluster, protos.google.protobuf.IAny>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.redis.cluster.v1beta1.ICluster, protos.google.protobuf.IAny>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.backupCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.backupCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes backupCluster with call error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.BackupClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.BackupClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.backupCluster = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.backupCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.backupCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.backupCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes backupCluster with LRO error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.BackupClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.BackupClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.backupCluster = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.backupCluster(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.backupCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.backupCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkBackupClusterProgress without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkBackupClusterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkBackupClusterProgress with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkBackupClusterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listClusters', () => {
+        it('invokes listClusters without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Cluster()),
+            ];
+            client.innerApiCalls.listClusters = stubSimpleCall(expectedResponse);
+            const [response] = await client.listClusters(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listClusters without error using callback', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Cluster()),
+            ];
+            client.innerApiCalls.listClusters = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listClusters(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.redis.cluster.v1beta1.ICluster[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listClusters with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listClusters = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listClusters(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listClustersStream without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Cluster()),
+            ];
+            client.descriptors.page.listClusters.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listClustersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.redis.cluster.v1beta1.Cluster[] = [];
+                stream.on('data', (response: protos.google.cloud.redis.cluster.v1beta1.Cluster) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listClusters.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listClusters, request));
+            assert(
+                (client.descriptors.page.listClusters.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listClustersStream with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listClusters.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listClustersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.redis.cluster.v1beta1.Cluster[] = [];
+                stream.on('data', (response: protos.google.cloud.redis.cluster.v1beta1.Cluster) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listClusters.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listClusters, request));
+            assert(
+                (client.descriptors.page.listClusters.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listClusters without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Cluster()),
+            ];
+            client.descriptors.page.listClusters.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.redis.cluster.v1beta1.ICluster[] = [];
+            const iterable = client.listClustersAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBackups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listClusters with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listClusters.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listClustersAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.redis.cluster.v1beta1.ICluster[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('invokes listBackups with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('listBackupCollections', () => {
+        it('invokes listBackupCollections without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()),
+            ];
+            client.innerApiCalls.listBackupCollections = stubSimpleCall(expectedResponse);
+            const [response] = await client.listBackupCollections(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBackupCollections as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackupCollections as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listBackups = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listBackups(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listBackups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes listBackupsStream without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listBackupCollections without error using callback', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()),
+            ];
+            client.innerApiCalls.listBackupCollections = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listBackupCollections(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.redis.cluster.v1beta1.IBackupCollection[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBackupCollections as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackupCollections as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Backup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Backup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Backup()
-        ),
-      ];
-      client.descriptors.page.listBackups.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listBackupsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.redis.cluster.v1beta1.Backup[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.redis.cluster.v1beta1.Backup) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listBackups.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBackups, request)
-      );
-      assert(
-        (client.descriptors.page.listBackups.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listBackupsStream with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listBackupCollections with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listBackupCollections = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listBackupCollections(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listBackupCollections as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackupCollections as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBackups.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listBackupsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.redis.cluster.v1beta1.Backup[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.redis.cluster.v1beta1.Backup) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listBackups.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBackups, request)
-      );
-      assert(
-        (client.descriptors.page.listBackups.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listBackups without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listBackupCollectionsStream without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()),
+            ];
+            client.descriptors.page.listBackupCollections.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listBackupCollectionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.redis.cluster.v1beta1.BackupCollection[] = [];
+                stream.on('data', (response: protos.google.cloud.redis.cluster.v1beta1.BackupCollection) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listBackupCollections.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBackupCollections, request));
+            assert(
+                (client.descriptors.page.listBackupCollections.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Backup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Backup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.redis.cluster.v1beta1.Backup()
-        ),
-      ];
-      client.descriptors.page.listBackups.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.redis.cluster.v1beta1.IBackup[] = [];
-      const iterable = client.listBackupsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listBackups.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listBackups.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listBackups with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listBackupCollectionsStream with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBackupCollections.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listBackupCollectionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.redis.cluster.v1beta1.BackupCollection[] = [];
+                stream.on('data', (response: protos.google.cloud.redis.cluster.v1beta1.BackupCollection) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listBackupCollections.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBackupCollections, request));
+            assert(
+                (client.descriptors.page.listBackupCollections.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.redis.cluster.v1beta1.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.redis.cluster.v1beta1.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBackups.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listBackupsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.redis.cluster.v1beta1.IBackup[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listBackups.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listBackups.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getLocation without error using callback', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+        it('uses async iteration with listBackupCollections without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.BackupCollection()),
+            ];
+            client.descriptors.page.listBackupCollections.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.redis.cluster.v1beta1.IBackupCollection[] = [];
+            const iterable = client.listBackupCollectionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
-    });
-    it('invokes getLocation with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBackupCollections.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBackupCollections.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+        it('uses async iteration with listBackupCollections with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListBackupCollectionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBackupCollections.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listBackupCollectionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.redis.cluster.v1beta1.IBackupCollection[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBackupCollections.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBackupCollections.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
-    it('uses async iteration with listLocations with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+    describe('listBackups', () => {
+        it('invokes listBackups without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Backup()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Backup()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Backup()),
+            ];
+            client.innerApiCalls.listBackups = stubSimpleCall(expectedResponse);
+            const [response] = await client.listBackups(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBackups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+        it('invokes listBackups without error using callback', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Backup()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Backup()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Backup()),
+            ];
+            client.innerApiCalls.listBackups = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listBackups(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.redis.cluster.v1beta1.IBackup[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBackups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+        it('invokes listBackups with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listBackups = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listBackups(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listBackups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+        it('invokes listBackupsStream without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Backup()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Backup()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Backup()),
+            ];
+            client.descriptors.page.listBackups.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listBackupsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.redis.cluster.v1beta1.Backup[] = [];
+                stream.on('data', (response: protos.google.cloud.redis.cluster.v1beta1.Backup) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listBackups.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBackups, request));
+            assert(
+                (client.descriptors.page.listBackups.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listBackupsStream with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBackups.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listBackupsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.redis.cluster.v1beta1.Backup[] = [];
+                stream.on('data', (response: protos.google.cloud.redis.cluster.v1beta1.Backup) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listBackups.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBackups, request));
+            assert(
+                (client.descriptors.page.listBackups.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listBackups without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Backup()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Backup()),
+              generateSampleMessage(new protos.google.cloud.redis.cluster.v1beta1.Backup()),
+            ];
+            client.descriptors.page.listBackups.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.redis.cluster.v1beta1.IBackup[] = [];
+            const iterable = client.listBackupsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-    it('invokes getOperation with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBackups.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBackups.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+        it('uses async iteration with listBackups with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBackups.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listBackupsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.redis.cluster.v1beta1.IBackup[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBackups.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBackups.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
     });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+        it('invokes getLocation without error using callback', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
-    });
-    it('invokes cancelOperation with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
     });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+        it('invokes getOperation without error using callback', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
     });
-    it('uses async iteration with listOperations with error', async () => {
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+    describe('Path templates', () => {
+
+        describe('backup', async () => {
+            const fakePath = "/rendered/path/backup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                backup_collection: "backupCollectionValue",
+                backup: "backupValue",
+            };
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.backupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.backupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('backupPath', () => {
+                const result = client.backupPath("projectValue", "locationValue", "backupCollectionValue", "backupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.backupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromBackupName', () => {
+                const result = client.matchProjectFromBackupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.backupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromBackupName', () => {
+                const result = client.matchLocationFromBackupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.backupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBackupCollectionFromBackupName', () => {
+                const result = client.matchBackupCollectionFromBackupName(fakePath);
+                assert.strictEqual(result, "backupCollectionValue");
+                assert((client.pathTemplates.backupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBackupFromBackupName', () => {
+                const result = client.matchBackupFromBackupName(fakePath);
+                assert.strictEqual(result, "backupValue");
+                assert((client.pathTemplates.backupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
 
-  describe('Path templates', () => {
-    describe('backup', async () => {
-      const fakePath = '/rendered/path/backup';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        backup_collection: 'backupCollectionValue',
-        backup: 'backupValue',
-      };
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        describe('backupCollection', async () => {
+            const fakePath = "/rendered/path/backupCollection";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                backup_collection: "backupCollectionValue",
+            };
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.backupCollectionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.backupCollectionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('backupCollectionPath', () => {
+                const result = client.backupCollectionPath("projectValue", "locationValue", "backupCollectionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.backupCollectionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromBackupCollectionName', () => {
+                const result = client.matchProjectFromBackupCollectionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.backupCollectionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromBackupCollectionName', () => {
+                const result = client.matchLocationFromBackupCollectionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.backupCollectionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBackupCollectionFromBackupCollectionName', () => {
+                const result = client.matchBackupCollectionFromBackupCollectionName(fakePath);
+                assert.strictEqual(result, "backupCollectionValue");
+                assert((client.pathTemplates.backupCollectionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.backupPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.backupPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('backupPath', () => {
-        const result = client.backupPath(
-          'projectValue',
-          'locationValue',
-          'backupCollectionValue',
-          'backupValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.backupPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('certificateAuthority', async () => {
+            const fakePath = "/rendered/path/certificateAuthority";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                cluster: "clusterValue",
+            };
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.certificateAuthorityPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.certificateAuthorityPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromBackupName', () => {
-        const result = client.matchProjectFromBackupName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.backupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('certificateAuthorityPath', () => {
+                const result = client.certificateAuthorityPath("projectValue", "locationValue", "clusterValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.certificateAuthorityPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromBackupName', () => {
-        const result = client.matchLocationFromBackupName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.backupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromCertificateAuthorityName', () => {
+                const result = client.matchProjectFromCertificateAuthorityName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.certificateAuthorityPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchBackupCollectionFromBackupName', () => {
-        const result = client.matchBackupCollectionFromBackupName(fakePath);
-        assert.strictEqual(result, 'backupCollectionValue');
-        assert(
-          (client.pathTemplates.backupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromCertificateAuthorityName', () => {
+                const result = client.matchLocationFromCertificateAuthorityName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.certificateAuthorityPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchBackupFromBackupName', () => {
-        const result = client.matchBackupFromBackupName(fakePath);
-        assert.strictEqual(result, 'backupValue');
-        assert(
-          (client.pathTemplates.backupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('backupCollection', async () => {
-      const fakePath = '/rendered/path/backupCollection';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        backup_collection: 'backupCollectionValue',
-      };
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchClusterFromCertificateAuthorityName', () => {
+                const result = client.matchClusterFromCertificateAuthorityName(fakePath);
+                assert.strictEqual(result, "clusterValue");
+                assert((client.pathTemplates.certificateAuthorityPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.backupCollectionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.backupCollectionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('backupCollectionPath', () => {
-        const result = client.backupCollectionPath(
-          'projectValue',
-          'locationValue',
-          'backupCollectionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.backupCollectionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('cluster', async () => {
+            const fakePath = "/rendered/path/cluster";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                cluster: "clusterValue",
+            };
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.clusterPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.clusterPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromBackupCollectionName', () => {
-        const result = client.matchProjectFromBackupCollectionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.backupCollectionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('clusterPath', () => {
+                const result = client.clusterPath("projectValue", "locationValue", "clusterValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.clusterPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromBackupCollectionName', () => {
-        const result = client.matchLocationFromBackupCollectionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.backupCollectionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromClusterName', () => {
+                const result = client.matchProjectFromClusterName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.clusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchBackupCollectionFromBackupCollectionName', () => {
-        const result =
-          client.matchBackupCollectionFromBackupCollectionName(fakePath);
-        assert.strictEqual(result, 'backupCollectionValue');
-        assert(
-          (client.pathTemplates.backupCollectionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+            it('matchLocationFromClusterName', () => {
+                const result = client.matchLocationFromClusterName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.clusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-    describe('certificateAuthority', async () => {
-      const fakePath = '/rendered/path/certificateAuthority';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        cluster: 'clusterValue',
-      };
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchClusterFromClusterName', () => {
+                const result = client.matchClusterFromClusterName(fakePath);
+                assert.strictEqual(result, "clusterValue");
+                assert((client.pathTemplates.clusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.certificateAuthorityPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.certificateAuthorityPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('certificateAuthorityPath', () => {
-        const result = client.certificateAuthorityPath(
-          'projectValue',
-          'locationValue',
-          'clusterValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.certificateAuthorityPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('cryptoKey', async () => {
+            const fakePath = "/rendered/path/cryptoKey";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                key_ring: "keyRingValue",
+                crypto_key: "cryptoKeyValue",
+            };
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cryptoKeyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cryptoKeyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromCertificateAuthorityName', () => {
-        const result =
-          client.matchProjectFromCertificateAuthorityName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.certificateAuthorityPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('cryptoKeyPath', () => {
+                const result = client.cryptoKeyPath("projectValue", "locationValue", "keyRingValue", "cryptoKeyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cryptoKeyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromCertificateAuthorityName', () => {
-        const result =
-          client.matchLocationFromCertificateAuthorityName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.certificateAuthorityPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromCryptoKeyName', () => {
+                const result = client.matchProjectFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchClusterFromCertificateAuthorityName', () => {
-        const result =
-          client.matchClusterFromCertificateAuthorityName(fakePath);
-        assert.strictEqual(result, 'clusterValue');
-        assert(
-          (
-            client.pathTemplates.certificateAuthorityPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+            it('matchLocationFromCryptoKeyName', () => {
+                const result = client.matchLocationFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-    describe('cluster', async () => {
-      const fakePath = '/rendered/path/cluster';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        cluster: 'clusterValue',
-      };
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchKeyRingFromCryptoKeyName', () => {
+                const result = client.matchKeyRingFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "keyRingValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCryptoKeyFromCryptoKeyName', () => {
+                const result = client.matchCryptoKeyFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "cryptoKeyValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.clusterPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.clusterPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('clusterPath', () => {
-        const result = client.clusterPath(
-          'projectValue',
-          'locationValue',
-          'clusterValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.clusterPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('cryptoKeyVersion', async () => {
+            const fakePath = "/rendered/path/cryptoKeyVersion";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                key_ring: "keyRingValue",
+                crypto_key: "cryptoKeyValue",
+                crypto_key_version: "cryptoKeyVersionValue",
+            };
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cryptoKeyVersionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cryptoKeyVersionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromClusterName', () => {
-        const result = client.matchProjectFromClusterName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.clusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('cryptoKeyVersionPath', () => {
+                const result = client.cryptoKeyVersionPath("projectValue", "locationValue", "keyRingValue", "cryptoKeyValue", "cryptoKeyVersionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromClusterName', () => {
-        const result = client.matchLocationFromClusterName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.clusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromCryptoKeyVersionName', () => {
+                const result = client.matchProjectFromCryptoKeyVersionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchClusterFromClusterName', () => {
-        const result = client.matchClusterFromClusterName(fakePath);
-        assert.strictEqual(result, 'clusterValue');
-        assert(
-          (client.pathTemplates.clusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+            it('matchLocationFromCryptoKeyVersionName', () => {
+                const result = client.matchLocationFromCryptoKeyVersionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-    describe('cryptoKey', async () => {
-      const fakePath = '/rendered/path/cryptoKey';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        key_ring: 'keyRingValue',
-        crypto_key: 'cryptoKeyValue',
-      };
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchKeyRingFromCryptoKeyVersionName', () => {
+                const result = client.matchKeyRingFromCryptoKeyVersionName(fakePath);
+                assert.strictEqual(result, "keyRingValue");
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCryptoKeyFromCryptoKeyVersionName', () => {
+                const result = client.matchCryptoKeyFromCryptoKeyVersionName(fakePath);
+                assert.strictEqual(result, "cryptoKeyValue");
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCryptoKeyVersionFromCryptoKeyVersionName', () => {
+                const result = client.matchCryptoKeyVersionFromCryptoKeyVersionName(fakePath);
+                assert.strictEqual(result, "cryptoKeyVersionValue");
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.cryptoKeyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.cryptoKeyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('cryptoKeyPath', () => {
-        const result = client.cryptoKeyPath(
-          'projectValue',
-          'locationValue',
-          'keyRingValue',
-          'cryptoKeyValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('forwardingRule', async () => {
+            const fakePath = "/rendered/path/forwardingRule";
+            const expectedParameters = {
+                project: "projectValue",
+                region: "regionValue",
+                forwarding_rule: "forwardingRuleValue",
+            };
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.forwardingRulePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.forwardingRulePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromCryptoKeyName', () => {
-        const result = client.matchProjectFromCryptoKeyName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('forwardingRulePath', () => {
+                const result = client.forwardingRulePath("projectValue", "regionValue", "forwardingRuleValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.forwardingRulePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromCryptoKeyName', () => {
-        const result = client.matchLocationFromCryptoKeyName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromForwardingRuleName', () => {
+                const result = client.matchProjectFromForwardingRuleName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.forwardingRulePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchKeyRingFromCryptoKeyName', () => {
-        const result = client.matchKeyRingFromCryptoKeyName(fakePath);
-        assert.strictEqual(result, 'keyRingValue');
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchRegionFromForwardingRuleName', () => {
+                const result = client.matchRegionFromForwardingRuleName(fakePath);
+                assert.strictEqual(result, "regionValue");
+                assert((client.pathTemplates.forwardingRulePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchCryptoKeyFromCryptoKeyName', () => {
-        const result = client.matchCryptoKeyFromCryptoKeyName(fakePath);
-        assert.strictEqual(result, 'cryptoKeyValue');
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('cryptoKeyVersion', async () => {
-      const fakePath = '/rendered/path/cryptoKeyVersion';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        key_ring: 'keyRingValue',
-        crypto_key: 'cryptoKeyValue',
-        crypto_key_version: 'cryptoKeyVersionValue',
-      };
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchForwardingRuleFromForwardingRuleName', () => {
+                const result = client.matchForwardingRuleFromForwardingRuleName(fakePath);
+                assert.strictEqual(result, "forwardingRuleValue");
+                assert((client.pathTemplates.forwardingRulePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.cryptoKeyVersionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.cryptoKeyVersionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('cryptoKeyVersionPath', () => {
-        const result = client.cryptoKeyVersionPath(
-          'projectValue',
-          'locationValue',
-          'keyRingValue',
-          'cryptoKeyValue',
-          'cryptoKeyVersionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.cryptoKeyVersionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromCryptoKeyVersionName', () => {
-        const result = client.matchProjectFromCryptoKeyVersionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromCryptoKeyVersionName', () => {
-        const result = client.matchLocationFromCryptoKeyVersionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchKeyRingFromCryptoKeyVersionName', () => {
-        const result = client.matchKeyRingFromCryptoKeyVersionName(fakePath);
-        assert.strictEqual(result, 'keyRingValue');
-        assert(
-          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCryptoKeyFromCryptoKeyVersionName', () => {
-        const result = client.matchCryptoKeyFromCryptoKeyVersionName(fakePath);
-        assert.strictEqual(result, 'cryptoKeyValue');
-        assert(
-          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCryptoKeyVersionFromCryptoKeyVersionName', () => {
-        const result =
-          client.matchCryptoKeyVersionFromCryptoKeyVersionName(fakePath);
-        assert.strictEqual(result, 'cryptoKeyVersionValue');
-        assert(
-          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('forwardingRule', async () => {
-      const fakePath = '/rendered/path/forwardingRule';
-      const expectedParameters = {
-        project: 'projectValue',
-        region: 'regionValue',
-        forwarding_rule: 'forwardingRuleValue',
-      };
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.forwardingRulePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.forwardingRulePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('forwardingRulePath', () => {
-        const result = client.forwardingRulePath(
-          'projectValue',
-          'regionValue',
-          'forwardingRuleValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.forwardingRulePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('network', async () => {
+            const fakePath = "/rendered/path/network";
+            const expectedParameters = {
+                project: "projectValue",
+                network: "networkValue",
+            };
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.networkPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.networkPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromForwardingRuleName', () => {
-        const result = client.matchProjectFromForwardingRuleName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.forwardingRulePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('networkPath', () => {
+                const result = client.networkPath("projectValue", "networkValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.networkPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchRegionFromForwardingRuleName', () => {
-        const result = client.matchRegionFromForwardingRuleName(fakePath);
-        assert.strictEqual(result, 'regionValue');
-        assert(
-          (client.pathTemplates.forwardingRulePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromNetworkName', () => {
+                const result = client.matchProjectFromNetworkName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.networkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchForwardingRuleFromForwardingRuleName', () => {
-        const result =
-          client.matchForwardingRuleFromForwardingRuleName(fakePath);
-        assert.strictEqual(result, 'forwardingRuleValue');
-        assert(
-          (client.pathTemplates.forwardingRulePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchNetworkFromNetworkName', () => {
+                const result = client.matchNetworkFromNetworkName(fakePath);
+                assert.strictEqual(result, "networkValue");
+                assert((client.pathTemplates.networkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('network', async () => {
-      const fakePath = '/rendered/path/network';
-      const expectedParameters = {
-        project: 'projectValue',
-        network: 'networkValue',
-      };
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.networkPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.networkPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('networkPath', () => {
-        const result = client.networkPath('projectValue', 'networkValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.networkPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('serviceAttachment', async () => {
+            const fakePath = "/rendered/path/serviceAttachment";
+            const expectedParameters = {
+                project: "projectValue",
+                region: "regionValue",
+                service_attachment: "serviceAttachmentValue",
+            };
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.serviceAttachmentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.serviceAttachmentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromNetworkName', () => {
-        const result = client.matchProjectFromNetworkName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.networkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('serviceAttachmentPath', () => {
+                const result = client.serviceAttachmentPath("projectValue", "regionValue", "serviceAttachmentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.serviceAttachmentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchNetworkFromNetworkName', () => {
-        const result = client.matchNetworkFromNetworkName(fakePath);
-        assert.strictEqual(result, 'networkValue');
-        assert(
-          (client.pathTemplates.networkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+            it('matchProjectFromServiceAttachmentName', () => {
+                const result = client.matchProjectFromServiceAttachmentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.serviceAttachmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchRegionFromServiceAttachmentName', () => {
+                const result = client.matchRegionFromServiceAttachmentName(fakePath);
+                assert.strictEqual(result, "regionValue");
+                assert((client.pathTemplates.serviceAttachmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceAttachmentFromServiceAttachmentName', () => {
+                const result = client.matchServiceAttachmentFromServiceAttachmentName(fakePath);
+                assert.strictEqual(result, "serviceAttachmentValue");
+                assert((client.pathTemplates.serviceAttachmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
     });
-
-    describe('serviceAttachment', async () => {
-      const fakePath = '/rendered/path/serviceAttachment';
-      const expectedParameters = {
-        project: 'projectValue',
-        region: 'regionValue',
-        service_attachment: 'serviceAttachmentValue',
-      };
-      const client =
-        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      client.pathTemplates.serviceAttachmentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.serviceAttachmentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('serviceAttachmentPath', () => {
-        const result = client.serviceAttachmentPath(
-          'projectValue',
-          'regionValue',
-          'serviceAttachmentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.serviceAttachmentPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromServiceAttachmentName', () => {
-        const result = client.matchProjectFromServiceAttachmentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.serviceAttachmentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRegionFromServiceAttachmentName', () => {
-        const result = client.matchRegionFromServiceAttachmentName(fakePath);
-        assert.strictEqual(result, 'regionValue');
-        assert(
-          (
-            client.pathTemplates.serviceAttachmentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceAttachmentFromServiceAttachmentName', () => {
-        const result =
-          client.matchServiceAttachmentFromServiceAttachmentName(fakePath);
-        assert.strictEqual(result, 'serviceAttachmentValue');
-        assert(
-          (
-            client.pathTemplates.serviceAttachmentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

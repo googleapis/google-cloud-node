@@ -2355,52 +2355,6 @@ describe('v1beta2.SecretManagerServiceClient', () => {
             });
         });
 
-        describe('projectLocationSecret', async () => {
-            const fakePath = "/rendered/path/projectLocationSecret";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                secret: "secretValue",
-            };
-            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationSecretPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationSecretPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationSecretPath', () => {
-                const result = client.projectLocationSecretPath("projectValue", "locationValue", "secretValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationSecretPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationSecretName', () => {
-                const result = client.matchProjectFromProjectLocationSecretName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationSecretPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationSecretName', () => {
-                const result = client.matchLocationFromProjectLocationSecretName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationSecretPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSecretFromProjectLocationSecretName', () => {
-                const result = client.matchSecretFromProjectLocationSecretName(fakePath);
-                assert.strictEqual(result, "secretValue");
-                assert((client.pathTemplates.projectLocationSecretPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
         describe('projectLocationSecretSecretVersion', async () => {
             const fakePath = "/rendered/path/projectLocationSecretSecretVersion";
             const expectedParameters = {
@@ -2455,10 +2409,11 @@ describe('v1beta2.SecretManagerServiceClient', () => {
             });
         });
 
-        describe('projectSecret', async () => {
-            const fakePath = "/rendered/path/projectSecret";
+        describe('projectLocationSecrets', async () => {
+            const fakePath = "/rendered/path/projectLocationSecrets";
             const expectedParameters = {
                 project: "projectValue",
+                location: "locationValue",
                 secret: "secretValue",
             };
             const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
@@ -2466,29 +2421,36 @@ describe('v1beta2.SecretManagerServiceClient', () => {
                 projectId: 'bogus',
             });
             await client.initialize();
-            client.pathTemplates.projectSecretPathTemplate.render =
+            client.pathTemplates.projectLocationSecretsPathTemplate.render =
                 sinon.stub().returns(fakePath);
-            client.pathTemplates.projectSecretPathTemplate.match =
+            client.pathTemplates.projectLocationSecretsPathTemplate.match =
                 sinon.stub().returns(expectedParameters);
 
-            it('projectSecretPath', () => {
-                const result = client.projectSecretPath("projectValue", "secretValue");
+            it('projectLocationSecretsPath', () => {
+                const result = client.projectLocationSecretsPath("projectValue", "locationValue", "secretValue");
                 assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectSecretPathTemplate.render as SinonStub)
+                assert((client.pathTemplates.projectLocationSecretsPathTemplate.render as SinonStub)
                     .getCall(-1).calledWith(expectedParameters));
             });
 
-            it('matchProjectFromProjectSecretName', () => {
-                const result = client.matchProjectFromProjectSecretName(fakePath);
+            it('matchProjectFromProjectLocationSecretsName', () => {
+                const result = client.matchProjectFromProjectLocationSecretsName(fakePath);
                 assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectSecretPathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationSecretsPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchSecretFromProjectSecretName', () => {
-                const result = client.matchSecretFromProjectSecretName(fakePath);
+            it('matchLocationFromProjectLocationSecretsName', () => {
+                const result = client.matchLocationFromProjectLocationSecretsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationSecretsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecretFromProjectLocationSecretsName', () => {
+                const result = client.matchSecretFromProjectLocationSecretsName(fakePath);
                 assert.strictEqual(result, "secretValue");
-                assert((client.pathTemplates.projectSecretPathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationSecretsPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -2535,6 +2497,44 @@ describe('v1beta2.SecretManagerServiceClient', () => {
                 const result = client.matchSecretVersionFromProjectSecretSecretVersionName(fakePath);
                 assert.strictEqual(result, "secretVersionValue");
                 assert((client.pathTemplates.projectSecretSecretVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectSecrets', async () => {
+            const fakePath = "/rendered/path/projectSecrets";
+            const expectedParameters = {
+                project: "projectValue",
+                secret: "secretValue",
+            };
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectSecretsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectSecretsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectSecretsPath', () => {
+                const result = client.projectSecretsPath("projectValue", "secretValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectSecretsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectSecretsName', () => {
+                const result = client.matchProjectFromProjectSecretsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectSecretsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecretFromProjectSecretsName', () => {
+                const result = client.matchSecretFromProjectSecretsName(fakePath);
+                assert.strictEqual(result, "secretValue");
+                assert((client.pathTemplates.projectSecretsPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

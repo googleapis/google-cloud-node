@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const securitycentermanagement = require('@google-cloud/securitycentermanagement');
 
 function main() {
-  const securityCenterManagementClient =
-    new securitycentermanagement.SecurityCenterManagementClient();
+  const securityCenterManagementClient = new securitycentermanagement.SecurityCenterManagementClient();
 }
 
 main();

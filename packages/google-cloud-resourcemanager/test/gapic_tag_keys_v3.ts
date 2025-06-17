@@ -29,2283 +29,1833 @@ import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v3.TagKeysClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new tagkeysModule.v3.TagKeysClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'cloudresourcemanager.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new tagkeysModule.v3.TagKeysClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath = tagkeysModule.v3.TagKeysClient.servicePath;
-        assert.strictEqual(servicePath, 'cloudresourcemanager.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint = tagkeysModule.v3.TagKeysClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'cloudresourcemanager.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudresourcemanager.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudresourcemanager.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new tagkeysModule.v3.TagKeysClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'cloudresourcemanager.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new tagkeysModule.v3.TagKeysClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'cloudresourcemanager.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new tagkeysModule.v3.TagKeysClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'cloudresourcemanager.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new tagkeysModule.v3.TagKeysClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new tagkeysModule.v3.TagKeysClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = tagkeysModule.v3.TagKeysClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = tagkeysModule.v3.TagKeysClient.servicePath;
+                assert.strictEqual(servicePath, 'cloudresourcemanager.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new tagkeysModule.v3.TagKeysClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.tagKeysStub, undefined);
-      await client.initialize();
-      assert(client.tagKeysStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.tagKeysStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.tagKeysStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getTagKey', () => {
-    it('invokes getTagKey without error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.GetTagKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.GetTagKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.TagKey()
-      );
-      client.innerApiCalls.getTagKey = stubSimpleCall(expectedResponse);
-      const [response] = await client.getTagKey(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getTagKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTagKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTagKey without error using callback', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.GetTagKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.GetTagKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.TagKey()
-      );
-      client.innerApiCalls.getTagKey =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getTagKey(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.resourcemanager.v3.ITagKey | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getTagKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTagKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTagKey with error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.GetTagKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.GetTagKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getTagKey = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getTagKey(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getTagKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTagKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTagKey with closed client', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.GetTagKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.GetTagKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getTagKey(request), expectedError);
-    });
-  });
-
-  describe('getNamespacedTagKey', () => {
-    it('invokes getNamespacedTagKey without error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.TagKey()
-      );
-      client.innerApiCalls.getNamespacedTagKey =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getNamespacedTagKey(request);
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes getNamespacedTagKey without error using callback', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.TagKey()
-      );
-      client.innerApiCalls.getNamespacedTagKey =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getNamespacedTagKey(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.resourcemanager.v3.ITagKey | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes getNamespacedTagKey with error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getNamespacedTagKey = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getNamespacedTagKey(request), expectedError);
-    });
-
-    it('invokes getNamespacedTagKey with closed client', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest()
-      );
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getNamespacedTagKey(request), expectedError);
-    });
-  });
-
-  describe('getIamPolicy', () => {
-    it('invokes getIamPolicy without error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.getIamPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy without error using callback', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.getIamPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getIamPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.IPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy with error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getIamPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getIamPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy with closed client', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getIamPolicy(request), expectedError);
-    });
-  });
-
-  describe('setIamPolicy', () => {
-    it('invokes setIamPolicy without error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.setIamPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy without error using callback', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.setIamPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setIamPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.IPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy with error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setIamPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setIamPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy with closed client', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.setIamPolicy(request), expectedError);
-    });
-  });
-
-  describe('testIamPermissions', () => {
-    it('invokes testIamPermissions without error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.innerApiCalls.testIamPermissions =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.testIamPermissions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions without error using callback', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.innerApiCalls.testIamPermissions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.testIamPermissions(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.ITestIamPermissionsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions with error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.testIamPermissions(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions with closed client', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.testIamPermissions(request), expectedError);
-    });
-  });
-
-  describe('createTagKey', () => {
-    it('invokes createTagKey without error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.CreateTagKeyRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createTagKey = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createTagKey(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes createTagKey without error using callback', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.CreateTagKeyRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createTagKey =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createTagKey(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.resourcemanager.v3.ITagKey,
-              protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagKey,
-        protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes createTagKey with call error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.CreateTagKeyRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createTagKey = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createTagKey(request), expectedError);
-    });
-
-    it('invokes createTagKey with LRO error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.CreateTagKeyRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createTagKey = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createTagKey(request);
-      await assert.rejects(operation.promise(), expectedError);
-    });
-
-    it('invokes checkCreateTagKeyProgress without error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateTagKeyProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateTagKeyProgress with error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCreateTagKeyProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateTagKey', () => {
-    it('invokes updateTagKey without error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.UpdateTagKeyRequest()
-      );
-      request.tagKey ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.UpdateTagKeyRequest',
-        ['tagKey', 'name']
-      );
-      request.tagKey.name = defaultValue1;
-      const expectedHeaderRequestParams = `tag_key.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateTagKey = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateTagKey(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateTagKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTagKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTagKey without error using callback', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.UpdateTagKeyRequest()
-      );
-      request.tagKey ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.UpdateTagKeyRequest',
-        ['tagKey', 'name']
-      );
-      request.tagKey.name = defaultValue1;
-      const expectedHeaderRequestParams = `tag_key.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateTagKey =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateTagKey(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.resourcemanager.v3.ITagKey,
-              protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagKey,
-        protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateTagKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTagKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTagKey with call error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.UpdateTagKeyRequest()
-      );
-      request.tagKey ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.UpdateTagKeyRequest',
-        ['tagKey', 'name']
-      );
-      request.tagKey.name = defaultValue1;
-      const expectedHeaderRequestParams = `tag_key.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateTagKey = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateTagKey(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateTagKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTagKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTagKey with LRO error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.UpdateTagKeyRequest()
-      );
-      request.tagKey ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.UpdateTagKeyRequest',
-        ['tagKey', 'name']
-      );
-      request.tagKey.name = defaultValue1;
-      const expectedHeaderRequestParams = `tag_key.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateTagKey = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateTagKey(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateTagKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTagKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateTagKeyProgress without error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateTagKeyProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateTagKeyProgress with error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkUpdateTagKeyProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteTagKey', () => {
-    it('invokes deleteTagKey without error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.DeleteTagKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.DeleteTagKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteTagKey = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteTagKey(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteTagKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTagKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteTagKey without error using callback', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.DeleteTagKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.DeleteTagKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteTagKey =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteTagKey(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.resourcemanager.v3.ITagKey,
-              protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagKey,
-        protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteTagKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTagKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteTagKey with call error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.DeleteTagKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.DeleteTagKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteTagKey = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteTagKey(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteTagKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTagKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteTagKey with LRO error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.DeleteTagKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcemanager.v3.DeleteTagKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteTagKey = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteTagKey(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteTagKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTagKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteTagKeyProgress without error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteTagKeyProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteTagKeyProgress with error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeleteTagKeyProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listTagKeys', () => {
-    it('invokes listTagKeys without error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.ListTagKeysRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.TagKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.TagKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.TagKey()
-        ),
-      ];
-      client.innerApiCalls.listTagKeys = stubSimpleCall(expectedResponse);
-      const [response] = await client.listTagKeys(request);
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes listTagKeys without error using callback', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.ListTagKeysRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.TagKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.TagKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.TagKey()
-        ),
-      ];
-      client.innerApiCalls.listTagKeys =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listTagKeys(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.resourcemanager.v3.ITagKey[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes listTagKeys with error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.ListTagKeysRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listTagKeys = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listTagKeys(request), expectedError);
-    });
-
-    it('invokes listTagKeysStream without error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.ListTagKeysRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.TagKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.TagKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.TagKey()
-        ),
-      ];
-      client.descriptors.page.listTagKeys.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listTagKeysStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.resourcemanager.v3.TagKey[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.resourcemanager.v3.TagKey) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listTagKeys.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listTagKeys, request)
-      );
-    });
-
-    it('invokes listTagKeysStream with error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.ListTagKeysRequest()
-      );
-      const expectedError = new Error('expected');
-      client.descriptors.page.listTagKeys.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listTagKeysStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.resourcemanager.v3.TagKey[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.resourcemanager.v3.TagKey) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listTagKeys.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listTagKeys, request)
-      );
-    });
-
-    it('uses async iteration with listTagKeys without error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.ListTagKeysRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.TagKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.TagKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcemanager.v3.TagKey()
-        ),
-      ];
-      client.descriptors.page.listTagKeys.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.resourcemanager.v3.ITagKey[] = [];
-      const iterable = client.listTagKeysAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listTagKeys.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-    });
-
-    it('uses async iteration with listTagKeys with error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcemanager.v3.ListTagKeysRequest()
-      );
-      const expectedError = new Error('expected');
-      client.descriptors.page.listTagKeys.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listTagKeysAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.resourcemanager.v3.ITagKey[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = tagkeysModule.v3.TagKeysClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'cloudresourcemanager.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listTagKeys.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-    it('invokes getOperation with error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
-    });
-    it('invokes cancelOperation with error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new tagkeysModule.v3.TagKeysClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudresourcemanager.example.com');
+        });
+
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new tagkeysModule.v3.TagKeysClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudresourcemanager.example.com');
+        });
+
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new tagkeysModule.v3.TagKeysClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudresourcemanager.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new tagkeysModule.v3.TagKeysClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudresourcemanager.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new tagkeysModule.v3.TagKeysClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('Path templates', () => {
-    describe('folder', async () => {
-      const fakePath = '/rendered/path/folder';
-      const expectedParameters = {
-        folder: 'folderValue',
-      };
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('has port', () => {
+            const port = tagkeysModule.v3.TagKeysClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-      it('folderPath', () => {
-        const result = client.folderPath('folderValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.folderPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('should create a client with no option', () => {
+            const client = new tagkeysModule.v3.TagKeysClient();
+            assert(client);
+        });
 
-      it('matchFolderFromFolderName', () => {
-        const result = client.matchFolderFromFolderName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (client.pathTemplates.folderPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+        it('should create a client with gRPC fallback', () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+                fallback: true,
+            });
+            assert(client);
+        });
 
-    describe('organization', async () => {
-      const fakePath = '/rendered/path/organization';
-      const expectedParameters = {
-        organization: 'organizationValue',
-      };
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.tagKeysStub, undefined);
+            await client.initialize();
+            assert(client.tagKeysStub);
+        });
 
-      it('organizationPath', () => {
-        const result = client.organizationPath('organizationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.organizationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('has close method for the initialized client', done => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.tagKeysStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('matchOrganizationFromOrganizationName', () => {
-        const result = client.matchOrganizationFromOrganizationName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (client.pathTemplates.organizationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+        it('has close method for the non-initialized client', done => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.tagKeysStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
 
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    describe('tagBinding', async () => {
-      const fakePath = '/rendered/path/tagBinding';
-      const expectedParameters = {
-        tag_binding: 'tagBindingValue',
-      };
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.tagBindingPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.tagBindingPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('getTagKey', () => {
+        it('invokes getTagKey without error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.GetTagKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.GetTagKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.TagKey()
+            );
+            client.innerApiCalls.getTagKey = stubSimpleCall(expectedResponse);
+            const [response] = await client.getTagKey(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getTagKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTagKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('tagBindingPath', () => {
-        const result = client.tagBindingPath('tagBindingValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.tagBindingPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes getTagKey without error using callback', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.GetTagKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.GetTagKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.TagKey()
+            );
+            client.innerApiCalls.getTagKey = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getTagKey(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.resourcemanager.v3.ITagKey|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getTagKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTagKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchTagBindingFromTagBindingName', () => {
-        const result = client.matchTagBindingFromTagBindingName(fakePath);
-        assert.strictEqual(result, 'tagBindingValue');
-        assert(
-          (client.pathTemplates.tagBindingPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getTagKey with error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.GetTagKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.GetTagKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getTagKey = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getTagKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getTagKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTagKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getTagKey with closed client', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.GetTagKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.GetTagKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getTagKey(request), expectedError);
+        });
     });
 
-    describe('tagHold', async () => {
-      const fakePath = '/rendered/path/tagHold';
-      const expectedParameters = {
-        tag_value: 'tagValueValue',
-        tag_hold: 'tagHoldValue',
-      };
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.tagHoldPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.tagHoldPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('getNamespacedTagKey', () => {
+        it('invokes getNamespacedTagKey without error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.TagKey()
+            );
+            client.innerApiCalls.getNamespacedTagKey = stubSimpleCall(expectedResponse);
+            const [response] = await client.getNamespacedTagKey(request);
+            assert.deepStrictEqual(response, expectedResponse);
+        });
 
-      it('tagHoldPath', () => {
-        const result = client.tagHoldPath('tagValueValue', 'tagHoldValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.tagHoldPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes getNamespacedTagKey without error using callback', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.TagKey()
+            );
+            client.innerApiCalls.getNamespacedTagKey = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getNamespacedTagKey(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.resourcemanager.v3.ITagKey|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+        });
 
-      it('matchTagValueFromTagHoldName', () => {
-        const result = client.matchTagValueFromTagHoldName(fakePath);
-        assert.strictEqual(result, 'tagValueValue');
-        assert(
-          (client.pathTemplates.tagHoldPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getNamespacedTagKey with error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getNamespacedTagKey = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getNamespacedTagKey(request), expectedError);
+        });
 
-      it('matchTagHoldFromTagHoldName', () => {
-        const result = client.matchTagHoldFromTagHoldName(fakePath);
-        assert.strictEqual(result, 'tagHoldValue');
-        assert(
-          (client.pathTemplates.tagHoldPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getNamespacedTagKey with closed client', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest()
+            );
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getNamespacedTagKey(request), expectedError);
+        });
     });
 
-    describe('tagKey', async () => {
-      const fakePath = '/rendered/path/tagKey';
-      const expectedParameters = {
-        tag_key: 'tagKeyValue',
-      };
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.tagKeyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.tagKeyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('getIamPolicy', () => {
+        it('invokes getIamPolicy without error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.getIamPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('tagKeyPath', () => {
-        const result = client.tagKeyPath('tagKeyValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.tagKeyPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes getIamPolicy without error using callback', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getIamPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.IPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchTagKeyFromTagKeyName', () => {
-        const result = client.matchTagKeyFromTagKeyName(fakePath);
-        assert.strictEqual(result, 'tagKeyValue');
-        assert(
-          (client.pathTemplates.tagKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getIamPolicy with error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getIamPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy with closed client', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getIamPolicy(request), expectedError);
+        });
     });
 
-    describe('tagValue', async () => {
-      const fakePath = '/rendered/path/tagValue';
-      const expectedParameters = {
-        tag_value: 'tagValueValue',
-      };
-      const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.tagValuePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.tagValuePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('setIamPolicy', () => {
+        it('invokes setIamPolicy without error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.setIamPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('tagValuePath', () => {
-        const result = client.tagValuePath('tagValueValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.tagValuePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes setIamPolicy without error using callback', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setIamPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.IPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchTagValueFromTagValueName', () => {
-        const result = client.matchTagValueFromTagValueName(fakePath);
-        assert.strictEqual(result, 'tagValueValue');
-        assert(
-          (client.pathTemplates.tagValuePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes setIamPolicy with error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setIamPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy with closed client', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setIamPolicy(request), expectedError);
+        });
     });
-  });
+
+    describe('testIamPermissions', () => {
+        it('invokes testIamPermissions without error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.innerApiCalls.testIamPermissions = stubSimpleCall(expectedResponse);
+            const [response] = await client.testIamPermissions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions without error using callback', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.testIamPermissions(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.ITestIamPermissionsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions with error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.testIamPermissions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.testIamPermissions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions with closed client', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.testIamPermissions(request), expectedError);
+        });
+    });
+
+    describe('createTagKey', () => {
+        it('invokes createTagKey without error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.CreateTagKeyRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createTagKey = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createTagKey(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes createTagKey without error using callback', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.CreateTagKeyRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createTagKey = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createTagKey(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes createTagKey with call error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.CreateTagKeyRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createTagKey = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createTagKey(request), expectedError);
+        });
+
+        it('invokes createTagKey with LRO error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.CreateTagKeyRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createTagKey = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createTagKey(request);
+            await assert.rejects(operation.promise(), expectedError);
+        });
+
+        it('invokes checkCreateTagKeyProgress without error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateTagKeyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateTagKeyProgress with error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateTagKeyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateTagKey', () => {
+        it('invokes updateTagKey without error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.UpdateTagKeyRequest()
+            );
+            request.tagKey ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.UpdateTagKeyRequest', ['tagKey', 'name']);
+            request.tagKey.name = defaultValue1;
+            const expectedHeaderRequestParams = `tag_key.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateTagKey = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateTagKey(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateTagKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTagKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateTagKey without error using callback', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.UpdateTagKeyRequest()
+            );
+            request.tagKey ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.UpdateTagKeyRequest', ['tagKey', 'name']);
+            request.tagKey.name = defaultValue1;
+            const expectedHeaderRequestParams = `tag_key.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateTagKey = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateTagKey(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateTagKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTagKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateTagKey with call error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.UpdateTagKeyRequest()
+            );
+            request.tagKey ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.UpdateTagKeyRequest', ['tagKey', 'name']);
+            request.tagKey.name = defaultValue1;
+            const expectedHeaderRequestParams = `tag_key.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateTagKey = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateTagKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateTagKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTagKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateTagKey with LRO error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.UpdateTagKeyRequest()
+            );
+            request.tagKey ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.UpdateTagKeyRequest', ['tagKey', 'name']);
+            request.tagKey.name = defaultValue1;
+            const expectedHeaderRequestParams = `tag_key.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateTagKey = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateTagKey(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateTagKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTagKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateTagKeyProgress without error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateTagKeyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateTagKeyProgress with error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateTagKeyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteTagKey', () => {
+        it('invokes deleteTagKey without error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.DeleteTagKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.DeleteTagKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteTagKey = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteTagKey(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteTagKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTagKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTagKey without error using callback', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.DeleteTagKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.DeleteTagKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteTagKey = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteTagKey(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteTagKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTagKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTagKey with call error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.DeleteTagKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.DeleteTagKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteTagKey = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteTagKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteTagKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTagKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTagKey with LRO error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.DeleteTagKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.resourcemanager.v3.DeleteTagKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteTagKey = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteTagKey(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteTagKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTagKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteTagKeyProgress without error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteTagKeyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteTagKeyProgress with error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteTagKeyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listTagKeys', () => {
+        it('invokes listTagKeys without error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.ListTagKeysRequest()
+            );const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.TagKey()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.TagKey()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.TagKey()),
+            ];
+            client.innerApiCalls.listTagKeys = stubSimpleCall(expectedResponse);
+            const [response] = await client.listTagKeys(request);
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes listTagKeys without error using callback', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.ListTagKeysRequest()
+            );const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.TagKey()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.TagKey()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.TagKey()),
+            ];
+            client.innerApiCalls.listTagKeys = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listTagKeys(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.resourcemanager.v3.ITagKey[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes listTagKeys with error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.ListTagKeysRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listTagKeys = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listTagKeys(request), expectedError);
+        });
+
+        it('invokes listTagKeysStream without error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.ListTagKeysRequest()
+            );
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.TagKey()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.TagKey()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.TagKey()),
+            ];
+            client.descriptors.page.listTagKeys.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listTagKeysStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.resourcemanager.v3.TagKey[] = [];
+                stream.on('data', (response: protos.google.cloud.resourcemanager.v3.TagKey) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listTagKeys.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listTagKeys, request));
+        });
+
+        it('invokes listTagKeysStream with error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.ListTagKeysRequest()
+            );
+            const expectedError = new Error('expected');
+            client.descriptors.page.listTagKeys.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listTagKeysStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.resourcemanager.v3.TagKey[] = [];
+                stream.on('data', (response: protos.google.cloud.resourcemanager.v3.TagKey) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listTagKeys.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listTagKeys, request));
+        });
+
+        it('uses async iteration with listTagKeys without error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.ListTagKeysRequest()
+            );
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.TagKey()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.TagKey()),
+              generateSampleMessage(new protos.google.cloud.resourcemanager.v3.TagKey()),
+            ];
+            client.descriptors.page.listTagKeys.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.resourcemanager.v3.ITagKey[] = [];
+            const iterable = client.listTagKeysAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listTagKeys.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+
+        it('uses async iteration with listTagKeys with error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.resourcemanager.v3.ListTagKeysRequest()
+            );
+            const expectedError = new Error('expected');
+            client.descriptors.page.listTagKeys.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listTagKeysAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.resourcemanager.v3.ITagKey[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listTagKeys.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+    });
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new tagkeysModule.v3.TagKeysClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('folder', async () => {
+            const fakePath = "/rendered/path/folder";
+            const expectedParameters = {
+                folder: "folderValue",
+            };
+            const client = new tagkeysModule.v3.TagKeysClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderPath', () => {
+                const result = client.folderPath("folderValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderName', () => {
+                const result = client.matchFolderFromFolderName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organization', async () => {
+            const fakePath = "/rendered/path/organization";
+            const expectedParameters = {
+                organization: "organizationValue",
+            };
+            const client = new tagkeysModule.v3.TagKeysClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationPath', () => {
+                const result = client.organizationPath("organizationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationName', () => {
+                const result = client.matchOrganizationFromOrganizationName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new tagkeysModule.v3.TagKeysClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tagBinding', async () => {
+            const fakePath = "/rendered/path/tagBinding";
+            const expectedParameters = {
+                tag_binding: "tagBindingValue",
+            };
+            const client = new tagkeysModule.v3.TagKeysClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tagBindingPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tagBindingPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tagBindingPath', () => {
+                const result = client.tagBindingPath("tagBindingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tagBindingPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchTagBindingFromTagBindingName', () => {
+                const result = client.matchTagBindingFromTagBindingName(fakePath);
+                assert.strictEqual(result, "tagBindingValue");
+                assert((client.pathTemplates.tagBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tagHold', async () => {
+            const fakePath = "/rendered/path/tagHold";
+            const expectedParameters = {
+                tag_value: "tagValueValue",
+                tag_hold: "tagHoldValue",
+            };
+            const client = new tagkeysModule.v3.TagKeysClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tagHoldPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tagHoldPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tagHoldPath', () => {
+                const result = client.tagHoldPath("tagValueValue", "tagHoldValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tagHoldPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchTagValueFromTagHoldName', () => {
+                const result = client.matchTagValueFromTagHoldName(fakePath);
+                assert.strictEqual(result, "tagValueValue");
+                assert((client.pathTemplates.tagHoldPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTagHoldFromTagHoldName', () => {
+                const result = client.matchTagHoldFromTagHoldName(fakePath);
+                assert.strictEqual(result, "tagHoldValue");
+                assert((client.pathTemplates.tagHoldPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tagKey', async () => {
+            const fakePath = "/rendered/path/tagKey";
+            const expectedParameters = {
+                tag_key: "tagKeyValue",
+            };
+            const client = new tagkeysModule.v3.TagKeysClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tagKeyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tagKeyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tagKeyPath', () => {
+                const result = client.tagKeyPath("tagKeyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tagKeyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchTagKeyFromTagKeyName', () => {
+                const result = client.matchTagKeyFromTagKeyName(fakePath);
+                assert.strictEqual(result, "tagKeyValue");
+                assert((client.pathTemplates.tagKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tagValue', async () => {
+            const fakePath = "/rendered/path/tagValue";
+            const expectedParameters = {
+                tag_value: "tagValueValue",
+            };
+            const client = new tagkeysModule.v3.TagKeysClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tagValuePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tagValuePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tagValuePath', () => {
+                const result = client.tagValuePath("tagValueValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tagValuePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchTagValueFromTagValueName', () => {
+                const result = client.matchTagValueFromTagValueName(fakePath);
+                assert.strictEqual(result, "tagValueValue");
+                assert((client.pathTemplates.tagValuePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

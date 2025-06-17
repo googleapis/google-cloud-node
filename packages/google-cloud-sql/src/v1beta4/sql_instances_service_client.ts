@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, LocationsClient, LocationProtos} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -106,41 +99,20 @@ export class SqlInstancesServiceClient {
    *     const client = new SqlInstancesServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SqlInstancesServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'sqladmin.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -166,7 +138,7 @@ export class SqlInstancesServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,9 +154,13 @@ export class SqlInstancesServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -203,11 +179,8 @@ export class SqlInstancesServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.sql.v1beta4.SqlInstancesService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.sql.v1beta4.SqlInstancesService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -238,70 +211,31 @@ export class SqlInstancesServiceClient {
     // Put together the "service stub" for
     // google.cloud.sql.v1beta4.SqlInstancesService.
     this.sqlInstancesServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.sql.v1beta4.SqlInstancesService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.sql.v1beta4.SqlInstancesService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.sql.v1beta4.SqlInstancesService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const sqlInstancesServiceStubMethods = [
-      'addServerCa',
-      'clone',
-      'delete',
-      'demoteMaster',
-      'demote',
-      'export',
-      'failover',
-      'reencrypt',
-      'get',
-      'import',
-      'insert',
-      'list',
-      'listServerCas',
-      'patch',
-      'promoteReplica',
-      'switchover',
-      'resetSslConfig',
-      'restart',
-      'restoreBackup',
-      'rotateServerCa',
-      'startReplica',
-      'stopReplica',
-      'truncateLog',
-      'update',
-      'createEphemeral',
-      'rescheduleMaintenance',
-      'verifyExternalSyncSettings',
-      'startExternalSync',
-      'performDiskShrink',
-      'getDiskShrinkConfig',
-      'resetReplicaSize',
-      'getLatestRecoveryTime',
-      'acquireSsrsLease',
-      'releaseSsrsLease',
-    ];
+    const sqlInstancesServiceStubMethods =
+        ['addServerCa', 'clone', 'delete', 'demoteMaster', 'demote', 'export', 'failover', 'reencrypt', 'get', 'import', 'insert', 'list', 'listServerCas', 'patch', 'promoteReplica', 'switchover', 'resetSslConfig', 'restart', 'restoreBackup', 'rotateServerCa', 'startReplica', 'stopReplica', 'truncateLog', 'update', 'createEphemeral', 'rescheduleMaintenance', 'verifyExternalSyncSettings', 'startExternalSync', 'performDiskShrink', 'getDiskShrinkConfig', 'resetReplicaSize', 'getLatestRecoveryTime', 'acquireSsrsLease', 'releaseSsrsLease'];
     for (const methodName of sqlInstancesServiceStubMethods) {
       const callPromise = this.sqlInstancesServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -321,14 +255,8 @@ export class SqlInstancesServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'sqladmin.googleapis.com';
   }
@@ -339,14 +267,8 @@ export class SqlInstancesServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'sqladmin.googleapis.com';
   }
@@ -379,7 +301,7 @@ export class SqlInstancesServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/sqlservice.admin',
+      'https://www.googleapis.com/auth/sqlservice.admin'
     ];
   }
 
@@ -389,9 +311,8 @@ export class SqlInstancesServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -402,4453 +323,3421 @@ export class SqlInstancesServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Add a new trusted Certificate Authority (CA) version for the specified
-   * instance. Required to prepare for a certificate rotation. If a CA version
-   * was previously added but never used in a certificate rotation, this
-   * operation replaces that version. There cannot be more than one CA version
-   * waiting to be rotated in.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.add_server_ca.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_AddServerCa_async
-   */
+/**
+ * Add a new trusted Certificate Authority (CA) version for the specified
+ * instance. Required to prepare for a certificate rotation. If a CA version
+ * was previously added but never used in a certificate rotation, this
+ * operation replaces that version. There cannot be more than one CA version
+ * waiting to be rotated in.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.add_server_ca.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_AddServerCa_async
+ */
   addServerCa(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest|undefined, {}|undefined
+      ]>;
   addServerCa(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  addServerCa(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  addServerCa(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest|null|undefined,
+          {}|null|undefined>): void;
+  addServerCa(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest|null|undefined,
+          {}|null|undefined>): void;
+  addServerCa(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('addServerCa request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('addServerCa response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .addServerCa(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('addServerCa response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.addServerCa(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('addServerCa response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a Cloud SQL instance as a clone of the source instance. Using this
-   * operation might cause your instance to restart.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   The ID of the Cloud SQL instance to be cloned (source). This does not
-   *   include the project ID.
-   * @param {string} request.project
-   *   Project ID of the source as well as the clone Cloud SQL instance.
-   * @param {google.cloud.sql.v1beta4.InstancesCloneRequest} request.body
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.clone.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Clone_async
-   */
+/**
+ * Creates a Cloud SQL instance as a clone of the source instance. Using this
+ * operation might cause your instance to restart.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   The ID of the Cloud SQL instance to be cloned (source). This does not
+ *   include the project ID.
+ * @param {string} request.project
+ *   Project ID of the source as well as the clone Cloud SQL instance.
+ * @param {google.cloud.sql.v1beta4.InstancesCloneRequest} request.body
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.clone.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Clone_async
+ */
   clone(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest|undefined, {}|undefined
+      ]>;
   clone(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  clone(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  clone(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest|null|undefined,
+          {}|null|undefined>): void;
+  clone(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest|null|undefined,
+          {}|null|undefined>): void;
+  clone(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('clone request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('clone response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .clone(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('clone response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.clone(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('clone response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a Cloud SQL instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance to be deleted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.delete.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Delete_async
-   */
+/**
+ * Deletes a Cloud SQL instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance to be deleted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.delete.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Delete_async
+ */
   delete(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest|undefined, {}|undefined
+      ]>;
   delete(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  delete(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  delete(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest|null|undefined,
+          {}|null|undefined>): void;
+  delete(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest|null|undefined,
+          {}|null|undefined>): void;
+  delete(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('delete request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('delete response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .delete(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('delete response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.delete(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('delete response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Demotes the stand-alone instance to be a Cloud SQL read replica for an
-   * external database server.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance name.
-   * @param {string} request.project
-   *   ID of the project that contains the instance.
-   * @param {google.cloud.sql.v1beta4.InstancesDemoteMasterRequest} request.body
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.demote_master.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_DemoteMaster_async
-   */
+/**
+ * Demotes the stand-alone instance to be a Cloud SQL read replica for an
+ * external database server.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance name.
+ * @param {string} request.project
+ *   ID of the project that contains the instance.
+ * @param {google.cloud.sql.v1beta4.InstancesDemoteMasterRequest} request.body
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.demote_master.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_DemoteMaster_async
+ */
   demoteMaster(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest|undefined, {}|undefined
+      ]>;
   demoteMaster(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  demoteMaster(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  demoteMaster(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest|null|undefined,
+          {}|null|undefined>): void;
+  demoteMaster(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest|null|undefined,
+          {}|null|undefined>): void;
+  demoteMaster(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('demoteMaster request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('demoteMaster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .demoteMaster(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('demoteMaster response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.demoteMaster(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('demoteMaster response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Demotes an existing standalone instance to be a Cloud SQL read replica
-   * for an external database server.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Required. The name of the Cloud SQL instance.
-   * @param {string} request.project
-   *   Required. The project ID of the project that contains the instance.
-   * @param {google.cloud.sql.v1beta4.InstancesDemoteRequest} request.body
-   *   The request body.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.demote.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Demote_async
-   */
+/**
+ * Demotes an existing standalone instance to be a Cloud SQL read replica
+ * for an external database server.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Required. The name of the Cloud SQL instance.
+ * @param {string} request.project
+ *   Required. The project ID of the project that contains the instance.
+ * @param {google.cloud.sql.v1beta4.InstancesDemoteRequest} request.body
+ *   The request body.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.demote.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Demote_async
+ */
   demote(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest|undefined, {}|undefined
+      ]>;
   demote(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  demote(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  demote(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest|null|undefined,
+          {}|null|undefined>): void;
+  demote(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest|null|undefined,
+          {}|null|undefined>): void;
+  demote(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('demote request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('demote response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .demote(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('demote response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.demote(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('demote response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Exports data from a Cloud SQL instance to a Cloud Storage bucket as a SQL
-   * dump or CSV file.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   The Cloud SQL instance ID. This doesn't include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance to be exported.
-   * @param {google.cloud.sql.v1beta4.InstancesExportRequest} request.body
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.export.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Export_async
-   */
+/**
+ * Exports data from a Cloud SQL instance to a Cloud Storage bucket as a SQL
+ * dump or CSV file.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   The Cloud SQL instance ID. This doesn't include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance to be exported.
+ * @param {google.cloud.sql.v1beta4.InstancesExportRequest} request.body
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.export.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Export_async
+ */
   export(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest|undefined, {}|undefined
+      ]>;
   export(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  export(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  export(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest|null|undefined,
+          {}|null|undefined>): void;
+  export(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest|null|undefined,
+          {}|null|undefined>): void;
+  export(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('export request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('export response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .export(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('export response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.export(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('export response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Initiates a manual failover of a high availability (HA) primary instance
-   * to a standby instance, which becomes the primary instance. Users are
-   * then rerouted to the new primary. For more information, see the
-   * [Overview of high
-   * availability](https://cloud.google.com/sql/docs/mysql/high-availability)
-   * page in the Cloud SQL documentation.
-   * If using Legacy HA (MySQL only), this causes the instance to failover to
-   * its failover replica instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   ID of the project that contains the read replica.
-   * @param {google.cloud.sql.v1beta4.InstancesFailoverRequest} request.body
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.failover.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Failover_async
-   */
+/**
+ * Initiates a manual failover of a high availability (HA) primary instance
+ * to a standby instance, which becomes the primary instance. Users are
+ * then rerouted to the new primary. For more information, see the
+ * [Overview of high
+ * availability](https://cloud.google.com/sql/docs/mysql/high-availability)
+ * page in the Cloud SQL documentation.
+ * If using Legacy HA (MySQL only), this causes the instance to failover to
+ * its failover replica instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   ID of the project that contains the read replica.
+ * @param {google.cloud.sql.v1beta4.InstancesFailoverRequest} request.body
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.failover.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Failover_async
+ */
   failover(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest|undefined, {}|undefined
+      ]>;
   failover(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  failover(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  failover(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest|null|undefined,
+          {}|null|undefined>): void;
+  failover(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest|null|undefined,
+          {}|null|undefined>): void;
+  failover(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('failover request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('failover response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .failover(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('failover response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.failover(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('failover response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Reencrypt CMEK instance with latest key version.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   ID of the project that contains the instance.
-   * @param {google.cloud.sql.v1beta4.InstancesReencryptRequest} request.body
-   *   Reencrypt body that users request
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.reencrypt.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Reencrypt_async
-   */
+/**
+ * Reencrypt CMEK instance with latest key version.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   ID of the project that contains the instance.
+ * @param {google.cloud.sql.v1beta4.InstancesReencryptRequest} request.body
+ *   Reencrypt body that users request
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.reencrypt.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Reencrypt_async
+ */
   reencrypt(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest|undefined, {}|undefined
+      ]>;
   reencrypt(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  reencrypt(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  reencrypt(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest|null|undefined,
+          {}|null|undefined>): void;
+  reencrypt(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest|null|undefined,
+          {}|null|undefined>): void;
+  reencrypt(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('reencrypt request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('reencrypt response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .reencrypt(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('reencrypt response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.reencrypt(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('reencrypt response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Retrieves a resource containing information about a Cloud SQL instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Database instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.DatabaseInstance|DatabaseInstance}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.get.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Get_async
-   */
+/**
+ * Retrieves a resource containing information about a Cloud SQL instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Database instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.DatabaseInstance|DatabaseInstance}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.get.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Get_async
+ */
   get(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IDatabaseInstance,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IDatabaseInstance,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest|undefined, {}|undefined
+      ]>;
   get(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IDatabaseInstance,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  get(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IDatabaseInstance,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  get(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IDatabaseInstance,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IDatabaseInstance,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IDatabaseInstance,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest|null|undefined,
+          {}|null|undefined>): void;
+  get(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IDatabaseInstance,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest|null|undefined,
+          {}|null|undefined>): void;
+  get(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IDatabaseInstance,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IDatabaseInstance,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IDatabaseInstance,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('get request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IDatabaseInstance,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IDatabaseInstance,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .get(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IDatabaseInstance,
-          protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('get response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.get(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IDatabaseInstance,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('get response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Imports data into a Cloud SQL instance from a SQL dump  or CSV file in
-   * Cloud Storage.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance.
-   * @param {google.cloud.sql.v1beta4.InstancesImportRequest} request.body
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.import.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Import_async
-   */
+/**
+ * Imports data into a Cloud SQL instance from a SQL dump  or CSV file in
+ * Cloud Storage.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance.
+ * @param {google.cloud.sql.v1beta4.InstancesImportRequest} request.body
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.import.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Import_async
+ */
   import(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest|undefined, {}|undefined
+      ]>;
   import(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  import(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  import(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest|null|undefined,
+          {}|null|undefined>): void;
+  import(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest|null|undefined,
+          {}|null|undefined>): void;
+  import(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('import request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('import response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .import(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('import response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.import(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('import response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a new Cloud SQL instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Project ID of the project to which the newly created Cloud SQL instances
-   *   should belong.
-   * @param {google.cloud.sql.v1beta4.DatabaseInstance} request.body
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.insert.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Insert_async
-   */
+/**
+ * Creates a new Cloud SQL instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.project
+ *   Project ID of the project to which the newly created Cloud SQL instances
+ *   should belong.
+ * @param {google.cloud.sql.v1beta4.DatabaseInstance} request.body
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.insert.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Insert_async
+ */
   insert(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest|undefined, {}|undefined
+      ]>;
   insert(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insert(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insert(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest|null|undefined,
+          {}|null|undefined>): void;
+  insert(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest|null|undefined,
+          {}|null|undefined>): void;
+  insert(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('insert request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('insert response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .insert(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('insert response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.insert(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('insert response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Lists instances under a given project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response.
-   *   The expression is in the form of field:value. For example,
-   *   'instanceType:CLOUD_SQL_INSTANCE'. Fields can be nested as needed as per
-   *   their JSON representation, such as 'settings.userLabels.auto_start:true'.
-   *
-   *   Multiple filter queries are space-separated. For example.
-   *   'state:RUNNABLE instanceType:CLOUD_SQL_INSTANCE'. By default, each
-   *   expression is an AND expression. However, you can include AND and OR
-   *   expressions explicitly.
-   * @param {number} request.maxResults
-   *   The maximum number of instances to return. The service may return fewer
-   *   than this value.
-   *   If unspecified, at most 500 instances are returned.
-   *   The maximum value is 1000; values above 1000 are coerced to 1000.
-   * @param {string} request.pageToken
-   *   A previously-returned page token representing part of the larger set of
-   *   results to view.
-   * @param {string} request.project
-   *   Project ID of the project for which to list Cloud SQL instances.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.InstancesListResponse|InstancesListResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.list.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_List_async
-   */
+/**
+ * Lists instances under a given project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response.
+ *   The expression is in the form of field:value. For example,
+ *   'instanceType:CLOUD_SQL_INSTANCE'. Fields can be nested as needed as per
+ *   their JSON representation, such as 'settings.userLabels.auto_start:true'.
+ *
+ *   Multiple filter queries are space-separated. For example.
+ *   'state:RUNNABLE instanceType:CLOUD_SQL_INSTANCE'. By default, each
+ *   expression is an AND expression. However, you can include AND and OR
+ *   expressions explicitly.
+ * @param {number} request.maxResults
+ *   The maximum number of instances to return. The service may return fewer
+ *   than this value.
+ *   If unspecified, at most 500 instances are returned.
+ *   The maximum value is 1000; values above 1000 are coerced to 1000.
+ * @param {string} request.pageToken
+ *   A previously-returned page token representing part of the larger set of
+ *   results to view.
+ * @param {string} request.project
+ *   Project ID of the project for which to list Cloud SQL instances.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.InstancesListResponse|InstancesListResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.list.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_List_async
+ */
   list(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IInstancesListResponse,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IInstancesListResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest|undefined, {}|undefined
+      ]>;
   list(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IInstancesListResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  list(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IInstancesListResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  list(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IInstancesListResponse,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IInstancesListResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IInstancesListResponse,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest|null|undefined,
+          {}|null|undefined>): void;
+  list(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IInstancesListResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest|null|undefined,
+          {}|null|undefined>): void;
+  list(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IInstancesListResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IInstancesListResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IInstancesListResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('list request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IInstancesListResponse,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IInstancesListResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('list response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .list(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IInstancesListResponse,
-          protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('list response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.list(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IInstancesListResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('list response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Lists all of the trusted Certificate Authorities (CAs) for the specified
-   * instance. There can be up to three CAs listed: the CA that was used to sign
-   * the certificate that is currently in use, a CA that has been added but not
-   * yet used to sign a certificate, and a CA used to sign a certificate that
-   * has previously rotated out.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.InstancesListServerCasResponse|InstancesListServerCasResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.list_server_cas.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_ListServerCas_async
-   */
+/**
+ * Lists all of the trusted Certificate Authorities (CAs) for the specified
+ * instance. There can be up to three CAs listed: the CA that was used to sign
+ * the certificate that is currently in use, a CA that has been added but not
+ * yet used to sign a certificate, and a CA used to sign a certificate that
+ * has previously rotated out.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.InstancesListServerCasResponse|InstancesListServerCasResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.list_server_cas.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_ListServerCas_async
+ */
   listServerCas(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IInstancesListServerCasResponse,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IInstancesListServerCasResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest|undefined, {}|undefined
+      ]>;
   listServerCas(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IInstancesListServerCasResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listServerCas(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IInstancesListServerCasResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listServerCas(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IInstancesListServerCasResponse,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IInstancesListServerCasResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IInstancesListServerCasResponse,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest|null|undefined,
+          {}|null|undefined>): void;
+  listServerCas(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IInstancesListServerCasResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest|null|undefined,
+          {}|null|undefined>): void;
+  listServerCas(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IInstancesListServerCasResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IInstancesListServerCasResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IInstancesListServerCasResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('listServerCas request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IInstancesListServerCasResponse,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IInstancesListServerCasResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listServerCas response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .listServerCas(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IInstancesListServerCasResponse,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('listServerCas response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.listServerCas(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IInstancesListServerCasResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('listServerCas response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Partially updates settings of a Cloud SQL instance by merging the request
-   * with the current configuration. This method supports patch semantics.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance.
-   * @param {google.cloud.sql.v1beta4.DatabaseInstance} request.body
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.patch.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Patch_async
-   */
+/**
+ * Partially updates settings of a Cloud SQL instance by merging the request
+ * with the current configuration. This method supports patch semantics.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance.
+ * @param {google.cloud.sql.v1beta4.DatabaseInstance} request.body
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.patch.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Patch_async
+ */
   patch(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest|undefined, {}|undefined
+      ]>;
   patch(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  patch(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  patch(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest|null|undefined,
+          {}|null|undefined>): void;
+  patch(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest|null|undefined,
+          {}|null|undefined>): void;
+  patch(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('patch request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('patch response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .patch(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('patch response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.patch(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('patch response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Promotes the read replica instance to be an independent Cloud SQL
-   * primary instance.
-   * Using this operation might cause your instance to restart.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL read replica instance name.
-   * @param {string} request.project
-   *   ID of the project that contains the read replica.
-   * @param {boolean} request.failover
-   *   Set to true to invoke a replica failover to the designated DR replica.
-   *   As part of replica failover, the promote operation attempts
-   *   to add the original primary instance as a replica of the promoted
-   *   DR replica when the original primary instance comes back online.
-   *   If set to false or not specified, then the original primary
-   *   instance becomes an independent Cloud SQL primary instance.
-   *   Only applicable to MySQL.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.promote_replica.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_PromoteReplica_async
-   */
+/**
+ * Promotes the read replica instance to be an independent Cloud SQL
+ * primary instance.
+ * Using this operation might cause your instance to restart.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL read replica instance name.
+ * @param {string} request.project
+ *   ID of the project that contains the read replica.
+ * @param {boolean} request.failover
+ *   Set to true to invoke a replica failover to the designated DR replica.
+ *   As part of replica failover, the promote operation attempts
+ *   to add the original primary instance as a replica of the promoted
+ *   DR replica when the original primary instance comes back online.
+ *   If set to false or not specified, then the original primary
+ *   instance becomes an independent Cloud SQL primary instance.
+ *   Only applicable to MySQL.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.promote_replica.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_PromoteReplica_async
+ */
   promoteReplica(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest|undefined, {}|undefined
+      ]>;
   promoteReplica(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  promoteReplica(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  promoteReplica(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest|null|undefined,
+          {}|null|undefined>): void;
+  promoteReplica(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest|null|undefined,
+          {}|null|undefined>): void;
+  promoteReplica(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('promoteReplica request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('promoteReplica response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .promoteReplica(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('promoteReplica response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.promoteReplica(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('promoteReplica response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Switches over from the primary instance to the designated DR replica
-   * instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL read replica instance name.
-   * @param {string} request.project
-   *   ID of the project that contains the replica.
-   * @param {google.protobuf.Duration} [request.dbTimeout]
-   *   Optional. (MySQL only) Cloud SQL instance operations timeout, which is a
-   *   sum of all database operations. Default value is 10 minutes and can be
-   *   modified to a maximum value of 24 hours.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.switchover.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Switchover_async
-   */
+/**
+ * Switches over from the primary instance to the designated DR replica
+ * instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL read replica instance name.
+ * @param {string} request.project
+ *   ID of the project that contains the replica.
+ * @param {google.protobuf.Duration} [request.dbTimeout]
+ *   Optional. (MySQL only) Cloud SQL instance operations timeout, which is a
+ *   sum of all database operations. Default value is 10 minutes and can be
+ *   modified to a maximum value of 24 hours.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.switchover.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Switchover_async
+ */
   switchover(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest|undefined, {}|undefined
+      ]>;
   switchover(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  switchover(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  switchover(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest|null|undefined,
+          {}|null|undefined>): void;
+  switchover(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest|null|undefined,
+          {}|null|undefined>): void;
+  switchover(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('switchover request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('switchover response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .switchover(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('switchover response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.switchover(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('switchover response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes all client certificates and generates a new server SSL certificate
-   * for the instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.reset_ssl_config.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_ResetSslConfig_async
-   */
+/**
+ * Deletes all client certificates and generates a new server SSL certificate
+ * for the instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.reset_ssl_config.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_ResetSslConfig_async
+ */
   resetSslConfig(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest|undefined, {}|undefined
+      ]>;
   resetSslConfig(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resetSslConfig(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resetSslConfig(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  resetSslConfig(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  resetSslConfig(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('resetSslConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('resetSslConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .resetSslConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('resetSslConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.resetSslConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('resetSslConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Restarts a Cloud SQL instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance to be restarted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.restart.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Restart_async
-   */
+/**
+ * Restarts a Cloud SQL instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance to be restarted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.restart.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Restart_async
+ */
   restart(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest|undefined, {}|undefined
+      ]>;
   restart(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  restart(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  restart(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest|null|undefined,
+          {}|null|undefined>): void;
+  restart(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest|null|undefined,
+          {}|null|undefined>): void;
+  restart(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('restart request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('restart response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .restart(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('restart response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.restart(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('restart response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Restores a backup of a Cloud SQL instance. Using this operation might cause
-   * your instance to restart.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance.
-   * @param {google.cloud.sql.v1beta4.InstancesRestoreBackupRequest} request.body
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.restore_backup.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_RestoreBackup_async
-   */
+/**
+ * Restores a backup of a Cloud SQL instance. Using this operation might cause
+ * your instance to restart.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance.
+ * @param {google.cloud.sql.v1beta4.InstancesRestoreBackupRequest} request.body
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.restore_backup.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_RestoreBackup_async
+ */
   restoreBackup(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest|undefined, {}|undefined
+      ]>;
   restoreBackup(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  restoreBackup(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  restoreBackup(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest|null|undefined,
+          {}|null|undefined>): void;
+  restoreBackup(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest|null|undefined,
+          {}|null|undefined>): void;
+  restoreBackup(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('restoreBackup request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('restoreBackup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .restoreBackup(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('restoreBackup response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.restoreBackup(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('restoreBackup response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Rotates the server certificate to one signed by the Certificate Authority
-   * (CA) version previously added with the addServerCA method.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance.
-   * @param {google.cloud.sql.v1beta4.InstancesRotateServerCaRequest} request.body
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.rotate_server_ca.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_RotateServerCa_async
-   */
+/**
+ * Rotates the server certificate to one signed by the Certificate Authority
+ * (CA) version previously added with the addServerCA method.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance.
+ * @param {google.cloud.sql.v1beta4.InstancesRotateServerCaRequest} request.body
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.rotate_server_ca.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_RotateServerCa_async
+ */
   rotateServerCa(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest|undefined, {}|undefined
+      ]>;
   rotateServerCa(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  rotateServerCa(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  rotateServerCa(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest|null|undefined,
+          {}|null|undefined>): void;
+  rotateServerCa(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest|null|undefined,
+          {}|null|undefined>): void;
+  rotateServerCa(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('rotateServerCa request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('rotateServerCa response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .rotateServerCa(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('rotateServerCa response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.rotateServerCa(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('rotateServerCa response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Starts the replication in the read replica instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL read replica instance name.
-   * @param {string} request.project
-   *   ID of the project that contains the read replica.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.start_replica.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_StartReplica_async
-   */
+/**
+ * Starts the replication in the read replica instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL read replica instance name.
+ * @param {string} request.project
+ *   ID of the project that contains the read replica.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.start_replica.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_StartReplica_async
+ */
   startReplica(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest|undefined, {}|undefined
+      ]>;
   startReplica(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  startReplica(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  startReplica(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest|null|undefined,
+          {}|null|undefined>): void;
+  startReplica(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest|null|undefined,
+          {}|null|undefined>): void;
+  startReplica(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('startReplica request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('startReplica response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .startReplica(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('startReplica response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.startReplica(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('startReplica response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Stops the replication in the read replica instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL read replica instance name.
-   * @param {string} request.project
-   *   ID of the project that contains the read replica.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.stop_replica.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_StopReplica_async
-   */
+/**
+ * Stops the replication in the read replica instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL read replica instance name.
+ * @param {string} request.project
+ *   ID of the project that contains the read replica.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.stop_replica.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_StopReplica_async
+ */
   stopReplica(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest|undefined, {}|undefined
+      ]>;
   stopReplica(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  stopReplica(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  stopReplica(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest|null|undefined,
+          {}|null|undefined>): void;
+  stopReplica(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest|null|undefined,
+          {}|null|undefined>): void;
+  stopReplica(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('stopReplica request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('stopReplica response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .stopReplica(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('stopReplica response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.stopReplica(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('stopReplica response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Truncate MySQL general and slow query log tables
-   * MySQL only.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the Cloud SQL project.
-   * @param {google.cloud.sql.v1beta4.InstancesTruncateLogRequest} request.body
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.truncate_log.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_TruncateLog_async
-   */
+/**
+ * Truncate MySQL general and slow query log tables
+ * MySQL only.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the Cloud SQL project.
+ * @param {google.cloud.sql.v1beta4.InstancesTruncateLogRequest} request.body
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.truncate_log.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_TruncateLog_async
+ */
   truncateLog(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest|undefined, {}|undefined
+      ]>;
   truncateLog(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  truncateLog(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  truncateLog(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest|null|undefined,
+          {}|null|undefined>): void;
+  truncateLog(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest|null|undefined,
+          {}|null|undefined>): void;
+  truncateLog(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('truncateLog request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('truncateLog response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .truncateLog(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('truncateLog response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.truncateLog(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('truncateLog response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates settings of a Cloud SQL instance. Using this operation might cause
-   * your instance to restart.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance.
-   * @param {google.cloud.sql.v1beta4.DatabaseInstance} request.body
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.update.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Update_async
-   */
+/**
+ * Updates settings of a Cloud SQL instance. Using this operation might cause
+ * your instance to restart.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance.
+ * @param {google.cloud.sql.v1beta4.DatabaseInstance} request.body
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.update.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Update_async
+ */
   update(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest|undefined, {}|undefined
+      ]>;
   update(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  update(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  update(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest|null|undefined,
+          {}|null|undefined>): void;
+  update(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest|null|undefined,
+          {}|null|undefined>): void;
+  update(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('update request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('update response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .update(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('update response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.update(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('update response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Generates a short-lived X509 certificate containing the provided public key
-   * and signed by a private key specific to the target instance. Users may use
-   * the certificate to authenticate as themselves when connecting to the
-   * database.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the Cloud SQL project.
-   * @param {google.cloud.sql.v1beta4.SslCertsCreateEphemeralRequest} request.body
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.SslCert|SslCert}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.create_ephemeral.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_CreateEphemeral_async
-   */
+/**
+ * Generates a short-lived X509 certificate containing the provided public key
+ * and signed by a private key specific to the target instance. Users may use
+ * the certificate to authenticate as themselves when connecting to the
+ * database.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the Cloud SQL project.
+ * @param {google.cloud.sql.v1beta4.SslCertsCreateEphemeralRequest} request.body
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.SslCert|SslCert}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.create_ephemeral.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_CreateEphemeral_async
+ */
   createEphemeral(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.ISslCert,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.ISslCert,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest|undefined, {}|undefined
+      ]>;
   createEphemeral(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.ISslCert,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createEphemeral(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.ISslCert,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createEphemeral(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.ISslCert,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.ISslCert,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.ISslCert,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest|null|undefined,
+          {}|null|undefined>): void;
+  createEphemeral(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.ISslCert,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest|null|undefined,
+          {}|null|undefined>): void;
+  createEphemeral(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.ISslCert,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.ISslCert,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.ISslCert,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createEphemeral request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.ISslCert,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.ISslCert,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createEphemeral response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createEphemeral(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.ISslCert,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createEphemeral response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createEphemeral(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.ISslCert,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createEphemeral response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Reschedules the maintenance on the given instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   ID of the project that contains the instance.
-   * @param {google.cloud.sql.v1beta4.SqlInstancesRescheduleMaintenanceRequestBody} request.body
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.reschedule_maintenance.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_RescheduleMaintenance_async
-   */
+/**
+ * Reschedules the maintenance on the given instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   ID of the project that contains the instance.
+ * @param {google.cloud.sql.v1beta4.SqlInstancesRescheduleMaintenanceRequestBody} request.body
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.reschedule_maintenance.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_RescheduleMaintenance_async
+ */
   rescheduleMaintenance(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest|undefined, {}|undefined
+      ]>;
   rescheduleMaintenance(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  rescheduleMaintenance(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  rescheduleMaintenance(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  rescheduleMaintenance(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  rescheduleMaintenance(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('rescheduleMaintenance request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('rescheduleMaintenance response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .rescheduleMaintenance(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('rescheduleMaintenance response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.rescheduleMaintenance(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('rescheduleMaintenance response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Verify External primary instance external sync settings.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance.
-   * @param {boolean} request.verifyConnectionOnly
-   *   Flag to enable verifying connection only
-   * @param {google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.ExternalSyncMode} request.syncMode
-   *   External sync mode
-   * @param {boolean} [request.verifyReplicationOnly]
-   *   Optional. Flag to verify settings required by replication setup only
-   * @param {google.cloud.sql.v1beta4.MySqlSyncConfig} [request.mysqlSyncConfig]
-   *   Optional. MySQL-specific settings for start external sync.
-   * @param {google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType} [request.migrationType]
-   *   Optional. MigrationType configures the migration to use physical files or
-   *   logical dump files. If not set, then the logical dump file configuration is
-   *   used. Valid values are `LOGICAL` or `PHYSICAL`. Only applicable to MySQL.
-   * @param {google.cloud.sql.v1beta4.ExternalSyncParallelLevel} [request.syncParallelLevel]
-   *   Optional. Parallel level for initial data sync. Only applicable for
-   *   PostgreSQL.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsResponse|SqlInstancesVerifyExternalSyncSettingsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.verify_external_sync_settings.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_VerifyExternalSyncSettings_async
-   */
+/**
+ * Verify External primary instance external sync settings.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance.
+ * @param {boolean} request.verifyConnectionOnly
+ *   Flag to enable verifying connection only
+ * @param {google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.ExternalSyncMode} request.syncMode
+ *   External sync mode
+ * @param {boolean} [request.verifyReplicationOnly]
+ *   Optional. Flag to verify settings required by replication setup only
+ * @param {google.cloud.sql.v1beta4.MySqlSyncConfig} [request.mysqlSyncConfig]
+ *   Optional. MySQL-specific settings for start external sync.
+ * @param {google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType} [request.migrationType]
+ *   Optional. MigrationType configures the migration to use physical files or
+ *   logical dump files. If not set, then the logical dump file configuration is
+ *   used. Valid values are `LOGICAL` or `PHYSICAL`. Only applicable to MySQL.
+ * @param {google.cloud.sql.v1beta4.ExternalSyncParallelLevel} [request.syncParallelLevel]
+ *   Optional. Parallel level for initial data sync. Only applicable for
+ *   PostgreSQL.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsResponse|SqlInstancesVerifyExternalSyncSettingsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.verify_external_sync_settings.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_VerifyExternalSyncSettings_async
+ */
   verifyExternalSyncSettings(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsResponse,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest|undefined, {}|undefined
+      ]>;
   verifyExternalSyncSettings(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  verifyExternalSyncSettings(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  verifyExternalSyncSettings(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsResponse,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsResponse,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  verifyExternalSyncSettings(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  verifyExternalSyncSettings(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('verifyExternalSyncSettings request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsResponse,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('verifyExternalSyncSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .verifyExternalSyncSettings(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsResponse,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('verifyExternalSyncSettings response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.verifyExternalSyncSettings(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('verifyExternalSyncSettings response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Start External primary instance migration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   ID of the project that contains the instance.
-   * @param {google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.ExternalSyncMode} request.syncMode
-   *   External sync mode.
-   * @param {boolean} request.skipVerification
-   *   Whether to skip the verification step (VESS).
-   * @param {google.cloud.sql.v1beta4.MySqlSyncConfig} request.mysqlSyncConfig
-   *   MySQL-specific settings for start external sync.
-   * @param {google.cloud.sql.v1beta4.ExternalSyncParallelLevel} [request.syncParallelLevel]
-   *   Optional. Parallel level for initial data sync. Currently only applicable
-   *   for MySQL.
-   * @param {google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType} [request.migrationType]
-   *   Optional. MigrationType configures the migration to use physical files or
-   *   logical dump files. If not set, then the logical dump file configuration is
-   *   used. Valid values are `LOGICAL` or `PHYSICAL`. Only applicable to MySQL.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.start_external_sync.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_StartExternalSync_async
-   */
+/**
+ * Start External primary instance migration.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   ID of the project that contains the instance.
+ * @param {google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.ExternalSyncMode} request.syncMode
+ *   External sync mode.
+ * @param {boolean} request.skipVerification
+ *   Whether to skip the verification step (VESS).
+ * @param {google.cloud.sql.v1beta4.MySqlSyncConfig} request.mysqlSyncConfig
+ *   MySQL-specific settings for start external sync.
+ * @param {google.cloud.sql.v1beta4.ExternalSyncParallelLevel} [request.syncParallelLevel]
+ *   Optional. Parallel level for initial data sync. Currently only applicable
+ *   for MySQL.
+ * @param {google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType} [request.migrationType]
+ *   Optional. MigrationType configures the migration to use physical files or
+ *   logical dump files. If not set, then the logical dump file configuration is
+ *   used. Valid values are `LOGICAL` or `PHYSICAL`. Only applicable to MySQL.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.start_external_sync.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_StartExternalSync_async
+ */
   startExternalSync(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest|undefined, {}|undefined
+      ]>;
   startExternalSync(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  startExternalSync(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  startExternalSync(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest|null|undefined,
+          {}|null|undefined>): void;
+  startExternalSync(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest|null|undefined,
+          {}|null|undefined>): void;
+  startExternalSync(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('startExternalSync request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('startExternalSync response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .startExternalSync(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('startExternalSync response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.startExternalSync(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('startExternalSync response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Perform Disk Shrink on primary instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance.
-   * @param {google.cloud.sql.v1beta4.PerformDiskShrinkContext} request.body
-   *   Perform disk shrink context.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.perform_disk_shrink.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_PerformDiskShrink_async
-   */
+/**
+ * Perform Disk Shrink on primary instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance.
+ * @param {google.cloud.sql.v1beta4.PerformDiskShrinkContext} request.body
+ *   Perform disk shrink context.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.perform_disk_shrink.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_PerformDiskShrink_async
+ */
   performDiskShrink(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest|undefined, {}|undefined
+      ]>;
   performDiskShrink(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  performDiskShrink(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  performDiskShrink(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  performDiskShrink(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  performDiskShrink(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('performDiskShrink request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('performDiskShrink response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .performDiskShrink(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('performDiskShrink response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.performDiskShrink(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('performDiskShrink response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Get Disk Shrink Config for a given instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.SqlInstancesGetDiskShrinkConfigResponse|SqlInstancesGetDiskShrinkConfigResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.get_disk_shrink_config.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_GetDiskShrinkConfig_async
-   */
+/**
+ * Get Disk Shrink Config for a given instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.SqlInstancesGetDiskShrinkConfigResponse|SqlInstancesGetDiskShrinkConfigResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.get_disk_shrink_config.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_GetDiskShrinkConfig_async
+ */
   getDiskShrinkConfig(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigResponse,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest|undefined, {}|undefined
+      ]>;
   getDiskShrinkConfig(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDiskShrinkConfig(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDiskShrinkConfig(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigResponse,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigResponse,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDiskShrinkConfig(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDiskShrinkConfig(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDiskShrinkConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigResponse,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDiskShrinkConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDiskShrinkConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigResponse,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDiskShrinkConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDiskShrinkConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDiskShrinkConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Reset Replica Size to primary instance disk size.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL read replica instance name.
-   * @param {string} request.project
-   *   ID of the project that contains the read replica.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.reset_replica_size.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_ResetReplicaSize_async
-   */
+/**
+ * Reset Replica Size to primary instance disk size.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL read replica instance name.
+ * @param {string} request.project
+ *   ID of the project that contains the read replica.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.reset_replica_size.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_ResetReplicaSize_async
+ */
   resetReplicaSize(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest|undefined, {}|undefined
+      ]>;
   resetReplicaSize(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resetReplicaSize(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resetReplicaSize(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IOperation,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IOperation,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest|null|undefined,
+          {}|null|undefined>): void;
+  resetReplicaSize(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest|null|undefined,
+          {}|null|undefined>): void;
+  resetReplicaSize(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('resetReplicaSize request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IOperation,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('resetReplicaSize response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .resetReplicaSize(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IOperation,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('resetReplicaSize response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.resetReplicaSize(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.IOperation,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('resetReplicaSize response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Get Latest Recovery Time for a given instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeResponse|SqlInstancesGetLatestRecoveryTimeResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.get_latest_recovery_time.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_GetLatestRecoveryTime_async
-   */
+/**
+ * Get Latest Recovery Time for a given instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeResponse|SqlInstancesGetLatestRecoveryTimeResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.get_latest_recovery_time.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_GetLatestRecoveryTime_async
+ */
   getLatestRecoveryTime(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeResponse,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest|undefined, {}|undefined
+      ]>;
   getLatestRecoveryTime(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getLatestRecoveryTime(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getLatestRecoveryTime(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeResponse,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeResponse,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest|null|undefined,
+          {}|null|undefined>): void;
+  getLatestRecoveryTime(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest|null|undefined,
+          {}|null|undefined>): void;
+  getLatestRecoveryTime(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getLatestRecoveryTime request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeResponse,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getLatestRecoveryTime response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getLatestRecoveryTime(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeResponse,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getLatestRecoveryTime response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getLatestRecoveryTime(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getLatestRecoveryTime response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Acquire a lease for the setup of SQL Server Reporting Services (SSRS).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Required. Cloud SQL instance ID. This doesn't include the project ID. It's
-   *   composed of lowercase letters, numbers, and hyphens, and it must start with
-   *   a letter. The total length must be 98 characters or less (Example:
-   *   instance-id).
-   * @param {string} request.project
-   *   Required. ID of the project that contains the instance (Example:
-   *   project-id).
-   * @param {google.cloud.sql.v1beta4.InstancesAcquireSsrsLeaseRequest} request.body
-   *   The body for request to acquire an SSRS lease.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.SqlInstancesAcquireSsrsLeaseResponse|SqlInstancesAcquireSsrsLeaseResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.acquire_ssrs_lease.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_AcquireSsrsLease_async
-   */
+/**
+ * Acquire a lease for the setup of SQL Server Reporting Services (SSRS).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Required. Cloud SQL instance ID. This doesn't include the project ID. It's
+ *   composed of lowercase letters, numbers, and hyphens, and it must start with
+ *   a letter. The total length must be 98 characters or less (Example:
+ *   instance-id).
+ * @param {string} request.project
+ *   Required. ID of the project that contains the instance (Example:
+ *   project-id).
+ * @param {google.cloud.sql.v1beta4.InstancesAcquireSsrsLeaseRequest} request.body
+ *   The body for request to acquire an SSRS lease.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.SqlInstancesAcquireSsrsLeaseResponse|SqlInstancesAcquireSsrsLeaseResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.acquire_ssrs_lease.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_AcquireSsrsLease_async
+ */
   acquireSsrsLease(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest|undefined, {}|undefined
+      ]>;
   acquireSsrsLease(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  acquireSsrsLease(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  acquireSsrsLease(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest|null|undefined,
+          {}|null|undefined>): void;
+  acquireSsrsLease(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest|null|undefined,
+          {}|null|undefined>): void;
+  acquireSsrsLease(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('acquireSsrsLease request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('acquireSsrsLease response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .acquireSsrsLease(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('acquireSsrsLease response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.acquireSsrsLease(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('acquireSsrsLease response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Release a lease for the setup of SQL Server Reporting Services (SSRS).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Required. The Cloud SQL instance ID. This doesn't include the project ID.
-   *   It's composed of lowercase letters, numbers, and hyphens, and it must start
-   *   with a letter. The total length must be 98 characters or less (Example:
-   *   instance-id).
-   * @param {string} request.project
-   *   Required. The ID of the project that contains the instance (Example:
-   *   project-id).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.SqlInstancesReleaseSsrsLeaseResponse|SqlInstancesReleaseSsrsLeaseResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.release_ssrs_lease.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_ReleaseSsrsLease_async
-   */
+/**
+ * Release a lease for the setup of SQL Server Reporting Services (SSRS).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Required. The Cloud SQL instance ID. This doesn't include the project ID.
+ *   It's composed of lowercase letters, numbers, and hyphens, and it must start
+ *   with a letter. The total length must be 98 characters or less (Example:
+ *   instance-id).
+ * @param {string} request.project
+ *   Required. The ID of the project that contains the instance (Example:
+ *   project-id).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.SqlInstancesReleaseSsrsLeaseResponse|SqlInstancesReleaseSsrsLeaseResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta4/sql_instances_service.release_ssrs_lease.js</caption>
+ * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_ReleaseSsrsLease_async
+ */
   releaseSsrsLease(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest|undefined, {}|undefined
+      ]>;
   releaseSsrsLease(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  releaseSsrsLease(
-    request: protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  releaseSsrsLease(
-    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
-      | protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
-      (
-        | protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest|null|undefined,
+          {}|null|undefined>): void;
+  releaseSsrsLease(
+      request: protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest|null|undefined,
+          {}|null|undefined>): void;
+  releaseSsrsLease(
+      request?: protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
+          protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('releaseSsrsLease request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
-          | protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('releaseSsrsLease response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .releaseSsrsLease(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
-          (
-            | protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('releaseSsrsLease response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.releaseSsrsLease(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
+        protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('releaseSsrsLease response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -4888,7 +3777,7 @@ export class SqlInstancesServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -4926,6 +3815,7 @@ export class SqlInstancesServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
+
   /**
    * Terminate the gRPC channel and close the client.
    *
@@ -4938,9 +3828,7 @@ export class SqlInstancesServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
       });
     }
     return Promise.resolve();
