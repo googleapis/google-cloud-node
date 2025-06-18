@@ -66,6 +66,22 @@
                      */
                     var v1 = {};
     
+                    /**
+                     * EnvoyHeaders enum.
+                     * @name google.cloud.networkservices.v1.EnvoyHeaders
+                     * @enum {number}
+                     * @property {number} ENVOY_HEADERS_UNSPECIFIED=0 ENVOY_HEADERS_UNSPECIFIED value
+                     * @property {number} NONE=1 NONE value
+                     * @property {number} DEBUG_HEADERS=2 DEBUG_HEADERS value
+                     */
+                    v1.EnvoyHeaders = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ENVOY_HEADERS_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "NONE"] = 1;
+                        values[valuesById[2] = "DEBUG_HEADERS"] = 2;
+                        return values;
+                    })();
+    
                     v1.OperationMetadata = (function() {
     
                         /**
@@ -217,12 +233,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OperationMetadata.decode = function decode(reader, length) {
+                        OperationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.OperationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -505,12 +523,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TrafficPortSelector.decode = function decode(reader, length) {
+                        TrafficPortSelector.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.TrafficPortSelector();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.ports && message.ports.length))
@@ -736,12 +756,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EndpointMatcher.decode = function decode(reader, length) {
+                        EndpointMatcher.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.EndpointMatcher();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.metadataLabelMatcher = $root.google.cloud.networkservices.v1.EndpointMatcher.MetadataLabelMatcher.decode(reader, reader.uint32());
@@ -959,12 +981,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            MetadataLabelMatcher.decode = function decode(reader, length) {
+                            MetadataLabelMatcher.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.EndpointMatcher.MetadataLabelMatcher();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.metadataLabelMatchCriteria = reader.int32();
@@ -1226,12 +1250,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                MetadataLabels.decode = function decode(reader, length) {
+                                MetadataLabels.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.EndpointMatcher.MetadataLabelMatcher.MetadataLabels();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.labelName = reader.string();
@@ -1893,12 +1919,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExtensionChain.decode = function decode(reader, length) {
+                        ExtensionChain.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ExtensionChain();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -2143,12 +2171,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            MatchCondition.decode = function decode(reader, length) {
+                            MatchCondition.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ExtensionChain.MatchCondition();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.celExpression = reader.string();
@@ -2419,12 +2449,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Extension.decode = function decode(reader, length) {
+                            Extension.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ExtensionChain.Extension();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -2876,12 +2908,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        LbTrafficExtension.decode = function decode(reader, length) {
+                        LbTrafficExtension.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.LbTrafficExtension(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -3328,12 +3362,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListLbTrafficExtensionsRequest.decode = function decode(reader, length) {
+                        ListLbTrafficExtensionsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -3606,12 +3642,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListLbTrafficExtensionsResponse.decode = function decode(reader, length) {
+                        ListLbTrafficExtensionsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.lbTrafficExtensions && message.lbTrafficExtensions.length))
@@ -3868,12 +3906,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetLbTrafficExtensionRequest.decode = function decode(reader, length) {
+                        GetLbTrafficExtensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -4104,12 +4144,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateLbTrafficExtensionRequest.decode = function decode(reader, length) {
+                        CreateLbTrafficExtensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -4371,12 +4413,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateLbTrafficExtensionRequest.decode = function decode(reader, length) {
+                        UpdateLbTrafficExtensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -4620,12 +4664,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteLbTrafficExtensionRequest.decode = function decode(reader, length) {
+                        DeleteLbTrafficExtensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -4930,12 +4976,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        LbRouteExtension.decode = function decode(reader, length) {
+                        LbRouteExtension.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.LbRouteExtension(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -5382,12 +5430,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListLbRouteExtensionsRequest.decode = function decode(reader, length) {
+                        ListLbRouteExtensionsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -5660,12 +5710,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListLbRouteExtensionsResponse.decode = function decode(reader, length) {
+                        ListLbRouteExtensionsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListLbRouteExtensionsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.lbRouteExtensions && message.lbRouteExtensions.length))
@@ -5922,12 +5974,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetLbRouteExtensionRequest.decode = function decode(reader, length) {
+                        GetLbRouteExtensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GetLbRouteExtensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -6158,12 +6212,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateLbRouteExtensionRequest.decode = function decode(reader, length) {
+                        CreateLbRouteExtensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -6425,12 +6481,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateLbRouteExtensionRequest.decode = function decode(reader, length) {
+                        UpdateLbRouteExtensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -6674,12 +6732,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteLbRouteExtensionRequest.decode = function decode(reader, length) {
+                        DeleteLbRouteExtensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -7002,12 +7062,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EndpointPolicy.decode = function decode(reader, length) {
+                        EndpointPolicy.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.EndpointPolicy(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -7344,6 +7406,7 @@
                          * @property {string|null} [parent] ListEndpointPoliciesRequest parent
                          * @property {number|null} [pageSize] ListEndpointPoliciesRequest pageSize
                          * @property {string|null} [pageToken] ListEndpointPoliciesRequest pageToken
+                         * @property {boolean|null} [returnPartialSuccess] ListEndpointPoliciesRequest returnPartialSuccess
                          */
     
                         /**
@@ -7386,6 +7449,14 @@
                         ListEndpointPoliciesRequest.prototype.pageToken = "";
     
                         /**
+                         * ListEndpointPoliciesRequest returnPartialSuccess.
+                         * @member {boolean} returnPartialSuccess
+                         * @memberof google.cloud.networkservices.v1.ListEndpointPoliciesRequest
+                         * @instance
+                         */
+                        ListEndpointPoliciesRequest.prototype.returnPartialSuccess = false;
+    
+                        /**
                          * Creates a new ListEndpointPoliciesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkservices.v1.ListEndpointPoliciesRequest
@@ -7415,6 +7486,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.returnPartialSuccess != null && Object.hasOwnProperty.call(message, "returnPartialSuccess"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.returnPartialSuccess);
                             return writer;
                         };
     
@@ -7442,12 +7515,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListEndpointPoliciesRequest.decode = function decode(reader, length) {
+                        ListEndpointPoliciesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListEndpointPoliciesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -7459,6 +7534,10 @@
                                     }
                                 case 3: {
                                         message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.returnPartialSuccess = reader.bool();
                                         break;
                                     }
                                 default:
@@ -7505,6 +7584,9 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
+                            if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                                if (typeof message.returnPartialSuccess !== "boolean")
+                                    return "returnPartialSuccess: boolean expected";
                             return null;
                         };
     
@@ -7526,6 +7608,8 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
+                            if (object.returnPartialSuccess != null)
+                                message.returnPartialSuccess = Boolean(object.returnPartialSuccess);
                             return message;
                         };
     
@@ -7546,6 +7630,7 @@
                                 object.parent = "";
                                 object.pageSize = 0;
                                 object.pageToken = "";
+                                object.returnPartialSuccess = false;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -7553,6 +7638,8 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                                object.returnPartialSuccess = message.returnPartialSuccess;
                             return object;
                         };
     
@@ -7593,6 +7680,7 @@
                          * @interface IListEndpointPoliciesResponse
                          * @property {Array.<google.cloud.networkservices.v1.IEndpointPolicy>|null} [endpointPolicies] ListEndpointPoliciesResponse endpointPolicies
                          * @property {string|null} [nextPageToken] ListEndpointPoliciesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListEndpointPoliciesResponse unreachable
                          */
     
                         /**
@@ -7605,6 +7693,7 @@
                          */
                         function ListEndpointPoliciesResponse(properties) {
                             this.endpointPolicies = [];
+                            this.unreachable = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -7626,6 +7715,14 @@
                          * @instance
                          */
                         ListEndpointPoliciesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListEndpointPoliciesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkservices.v1.ListEndpointPoliciesResponse
+                         * @instance
+                         */
+                        ListEndpointPoliciesResponse.prototype.unreachable = $util.emptyArray;
     
                         /**
                          * Creates a new ListEndpointPoliciesResponse instance using the specified properties.
@@ -7656,6 +7753,9 @@
                                     $root.google.cloud.networkservices.v1.EndpointPolicy.encode(message.endpointPolicies[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
                             return writer;
                         };
     
@@ -7683,12 +7783,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListEndpointPoliciesResponse.decode = function decode(reader, length) {
+                        ListEndpointPoliciesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListEndpointPoliciesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.endpointPolicies && message.endpointPolicies.length))
@@ -7698,6 +7800,12 @@
                                     }
                                 case 2: {
                                         message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -7747,6 +7855,13 @@
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
                             return null;
                         };
     
@@ -7774,6 +7889,13 @@
                             }
                             if (object.nextPageToken != null)
                                 message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListEndpointPoliciesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
                             return message;
                         };
     
@@ -7790,8 +7912,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.endpointPolicies = [];
+                                object.unreachable = [];
+                            }
                             if (options.defaults)
                                 object.nextPageToken = "";
                             if (message.endpointPolicies && message.endpointPolicies.length) {
@@ -7801,6 +7925,11 @@
                             }
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
                             return object;
                         };
     
@@ -7918,12 +8047,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetEndpointPolicyRequest.decode = function decode(reader, length) {
+                        GetEndpointPolicyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GetEndpointPolicyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -8143,12 +8274,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateEndpointPolicyRequest.decode = function decode(reader, length) {
+                        CreateEndpointPolicyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.CreateEndpointPolicyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -8387,12 +8520,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateEndpointPolicyRequest.decode = function decode(reader, length) {
+                        UpdateEndpointPolicyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.UpdateEndpointPolicyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -8613,12 +8748,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteEndpointPolicyRequest.decode = function decode(reader, length) {
+                        DeleteEndpointPolicyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.DeleteEndpointPolicyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -8744,9 +8881,17 @@
                          * @property {Object.<string,string>|null} [labels] Gateway labels
                          * @property {string|null} [description] Gateway description
                          * @property {google.cloud.networkservices.v1.Gateway.Type|null} [type] Gateway type
+                         * @property {Array.<string>|null} [addresses] Gateway addresses
                          * @property {Array.<number>|null} [ports] Gateway ports
                          * @property {string|null} [scope] Gateway scope
                          * @property {string|null} [serverTlsPolicy] Gateway serverTlsPolicy
+                         * @property {Array.<string>|null} [certificateUrls] Gateway certificateUrls
+                         * @property {string|null} [gatewaySecurityPolicy] Gateway gatewaySecurityPolicy
+                         * @property {string|null} [network] Gateway network
+                         * @property {string|null} [subnetwork] Gateway subnetwork
+                         * @property {google.cloud.networkservices.v1.Gateway.IpVersion|null} [ipVersion] Gateway ipVersion
+                         * @property {google.cloud.networkservices.v1.EnvoyHeaders|null} [envoyHeaders] Gateway envoyHeaders
+                         * @property {google.cloud.networkservices.v1.Gateway.RoutingMode|null} [routingMode] Gateway routingMode
                          */
     
                         /**
@@ -8759,7 +8904,9 @@
                          */
                         function Gateway(properties) {
                             this.labels = {};
+                            this.addresses = [];
                             this.ports = [];
+                            this.certificateUrls = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -8823,6 +8970,14 @@
                         Gateway.prototype.type = 0;
     
                         /**
+                         * Gateway addresses.
+                         * @member {Array.<string>} addresses
+                         * @memberof google.cloud.networkservices.v1.Gateway
+                         * @instance
+                         */
+                        Gateway.prototype.addresses = $util.emptyArray;
+    
+                        /**
                          * Gateway ports.
                          * @member {Array.<number>} ports
                          * @memberof google.cloud.networkservices.v1.Gateway
@@ -8845,6 +9000,71 @@
                          * @instance
                          */
                         Gateway.prototype.serverTlsPolicy = "";
+    
+                        /**
+                         * Gateway certificateUrls.
+                         * @member {Array.<string>} certificateUrls
+                         * @memberof google.cloud.networkservices.v1.Gateway
+                         * @instance
+                         */
+                        Gateway.prototype.certificateUrls = $util.emptyArray;
+    
+                        /**
+                         * Gateway gatewaySecurityPolicy.
+                         * @member {string} gatewaySecurityPolicy
+                         * @memberof google.cloud.networkservices.v1.Gateway
+                         * @instance
+                         */
+                        Gateway.prototype.gatewaySecurityPolicy = "";
+    
+                        /**
+                         * Gateway network.
+                         * @member {string} network
+                         * @memberof google.cloud.networkservices.v1.Gateway
+                         * @instance
+                         */
+                        Gateway.prototype.network = "";
+    
+                        /**
+                         * Gateway subnetwork.
+                         * @member {string} subnetwork
+                         * @memberof google.cloud.networkservices.v1.Gateway
+                         * @instance
+                         */
+                        Gateway.prototype.subnetwork = "";
+    
+                        /**
+                         * Gateway ipVersion.
+                         * @member {google.cloud.networkservices.v1.Gateway.IpVersion} ipVersion
+                         * @memberof google.cloud.networkservices.v1.Gateway
+                         * @instance
+                         */
+                        Gateway.prototype.ipVersion = 0;
+    
+                        /**
+                         * Gateway envoyHeaders.
+                         * @member {google.cloud.networkservices.v1.EnvoyHeaders|null|undefined} envoyHeaders
+                         * @memberof google.cloud.networkservices.v1.Gateway
+                         * @instance
+                         */
+                        Gateway.prototype.envoyHeaders = null;
+    
+                        /**
+                         * Gateway routingMode.
+                         * @member {google.cloud.networkservices.v1.Gateway.RoutingMode} routingMode
+                         * @memberof google.cloud.networkservices.v1.Gateway
+                         * @instance
+                         */
+                        Gateway.prototype.routingMode = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Gateway.prototype, "_envoyHeaders", {
+                            get: $util.oneOfGetter($oneOfFields = ["envoyHeaders"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new Gateway instance using the specified properties.
@@ -8883,6 +9103,9 @@
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.description);
                             if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.type);
+                            if (message.addresses != null && message.addresses.length)
+                                for (var i = 0; i < message.addresses.length; ++i)
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.addresses[i]);
                             if (message.scope != null && Object.hasOwnProperty.call(message, "scope"))
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.scope);
                             if (message.serverTlsPolicy != null && Object.hasOwnProperty.call(message, "serverTlsPolicy"))
@@ -8895,6 +9118,21 @@
                             }
                             if (message.selfLink != null && Object.hasOwnProperty.call(message, "selfLink"))
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.selfLink);
+                            if (message.certificateUrls != null && message.certificateUrls.length)
+                                for (var i = 0; i < message.certificateUrls.length; ++i)
+                                    writer.uint32(/* id 14, wireType 2 =*/114).string(message.certificateUrls[i]);
+                            if (message.network != null && Object.hasOwnProperty.call(message, "network"))
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.network);
+                            if (message.subnetwork != null && Object.hasOwnProperty.call(message, "subnetwork"))
+                                writer.uint32(/* id 17, wireType 2 =*/138).string(message.subnetwork);
+                            if (message.gatewaySecurityPolicy != null && Object.hasOwnProperty.call(message, "gatewaySecurityPolicy"))
+                                writer.uint32(/* id 18, wireType 2 =*/146).string(message.gatewaySecurityPolicy);
+                            if (message.ipVersion != null && Object.hasOwnProperty.call(message, "ipVersion"))
+                                writer.uint32(/* id 21, wireType 0 =*/168).int32(message.ipVersion);
+                            if (message.envoyHeaders != null && Object.hasOwnProperty.call(message, "envoyHeaders"))
+                                writer.uint32(/* id 28, wireType 0 =*/224).int32(message.envoyHeaders);
+                            if (message.routingMode != null && Object.hasOwnProperty.call(message, "routingMode"))
+                                writer.uint32(/* id 32, wireType 0 =*/256).int32(message.routingMode);
                             return writer;
                         };
     
@@ -8922,12 +9160,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Gateway.decode = function decode(reader, length) {
+                        Gateway.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.Gateway(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -8976,6 +9216,12 @@
                                         message.type = reader.int32();
                                         break;
                                     }
+                                case 7: {
+                                        if (!(message.addresses && message.addresses.length))
+                                            message.addresses = [];
+                                        message.addresses.push(reader.string());
+                                        break;
+                                    }
                                 case 11: {
                                         if (!(message.ports && message.ports.length))
                                             message.ports = [];
@@ -8993,6 +9239,36 @@
                                     }
                                 case 9: {
                                         message.serverTlsPolicy = reader.string();
+                                        break;
+                                    }
+                                case 14: {
+                                        if (!(message.certificateUrls && message.certificateUrls.length))
+                                            message.certificateUrls = [];
+                                        message.certificateUrls.push(reader.string());
+                                        break;
+                                    }
+                                case 18: {
+                                        message.gatewaySecurityPolicy = reader.string();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.network = reader.string();
+                                        break;
+                                    }
+                                case 17: {
+                                        message.subnetwork = reader.string();
+                                        break;
+                                    }
+                                case 21: {
+                                        message.ipVersion = reader.int32();
+                                        break;
+                                    }
+                                case 28: {
+                                        message.envoyHeaders = reader.int32();
+                                        break;
+                                    }
+                                case 32: {
+                                        message.routingMode = reader.int32();
                                         break;
                                     }
                                 default:
@@ -9030,6 +9306,7 @@
                         Gateway.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -9066,6 +9343,13 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.addresses != null && message.hasOwnProperty("addresses")) {
+                                if (!Array.isArray(message.addresses))
+                                    return "addresses: array expected";
+                                for (var i = 0; i < message.addresses.length; ++i)
+                                    if (!$util.isString(message.addresses[i]))
+                                        return "addresses: string[] expected";
+                            }
                             if (message.ports != null && message.hasOwnProperty("ports")) {
                                 if (!Array.isArray(message.ports))
                                     return "ports: array expected";
@@ -9079,6 +9363,50 @@
                             if (message.serverTlsPolicy != null && message.hasOwnProperty("serverTlsPolicy"))
                                 if (!$util.isString(message.serverTlsPolicy))
                                     return "serverTlsPolicy: string expected";
+                            if (message.certificateUrls != null && message.hasOwnProperty("certificateUrls")) {
+                                if (!Array.isArray(message.certificateUrls))
+                                    return "certificateUrls: array expected";
+                                for (var i = 0; i < message.certificateUrls.length; ++i)
+                                    if (!$util.isString(message.certificateUrls[i]))
+                                        return "certificateUrls: string[] expected";
+                            }
+                            if (message.gatewaySecurityPolicy != null && message.hasOwnProperty("gatewaySecurityPolicy"))
+                                if (!$util.isString(message.gatewaySecurityPolicy))
+                                    return "gatewaySecurityPolicy: string expected";
+                            if (message.network != null && message.hasOwnProperty("network"))
+                                if (!$util.isString(message.network))
+                                    return "network: string expected";
+                            if (message.subnetwork != null && message.hasOwnProperty("subnetwork"))
+                                if (!$util.isString(message.subnetwork))
+                                    return "subnetwork: string expected";
+                            if (message.ipVersion != null && message.hasOwnProperty("ipVersion"))
+                                switch (message.ipVersion) {
+                                default:
+                                    return "ipVersion: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.envoyHeaders != null && message.hasOwnProperty("envoyHeaders")) {
+                                properties._envoyHeaders = 1;
+                                switch (message.envoyHeaders) {
+                                default:
+                                    return "envoyHeaders: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            if (message.routingMode != null && message.hasOwnProperty("routingMode"))
+                                switch (message.routingMode) {
+                                default:
+                                    return "routingMode: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -9137,6 +9465,13 @@
                                 message.type = 2;
                                 break;
                             }
+                            if (object.addresses) {
+                                if (!Array.isArray(object.addresses))
+                                    throw TypeError(".google.cloud.networkservices.v1.Gateway.addresses: array expected");
+                                message.addresses = [];
+                                for (var i = 0; i < object.addresses.length; ++i)
+                                    message.addresses[i] = String(object.addresses[i]);
+                            }
                             if (object.ports) {
                                 if (!Array.isArray(object.ports))
                                     throw TypeError(".google.cloud.networkservices.v1.Gateway.ports: array expected");
@@ -9148,6 +9483,75 @@
                                 message.scope = String(object.scope);
                             if (object.serverTlsPolicy != null)
                                 message.serverTlsPolicy = String(object.serverTlsPolicy);
+                            if (object.certificateUrls) {
+                                if (!Array.isArray(object.certificateUrls))
+                                    throw TypeError(".google.cloud.networkservices.v1.Gateway.certificateUrls: array expected");
+                                message.certificateUrls = [];
+                                for (var i = 0; i < object.certificateUrls.length; ++i)
+                                    message.certificateUrls[i] = String(object.certificateUrls[i]);
+                            }
+                            if (object.gatewaySecurityPolicy != null)
+                                message.gatewaySecurityPolicy = String(object.gatewaySecurityPolicy);
+                            if (object.network != null)
+                                message.network = String(object.network);
+                            if (object.subnetwork != null)
+                                message.subnetwork = String(object.subnetwork);
+                            switch (object.ipVersion) {
+                            default:
+                                if (typeof object.ipVersion === "number") {
+                                    message.ipVersion = object.ipVersion;
+                                    break;
+                                }
+                                break;
+                            case "IP_VERSION_UNSPECIFIED":
+                            case 0:
+                                message.ipVersion = 0;
+                                break;
+                            case "IPV4":
+                            case 1:
+                                message.ipVersion = 1;
+                                break;
+                            case "IPV6":
+                            case 2:
+                                message.ipVersion = 2;
+                                break;
+                            }
+                            switch (object.envoyHeaders) {
+                            default:
+                                if (typeof object.envoyHeaders === "number") {
+                                    message.envoyHeaders = object.envoyHeaders;
+                                    break;
+                                }
+                                break;
+                            case "ENVOY_HEADERS_UNSPECIFIED":
+                            case 0:
+                                message.envoyHeaders = 0;
+                                break;
+                            case "NONE":
+                            case 1:
+                                message.envoyHeaders = 1;
+                                break;
+                            case "DEBUG_HEADERS":
+                            case 2:
+                                message.envoyHeaders = 2;
+                                break;
+                            }
+                            switch (object.routingMode) {
+                            default:
+                                if (typeof object.routingMode === "number") {
+                                    message.routingMode = object.routingMode;
+                                    break;
+                                }
+                                break;
+                            case "EXPLICIT_ROUTING_MODE":
+                            case 0:
+                                message.routingMode = 0;
+                                break;
+                            case "NEXT_HOP_ROUTING_MODE":
+                            case 1:
+                                message.routingMode = 1;
+                                break;
+                            }
                             return message;
                         };
     
@@ -9164,8 +9568,11 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
+                                object.addresses = [];
                                 object.ports = [];
+                                object.certificateUrls = [];
+                            }
                             if (options.objects || options.defaults)
                                 object.labels = {};
                             if (options.defaults) {
@@ -9177,6 +9584,11 @@
                                 object.scope = "";
                                 object.serverTlsPolicy = "";
                                 object.selfLink = "";
+                                object.network = "";
+                                object.subnetwork = "";
+                                object.gatewaySecurityPolicy = "";
+                                object.ipVersion = options.enums === String ? "IP_VERSION_UNSPECIFIED" : 0;
+                                object.routingMode = options.enums === String ? "EXPLICIT_ROUTING_MODE" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -9194,6 +9606,11 @@
                                 object.description = message.description;
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = options.enums === String ? $root.google.cloud.networkservices.v1.Gateway.Type[message.type] === undefined ? message.type : $root.google.cloud.networkservices.v1.Gateway.Type[message.type] : message.type;
+                            if (message.addresses && message.addresses.length) {
+                                object.addresses = [];
+                                for (var j = 0; j < message.addresses.length; ++j)
+                                    object.addresses[j] = message.addresses[j];
+                            }
                             if (message.scope != null && message.hasOwnProperty("scope"))
                                 object.scope = message.scope;
                             if (message.serverTlsPolicy != null && message.hasOwnProperty("serverTlsPolicy"))
@@ -9205,6 +9622,26 @@
                             }
                             if (message.selfLink != null && message.hasOwnProperty("selfLink"))
                                 object.selfLink = message.selfLink;
+                            if (message.certificateUrls && message.certificateUrls.length) {
+                                object.certificateUrls = [];
+                                for (var j = 0; j < message.certificateUrls.length; ++j)
+                                    object.certificateUrls[j] = message.certificateUrls[j];
+                            }
+                            if (message.network != null && message.hasOwnProperty("network"))
+                                object.network = message.network;
+                            if (message.subnetwork != null && message.hasOwnProperty("subnetwork"))
+                                object.subnetwork = message.subnetwork;
+                            if (message.gatewaySecurityPolicy != null && message.hasOwnProperty("gatewaySecurityPolicy"))
+                                object.gatewaySecurityPolicy = message.gatewaySecurityPolicy;
+                            if (message.ipVersion != null && message.hasOwnProperty("ipVersion"))
+                                object.ipVersion = options.enums === String ? $root.google.cloud.networkservices.v1.Gateway.IpVersion[message.ipVersion] === undefined ? message.ipVersion : $root.google.cloud.networkservices.v1.Gateway.IpVersion[message.ipVersion] : message.ipVersion;
+                            if (message.envoyHeaders != null && message.hasOwnProperty("envoyHeaders")) {
+                                object.envoyHeaders = options.enums === String ? $root.google.cloud.networkservices.v1.EnvoyHeaders[message.envoyHeaders] === undefined ? message.envoyHeaders : $root.google.cloud.networkservices.v1.EnvoyHeaders[message.envoyHeaders] : message.envoyHeaders;
+                                if (options.oneofs)
+                                    object._envoyHeaders = "envoyHeaders";
+                            }
+                            if (message.routingMode != null && message.hasOwnProperty("routingMode"))
+                                object.routingMode = options.enums === String ? $root.google.cloud.networkservices.v1.Gateway.RoutingMode[message.routingMode] === undefined ? message.routingMode : $root.google.cloud.networkservices.v1.Gateway.RoutingMode[message.routingMode] : message.routingMode;
                             return object;
                         };
     
@@ -9247,6 +9684,36 @@
                             values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "OPEN_MESH"] = 1;
                             values[valuesById[2] = "SECURE_WEB_GATEWAY"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * IpVersion enum.
+                         * @name google.cloud.networkservices.v1.Gateway.IpVersion
+                         * @enum {number}
+                         * @property {number} IP_VERSION_UNSPECIFIED=0 IP_VERSION_UNSPECIFIED value
+                         * @property {number} IPV4=1 IPV4 value
+                         * @property {number} IPV6=2 IPV6 value
+                         */
+                        Gateway.IpVersion = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "IP_VERSION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "IPV4"] = 1;
+                            values[valuesById[2] = "IPV6"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * RoutingMode enum.
+                         * @name google.cloud.networkservices.v1.Gateway.RoutingMode
+                         * @enum {number}
+                         * @property {number} EXPLICIT_ROUTING_MODE=0 EXPLICIT_ROUTING_MODE value
+                         * @property {number} NEXT_HOP_ROUTING_MODE=1 NEXT_HOP_ROUTING_MODE value
+                         */
+                        Gateway.RoutingMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "EXPLICIT_ROUTING_MODE"] = 0;
+                            values[valuesById[1] = "NEXT_HOP_ROUTING_MODE"] = 1;
                             return values;
                         })();
     
@@ -9360,12 +9827,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListGatewaysRequest.decode = function decode(reader, length) {
+                        ListGatewaysRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListGatewaysRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -9511,6 +9980,7 @@
                          * @interface IListGatewaysResponse
                          * @property {Array.<google.cloud.networkservices.v1.IGateway>|null} [gateways] ListGatewaysResponse gateways
                          * @property {string|null} [nextPageToken] ListGatewaysResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListGatewaysResponse unreachable
                          */
     
                         /**
@@ -9523,6 +9993,7 @@
                          */
                         function ListGatewaysResponse(properties) {
                             this.gateways = [];
+                            this.unreachable = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -9544,6 +10015,14 @@
                          * @instance
                          */
                         ListGatewaysResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListGatewaysResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkservices.v1.ListGatewaysResponse
+                         * @instance
+                         */
+                        ListGatewaysResponse.prototype.unreachable = $util.emptyArray;
     
                         /**
                          * Creates a new ListGatewaysResponse instance using the specified properties.
@@ -9574,6 +10053,9 @@
                                     $root.google.cloud.networkservices.v1.Gateway.encode(message.gateways[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
                             return writer;
                         };
     
@@ -9601,12 +10083,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListGatewaysResponse.decode = function decode(reader, length) {
+                        ListGatewaysResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListGatewaysResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.gateways && message.gateways.length))
@@ -9616,6 +10100,12 @@
                                     }
                                 case 2: {
                                         message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -9665,6 +10155,13 @@
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
                             return null;
                         };
     
@@ -9692,6 +10189,13 @@
                             }
                             if (object.nextPageToken != null)
                                 message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListGatewaysResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
                             return message;
                         };
     
@@ -9708,8 +10212,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.gateways = [];
+                                object.unreachable = [];
+                            }
                             if (options.defaults)
                                 object.nextPageToken = "";
                             if (message.gateways && message.gateways.length) {
@@ -9719,6 +10225,11 @@
                             }
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
                             return object;
                         };
     
@@ -9836,12 +10347,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetGatewayRequest.decode = function decode(reader, length) {
+                        GetGatewayRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GetGatewayRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -10061,12 +10574,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateGatewayRequest.decode = function decode(reader, length) {
+                        CreateGatewayRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.CreateGatewayRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -10305,12 +10820,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateGatewayRequest.decode = function decode(reader, length) {
+                        UpdateGatewayRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.UpdateGatewayRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -10531,12 +11048,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteGatewayRequest.decode = function decode(reader, length) {
+                        DeleteGatewayRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.DeleteGatewayRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -10843,12 +11362,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GrpcRoute.decode = function decode(reader, length) {
+                        GrpcRoute.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GrpcRoute(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -11236,12 +11757,7 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * MethodMatch _caseSensitive.
-                             * @member {"caseSensitive"|undefined} _caseSensitive
-                             * @memberof google.cloud.networkservices.v1.GrpcRoute.MethodMatch
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(MethodMatch.prototype, "_caseSensitive", {
                                 get: $util.oneOfGetter($oneOfFields = ["caseSensitive"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -11306,12 +11822,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            MethodMatch.decode = function decode(reader, length) {
+                            MethodMatch.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GrpcRoute.MethodMatch();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.type = reader.int32();
@@ -11613,12 +12131,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            HeaderMatch.decode = function decode(reader, length) {
+                            HeaderMatch.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GrpcRoute.HeaderMatch();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.type = reader.int32();
@@ -11841,12 +12361,7 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * RouteMatch _method.
-                             * @member {"method"|undefined} _method
-                             * @memberof google.cloud.networkservices.v1.GrpcRoute.RouteMatch
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(RouteMatch.prototype, "_method", {
                                 get: $util.oneOfGetter($oneOfFields = ["method"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -11908,12 +12423,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RouteMatch.decode = function decode(reader, length) {
+                            RouteMatch.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GrpcRoute.RouteMatch();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.method = $root.google.cloud.networkservices.v1.GrpcRoute.MethodMatch.decode(reader, reader.uint32());
@@ -12123,12 +12640,7 @@
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Destination _weight.
-                             * @member {"weight"|undefined} _weight
-                             * @memberof google.cloud.networkservices.v1.GrpcRoute.Destination
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Destination.prototype, "_weight", {
                                 get: $util.oneOfGetter($oneOfFields = ["weight"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -12189,12 +12701,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Destination.decode = function decode(reader, length) {
+                            Destination.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GrpcRoute.Destination();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.serviceName = reader.string();
@@ -12371,23 +12885,13 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * FaultInjectionPolicy _delay.
-                             * @member {"delay"|undefined} _delay
-                             * @memberof google.cloud.networkservices.v1.GrpcRoute.FaultInjectionPolicy
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(FaultInjectionPolicy.prototype, "_delay", {
                                 get: $util.oneOfGetter($oneOfFields = ["delay"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * FaultInjectionPolicy _abort.
-                             * @member {"abort"|undefined} _abort
-                             * @memberof google.cloud.networkservices.v1.GrpcRoute.FaultInjectionPolicy
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(FaultInjectionPolicy.prototype, "_abort", {
                                 get: $util.oneOfGetter($oneOfFields = ["abort"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -12448,12 +12952,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            FaultInjectionPolicy.decode = function decode(reader, length) {
+                            FaultInjectionPolicy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GrpcRoute.FaultInjectionPolicy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.delay = $root.google.cloud.networkservices.v1.GrpcRoute.FaultInjectionPolicy.Delay.decode(reader, reader.uint32());
@@ -12639,23 +13145,13 @@
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
     
-                                /**
-                                 * Delay _fixedDelay.
-                                 * @member {"fixedDelay"|undefined} _fixedDelay
-                                 * @memberof google.cloud.networkservices.v1.GrpcRoute.FaultInjectionPolicy.Delay
-                                 * @instance
-                                 */
+                                // Virtual OneOf for proto3 optional field
                                 Object.defineProperty(Delay.prototype, "_fixedDelay", {
                                     get: $util.oneOfGetter($oneOfFields = ["fixedDelay"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
-                                /**
-                                 * Delay _percentage.
-                                 * @member {"percentage"|undefined} _percentage
-                                 * @memberof google.cloud.networkservices.v1.GrpcRoute.FaultInjectionPolicy.Delay
-                                 * @instance
-                                 */
+                                // Virtual OneOf for proto3 optional field
                                 Object.defineProperty(Delay.prototype, "_percentage", {
                                     get: $util.oneOfGetter($oneOfFields = ["percentage"]),
                                     set: $util.oneOfSetter($oneOfFields)
@@ -12716,12 +13212,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                Delay.decode = function decode(reader, length) {
+                                Delay.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GrpcRoute.FaultInjectionPolicy.Delay();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.fixedDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -12904,23 +13402,13 @@
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
     
-                                /**
-                                 * Abort _httpStatus.
-                                 * @member {"httpStatus"|undefined} _httpStatus
-                                 * @memberof google.cloud.networkservices.v1.GrpcRoute.FaultInjectionPolicy.Abort
-                                 * @instance
-                                 */
+                                // Virtual OneOf for proto3 optional field
                                 Object.defineProperty(Abort.prototype, "_httpStatus", {
                                     get: $util.oneOfGetter($oneOfFields = ["httpStatus"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
-                                /**
-                                 * Abort _percentage.
-                                 * @member {"percentage"|undefined} _percentage
-                                 * @memberof google.cloud.networkservices.v1.GrpcRoute.FaultInjectionPolicy.Abort
-                                 * @instance
-                                 */
+                                // Virtual OneOf for proto3 optional field
                                 Object.defineProperty(Abort.prototype, "_percentage", {
                                     get: $util.oneOfGetter($oneOfFields = ["percentage"]),
                                     set: $util.oneOfSetter($oneOfFields)
@@ -12981,12 +13469,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                Abort.decode = function decode(reader, length) {
+                                Abort.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GrpcRoute.FaultInjectionPolicy.Abort();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.httpStatus = reader.int32();
@@ -13122,6 +13612,216 @@
                             return FaultInjectionPolicy;
                         })();
     
+                        GrpcRoute.StatefulSessionAffinityPolicy = (function() {
+    
+                            /**
+                             * Properties of a StatefulSessionAffinityPolicy.
+                             * @memberof google.cloud.networkservices.v1.GrpcRoute
+                             * @interface IStatefulSessionAffinityPolicy
+                             * @property {google.protobuf.IDuration|null} [cookieTtl] StatefulSessionAffinityPolicy cookieTtl
+                             */
+    
+                            /**
+                             * Constructs a new StatefulSessionAffinityPolicy.
+                             * @memberof google.cloud.networkservices.v1.GrpcRoute
+                             * @classdesc Represents a StatefulSessionAffinityPolicy.
+                             * @implements IStatefulSessionAffinityPolicy
+                             * @constructor
+                             * @param {google.cloud.networkservices.v1.GrpcRoute.IStatefulSessionAffinityPolicy=} [properties] Properties to set
+                             */
+                            function StatefulSessionAffinityPolicy(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * StatefulSessionAffinityPolicy cookieTtl.
+                             * @member {google.protobuf.IDuration|null|undefined} cookieTtl
+                             * @memberof google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy
+                             * @instance
+                             */
+                            StatefulSessionAffinityPolicy.prototype.cookieTtl = null;
+    
+                            /**
+                             * Creates a new StatefulSessionAffinityPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy
+                             * @static
+                             * @param {google.cloud.networkservices.v1.GrpcRoute.IStatefulSessionAffinityPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy} StatefulSessionAffinityPolicy instance
+                             */
+                            StatefulSessionAffinityPolicy.create = function create(properties) {
+                                return new StatefulSessionAffinityPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified StatefulSessionAffinityPolicy message. Does not implicitly {@link google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy
+                             * @static
+                             * @param {google.cloud.networkservices.v1.GrpcRoute.IStatefulSessionAffinityPolicy} message StatefulSessionAffinityPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StatefulSessionAffinityPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.cookieTtl != null && Object.hasOwnProperty.call(message, "cookieTtl"))
+                                    $root.google.protobuf.Duration.encode(message.cookieTtl, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified StatefulSessionAffinityPolicy message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy
+                             * @static
+                             * @param {google.cloud.networkservices.v1.GrpcRoute.IStatefulSessionAffinityPolicy} message StatefulSessionAffinityPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StatefulSessionAffinityPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a StatefulSessionAffinityPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy} StatefulSessionAffinityPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StatefulSessionAffinityPolicy.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.cookieTtl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a StatefulSessionAffinityPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy} StatefulSessionAffinityPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StatefulSessionAffinityPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a StatefulSessionAffinityPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            StatefulSessionAffinityPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.cookieTtl != null && message.hasOwnProperty("cookieTtl")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.cookieTtl);
+                                    if (error)
+                                        return "cookieTtl." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a StatefulSessionAffinityPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy} StatefulSessionAffinityPolicy
+                             */
+                            StatefulSessionAffinityPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy();
+                                if (object.cookieTtl != null) {
+                                    if (typeof object.cookieTtl !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy.cookieTtl: object expected");
+                                    message.cookieTtl = $root.google.protobuf.Duration.fromObject(object.cookieTtl);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a StatefulSessionAffinityPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy
+                             * @static
+                             * @param {google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy} message StatefulSessionAffinityPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            StatefulSessionAffinityPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.cookieTtl = null;
+                                if (message.cookieTtl != null && message.hasOwnProperty("cookieTtl"))
+                                    object.cookieTtl = $root.google.protobuf.Duration.toObject(message.cookieTtl, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this StatefulSessionAffinityPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            StatefulSessionAffinityPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for StatefulSessionAffinityPolicy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            StatefulSessionAffinityPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy";
+                            };
+    
+                            return StatefulSessionAffinityPolicy;
+                        })();
+    
                         GrpcRoute.RetryPolicy = (function() {
     
                             /**
@@ -13220,12 +13920,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RetryPolicy.decode = function decode(reader, length) {
+                            RetryPolicy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GrpcRoute.RetryPolicy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.retryConditions && message.retryConditions.length))
@@ -13375,6 +14077,8 @@
                              * @property {google.cloud.networkservices.v1.GrpcRoute.IFaultInjectionPolicy|null} [faultInjectionPolicy] RouteAction faultInjectionPolicy
                              * @property {google.protobuf.IDuration|null} [timeout] RouteAction timeout
                              * @property {google.cloud.networkservices.v1.GrpcRoute.IRetryPolicy|null} [retryPolicy] RouteAction retryPolicy
+                             * @property {google.cloud.networkservices.v1.GrpcRoute.IStatefulSessionAffinityPolicy|null} [statefulSessionAffinity] RouteAction statefulSessionAffinity
+                             * @property {google.protobuf.IDuration|null} [idleTimeout] RouteAction idleTimeout
                              */
     
                             /**
@@ -13426,6 +14130,22 @@
                             RouteAction.prototype.retryPolicy = null;
     
                             /**
+                             * RouteAction statefulSessionAffinity.
+                             * @member {google.cloud.networkservices.v1.GrpcRoute.IStatefulSessionAffinityPolicy|null|undefined} statefulSessionAffinity
+                             * @memberof google.cloud.networkservices.v1.GrpcRoute.RouteAction
+                             * @instance
+                             */
+                            RouteAction.prototype.statefulSessionAffinity = null;
+    
+                            /**
+                             * RouteAction idleTimeout.
+                             * @member {google.protobuf.IDuration|null|undefined} idleTimeout
+                             * @memberof google.cloud.networkservices.v1.GrpcRoute.RouteAction
+                             * @instance
+                             */
+                            RouteAction.prototype.idleTimeout = null;
+    
+                            /**
                              * Creates a new RouteAction instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.networkservices.v1.GrpcRoute.RouteAction
@@ -13458,6 +14178,10 @@
                                     $root.google.protobuf.Duration.encode(message.timeout, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 if (message.retryPolicy != null && Object.hasOwnProperty.call(message, "retryPolicy"))
                                     $root.google.cloud.networkservices.v1.GrpcRoute.RetryPolicy.encode(message.retryPolicy, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.statefulSessionAffinity != null && Object.hasOwnProperty.call(message, "statefulSessionAffinity"))
+                                    $root.google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy.encode(message.statefulSessionAffinity, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                if (message.idleTimeout != null && Object.hasOwnProperty.call(message, "idleTimeout"))
+                                    $root.google.protobuf.Duration.encode(message.idleTimeout, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                                 return writer;
                             };
     
@@ -13485,12 +14209,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RouteAction.decode = function decode(reader, length) {
+                            RouteAction.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GrpcRoute.RouteAction();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.destinations && message.destinations.length))
@@ -13508,6 +14234,14 @@
                                         }
                                     case 8: {
                                             message.retryPolicy = $root.google.cloud.networkservices.v1.GrpcRoute.RetryPolicy.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.statefulSessionAffinity = $root.google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.idleTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -13569,6 +14303,16 @@
                                     if (error)
                                         return "retryPolicy." + error;
                                 }
+                                if (message.statefulSessionAffinity != null && message.hasOwnProperty("statefulSessionAffinity")) {
+                                    var error = $root.google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy.verify(message.statefulSessionAffinity);
+                                    if (error)
+                                        return "statefulSessionAffinity." + error;
+                                }
+                                if (message.idleTimeout != null && message.hasOwnProperty("idleTimeout")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.idleTimeout);
+                                    if (error)
+                                        return "idleTimeout." + error;
+                                }
                                 return null;
                             };
     
@@ -13609,6 +14353,16 @@
                                         throw TypeError(".google.cloud.networkservices.v1.GrpcRoute.RouteAction.retryPolicy: object expected");
                                     message.retryPolicy = $root.google.cloud.networkservices.v1.GrpcRoute.RetryPolicy.fromObject(object.retryPolicy);
                                 }
+                                if (object.statefulSessionAffinity != null) {
+                                    if (typeof object.statefulSessionAffinity !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.GrpcRoute.RouteAction.statefulSessionAffinity: object expected");
+                                    message.statefulSessionAffinity = $root.google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy.fromObject(object.statefulSessionAffinity);
+                                }
+                                if (object.idleTimeout != null) {
+                                    if (typeof object.idleTimeout !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.GrpcRoute.RouteAction.idleTimeout: object expected");
+                                    message.idleTimeout = $root.google.protobuf.Duration.fromObject(object.idleTimeout);
+                                }
                                 return message;
                             };
     
@@ -13631,6 +14385,8 @@
                                     object.faultInjectionPolicy = null;
                                     object.timeout = null;
                                     object.retryPolicy = null;
+                                    object.statefulSessionAffinity = null;
+                                    object.idleTimeout = null;
                                 }
                                 if (message.destinations && message.destinations.length) {
                                     object.destinations = [];
@@ -13643,6 +14399,10 @@
                                     object.timeout = $root.google.protobuf.Duration.toObject(message.timeout, options);
                                 if (message.retryPolicy != null && message.hasOwnProperty("retryPolicy"))
                                     object.retryPolicy = $root.google.cloud.networkservices.v1.GrpcRoute.RetryPolicy.toObject(message.retryPolicy, options);
+                                if (message.statefulSessionAffinity != null && message.hasOwnProperty("statefulSessionAffinity"))
+                                    object.statefulSessionAffinity = $root.google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy.toObject(message.statefulSessionAffinity, options);
+                                if (message.idleTimeout != null && message.hasOwnProperty("idleTimeout"))
+                                    object.idleTimeout = $root.google.protobuf.Duration.toObject(message.idleTimeout, options);
                                 return object;
                             };
     
@@ -13773,12 +14533,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RouteRule.decode = function decode(reader, length) {
+                            RouteRule.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GrpcRoute.RouteRule();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.matches && message.matches.length))
@@ -13940,6 +14702,7 @@
                          * @property {string|null} [parent] ListGrpcRoutesRequest parent
                          * @property {number|null} [pageSize] ListGrpcRoutesRequest pageSize
                          * @property {string|null} [pageToken] ListGrpcRoutesRequest pageToken
+                         * @property {boolean|null} [returnPartialSuccess] ListGrpcRoutesRequest returnPartialSuccess
                          */
     
                         /**
@@ -13982,6 +14745,14 @@
                         ListGrpcRoutesRequest.prototype.pageToken = "";
     
                         /**
+                         * ListGrpcRoutesRequest returnPartialSuccess.
+                         * @member {boolean} returnPartialSuccess
+                         * @memberof google.cloud.networkservices.v1.ListGrpcRoutesRequest
+                         * @instance
+                         */
+                        ListGrpcRoutesRequest.prototype.returnPartialSuccess = false;
+    
+                        /**
                          * Creates a new ListGrpcRoutesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkservices.v1.ListGrpcRoutesRequest
@@ -14011,6 +14782,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.returnPartialSuccess != null && Object.hasOwnProperty.call(message, "returnPartialSuccess"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.returnPartialSuccess);
                             return writer;
                         };
     
@@ -14038,12 +14811,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListGrpcRoutesRequest.decode = function decode(reader, length) {
+                        ListGrpcRoutesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListGrpcRoutesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -14055,6 +14830,10 @@
                                     }
                                 case 3: {
                                         message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.returnPartialSuccess = reader.bool();
                                         break;
                                     }
                                 default:
@@ -14101,6 +14880,9 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
+                            if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                                if (typeof message.returnPartialSuccess !== "boolean")
+                                    return "returnPartialSuccess: boolean expected";
                             return null;
                         };
     
@@ -14122,6 +14904,8 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
+                            if (object.returnPartialSuccess != null)
+                                message.returnPartialSuccess = Boolean(object.returnPartialSuccess);
                             return message;
                         };
     
@@ -14142,6 +14926,7 @@
                                 object.parent = "";
                                 object.pageSize = 0;
                                 object.pageToken = "";
+                                object.returnPartialSuccess = false;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -14149,6 +14934,8 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                                object.returnPartialSuccess = message.returnPartialSuccess;
                             return object;
                         };
     
@@ -14189,6 +14976,7 @@
                          * @interface IListGrpcRoutesResponse
                          * @property {Array.<google.cloud.networkservices.v1.IGrpcRoute>|null} [grpcRoutes] ListGrpcRoutesResponse grpcRoutes
                          * @property {string|null} [nextPageToken] ListGrpcRoutesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListGrpcRoutesResponse unreachable
                          */
     
                         /**
@@ -14201,6 +14989,7 @@
                          */
                         function ListGrpcRoutesResponse(properties) {
                             this.grpcRoutes = [];
+                            this.unreachable = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -14222,6 +15011,14 @@
                          * @instance
                          */
                         ListGrpcRoutesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListGrpcRoutesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkservices.v1.ListGrpcRoutesResponse
+                         * @instance
+                         */
+                        ListGrpcRoutesResponse.prototype.unreachable = $util.emptyArray;
     
                         /**
                          * Creates a new ListGrpcRoutesResponse instance using the specified properties.
@@ -14252,6 +15049,9 @@
                                     $root.google.cloud.networkservices.v1.GrpcRoute.encode(message.grpcRoutes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
                             return writer;
                         };
     
@@ -14279,12 +15079,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListGrpcRoutesResponse.decode = function decode(reader, length) {
+                        ListGrpcRoutesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListGrpcRoutesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.grpcRoutes && message.grpcRoutes.length))
@@ -14294,6 +15096,12 @@
                                     }
                                 case 2: {
                                         message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -14343,6 +15151,13 @@
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
                             return null;
                         };
     
@@ -14370,6 +15185,13 @@
                             }
                             if (object.nextPageToken != null)
                                 message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListGrpcRoutesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
                             return message;
                         };
     
@@ -14386,8 +15208,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.grpcRoutes = [];
+                                object.unreachable = [];
+                            }
                             if (options.defaults)
                                 object.nextPageToken = "";
                             if (message.grpcRoutes && message.grpcRoutes.length) {
@@ -14397,6 +15221,11 @@
                             }
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
                             return object;
                         };
     
@@ -14514,12 +15343,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetGrpcRouteRequest.decode = function decode(reader, length) {
+                        GetGrpcRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GetGrpcRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -14739,12 +15570,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateGrpcRouteRequest.decode = function decode(reader, length) {
+                        CreateGrpcRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.CreateGrpcRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -14983,12 +15816,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateGrpcRouteRequest.decode = function decode(reader, length) {
+                        UpdateGrpcRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.UpdateGrpcRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -15209,12 +16044,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteGrpcRouteRequest.decode = function decode(reader, length) {
+                        DeleteGrpcRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.DeleteGrpcRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -15521,12 +16358,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        HttpRoute.decode = function decode(reader, length) {
+                        HttpRoute.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.HttpRoute(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -16028,12 +16867,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            HeaderMatch.decode = function decode(reader, length) {
+                            HeaderMatch.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.HttpRoute.HeaderMatch();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 2: {
                                             message.exactMatch = reader.string();
@@ -16365,12 +17206,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                IntegerRange.decode = function decode(reader, length) {
+                                IntegerRange.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.HttpRoute.HeaderMatch.IntegerRange();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.start = reader.int32();
@@ -16631,12 +17474,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            QueryParameterMatch.decode = function decode(reader, length) {
+                            QueryParameterMatch.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.HttpRoute.QueryParameterMatch();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 2: {
                                             message.exactMatch = reader.string();
@@ -16960,12 +17805,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RouteMatch.decode = function decode(reader, length) {
+                            RouteMatch.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.HttpRoute.RouteMatch();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.fullPathMatch = reader.string();
@@ -17203,6 +18050,8 @@
                              * @interface IDestination
                              * @property {string|null} [serviceName] Destination serviceName
                              * @property {number|null} [weight] Destination weight
+                             * @property {google.cloud.networkservices.v1.HttpRoute.IHeaderModifier|null} [requestHeaderModifier] Destination requestHeaderModifier
+                             * @property {google.cloud.networkservices.v1.HttpRoute.IHeaderModifier|null} [responseHeaderModifier] Destination responseHeaderModifier
                              */
     
                             /**
@@ -17237,6 +18086,22 @@
                             Destination.prototype.weight = 0;
     
                             /**
+                             * Destination requestHeaderModifier.
+                             * @member {google.cloud.networkservices.v1.HttpRoute.IHeaderModifier|null|undefined} requestHeaderModifier
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.Destination
+                             * @instance
+                             */
+                            Destination.prototype.requestHeaderModifier = null;
+    
+                            /**
+                             * Destination responseHeaderModifier.
+                             * @member {google.cloud.networkservices.v1.HttpRoute.IHeaderModifier|null|undefined} responseHeaderModifier
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.Destination
+                             * @instance
+                             */
+                            Destination.prototype.responseHeaderModifier = null;
+    
+                            /**
                              * Creates a new Destination instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.networkservices.v1.HttpRoute.Destination
@@ -17264,6 +18129,10 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceName);
                                 if (message.weight != null && Object.hasOwnProperty.call(message, "weight"))
                                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.weight);
+                                if (message.requestHeaderModifier != null && Object.hasOwnProperty.call(message, "requestHeaderModifier"))
+                                    $root.google.cloud.networkservices.v1.HttpRoute.HeaderModifier.encode(message.requestHeaderModifier, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.responseHeaderModifier != null && Object.hasOwnProperty.call(message, "responseHeaderModifier"))
+                                    $root.google.cloud.networkservices.v1.HttpRoute.HeaderModifier.encode(message.responseHeaderModifier, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 return writer;
                             };
     
@@ -17291,12 +18160,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Destination.decode = function decode(reader, length) {
+                            Destination.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.HttpRoute.Destination();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.serviceName = reader.string();
@@ -17304,6 +18175,14 @@
                                         }
                                     case 2: {
                                             message.weight = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.requestHeaderModifier = $root.google.cloud.networkservices.v1.HttpRoute.HeaderModifier.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.responseHeaderModifier = $root.google.cloud.networkservices.v1.HttpRoute.HeaderModifier.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -17347,6 +18226,16 @@
                                 if (message.weight != null && message.hasOwnProperty("weight"))
                                     if (!$util.isInteger(message.weight))
                                         return "weight: integer expected";
+                                if (message.requestHeaderModifier != null && message.hasOwnProperty("requestHeaderModifier")) {
+                                    var error = $root.google.cloud.networkservices.v1.HttpRoute.HeaderModifier.verify(message.requestHeaderModifier);
+                                    if (error)
+                                        return "requestHeaderModifier." + error;
+                                }
+                                if (message.responseHeaderModifier != null && message.hasOwnProperty("responseHeaderModifier")) {
+                                    var error = $root.google.cloud.networkservices.v1.HttpRoute.HeaderModifier.verify(message.responseHeaderModifier);
+                                    if (error)
+                                        return "responseHeaderModifier." + error;
+                                }
                                 return null;
                             };
     
@@ -17366,6 +18255,16 @@
                                     message.serviceName = String(object.serviceName);
                                 if (object.weight != null)
                                     message.weight = object.weight | 0;
+                                if (object.requestHeaderModifier != null) {
+                                    if (typeof object.requestHeaderModifier !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.HttpRoute.Destination.requestHeaderModifier: object expected");
+                                    message.requestHeaderModifier = $root.google.cloud.networkservices.v1.HttpRoute.HeaderModifier.fromObject(object.requestHeaderModifier);
+                                }
+                                if (object.responseHeaderModifier != null) {
+                                    if (typeof object.responseHeaderModifier !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.HttpRoute.Destination.responseHeaderModifier: object expected");
+                                    message.responseHeaderModifier = $root.google.cloud.networkservices.v1.HttpRoute.HeaderModifier.fromObject(object.responseHeaderModifier);
+                                }
                                 return message;
                             };
     
@@ -17385,11 +18284,17 @@
                                 if (options.defaults) {
                                     object.serviceName = "";
                                     object.weight = 0;
+                                    object.requestHeaderModifier = null;
+                                    object.responseHeaderModifier = null;
                                 }
                                 if (message.serviceName != null && message.hasOwnProperty("serviceName"))
                                     object.serviceName = message.serviceName;
                                 if (message.weight != null && message.hasOwnProperty("weight"))
                                     object.weight = message.weight;
+                                if (message.requestHeaderModifier != null && message.hasOwnProperty("requestHeaderModifier"))
+                                    object.requestHeaderModifier = $root.google.cloud.networkservices.v1.HttpRoute.HeaderModifier.toObject(message.requestHeaderModifier, options);
+                                if (message.responseHeaderModifier != null && message.hasOwnProperty("responseHeaderModifier"))
+                                    object.responseHeaderModifier = $root.google.cloud.networkservices.v1.HttpRoute.HeaderModifier.toObject(message.responseHeaderModifier, options);
                                 return object;
                             };
     
@@ -17573,12 +18478,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Redirect.decode = function decode(reader, length) {
+                            Redirect.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.HttpRoute.Redirect();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.hostRedirect = reader.string();
@@ -17921,12 +18828,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            FaultInjectionPolicy.decode = function decode(reader, length) {
+                            FaultInjectionPolicy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.HttpRoute.FaultInjectionPolicy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.delay = $root.google.cloud.networkservices.v1.HttpRoute.FaultInjectionPolicy.Delay.decode(reader, reader.uint32());
@@ -18155,12 +19064,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                Delay.decode = function decode(reader, length) {
+                                Delay.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.HttpRoute.FaultInjectionPolicy.Delay();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.fixedDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -18387,12 +19298,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                Abort.decode = function decode(reader, length) {
+                                Abort.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.HttpRoute.FaultInjectionPolicy.Abort();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.httpStatus = reader.int32();
@@ -18521,6 +19434,216 @@
                             return FaultInjectionPolicy;
                         })();
     
+                        HttpRoute.StatefulSessionAffinityPolicy = (function() {
+    
+                            /**
+                             * Properties of a StatefulSessionAffinityPolicy.
+                             * @memberof google.cloud.networkservices.v1.HttpRoute
+                             * @interface IStatefulSessionAffinityPolicy
+                             * @property {google.protobuf.IDuration|null} [cookieTtl] StatefulSessionAffinityPolicy cookieTtl
+                             */
+    
+                            /**
+                             * Constructs a new StatefulSessionAffinityPolicy.
+                             * @memberof google.cloud.networkservices.v1.HttpRoute
+                             * @classdesc Represents a StatefulSessionAffinityPolicy.
+                             * @implements IStatefulSessionAffinityPolicy
+                             * @constructor
+                             * @param {google.cloud.networkservices.v1.HttpRoute.IStatefulSessionAffinityPolicy=} [properties] Properties to set
+                             */
+                            function StatefulSessionAffinityPolicy(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * StatefulSessionAffinityPolicy cookieTtl.
+                             * @member {google.protobuf.IDuration|null|undefined} cookieTtl
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy
+                             * @instance
+                             */
+                            StatefulSessionAffinityPolicy.prototype.cookieTtl = null;
+    
+                            /**
+                             * Creates a new StatefulSessionAffinityPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy
+                             * @static
+                             * @param {google.cloud.networkservices.v1.HttpRoute.IStatefulSessionAffinityPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy} StatefulSessionAffinityPolicy instance
+                             */
+                            StatefulSessionAffinityPolicy.create = function create(properties) {
+                                return new StatefulSessionAffinityPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified StatefulSessionAffinityPolicy message. Does not implicitly {@link google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy
+                             * @static
+                             * @param {google.cloud.networkservices.v1.HttpRoute.IStatefulSessionAffinityPolicy} message StatefulSessionAffinityPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StatefulSessionAffinityPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.cookieTtl != null && Object.hasOwnProperty.call(message, "cookieTtl"))
+                                    $root.google.protobuf.Duration.encode(message.cookieTtl, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified StatefulSessionAffinityPolicy message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy
+                             * @static
+                             * @param {google.cloud.networkservices.v1.HttpRoute.IStatefulSessionAffinityPolicy} message StatefulSessionAffinityPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StatefulSessionAffinityPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a StatefulSessionAffinityPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy} StatefulSessionAffinityPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StatefulSessionAffinityPolicy.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.cookieTtl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a StatefulSessionAffinityPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy} StatefulSessionAffinityPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StatefulSessionAffinityPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a StatefulSessionAffinityPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            StatefulSessionAffinityPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.cookieTtl != null && message.hasOwnProperty("cookieTtl")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.cookieTtl);
+                                    if (error)
+                                        return "cookieTtl." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a StatefulSessionAffinityPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy} StatefulSessionAffinityPolicy
+                             */
+                            StatefulSessionAffinityPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy();
+                                if (object.cookieTtl != null) {
+                                    if (typeof object.cookieTtl !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy.cookieTtl: object expected");
+                                    message.cookieTtl = $root.google.protobuf.Duration.fromObject(object.cookieTtl);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a StatefulSessionAffinityPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy
+                             * @static
+                             * @param {google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy} message StatefulSessionAffinityPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            StatefulSessionAffinityPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.cookieTtl = null;
+                                if (message.cookieTtl != null && message.hasOwnProperty("cookieTtl"))
+                                    object.cookieTtl = $root.google.protobuf.Duration.toObject(message.cookieTtl, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this StatefulSessionAffinityPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            StatefulSessionAffinityPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for StatefulSessionAffinityPolicy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            StatefulSessionAffinityPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy";
+                            };
+    
+                            return StatefulSessionAffinityPolicy;
+                        })();
+    
                         HttpRoute.HeaderModifier = (function() {
     
                             /**
@@ -18634,12 +19757,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            HeaderModifier.decode = function decode(reader, length) {
+                            HeaderModifier.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.HttpRoute.HeaderModifier(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (message.set === $util.emptyObject)
@@ -18953,12 +20078,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            URLRewrite.decode = function decode(reader, length) {
+                            URLRewrite.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.HttpRoute.URLRewrite();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.pathPrefixRewrite = reader.string();
@@ -19193,12 +20320,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RetryPolicy.decode = function decode(reader, length) {
+                            RetryPolicy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.HttpRoute.RetryPolicy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.retryConditions && message.retryConditions.length))
@@ -19363,6 +20492,7 @@
                              * @memberof google.cloud.networkservices.v1.HttpRoute
                              * @interface IRequestMirrorPolicy
                              * @property {google.cloud.networkservices.v1.HttpRoute.IDestination|null} [destination] RequestMirrorPolicy destination
+                             * @property {number|null} [mirrorPercent] RequestMirrorPolicy mirrorPercent
                              */
     
                             /**
@@ -19387,6 +20517,14 @@
                              * @instance
                              */
                             RequestMirrorPolicy.prototype.destination = null;
+    
+                            /**
+                             * RequestMirrorPolicy mirrorPercent.
+                             * @member {number} mirrorPercent
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.RequestMirrorPolicy
+                             * @instance
+                             */
+                            RequestMirrorPolicy.prototype.mirrorPercent = 0;
     
                             /**
                              * Creates a new RequestMirrorPolicy instance using the specified properties.
@@ -19414,6 +20552,8 @@
                                     writer = $Writer.create();
                                 if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
                                     $root.google.cloud.networkservices.v1.HttpRoute.Destination.encode(message.destination, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.mirrorPercent != null && Object.hasOwnProperty.call(message, "mirrorPercent"))
+                                    writer.uint32(/* id 2, wireType 5 =*/21).float(message.mirrorPercent);
                                 return writer;
                             };
     
@@ -19441,15 +20581,21 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RequestMirrorPolicy.decode = function decode(reader, length) {
+                            RequestMirrorPolicy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.HttpRoute.RequestMirrorPolicy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.destination = $root.google.cloud.networkservices.v1.HttpRoute.Destination.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.mirrorPercent = reader.float();
                                             break;
                                         }
                                     default:
@@ -19492,6 +20638,9 @@
                                     if (error)
                                         return "destination." + error;
                                 }
+                                if (message.mirrorPercent != null && message.hasOwnProperty("mirrorPercent"))
+                                    if (typeof message.mirrorPercent !== "number")
+                                        return "mirrorPercent: number expected";
                                 return null;
                             };
     
@@ -19512,6 +20661,8 @@
                                         throw TypeError(".google.cloud.networkservices.v1.HttpRoute.RequestMirrorPolicy.destination: object expected");
                                     message.destination = $root.google.cloud.networkservices.v1.HttpRoute.Destination.fromObject(object.destination);
                                 }
+                                if (object.mirrorPercent != null)
+                                    message.mirrorPercent = Number(object.mirrorPercent);
                                 return message;
                             };
     
@@ -19528,10 +20679,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.destination = null;
+                                    object.mirrorPercent = 0;
+                                }
                                 if (message.destination != null && message.hasOwnProperty("destination"))
                                     object.destination = $root.google.cloud.networkservices.v1.HttpRoute.Destination.toObject(message.destination, options);
+                                if (message.mirrorPercent != null && message.hasOwnProperty("mirrorPercent"))
+                                    object.mirrorPercent = options.json && !isFinite(message.mirrorPercent) ? String(message.mirrorPercent) : message.mirrorPercent;
                                 return object;
                             };
     
@@ -19736,12 +20891,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CorsPolicy.decode = function decode(reader, length) {
+                            CorsPolicy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.HttpRoute.CorsPolicy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.allowOrigins && message.allowOrigins.length))
@@ -20011,6 +21168,285 @@
                             return CorsPolicy;
                         })();
     
+                        HttpRoute.HttpDirectResponse = (function() {
+    
+                            /**
+                             * Properties of a HttpDirectResponse.
+                             * @memberof google.cloud.networkservices.v1.HttpRoute
+                             * @interface IHttpDirectResponse
+                             * @property {string|null} [stringBody] HttpDirectResponse stringBody
+                             * @property {Uint8Array|null} [bytesBody] HttpDirectResponse bytesBody
+                             * @property {number|null} [status] HttpDirectResponse status
+                             */
+    
+                            /**
+                             * Constructs a new HttpDirectResponse.
+                             * @memberof google.cloud.networkservices.v1.HttpRoute
+                             * @classdesc Represents a HttpDirectResponse.
+                             * @implements IHttpDirectResponse
+                             * @constructor
+                             * @param {google.cloud.networkservices.v1.HttpRoute.IHttpDirectResponse=} [properties] Properties to set
+                             */
+                            function HttpDirectResponse(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * HttpDirectResponse stringBody.
+                             * @member {string|null|undefined} stringBody
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse
+                             * @instance
+                             */
+                            HttpDirectResponse.prototype.stringBody = null;
+    
+                            /**
+                             * HttpDirectResponse bytesBody.
+                             * @member {Uint8Array|null|undefined} bytesBody
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse
+                             * @instance
+                             */
+                            HttpDirectResponse.prototype.bytesBody = null;
+    
+                            /**
+                             * HttpDirectResponse status.
+                             * @member {number} status
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse
+                             * @instance
+                             */
+                            HttpDirectResponse.prototype.status = 0;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * HttpDirectResponse HttpBody.
+                             * @member {"stringBody"|"bytesBody"|undefined} HttpBody
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse
+                             * @instance
+                             */
+                            Object.defineProperty(HttpDirectResponse.prototype, "HttpBody", {
+                                get: $util.oneOfGetter($oneOfFields = ["stringBody", "bytesBody"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new HttpDirectResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse
+                             * @static
+                             * @param {google.cloud.networkservices.v1.HttpRoute.IHttpDirectResponse=} [properties] Properties to set
+                             * @returns {google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse} HttpDirectResponse instance
+                             */
+                            HttpDirectResponse.create = function create(properties) {
+                                return new HttpDirectResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified HttpDirectResponse message. Does not implicitly {@link google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse
+                             * @static
+                             * @param {google.cloud.networkservices.v1.HttpRoute.IHttpDirectResponse} message HttpDirectResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            HttpDirectResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.status);
+                                if (message.stringBody != null && Object.hasOwnProperty.call(message, "stringBody"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.stringBody);
+                                if (message.bytesBody != null && Object.hasOwnProperty.call(message, "bytesBody"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.bytesBody);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified HttpDirectResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse
+                             * @static
+                             * @param {google.cloud.networkservices.v1.HttpRoute.IHttpDirectResponse} message HttpDirectResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            HttpDirectResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a HttpDirectResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse} HttpDirectResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            HttpDirectResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.stringBody = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.bytesBody = reader.bytes();
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.status = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a HttpDirectResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse} HttpDirectResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            HttpDirectResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a HttpDirectResponse message.
+                             * @function verify
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            HttpDirectResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.stringBody != null && message.hasOwnProperty("stringBody")) {
+                                    properties.HttpBody = 1;
+                                    if (!$util.isString(message.stringBody))
+                                        return "stringBody: string expected";
+                                }
+                                if (message.bytesBody != null && message.hasOwnProperty("bytesBody")) {
+                                    if (properties.HttpBody === 1)
+                                        return "HttpBody: multiple values";
+                                    properties.HttpBody = 1;
+                                    if (!(message.bytesBody && typeof message.bytesBody.length === "number" || $util.isString(message.bytesBody)))
+                                        return "bytesBody: buffer expected";
+                                }
+                                if (message.status != null && message.hasOwnProperty("status"))
+                                    if (!$util.isInteger(message.status))
+                                        return "status: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a HttpDirectResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse} HttpDirectResponse
+                             */
+                            HttpDirectResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse)
+                                    return object;
+                                var message = new $root.google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse();
+                                if (object.stringBody != null)
+                                    message.stringBody = String(object.stringBody);
+                                if (object.bytesBody != null)
+                                    if (typeof object.bytesBody === "string")
+                                        $util.base64.decode(object.bytesBody, message.bytesBody = $util.newBuffer($util.base64.length(object.bytesBody)), 0);
+                                    else if (object.bytesBody.length >= 0)
+                                        message.bytesBody = object.bytesBody;
+                                if (object.status != null)
+                                    message.status = object.status | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a HttpDirectResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse
+                             * @static
+                             * @param {google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse} message HttpDirectResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            HttpDirectResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.status = 0;
+                                if (message.status != null && message.hasOwnProperty("status"))
+                                    object.status = message.status;
+                                if (message.stringBody != null && message.hasOwnProperty("stringBody")) {
+                                    object.stringBody = message.stringBody;
+                                    if (options.oneofs)
+                                        object.HttpBody = "stringBody";
+                                }
+                                if (message.bytesBody != null && message.hasOwnProperty("bytesBody")) {
+                                    object.bytesBody = options.bytes === String ? $util.base64.encode(message.bytesBody, 0, message.bytesBody.length) : options.bytes === Array ? Array.prototype.slice.call(message.bytesBody) : message.bytesBody;
+                                    if (options.oneofs)
+                                        object.HttpBody = "bytesBody";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this HttpDirectResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            HttpDirectResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for HttpDirectResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            HttpDirectResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse";
+                            };
+    
+                            return HttpDirectResponse;
+                        })();
+    
                         HttpRoute.RouteAction = (function() {
     
                             /**
@@ -20027,6 +21463,9 @@
                              * @property {google.cloud.networkservices.v1.HttpRoute.IRetryPolicy|null} [retryPolicy] RouteAction retryPolicy
                              * @property {google.cloud.networkservices.v1.HttpRoute.IRequestMirrorPolicy|null} [requestMirrorPolicy] RouteAction requestMirrorPolicy
                              * @property {google.cloud.networkservices.v1.HttpRoute.ICorsPolicy|null} [corsPolicy] RouteAction corsPolicy
+                             * @property {google.cloud.networkservices.v1.HttpRoute.IStatefulSessionAffinityPolicy|null} [statefulSessionAffinity] RouteAction statefulSessionAffinity
+                             * @property {google.cloud.networkservices.v1.HttpRoute.IHttpDirectResponse|null} [directResponse] RouteAction directResponse
+                             * @property {google.protobuf.IDuration|null} [idleTimeout] RouteAction idleTimeout
                              */
     
                             /**
@@ -20126,6 +21565,30 @@
                             RouteAction.prototype.corsPolicy = null;
     
                             /**
+                             * RouteAction statefulSessionAffinity.
+                             * @member {google.cloud.networkservices.v1.HttpRoute.IStatefulSessionAffinityPolicy|null|undefined} statefulSessionAffinity
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.RouteAction
+                             * @instance
+                             */
+                            RouteAction.prototype.statefulSessionAffinity = null;
+    
+                            /**
+                             * RouteAction directResponse.
+                             * @member {google.cloud.networkservices.v1.HttpRoute.IHttpDirectResponse|null|undefined} directResponse
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.RouteAction
+                             * @instance
+                             */
+                            RouteAction.prototype.directResponse = null;
+    
+                            /**
+                             * RouteAction idleTimeout.
+                             * @member {google.protobuf.IDuration|null|undefined} idleTimeout
+                             * @memberof google.cloud.networkservices.v1.HttpRoute.RouteAction
+                             * @instance
+                             */
+                            RouteAction.prototype.idleTimeout = null;
+    
+                            /**
                              * Creates a new RouteAction instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.networkservices.v1.HttpRoute.RouteAction
@@ -20170,6 +21633,12 @@
                                     $root.google.cloud.networkservices.v1.HttpRoute.RequestMirrorPolicy.encode(message.requestMirrorPolicy, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                                 if (message.corsPolicy != null && Object.hasOwnProperty.call(message, "corsPolicy"))
                                     $root.google.cloud.networkservices.v1.HttpRoute.CorsPolicy.encode(message.corsPolicy, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                if (message.statefulSessionAffinity != null && Object.hasOwnProperty.call(message, "statefulSessionAffinity"))
+                                    $root.google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy.encode(message.statefulSessionAffinity, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                                if (message.directResponse != null && Object.hasOwnProperty.call(message, "directResponse"))
+                                    $root.google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse.encode(message.directResponse, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                                if (message.idleTimeout != null && Object.hasOwnProperty.call(message, "idleTimeout"))
+                                    $root.google.protobuf.Duration.encode(message.idleTimeout, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                                 return writer;
                             };
     
@@ -20197,12 +21666,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RouteAction.decode = function decode(reader, length) {
+                            RouteAction.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.HttpRoute.RouteAction();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.destinations && message.destinations.length))
@@ -20244,6 +21715,18 @@
                                         }
                                     case 11: {
                                             message.corsPolicy = $root.google.cloud.networkservices.v1.HttpRoute.CorsPolicy.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.statefulSessionAffinity = $root.google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 13: {
+                                            message.directResponse = $root.google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 14: {
+                                            message.idleTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -20335,6 +21818,21 @@
                                     if (error)
                                         return "corsPolicy." + error;
                                 }
+                                if (message.statefulSessionAffinity != null && message.hasOwnProperty("statefulSessionAffinity")) {
+                                    var error = $root.google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy.verify(message.statefulSessionAffinity);
+                                    if (error)
+                                        return "statefulSessionAffinity." + error;
+                                }
+                                if (message.directResponse != null && message.hasOwnProperty("directResponse")) {
+                                    var error = $root.google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse.verify(message.directResponse);
+                                    if (error)
+                                        return "directResponse." + error;
+                                }
+                                if (message.idleTimeout != null && message.hasOwnProperty("idleTimeout")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.idleTimeout);
+                                    if (error)
+                                        return "idleTimeout." + error;
+                                }
                                 return null;
                             };
     
@@ -20405,6 +21903,21 @@
                                         throw TypeError(".google.cloud.networkservices.v1.HttpRoute.RouteAction.corsPolicy: object expected");
                                     message.corsPolicy = $root.google.cloud.networkservices.v1.HttpRoute.CorsPolicy.fromObject(object.corsPolicy);
                                 }
+                                if (object.statefulSessionAffinity != null) {
+                                    if (typeof object.statefulSessionAffinity !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.HttpRoute.RouteAction.statefulSessionAffinity: object expected");
+                                    message.statefulSessionAffinity = $root.google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy.fromObject(object.statefulSessionAffinity);
+                                }
+                                if (object.directResponse != null) {
+                                    if (typeof object.directResponse !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.HttpRoute.RouteAction.directResponse: object expected");
+                                    message.directResponse = $root.google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse.fromObject(object.directResponse);
+                                }
+                                if (object.idleTimeout != null) {
+                                    if (typeof object.idleTimeout !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.HttpRoute.RouteAction.idleTimeout: object expected");
+                                    message.idleTimeout = $root.google.protobuf.Duration.fromObject(object.idleTimeout);
+                                }
                                 return message;
                             };
     
@@ -20433,6 +21946,9 @@
                                     object.retryPolicy = null;
                                     object.requestMirrorPolicy = null;
                                     object.corsPolicy = null;
+                                    object.statefulSessionAffinity = null;
+                                    object.directResponse = null;
+                                    object.idleTimeout = null;
                                 }
                                 if (message.destinations && message.destinations.length) {
                                     object.destinations = [];
@@ -20457,6 +21973,12 @@
                                     object.requestMirrorPolicy = $root.google.cloud.networkservices.v1.HttpRoute.RequestMirrorPolicy.toObject(message.requestMirrorPolicy, options);
                                 if (message.corsPolicy != null && message.hasOwnProperty("corsPolicy"))
                                     object.corsPolicy = $root.google.cloud.networkservices.v1.HttpRoute.CorsPolicy.toObject(message.corsPolicy, options);
+                                if (message.statefulSessionAffinity != null && message.hasOwnProperty("statefulSessionAffinity"))
+                                    object.statefulSessionAffinity = $root.google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy.toObject(message.statefulSessionAffinity, options);
+                                if (message.directResponse != null && message.hasOwnProperty("directResponse"))
+                                    object.directResponse = $root.google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse.toObject(message.directResponse, options);
+                                if (message.idleTimeout != null && message.hasOwnProperty("idleTimeout"))
+                                    object.idleTimeout = $root.google.protobuf.Duration.toObject(message.idleTimeout, options);
                                 return object;
                             };
     
@@ -20587,12 +22109,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RouteRule.decode = function decode(reader, length) {
+                            RouteRule.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.HttpRoute.RouteRule();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.matches && message.matches.length))
@@ -20754,6 +22278,7 @@
                          * @property {string|null} [parent] ListHttpRoutesRequest parent
                          * @property {number|null} [pageSize] ListHttpRoutesRequest pageSize
                          * @property {string|null} [pageToken] ListHttpRoutesRequest pageToken
+                         * @property {boolean|null} [returnPartialSuccess] ListHttpRoutesRequest returnPartialSuccess
                          */
     
                         /**
@@ -20796,6 +22321,14 @@
                         ListHttpRoutesRequest.prototype.pageToken = "";
     
                         /**
+                         * ListHttpRoutesRequest returnPartialSuccess.
+                         * @member {boolean} returnPartialSuccess
+                         * @memberof google.cloud.networkservices.v1.ListHttpRoutesRequest
+                         * @instance
+                         */
+                        ListHttpRoutesRequest.prototype.returnPartialSuccess = false;
+    
+                        /**
                          * Creates a new ListHttpRoutesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkservices.v1.ListHttpRoutesRequest
@@ -20825,6 +22358,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.returnPartialSuccess != null && Object.hasOwnProperty.call(message, "returnPartialSuccess"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.returnPartialSuccess);
                             return writer;
                         };
     
@@ -20852,12 +22387,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListHttpRoutesRequest.decode = function decode(reader, length) {
+                        ListHttpRoutesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListHttpRoutesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -20869,6 +22406,10 @@
                                     }
                                 case 3: {
                                         message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.returnPartialSuccess = reader.bool();
                                         break;
                                     }
                                 default:
@@ -20915,6 +22456,9 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
+                            if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                                if (typeof message.returnPartialSuccess !== "boolean")
+                                    return "returnPartialSuccess: boolean expected";
                             return null;
                         };
     
@@ -20936,6 +22480,8 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
+                            if (object.returnPartialSuccess != null)
+                                message.returnPartialSuccess = Boolean(object.returnPartialSuccess);
                             return message;
                         };
     
@@ -20956,6 +22502,7 @@
                                 object.parent = "";
                                 object.pageSize = 0;
                                 object.pageToken = "";
+                                object.returnPartialSuccess = false;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -20963,6 +22510,8 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                                object.returnPartialSuccess = message.returnPartialSuccess;
                             return object;
                         };
     
@@ -21003,6 +22552,7 @@
                          * @interface IListHttpRoutesResponse
                          * @property {Array.<google.cloud.networkservices.v1.IHttpRoute>|null} [httpRoutes] ListHttpRoutesResponse httpRoutes
                          * @property {string|null} [nextPageToken] ListHttpRoutesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListHttpRoutesResponse unreachable
                          */
     
                         /**
@@ -21015,6 +22565,7 @@
                          */
                         function ListHttpRoutesResponse(properties) {
                             this.httpRoutes = [];
+                            this.unreachable = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -21036,6 +22587,14 @@
                          * @instance
                          */
                         ListHttpRoutesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListHttpRoutesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkservices.v1.ListHttpRoutesResponse
+                         * @instance
+                         */
+                        ListHttpRoutesResponse.prototype.unreachable = $util.emptyArray;
     
                         /**
                          * Creates a new ListHttpRoutesResponse instance using the specified properties.
@@ -21066,6 +22625,9 @@
                                     $root.google.cloud.networkservices.v1.HttpRoute.encode(message.httpRoutes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
                             return writer;
                         };
     
@@ -21093,12 +22655,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListHttpRoutesResponse.decode = function decode(reader, length) {
+                        ListHttpRoutesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListHttpRoutesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.httpRoutes && message.httpRoutes.length))
@@ -21108,6 +22672,12 @@
                                     }
                                 case 2: {
                                         message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -21157,6 +22727,13 @@
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
                             return null;
                         };
     
@@ -21184,6 +22761,13 @@
                             }
                             if (object.nextPageToken != null)
                                 message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListHttpRoutesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
                             return message;
                         };
     
@@ -21200,8 +22784,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.httpRoutes = [];
+                                object.unreachable = [];
+                            }
                             if (options.defaults)
                                 object.nextPageToken = "";
                             if (message.httpRoutes && message.httpRoutes.length) {
@@ -21211,6 +22797,11 @@
                             }
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
                             return object;
                         };
     
@@ -21328,12 +22919,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetHttpRouteRequest.decode = function decode(reader, length) {
+                        GetHttpRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GetHttpRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -21553,12 +23146,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateHttpRouteRequest.decode = function decode(reader, length) {
+                        CreateHttpRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.CreateHttpRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -21797,12 +23392,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateHttpRouteRequest.decode = function decode(reader, length) {
+                        UpdateHttpRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.UpdateHttpRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -22023,12 +23620,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteHttpRouteRequest.decode = function decode(reader, length) {
+                        DeleteHttpRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.DeleteHttpRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -22154,6 +23753,7 @@
                          * @property {Object.<string,string>|null} [labels] Mesh labels
                          * @property {string|null} [description] Mesh description
                          * @property {number|null} [interceptionPort] Mesh interceptionPort
+                         * @property {google.cloud.networkservices.v1.EnvoyHeaders|null} [envoyHeaders] Mesh envoyHeaders
                          */
     
                         /**
@@ -22229,6 +23829,23 @@
                         Mesh.prototype.interceptionPort = 0;
     
                         /**
+                         * Mesh envoyHeaders.
+                         * @member {google.cloud.networkservices.v1.EnvoyHeaders|null|undefined} envoyHeaders
+                         * @memberof google.cloud.networkservices.v1.Mesh
+                         * @instance
+                         */
+                        Mesh.prototype.envoyHeaders = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Mesh.prototype, "_envoyHeaders", {
+                            get: $util.oneOfGetter($oneOfFields = ["envoyHeaders"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new Mesh instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkservices.v1.Mesh
@@ -22267,6 +23884,8 @@
                                 writer.uint32(/* id 8, wireType 0 =*/64).int32(message.interceptionPort);
                             if (message.selfLink != null && Object.hasOwnProperty.call(message, "selfLink"))
                                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.selfLink);
+                            if (message.envoyHeaders != null && Object.hasOwnProperty.call(message, "envoyHeaders"))
+                                writer.uint32(/* id 16, wireType 0 =*/128).int32(message.envoyHeaders);
                             return writer;
                         };
     
@@ -22294,12 +23913,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Mesh.decode = function decode(reader, length) {
+                        Mesh.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.Mesh(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -22348,6 +23969,10 @@
                                         message.interceptionPort = reader.int32();
                                         break;
                                     }
+                                case 16: {
+                                        message.envoyHeaders = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -22383,6 +24008,7 @@
                         Mesh.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -22413,6 +24039,17 @@
                             if (message.interceptionPort != null && message.hasOwnProperty("interceptionPort"))
                                 if (!$util.isInteger(message.interceptionPort))
                                     return "interceptionPort: integer expected";
+                            if (message.envoyHeaders != null && message.hasOwnProperty("envoyHeaders")) {
+                                properties._envoyHeaders = 1;
+                                switch (message.envoyHeaders) {
+                                default:
+                                    return "envoyHeaders: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
                             return null;
                         };
     
@@ -22453,6 +24090,26 @@
                                 message.description = String(object.description);
                             if (object.interceptionPort != null)
                                 message.interceptionPort = object.interceptionPort | 0;
+                            switch (object.envoyHeaders) {
+                            default:
+                                if (typeof object.envoyHeaders === "number") {
+                                    message.envoyHeaders = object.envoyHeaders;
+                                    break;
+                                }
+                                break;
+                            case "ENVOY_HEADERS_UNSPECIFIED":
+                            case 0:
+                                message.envoyHeaders = 0;
+                                break;
+                            case "NONE":
+                            case 1:
+                                message.envoyHeaders = 1;
+                                break;
+                            case "DEBUG_HEADERS":
+                            case 2:
+                                message.envoyHeaders = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -22497,6 +24154,11 @@
                                 object.interceptionPort = message.interceptionPort;
                             if (message.selfLink != null && message.hasOwnProperty("selfLink"))
                                 object.selfLink = message.selfLink;
+                            if (message.envoyHeaders != null && message.hasOwnProperty("envoyHeaders")) {
+                                object.envoyHeaders = options.enums === String ? $root.google.cloud.networkservices.v1.EnvoyHeaders[message.envoyHeaders] === undefined ? message.envoyHeaders : $root.google.cloud.networkservices.v1.EnvoyHeaders[message.envoyHeaders] : message.envoyHeaders;
+                                if (options.oneofs)
+                                    object._envoyHeaders = "envoyHeaders";
+                            }
                             return object;
                         };
     
@@ -22538,6 +24200,7 @@
                          * @property {string|null} [parent] ListMeshesRequest parent
                          * @property {number|null} [pageSize] ListMeshesRequest pageSize
                          * @property {string|null} [pageToken] ListMeshesRequest pageToken
+                         * @property {boolean|null} [returnPartialSuccess] ListMeshesRequest returnPartialSuccess
                          */
     
                         /**
@@ -22580,6 +24243,14 @@
                         ListMeshesRequest.prototype.pageToken = "";
     
                         /**
+                         * ListMeshesRequest returnPartialSuccess.
+                         * @member {boolean} returnPartialSuccess
+                         * @memberof google.cloud.networkservices.v1.ListMeshesRequest
+                         * @instance
+                         */
+                        ListMeshesRequest.prototype.returnPartialSuccess = false;
+    
+                        /**
                          * Creates a new ListMeshesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkservices.v1.ListMeshesRequest
@@ -22609,6 +24280,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.returnPartialSuccess != null && Object.hasOwnProperty.call(message, "returnPartialSuccess"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.returnPartialSuccess);
                             return writer;
                         };
     
@@ -22636,12 +24309,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListMeshesRequest.decode = function decode(reader, length) {
+                        ListMeshesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListMeshesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -22653,6 +24328,10 @@
                                     }
                                 case 3: {
                                         message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.returnPartialSuccess = reader.bool();
                                         break;
                                     }
                                 default:
@@ -22699,6 +24378,9 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
+                            if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                                if (typeof message.returnPartialSuccess !== "boolean")
+                                    return "returnPartialSuccess: boolean expected";
                             return null;
                         };
     
@@ -22720,6 +24402,8 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
+                            if (object.returnPartialSuccess != null)
+                                message.returnPartialSuccess = Boolean(object.returnPartialSuccess);
                             return message;
                         };
     
@@ -22740,6 +24424,7 @@
                                 object.parent = "";
                                 object.pageSize = 0;
                                 object.pageToken = "";
+                                object.returnPartialSuccess = false;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -22747,6 +24432,8 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                                object.returnPartialSuccess = message.returnPartialSuccess;
                             return object;
                         };
     
@@ -22787,6 +24474,7 @@
                          * @interface IListMeshesResponse
                          * @property {Array.<google.cloud.networkservices.v1.IMesh>|null} [meshes] ListMeshesResponse meshes
                          * @property {string|null} [nextPageToken] ListMeshesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListMeshesResponse unreachable
                          */
     
                         /**
@@ -22799,6 +24487,7 @@
                          */
                         function ListMeshesResponse(properties) {
                             this.meshes = [];
+                            this.unreachable = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -22820,6 +24509,14 @@
                          * @instance
                          */
                         ListMeshesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListMeshesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkservices.v1.ListMeshesResponse
+                         * @instance
+                         */
+                        ListMeshesResponse.prototype.unreachable = $util.emptyArray;
     
                         /**
                          * Creates a new ListMeshesResponse instance using the specified properties.
@@ -22850,6 +24547,9 @@
                                     $root.google.cloud.networkservices.v1.Mesh.encode(message.meshes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
                             return writer;
                         };
     
@@ -22877,12 +24577,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListMeshesResponse.decode = function decode(reader, length) {
+                        ListMeshesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListMeshesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.meshes && message.meshes.length))
@@ -22892,6 +24594,12 @@
                                     }
                                 case 2: {
                                         message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -22941,6 +24649,13 @@
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
                             return null;
                         };
     
@@ -22968,6 +24683,13 @@
                             }
                             if (object.nextPageToken != null)
                                 message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListMeshesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
                             return message;
                         };
     
@@ -22984,8 +24706,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.meshes = [];
+                                object.unreachable = [];
+                            }
                             if (options.defaults)
                                 object.nextPageToken = "";
                             if (message.meshes && message.meshes.length) {
@@ -22995,6 +24719,11 @@
                             }
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
                             return object;
                         };
     
@@ -23112,12 +24841,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetMeshRequest.decode = function decode(reader, length) {
+                        GetMeshRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GetMeshRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -23337,12 +25068,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateMeshRequest.decode = function decode(reader, length) {
+                        CreateMeshRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.CreateMeshRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -23581,12 +25314,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateMeshRequest.decode = function decode(reader, length) {
+                        UpdateMeshRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.UpdateMeshRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -23807,12 +25542,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteMeshRequest.decode = function decode(reader, length) {
+                        DeleteMeshRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.DeleteMeshRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -25047,6 +26784,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|updateServiceBinding}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef UpdateServiceBindingCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateServiceBinding.
+                         * @function updateServiceBinding
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IUpdateServiceBindingRequest} request UpdateServiceBindingRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.UpdateServiceBindingCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.updateServiceBinding = function updateServiceBinding(request, callback) {
+                            return this.rpcCall(updateServiceBinding, $root.google.cloud.networkservices.v1.UpdateServiceBindingRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateServiceBinding" });
+    
+                        /**
+                         * Calls UpdateServiceBinding.
+                         * @function updateServiceBinding
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IUpdateServiceBindingRequest} request UpdateServiceBindingRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|deleteServiceBinding}.
                          * @memberof google.cloud.networkservices.v1.NetworkServices
                          * @typedef DeleteServiceBindingCallback
@@ -25244,7 +27014,2422 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|listServiceLbPolicies}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef ListServiceLbPoliciesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkservices.v1.ListServiceLbPoliciesResponse} [response] ListServiceLbPoliciesResponse
+                         */
+    
+                        /**
+                         * Calls ListServiceLbPolicies.
+                         * @function listServiceLbPolicies
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IListServiceLbPoliciesRequest} request ListServiceLbPoliciesRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.ListServiceLbPoliciesCallback} callback Node-style callback called with the error, if any, and ListServiceLbPoliciesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.listServiceLbPolicies = function listServiceLbPolicies(request, callback) {
+                            return this.rpcCall(listServiceLbPolicies, $root.google.cloud.networkservices.v1.ListServiceLbPoliciesRequest, $root.google.cloud.networkservices.v1.ListServiceLbPoliciesResponse, request, callback);
+                        }, "name", { value: "ListServiceLbPolicies" });
+    
+                        /**
+                         * Calls ListServiceLbPolicies.
+                         * @function listServiceLbPolicies
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IListServiceLbPoliciesRequest} request ListServiceLbPoliciesRequest message or plain object
+                         * @returns {Promise<google.cloud.networkservices.v1.ListServiceLbPoliciesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|getServiceLbPolicy}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef GetServiceLbPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkservices.v1.ServiceLbPolicy} [response] ServiceLbPolicy
+                         */
+    
+                        /**
+                         * Calls GetServiceLbPolicy.
+                         * @function getServiceLbPolicy
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IGetServiceLbPolicyRequest} request GetServiceLbPolicyRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.GetServiceLbPolicyCallback} callback Node-style callback called with the error, if any, and ServiceLbPolicy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.getServiceLbPolicy = function getServiceLbPolicy(request, callback) {
+                            return this.rpcCall(getServiceLbPolicy, $root.google.cloud.networkservices.v1.GetServiceLbPolicyRequest, $root.google.cloud.networkservices.v1.ServiceLbPolicy, request, callback);
+                        }, "name", { value: "GetServiceLbPolicy" });
+    
+                        /**
+                         * Calls GetServiceLbPolicy.
+                         * @function getServiceLbPolicy
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IGetServiceLbPolicyRequest} request GetServiceLbPolicyRequest message or plain object
+                         * @returns {Promise<google.cloud.networkservices.v1.ServiceLbPolicy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|createServiceLbPolicy}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef CreateServiceLbPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateServiceLbPolicy.
+                         * @function createServiceLbPolicy
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.ICreateServiceLbPolicyRequest} request CreateServiceLbPolicyRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.CreateServiceLbPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.createServiceLbPolicy = function createServiceLbPolicy(request, callback) {
+                            return this.rpcCall(createServiceLbPolicy, $root.google.cloud.networkservices.v1.CreateServiceLbPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateServiceLbPolicy" });
+    
+                        /**
+                         * Calls CreateServiceLbPolicy.
+                         * @function createServiceLbPolicy
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.ICreateServiceLbPolicyRequest} request CreateServiceLbPolicyRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|updateServiceLbPolicy}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef UpdateServiceLbPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateServiceLbPolicy.
+                         * @function updateServiceLbPolicy
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IUpdateServiceLbPolicyRequest} request UpdateServiceLbPolicyRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.UpdateServiceLbPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.updateServiceLbPolicy = function updateServiceLbPolicy(request, callback) {
+                            return this.rpcCall(updateServiceLbPolicy, $root.google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateServiceLbPolicy" });
+    
+                        /**
+                         * Calls UpdateServiceLbPolicy.
+                         * @function updateServiceLbPolicy
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IUpdateServiceLbPolicyRequest} request UpdateServiceLbPolicyRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|deleteServiceLbPolicy}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef DeleteServiceLbPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteServiceLbPolicy.
+                         * @function deleteServiceLbPolicy
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IDeleteServiceLbPolicyRequest} request DeleteServiceLbPolicyRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.DeleteServiceLbPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.deleteServiceLbPolicy = function deleteServiceLbPolicy(request, callback) {
+                            return this.rpcCall(deleteServiceLbPolicy, $root.google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteServiceLbPolicy" });
+    
+                        /**
+                         * Calls DeleteServiceLbPolicy.
+                         * @function deleteServiceLbPolicy
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IDeleteServiceLbPolicyRequest} request DeleteServiceLbPolicyRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|getGatewayRouteView}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef GetGatewayRouteViewCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkservices.v1.GatewayRouteView} [response] GatewayRouteView
+                         */
+    
+                        /**
+                         * Calls GetGatewayRouteView.
+                         * @function getGatewayRouteView
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IGetGatewayRouteViewRequest} request GetGatewayRouteViewRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.GetGatewayRouteViewCallback} callback Node-style callback called with the error, if any, and GatewayRouteView
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.getGatewayRouteView = function getGatewayRouteView(request, callback) {
+                            return this.rpcCall(getGatewayRouteView, $root.google.cloud.networkservices.v1.GetGatewayRouteViewRequest, $root.google.cloud.networkservices.v1.GatewayRouteView, request, callback);
+                        }, "name", { value: "GetGatewayRouteView" });
+    
+                        /**
+                         * Calls GetGatewayRouteView.
+                         * @function getGatewayRouteView
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IGetGatewayRouteViewRequest} request GetGatewayRouteViewRequest message or plain object
+                         * @returns {Promise<google.cloud.networkservices.v1.GatewayRouteView>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|getMeshRouteView}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef GetMeshRouteViewCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkservices.v1.MeshRouteView} [response] MeshRouteView
+                         */
+    
+                        /**
+                         * Calls GetMeshRouteView.
+                         * @function getMeshRouteView
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IGetMeshRouteViewRequest} request GetMeshRouteViewRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.GetMeshRouteViewCallback} callback Node-style callback called with the error, if any, and MeshRouteView
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.getMeshRouteView = function getMeshRouteView(request, callback) {
+                            return this.rpcCall(getMeshRouteView, $root.google.cloud.networkservices.v1.GetMeshRouteViewRequest, $root.google.cloud.networkservices.v1.MeshRouteView, request, callback);
+                        }, "name", { value: "GetMeshRouteView" });
+    
+                        /**
+                         * Calls GetMeshRouteView.
+                         * @function getMeshRouteView
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IGetMeshRouteViewRequest} request GetMeshRouteViewRequest message or plain object
+                         * @returns {Promise<google.cloud.networkservices.v1.MeshRouteView>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|listGatewayRouteViews}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef ListGatewayRouteViewsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkservices.v1.ListGatewayRouteViewsResponse} [response] ListGatewayRouteViewsResponse
+                         */
+    
+                        /**
+                         * Calls ListGatewayRouteViews.
+                         * @function listGatewayRouteViews
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IListGatewayRouteViewsRequest} request ListGatewayRouteViewsRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.ListGatewayRouteViewsCallback} callback Node-style callback called with the error, if any, and ListGatewayRouteViewsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.listGatewayRouteViews = function listGatewayRouteViews(request, callback) {
+                            return this.rpcCall(listGatewayRouteViews, $root.google.cloud.networkservices.v1.ListGatewayRouteViewsRequest, $root.google.cloud.networkservices.v1.ListGatewayRouteViewsResponse, request, callback);
+                        }, "name", { value: "ListGatewayRouteViews" });
+    
+                        /**
+                         * Calls ListGatewayRouteViews.
+                         * @function listGatewayRouteViews
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IListGatewayRouteViewsRequest} request ListGatewayRouteViewsRequest message or plain object
+                         * @returns {Promise<google.cloud.networkservices.v1.ListGatewayRouteViewsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|listMeshRouteViews}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef ListMeshRouteViewsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkservices.v1.ListMeshRouteViewsResponse} [response] ListMeshRouteViewsResponse
+                         */
+    
+                        /**
+                         * Calls ListMeshRouteViews.
+                         * @function listMeshRouteViews
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IListMeshRouteViewsRequest} request ListMeshRouteViewsRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.ListMeshRouteViewsCallback} callback Node-style callback called with the error, if any, and ListMeshRouteViewsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.listMeshRouteViews = function listMeshRouteViews(request, callback) {
+                            return this.rpcCall(listMeshRouteViews, $root.google.cloud.networkservices.v1.ListMeshRouteViewsRequest, $root.google.cloud.networkservices.v1.ListMeshRouteViewsResponse, request, callback);
+                        }, "name", { value: "ListMeshRouteViews" });
+    
+                        /**
+                         * Calls ListMeshRouteViews.
+                         * @function listMeshRouteViews
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IListMeshRouteViewsRequest} request ListMeshRouteViewsRequest message or plain object
+                         * @returns {Promise<google.cloud.networkservices.v1.ListMeshRouteViewsResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return NetworkServices;
+                    })();
+    
+                    v1.GatewayRouteView = (function() {
+    
+                        /**
+                         * Properties of a GatewayRouteView.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IGatewayRouteView
+                         * @property {string|null} [name] GatewayRouteView name
+                         * @property {number|Long|null} [routeProjectNumber] GatewayRouteView routeProjectNumber
+                         * @property {string|null} [routeLocation] GatewayRouteView routeLocation
+                         * @property {string|null} [routeType] GatewayRouteView routeType
+                         * @property {string|null} [routeId] GatewayRouteView routeId
+                         */
+    
+                        /**
+                         * Constructs a new GatewayRouteView.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a GatewayRouteView.
+                         * @implements IGatewayRouteView
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IGatewayRouteView=} [properties] Properties to set
+                         */
+                        function GatewayRouteView(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GatewayRouteView name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.GatewayRouteView
+                         * @instance
+                         */
+                        GatewayRouteView.prototype.name = "";
+    
+                        /**
+                         * GatewayRouteView routeProjectNumber.
+                         * @member {number|Long} routeProjectNumber
+                         * @memberof google.cloud.networkservices.v1.GatewayRouteView
+                         * @instance
+                         */
+                        GatewayRouteView.prototype.routeProjectNumber = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * GatewayRouteView routeLocation.
+                         * @member {string} routeLocation
+                         * @memberof google.cloud.networkservices.v1.GatewayRouteView
+                         * @instance
+                         */
+                        GatewayRouteView.prototype.routeLocation = "";
+    
+                        /**
+                         * GatewayRouteView routeType.
+                         * @member {string} routeType
+                         * @memberof google.cloud.networkservices.v1.GatewayRouteView
+                         * @instance
+                         */
+                        GatewayRouteView.prototype.routeType = "";
+    
+                        /**
+                         * GatewayRouteView routeId.
+                         * @member {string} routeId
+                         * @memberof google.cloud.networkservices.v1.GatewayRouteView
+                         * @instance
+                         */
+                        GatewayRouteView.prototype.routeId = "";
+    
+                        /**
+                         * Creates a new GatewayRouteView instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.GatewayRouteView
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGatewayRouteView=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.GatewayRouteView} GatewayRouteView instance
+                         */
+                        GatewayRouteView.create = function create(properties) {
+                            return new GatewayRouteView(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GatewayRouteView message. Does not implicitly {@link google.cloud.networkservices.v1.GatewayRouteView.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.GatewayRouteView
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGatewayRouteView} message GatewayRouteView message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GatewayRouteView.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.routeProjectNumber != null && Object.hasOwnProperty.call(message, "routeProjectNumber"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.routeProjectNumber);
+                            if (message.routeLocation != null && Object.hasOwnProperty.call(message, "routeLocation"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.routeLocation);
+                            if (message.routeType != null && Object.hasOwnProperty.call(message, "routeType"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.routeType);
+                            if (message.routeId != null && Object.hasOwnProperty.call(message, "routeId"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.routeId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GatewayRouteView message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GatewayRouteView.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.GatewayRouteView
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGatewayRouteView} message GatewayRouteView message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GatewayRouteView.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GatewayRouteView message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.GatewayRouteView
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.GatewayRouteView} GatewayRouteView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GatewayRouteView.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GatewayRouteView();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.routeProjectNumber = reader.int64();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.routeLocation = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.routeType = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.routeId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GatewayRouteView message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.GatewayRouteView
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.GatewayRouteView} GatewayRouteView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GatewayRouteView.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GatewayRouteView message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.GatewayRouteView
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GatewayRouteView.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.routeProjectNumber != null && message.hasOwnProperty("routeProjectNumber"))
+                                if (!$util.isInteger(message.routeProjectNumber) && !(message.routeProjectNumber && $util.isInteger(message.routeProjectNumber.low) && $util.isInteger(message.routeProjectNumber.high)))
+                                    return "routeProjectNumber: integer|Long expected";
+                            if (message.routeLocation != null && message.hasOwnProperty("routeLocation"))
+                                if (!$util.isString(message.routeLocation))
+                                    return "routeLocation: string expected";
+                            if (message.routeType != null && message.hasOwnProperty("routeType"))
+                                if (!$util.isString(message.routeType))
+                                    return "routeType: string expected";
+                            if (message.routeId != null && message.hasOwnProperty("routeId"))
+                                if (!$util.isString(message.routeId))
+                                    return "routeId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GatewayRouteView message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.GatewayRouteView
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.GatewayRouteView} GatewayRouteView
+                         */
+                        GatewayRouteView.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.GatewayRouteView)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.GatewayRouteView();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.routeProjectNumber != null)
+                                if ($util.Long)
+                                    (message.routeProjectNumber = $util.Long.fromValue(object.routeProjectNumber)).unsigned = false;
+                                else if (typeof object.routeProjectNumber === "string")
+                                    message.routeProjectNumber = parseInt(object.routeProjectNumber, 10);
+                                else if (typeof object.routeProjectNumber === "number")
+                                    message.routeProjectNumber = object.routeProjectNumber;
+                                else if (typeof object.routeProjectNumber === "object")
+                                    message.routeProjectNumber = new $util.LongBits(object.routeProjectNumber.low >>> 0, object.routeProjectNumber.high >>> 0).toNumber();
+                            if (object.routeLocation != null)
+                                message.routeLocation = String(object.routeLocation);
+                            if (object.routeType != null)
+                                message.routeType = String(object.routeType);
+                            if (object.routeId != null)
+                                message.routeId = String(object.routeId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GatewayRouteView message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.GatewayRouteView
+                         * @static
+                         * @param {google.cloud.networkservices.v1.GatewayRouteView} message GatewayRouteView
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GatewayRouteView.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.routeProjectNumber = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.routeProjectNumber = options.longs === String ? "0" : 0;
+                                object.routeLocation = "";
+                                object.routeType = "";
+                                object.routeId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.routeProjectNumber != null && message.hasOwnProperty("routeProjectNumber"))
+                                if (typeof message.routeProjectNumber === "number")
+                                    object.routeProjectNumber = options.longs === String ? String(message.routeProjectNumber) : message.routeProjectNumber;
+                                else
+                                    object.routeProjectNumber = options.longs === String ? $util.Long.prototype.toString.call(message.routeProjectNumber) : options.longs === Number ? new $util.LongBits(message.routeProjectNumber.low >>> 0, message.routeProjectNumber.high >>> 0).toNumber() : message.routeProjectNumber;
+                            if (message.routeLocation != null && message.hasOwnProperty("routeLocation"))
+                                object.routeLocation = message.routeLocation;
+                            if (message.routeType != null && message.hasOwnProperty("routeType"))
+                                object.routeType = message.routeType;
+                            if (message.routeId != null && message.hasOwnProperty("routeId"))
+                                object.routeId = message.routeId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GatewayRouteView to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.GatewayRouteView
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GatewayRouteView.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GatewayRouteView
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.GatewayRouteView
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GatewayRouteView.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.GatewayRouteView";
+                        };
+    
+                        return GatewayRouteView;
+                    })();
+    
+                    v1.MeshRouteView = (function() {
+    
+                        /**
+                         * Properties of a MeshRouteView.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IMeshRouteView
+                         * @property {string|null} [name] MeshRouteView name
+                         * @property {number|Long|null} [routeProjectNumber] MeshRouteView routeProjectNumber
+                         * @property {string|null} [routeLocation] MeshRouteView routeLocation
+                         * @property {string|null} [routeType] MeshRouteView routeType
+                         * @property {string|null} [routeId] MeshRouteView routeId
+                         */
+    
+                        /**
+                         * Constructs a new MeshRouteView.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a MeshRouteView.
+                         * @implements IMeshRouteView
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IMeshRouteView=} [properties] Properties to set
+                         */
+                        function MeshRouteView(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MeshRouteView name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.MeshRouteView
+                         * @instance
+                         */
+                        MeshRouteView.prototype.name = "";
+    
+                        /**
+                         * MeshRouteView routeProjectNumber.
+                         * @member {number|Long} routeProjectNumber
+                         * @memberof google.cloud.networkservices.v1.MeshRouteView
+                         * @instance
+                         */
+                        MeshRouteView.prototype.routeProjectNumber = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * MeshRouteView routeLocation.
+                         * @member {string} routeLocation
+                         * @memberof google.cloud.networkservices.v1.MeshRouteView
+                         * @instance
+                         */
+                        MeshRouteView.prototype.routeLocation = "";
+    
+                        /**
+                         * MeshRouteView routeType.
+                         * @member {string} routeType
+                         * @memberof google.cloud.networkservices.v1.MeshRouteView
+                         * @instance
+                         */
+                        MeshRouteView.prototype.routeType = "";
+    
+                        /**
+                         * MeshRouteView routeId.
+                         * @member {string} routeId
+                         * @memberof google.cloud.networkservices.v1.MeshRouteView
+                         * @instance
+                         */
+                        MeshRouteView.prototype.routeId = "";
+    
+                        /**
+                         * Creates a new MeshRouteView instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.MeshRouteView
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IMeshRouteView=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.MeshRouteView} MeshRouteView instance
+                         */
+                        MeshRouteView.create = function create(properties) {
+                            return new MeshRouteView(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MeshRouteView message. Does not implicitly {@link google.cloud.networkservices.v1.MeshRouteView.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.MeshRouteView
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IMeshRouteView} message MeshRouteView message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MeshRouteView.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.routeProjectNumber != null && Object.hasOwnProperty.call(message, "routeProjectNumber"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.routeProjectNumber);
+                            if (message.routeLocation != null && Object.hasOwnProperty.call(message, "routeLocation"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.routeLocation);
+                            if (message.routeType != null && Object.hasOwnProperty.call(message, "routeType"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.routeType);
+                            if (message.routeId != null && Object.hasOwnProperty.call(message, "routeId"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.routeId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MeshRouteView message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.MeshRouteView.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.MeshRouteView
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IMeshRouteView} message MeshRouteView message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MeshRouteView.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MeshRouteView message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.MeshRouteView
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.MeshRouteView} MeshRouteView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MeshRouteView.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.MeshRouteView();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.routeProjectNumber = reader.int64();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.routeLocation = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.routeType = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.routeId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MeshRouteView message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.MeshRouteView
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.MeshRouteView} MeshRouteView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MeshRouteView.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MeshRouteView message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.MeshRouteView
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MeshRouteView.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.routeProjectNumber != null && message.hasOwnProperty("routeProjectNumber"))
+                                if (!$util.isInteger(message.routeProjectNumber) && !(message.routeProjectNumber && $util.isInteger(message.routeProjectNumber.low) && $util.isInteger(message.routeProjectNumber.high)))
+                                    return "routeProjectNumber: integer|Long expected";
+                            if (message.routeLocation != null && message.hasOwnProperty("routeLocation"))
+                                if (!$util.isString(message.routeLocation))
+                                    return "routeLocation: string expected";
+                            if (message.routeType != null && message.hasOwnProperty("routeType"))
+                                if (!$util.isString(message.routeType))
+                                    return "routeType: string expected";
+                            if (message.routeId != null && message.hasOwnProperty("routeId"))
+                                if (!$util.isString(message.routeId))
+                                    return "routeId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MeshRouteView message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.MeshRouteView
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.MeshRouteView} MeshRouteView
+                         */
+                        MeshRouteView.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.MeshRouteView)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.MeshRouteView();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.routeProjectNumber != null)
+                                if ($util.Long)
+                                    (message.routeProjectNumber = $util.Long.fromValue(object.routeProjectNumber)).unsigned = false;
+                                else if (typeof object.routeProjectNumber === "string")
+                                    message.routeProjectNumber = parseInt(object.routeProjectNumber, 10);
+                                else if (typeof object.routeProjectNumber === "number")
+                                    message.routeProjectNumber = object.routeProjectNumber;
+                                else if (typeof object.routeProjectNumber === "object")
+                                    message.routeProjectNumber = new $util.LongBits(object.routeProjectNumber.low >>> 0, object.routeProjectNumber.high >>> 0).toNumber();
+                            if (object.routeLocation != null)
+                                message.routeLocation = String(object.routeLocation);
+                            if (object.routeType != null)
+                                message.routeType = String(object.routeType);
+                            if (object.routeId != null)
+                                message.routeId = String(object.routeId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MeshRouteView message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.MeshRouteView
+                         * @static
+                         * @param {google.cloud.networkservices.v1.MeshRouteView} message MeshRouteView
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MeshRouteView.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.routeProjectNumber = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.routeProjectNumber = options.longs === String ? "0" : 0;
+                                object.routeLocation = "";
+                                object.routeType = "";
+                                object.routeId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.routeProjectNumber != null && message.hasOwnProperty("routeProjectNumber"))
+                                if (typeof message.routeProjectNumber === "number")
+                                    object.routeProjectNumber = options.longs === String ? String(message.routeProjectNumber) : message.routeProjectNumber;
+                                else
+                                    object.routeProjectNumber = options.longs === String ? $util.Long.prototype.toString.call(message.routeProjectNumber) : options.longs === Number ? new $util.LongBits(message.routeProjectNumber.low >>> 0, message.routeProjectNumber.high >>> 0).toNumber() : message.routeProjectNumber;
+                            if (message.routeLocation != null && message.hasOwnProperty("routeLocation"))
+                                object.routeLocation = message.routeLocation;
+                            if (message.routeType != null && message.hasOwnProperty("routeType"))
+                                object.routeType = message.routeType;
+                            if (message.routeId != null && message.hasOwnProperty("routeId"))
+                                object.routeId = message.routeId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MeshRouteView to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.MeshRouteView
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MeshRouteView.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MeshRouteView
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.MeshRouteView
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MeshRouteView.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.MeshRouteView";
+                        };
+    
+                        return MeshRouteView;
+                    })();
+    
+                    v1.GetGatewayRouteViewRequest = (function() {
+    
+                        /**
+                         * Properties of a GetGatewayRouteViewRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IGetGatewayRouteViewRequest
+                         * @property {string|null} [name] GetGatewayRouteViewRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetGatewayRouteViewRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a GetGatewayRouteViewRequest.
+                         * @implements IGetGatewayRouteViewRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IGetGatewayRouteViewRequest=} [properties] Properties to set
+                         */
+                        function GetGatewayRouteViewRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetGatewayRouteViewRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.GetGatewayRouteViewRequest
+                         * @instance
+                         */
+                        GetGatewayRouteViewRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetGatewayRouteViewRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.GetGatewayRouteViewRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetGatewayRouteViewRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.GetGatewayRouteViewRequest} GetGatewayRouteViewRequest instance
+                         */
+                        GetGatewayRouteViewRequest.create = function create(properties) {
+                            return new GetGatewayRouteViewRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetGatewayRouteViewRequest message. Does not implicitly {@link google.cloud.networkservices.v1.GetGatewayRouteViewRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.GetGatewayRouteViewRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetGatewayRouteViewRequest} message GetGatewayRouteViewRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetGatewayRouteViewRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetGatewayRouteViewRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GetGatewayRouteViewRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.GetGatewayRouteViewRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetGatewayRouteViewRequest} message GetGatewayRouteViewRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetGatewayRouteViewRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetGatewayRouteViewRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.GetGatewayRouteViewRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.GetGatewayRouteViewRequest} GetGatewayRouteViewRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetGatewayRouteViewRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GetGatewayRouteViewRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetGatewayRouteViewRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.GetGatewayRouteViewRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.GetGatewayRouteViewRequest} GetGatewayRouteViewRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetGatewayRouteViewRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetGatewayRouteViewRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.GetGatewayRouteViewRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetGatewayRouteViewRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetGatewayRouteViewRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.GetGatewayRouteViewRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.GetGatewayRouteViewRequest} GetGatewayRouteViewRequest
+                         */
+                        GetGatewayRouteViewRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.GetGatewayRouteViewRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.GetGatewayRouteViewRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetGatewayRouteViewRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.GetGatewayRouteViewRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.GetGatewayRouteViewRequest} message GetGatewayRouteViewRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetGatewayRouteViewRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetGatewayRouteViewRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.GetGatewayRouteViewRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetGatewayRouteViewRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetGatewayRouteViewRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.GetGatewayRouteViewRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetGatewayRouteViewRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.GetGatewayRouteViewRequest";
+                        };
+    
+                        return GetGatewayRouteViewRequest;
+                    })();
+    
+                    v1.GetMeshRouteViewRequest = (function() {
+    
+                        /**
+                         * Properties of a GetMeshRouteViewRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IGetMeshRouteViewRequest
+                         * @property {string|null} [name] GetMeshRouteViewRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetMeshRouteViewRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a GetMeshRouteViewRequest.
+                         * @implements IGetMeshRouteViewRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IGetMeshRouteViewRequest=} [properties] Properties to set
+                         */
+                        function GetMeshRouteViewRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetMeshRouteViewRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.GetMeshRouteViewRequest
+                         * @instance
+                         */
+                        GetMeshRouteViewRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetMeshRouteViewRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.GetMeshRouteViewRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetMeshRouteViewRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.GetMeshRouteViewRequest} GetMeshRouteViewRequest instance
+                         */
+                        GetMeshRouteViewRequest.create = function create(properties) {
+                            return new GetMeshRouteViewRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetMeshRouteViewRequest message. Does not implicitly {@link google.cloud.networkservices.v1.GetMeshRouteViewRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.GetMeshRouteViewRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetMeshRouteViewRequest} message GetMeshRouteViewRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMeshRouteViewRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetMeshRouteViewRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GetMeshRouteViewRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.GetMeshRouteViewRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetMeshRouteViewRequest} message GetMeshRouteViewRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMeshRouteViewRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetMeshRouteViewRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.GetMeshRouteViewRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.GetMeshRouteViewRequest} GetMeshRouteViewRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMeshRouteViewRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GetMeshRouteViewRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetMeshRouteViewRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.GetMeshRouteViewRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.GetMeshRouteViewRequest} GetMeshRouteViewRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMeshRouteViewRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetMeshRouteViewRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.GetMeshRouteViewRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetMeshRouteViewRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetMeshRouteViewRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.GetMeshRouteViewRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.GetMeshRouteViewRequest} GetMeshRouteViewRequest
+                         */
+                        GetMeshRouteViewRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.GetMeshRouteViewRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.GetMeshRouteViewRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetMeshRouteViewRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.GetMeshRouteViewRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.GetMeshRouteViewRequest} message GetMeshRouteViewRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetMeshRouteViewRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetMeshRouteViewRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.GetMeshRouteViewRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetMeshRouteViewRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetMeshRouteViewRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.GetMeshRouteViewRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetMeshRouteViewRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.GetMeshRouteViewRequest";
+                        };
+    
+                        return GetMeshRouteViewRequest;
+                    })();
+    
+                    v1.ListGatewayRouteViewsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListGatewayRouteViewsRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IListGatewayRouteViewsRequest
+                         * @property {string|null} [parent] ListGatewayRouteViewsRequest parent
+                         * @property {number|null} [pageSize] ListGatewayRouteViewsRequest pageSize
+                         * @property {string|null} [pageToken] ListGatewayRouteViewsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListGatewayRouteViewsRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a ListGatewayRouteViewsRequest.
+                         * @implements IListGatewayRouteViewsRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IListGatewayRouteViewsRequest=} [properties] Properties to set
+                         */
+                        function ListGatewayRouteViewsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListGatewayRouteViewsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsRequest
+                         * @instance
+                         */
+                        ListGatewayRouteViewsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListGatewayRouteViewsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsRequest
+                         * @instance
+                         */
+                        ListGatewayRouteViewsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListGatewayRouteViewsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsRequest
+                         * @instance
+                         */
+                        ListGatewayRouteViewsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListGatewayRouteViewsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListGatewayRouteViewsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.ListGatewayRouteViewsRequest} ListGatewayRouteViewsRequest instance
+                         */
+                        ListGatewayRouteViewsRequest.create = function create(properties) {
+                            return new ListGatewayRouteViewsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListGatewayRouteViewsRequest message. Does not implicitly {@link google.cloud.networkservices.v1.ListGatewayRouteViewsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListGatewayRouteViewsRequest} message ListGatewayRouteViewsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListGatewayRouteViewsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListGatewayRouteViewsRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListGatewayRouteViewsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListGatewayRouteViewsRequest} message ListGatewayRouteViewsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListGatewayRouteViewsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListGatewayRouteViewsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.ListGatewayRouteViewsRequest} ListGatewayRouteViewsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListGatewayRouteViewsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListGatewayRouteViewsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListGatewayRouteViewsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.ListGatewayRouteViewsRequest} ListGatewayRouteViewsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListGatewayRouteViewsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListGatewayRouteViewsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListGatewayRouteViewsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListGatewayRouteViewsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.ListGatewayRouteViewsRequest} ListGatewayRouteViewsRequest
+                         */
+                        ListGatewayRouteViewsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.ListGatewayRouteViewsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.ListGatewayRouteViewsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListGatewayRouteViewsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ListGatewayRouteViewsRequest} message ListGatewayRouteViewsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListGatewayRouteViewsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListGatewayRouteViewsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListGatewayRouteViewsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListGatewayRouteViewsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListGatewayRouteViewsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.ListGatewayRouteViewsRequest";
+                        };
+    
+                        return ListGatewayRouteViewsRequest;
+                    })();
+    
+                    v1.ListMeshRouteViewsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListMeshRouteViewsRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IListMeshRouteViewsRequest
+                         * @property {string|null} [parent] ListMeshRouteViewsRequest parent
+                         * @property {number|null} [pageSize] ListMeshRouteViewsRequest pageSize
+                         * @property {string|null} [pageToken] ListMeshRouteViewsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListMeshRouteViewsRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a ListMeshRouteViewsRequest.
+                         * @implements IListMeshRouteViewsRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IListMeshRouteViewsRequest=} [properties] Properties to set
+                         */
+                        function ListMeshRouteViewsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMeshRouteViewsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsRequest
+                         * @instance
+                         */
+                        ListMeshRouteViewsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListMeshRouteViewsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsRequest
+                         * @instance
+                         */
+                        ListMeshRouteViewsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListMeshRouteViewsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsRequest
+                         * @instance
+                         */
+                        ListMeshRouteViewsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListMeshRouteViewsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListMeshRouteViewsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.ListMeshRouteViewsRequest} ListMeshRouteViewsRequest instance
+                         */
+                        ListMeshRouteViewsRequest.create = function create(properties) {
+                            return new ListMeshRouteViewsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMeshRouteViewsRequest message. Does not implicitly {@link google.cloud.networkservices.v1.ListMeshRouteViewsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListMeshRouteViewsRequest} message ListMeshRouteViewsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMeshRouteViewsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMeshRouteViewsRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListMeshRouteViewsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListMeshRouteViewsRequest} message ListMeshRouteViewsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMeshRouteViewsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMeshRouteViewsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.ListMeshRouteViewsRequest} ListMeshRouteViewsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMeshRouteViewsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListMeshRouteViewsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMeshRouteViewsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.ListMeshRouteViewsRequest} ListMeshRouteViewsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMeshRouteViewsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMeshRouteViewsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMeshRouteViewsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMeshRouteViewsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.ListMeshRouteViewsRequest} ListMeshRouteViewsRequest
+                         */
+                        ListMeshRouteViewsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.ListMeshRouteViewsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.ListMeshRouteViewsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMeshRouteViewsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ListMeshRouteViewsRequest} message ListMeshRouteViewsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMeshRouteViewsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMeshRouteViewsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMeshRouteViewsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMeshRouteViewsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMeshRouteViewsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.ListMeshRouteViewsRequest";
+                        };
+    
+                        return ListMeshRouteViewsRequest;
+                    })();
+    
+                    v1.ListGatewayRouteViewsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListGatewayRouteViewsResponse.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IListGatewayRouteViewsResponse
+                         * @property {Array.<google.cloud.networkservices.v1.IGatewayRouteView>|null} [gatewayRouteViews] ListGatewayRouteViewsResponse gatewayRouteViews
+                         * @property {string|null} [nextPageToken] ListGatewayRouteViewsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListGatewayRouteViewsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListGatewayRouteViewsResponse.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a ListGatewayRouteViewsResponse.
+                         * @implements IListGatewayRouteViewsResponse
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IListGatewayRouteViewsResponse=} [properties] Properties to set
+                         */
+                        function ListGatewayRouteViewsResponse(properties) {
+                            this.gatewayRouteViews = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListGatewayRouteViewsResponse gatewayRouteViews.
+                         * @member {Array.<google.cloud.networkservices.v1.IGatewayRouteView>} gatewayRouteViews
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsResponse
+                         * @instance
+                         */
+                        ListGatewayRouteViewsResponse.prototype.gatewayRouteViews = $util.emptyArray;
+    
+                        /**
+                         * ListGatewayRouteViewsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsResponse
+                         * @instance
+                         */
+                        ListGatewayRouteViewsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListGatewayRouteViewsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsResponse
+                         * @instance
+                         */
+                        ListGatewayRouteViewsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListGatewayRouteViewsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListGatewayRouteViewsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.ListGatewayRouteViewsResponse} ListGatewayRouteViewsResponse instance
+                         */
+                        ListGatewayRouteViewsResponse.create = function create(properties) {
+                            return new ListGatewayRouteViewsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListGatewayRouteViewsResponse message. Does not implicitly {@link google.cloud.networkservices.v1.ListGatewayRouteViewsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListGatewayRouteViewsResponse} message ListGatewayRouteViewsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListGatewayRouteViewsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.gatewayRouteViews != null && message.gatewayRouteViews.length)
+                                for (var i = 0; i < message.gatewayRouteViews.length; ++i)
+                                    $root.google.cloud.networkservices.v1.GatewayRouteView.encode(message.gatewayRouteViews[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListGatewayRouteViewsResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListGatewayRouteViewsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListGatewayRouteViewsResponse} message ListGatewayRouteViewsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListGatewayRouteViewsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListGatewayRouteViewsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.ListGatewayRouteViewsResponse} ListGatewayRouteViewsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListGatewayRouteViewsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListGatewayRouteViewsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.gatewayRouteViews && message.gatewayRouteViews.length))
+                                            message.gatewayRouteViews = [];
+                                        message.gatewayRouteViews.push($root.google.cloud.networkservices.v1.GatewayRouteView.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListGatewayRouteViewsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.ListGatewayRouteViewsResponse} ListGatewayRouteViewsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListGatewayRouteViewsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListGatewayRouteViewsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListGatewayRouteViewsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.gatewayRouteViews != null && message.hasOwnProperty("gatewayRouteViews")) {
+                                if (!Array.isArray(message.gatewayRouteViews))
+                                    return "gatewayRouteViews: array expected";
+                                for (var i = 0; i < message.gatewayRouteViews.length; ++i) {
+                                    var error = $root.google.cloud.networkservices.v1.GatewayRouteView.verify(message.gatewayRouteViews[i]);
+                                    if (error)
+                                        return "gatewayRouteViews." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListGatewayRouteViewsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.ListGatewayRouteViewsResponse} ListGatewayRouteViewsResponse
+                         */
+                        ListGatewayRouteViewsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.ListGatewayRouteViewsResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.ListGatewayRouteViewsResponse();
+                            if (object.gatewayRouteViews) {
+                                if (!Array.isArray(object.gatewayRouteViews))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListGatewayRouteViewsResponse.gatewayRouteViews: array expected");
+                                message.gatewayRouteViews = [];
+                                for (var i = 0; i < object.gatewayRouteViews.length; ++i) {
+                                    if (typeof object.gatewayRouteViews[i] !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.ListGatewayRouteViewsResponse.gatewayRouteViews: object expected");
+                                    message.gatewayRouteViews[i] = $root.google.cloud.networkservices.v1.GatewayRouteView.fromObject(object.gatewayRouteViews[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListGatewayRouteViewsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListGatewayRouteViewsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ListGatewayRouteViewsResponse} message ListGatewayRouteViewsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListGatewayRouteViewsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.gatewayRouteViews = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.gatewayRouteViews && message.gatewayRouteViews.length) {
+                                object.gatewayRouteViews = [];
+                                for (var j = 0; j < message.gatewayRouteViews.length; ++j)
+                                    object.gatewayRouteViews[j] = $root.google.cloud.networkservices.v1.GatewayRouteView.toObject(message.gatewayRouteViews[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListGatewayRouteViewsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListGatewayRouteViewsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListGatewayRouteViewsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.ListGatewayRouteViewsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListGatewayRouteViewsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.ListGatewayRouteViewsResponse";
+                        };
+    
+                        return ListGatewayRouteViewsResponse;
+                    })();
+    
+                    v1.ListMeshRouteViewsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListMeshRouteViewsResponse.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IListMeshRouteViewsResponse
+                         * @property {Array.<google.cloud.networkservices.v1.IMeshRouteView>|null} [meshRouteViews] ListMeshRouteViewsResponse meshRouteViews
+                         * @property {string|null} [nextPageToken] ListMeshRouteViewsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListMeshRouteViewsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListMeshRouteViewsResponse.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a ListMeshRouteViewsResponse.
+                         * @implements IListMeshRouteViewsResponse
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IListMeshRouteViewsResponse=} [properties] Properties to set
+                         */
+                        function ListMeshRouteViewsResponse(properties) {
+                            this.meshRouteViews = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMeshRouteViewsResponse meshRouteViews.
+                         * @member {Array.<google.cloud.networkservices.v1.IMeshRouteView>} meshRouteViews
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsResponse
+                         * @instance
+                         */
+                        ListMeshRouteViewsResponse.prototype.meshRouteViews = $util.emptyArray;
+    
+                        /**
+                         * ListMeshRouteViewsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsResponse
+                         * @instance
+                         */
+                        ListMeshRouteViewsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListMeshRouteViewsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsResponse
+                         * @instance
+                         */
+                        ListMeshRouteViewsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListMeshRouteViewsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListMeshRouteViewsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.ListMeshRouteViewsResponse} ListMeshRouteViewsResponse instance
+                         */
+                        ListMeshRouteViewsResponse.create = function create(properties) {
+                            return new ListMeshRouteViewsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMeshRouteViewsResponse message. Does not implicitly {@link google.cloud.networkservices.v1.ListMeshRouteViewsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListMeshRouteViewsResponse} message ListMeshRouteViewsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMeshRouteViewsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.meshRouteViews != null && message.meshRouteViews.length)
+                                for (var i = 0; i < message.meshRouteViews.length; ++i)
+                                    $root.google.cloud.networkservices.v1.MeshRouteView.encode(message.meshRouteViews[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMeshRouteViewsResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListMeshRouteViewsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListMeshRouteViewsResponse} message ListMeshRouteViewsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMeshRouteViewsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMeshRouteViewsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.ListMeshRouteViewsResponse} ListMeshRouteViewsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMeshRouteViewsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListMeshRouteViewsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.meshRouteViews && message.meshRouteViews.length))
+                                            message.meshRouteViews = [];
+                                        message.meshRouteViews.push($root.google.cloud.networkservices.v1.MeshRouteView.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMeshRouteViewsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.ListMeshRouteViewsResponse} ListMeshRouteViewsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMeshRouteViewsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMeshRouteViewsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMeshRouteViewsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.meshRouteViews != null && message.hasOwnProperty("meshRouteViews")) {
+                                if (!Array.isArray(message.meshRouteViews))
+                                    return "meshRouteViews: array expected";
+                                for (var i = 0; i < message.meshRouteViews.length; ++i) {
+                                    var error = $root.google.cloud.networkservices.v1.MeshRouteView.verify(message.meshRouteViews[i]);
+                                    if (error)
+                                        return "meshRouteViews." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMeshRouteViewsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.ListMeshRouteViewsResponse} ListMeshRouteViewsResponse
+                         */
+                        ListMeshRouteViewsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.ListMeshRouteViewsResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.ListMeshRouteViewsResponse();
+                            if (object.meshRouteViews) {
+                                if (!Array.isArray(object.meshRouteViews))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListMeshRouteViewsResponse.meshRouteViews: array expected");
+                                message.meshRouteViews = [];
+                                for (var i = 0; i < object.meshRouteViews.length; ++i) {
+                                    if (typeof object.meshRouteViews[i] !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.ListMeshRouteViewsResponse.meshRouteViews: object expected");
+                                    message.meshRouteViews[i] = $root.google.cloud.networkservices.v1.MeshRouteView.fromObject(object.meshRouteViews[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListMeshRouteViewsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMeshRouteViewsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ListMeshRouteViewsResponse} message ListMeshRouteViewsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMeshRouteViewsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.meshRouteViews = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.meshRouteViews && message.meshRouteViews.length) {
+                                object.meshRouteViews = [];
+                                for (var j = 0; j < message.meshRouteViews.length; ++j)
+                                    object.meshRouteViews[j] = $root.google.cloud.networkservices.v1.MeshRouteView.toObject(message.meshRouteViews[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMeshRouteViewsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMeshRouteViewsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMeshRouteViewsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.ListMeshRouteViewsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMeshRouteViewsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.ListMeshRouteViewsResponse";
+                        };
+    
+                        return ListMeshRouteViewsResponse;
                     })();
     
                     v1.ServiceBinding = (function() {
@@ -25258,6 +29443,7 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] ServiceBinding createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] ServiceBinding updateTime
                          * @property {string|null} [service] ServiceBinding service
+                         * @property {string|null} [serviceId] ServiceBinding serviceId
                          * @property {Object.<string,string>|null} [labels] ServiceBinding labels
                          */
     
@@ -25318,6 +29504,14 @@
                         ServiceBinding.prototype.service = "";
     
                         /**
+                         * ServiceBinding serviceId.
+                         * @member {string} serviceId
+                         * @memberof google.cloud.networkservices.v1.ServiceBinding
+                         * @instance
+                         */
+                        ServiceBinding.prototype.serviceId = "";
+    
+                        /**
                          * ServiceBinding labels.
                          * @member {Object.<string,string>} labels
                          * @memberof google.cloud.networkservices.v1.ServiceBinding
@@ -25362,6 +29556,8 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.serviceId != null && Object.hasOwnProperty.call(message, "serviceId"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.serviceId);
                             return writer;
                         };
     
@@ -25389,12 +29585,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ServiceBinding.decode = function decode(reader, length) {
+                        ServiceBinding.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ServiceBinding(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -25414,6 +29612,10 @@
                                     }
                                 case 5: {
                                         message.service = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.serviceId = reader.string();
                                         break;
                                     }
                                 case 7: {
@@ -25493,6 +29695,9 @@
                             if (message.service != null && message.hasOwnProperty("service"))
                                 if (!$util.isString(message.service))
                                     return "service: string expected";
+                            if (message.serviceId != null && message.hasOwnProperty("serviceId"))
+                                if (!$util.isString(message.serviceId))
+                                    return "serviceId: string expected";
                             if (message.labels != null && message.hasOwnProperty("labels")) {
                                 if (!$util.isObject(message.labels))
                                     return "labels: object expected";
@@ -25532,6 +29737,8 @@
                             }
                             if (object.service != null)
                                 message.service = String(object.service);
+                            if (object.serviceId != null)
+                                message.serviceId = String(object.serviceId);
                             if (object.labels) {
                                 if (typeof object.labels !== "object")
                                     throw TypeError(".google.cloud.networkservices.v1.ServiceBinding.labels: object expected");
@@ -25563,6 +29770,7 @@
                                 object.createTime = null;
                                 object.updateTime = null;
                                 object.service = "";
+                                object.serviceId = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -25580,6 +29788,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
+                            if (message.serviceId != null && message.hasOwnProperty("serviceId"))
+                                object.serviceId = message.serviceId;
                             return object;
                         };
     
@@ -25719,12 +29929,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListServiceBindingsRequest.decode = function decode(reader, length) {
+                        ListServiceBindingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListServiceBindingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -25870,6 +30082,7 @@
                          * @interface IListServiceBindingsResponse
                          * @property {Array.<google.cloud.networkservices.v1.IServiceBinding>|null} [serviceBindings] ListServiceBindingsResponse serviceBindings
                          * @property {string|null} [nextPageToken] ListServiceBindingsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListServiceBindingsResponse unreachable
                          */
     
                         /**
@@ -25882,6 +30095,7 @@
                          */
                         function ListServiceBindingsResponse(properties) {
                             this.serviceBindings = [];
+                            this.unreachable = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -25903,6 +30117,14 @@
                          * @instance
                          */
                         ListServiceBindingsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListServiceBindingsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkservices.v1.ListServiceBindingsResponse
+                         * @instance
+                         */
+                        ListServiceBindingsResponse.prototype.unreachable = $util.emptyArray;
     
                         /**
                          * Creates a new ListServiceBindingsResponse instance using the specified properties.
@@ -25933,6 +30155,9 @@
                                     $root.google.cloud.networkservices.v1.ServiceBinding.encode(message.serviceBindings[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
                             return writer;
                         };
     
@@ -25960,12 +30185,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListServiceBindingsResponse.decode = function decode(reader, length) {
+                        ListServiceBindingsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListServiceBindingsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.serviceBindings && message.serviceBindings.length))
@@ -25975,6 +30202,12 @@
                                     }
                                 case 2: {
                                         message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -26024,6 +30257,13 @@
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
                             return null;
                         };
     
@@ -26051,6 +30291,13 @@
                             }
                             if (object.nextPageToken != null)
                                 message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListServiceBindingsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
                             return message;
                         };
     
@@ -26067,8 +30314,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.serviceBindings = [];
+                                object.unreachable = [];
+                            }
                             if (options.defaults)
                                 object.nextPageToken = "";
                             if (message.serviceBindings && message.serviceBindings.length) {
@@ -26078,6 +30327,11 @@
                             }
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
                             return object;
                         };
     
@@ -26195,12 +30449,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetServiceBindingRequest.decode = function decode(reader, length) {
+                        GetServiceBindingRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GetServiceBindingRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -26420,12 +30676,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateServiceBindingRequest.decode = function decode(reader, length) {
+                        CreateServiceBindingRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.CreateServiceBindingRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -26568,6 +30826,245 @@
                         return CreateServiceBindingRequest;
                     })();
     
+                    v1.UpdateServiceBindingRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateServiceBindingRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IUpdateServiceBindingRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateServiceBindingRequest updateMask
+                         * @property {google.cloud.networkservices.v1.IServiceBinding|null} [serviceBinding] UpdateServiceBindingRequest serviceBinding
+                         */
+    
+                        /**
+                         * Constructs a new UpdateServiceBindingRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents an UpdateServiceBindingRequest.
+                         * @implements IUpdateServiceBindingRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IUpdateServiceBindingRequest=} [properties] Properties to set
+                         */
+                        function UpdateServiceBindingRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateServiceBindingRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceBindingRequest
+                         * @instance
+                         */
+                        UpdateServiceBindingRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateServiceBindingRequest serviceBinding.
+                         * @member {google.cloud.networkservices.v1.IServiceBinding|null|undefined} serviceBinding
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceBindingRequest
+                         * @instance
+                         */
+                        UpdateServiceBindingRequest.prototype.serviceBinding = null;
+    
+                        /**
+                         * Creates a new UpdateServiceBindingRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceBindingRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateServiceBindingRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.UpdateServiceBindingRequest} UpdateServiceBindingRequest instance
+                         */
+                        UpdateServiceBindingRequest.create = function create(properties) {
+                            return new UpdateServiceBindingRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateServiceBindingRequest message. Does not implicitly {@link google.cloud.networkservices.v1.UpdateServiceBindingRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceBindingRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateServiceBindingRequest} message UpdateServiceBindingRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateServiceBindingRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.serviceBinding != null && Object.hasOwnProperty.call(message, "serviceBinding"))
+                                $root.google.cloud.networkservices.v1.ServiceBinding.encode(message.serviceBinding, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateServiceBindingRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.UpdateServiceBindingRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceBindingRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateServiceBindingRequest} message UpdateServiceBindingRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateServiceBindingRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateServiceBindingRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceBindingRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.UpdateServiceBindingRequest} UpdateServiceBindingRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateServiceBindingRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.UpdateServiceBindingRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.serviceBinding = $root.google.cloud.networkservices.v1.ServiceBinding.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateServiceBindingRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceBindingRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.UpdateServiceBindingRequest} UpdateServiceBindingRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateServiceBindingRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateServiceBindingRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceBindingRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateServiceBindingRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.serviceBinding != null && message.hasOwnProperty("serviceBinding")) {
+                                var error = $root.google.cloud.networkservices.v1.ServiceBinding.verify(message.serviceBinding);
+                                if (error)
+                                    return "serviceBinding." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateServiceBindingRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceBindingRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.UpdateServiceBindingRequest} UpdateServiceBindingRequest
+                         */
+                        UpdateServiceBindingRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.UpdateServiceBindingRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.UpdateServiceBindingRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.UpdateServiceBindingRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.serviceBinding != null) {
+                                if (typeof object.serviceBinding !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.UpdateServiceBindingRequest.serviceBinding: object expected");
+                                message.serviceBinding = $root.google.cloud.networkservices.v1.ServiceBinding.fromObject(object.serviceBinding);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateServiceBindingRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceBindingRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.UpdateServiceBindingRequest} message UpdateServiceBindingRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateServiceBindingRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.serviceBinding = null;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.serviceBinding != null && message.hasOwnProperty("serviceBinding"))
+                                object.serviceBinding = $root.google.cloud.networkservices.v1.ServiceBinding.toObject(message.serviceBinding, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateServiceBindingRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceBindingRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateServiceBindingRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateServiceBindingRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceBindingRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateServiceBindingRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.UpdateServiceBindingRequest";
+                        };
+    
+                        return UpdateServiceBindingRequest;
+                    })();
+    
                     v1.DeleteServiceBindingRequest = (function() {
     
                         /**
@@ -26653,12 +31150,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteServiceBindingRequest.decode = function decode(reader, length) {
+                        DeleteServiceBindingRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.DeleteServiceBindingRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -26769,6 +31268,2341 @@
                         };
     
                         return DeleteServiceBindingRequest;
+                    })();
+    
+                    v1.ServiceLbPolicy = (function() {
+    
+                        /**
+                         * Properties of a ServiceLbPolicy.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IServiceLbPolicy
+                         * @property {string|null} [name] ServiceLbPolicy name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] ServiceLbPolicy createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] ServiceLbPolicy updateTime
+                         * @property {Object.<string,string>|null} [labels] ServiceLbPolicy labels
+                         * @property {string|null} [description] ServiceLbPolicy description
+                         * @property {google.cloud.networkservices.v1.ServiceLbPolicy.LoadBalancingAlgorithm|null} [loadBalancingAlgorithm] ServiceLbPolicy loadBalancingAlgorithm
+                         * @property {google.cloud.networkservices.v1.ServiceLbPolicy.IAutoCapacityDrain|null} [autoCapacityDrain] ServiceLbPolicy autoCapacityDrain
+                         * @property {google.cloud.networkservices.v1.ServiceLbPolicy.IFailoverConfig|null} [failoverConfig] ServiceLbPolicy failoverConfig
+                         */
+    
+                        /**
+                         * Constructs a new ServiceLbPolicy.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a ServiceLbPolicy.
+                         * @implements IServiceLbPolicy
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IServiceLbPolicy=} [properties] Properties to set
+                         */
+                        function ServiceLbPolicy(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ServiceLbPolicy name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                         * @instance
+                         */
+                        ServiceLbPolicy.prototype.name = "";
+    
+                        /**
+                         * ServiceLbPolicy createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                         * @instance
+                         */
+                        ServiceLbPolicy.prototype.createTime = null;
+    
+                        /**
+                         * ServiceLbPolicy updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                         * @instance
+                         */
+                        ServiceLbPolicy.prototype.updateTime = null;
+    
+                        /**
+                         * ServiceLbPolicy labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                         * @instance
+                         */
+                        ServiceLbPolicy.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * ServiceLbPolicy description.
+                         * @member {string} description
+                         * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                         * @instance
+                         */
+                        ServiceLbPolicy.prototype.description = "";
+    
+                        /**
+                         * ServiceLbPolicy loadBalancingAlgorithm.
+                         * @member {google.cloud.networkservices.v1.ServiceLbPolicy.LoadBalancingAlgorithm} loadBalancingAlgorithm
+                         * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                         * @instance
+                         */
+                        ServiceLbPolicy.prototype.loadBalancingAlgorithm = 0;
+    
+                        /**
+                         * ServiceLbPolicy autoCapacityDrain.
+                         * @member {google.cloud.networkservices.v1.ServiceLbPolicy.IAutoCapacityDrain|null|undefined} autoCapacityDrain
+                         * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                         * @instance
+                         */
+                        ServiceLbPolicy.prototype.autoCapacityDrain = null;
+    
+                        /**
+                         * ServiceLbPolicy failoverConfig.
+                         * @member {google.cloud.networkservices.v1.ServiceLbPolicy.IFailoverConfig|null|undefined} failoverConfig
+                         * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                         * @instance
+                         */
+                        ServiceLbPolicy.prototype.failoverConfig = null;
+    
+                        /**
+                         * Creates a new ServiceLbPolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IServiceLbPolicy=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.ServiceLbPolicy} ServiceLbPolicy instance
+                         */
+                        ServiceLbPolicy.create = function create(properties) {
+                            return new ServiceLbPolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ServiceLbPolicy message. Does not implicitly {@link google.cloud.networkservices.v1.ServiceLbPolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IServiceLbPolicy} message ServiceLbPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ServiceLbPolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.description);
+                            if (message.loadBalancingAlgorithm != null && Object.hasOwnProperty.call(message, "loadBalancingAlgorithm"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.loadBalancingAlgorithm);
+                            if (message.autoCapacityDrain != null && Object.hasOwnProperty.call(message, "autoCapacityDrain"))
+                                $root.google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain.encode(message.autoCapacityDrain, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.failoverConfig != null && Object.hasOwnProperty.call(message, "failoverConfig"))
+                                $root.google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig.encode(message.failoverConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ServiceLbPolicy message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ServiceLbPolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IServiceLbPolicy} message ServiceLbPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ServiceLbPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ServiceLbPolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.ServiceLbPolicy} ServiceLbPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ServiceLbPolicy.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ServiceLbPolicy(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.loadBalancingAlgorithm = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.autoCapacityDrain = $root.google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.failoverConfig = $root.google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ServiceLbPolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.ServiceLbPolicy} ServiceLbPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ServiceLbPolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ServiceLbPolicy message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ServiceLbPolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.loadBalancingAlgorithm != null && message.hasOwnProperty("loadBalancingAlgorithm"))
+                                switch (message.loadBalancingAlgorithm) {
+                                default:
+                                    return "loadBalancingAlgorithm: enum value expected";
+                                case 0:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            if (message.autoCapacityDrain != null && message.hasOwnProperty("autoCapacityDrain")) {
+                                var error = $root.google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain.verify(message.autoCapacityDrain);
+                                if (error)
+                                    return "autoCapacityDrain." + error;
+                            }
+                            if (message.failoverConfig != null && message.hasOwnProperty("failoverConfig")) {
+                                var error = $root.google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig.verify(message.failoverConfig);
+                                if (error)
+                                    return "failoverConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ServiceLbPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.ServiceLbPolicy} ServiceLbPolicy
+                         */
+                        ServiceLbPolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.ServiceLbPolicy)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.ServiceLbPolicy();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.ServiceLbPolicy.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.ServiceLbPolicy.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.ServiceLbPolicy.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            switch (object.loadBalancingAlgorithm) {
+                            default:
+                                if (typeof object.loadBalancingAlgorithm === "number") {
+                                    message.loadBalancingAlgorithm = object.loadBalancingAlgorithm;
+                                    break;
+                                }
+                                break;
+                            case "LOAD_BALANCING_ALGORITHM_UNSPECIFIED":
+                            case 0:
+                                message.loadBalancingAlgorithm = 0;
+                                break;
+                            case "SPRAY_TO_WORLD":
+                            case 3:
+                                message.loadBalancingAlgorithm = 3;
+                                break;
+                            case "SPRAY_TO_REGION":
+                            case 4:
+                                message.loadBalancingAlgorithm = 4;
+                                break;
+                            case "WATERFALL_BY_REGION":
+                            case 5:
+                                message.loadBalancingAlgorithm = 5;
+                                break;
+                            case "WATERFALL_BY_ZONE":
+                            case 6:
+                                message.loadBalancingAlgorithm = 6;
+                                break;
+                            }
+                            if (object.autoCapacityDrain != null) {
+                                if (typeof object.autoCapacityDrain !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.ServiceLbPolicy.autoCapacityDrain: object expected");
+                                message.autoCapacityDrain = $root.google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain.fromObject(object.autoCapacityDrain);
+                            }
+                            if (object.failoverConfig != null) {
+                                if (typeof object.failoverConfig !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.ServiceLbPolicy.failoverConfig: object expected");
+                                message.failoverConfig = $root.google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig.fromObject(object.failoverConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ServiceLbPolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ServiceLbPolicy} message ServiceLbPolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ServiceLbPolicy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.description = "";
+                                object.loadBalancingAlgorithm = options.enums === String ? "LOAD_BALANCING_ALGORITHM_UNSPECIFIED" : 0;
+                                object.autoCapacityDrain = null;
+                                object.failoverConfig = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.loadBalancingAlgorithm != null && message.hasOwnProperty("loadBalancingAlgorithm"))
+                                object.loadBalancingAlgorithm = options.enums === String ? $root.google.cloud.networkservices.v1.ServiceLbPolicy.LoadBalancingAlgorithm[message.loadBalancingAlgorithm] === undefined ? message.loadBalancingAlgorithm : $root.google.cloud.networkservices.v1.ServiceLbPolicy.LoadBalancingAlgorithm[message.loadBalancingAlgorithm] : message.loadBalancingAlgorithm;
+                            if (message.autoCapacityDrain != null && message.hasOwnProperty("autoCapacityDrain"))
+                                object.autoCapacityDrain = $root.google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain.toObject(message.autoCapacityDrain, options);
+                            if (message.failoverConfig != null && message.hasOwnProperty("failoverConfig"))
+                                object.failoverConfig = $root.google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig.toObject(message.failoverConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ServiceLbPolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ServiceLbPolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ServiceLbPolicy
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ServiceLbPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.ServiceLbPolicy";
+                        };
+    
+                        ServiceLbPolicy.AutoCapacityDrain = (function() {
+    
+                            /**
+                             * Properties of an AutoCapacityDrain.
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                             * @interface IAutoCapacityDrain
+                             * @property {boolean|null} [enable] AutoCapacityDrain enable
+                             */
+    
+                            /**
+                             * Constructs a new AutoCapacityDrain.
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                             * @classdesc Represents an AutoCapacityDrain.
+                             * @implements IAutoCapacityDrain
+                             * @constructor
+                             * @param {google.cloud.networkservices.v1.ServiceLbPolicy.IAutoCapacityDrain=} [properties] Properties to set
+                             */
+                            function AutoCapacityDrain(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AutoCapacityDrain enable.
+                             * @member {boolean} enable
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain
+                             * @instance
+                             */
+                            AutoCapacityDrain.prototype.enable = false;
+    
+                            /**
+                             * Creates a new AutoCapacityDrain instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain
+                             * @static
+                             * @param {google.cloud.networkservices.v1.ServiceLbPolicy.IAutoCapacityDrain=} [properties] Properties to set
+                             * @returns {google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain} AutoCapacityDrain instance
+                             */
+                            AutoCapacityDrain.create = function create(properties) {
+                                return new AutoCapacityDrain(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AutoCapacityDrain message. Does not implicitly {@link google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain
+                             * @static
+                             * @param {google.cloud.networkservices.v1.ServiceLbPolicy.IAutoCapacityDrain} message AutoCapacityDrain message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutoCapacityDrain.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enable != null && Object.hasOwnProperty.call(message, "enable"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enable);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AutoCapacityDrain message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain
+                             * @static
+                             * @param {google.cloud.networkservices.v1.ServiceLbPolicy.IAutoCapacityDrain} message AutoCapacityDrain message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutoCapacityDrain.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AutoCapacityDrain message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain} AutoCapacityDrain
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutoCapacityDrain.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.enable = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AutoCapacityDrain message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain} AutoCapacityDrain
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutoCapacityDrain.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AutoCapacityDrain message.
+                             * @function verify
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AutoCapacityDrain.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enable != null && message.hasOwnProperty("enable"))
+                                    if (typeof message.enable !== "boolean")
+                                        return "enable: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AutoCapacityDrain message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain} AutoCapacityDrain
+                             */
+                            AutoCapacityDrain.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain)
+                                    return object;
+                                var message = new $root.google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain();
+                                if (object.enable != null)
+                                    message.enable = Boolean(object.enable);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AutoCapacityDrain message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain
+                             * @static
+                             * @param {google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain} message AutoCapacityDrain
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AutoCapacityDrain.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.enable = false;
+                                if (message.enable != null && message.hasOwnProperty("enable"))
+                                    object.enable = message.enable;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AutoCapacityDrain to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AutoCapacityDrain.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AutoCapacityDrain
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AutoCapacityDrain.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain";
+                            };
+    
+                            return AutoCapacityDrain;
+                        })();
+    
+                        ServiceLbPolicy.FailoverConfig = (function() {
+    
+                            /**
+                             * Properties of a FailoverConfig.
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                             * @interface IFailoverConfig
+                             * @property {number|null} [failoverHealthThreshold] FailoverConfig failoverHealthThreshold
+                             */
+    
+                            /**
+                             * Constructs a new FailoverConfig.
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy
+                             * @classdesc Represents a FailoverConfig.
+                             * @implements IFailoverConfig
+                             * @constructor
+                             * @param {google.cloud.networkservices.v1.ServiceLbPolicy.IFailoverConfig=} [properties] Properties to set
+                             */
+                            function FailoverConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FailoverConfig failoverHealthThreshold.
+                             * @member {number} failoverHealthThreshold
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig
+                             * @instance
+                             */
+                            FailoverConfig.prototype.failoverHealthThreshold = 0;
+    
+                            /**
+                             * Creates a new FailoverConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig
+                             * @static
+                             * @param {google.cloud.networkservices.v1.ServiceLbPolicy.IFailoverConfig=} [properties] Properties to set
+                             * @returns {google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig} FailoverConfig instance
+                             */
+                            FailoverConfig.create = function create(properties) {
+                                return new FailoverConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FailoverConfig message. Does not implicitly {@link google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig
+                             * @static
+                             * @param {google.cloud.networkservices.v1.ServiceLbPolicy.IFailoverConfig} message FailoverConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FailoverConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.failoverHealthThreshold != null && Object.hasOwnProperty.call(message, "failoverHealthThreshold"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.failoverHealthThreshold);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FailoverConfig message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig
+                             * @static
+                             * @param {google.cloud.networkservices.v1.ServiceLbPolicy.IFailoverConfig} message FailoverConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FailoverConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FailoverConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig} FailoverConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FailoverConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.failoverHealthThreshold = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FailoverConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig} FailoverConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FailoverConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FailoverConfig message.
+                             * @function verify
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FailoverConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.failoverHealthThreshold != null && message.hasOwnProperty("failoverHealthThreshold"))
+                                    if (!$util.isInteger(message.failoverHealthThreshold))
+                                        return "failoverHealthThreshold: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FailoverConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig} FailoverConfig
+                             */
+                            FailoverConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig)
+                                    return object;
+                                var message = new $root.google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig();
+                                if (object.failoverHealthThreshold != null)
+                                    message.failoverHealthThreshold = object.failoverHealthThreshold | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FailoverConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig
+                             * @static
+                             * @param {google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig} message FailoverConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FailoverConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.failoverHealthThreshold = 0;
+                                if (message.failoverHealthThreshold != null && message.hasOwnProperty("failoverHealthThreshold"))
+                                    object.failoverHealthThreshold = message.failoverHealthThreshold;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FailoverConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FailoverConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FailoverConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FailoverConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig";
+                            };
+    
+                            return FailoverConfig;
+                        })();
+    
+                        /**
+                         * LoadBalancingAlgorithm enum.
+                         * @name google.cloud.networkservices.v1.ServiceLbPolicy.LoadBalancingAlgorithm
+                         * @enum {number}
+                         * @property {number} LOAD_BALANCING_ALGORITHM_UNSPECIFIED=0 LOAD_BALANCING_ALGORITHM_UNSPECIFIED value
+                         * @property {number} SPRAY_TO_WORLD=3 SPRAY_TO_WORLD value
+                         * @property {number} SPRAY_TO_REGION=4 SPRAY_TO_REGION value
+                         * @property {number} WATERFALL_BY_REGION=5 WATERFALL_BY_REGION value
+                         * @property {number} WATERFALL_BY_ZONE=6 WATERFALL_BY_ZONE value
+                         */
+                        ServiceLbPolicy.LoadBalancingAlgorithm = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "LOAD_BALANCING_ALGORITHM_UNSPECIFIED"] = 0;
+                            values[valuesById[3] = "SPRAY_TO_WORLD"] = 3;
+                            values[valuesById[4] = "SPRAY_TO_REGION"] = 4;
+                            values[valuesById[5] = "WATERFALL_BY_REGION"] = 5;
+                            values[valuesById[6] = "WATERFALL_BY_ZONE"] = 6;
+                            return values;
+                        })();
+    
+                        return ServiceLbPolicy;
+                    })();
+    
+                    v1.ListServiceLbPoliciesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListServiceLbPoliciesRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IListServiceLbPoliciesRequest
+                         * @property {string|null} [parent] ListServiceLbPoliciesRequest parent
+                         * @property {number|null} [pageSize] ListServiceLbPoliciesRequest pageSize
+                         * @property {string|null} [pageToken] ListServiceLbPoliciesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListServiceLbPoliciesRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a ListServiceLbPoliciesRequest.
+                         * @implements IListServiceLbPoliciesRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IListServiceLbPoliciesRequest=} [properties] Properties to set
+                         */
+                        function ListServiceLbPoliciesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListServiceLbPoliciesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesRequest
+                         * @instance
+                         */
+                        ListServiceLbPoliciesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListServiceLbPoliciesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesRequest
+                         * @instance
+                         */
+                        ListServiceLbPoliciesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListServiceLbPoliciesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesRequest
+                         * @instance
+                         */
+                        ListServiceLbPoliciesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListServiceLbPoliciesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListServiceLbPoliciesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.ListServiceLbPoliciesRequest} ListServiceLbPoliciesRequest instance
+                         */
+                        ListServiceLbPoliciesRequest.create = function create(properties) {
+                            return new ListServiceLbPoliciesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListServiceLbPoliciesRequest message. Does not implicitly {@link google.cloud.networkservices.v1.ListServiceLbPoliciesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListServiceLbPoliciesRequest} message ListServiceLbPoliciesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListServiceLbPoliciesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListServiceLbPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListServiceLbPoliciesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListServiceLbPoliciesRequest} message ListServiceLbPoliciesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListServiceLbPoliciesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListServiceLbPoliciesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.ListServiceLbPoliciesRequest} ListServiceLbPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListServiceLbPoliciesRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListServiceLbPoliciesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListServiceLbPoliciesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.ListServiceLbPoliciesRequest} ListServiceLbPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListServiceLbPoliciesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListServiceLbPoliciesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListServiceLbPoliciesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListServiceLbPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.ListServiceLbPoliciesRequest} ListServiceLbPoliciesRequest
+                         */
+                        ListServiceLbPoliciesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.ListServiceLbPoliciesRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.ListServiceLbPoliciesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListServiceLbPoliciesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ListServiceLbPoliciesRequest} message ListServiceLbPoliciesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListServiceLbPoliciesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListServiceLbPoliciesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListServiceLbPoliciesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListServiceLbPoliciesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListServiceLbPoliciesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.ListServiceLbPoliciesRequest";
+                        };
+    
+                        return ListServiceLbPoliciesRequest;
+                    })();
+    
+                    v1.ListServiceLbPoliciesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListServiceLbPoliciesResponse.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IListServiceLbPoliciesResponse
+                         * @property {Array.<google.cloud.networkservices.v1.IServiceLbPolicy>|null} [serviceLbPolicies] ListServiceLbPoliciesResponse serviceLbPolicies
+                         * @property {string|null} [nextPageToken] ListServiceLbPoliciesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListServiceLbPoliciesResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListServiceLbPoliciesResponse.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a ListServiceLbPoliciesResponse.
+                         * @implements IListServiceLbPoliciesResponse
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IListServiceLbPoliciesResponse=} [properties] Properties to set
+                         */
+                        function ListServiceLbPoliciesResponse(properties) {
+                            this.serviceLbPolicies = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListServiceLbPoliciesResponse serviceLbPolicies.
+                         * @member {Array.<google.cloud.networkservices.v1.IServiceLbPolicy>} serviceLbPolicies
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesResponse
+                         * @instance
+                         */
+                        ListServiceLbPoliciesResponse.prototype.serviceLbPolicies = $util.emptyArray;
+    
+                        /**
+                         * ListServiceLbPoliciesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesResponse
+                         * @instance
+                         */
+                        ListServiceLbPoliciesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListServiceLbPoliciesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesResponse
+                         * @instance
+                         */
+                        ListServiceLbPoliciesResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListServiceLbPoliciesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListServiceLbPoliciesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.ListServiceLbPoliciesResponse} ListServiceLbPoliciesResponse instance
+                         */
+                        ListServiceLbPoliciesResponse.create = function create(properties) {
+                            return new ListServiceLbPoliciesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListServiceLbPoliciesResponse message. Does not implicitly {@link google.cloud.networkservices.v1.ListServiceLbPoliciesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListServiceLbPoliciesResponse} message ListServiceLbPoliciesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListServiceLbPoliciesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.serviceLbPolicies != null && message.serviceLbPolicies.length)
+                                for (var i = 0; i < message.serviceLbPolicies.length; ++i)
+                                    $root.google.cloud.networkservices.v1.ServiceLbPolicy.encode(message.serviceLbPolicies[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListServiceLbPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListServiceLbPoliciesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListServiceLbPoliciesResponse} message ListServiceLbPoliciesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListServiceLbPoliciesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListServiceLbPoliciesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.ListServiceLbPoliciesResponse} ListServiceLbPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListServiceLbPoliciesResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListServiceLbPoliciesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.serviceLbPolicies && message.serviceLbPolicies.length))
+                                            message.serviceLbPolicies = [];
+                                        message.serviceLbPolicies.push($root.google.cloud.networkservices.v1.ServiceLbPolicy.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListServiceLbPoliciesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.ListServiceLbPoliciesResponse} ListServiceLbPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListServiceLbPoliciesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListServiceLbPoliciesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListServiceLbPoliciesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.serviceLbPolicies != null && message.hasOwnProperty("serviceLbPolicies")) {
+                                if (!Array.isArray(message.serviceLbPolicies))
+                                    return "serviceLbPolicies: array expected";
+                                for (var i = 0; i < message.serviceLbPolicies.length; ++i) {
+                                    var error = $root.google.cloud.networkservices.v1.ServiceLbPolicy.verify(message.serviceLbPolicies[i]);
+                                    if (error)
+                                        return "serviceLbPolicies." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListServiceLbPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.ListServiceLbPoliciesResponse} ListServiceLbPoliciesResponse
+                         */
+                        ListServiceLbPoliciesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.ListServiceLbPoliciesResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.ListServiceLbPoliciesResponse();
+                            if (object.serviceLbPolicies) {
+                                if (!Array.isArray(object.serviceLbPolicies))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListServiceLbPoliciesResponse.serviceLbPolicies: array expected");
+                                message.serviceLbPolicies = [];
+                                for (var i = 0; i < object.serviceLbPolicies.length; ++i) {
+                                    if (typeof object.serviceLbPolicies[i] !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.ListServiceLbPoliciesResponse.serviceLbPolicies: object expected");
+                                    message.serviceLbPolicies[i] = $root.google.cloud.networkservices.v1.ServiceLbPolicy.fromObject(object.serviceLbPolicies[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListServiceLbPoliciesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListServiceLbPoliciesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ListServiceLbPoliciesResponse} message ListServiceLbPoliciesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListServiceLbPoliciesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.serviceLbPolicies = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.serviceLbPolicies && message.serviceLbPolicies.length) {
+                                object.serviceLbPolicies = [];
+                                for (var j = 0; j < message.serviceLbPolicies.length; ++j)
+                                    object.serviceLbPolicies[j] = $root.google.cloud.networkservices.v1.ServiceLbPolicy.toObject(message.serviceLbPolicies[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListServiceLbPoliciesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListServiceLbPoliciesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListServiceLbPoliciesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.ListServiceLbPoliciesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListServiceLbPoliciesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.ListServiceLbPoliciesResponse";
+                        };
+    
+                        return ListServiceLbPoliciesResponse;
+                    })();
+    
+                    v1.GetServiceLbPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a GetServiceLbPolicyRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IGetServiceLbPolicyRequest
+                         * @property {string|null} [name] GetServiceLbPolicyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetServiceLbPolicyRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a GetServiceLbPolicyRequest.
+                         * @implements IGetServiceLbPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IGetServiceLbPolicyRequest=} [properties] Properties to set
+                         */
+                        function GetServiceLbPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetServiceLbPolicyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.GetServiceLbPolicyRequest
+                         * @instance
+                         */
+                        GetServiceLbPolicyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetServiceLbPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.GetServiceLbPolicyRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetServiceLbPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.GetServiceLbPolicyRequest} GetServiceLbPolicyRequest instance
+                         */
+                        GetServiceLbPolicyRequest.create = function create(properties) {
+                            return new GetServiceLbPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetServiceLbPolicyRequest message. Does not implicitly {@link google.cloud.networkservices.v1.GetServiceLbPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.GetServiceLbPolicyRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetServiceLbPolicyRequest} message GetServiceLbPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetServiceLbPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetServiceLbPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GetServiceLbPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.GetServiceLbPolicyRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetServiceLbPolicyRequest} message GetServiceLbPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetServiceLbPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetServiceLbPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.GetServiceLbPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.GetServiceLbPolicyRequest} GetServiceLbPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetServiceLbPolicyRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GetServiceLbPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetServiceLbPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.GetServiceLbPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.GetServiceLbPolicyRequest} GetServiceLbPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetServiceLbPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetServiceLbPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.GetServiceLbPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetServiceLbPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetServiceLbPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.GetServiceLbPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.GetServiceLbPolicyRequest} GetServiceLbPolicyRequest
+                         */
+                        GetServiceLbPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.GetServiceLbPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.GetServiceLbPolicyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetServiceLbPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.GetServiceLbPolicyRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.GetServiceLbPolicyRequest} message GetServiceLbPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetServiceLbPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetServiceLbPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.GetServiceLbPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetServiceLbPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetServiceLbPolicyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.GetServiceLbPolicyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetServiceLbPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.GetServiceLbPolicyRequest";
+                        };
+    
+                        return GetServiceLbPolicyRequest;
+                    })();
+    
+                    v1.CreateServiceLbPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateServiceLbPolicyRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface ICreateServiceLbPolicyRequest
+                         * @property {string|null} [parent] CreateServiceLbPolicyRequest parent
+                         * @property {string|null} [serviceLbPolicyId] CreateServiceLbPolicyRequest serviceLbPolicyId
+                         * @property {google.cloud.networkservices.v1.IServiceLbPolicy|null} [serviceLbPolicy] CreateServiceLbPolicyRequest serviceLbPolicy
+                         */
+    
+                        /**
+                         * Constructs a new CreateServiceLbPolicyRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a CreateServiceLbPolicyRequest.
+                         * @implements ICreateServiceLbPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.ICreateServiceLbPolicyRequest=} [properties] Properties to set
+                         */
+                        function CreateServiceLbPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateServiceLbPolicyRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkservices.v1.CreateServiceLbPolicyRequest
+                         * @instance
+                         */
+                        CreateServiceLbPolicyRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateServiceLbPolicyRequest serviceLbPolicyId.
+                         * @member {string} serviceLbPolicyId
+                         * @memberof google.cloud.networkservices.v1.CreateServiceLbPolicyRequest
+                         * @instance
+                         */
+                        CreateServiceLbPolicyRequest.prototype.serviceLbPolicyId = "";
+    
+                        /**
+                         * CreateServiceLbPolicyRequest serviceLbPolicy.
+                         * @member {google.cloud.networkservices.v1.IServiceLbPolicy|null|undefined} serviceLbPolicy
+                         * @memberof google.cloud.networkservices.v1.CreateServiceLbPolicyRequest
+                         * @instance
+                         */
+                        CreateServiceLbPolicyRequest.prototype.serviceLbPolicy = null;
+    
+                        /**
+                         * Creates a new CreateServiceLbPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.CreateServiceLbPolicyRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateServiceLbPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.CreateServiceLbPolicyRequest} CreateServiceLbPolicyRequest instance
+                         */
+                        CreateServiceLbPolicyRequest.create = function create(properties) {
+                            return new CreateServiceLbPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateServiceLbPolicyRequest message. Does not implicitly {@link google.cloud.networkservices.v1.CreateServiceLbPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.CreateServiceLbPolicyRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateServiceLbPolicyRequest} message CreateServiceLbPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateServiceLbPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.serviceLbPolicyId != null && Object.hasOwnProperty.call(message, "serviceLbPolicyId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceLbPolicyId);
+                            if (message.serviceLbPolicy != null && Object.hasOwnProperty.call(message, "serviceLbPolicy"))
+                                $root.google.cloud.networkservices.v1.ServiceLbPolicy.encode(message.serviceLbPolicy, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateServiceLbPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.CreateServiceLbPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.CreateServiceLbPolicyRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateServiceLbPolicyRequest} message CreateServiceLbPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateServiceLbPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateServiceLbPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.CreateServiceLbPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.CreateServiceLbPolicyRequest} CreateServiceLbPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateServiceLbPolicyRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.CreateServiceLbPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.serviceLbPolicyId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.serviceLbPolicy = $root.google.cloud.networkservices.v1.ServiceLbPolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateServiceLbPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.CreateServiceLbPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.CreateServiceLbPolicyRequest} CreateServiceLbPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateServiceLbPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateServiceLbPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.CreateServiceLbPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateServiceLbPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.serviceLbPolicyId != null && message.hasOwnProperty("serviceLbPolicyId"))
+                                if (!$util.isString(message.serviceLbPolicyId))
+                                    return "serviceLbPolicyId: string expected";
+                            if (message.serviceLbPolicy != null && message.hasOwnProperty("serviceLbPolicy")) {
+                                var error = $root.google.cloud.networkservices.v1.ServiceLbPolicy.verify(message.serviceLbPolicy);
+                                if (error)
+                                    return "serviceLbPolicy." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateServiceLbPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.CreateServiceLbPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.CreateServiceLbPolicyRequest} CreateServiceLbPolicyRequest
+                         */
+                        CreateServiceLbPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.CreateServiceLbPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.CreateServiceLbPolicyRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.serviceLbPolicyId != null)
+                                message.serviceLbPolicyId = String(object.serviceLbPolicyId);
+                            if (object.serviceLbPolicy != null) {
+                                if (typeof object.serviceLbPolicy !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.CreateServiceLbPolicyRequest.serviceLbPolicy: object expected");
+                                message.serviceLbPolicy = $root.google.cloud.networkservices.v1.ServiceLbPolicy.fromObject(object.serviceLbPolicy);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateServiceLbPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.CreateServiceLbPolicyRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.CreateServiceLbPolicyRequest} message CreateServiceLbPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateServiceLbPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.serviceLbPolicyId = "";
+                                object.serviceLbPolicy = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.serviceLbPolicyId != null && message.hasOwnProperty("serviceLbPolicyId"))
+                                object.serviceLbPolicyId = message.serviceLbPolicyId;
+                            if (message.serviceLbPolicy != null && message.hasOwnProperty("serviceLbPolicy"))
+                                object.serviceLbPolicy = $root.google.cloud.networkservices.v1.ServiceLbPolicy.toObject(message.serviceLbPolicy, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateServiceLbPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.CreateServiceLbPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateServiceLbPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateServiceLbPolicyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.CreateServiceLbPolicyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateServiceLbPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.CreateServiceLbPolicyRequest";
+                        };
+    
+                        return CreateServiceLbPolicyRequest;
+                    })();
+    
+                    v1.UpdateServiceLbPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateServiceLbPolicyRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IUpdateServiceLbPolicyRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateServiceLbPolicyRequest updateMask
+                         * @property {google.cloud.networkservices.v1.IServiceLbPolicy|null} [serviceLbPolicy] UpdateServiceLbPolicyRequest serviceLbPolicy
+                         */
+    
+                        /**
+                         * Constructs a new UpdateServiceLbPolicyRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents an UpdateServiceLbPolicyRequest.
+                         * @implements IUpdateServiceLbPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IUpdateServiceLbPolicyRequest=} [properties] Properties to set
+                         */
+                        function UpdateServiceLbPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateServiceLbPolicyRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest
+                         * @instance
+                         */
+                        UpdateServiceLbPolicyRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateServiceLbPolicyRequest serviceLbPolicy.
+                         * @member {google.cloud.networkservices.v1.IServiceLbPolicy|null|undefined} serviceLbPolicy
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest
+                         * @instance
+                         */
+                        UpdateServiceLbPolicyRequest.prototype.serviceLbPolicy = null;
+    
+                        /**
+                         * Creates a new UpdateServiceLbPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateServiceLbPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest} UpdateServiceLbPolicyRequest instance
+                         */
+                        UpdateServiceLbPolicyRequest.create = function create(properties) {
+                            return new UpdateServiceLbPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateServiceLbPolicyRequest message. Does not implicitly {@link google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateServiceLbPolicyRequest} message UpdateServiceLbPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateServiceLbPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.serviceLbPolicy != null && Object.hasOwnProperty.call(message, "serviceLbPolicy"))
+                                $root.google.cloud.networkservices.v1.ServiceLbPolicy.encode(message.serviceLbPolicy, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateServiceLbPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateServiceLbPolicyRequest} message UpdateServiceLbPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateServiceLbPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateServiceLbPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest} UpdateServiceLbPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateServiceLbPolicyRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.serviceLbPolicy = $root.google.cloud.networkservices.v1.ServiceLbPolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateServiceLbPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest} UpdateServiceLbPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateServiceLbPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateServiceLbPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateServiceLbPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.serviceLbPolicy != null && message.hasOwnProperty("serviceLbPolicy")) {
+                                var error = $root.google.cloud.networkservices.v1.ServiceLbPolicy.verify(message.serviceLbPolicy);
+                                if (error)
+                                    return "serviceLbPolicy." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateServiceLbPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest} UpdateServiceLbPolicyRequest
+                         */
+                        UpdateServiceLbPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.serviceLbPolicy != null) {
+                                if (typeof object.serviceLbPolicy !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest.serviceLbPolicy: object expected");
+                                message.serviceLbPolicy = $root.google.cloud.networkservices.v1.ServiceLbPolicy.fromObject(object.serviceLbPolicy);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateServiceLbPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest} message UpdateServiceLbPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateServiceLbPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.serviceLbPolicy = null;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.serviceLbPolicy != null && message.hasOwnProperty("serviceLbPolicy"))
+                                object.serviceLbPolicy = $root.google.cloud.networkservices.v1.ServiceLbPolicy.toObject(message.serviceLbPolicy, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateServiceLbPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateServiceLbPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateServiceLbPolicyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateServiceLbPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest";
+                        };
+    
+                        return UpdateServiceLbPolicyRequest;
+                    })();
+    
+                    v1.DeleteServiceLbPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteServiceLbPolicyRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IDeleteServiceLbPolicyRequest
+                         * @property {string|null} [name] DeleteServiceLbPolicyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteServiceLbPolicyRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a DeleteServiceLbPolicyRequest.
+                         * @implements IDeleteServiceLbPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IDeleteServiceLbPolicyRequest=} [properties] Properties to set
+                         */
+                        function DeleteServiceLbPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteServiceLbPolicyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest
+                         * @instance
+                         */
+                        DeleteServiceLbPolicyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteServiceLbPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteServiceLbPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest} DeleteServiceLbPolicyRequest instance
+                         */
+                        DeleteServiceLbPolicyRequest.create = function create(properties) {
+                            return new DeleteServiceLbPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteServiceLbPolicyRequest message. Does not implicitly {@link google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteServiceLbPolicyRequest} message DeleteServiceLbPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteServiceLbPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteServiceLbPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteServiceLbPolicyRequest} message DeleteServiceLbPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteServiceLbPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteServiceLbPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest} DeleteServiceLbPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteServiceLbPolicyRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteServiceLbPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest} DeleteServiceLbPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteServiceLbPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteServiceLbPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteServiceLbPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteServiceLbPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest} DeleteServiceLbPolicyRequest
+                         */
+                        DeleteServiceLbPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteServiceLbPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest} message DeleteServiceLbPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteServiceLbPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteServiceLbPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteServiceLbPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteServiceLbPolicyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteServiceLbPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest";
+                        };
+    
+                        return DeleteServiceLbPolicyRequest;
                     })();
     
                     v1.TcpRoute = (function() {
@@ -26952,12 +33786,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TcpRoute.decode = function decode(reader, length) {
+                        TcpRoute.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.TcpRoute(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -27355,12 +34191,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RouteRule.decode = function decode(reader, length) {
+                            RouteRule.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.TcpRoute.RouteRule();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.matches && message.matches.length))
@@ -27606,12 +34444,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RouteMatch.decode = function decode(reader, length) {
+                            RouteMatch.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.TcpRoute.RouteMatch();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.address = reader.string();
@@ -27745,6 +34585,7 @@
                              * @interface IRouteAction
                              * @property {Array.<google.cloud.networkservices.v1.TcpRoute.IRouteDestination>|null} [destinations] RouteAction destinations
                              * @property {boolean|null} [originalDestination] RouteAction originalDestination
+                             * @property {google.protobuf.IDuration|null} [idleTimeout] RouteAction idleTimeout
                              */
     
                             /**
@@ -27780,6 +34621,14 @@
                             RouteAction.prototype.originalDestination = false;
     
                             /**
+                             * RouteAction idleTimeout.
+                             * @member {google.protobuf.IDuration|null|undefined} idleTimeout
+                             * @memberof google.cloud.networkservices.v1.TcpRoute.RouteAction
+                             * @instance
+                             */
+                            RouteAction.prototype.idleTimeout = null;
+    
+                            /**
                              * Creates a new RouteAction instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.networkservices.v1.TcpRoute.RouteAction
@@ -27808,6 +34657,8 @@
                                         $root.google.cloud.networkservices.v1.TcpRoute.RouteDestination.encode(message.destinations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                                 if (message.originalDestination != null && Object.hasOwnProperty.call(message, "originalDestination"))
                                     writer.uint32(/* id 3, wireType 0 =*/24).bool(message.originalDestination);
+                                if (message.idleTimeout != null && Object.hasOwnProperty.call(message, "idleTimeout"))
+                                    $root.google.protobuf.Duration.encode(message.idleTimeout, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 return writer;
                             };
     
@@ -27835,12 +34686,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RouteAction.decode = function decode(reader, length) {
+                            RouteAction.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.TcpRoute.RouteAction();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.destinations && message.destinations.length))
@@ -27850,6 +34703,10 @@
                                         }
                                     case 3: {
                                             message.originalDestination = reader.bool();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.idleTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -27899,6 +34756,11 @@
                                 if (message.originalDestination != null && message.hasOwnProperty("originalDestination"))
                                     if (typeof message.originalDestination !== "boolean")
                                         return "originalDestination: boolean expected";
+                                if (message.idleTimeout != null && message.hasOwnProperty("idleTimeout")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.idleTimeout);
+                                    if (error)
+                                        return "idleTimeout." + error;
+                                }
                                 return null;
                             };
     
@@ -27926,6 +34788,11 @@
                                 }
                                 if (object.originalDestination != null)
                                     message.originalDestination = Boolean(object.originalDestination);
+                                if (object.idleTimeout != null) {
+                                    if (typeof object.idleTimeout !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.TcpRoute.RouteAction.idleTimeout: object expected");
+                                    message.idleTimeout = $root.google.protobuf.Duration.fromObject(object.idleTimeout);
+                                }
                                 return message;
                             };
     
@@ -27944,8 +34811,10 @@
                                 var object = {};
                                 if (options.arrays || options.defaults)
                                     object.destinations = [];
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.originalDestination = false;
+                                    object.idleTimeout = null;
+                                }
                                 if (message.destinations && message.destinations.length) {
                                     object.destinations = [];
                                     for (var j = 0; j < message.destinations.length; ++j)
@@ -27953,6 +34822,8 @@
                                 }
                                 if (message.originalDestination != null && message.hasOwnProperty("originalDestination"))
                                     object.originalDestination = message.originalDestination;
+                                if (message.idleTimeout != null && message.hasOwnProperty("idleTimeout"))
+                                    object.idleTimeout = $root.google.protobuf.Duration.toObject(message.idleTimeout, options);
                                 return object;
                             };
     
@@ -28081,12 +34952,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RouteDestination.decode = function decode(reader, length) {
+                            RouteDestination.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.TcpRoute.RouteDestination();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.serviceName = reader.string();
@@ -28224,6 +35097,7 @@
                          * @property {string|null} [parent] ListTcpRoutesRequest parent
                          * @property {number|null} [pageSize] ListTcpRoutesRequest pageSize
                          * @property {string|null} [pageToken] ListTcpRoutesRequest pageToken
+                         * @property {boolean|null} [returnPartialSuccess] ListTcpRoutesRequest returnPartialSuccess
                          */
     
                         /**
@@ -28266,6 +35140,14 @@
                         ListTcpRoutesRequest.prototype.pageToken = "";
     
                         /**
+                         * ListTcpRoutesRequest returnPartialSuccess.
+                         * @member {boolean} returnPartialSuccess
+                         * @memberof google.cloud.networkservices.v1.ListTcpRoutesRequest
+                         * @instance
+                         */
+                        ListTcpRoutesRequest.prototype.returnPartialSuccess = false;
+    
+                        /**
                          * Creates a new ListTcpRoutesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkservices.v1.ListTcpRoutesRequest
@@ -28295,6 +35177,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.returnPartialSuccess != null && Object.hasOwnProperty.call(message, "returnPartialSuccess"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.returnPartialSuccess);
                             return writer;
                         };
     
@@ -28322,12 +35206,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListTcpRoutesRequest.decode = function decode(reader, length) {
+                        ListTcpRoutesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListTcpRoutesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -28339,6 +35225,10 @@
                                     }
                                 case 3: {
                                         message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.returnPartialSuccess = reader.bool();
                                         break;
                                     }
                                 default:
@@ -28385,6 +35275,9 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
+                            if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                                if (typeof message.returnPartialSuccess !== "boolean")
+                                    return "returnPartialSuccess: boolean expected";
                             return null;
                         };
     
@@ -28406,6 +35299,8 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
+                            if (object.returnPartialSuccess != null)
+                                message.returnPartialSuccess = Boolean(object.returnPartialSuccess);
                             return message;
                         };
     
@@ -28426,6 +35321,7 @@
                                 object.parent = "";
                                 object.pageSize = 0;
                                 object.pageToken = "";
+                                object.returnPartialSuccess = false;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -28433,6 +35329,8 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                                object.returnPartialSuccess = message.returnPartialSuccess;
                             return object;
                         };
     
@@ -28473,6 +35371,7 @@
                          * @interface IListTcpRoutesResponse
                          * @property {Array.<google.cloud.networkservices.v1.ITcpRoute>|null} [tcpRoutes] ListTcpRoutesResponse tcpRoutes
                          * @property {string|null} [nextPageToken] ListTcpRoutesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListTcpRoutesResponse unreachable
                          */
     
                         /**
@@ -28485,6 +35384,7 @@
                          */
                         function ListTcpRoutesResponse(properties) {
                             this.tcpRoutes = [];
+                            this.unreachable = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -28506,6 +35406,14 @@
                          * @instance
                          */
                         ListTcpRoutesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListTcpRoutesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkservices.v1.ListTcpRoutesResponse
+                         * @instance
+                         */
+                        ListTcpRoutesResponse.prototype.unreachable = $util.emptyArray;
     
                         /**
                          * Creates a new ListTcpRoutesResponse instance using the specified properties.
@@ -28536,6 +35444,9 @@
                                     $root.google.cloud.networkservices.v1.TcpRoute.encode(message.tcpRoutes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
                             return writer;
                         };
     
@@ -28563,12 +35474,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListTcpRoutesResponse.decode = function decode(reader, length) {
+                        ListTcpRoutesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListTcpRoutesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.tcpRoutes && message.tcpRoutes.length))
@@ -28578,6 +35491,12 @@
                                     }
                                 case 2: {
                                         message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -28627,6 +35546,13 @@
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
                             return null;
                         };
     
@@ -28654,6 +35580,13 @@
                             }
                             if (object.nextPageToken != null)
                                 message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListTcpRoutesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
                             return message;
                         };
     
@@ -28670,8 +35603,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.tcpRoutes = [];
+                                object.unreachable = [];
+                            }
                             if (options.defaults)
                                 object.nextPageToken = "";
                             if (message.tcpRoutes && message.tcpRoutes.length) {
@@ -28681,6 +35616,11 @@
                             }
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
                             return object;
                         };
     
@@ -28798,12 +35738,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetTcpRouteRequest.decode = function decode(reader, length) {
+                        GetTcpRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GetTcpRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -29023,12 +35965,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateTcpRouteRequest.decode = function decode(reader, length) {
+                        CreateTcpRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.CreateTcpRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -29267,12 +36211,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateTcpRouteRequest.decode = function decode(reader, length) {
+                        UpdateTcpRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.UpdateTcpRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -29493,12 +36439,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteTcpRouteRequest.decode = function decode(reader, length) {
+                        DeleteTcpRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.DeleteTcpRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -29625,6 +36573,7 @@
                          * @property {Array.<google.cloud.networkservices.v1.TlsRoute.IRouteRule>|null} [rules] TlsRoute rules
                          * @property {Array.<string>|null} [meshes] TlsRoute meshes
                          * @property {Array.<string>|null} [gateways] TlsRoute gateways
+                         * @property {Object.<string,string>|null} [labels] TlsRoute labels
                          */
     
                         /**
@@ -29639,6 +36588,7 @@
                             this.rules = [];
                             this.meshes = [];
                             this.gateways = [];
+                            this.labels = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -29710,6 +36660,14 @@
                         TlsRoute.prototype.gateways = $util.emptyArray;
     
                         /**
+                         * TlsRoute labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networkservices.v1.TlsRoute
+                         * @instance
+                         */
+                        TlsRoute.prototype.labels = $util.emptyObject;
+    
+                        /**
                          * Creates a new TlsRoute instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkservices.v1.TlsRoute
@@ -29752,6 +36710,9 @@
                                     writer.uint32(/* id 7, wireType 2 =*/58).string(message.gateways[i]);
                             if (message.selfLink != null && Object.hasOwnProperty.call(message, "selfLink"))
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.selfLink);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 11, wireType 2 =*/90).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -29779,12 +36740,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TlsRoute.decode = function decode(reader, length) {
+                        TlsRoute.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.TlsRoute();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.TlsRoute(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -29822,6 +36785,29 @@
                                         if (!(message.gateways && message.gateways.length))
                                             message.gateways = [];
                                         message.gateways.push(reader.string());
+                                        break;
+                                    }
+                                case 11: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
                                         break;
                                     }
                                 default:
@@ -29901,6 +36887,14 @@
                                     if (!$util.isString(message.gateways[i]))
                                         return "gateways: string[] expected";
                             }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -29956,6 +36950,13 @@
                                 for (var i = 0; i < object.gateways.length; ++i)
                                     message.gateways[i] = String(object.gateways[i]);
                             }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.TlsRoute.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -29977,6 +36978,8 @@
                                 object.meshes = [];
                                 object.gateways = [];
                             }
+                            if (options.objects || options.defaults)
+                                object.labels = {};
                             if (options.defaults) {
                                 object.name = "";
                                 object.createTime = null;
@@ -30009,6 +37012,12 @@
                             }
                             if (message.selfLink != null && message.hasOwnProperty("selfLink"))
                                 object.selfLink = message.selfLink;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
                             return object;
                         };
     
@@ -30136,12 +37145,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RouteRule.decode = function decode(reader, length) {
+                            RouteRule.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.TlsRoute.RouteRule();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.matches && message.matches.length))
@@ -30391,12 +37402,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RouteMatch.decode = function decode(reader, length) {
+                            RouteMatch.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.TlsRoute.RouteMatch();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.sniHost && message.sniHost.length))
@@ -30557,6 +37570,7 @@
                              * @memberof google.cloud.networkservices.v1.TlsRoute
                              * @interface IRouteAction
                              * @property {Array.<google.cloud.networkservices.v1.TlsRoute.IRouteDestination>|null} [destinations] RouteAction destinations
+                             * @property {google.protobuf.IDuration|null} [idleTimeout] RouteAction idleTimeout
                              */
     
                             /**
@@ -30582,6 +37596,14 @@
                              * @instance
                              */
                             RouteAction.prototype.destinations = $util.emptyArray;
+    
+                            /**
+                             * RouteAction idleTimeout.
+                             * @member {google.protobuf.IDuration|null|undefined} idleTimeout
+                             * @memberof google.cloud.networkservices.v1.TlsRoute.RouteAction
+                             * @instance
+                             */
+                            RouteAction.prototype.idleTimeout = null;
     
                             /**
                              * Creates a new RouteAction instance using the specified properties.
@@ -30610,6 +37632,8 @@
                                 if (message.destinations != null && message.destinations.length)
                                     for (var i = 0; i < message.destinations.length; ++i)
                                         $root.google.cloud.networkservices.v1.TlsRoute.RouteDestination.encode(message.destinations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.idleTimeout != null && Object.hasOwnProperty.call(message, "idleTimeout"))
+                                    $root.google.protobuf.Duration.encode(message.idleTimeout, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 return writer;
                             };
     
@@ -30637,17 +37661,23 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RouteAction.decode = function decode(reader, length) {
+                            RouteAction.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.TlsRoute.RouteAction();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.destinations && message.destinations.length))
                                                 message.destinations = [];
                                             message.destinations.push($root.google.cloud.networkservices.v1.TlsRoute.RouteDestination.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.idleTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -30694,6 +37724,11 @@
                                             return "destinations." + error;
                                     }
                                 }
+                                if (message.idleTimeout != null && message.hasOwnProperty("idleTimeout")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.idleTimeout);
+                                    if (error)
+                                        return "idleTimeout." + error;
+                                }
                                 return null;
                             };
     
@@ -30719,6 +37754,11 @@
                                         message.destinations[i] = $root.google.cloud.networkservices.v1.TlsRoute.RouteDestination.fromObject(object.destinations[i]);
                                     }
                                 }
+                                if (object.idleTimeout != null) {
+                                    if (typeof object.idleTimeout !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.TlsRoute.RouteAction.idleTimeout: object expected");
+                                    message.idleTimeout = $root.google.protobuf.Duration.fromObject(object.idleTimeout);
+                                }
                                 return message;
                             };
     
@@ -30737,11 +37777,15 @@
                                 var object = {};
                                 if (options.arrays || options.defaults)
                                     object.destinations = [];
+                                if (options.defaults)
+                                    object.idleTimeout = null;
                                 if (message.destinations && message.destinations.length) {
                                     object.destinations = [];
                                     for (var j = 0; j < message.destinations.length; ++j)
                                         object.destinations[j] = $root.google.cloud.networkservices.v1.TlsRoute.RouteDestination.toObject(message.destinations[j], options);
                                 }
+                                if (message.idleTimeout != null && message.hasOwnProperty("idleTimeout"))
+                                    object.idleTimeout = $root.google.protobuf.Duration.toObject(message.idleTimeout, options);
                                 return object;
                             };
     
@@ -30870,12 +37914,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RouteDestination.decode = function decode(reader, length) {
+                            RouteDestination.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.TlsRoute.RouteDestination();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.serviceName = reader.string();
@@ -31013,6 +38059,7 @@
                          * @property {string|null} [parent] ListTlsRoutesRequest parent
                          * @property {number|null} [pageSize] ListTlsRoutesRequest pageSize
                          * @property {string|null} [pageToken] ListTlsRoutesRequest pageToken
+                         * @property {boolean|null} [returnPartialSuccess] ListTlsRoutesRequest returnPartialSuccess
                          */
     
                         /**
@@ -31055,6 +38102,14 @@
                         ListTlsRoutesRequest.prototype.pageToken = "";
     
                         /**
+                         * ListTlsRoutesRequest returnPartialSuccess.
+                         * @member {boolean} returnPartialSuccess
+                         * @memberof google.cloud.networkservices.v1.ListTlsRoutesRequest
+                         * @instance
+                         */
+                        ListTlsRoutesRequest.prototype.returnPartialSuccess = false;
+    
+                        /**
                          * Creates a new ListTlsRoutesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkservices.v1.ListTlsRoutesRequest
@@ -31084,6 +38139,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.returnPartialSuccess != null && Object.hasOwnProperty.call(message, "returnPartialSuccess"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.returnPartialSuccess);
                             return writer;
                         };
     
@@ -31111,12 +38168,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListTlsRoutesRequest.decode = function decode(reader, length) {
+                        ListTlsRoutesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListTlsRoutesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -31128,6 +38187,10 @@
                                     }
                                 case 3: {
                                         message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.returnPartialSuccess = reader.bool();
                                         break;
                                     }
                                 default:
@@ -31174,6 +38237,9 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
+                            if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                                if (typeof message.returnPartialSuccess !== "boolean")
+                                    return "returnPartialSuccess: boolean expected";
                             return null;
                         };
     
@@ -31195,6 +38261,8 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
+                            if (object.returnPartialSuccess != null)
+                                message.returnPartialSuccess = Boolean(object.returnPartialSuccess);
                             return message;
                         };
     
@@ -31215,6 +38283,7 @@
                                 object.parent = "";
                                 object.pageSize = 0;
                                 object.pageToken = "";
+                                object.returnPartialSuccess = false;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -31222,6 +38291,8 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                                object.returnPartialSuccess = message.returnPartialSuccess;
                             return object;
                         };
     
@@ -31262,6 +38333,7 @@
                          * @interface IListTlsRoutesResponse
                          * @property {Array.<google.cloud.networkservices.v1.ITlsRoute>|null} [tlsRoutes] ListTlsRoutesResponse tlsRoutes
                          * @property {string|null} [nextPageToken] ListTlsRoutesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListTlsRoutesResponse unreachable
                          */
     
                         /**
@@ -31274,6 +38346,7 @@
                          */
                         function ListTlsRoutesResponse(properties) {
                             this.tlsRoutes = [];
+                            this.unreachable = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -31295,6 +38368,14 @@
                          * @instance
                          */
                         ListTlsRoutesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListTlsRoutesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkservices.v1.ListTlsRoutesResponse
+                         * @instance
+                         */
+                        ListTlsRoutesResponse.prototype.unreachable = $util.emptyArray;
     
                         /**
                          * Creates a new ListTlsRoutesResponse instance using the specified properties.
@@ -31325,6 +38406,9 @@
                                     $root.google.cloud.networkservices.v1.TlsRoute.encode(message.tlsRoutes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
                             return writer;
                         };
     
@@ -31352,12 +38436,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListTlsRoutesResponse.decode = function decode(reader, length) {
+                        ListTlsRoutesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListTlsRoutesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.tlsRoutes && message.tlsRoutes.length))
@@ -31367,6 +38453,12 @@
                                     }
                                 case 2: {
                                         message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -31416,6 +38508,13 @@
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
                             return null;
                         };
     
@@ -31443,6 +38542,13 @@
                             }
                             if (object.nextPageToken != null)
                                 message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListTlsRoutesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
                             return message;
                         };
     
@@ -31459,8 +38565,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.tlsRoutes = [];
+                                object.unreachable = [];
+                            }
                             if (options.defaults)
                                 object.nextPageToken = "";
                             if (message.tlsRoutes && message.tlsRoutes.length) {
@@ -31470,6 +38578,11 @@
                             }
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
                             return object;
                         };
     
@@ -31587,12 +38700,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetTlsRouteRequest.decode = function decode(reader, length) {
+                        GetTlsRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GetTlsRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -31812,12 +38927,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateTlsRouteRequest.decode = function decode(reader, length) {
+                        CreateTlsRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.CreateTlsRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -32056,12 +39173,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateTlsRouteRequest.decode = function decode(reader, length) {
+                        UpdateTlsRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.UpdateTlsRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -32282,12 +39401,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteTlsRouteRequest.decode = function decode(reader, length) {
+                        DeleteTlsRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.DeleteTlsRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -32563,12 +39684,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OperationMetadata.decode = function decode(reader, length) {
+                        OperationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.OperationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -32851,12 +39974,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TrafficPortSelector.decode = function decode(reader, length) {
+                        TrafficPortSelector.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.TrafficPortSelector();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.ports && message.ports.length))
@@ -33082,12 +40207,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EndpointMatcher.decode = function decode(reader, length) {
+                        EndpointMatcher.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.EndpointMatcher();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.metadataLabelMatcher = $root.google.cloud.networkservices.v1beta1.EndpointMatcher.MetadataLabelMatcher.decode(reader, reader.uint32());
@@ -33305,12 +40432,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            MetadataLabelMatcher.decode = function decode(reader, length) {
+                            MetadataLabelMatcher.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.EndpointMatcher.MetadataLabelMatcher();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.metadataLabelMatchCriteria = reader.int32();
@@ -33572,12 +40701,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                MetadataLabels.decode = function decode(reader, length) {
+                                MetadataLabels.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.EndpointMatcher.MetadataLabelMatcher.MetadataLabels();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.labelName = reader.string();
@@ -34239,12 +41370,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExtensionChain.decode = function decode(reader, length) {
+                        ExtensionChain.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.ExtensionChain();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -34489,12 +41622,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            MatchCondition.decode = function decode(reader, length) {
+                            MatchCondition.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.ExtensionChain.MatchCondition();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.celExpression = reader.string();
@@ -34765,12 +41900,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Extension.decode = function decode(reader, length) {
+                            Extension.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.ExtensionChain.Extension();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -35211,12 +42348,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        LbTrafficExtension.decode = function decode(reader, length) {
+                        LbTrafficExtension.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.LbTrafficExtension(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -35646,12 +42785,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListLbTrafficExtensionsRequest.decode = function decode(reader, length) {
+                        ListLbTrafficExtensionsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.ListLbTrafficExtensionsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -35924,12 +43065,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListLbTrafficExtensionsResponse.decode = function decode(reader, length) {
+                        ListLbTrafficExtensionsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.ListLbTrafficExtensionsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.lbTrafficExtensions && message.lbTrafficExtensions.length))
@@ -36186,12 +43329,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetLbTrafficExtensionRequest.decode = function decode(reader, length) {
+                        GetLbTrafficExtensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.GetLbTrafficExtensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -36422,12 +43567,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateLbTrafficExtensionRequest.decode = function decode(reader, length) {
+                        CreateLbTrafficExtensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.CreateLbTrafficExtensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -36689,12 +43836,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateLbTrafficExtensionRequest.decode = function decode(reader, length) {
+                        UpdateLbTrafficExtensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.UpdateLbTrafficExtensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -36938,12 +44087,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteLbTrafficExtensionRequest.decode = function decode(reader, length) {
+                        DeleteLbTrafficExtensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.DeleteLbTrafficExtensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -37237,12 +44388,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        LbRouteExtension.decode = function decode(reader, length) {
+                        LbRouteExtension.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.LbRouteExtension(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -37672,12 +44825,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListLbRouteExtensionsRequest.decode = function decode(reader, length) {
+                        ListLbRouteExtensionsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.ListLbRouteExtensionsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -37950,12 +45105,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListLbRouteExtensionsResponse.decode = function decode(reader, length) {
+                        ListLbRouteExtensionsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.ListLbRouteExtensionsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.lbRouteExtensions && message.lbRouteExtensions.length))
@@ -38212,12 +45369,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetLbRouteExtensionRequest.decode = function decode(reader, length) {
+                        GetLbRouteExtensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.GetLbRouteExtensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -38448,12 +45607,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateLbRouteExtensionRequest.decode = function decode(reader, length) {
+                        CreateLbRouteExtensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.CreateLbRouteExtensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -38715,12 +45876,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateLbRouteExtensionRequest.decode = function decode(reader, length) {
+                        UpdateLbRouteExtensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.UpdateLbRouteExtensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -38964,12 +46127,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteLbRouteExtensionRequest.decode = function decode(reader, length) {
+                        DeleteLbRouteExtensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.DeleteLbRouteExtensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -39292,12 +46457,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EndpointPolicy.decode = function decode(reader, length) {
+                        EndpointPolicy.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.EndpointPolicy(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -39732,12 +46899,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListEndpointPoliciesRequest.decode = function decode(reader, length) {
+                        ListEndpointPoliciesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.ListEndpointPoliciesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -39973,12 +47142,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListEndpointPoliciesResponse.decode = function decode(reader, length) {
+                        ListEndpointPoliciesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.ListEndpointPoliciesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.endpointPolicies && message.endpointPolicies.length))
@@ -40208,12 +47379,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetEndpointPolicyRequest.decode = function decode(reader, length) {
+                        GetEndpointPolicyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.GetEndpointPolicyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -40433,12 +47606,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateEndpointPolicyRequest.decode = function decode(reader, length) {
+                        CreateEndpointPolicyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.CreateEndpointPolicyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -40677,12 +47852,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateEndpointPolicyRequest.decode = function decode(reader, length) {
+                        UpdateEndpointPolicyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.UpdateEndpointPolicyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -40903,12 +48080,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteEndpointPolicyRequest.decode = function decode(reader, length) {
+                        DeleteEndpointPolicyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1beta1.DeleteEndpointPolicyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -41365,12 +48544,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length) {
+                Http.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.rules && message.rules.length))
@@ -41715,12 +48896,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length) {
+                HttpRule.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -42099,12 +49282,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length) {
+                CustomHttpPattern.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.kind = reader.string();
@@ -42331,12 +49516,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length) {
+                CommonLanguageSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.referenceDocsUri = reader.string();
@@ -42700,12 +49887,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length) {
+                ClientLibrarySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.version = reader.string();
@@ -43044,6 +50233,7 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
+                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -43145,6 +50335,14 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
+                 * Publishing restReferenceDocumentationUri.
+                 * @member {string} restReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.restReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -43191,6 +50389,8 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
+                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -43218,12 +50418,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length) {
+                Publishing.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
@@ -43269,6 +50471,10 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
+                                break;
+                            }
+                        case 111: {
+                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -43363,6 +50569,9 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        if (!$util.isString(message.restReferenceDocumentationUri))
+                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -43457,6 +50666,8 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
+                    if (object.restReferenceDocumentationUri != null)
+                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -43486,6 +50697,7 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
+                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -43516,6 +50728,8 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -43657,12 +50871,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length) {
+                JavaSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.libraryPackage = reader.string();
@@ -43924,12 +51140,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length) {
+                CppSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -44132,12 +51350,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length) {
+                PhpSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -44340,12 +51560,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length) {
+                PythonSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -44548,12 +51770,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length) {
+                NodeSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -44821,12 +52045,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length) {
+                DotnetSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -45200,12 +52426,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length) {
+                RubySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -45408,12 +52636,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length) {
+                GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -45640,12 +52870,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length) {
+                MethodSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -45918,12 +53150,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length) {
+                    LongRunning.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -46244,12 +53478,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldInfo.decode = function decode(reader, length) {
+                FieldInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.format = reader.int32();
@@ -46574,12 +53810,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length) {
+                ResourceDescriptor.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -46969,12 +54207,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length) {
+                ResourceReference.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -47199,12 +54439,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length) {
+                FileDescriptorSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.file && message.file.length))
@@ -47599,12 +54841,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length) {
+                FileDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -48266,12 +55510,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length) {
+                DescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -48751,12 +55997,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length) {
+                    ExtensionRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -48995,12 +56243,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length) {
+                    ReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -49251,12 +56501,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
@@ -49596,12 +56848,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length) {
+                    Declaration.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.number = reader.int32();
@@ -49975,12 +57229,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length) {
+                FieldDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -50500,12 +57756,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length) {
+                OneofDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -50771,12 +58029,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length) {
+                EnumDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -51090,12 +58350,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length) {
+                    EnumReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -51331,12 +58593,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -51588,12 +58852,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -51896,12 +59162,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length) {
+                MethodDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -52400,12 +59668,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length) {
+                FileOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.javaPackage = reader.string();
@@ -53020,12 +60290,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length) {
+                MessageOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.messageSetWireFormat = reader.bool();
@@ -53477,12 +60749,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
-                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.int32(message[".google.api.fieldBehavior"][i]);
-                        writer.ldelim();
-                    }
+                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo"))
@@ -53514,12 +60783,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length) {
+                FieldOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.ctype = reader.int32();
@@ -54262,12 +61533,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length) {
+                    EditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -54558,12 +61831,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length) {
+                OneofOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -54844,12 +62119,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length) {
+                EnumOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 message.allowAlias = reader.bool();
@@ -55156,12 +62433,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length) {
+                EnumValueOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
@@ -55347,6 +62626,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
+                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -55406,6 +62686,14 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
+                 * ServiceOptions .google.api.apiVersion.
+                 * @member {string} .google.api.apiVersion
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.apiVersion"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -55440,6 +62728,8 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
+                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -55467,12 +62757,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length) {
+                ServiceOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 34: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -55494,6 +62786,10 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
+                        case 525000001: {
+                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -55554,6 +62850,9 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        if (!$util.isString(message[".google.api.apiVersion"]))
+                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -55590,6 +62889,8 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
+                    if (object[".google.api.apiVersion"] != null)
+                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -55613,6 +62914,7 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
+                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -55627,6 +62929,8 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -55814,12 +63118,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length) {
+                MethodOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 33: {
                                 message.deprecated = reader.bool();
@@ -56248,12 +63554,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length) {
+                UninterpretedOption.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.name && message.name.length))
@@ -56587,12 +63895,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length) {
+                    NamePart.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.namePart = reader.string();
@@ -56863,12 +64173,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length) {
+                FeatureSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.fieldPresence = reader.int32();
@@ -57398,12 +64710,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length) {
+                FeatureSetDefaults.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
@@ -57782,12 +65096,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -58072,12 +65388,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length) {
+                SourceCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.location && message.location.length))
@@ -58347,12 +65665,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length) {
+                    Location.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -58658,12 +65978,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
@@ -58926,12 +66248,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length) {
+                    Annotation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -59252,12 +66576,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length) {
+                Timestamp.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -59493,12 +66819,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length) {
+                Duration.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -59734,12 +67062,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Any.decode = function decode(reader, length) {
+                Any.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type_url = reader.string();
@@ -59948,12 +67278,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length) {
+                Empty.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -60136,12 +67468,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length) {
+                FieldMask.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.paths && message.paths.length))
@@ -60357,12 +67691,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Struct.decode = function decode(reader, length) {
+                Struct.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Struct(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (message.fields === $util.emptyObject)
@@ -60667,12 +68003,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Value.decode = function decode(reader, length) {
+                Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.nullValue = reader.int32();
@@ -61004,12 +68342,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListValue.decode = function decode(reader, length) {
+                ListValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ListValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.values && message.values.length))
@@ -61496,12 +68836,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Operation.decode = function decode(reader, length) {
+                Operation.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.Operation();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -61776,12 +69118,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GetOperationRequest.decode = function decode(reader, length) {
+                GetOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.GetOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -62012,12 +69356,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsRequest.decode = function decode(reader, length) {
+                ListOperationsRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 4: {
                                 message.name = reader.string();
@@ -62265,12 +69611,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsResponse.decode = function decode(reader, length) {
+                ListOperationsResponse.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsResponse();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.operations && message.operations.length))
@@ -62500,12 +69848,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CancelOperationRequest.decode = function decode(reader, length) {
+                CancelOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.CancelOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -62703,12 +70053,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DeleteOperationRequest.decode = function decode(reader, length) {
+                DeleteOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.DeleteOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -62917,12 +70269,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                WaitOperationRequest.decode = function decode(reader, length) {
+                WaitOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.WaitOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -63149,12 +70503,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OperationInfo.decode = function decode(reader, length) {
+                OperationInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.OperationInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.responseType = reader.string();
@@ -63401,12 +70757,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Status.decode = function decode(reader, length) {
+                Status.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.code = reader.int32();

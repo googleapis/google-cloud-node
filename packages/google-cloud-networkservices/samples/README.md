@@ -28,6 +28,7 @@
   * [Network_services.create_http_route](#network_services.create_http_route)
   * [Network_services.create_mesh](#network_services.create_mesh)
   * [Network_services.create_service_binding](#network_services.create_service_binding)
+  * [Network_services.create_service_lb_policy](#network_services.create_service_lb_policy)
   * [Network_services.create_tcp_route](#network_services.create_tcp_route)
   * [Network_services.create_tls_route](#network_services.create_tls_route)
   * [Network_services.delete_endpoint_policy](#network_services.delete_endpoint_policy)
@@ -36,22 +37,29 @@
   * [Network_services.delete_http_route](#network_services.delete_http_route)
   * [Network_services.delete_mesh](#network_services.delete_mesh)
   * [Network_services.delete_service_binding](#network_services.delete_service_binding)
+  * [Network_services.delete_service_lb_policy](#network_services.delete_service_lb_policy)
   * [Network_services.delete_tcp_route](#network_services.delete_tcp_route)
   * [Network_services.delete_tls_route](#network_services.delete_tls_route)
   * [Network_services.get_endpoint_policy](#network_services.get_endpoint_policy)
   * [Network_services.get_gateway](#network_services.get_gateway)
+  * [Network_services.get_gateway_route_view](#network_services.get_gateway_route_view)
   * [Network_services.get_grpc_route](#network_services.get_grpc_route)
   * [Network_services.get_http_route](#network_services.get_http_route)
   * [Network_services.get_mesh](#network_services.get_mesh)
+  * [Network_services.get_mesh_route_view](#network_services.get_mesh_route_view)
   * [Network_services.get_service_binding](#network_services.get_service_binding)
+  * [Network_services.get_service_lb_policy](#network_services.get_service_lb_policy)
   * [Network_services.get_tcp_route](#network_services.get_tcp_route)
   * [Network_services.get_tls_route](#network_services.get_tls_route)
   * [Network_services.list_endpoint_policies](#network_services.list_endpoint_policies)
+  * [Network_services.list_gateway_route_views](#network_services.list_gateway_route_views)
   * [Network_services.list_gateways](#network_services.list_gateways)
   * [Network_services.list_grpc_routes](#network_services.list_grpc_routes)
   * [Network_services.list_http_routes](#network_services.list_http_routes)
+  * [Network_services.list_mesh_route_views](#network_services.list_mesh_route_views)
   * [Network_services.list_meshes](#network_services.list_meshes)
   * [Network_services.list_service_bindings](#network_services.list_service_bindings)
+  * [Network_services.list_service_lb_policies](#network_services.list_service_lb_policies)
   * [Network_services.list_tcp_routes](#network_services.list_tcp_routes)
   * [Network_services.list_tls_routes](#network_services.list_tls_routes)
   * [Network_services.update_endpoint_policy](#network_services.update_endpoint_policy)
@@ -59,6 +67,8 @@
   * [Network_services.update_grpc_route](#network_services.update_grpc_route)
   * [Network_services.update_http_route](#network_services.update_http_route)
   * [Network_services.update_mesh](#network_services.update_mesh)
+  * [Network_services.update_service_binding](#network_services.update_service_binding)
+  * [Network_services.update_service_lb_policy](#network_services.update_service_lb_policy)
   * [Network_services.update_tcp_route](#network_services.update_tcp_route)
   * [Network_services.update_tls_route](#network_services.update_tls_route)
   * [Dep_service.create_lb_route_extension](#dep_service.create_lb_route_extension)
@@ -365,6 +375,23 @@ __Usage:__
 
 
 
+### Network_services.create_service_lb_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_service_lb_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.create_service_lb_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/network_services.create_service_lb_policy.js`
+
+
+-----
+
+
+
+
 ### Network_services.create_tcp_route
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_tcp_route.js).
@@ -501,6 +528,23 @@ __Usage:__
 
 
 
+### Network_services.delete_service_lb_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_service_lb_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_service_lb_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_service_lb_policy.js`
+
+
+-----
+
+
+
+
 ### Network_services.delete_tcp_route
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_tcp_route.js).
@@ -569,6 +613,23 @@ __Usage:__
 
 
 
+### Network_services.get_gateway_route_view
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_gateway_route_view.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.get_gateway_route_view.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/network_services.get_gateway_route_view.js`
+
+
+-----
+
+
+
+
 ### Network_services.get_grpc_route
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_grpc_route.js).
@@ -620,6 +681,23 @@ __Usage:__
 
 
 
+### Network_services.get_mesh_route_view
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_mesh_route_view.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.get_mesh_route_view.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/network_services.get_mesh_route_view.js`
+
+
+-----
+
+
+
+
 ### Network_services.get_service_binding
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_service_binding.js).
@@ -630,6 +708,23 @@ __Usage:__
 
 
 `node packages/google-cloud-networkservices/samples/generated/v1/network_services.get_service_binding.js`
+
+
+-----
+
+
+
+
+### Network_services.get_service_lb_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_service_lb_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.get_service_lb_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/network_services.get_service_lb_policy.js`
 
 
 -----
@@ -688,6 +783,23 @@ __Usage:__
 
 
 
+### Network_services.list_gateway_route_views
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_gateway_route_views.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.list_gateway_route_views.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/network_services.list_gateway_route_views.js`
+
+
+-----
+
+
+
+
 ### Network_services.list_gateways
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_gateways.js).
@@ -739,6 +851,23 @@ __Usage:__
 
 
 
+### Network_services.list_mesh_route_views
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_mesh_route_views.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.list_mesh_route_views.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/network_services.list_mesh_route_views.js`
+
+
+-----
+
+
+
+
 ### Network_services.list_meshes
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_meshes.js).
@@ -766,6 +895,23 @@ __Usage:__
 
 
 `node packages/google-cloud-networkservices/samples/generated/v1/network_services.list_service_bindings.js`
+
+
+-----
+
+
+
+
+### Network_services.list_service_lb_policies
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_service_lb_policies.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.list_service_lb_policies.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/network_services.list_service_lb_policies.js`
 
 
 -----
@@ -885,6 +1031,40 @@ __Usage:__
 
 
 `node packages/google-cloud-networkservices/samples/generated/v1/network_services.update_mesh.js`
+
+
+-----
+
+
+
+
+### Network_services.update_service_binding
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_service_binding.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.update_service_binding.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/network_services.update_service_binding.js`
+
+
+-----
+
+
+
+
+### Network_services.update_service_lb_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_service_lb_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.update_service_lb_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/network_services.update_service_lb_policy.js`
 
 
 -----

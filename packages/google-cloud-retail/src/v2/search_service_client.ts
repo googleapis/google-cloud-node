@@ -32,7 +32,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -254,7 +254,7 @@ export class SearchServiceClient {
       ),
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
@@ -707,6 +707,24 @@ export class SearchServiceClient {
    *   addition to traditional retail search.
    * @param {google.cloud.retail.v2.SearchRequest.TileNavigationSpec} [request.tileNavigationSpec]
    *   Optional. This field specifies tile navigation related parameters.
+   * @param {string} [request.languageCode]
+   *   Optional. The BCP-47 language code, such as "en-US" or "sr-Latn"
+   *   [list](https://www.unicode.org/cldr/charts/46/summary/root.html). For more
+   *   information, see [Standardized codes](https://google.aip.dev/143). This
+   *   field helps to better interpret the query. If a value isn't specified, the
+   *   query language code is automatically detected, which may not be accurate.
+   * @param {string} [request.regionCode]
+   *   Optional. The Unicode country/region code (CLDR) of a location, such as
+   *   "US" and "419"
+   *   [list](https://www.unicode.org/cldr/charts/46/supplemental/territory_information.html).
+   *   For more information, see [Standardized codes](https://google.aip.dev/143).
+   *   If set, then results will be boosted based on the region_code provided.
+   * @param {string} [request.placeId]
+   *   Optional. An id corresponding to a place, such as a store id or region id.
+   *   When specified, we use the price from the local inventory with the matching
+   *   product's
+   *   {@link protos.google.cloud.retail.v2.LocalInventory.place_id|LocalInventory.place_id}
+   *   for revenue optimization.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1059,6 +1077,24 @@ export class SearchServiceClient {
    *   addition to traditional retail search.
    * @param {google.cloud.retail.v2.SearchRequest.TileNavigationSpec} [request.tileNavigationSpec]
    *   Optional. This field specifies tile navigation related parameters.
+   * @param {string} [request.languageCode]
+   *   Optional. The BCP-47 language code, such as "en-US" or "sr-Latn"
+   *   [list](https://www.unicode.org/cldr/charts/46/summary/root.html). For more
+   *   information, see [Standardized codes](https://google.aip.dev/143). This
+   *   field helps to better interpret the query. If a value isn't specified, the
+   *   query language code is automatically detected, which may not be accurate.
+   * @param {string} [request.regionCode]
+   *   Optional. The Unicode country/region code (CLDR) of a location, such as
+   *   "US" and "419"
+   *   [list](https://www.unicode.org/cldr/charts/46/supplemental/territory_information.html).
+   *   For more information, see [Standardized codes](https://google.aip.dev/143).
+   *   If set, then results will be boosted based on the region_code provided.
+   * @param {string} [request.placeId]
+   *   Optional. An id corresponding to a place, such as a store id or region id.
+   *   When specified, we use the price from the local inventory with the matching
+   *   product's
+   *   {@link protos.google.cloud.retail.v2.LocalInventory.place_id|LocalInventory.place_id}
+   *   for revenue optimization.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1344,6 +1380,24 @@ export class SearchServiceClient {
    *   addition to traditional retail search.
    * @param {google.cloud.retail.v2.SearchRequest.TileNavigationSpec} [request.tileNavigationSpec]
    *   Optional. This field specifies tile navigation related parameters.
+   * @param {string} [request.languageCode]
+   *   Optional. The BCP-47 language code, such as "en-US" or "sr-Latn"
+   *   [list](https://www.unicode.org/cldr/charts/46/summary/root.html). For more
+   *   information, see [Standardized codes](https://google.aip.dev/143). This
+   *   field helps to better interpret the query. If a value isn't specified, the
+   *   query language code is automatically detected, which may not be accurate.
+   * @param {string} [request.regionCode]
+   *   Optional. The Unicode country/region code (CLDR) of a location, such as
+   *   "US" and "419"
+   *   [list](https://www.unicode.org/cldr/charts/46/supplemental/territory_information.html).
+   *   For more information, see [Standardized codes](https://google.aip.dev/143).
+   *   If set, then results will be boosted based on the region_code provided.
+   * @param {string} [request.placeId]
+   *   Optional. An id corresponding to a place, such as a store id or region id.
+   *   When specified, we use the price from the local inventory with the matching
+   *   product's
+   *   {@link protos.google.cloud.retail.v2.LocalInventory.place_id|LocalInventory.place_id}
+   *   for revenue optimization.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2276,8 +2330,10 @@ export class SearchServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
-        this.operationsClient.close();
+        this.locationsClient.close().catch(err => {
+          throw err;
+        });
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

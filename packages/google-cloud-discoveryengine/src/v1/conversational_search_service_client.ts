@@ -22,7 +22,7 @@ import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallba
 import {Transform, PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -186,8 +186,17 @@ export class ConversationalSearchServiceClient {
       enginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}'
       ),
+      identityMappingStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/identityMappingStores/{identity_mapping_store}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
+      ),
+      projectLocationCmekConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cmekConfig'
+      ),
+      projectLocationCmekConfigsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cmekConfigs/{cmek_config}'
       ),
       projectLocationCollectionDataStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}'
@@ -604,6 +613,12 @@ export class ConversationalSearchServiceClient {
       ]) => {
         this._log.info('converseConversation response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -698,6 +713,12 @@ export class ConversationalSearchServiceClient {
       ]) => {
         this._log.info('createConversation response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -790,6 +811,12 @@ export class ConversationalSearchServiceClient {
       ]) => {
         this._log.info('deleteConversation response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -891,6 +918,12 @@ export class ConversationalSearchServiceClient {
       ]) => {
         this._log.info('updateConversation response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -980,6 +1013,12 @@ export class ConversationalSearchServiceClient {
       ]) => {
         this._log.info('getConversation response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1137,6 +1176,12 @@ export class ConversationalSearchServiceClient {
       ]) => {
         this._log.info('answerQuery response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1226,6 +1271,12 @@ export class ConversationalSearchServiceClient {
       ]) => {
         this._log.info('getAnswer response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1320,6 +1371,12 @@ export class ConversationalSearchServiceClient {
       ]) => {
         this._log.info('createSession response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1412,6 +1469,12 @@ export class ConversationalSearchServiceClient {
       ]) => {
         this._log.info('deleteSession response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1512,6 +1575,12 @@ export class ConversationalSearchServiceClient {
       ]) => {
         this._log.info('updateSession response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1604,6 +1673,12 @@ export class ConversationalSearchServiceClient {
       ]) => {
         this._log.info('getSession response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 
@@ -2380,6 +2455,55 @@ export class ConversationalSearchServiceClient {
   }
 
   /**
+   * Return a fully-qualified identityMappingStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} identity_mapping_store
+   * @returns {string} Resource name string.
+   */
+  identityMappingStorePath(project:string,location:string,identityMappingStore:string) {
+    return this.pathTemplates.identityMappingStorePathTemplate.render({
+      project: project,
+      location: location,
+      identity_mapping_store: identityMappingStore,
+    });
+  }
+
+  /**
+   * Parse the project from IdentityMappingStore resource.
+   *
+   * @param {string} identityMappingStoreName
+   *   A fully-qualified path representing IdentityMappingStore resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromIdentityMappingStoreName(identityMappingStoreName: string) {
+    return this.pathTemplates.identityMappingStorePathTemplate.match(identityMappingStoreName).project;
+  }
+
+  /**
+   * Parse the location from IdentityMappingStore resource.
+   *
+   * @param {string} identityMappingStoreName
+   *   A fully-qualified path representing IdentityMappingStore resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromIdentityMappingStoreName(identityMappingStoreName: string) {
+    return this.pathTemplates.identityMappingStorePathTemplate.match(identityMappingStoreName).location;
+  }
+
+  /**
+   * Parse the identity_mapping_store from IdentityMappingStore resource.
+   *
+   * @param {string} identityMappingStoreName
+   *   A fully-qualified path representing IdentityMappingStore resource.
+   * @returns {string} A string representing the identity_mapping_store.
+   */
+  matchIdentityMappingStoreFromIdentityMappingStoreName(identityMappingStoreName: string) {
+    return this.pathTemplates.identityMappingStorePathTemplate.match(identityMappingStoreName).identity_mapping_store;
+  }
+
+  /**
    * Return a fully-qualified project resource name string.
    *
    * @param {string} project
@@ -2400,6 +2524,91 @@ export class ConversationalSearchServiceClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCmekConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  projectLocationCmekConfigPath(project:string,location:string) {
+    return this.pathTemplates.projectLocationCmekConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationCmekConfig resource.
+   *
+   * @param {string} projectLocationCmekConfigName
+   *   A fully-qualified path representing project_location_cmekConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCmekConfigName(projectLocationCmekConfigName: string) {
+    return this.pathTemplates.projectLocationCmekConfigPathTemplate.match(projectLocationCmekConfigName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCmekConfig resource.
+   *
+   * @param {string} projectLocationCmekConfigName
+   *   A fully-qualified path representing project_location_cmekConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCmekConfigName(projectLocationCmekConfigName: string) {
+    return this.pathTemplates.projectLocationCmekConfigPathTemplate.match(projectLocationCmekConfigName).location;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCmekConfigs resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cmek_config
+   * @returns {string} Resource name string.
+   */
+  projectLocationCmekConfigsPath(project:string,location:string,cmekConfig:string) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.render({
+      project: project,
+      location: location,
+      cmek_config: cmekConfig,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationCmekConfigs resource.
+   *
+   * @param {string} projectLocationCmekConfigsName
+   *   A fully-qualified path representing project_location_cmekConfigs resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCmekConfigsName(projectLocationCmekConfigsName: string) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.match(projectLocationCmekConfigsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCmekConfigs resource.
+   *
+   * @param {string} projectLocationCmekConfigsName
+   *   A fully-qualified path representing project_location_cmekConfigs resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCmekConfigsName(projectLocationCmekConfigsName: string) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.match(projectLocationCmekConfigsName).location;
+  }
+
+  /**
+   * Parse the cmek_config from ProjectLocationCmekConfigs resource.
+   *
+   * @param {string} projectLocationCmekConfigsName
+   *   A fully-qualified path representing project_location_cmekConfigs resource.
+   * @returns {string} A string representing the cmek_config.
+   */
+  matchCmekConfigFromProjectLocationCmekConfigsName(projectLocationCmekConfigsName: string) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.match(projectLocationCmekConfigsName).cmek_config;
   }
 
   /**
