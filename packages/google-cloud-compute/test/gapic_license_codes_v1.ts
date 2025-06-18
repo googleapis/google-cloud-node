@@ -100,104 +100,10 @@ describe('v1.LicenseCodesClient', () => {
             assert.strictEqual(servicePath, 'compute.example.com');
         });
 
-<<<<<<< HEAD
-    it('has port', () => {
-      const port = licensecodesModule.v1.LicenseCodesClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new licensecodesModule.v1.LicenseCodesClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new licensecodesModule.v1.LicenseCodesClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new licensecodesModule.v1.LicenseCodesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.licenseCodesStub, undefined);
-      await client.initialize();
-      assert(client.licenseCodesStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new licensecodesModule.v1.LicenseCodesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.licenseCodesStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new licensecodesModule.v1.LicenseCodesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.licenseCodesStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new licensecodesModule.v1.LicenseCodesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new licensecodesModule.v1.LicenseCodesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-=======
         it('sets apiEndpoint according to universe domain snakeCase', () => {
             const client = new licensecodesModule.v1.LicenseCodesClient({universe_domain: 'example.com'});
             const servicePath = client.apiEndpoint;
             assert.strictEqual(servicePath, 'compute.example.com');
->>>>>>> e7e9fc358f4a9717c33bd318da587d88ec01fa21
         });
 
         if (typeof process === 'object' && 'env' in process) {
@@ -468,34 +374,6 @@ describe('v1.LicenseCodesClient', () => {
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-<<<<<<< HEAD
-    it('invokes get with closed client', async () => {
-      const client = new licensecodesModule.v1.LicenseCodesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.GetLicenseCodeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetLicenseCodeRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.GetLicenseCodeRequest',
-        ['licenseCode']
-      );
-      request.licenseCode = defaultValue2;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.get(request), expectedError);
-    });
-  });
-=======
         it('invokes testIamPermissions without error using callback', async () => {
             const client = new licensecodesModule.v1.LicenseCodesClient({
               auth: googleAuth,
@@ -536,7 +414,6 @@ describe('v1.LicenseCodesClient', () => {
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
->>>>>>> e7e9fc358f4a9717c33bd318da587d88ec01fa21
 
         it('invokes testIamPermissions with error', async () => {
             const client = new licensecodesModule.v1.LicenseCodesClient({
@@ -585,70 +462,4 @@ describe('v1.LicenseCodesClient', () => {
             await assert.rejects(client.testIamPermissions(request), expectedError);
         });
     });
-<<<<<<< HEAD
-
-    it('invokes testIamPermissions with error', async () => {
-      const client = new licensecodesModule.v1.LicenseCodesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest',
-        ['resource']
-      );
-      request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.testIamPermissions(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions with closed client', async () => {
-      const client = new licensecodesModule.v1.LicenseCodesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest',
-        ['resource']
-      );
-      request.resource = defaultValue2;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.testIamPermissions(request), expectedError);
-    });
-  });
-=======
->>>>>>> e7e9fc358f4a9717c33bd318da587d88ec01fa21
 });

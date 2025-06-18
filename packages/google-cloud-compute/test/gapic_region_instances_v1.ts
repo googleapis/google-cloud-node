@@ -100,104 +100,10 @@ describe('v1.RegionInstancesClient', () => {
             assert.strictEqual(servicePath, 'compute.example.com');
         });
 
-<<<<<<< HEAD
-    it('has port', () => {
-      const port = regioninstancesModule.v1.RegionInstancesClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new regioninstancesModule.v1.RegionInstancesClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new regioninstancesModule.v1.RegionInstancesClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new regioninstancesModule.v1.RegionInstancesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.regionInstancesStub, undefined);
-      await client.initialize();
-      assert(client.regionInstancesStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new regioninstancesModule.v1.RegionInstancesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.regionInstancesStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new regioninstancesModule.v1.RegionInstancesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.regionInstancesStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new regioninstancesModule.v1.RegionInstancesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new regioninstancesModule.v1.RegionInstancesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-=======
         it('sets apiEndpoint according to universe domain snakeCase', () => {
             const client = new regioninstancesModule.v1.RegionInstancesClient({universe_domain: 'example.com'});
             const servicePath = client.apiEndpoint;
             assert.strictEqual(servicePath, 'compute.example.com');
->>>>>>> e7e9fc358f4a9717c33bd318da587d88ec01fa21
         });
 
         if (typeof process === 'object' && 'env' in process) {
@@ -389,32 +295,6 @@ describe('v1.RegionInstancesClient', () => {
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-<<<<<<< HEAD
-    it('invokes bulkInsert with closed client', async () => {
-      const client = new regioninstancesModule.v1.RegionInstancesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.BulkInsertRegionInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.BulkInsertRegionInstanceRequest',
-        ['project']
-      );
-      request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.compute.v1.BulkInsertRegionInstanceRequest',
-        ['region']
-      );
-      request.region = defaultValue2;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.bulkInsert(request), expectedError);
-=======
         it('invokes bulkInsert with error', async () => {
             const client = new regioninstancesModule.v1.RegionInstancesClient({
               auth: googleAuth,
@@ -461,6 +341,5 @@ describe('v1.RegionInstancesClient', () => {
             client.close().catch(err => {throw err});
             await assert.rejects(client.bulkInsert(request), expectedError);
         });
->>>>>>> e7e9fc358f4a9717c33bd318da587d88ec01fa21
     });
 });
