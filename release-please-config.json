@@ -206,8 +206,7 @@
     "packages/google-apps-events-subscriptions": {},
     "packages/google-cloud-configdelivery": {},
     "packages/google-cloud-lustre": {},
-    "packages/google-cloud-storagebatchoperations": {},
-    "packages/google-apps-events-subscriptions": {}
+    "packages/google-cloud-storagebatchoperations": {}
   },
   "plugins": [
     {
