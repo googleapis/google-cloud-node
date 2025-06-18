@@ -473,6 +473,11 @@
                           "rule": "repeated",
                           "type": "MaintenanceWindow",
                           "id": 1
+                        },
+                        "denyMaintenancePeriods": {
+                          "rule": "repeated",
+                          "type": "DenyMaintenancePeriod",
+                          "id": 2
                         }
                       },
                       "nested": {
@@ -485,6 +490,22 @@
                             "startTime": {
                               "type": "google.type.TimeOfDay",
                               "id": 2
+                            }
+                          }
+                        },
+                        "DenyMaintenancePeriod": {
+                          "fields": {
+                            "startDate": {
+                              "type": "google.type.Date",
+                              "id": 1
+                            },
+                            "endDate": {
+                              "type": "google.type.Date",
+                              "id": 2
+                            },
+                            "time": {
+                              "type": "google.type.TimeOfDay",
+                              "id": 3
                             }
                           }
                         }
@@ -1024,6 +1045,13 @@
                             "(google.api.field_info).format": "IPV4",
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "activationPolicy": {
+                          "type": "ActivationPolicy",
+                          "id": 35,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1353,6 +1381,21 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "network": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                              }
+                            },
+                            "allocatedIpRangeOverride": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -1395,6 +1438,13 @@
                             "AVAILABILITY_TYPE_UNSPECIFIED": 0,
                             "ZONAL": 1,
                             "REGIONAL": 2
+                          }
+                        },
+                        "ActivationPolicy": {
+                          "values": {
+                            "ACTIVATION_POLICY_UNSPECIFIED": 0,
+                            "ALWAYS": 1,
+                            "NEVER": 2
                           }
                         }
                       }
@@ -1479,6 +1529,13 @@
                         "deleteTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createCompletionTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 26,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -16619,14 +16676,30 @@
         },
         "type": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/type/date;date",
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/type/timeofday;timeofday",
             "java_multiple_files": true,
-            "java_outer_classname": "DateProto",
+            "java_outer_classname": "TimeOfDayProto",
             "java_package": "com.google.type",
-            "objc_class_prefix": "GTP",
-            "cc_enable_arenas": true
+            "objc_class_prefix": "GTP"
           },
           "nested": {
+            "Date": {
+              "fields": {
+                "year": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "month": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "day": {
+                  "type": "int32",
+                  "id": 3
+                }
+              }
+            },
             "DayOfWeek": {
               "values": {
                 "DAY_OF_WEEK_UNSPECIFIED": 0,
@@ -16656,22 +16729,6 @@
                 "nanos": {
                   "type": "int32",
                   "id": 4
-                }
-              }
-            },
-            "Date": {
-              "fields": {
-                "year": {
-                  "type": "int32",
-                  "id": 1
-                },
-                "month": {
-                  "type": "int32",
-                  "id": 2
-                },
-                "day": {
-                  "type": "int32",
-                  "id": 3
                 }
               }
             }
