@@ -3769,8 +3769,8 @@ describe('v1.PersistentResourceServiceClient', () => {
             });
         });
 
-        describe('projectLocationFeatureGroupFeature', async () => {
-            const fakePath = "/rendered/path/projectLocationFeatureGroupFeature";
+        describe('projectLocationFeatureGroupFeatures', async () => {
+            const fakePath = "/rendered/path/projectLocationFeatureGroupFeatures";
             const expectedParameters = {
                 project: "projectValue",
                 location: "locationValue",
@@ -3782,49 +3782,49 @@ describe('v1.PersistentResourceServiceClient', () => {
                 projectId: 'bogus',
             });
             await client.initialize();
-            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render =
+            client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.render =
                 sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match =
+            client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match =
                 sinon.stub().returns(expectedParameters);
 
-            it('projectLocationFeatureGroupFeaturePath', () => {
-                const result = client.projectLocationFeatureGroupFeaturePath("projectValue", "locationValue", "featureGroupValue", "featureValue");
+            it('projectLocationFeatureGroupFeaturesPath', () => {
+                const result = client.projectLocationFeatureGroupFeaturesPath("projectValue", "locationValue", "featureGroupValue", "featureValue");
                 assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render as SinonStub)
+                assert((client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.render as SinonStub)
                     .getCall(-1).calledWith(expectedParameters));
             });
 
-            it('matchProjectFromProjectLocationFeatureGroupFeatureName', () => {
-                const result = client.matchProjectFromProjectLocationFeatureGroupFeatureName(fakePath);
+            it('matchProjectFromProjectLocationFeatureGroupFeaturesName', () => {
+                const result = client.matchProjectFromProjectLocationFeatureGroupFeaturesName(fakePath);
                 assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchLocationFromProjectLocationFeatureGroupFeatureName', () => {
-                const result = client.matchLocationFromProjectLocationFeatureGroupFeatureName(fakePath);
+            it('matchLocationFromProjectLocationFeatureGroupFeaturesName', () => {
+                const result = client.matchLocationFromProjectLocationFeatureGroupFeaturesName(fakePath);
                 assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchFeatureGroupFromProjectLocationFeatureGroupFeatureName', () => {
-                const result = client.matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(fakePath);
+            it('matchFeatureGroupFromProjectLocationFeatureGroupFeaturesName', () => {
+                const result = client.matchFeatureGroupFromProjectLocationFeatureGroupFeaturesName(fakePath);
                 assert.strictEqual(result, "featureGroupValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchFeatureFromProjectLocationFeatureGroupFeatureName', () => {
-                const result = client.matchFeatureFromProjectLocationFeatureGroupFeatureName(fakePath);
+            it('matchFeatureFromProjectLocationFeatureGroupFeaturesName', () => {
+                const result = client.matchFeatureFromProjectLocationFeatureGroupFeaturesName(fakePath);
                 assert.strictEqual(result, "featureValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
 
-        describe('projectLocationFeaturestoreEntityTypeFeature', async () => {
-            const fakePath = "/rendered/path/projectLocationFeaturestoreEntityTypeFeature";
+        describe('projectLocationFeaturestoreEntityTypeFeatures', async () => {
+            const fakePath = "/rendered/path/projectLocationFeaturestoreEntityTypeFeatures";
             const expectedParameters = {
                 project: "projectValue",
                 location: "locationValue",
@@ -3837,50 +3837,50 @@ describe('v1.PersistentResourceServiceClient', () => {
                 projectId: 'bogus',
             });
             await client.initialize();
-            client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render =
+            client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.render =
                 sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match =
+            client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match =
                 sinon.stub().returns(expectedParameters);
 
-            it('projectLocationFeaturestoreEntityTypeFeaturePath', () => {
-                const result = client.projectLocationFeaturestoreEntityTypeFeaturePath("projectValue", "locationValue", "featurestoreValue", "entityTypeValue", "featureValue");
+            it('projectLocationFeaturestoreEntityTypeFeaturesPath', () => {
+                const result = client.projectLocationFeaturestoreEntityTypeFeaturesPath("projectValue", "locationValue", "featurestoreValue", "entityTypeValue", "featureValue");
                 assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.render as SinonStub)
                     .getCall(-1).calledWith(expectedParameters));
             });
 
-            it('matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
-                const result = client.matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
+            it('matchProjectFromProjectLocationFeaturestoreEntityTypeFeaturesName', () => {
+                const result = client.matchProjectFromProjectLocationFeaturestoreEntityTypeFeaturesName(fakePath);
                 assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
-                const result = client.matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
+            it('matchLocationFromProjectLocationFeaturestoreEntityTypeFeaturesName', () => {
+                const result = client.matchLocationFromProjectLocationFeaturestoreEntityTypeFeaturesName(fakePath);
                 assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
-                const result = client.matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
+            it('matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeaturesName', () => {
+                const result = client.matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeaturesName(fakePath);
                 assert.strictEqual(result, "featurestoreValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
-                const result = client.matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
+            it('matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeaturesName', () => {
+                const result = client.matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeaturesName(fakePath);
                 assert.strictEqual(result, "entityTypeValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
-                const result = client.matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
+            it('matchFeatureFromProjectLocationFeaturestoreEntityTypeFeaturesName', () => {
+                const result = client.matchFeatureFromProjectLocationFeaturestoreEntityTypeFeaturesName(fakePath);
                 assert.strictEqual(result, "featureValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -4019,6 +4019,44 @@ describe('v1.PersistentResourceServiceClient', () => {
                 const result = client.matchRagCorpusFromRagCorpusName(fakePath);
                 assert.strictEqual(result, "ragCorpusValue");
                 assert((client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('ragEngineConfig', async () => {
+            const fakePath = "/rendered/path/ragEngineConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new persistentresourceserviceModule.v1.PersistentResourceServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.ragEngineConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.ragEngineConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('ragEngineConfigPath', () => {
+                const result = client.ragEngineConfigPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.ragEngineConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRagEngineConfigName', () => {
+                const result = client.matchProjectFromRagEngineConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.ragEngineConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRagEngineConfigName', () => {
+                const result = client.matchLocationFromRagEngineConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.ragEngineConfigPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

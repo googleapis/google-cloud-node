@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const generativelanguage = require('@google-ai/generativelanguage');
 
@@ -23,15 +24,11 @@ function main() {
   const cacheServiceClient = new generativelanguage.CacheServiceClient();
   const discussServiceClient = new generativelanguage.DiscussServiceClient();
   const fileServiceClient = new generativelanguage.FileServiceClient();
-  const generativeServiceClient =
-    new generativelanguage.GenerativeServiceClient();
+  const generativeServiceClient = new generativelanguage.GenerativeServiceClient();
   const modelServiceClient = new generativelanguage.ModelServiceClient();
-  const permissionServiceClient =
-    new generativelanguage.PermissionServiceClient();
-  const predictionServiceClient =
-    new generativelanguage.PredictionServiceClient();
-  const retrieverServiceClient =
-    new generativelanguage.RetrieverServiceClient();
+  const permissionServiceClient = new generativelanguage.PermissionServiceClient();
+  const predictionServiceClient = new generativelanguage.PredictionServiceClient();
+  const retrieverServiceClient = new generativelanguage.RetrieverServiceClient();
   const textServiceClient = new generativelanguage.TextServiceClient();
 }
 

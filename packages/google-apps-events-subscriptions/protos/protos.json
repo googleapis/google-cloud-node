@@ -535,6 +535,11 @@
                             "(google.api.resource).style": "DECLARATIVE_FRIENDLY"
                           },
                           "oneofs": {
+                            "subscriptionOptions": {
+                              "oneof": [
+                                "driveOptions"
+                              ]
+                            },
                             "expiration": {
                               "oneof": [
                                 "expireTime",
@@ -543,6 +548,13 @@
                             }
                           },
                           "fields": {
+                            "driveOptions": {
+                              "type": "DriveOptions",
+                              "id": 20,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "expireTime": {
                               "type": "google.protobuf.Timestamp",
                               "id": 13,
@@ -654,6 +666,17 @@
                             }
                           },
                           "nested": {
+                            "DriveOptions": {
+                              "fields": {
+                                "includeDescendants": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "IMMUTABLE"
+                                  }
+                                }
+                              }
+                            },
                             "State": {
                               "values": {
                                 "STATE_UNSPECIFIED": 0,
