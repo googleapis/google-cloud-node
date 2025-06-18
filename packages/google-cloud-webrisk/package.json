@@ -28,7 +28,7 @@
     "Web Risk API"
   ],
   "dependencies": {
-    "google-gax": "^5.0.1-rc.0"
+    "google-gax": "^5.0.0"
   },
   "devDependencies": {
     "@types/chai": "^4.2.7",
