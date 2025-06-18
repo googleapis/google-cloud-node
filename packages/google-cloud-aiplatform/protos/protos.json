@@ -39763,6 +39763,13 @@
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         },
+                        "invokeRoutePrefix": {
+                          "type": "string",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
                         "grpcPorts": {
                           "rule": "repeated",
                           "type": "Port",

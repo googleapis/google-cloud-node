@@ -149502,6 +149502,9 @@ export namespace google {
                     /** ModelContainerSpec healthRoute */
                     healthRoute?: (string|null);
 
+                    /** ModelContainerSpec invokeRoutePrefix */
+                    invokeRoutePrefix?: (string|null);
+
                     /** ModelContainerSpec grpcPorts */
                     grpcPorts?: (google.cloud.aiplatform.v1beta1.IPort[]|null);
 
@@ -149550,6 +149553,9 @@ export namespace google {
 
                     /** ModelContainerSpec healthRoute. */
                     public healthRoute: string;
+
+                    /** ModelContainerSpec invokeRoutePrefix. */
+                    public invokeRoutePrefix: string;
 
                     /** ModelContainerSpec grpcPorts. */
                     public grpcPorts: google.cloud.aiplatform.v1beta1.IPort[];
