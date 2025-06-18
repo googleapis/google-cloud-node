@@ -304,9 +304,14 @@ describe('v1.ContactCenterInsightsClient', () => {
         throw err;
       });
       assert(client.contactCenterInsightsStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -316,9 +321,14 @@ describe('v1.ContactCenterInsightsClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.contactCenterInsightsStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -488,7 +498,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createConversation(request), expectedError);
     });
   });
@@ -627,7 +639,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.conversation.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateConversation(request), expectedError);
     });
   });
@@ -761,7 +775,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getConversation(request), expectedError);
     });
   });
@@ -896,7 +912,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteConversation(request), expectedError);
     });
   });
@@ -1030,7 +1048,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getAnalysis(request), expectedError);
     });
   });
@@ -1164,7 +1184,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteAnalysis(request), expectedError);
     });
   });
@@ -1302,7 +1324,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.issueModel.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateIssueModel(request), expectedError);
     });
   });
@@ -1436,7 +1460,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getIssueModel(request), expectedError);
     });
   });
@@ -1570,7 +1596,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.listIssueModels(request), expectedError);
     });
   });
@@ -1701,7 +1729,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getIssue(request), expectedError);
     });
   });
@@ -1835,7 +1865,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.listIssues(request), expectedError);
     });
   });
@@ -1973,7 +2005,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.issue.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateIssue(request), expectedError);
     });
   });
@@ -2107,7 +2141,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteIssue(request), expectedError);
     });
   });
@@ -2245,7 +2281,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.issueModel = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.calculateIssueModelStats(request),
         expectedError
@@ -2383,7 +2421,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createPhraseMatcher(request), expectedError);
     });
   });
@@ -2517,7 +2557,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getPhraseMatcher(request), expectedError);
     });
   });
@@ -2652,7 +2694,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deletePhraseMatcher(request), expectedError);
     });
   });
@@ -2791,7 +2835,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.phraseMatcher.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updatePhraseMatcher(request), expectedError);
     });
   });
@@ -2925,7 +2971,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.location = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.calculateStats(request), expectedError);
     });
   });
@@ -3059,7 +3107,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getSettings(request), expectedError);
     });
   });
@@ -3197,7 +3247,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.settings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateSettings(request), expectedError);
     });
   });
@@ -3332,7 +3384,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createAnalysisRule(request), expectedError);
     });
   });
@@ -3466,7 +3520,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getAnalysisRule(request), expectedError);
     });
   });
@@ -3605,7 +3661,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.analysisRule.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateAnalysisRule(request), expectedError);
     });
   });
@@ -3740,7 +3798,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteAnalysisRule(request), expectedError);
     });
   });
@@ -3874,7 +3934,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getEncryptionSpec(request), expectedError);
     });
   });
@@ -4008,7 +4070,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createView(request), expectedError);
     });
   });
@@ -4139,7 +4203,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getView(request), expectedError);
     });
   });
@@ -4277,7 +4343,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.view.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateView(request), expectedError);
     });
   });
@@ -4411,7 +4479,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteView(request), expectedError);
     });
   });
@@ -4545,7 +4615,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createQaQuestion(request), expectedError);
     });
   });
@@ -4679,7 +4751,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getQaQuestion(request), expectedError);
     });
   });
@@ -4817,7 +4891,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.qaQuestion.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateQaQuestion(request), expectedError);
     });
   });
@@ -4951,7 +5027,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteQaQuestion(request), expectedError);
     });
   });
@@ -5085,7 +5163,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createQaScorecard(request), expectedError);
     });
   });
@@ -5219,7 +5299,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getQaScorecard(request), expectedError);
     });
   });
@@ -5357,7 +5439,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.qaScorecard.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateQaScorecard(request), expectedError);
     });
   });
@@ -5491,7 +5575,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteQaScorecard(request), expectedError);
     });
   });
@@ -5629,7 +5715,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createQaScorecardRevision(request),
         expectedError
@@ -5770,7 +5858,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getQaScorecardRevision(request),
         expectedError
@@ -5911,7 +6001,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deployQaScorecardRevision(request),
         expectedError
@@ -6052,7 +6144,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.undeployQaScorecardRevision(request),
         expectedError
@@ -6193,7 +6287,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteQaScorecardRevision(request),
         expectedError
@@ -6331,7 +6427,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createFeedbackLabel(request), expectedError);
     });
   });
@@ -6465,7 +6563,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getFeedbackLabel(request), expectedError);
     });
   });
@@ -6604,7 +6704,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.feedbackLabel.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateFeedbackLabel(request), expectedError);
     });
   });
@@ -6739,7 +6841,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteFeedbackLabel(request), expectedError);
     });
   });
@@ -13686,20 +13790,24 @@ describe('v1.ContactCenterInsightsClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getIamPolicy(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: IamProtos.google.iam.v1.Policy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client
+          .getIamPolicy(
+            request,
+            expectedOptions,
+            (
+              err?: Error | null,
+              result?: IamProtos.google.iam.v1.Policy | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -13795,20 +13903,24 @@ describe('v1.ContactCenterInsightsClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.setIamPolicy(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: IamProtos.google.iam.v1.Policy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client
+          .setIamPolicy(
+            request,
+            expectedOptions,
+            (
+              err?: Error | null,
+              result?: IamProtos.google.iam.v1.Policy | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -13907,20 +14019,24 @@ describe('v1.ContactCenterInsightsClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.testIamPermissions(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client
+          .testIamPermissions(
+            request,
+            expectedOptions,
+            (
+              err?: Error | null,
+              result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -14000,20 +14116,24 @@ describe('v1.ContactCenterInsightsClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .getOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: operationsProtos.google.longrunning.Operation | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -14083,20 +14203,24 @@ describe('v1.ContactCenterInsightsClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .cancelOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -14166,20 +14290,24 @@ describe('v1.ContactCenterInsightsClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .deleteOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
