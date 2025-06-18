@@ -1,0 +1,251 @@
+{
+    "clientLibrary": {
+        "name": "nodejs-storagebatchoperations",
+        "version": "0.0.0",
+        "language": "TYPESCRIPT",
+        "apis": [
+            {
+                "id": "google.cloud.storagebatchoperations.v1",
+                "version": "v1"
+            }
+        ]
+    },
+    "snippets": [
+        {
+            "regionTag": "storagebatchoperations_v1_generated_StorageBatchOperations_ListJobs_async",
+            "title": "StorageBatchOperations listJobs Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists Jobs in a given project.",
+            "canonical": true,
+            "file": "storage_batch_operations.list_jobs.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListJobs",
+                "fullName": "google.cloud.storagebatchoperations.v1.StorageBatchOperations.ListJobs",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.storagebatchoperations.v1.ListJobsResponse",
+                "client": {
+                    "shortName": "StorageBatchOperationsClient",
+                    "fullName": "google.cloud.storagebatchoperations.v1.StorageBatchOperationsClient"
+                },
+                "method": {
+                    "shortName": "ListJobs",
+                    "fullName": "google.cloud.storagebatchoperations.v1.StorageBatchOperations.ListJobs",
+                    "service": {
+                        "shortName": "StorageBatchOperations",
+                        "fullName": "google.cloud.storagebatchoperations.v1.StorageBatchOperations"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "storagebatchoperations_v1_generated_StorageBatchOperations_GetJob_async",
+            "title": "StorageBatchOperations getJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a batch job.",
+            "canonical": true,
+            "file": "storage_batch_operations.get_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetJob",
+                "fullName": "google.cloud.storagebatchoperations.v1.StorageBatchOperations.GetJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.storagebatchoperations.v1.Job",
+                "client": {
+                    "shortName": "StorageBatchOperationsClient",
+                    "fullName": "google.cloud.storagebatchoperations.v1.StorageBatchOperationsClient"
+                },
+                "method": {
+                    "shortName": "GetJob",
+                    "fullName": "google.cloud.storagebatchoperations.v1.StorageBatchOperations.GetJob",
+                    "service": {
+                        "shortName": "StorageBatchOperations",
+                        "fullName": "google.cloud.storagebatchoperations.v1.StorageBatchOperations"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "storagebatchoperations_v1_generated_StorageBatchOperations_CreateJob_async",
+            "title": "StorageBatchOperations createJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a batch job.",
+            "canonical": true,
+            "file": "storage_batch_operations.create_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 75,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateJob",
+                "fullName": "google.cloud.storagebatchoperations.v1.StorageBatchOperations.CreateJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "job_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "job",
+                        "type": ".google.cloud.storagebatchoperations.v1.Job"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "StorageBatchOperationsClient",
+                    "fullName": "google.cloud.storagebatchoperations.v1.StorageBatchOperationsClient"
+                },
+                "method": {
+                    "shortName": "CreateJob",
+                    "fullName": "google.cloud.storagebatchoperations.v1.StorageBatchOperations.CreateJob",
+                    "service": {
+                        "shortName": "StorageBatchOperations",
+                        "fullName": "google.cloud.storagebatchoperations.v1.StorageBatchOperations"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "storagebatchoperations_v1_generated_StorageBatchOperations_DeleteJob_async",
+            "title": "StorageBatchOperations deleteJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a batch job.",
+            "canonical": true,
+            "file": "storage_batch_operations.delete_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteJob",
+                "fullName": "google.cloud.storagebatchoperations.v1.StorageBatchOperations.DeleteJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "StorageBatchOperationsClient",
+                    "fullName": "google.cloud.storagebatchoperations.v1.StorageBatchOperationsClient"
+                },
+                "method": {
+                    "shortName": "DeleteJob",
+                    "fullName": "google.cloud.storagebatchoperations.v1.StorageBatchOperations.DeleteJob",
+                    "service": {
+                        "shortName": "StorageBatchOperations",
+                        "fullName": "google.cloud.storagebatchoperations.v1.StorageBatchOperations"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "storagebatchoperations_v1_generated_StorageBatchOperations_CancelJob_async",
+            "title": "StorageBatchOperations cancelJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Cancels a batch job.",
+            "canonical": true,
+            "file": "storage_batch_operations.cancel_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CancelJob",
+                "fullName": "google.cloud.storagebatchoperations.v1.StorageBatchOperations.CancelJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.storagebatchoperations.v1.CancelJobResponse",
+                "client": {
+                    "shortName": "StorageBatchOperationsClient",
+                    "fullName": "google.cloud.storagebatchoperations.v1.StorageBatchOperationsClient"
+                },
+                "method": {
+                    "shortName": "CancelJob",
+                    "fullName": "google.cloud.storagebatchoperations.v1.StorageBatchOperations.CancelJob",
+                    "service": {
+                        "shortName": "StorageBatchOperations",
+                        "fullName": "google.cloud.storagebatchoperations.v1.StorageBatchOperations"
+                    }
+                }
+            }
+        }
+    ]
+}

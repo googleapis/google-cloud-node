@@ -1,0 +1,53 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.shopping.merchant.issueresolution.v1beta",
+  "libraryPackage": "@google-shopping/issueresolution",
+  "services": {
+    "IssueResolutionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "IssueResolutionServiceClient",
+          "rpcs": {
+            "RenderAccountIssues": {
+              "methods": [
+                "renderAccountIssues"
+              ]
+            },
+            "RenderProductIssues": {
+              "methods": [
+                "renderProductIssues"
+              ]
+            },
+            "TriggerAction": {
+              "methods": [
+                "triggerAction"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "IssueResolutionServiceClient",
+          "rpcs": {
+            "RenderAccountIssues": {
+              "methods": [
+                "renderAccountIssues"
+              ]
+            },
+            "RenderProductIssues": {
+              "methods": [
+                "renderProductIssues"
+              ]
+            },
+            "TriggerAction": {
+              "methods": [
+                "triggerAction"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

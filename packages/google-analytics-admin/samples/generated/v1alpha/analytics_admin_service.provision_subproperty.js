@@ -36,6 +36,11 @@ function main(subproperty) {
    *  Optional. The subproperty event filter to create on an ordinary property.
    */
   // const subpropertyEventFilter = {}
+  /**
+   *  Optional. The subproperty feature synchronization mode for Custom
+   *  Dimensions and Metrics
+   */
+  // const customDimensionAndMetricSynchronizationMode = {}
 
   // Imports the Admin library
   const {AnalyticsAdminServiceClient} = require('@google-analytics/admin').v1alpha;

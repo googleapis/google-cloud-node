@@ -3131,9 +3131,6 @@ export namespace google {
                     /** IngestConversationsRequest objectConfig. */
                     public objectConfig?: "transcriptObjectConfig";
 
-                    /** IngestConversationsRequest _sampleSize. */
-                    public _sampleSize?: "sampleSize";
-
                     /**
                      * Creates a new IngestConversationsRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -3250,9 +3247,6 @@ export namespace google {
 
                         /** GcsSource customMetadataKeys. */
                         public customMetadataKeys: string[];
-
-                        /** GcsSource _metadataBucketUri. */
-                        public _metadataBucketUri?: "metadataBucketUri";
 
                         /**
                          * Creates a new GcsSource instance using the specified properties.
@@ -11618,9 +11612,6 @@ export namespace google {
                     /** QueryMetricsResponse macroAverageSlice. */
                     public macroAverageSlice?: (google.cloud.contactcenterinsights.v1.QueryMetricsResponse.ISlice|null);
 
-                    /** QueryMetricsResponse _macroAverageSlice. */
-                    public _macroAverageSlice?: "macroAverageSlice";
-
                     /**
                      * Creates a new QueryMetricsResponse instance using the specified properties.
                      * @param [properties] Properties to set
@@ -11992,33 +11983,6 @@ export namespace google {
 
                                 /** ConversationMeasure averageQaQuestionNormalizedScore. */
                                 public averageQaQuestionNormalizedScore?: (number|null);
-
-                                /** ConversationMeasure _conversationCount. */
-                                public _conversationCount?: "conversationCount";
-
-                                /** ConversationMeasure _averageSilencePercentage. */
-                                public _averageSilencePercentage?: "averageSilencePercentage";
-
-                                /** ConversationMeasure _averageDuration. */
-                                public _averageDuration?: "averageDuration";
-
-                                /** ConversationMeasure _averageTurnCount. */
-                                public _averageTurnCount?: "averageTurnCount";
-
-                                /** ConversationMeasure _averageAgentSentimentScore. */
-                                public _averageAgentSentimentScore?: "averageAgentSentimentScore";
-
-                                /** ConversationMeasure _averageClientSentimentScore. */
-                                public _averageClientSentimentScore?: "averageClientSentimentScore";
-
-                                /** ConversationMeasure _averageCustomerSatisfactionRating. */
-                                public _averageCustomerSatisfactionRating?: "averageCustomerSatisfactionRating";
-
-                                /** ConversationMeasure _averageQaNormalizedScore. */
-                                public _averageQaNormalizedScore?: "averageQaNormalizedScore";
-
-                                /** ConversationMeasure _averageQaQuestionNormalizedScore. */
-                                public _averageQaQuestionNormalizedScore?: "averageQaQuestionNormalizedScore";
 
                                 /**
                                  * Creates a new ConversationMeasure instance using the specified properties.
@@ -22211,9 +22175,6 @@ export namespace google {
                     /** AnalysisRule active. */
                     public active: boolean;
 
-                    /** AnalysisRule _displayName. */
-                    public _displayName?: "displayName";
-
                     /**
                      * Creates a new AnalysisRule instance using the specified properties.
                      * @param [properties] Properties to set
@@ -24673,9 +24634,6 @@ export namespace google {
                         /** AnswerChoice value. */
                         public value?: ("strValue"|"numValue"|"boolValue"|"naValue");
 
-                        /** AnswerChoice _score. */
-                        public _score?: "score";
-
                         /**
                          * Creates a new AnswerChoice instance using the specified properties.
                          * @param [properties] Properties to set
@@ -25410,15 +25368,6 @@ export namespace google {
                         /** AnswerValue value. */
                         public value?: ("strValue"|"numValue"|"boolValue"|"naValue");
 
-                        /** AnswerValue _score. */
-                        public _score?: "score";
-
-                        /** AnswerValue _potentialScore. */
-                        public _potentialScore?: "potentialScore";
-
-                        /** AnswerValue _normalizedScore. */
-                        public _normalizedScore?: "normalizedScore";
-
                         /**
                          * Creates a new AnswerValue instance using the specified properties.
                          * @param [properties] Properties to set
@@ -25690,15 +25639,6 @@ export namespace google {
                     /** QaScorecardResult scoreSources. */
                     public scoreSources: google.cloud.contactcenterinsights.v1.QaScorecardResult.IScoreSource[];
 
-                    /** QaScorecardResult _score. */
-                    public _score?: "score";
-
-                    /** QaScorecardResult _potentialScore. */
-                    public _potentialScore?: "potentialScore";
-
-                    /** QaScorecardResult _normalizedScore. */
-                    public _normalizedScore?: "normalizedScore";
-
                     /**
                      * Creates a new QaScorecardResult instance using the specified properties.
                      * @param [properties] Properties to set
@@ -25815,15 +25755,6 @@ export namespace google {
 
                         /** QaTagResult normalizedScore. */
                         public normalizedScore?: (number|null);
-
-                        /** QaTagResult _score. */
-                        public _score?: "score";
-
-                        /** QaTagResult _potentialScore. */
-                        public _potentialScore?: "potentialScore";
-
-                        /** QaTagResult _normalizedScore. */
-                        public _normalizedScore?: "normalizedScore";
 
                         /**
                          * Creates a new QaTagResult instance using the specified properties.
@@ -25945,15 +25876,6 @@ export namespace google {
 
                         /** ScoreSource qaTagResults. */
                         public qaTagResults: google.cloud.contactcenterinsights.v1.QaScorecardResult.IQaTagResult[];
-
-                        /** ScoreSource _score. */
-                        public _score?: "score";
-
-                        /** ScoreSource _potentialScore. */
-                        public _potentialScore?: "potentialScore";
-
-                        /** ScoreSource _normalizedScore. */
-                        public _normalizedScore?: "normalizedScore";
 
                         /**
                          * Creates a new ScoreSource instance using the specified properties.
@@ -26702,6 +26624,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -26742,6 +26667,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -30960,6 +30888,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -31211,7 +31142,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -31242,7 +31173,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -32484,7 +32415,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -32500,7 +32431,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

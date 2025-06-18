@@ -3501,6 +3501,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "urlContextMetadata": {
+                          "type": "UrlContextMetadata",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -3516,6 +3523,39 @@
                             "PROHIBITED_CONTENT": 7,
                             "SPII": 8,
                             "MALFORMED_FUNCTION_CALL": 9
+                          }
+                        }
+                      }
+                    },
+                    "UrlContextMetadata": {
+                      "fields": {
+                        "urlMetadata": {
+                          "rule": "repeated",
+                          "type": "UrlMetadata",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "UrlMetadata": {
+                      "fields": {
+                        "retrievedUrl": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "urlRetrievalStatus": {
+                          "type": "UrlRetrievalStatus",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "UrlRetrievalStatus": {
+                          "values": {
+                            "URL_RETRIEVAL_STATUS_UNSPECIFIED": 0,
+                            "URL_RETRIEVAL_STATUS_SUCCESS": 1,
+                            "URL_RETRIEVAL_STATUS_ERROR": 2
                           }
                         }
                       }
@@ -40832,6 +40872,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "urlContextMetadata": {
+                          "type": "UrlContextMetadata",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -40847,6 +40894,39 @@
                             "PROHIBITED_CONTENT": 7,
                             "SPII": 8,
                             "MALFORMED_FUNCTION_CALL": 9
+                          }
+                        }
+                      }
+                    },
+                    "UrlContextMetadata": {
+                      "fields": {
+                        "urlMetadata": {
+                          "rule": "repeated",
+                          "type": "UrlMetadata",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "UrlMetadata": {
+                      "fields": {
+                        "retrievedUrl": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "urlRetrievalStatus": {
+                          "type": "UrlRetrievalStatus",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "UrlRetrievalStatus": {
+                          "values": {
+                            "URL_RETRIEVAL_STATUS_UNSPECIFIED": 0,
+                            "URL_RETRIEVAL_STATUS_SUCCESS": 1,
+                            "URL_RETRIEVAL_STATUS_ERROR": 2
                           }
                         }
                       }

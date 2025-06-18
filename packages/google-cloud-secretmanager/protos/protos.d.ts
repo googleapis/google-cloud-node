@@ -67,6 +67,9 @@ export namespace google {
 
                     /** Secret customerManagedEncryption */
                     customerManagedEncryption?: (google.cloud.secretmanager.v1.ICustomerManagedEncryption|null);
+
+                    /** Secret tags */
+                    tags?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a Secret. */
@@ -116,6 +119,9 @@ export namespace google {
 
                     /** Secret customerManagedEncryption. */
                     public customerManagedEncryption?: (google.cloud.secretmanager.v1.ICustomerManagedEncryption|null);
+
+                    /** Secret tags. */
+                    public tags: { [k: string]: string };
 
                     /** Secret expiration. */
                     public expiration?: ("expireTime"|"ttl");

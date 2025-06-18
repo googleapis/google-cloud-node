@@ -18,14 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -107,41 +100,20 @@ export class AdaptationClient {
    *     const client = new AdaptationClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AdaptationClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'speech.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -167,7 +139,7 @@ export class AdaptationClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -181,7 +153,10 @@ export class AdaptationClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -220,25 +195,16 @@ export class AdaptationClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listPhraseSet: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'phraseSets'
-      ),
-      listCustomClasses: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'customClasses'
-      ),
+      listPhraseSet:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'phraseSets'),
+      listCustomClasses:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'customClasses')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.speech.v1p1beta1.Adaptation',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.speech.v1p1beta1.Adaptation', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -269,46 +235,32 @@ export class AdaptationClient {
     // Put together the "service stub" for
     // google.cloud.speech.v1p1beta1.Adaptation.
     this.adaptationStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.speech.v1p1beta1.Adaptation'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.speech.v1p1beta1.Adaptation') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.speech.v1p1beta1.Adaptation,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const adaptationStubMethods = [
-      'createPhraseSet',
-      'getPhraseSet',
-      'listPhraseSet',
-      'updatePhraseSet',
-      'deletePhraseSet',
-      'createCustomClass',
-      'getCustomClass',
-      'listCustomClasses',
-      'updateCustomClass',
-      'deleteCustomClass',
-    ];
+    const adaptationStubMethods =
+        ['createPhraseSet', 'getPhraseSet', 'listPhraseSet', 'updatePhraseSet', 'deletePhraseSet', 'createCustomClass', 'getCustomClass', 'listCustomClasses', 'updateCustomClass', 'deleteCustomClass'];
     for (const methodName of adaptationStubMethods) {
       const callPromise = this.adaptationStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -328,14 +280,8 @@ export class AdaptationClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'speech.googleapis.com';
   }
@@ -346,14 +292,8 @@ export class AdaptationClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'speech.googleapis.com';
   }
@@ -384,7 +324,9 @@ export class AdaptationClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -393,9 +335,8 @@ export class AdaptationClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -406,1193 +347,889 @@ export class AdaptationClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Create a set of phrase hints. Each item in the set can be a single word or
-   * a multi-word phrase. The items in the PhraseSet are favored by the
-   * recognition model when you send a call that includes the PhraseSet.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource where this phrase set will be created.
-   *   Format:
-   *
-   *   `projects/{project}/locations/{location}`
-   *
-   *   Speech-to-Text supports three locations: `global`, `us` (US North America),
-   *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
-   *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
-   *   with matching `us` or `eu` location value.
-   * @param {string} request.phraseSetId
-   *   Required. The ID to use for the phrase set, which will become the final
-   *   component of the phrase set's resource name.
-   *
-   *   This value should restrict to letters, numbers, and hyphens, with the first
-   *   character a letter, the last a letter or a number, and be 4-63 characters.
-   * @param {google.cloud.speech.v1p1beta1.PhraseSet} request.phraseSet
-   *   Required. The phrase set to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.speech.v1p1beta1.PhraseSet|PhraseSet}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1p1beta1/adaptation.create_phrase_set.js</caption>
-   * region_tag:speech_v1p1beta1_generated_Adaptation_CreatePhraseSet_async
-   */
+/**
+ * Create a set of phrase hints. Each item in the set can be a single word or
+ * a multi-word phrase. The items in the PhraseSet are favored by the
+ * recognition model when you send a call that includes the PhraseSet.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this phrase set will be created.
+ *   Format:
+ *
+ *   `projects/{project}/locations/{location}`
+ *
+ *   Speech-to-Text supports three locations: `global`, `us` (US North America),
+ *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
+ *   endpoint, use the `global` location. To specify a region, use a
+ *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+ *   with matching `us` or `eu` location value.
+ * @param {string} request.phraseSetId
+ *   Required. The ID to use for the phrase set, which will become the final
+ *   component of the phrase set's resource name.
+ *
+ *   This value should restrict to letters, numbers, and hyphens, with the first
+ *   character a letter, the last a letter or a number, and be 4-63 characters.
+ * @param {google.cloud.speech.v1p1beta1.PhraseSet} request.phraseSet
+ *   Required. The phrase set to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.speech.v1p1beta1.PhraseSet|PhraseSet}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1p1beta1/adaptation.create_phrase_set.js</caption>
+ * region_tag:speech_v1p1beta1_generated_Adaptation_CreatePhraseSet_async
+ */
   createPhraseSet(
-    request?: protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-      protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+        protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest|undefined, {}|undefined
+      ]>;
   createPhraseSet(
-    request: protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-      | protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createPhraseSet(
-    request: protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest,
-    callback: Callback<
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-      | protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createPhraseSet(
-    request?: protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-          | protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-      | protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-      protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  createPhraseSet(
+      request: protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest,
+      callback: Callback<
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+          protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  createPhraseSet(
+      request?: protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+          protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+          protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+        protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createPhraseSet request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-          | protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+        protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createPhraseSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createPhraseSet(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-          (
-            | protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createPhraseSet response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.createPhraseSet(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+        protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createPhraseSet response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Get a phrase set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the phrase set to retrieve. Format:
-   *
-   *   `projects/{project}/locations/{location}/phraseSets/{phrase_set}`
-   *
-   *   Speech-to-Text supports three locations: `global`, `us` (US North America),
-   *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
-   *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
-   *   with matching `us` or `eu` location value.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.speech.v1p1beta1.PhraseSet|PhraseSet}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1p1beta1/adaptation.get_phrase_set.js</caption>
-   * region_tag:speech_v1p1beta1_generated_Adaptation_GetPhraseSet_async
-   */
+/**
+ * Get a phrase set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the phrase set to retrieve. Format:
+ *
+ *   `projects/{project}/locations/{location}/phraseSets/{phrase_set}`
+ *
+ *   Speech-to-Text supports three locations: `global`, `us` (US North America),
+ *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
+ *   endpoint, use the `global` location. To specify a region, use a
+ *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+ *   with matching `us` or `eu` location value.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.speech.v1p1beta1.PhraseSet|PhraseSet}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1p1beta1/adaptation.get_phrase_set.js</caption>
+ * region_tag:speech_v1p1beta1_generated_Adaptation_GetPhraseSet_async
+ */
   getPhraseSet(
-    request?: protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-      protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+        protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest|undefined, {}|undefined
+      ]>;
   getPhraseSet(
-    request: protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-      | protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPhraseSet(
-    request: protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest,
-    callback: Callback<
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-      | protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPhraseSet(
-    request?: protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-          | protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-      | protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-      protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPhraseSet(
+      request: protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest,
+      callback: Callback<
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+          protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPhraseSet(
+      request?: protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+          protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+          protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+        protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getPhraseSet request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-          | protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+        protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPhraseSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getPhraseSet(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-          protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getPhraseSet response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getPhraseSet(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+        protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getPhraseSet response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Update a phrase set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.speech.v1p1beta1.PhraseSet} request.phraseSet
-   *   Required. The phrase set to update.
-   *
-   *   The phrase set's `name` field is used to identify the set to be
-   *   updated. Format:
-   *
-   *   `projects/{project}/locations/{location}/phraseSets/{phrase_set}`
-   *
-   *   Speech-to-Text supports three locations: `global`, `us` (US North America),
-   *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
-   *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
-   *   with matching `us` or `eu` location value.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.speech.v1p1beta1.PhraseSet|PhraseSet}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1p1beta1/adaptation.update_phrase_set.js</caption>
-   * region_tag:speech_v1p1beta1_generated_Adaptation_UpdatePhraseSet_async
-   */
+/**
+ * Update a phrase set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.speech.v1p1beta1.PhraseSet} request.phraseSet
+ *   Required. The phrase set to update.
+ *
+ *   The phrase set's `name` field is used to identify the set to be
+ *   updated. Format:
+ *
+ *   `projects/{project}/locations/{location}/phraseSets/{phrase_set}`
+ *
+ *   Speech-to-Text supports three locations: `global`, `us` (US North America),
+ *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
+ *   endpoint, use the `global` location. To specify a region, use a
+ *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+ *   with matching `us` or `eu` location value.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The list of fields to be updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.speech.v1p1beta1.PhraseSet|PhraseSet}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1p1beta1/adaptation.update_phrase_set.js</caption>
+ * region_tag:speech_v1p1beta1_generated_Adaptation_UpdatePhraseSet_async
+ */
   updatePhraseSet(
-    request?: protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-      protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+        protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest|undefined, {}|undefined
+      ]>;
   updatePhraseSet(
-    request: protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-      | protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updatePhraseSet(
-    request: protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest,
-    callback: Callback<
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-      | protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updatePhraseSet(
-    request?: protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-          | protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-      | protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-      protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  updatePhraseSet(
+      request: protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest,
+      callback: Callback<
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+          protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  updatePhraseSet(
+      request?: protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+          protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+          protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+        protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'phrase_set.name': request.phraseSet!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'phrase_set.name': request.phraseSet!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updatePhraseSet request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-          | protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+        protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updatePhraseSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updatePhraseSet(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
-          (
-            | protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updatePhraseSet response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.updatePhraseSet(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+        protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updatePhraseSet response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Delete a phrase set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the phrase set to delete. Format:
-   *
-   *   `projects/{project}/locations/{location}/phraseSets/{phrase_set}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1p1beta1/adaptation.delete_phrase_set.js</caption>
-   * region_tag:speech_v1p1beta1_generated_Adaptation_DeletePhraseSet_async
-   */
+/**
+ * Delete a phrase set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the phrase set to delete. Format:
+ *
+ *   `projects/{project}/locations/{location}/phraseSets/{phrase_set}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1p1beta1/adaptation.delete_phrase_set.js</caption>
+ * region_tag:speech_v1p1beta1_generated_Adaptation_DeletePhraseSet_async
+ */
   deletePhraseSet(
-    request?: protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest|undefined, {}|undefined
+      ]>;
   deletePhraseSet(
-    request: protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deletePhraseSet(
-    request: protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deletePhraseSet(
-    request?: protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  deletePhraseSet(
+      request: protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  deletePhraseSet(
+      request?: protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deletePhraseSet request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deletePhraseSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deletePhraseSet(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deletePhraseSet response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.deletePhraseSet(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deletePhraseSet response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Create a custom class.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource where this custom class will be created.
-   *   Format:
-   *
-   *   `projects/{project}/locations/{location}/customClasses`
-   *
-   *   Speech-to-Text supports three locations: `global`, `us` (US North America),
-   *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
-   *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
-   *   with matching `us` or `eu` location value.
-   * @param {string} request.customClassId
-   *   Required. The ID to use for the custom class, which will become the final
-   *   component of the custom class' resource name.
-   *
-   *   This value should restrict to letters, numbers, and hyphens, with the first
-   *   character a letter, the last a letter or a number, and be 4-63 characters.
-   * @param {google.cloud.speech.v1p1beta1.CustomClass} request.customClass
-   *   Required. The custom class to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.speech.v1p1beta1.CustomClass|CustomClass}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1p1beta1/adaptation.create_custom_class.js</caption>
-   * region_tag:speech_v1p1beta1_generated_Adaptation_CreateCustomClass_async
-   */
+/**
+ * Create a custom class.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this custom class will be created.
+ *   Format:
+ *
+ *   `projects/{project}/locations/{location}/customClasses`
+ *
+ *   Speech-to-Text supports three locations: `global`, `us` (US North America),
+ *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
+ *   endpoint, use the `global` location. To specify a region, use a
+ *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+ *   with matching `us` or `eu` location value.
+ * @param {string} request.customClassId
+ *   Required. The ID to use for the custom class, which will become the final
+ *   component of the custom class' resource name.
+ *
+ *   This value should restrict to letters, numbers, and hyphens, with the first
+ *   character a letter, the last a letter or a number, and be 4-63 characters.
+ * @param {google.cloud.speech.v1p1beta1.CustomClass} request.customClass
+ *   Required. The custom class to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.speech.v1p1beta1.CustomClass|CustomClass}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1p1beta1/adaptation.create_custom_class.js</caption>
+ * region_tag:speech_v1p1beta1_generated_Adaptation_CreateCustomClass_async
+ */
   createCustomClass(
-    request?: protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.speech.v1p1beta1.ICustomClass,
-      (
-        | protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.speech.v1p1beta1.ICustomClass,
+        protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest|undefined, {}|undefined
+      ]>;
   createCustomClass(
-    request: protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.speech.v1p1beta1.ICustomClass,
-      | protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCustomClass(
-    request: protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest,
-    callback: Callback<
-      protos.google.cloud.speech.v1p1beta1.ICustomClass,
-      | protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCustomClass(
-    request?: protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.speech.v1p1beta1.ICustomClass,
-          | protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.speech.v1p1beta1.ICustomClass,
-      | protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.speech.v1p1beta1.ICustomClass,
-      (
-        | protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCustomClass(
+      request: protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest,
+      callback: Callback<
+          protos.google.cloud.speech.v1p1beta1.ICustomClass,
+          protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCustomClass(
+      request?: protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.speech.v1p1beta1.ICustomClass,
+          protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.speech.v1p1beta1.ICustomClass,
+          protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.speech.v1p1beta1.ICustomClass,
+        protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createCustomClass request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.speech.v1p1beta1.ICustomClass,
-          | protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.speech.v1p1beta1.ICustomClass,
+        protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createCustomClass response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createCustomClass(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.speech.v1p1beta1.ICustomClass,
-          (
-            | protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createCustomClass response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.createCustomClass(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.speech.v1p1beta1.ICustomClass,
+        protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createCustomClass response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Get a custom class.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the custom class to retrieve. Format:
-   *
-   *   `projects/{project}/locations/{location}/customClasses/{custom_class}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.speech.v1p1beta1.CustomClass|CustomClass}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1p1beta1/adaptation.get_custom_class.js</caption>
-   * region_tag:speech_v1p1beta1_generated_Adaptation_GetCustomClass_async
-   */
+/**
+ * Get a custom class.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the custom class to retrieve. Format:
+ *
+ *   `projects/{project}/locations/{location}/customClasses/{custom_class}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.speech.v1p1beta1.CustomClass|CustomClass}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1p1beta1/adaptation.get_custom_class.js</caption>
+ * region_tag:speech_v1p1beta1_generated_Adaptation_GetCustomClass_async
+ */
   getCustomClass(
-    request?: protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.speech.v1p1beta1.ICustomClass,
-      protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.speech.v1p1beta1.ICustomClass,
+        protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest|undefined, {}|undefined
+      ]>;
   getCustomClass(
-    request: protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.speech.v1p1beta1.ICustomClass,
-      | protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCustomClass(
-    request: protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest,
-    callback: Callback<
-      protos.google.cloud.speech.v1p1beta1.ICustomClass,
-      | protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCustomClass(
-    request?: protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.speech.v1p1beta1.ICustomClass,
-          | protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.speech.v1p1beta1.ICustomClass,
-      | protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.speech.v1p1beta1.ICustomClass,
-      protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCustomClass(
+      request: protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest,
+      callback: Callback<
+          protos.google.cloud.speech.v1p1beta1.ICustomClass,
+          protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCustomClass(
+      request?: protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.speech.v1p1beta1.ICustomClass,
+          protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.speech.v1p1beta1.ICustomClass,
+          protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.speech.v1p1beta1.ICustomClass,
+        protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCustomClass request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.speech.v1p1beta1.ICustomClass,
-          | protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.speech.v1p1beta1.ICustomClass,
+        protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCustomClass response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCustomClass(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.speech.v1p1beta1.ICustomClass,
-          (
-            | protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCustomClass response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getCustomClass(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.speech.v1p1beta1.ICustomClass,
+        protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCustomClass response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Update a custom class.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.speech.v1p1beta1.CustomClass} request.customClass
-   *   Required. The custom class to update.
-   *
-   *   The custom class's `name` field is used to identify the custom class to be
-   *   updated. Format:
-   *
-   *   `projects/{project}/locations/{location}/customClasses/{custom_class}`
-   *
-   *   Speech-to-Text supports three locations: `global`, `us` (US North America),
-   *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
-   *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
-   *   with matching `us` or `eu` location value.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.speech.v1p1beta1.CustomClass|CustomClass}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1p1beta1/adaptation.update_custom_class.js</caption>
-   * region_tag:speech_v1p1beta1_generated_Adaptation_UpdateCustomClass_async
-   */
+/**
+ * Update a custom class.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.speech.v1p1beta1.CustomClass} request.customClass
+ *   Required. The custom class to update.
+ *
+ *   The custom class's `name` field is used to identify the custom class to be
+ *   updated. Format:
+ *
+ *   `projects/{project}/locations/{location}/customClasses/{custom_class}`
+ *
+ *   Speech-to-Text supports three locations: `global`, `us` (US North America),
+ *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
+ *   endpoint, use the `global` location. To specify a region, use a
+ *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+ *   with matching `us` or `eu` location value.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The list of fields to be updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.speech.v1p1beta1.CustomClass|CustomClass}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1p1beta1/adaptation.update_custom_class.js</caption>
+ * region_tag:speech_v1p1beta1_generated_Adaptation_UpdateCustomClass_async
+ */
   updateCustomClass(
-    request?: protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.speech.v1p1beta1.ICustomClass,
-      (
-        | protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.speech.v1p1beta1.ICustomClass,
+        protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest|undefined, {}|undefined
+      ]>;
   updateCustomClass(
-    request: protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.speech.v1p1beta1.ICustomClass,
-      | protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCustomClass(
-    request: protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest,
-    callback: Callback<
-      protos.google.cloud.speech.v1p1beta1.ICustomClass,
-      | protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCustomClass(
-    request?: protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.speech.v1p1beta1.ICustomClass,
-          | protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.speech.v1p1beta1.ICustomClass,
-      | protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.speech.v1p1beta1.ICustomClass,
-      (
-        | protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCustomClass(
+      request: protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest,
+      callback: Callback<
+          protos.google.cloud.speech.v1p1beta1.ICustomClass,
+          protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCustomClass(
+      request?: protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.speech.v1p1beta1.ICustomClass,
+          protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.speech.v1p1beta1.ICustomClass,
+          protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.speech.v1p1beta1.ICustomClass,
+        protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'custom_class.name': request.customClass!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'custom_class.name': request.customClass!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateCustomClass request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.speech.v1p1beta1.ICustomClass,
-          | protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.speech.v1p1beta1.ICustomClass,
+        protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateCustomClass response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateCustomClass(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.speech.v1p1beta1.ICustomClass,
-          (
-            | protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateCustomClass response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.updateCustomClass(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.speech.v1p1beta1.ICustomClass,
+        protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateCustomClass response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Delete a custom class.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the custom class to delete. Format:
-   *
-   *   `projects/{project}/locations/{location}/customClasses/{custom_class}`
-   *
-   *   Speech-to-Text supports three locations: `global`, `us` (US North America),
-   *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
-   *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
-   *   with matching `us` or `eu` location value.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1p1beta1/adaptation.delete_custom_class.js</caption>
-   * region_tag:speech_v1p1beta1_generated_Adaptation_DeleteCustomClass_async
-   */
+/**
+ * Delete a custom class.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the custom class to delete. Format:
+ *
+ *   `projects/{project}/locations/{location}/customClasses/{custom_class}`
+ *
+ *   Speech-to-Text supports three locations: `global`, `us` (US North America),
+ *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
+ *   endpoint, use the `global` location. To specify a region, use a
+ *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+ *   with matching `us` or `eu` location value.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1p1beta1/adaptation.delete_custom_class.js</caption>
+ * region_tag:speech_v1p1beta1_generated_Adaptation_DeleteCustomClass_async
+ */
   deleteCustomClass(
-    request?: protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest|undefined, {}|undefined
+      ]>;
   deleteCustomClass(
-    request: protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteCustomClass(
-    request: protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteCustomClass(
-    request?: protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteCustomClass(
+      request: protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteCustomClass(
+      request?: protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteCustomClass request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteCustomClass response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteCustomClass(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteCustomClass response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.deleteCustomClass(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteCustomClass response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 
-  /**
-   * List phrase sets.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of phrase set. Format:
-   *
-   *   `projects/{project}/locations/{location}`
-   *
-   *   Speech-to-Text supports three locations: `global`, `us` (US North America),
-   *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
-   *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
-   *   with matching `us` or `eu` location value.
-   * @param {number} request.pageSize
-   *   The maximum number of phrase sets to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 phrase sets will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListPhraseSet` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListPhraseSet` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.speech.v1p1beta1.PhraseSet|PhraseSet}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listPhraseSetAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * List phrase sets.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of phrase set. Format:
+ *
+ *   `projects/{project}/locations/{location}`
+ *
+ *   Speech-to-Text supports three locations: `global`, `us` (US North America),
+ *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
+ *   endpoint, use the `global` location. To specify a region, use a
+ *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+ *   with matching `us` or `eu` location value.
+ * @param {number} request.pageSize
+ *   The maximum number of phrase sets to return. The service may return
+ *   fewer than this value. If unspecified, at most 50 phrase sets will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListPhraseSet` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListPhraseSet` must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.speech.v1p1beta1.PhraseSet|PhraseSet}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listPhraseSetAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPhraseSet(
-    request?: protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet[],
-      protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest | null,
-      protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse,
-    ]
-  >;
+      request?: protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.speech.v1p1beta1.IPhraseSet[],
+        protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest|null,
+        protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse
+      ]>;
   listPhraseSet(
-    request: protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
-      | protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse
-      | null
-      | undefined,
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet
-    >
-  ): void;
-  listPhraseSet(
-    request: protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
-      | protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse
-      | null
-      | undefined,
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet
-    >
-  ): void;
-  listPhraseSet(
-    request?: protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
-          | protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse
-          | null
-          | undefined,
-          protos.google.cloud.speech.v1p1beta1.IPhraseSet
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
-      | protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse
-      | null
-      | undefined,
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet
-    >
-  ): Promise<
-    [
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet[],
-      protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest | null,
-      protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse,
-    ]
-  > | void {
+          protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse|null|undefined,
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet>): void;
+  listPhraseSet(
+      request: protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
+          protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse|null|undefined,
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet>): void;
+  listPhraseSet(
+      request?: protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
+          protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse|null|undefined,
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet>,
+      callback?: PaginationCallback<
+          protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
+          protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse|null|undefined,
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet>):
+      Promise<[
+        protos.google.cloud.speech.v1p1beta1.IPhraseSet[],
+        protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest|null,
+        protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
-          | protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse
-          | null
-          | undefined,
-          protos.google.cloud.speech.v1p1beta1.IPhraseSet
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
+      protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse|null|undefined,
+      protos.google.cloud.speech.v1p1beta1.IPhraseSet>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPhraseSet values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1601,71 +1238,68 @@ export class AdaptationClient {
     this._log.info('listPhraseSet request %j', request);
     return this.innerApiCalls
       .listPhraseSet(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.speech.v1p1beta1.IPhraseSet[],
-          protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest | null,
-          protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse,
-        ]) => {
-          this._log.info('listPhraseSet values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.speech.v1p1beta1.IPhraseSet[],
+        protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest|null,
+        protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse
+      ]) => {
+        this._log.info('listPhraseSet values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listPhraseSet`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of phrase set. Format:
-   *
-   *   `projects/{project}/locations/{location}`
-   *
-   *   Speech-to-Text supports three locations: `global`, `us` (US North America),
-   *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
-   *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
-   *   with matching `us` or `eu` location value.
-   * @param {number} request.pageSize
-   *   The maximum number of phrase sets to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 phrase sets will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListPhraseSet` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListPhraseSet` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.speech.v1p1beta1.PhraseSet|PhraseSet} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listPhraseSetAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listPhraseSet`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of phrase set. Format:
+ *
+ *   `projects/{project}/locations/{location}`
+ *
+ *   Speech-to-Text supports three locations: `global`, `us` (US North America),
+ *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
+ *   endpoint, use the `global` location. To specify a region, use a
+ *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+ *   with matching `us` or `eu` location value.
+ * @param {number} request.pageSize
+ *   The maximum number of phrase sets to return. The service may return
+ *   fewer than this value. If unspecified, at most 50 phrase sets will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListPhraseSet` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListPhraseSet` must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.speech.v1p1beta1.PhraseSet|PhraseSet} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listPhraseSetAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPhraseSetStream(
-    request?: protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPhraseSet'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPhraseSet stream %j', request);
     return this.descriptors.page.listPhraseSet.createStream(
       this.innerApiCalls.listPhraseSet as GaxCall,
@@ -1674,62 +1308,61 @@ export class AdaptationClient {
     );
   }
 
-  /**
-   * Equivalent to `listPhraseSet`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of phrase set. Format:
-   *
-   *   `projects/{project}/locations/{location}`
-   *
-   *   Speech-to-Text supports three locations: `global`, `us` (US North America),
-   *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
-   *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
-   *   with matching `us` or `eu` location value.
-   * @param {number} request.pageSize
-   *   The maximum number of phrase sets to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 phrase sets will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListPhraseSet` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListPhraseSet` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.speech.v1p1beta1.PhraseSet|PhraseSet}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1p1beta1/adaptation.list_phrase_set.js</caption>
-   * region_tag:speech_v1p1beta1_generated_Adaptation_ListPhraseSet_async
-   */
+/**
+ * Equivalent to `listPhraseSet`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of phrase set. Format:
+ *
+ *   `projects/{project}/locations/{location}`
+ *
+ *   Speech-to-Text supports three locations: `global`, `us` (US North America),
+ *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
+ *   endpoint, use the `global` location. To specify a region, use a
+ *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+ *   with matching `us` or `eu` location value.
+ * @param {number} request.pageSize
+ *   The maximum number of phrase sets to return. The service may return
+ *   fewer than this value. If unspecified, at most 50 phrase sets will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListPhraseSet` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListPhraseSet` must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.speech.v1p1beta1.PhraseSet|PhraseSet}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1p1beta1/adaptation.list_phrase_set.js</caption>
+ * region_tag:speech_v1p1beta1_generated_Adaptation_ListPhraseSet_async
+ */
   listPhraseSetAsync(
-    request?: protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.speech.v1p1beta1.IPhraseSet> {
+      request?: protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.speech.v1p1beta1.IPhraseSet>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPhraseSet'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPhraseSet iterate %j', request);
     return this.descriptors.page.listPhraseSet.asyncIterate(
       this.innerApiCalls['listPhraseSet'] as GaxCall,
@@ -1737,127 +1370,102 @@ export class AdaptationClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.speech.v1p1beta1.IPhraseSet>;
   }
-  /**
-   * List custom classes.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of custom classes. Format:
-   *
-   *   `projects/{project}/locations/{location}/customClasses`
-   *
-   *   Speech-to-Text supports three locations: `global`, `us` (US North America),
-   *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
-   *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
-   *   with matching `us` or `eu` location value.
-   * @param {number} request.pageSize
-   *   The maximum number of custom classes to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 custom classes will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListCustomClass` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListCustomClass` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.speech.v1p1beta1.CustomClass|CustomClass}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCustomClassesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * List custom classes.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of custom classes. Format:
+ *
+ *   `projects/{project}/locations/{location}/customClasses`
+ *
+ *   Speech-to-Text supports three locations: `global`, `us` (US North America),
+ *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
+ *   endpoint, use the `global` location. To specify a region, use a
+ *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+ *   with matching `us` or `eu` location value.
+ * @param {number} request.pageSize
+ *   The maximum number of custom classes to return. The service may return
+ *   fewer than this value. If unspecified, at most 50 custom classes will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListCustomClass` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListCustomClass` must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.speech.v1p1beta1.CustomClass|CustomClass}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCustomClassesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCustomClasses(
-    request?: protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.speech.v1p1beta1.ICustomClass[],
-      protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest | null,
-      protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.speech.v1p1beta1.ICustomClass[],
+        protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest|null,
+        protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse
+      ]>;
   listCustomClasses(
-    request: protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
-      | protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse
-      | null
-      | undefined,
-      protos.google.cloud.speech.v1p1beta1.ICustomClass
-    >
-  ): void;
-  listCustomClasses(
-    request: protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
-      | protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse
-      | null
-      | undefined,
-      protos.google.cloud.speech.v1p1beta1.ICustomClass
-    >
-  ): void;
-  listCustomClasses(
-    request?: protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
-          | protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse
-          | null
-          | undefined,
-          protos.google.cloud.speech.v1p1beta1.ICustomClass
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
-      | protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse
-      | null
-      | undefined,
-      protos.google.cloud.speech.v1p1beta1.ICustomClass
-    >
-  ): Promise<
-    [
-      protos.google.cloud.speech.v1p1beta1.ICustomClass[],
-      protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest | null,
-      protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse,
-    ]
-  > | void {
+          protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse|null|undefined,
+          protos.google.cloud.speech.v1p1beta1.ICustomClass>): void;
+  listCustomClasses(
+      request: protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
+          protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse|null|undefined,
+          protos.google.cloud.speech.v1p1beta1.ICustomClass>): void;
+  listCustomClasses(
+      request?: protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
+          protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse|null|undefined,
+          protos.google.cloud.speech.v1p1beta1.ICustomClass>,
+      callback?: PaginationCallback<
+          protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
+          protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse|null|undefined,
+          protos.google.cloud.speech.v1p1beta1.ICustomClass>):
+      Promise<[
+        protos.google.cloud.speech.v1p1beta1.ICustomClass[],
+        protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest|null,
+        protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
-          | protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse
-          | null
-          | undefined,
-          protos.google.cloud.speech.v1p1beta1.ICustomClass
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
+      protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse|null|undefined,
+      protos.google.cloud.speech.v1p1beta1.ICustomClass>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCustomClasses values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1866,71 +1474,68 @@ export class AdaptationClient {
     this._log.info('listCustomClasses request %j', request);
     return this.innerApiCalls
       .listCustomClasses(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.speech.v1p1beta1.ICustomClass[],
-          protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest | null,
-          protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse,
-        ]) => {
-          this._log.info('listCustomClasses values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.speech.v1p1beta1.ICustomClass[],
+        protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest|null,
+        protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse
+      ]) => {
+        this._log.info('listCustomClasses values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listCustomClasses`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of custom classes. Format:
-   *
-   *   `projects/{project}/locations/{location}/customClasses`
-   *
-   *   Speech-to-Text supports three locations: `global`, `us` (US North America),
-   *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
-   *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
-   *   with matching `us` or `eu` location value.
-   * @param {number} request.pageSize
-   *   The maximum number of custom classes to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 custom classes will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListCustomClass` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListCustomClass` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.speech.v1p1beta1.CustomClass|CustomClass} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCustomClassesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listCustomClasses`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of custom classes. Format:
+ *
+ *   `projects/{project}/locations/{location}/customClasses`
+ *
+ *   Speech-to-Text supports three locations: `global`, `us` (US North America),
+ *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
+ *   endpoint, use the `global` location. To specify a region, use a
+ *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+ *   with matching `us` or `eu` location value.
+ * @param {number} request.pageSize
+ *   The maximum number of custom classes to return. The service may return
+ *   fewer than this value. If unspecified, at most 50 custom classes will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListCustomClass` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListCustomClass` must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.speech.v1p1beta1.CustomClass|CustomClass} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCustomClassesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCustomClassesStream(
-    request?: protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCustomClasses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCustomClasses stream %j', request);
     return this.descriptors.page.listCustomClasses.createStream(
       this.innerApiCalls.listCustomClasses as GaxCall,
@@ -1939,62 +1544,61 @@ export class AdaptationClient {
     );
   }
 
-  /**
-   * Equivalent to `listCustomClasses`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of custom classes. Format:
-   *
-   *   `projects/{project}/locations/{location}/customClasses`
-   *
-   *   Speech-to-Text supports three locations: `global`, `us` (US North America),
-   *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
-   *   endpoint, use the `global` location. To specify a region, use a
-   *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
-   *   with matching `us` or `eu` location value.
-   * @param {number} request.pageSize
-   *   The maximum number of custom classes to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 custom classes will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListCustomClass` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListCustomClass` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.speech.v1p1beta1.CustomClass|CustomClass}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1p1beta1/adaptation.list_custom_classes.js</caption>
-   * region_tag:speech_v1p1beta1_generated_Adaptation_ListCustomClasses_async
-   */
+/**
+ * Equivalent to `listCustomClasses`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of custom classes. Format:
+ *
+ *   `projects/{project}/locations/{location}/customClasses`
+ *
+ *   Speech-to-Text supports three locations: `global`, `us` (US North America),
+ *   and `eu` (Europe). If you are calling the `speech.googleapis.com`
+ *   endpoint, use the `global` location. To specify a region, use a
+ *   [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+ *   with matching `us` or `eu` location value.
+ * @param {number} request.pageSize
+ *   The maximum number of custom classes to return. The service may return
+ *   fewer than this value. If unspecified, at most 50 custom classes will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListCustomClass` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListCustomClass` must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.speech.v1p1beta1.CustomClass|CustomClass}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1p1beta1/adaptation.list_custom_classes.js</caption>
+ * region_tag:speech_v1p1beta1_generated_Adaptation_ListCustomClasses_async
+ */
   listCustomClassesAsync(
-    request?: protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.speech.v1p1beta1.ICustomClass> {
+      request?: protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.speech.v1p1beta1.ICustomClass>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCustomClasses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCustomClasses iterate %j', request);
     return this.descriptors.page.listCustomClasses.asyncIterate(
       this.innerApiCalls['listCustomClasses'] as GaxCall,
@@ -2014,7 +1618,7 @@ export class AdaptationClient {
    * @param {string} custom_class
    * @returns {string} Resource name string.
    */
-  customClassPath(project: string, location: string, customClass: string) {
+  customClassPath(project:string,location:string,customClass:string) {
     return this.pathTemplates.customClassPathTemplate.render({
       project: project,
       location: location,
@@ -2030,8 +1634,7 @@ export class AdaptationClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCustomClassName(customClassName: string) {
-    return this.pathTemplates.customClassPathTemplate.match(customClassName)
-      .project;
+    return this.pathTemplates.customClassPathTemplate.match(customClassName).project;
   }
 
   /**
@@ -2042,8 +1645,7 @@ export class AdaptationClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCustomClassName(customClassName: string) {
-    return this.pathTemplates.customClassPathTemplate.match(customClassName)
-      .location;
+    return this.pathTemplates.customClassPathTemplate.match(customClassName).location;
   }
 
   /**
@@ -2054,8 +1656,7 @@ export class AdaptationClient {
    * @returns {string} A string representing the custom_class.
    */
   matchCustomClassFromCustomClassName(customClassName: string) {
-    return this.pathTemplates.customClassPathTemplate.match(customClassName)
-      .custom_class;
+    return this.pathTemplates.customClassPathTemplate.match(customClassName).custom_class;
   }
 
   /**
@@ -2065,7 +1666,7 @@ export class AdaptationClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2102,7 +1703,7 @@ export class AdaptationClient {
    * @param {string} phrase_set
    * @returns {string} Resource name string.
    */
-  phraseSetPath(project: string, location: string, phraseSet: string) {
+  phraseSetPath(project:string,location:string,phraseSet:string) {
     return this.pathTemplates.phraseSetPathTemplate.render({
       project: project,
       location: location,
@@ -2118,8 +1719,7 @@ export class AdaptationClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPhraseSetName(phraseSetName: string) {
-    return this.pathTemplates.phraseSetPathTemplate.match(phraseSetName)
-      .project;
+    return this.pathTemplates.phraseSetPathTemplate.match(phraseSetName).project;
   }
 
   /**
@@ -2130,8 +1730,7 @@ export class AdaptationClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPhraseSetName(phraseSetName: string) {
-    return this.pathTemplates.phraseSetPathTemplate.match(phraseSetName)
-      .location;
+    return this.pathTemplates.phraseSetPathTemplate.match(phraseSetName).location;
   }
 
   /**
@@ -2142,8 +1741,7 @@ export class AdaptationClient {
    * @returns {string} A string representing the phrase_set.
    */
   matchPhraseSetFromPhraseSetName(phraseSetName: string) {
-    return this.pathTemplates.phraseSetPathTemplate.match(phraseSetName)
-      .phrase_set;
+    return this.pathTemplates.phraseSetPathTemplate.match(phraseSetName).phrase_set;
   }
 
   /**
@@ -2152,7 +1750,7 @@ export class AdaptationClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
