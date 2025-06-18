@@ -96106,6 +96106,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public getPublisherModel(request: google.cloud.aiplatform.v1.IGetPublisherModelRequest): Promise<google.cloud.aiplatform.v1.PublisherModel>;
+
+                    /**
+                     * Calls Deploy.
+                     * @param request DeployRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deploy(request: google.cloud.aiplatform.v1.IDeployRequest, callback: google.cloud.aiplatform.v1.ModelGardenService.DeployCallback): void;
+
+                    /**
+                     * Calls Deploy.
+                     * @param request DeployRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deploy(request: google.cloud.aiplatform.v1.IDeployRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace ModelGardenService {
@@ -96116,6 +96130,13 @@ export namespace google {
                      * @param [response] PublisherModel
                      */
                     type GetPublisherModelCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1.PublisherModel) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1.ModelGardenService|deploy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeployCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** PublisherModelView enum. */
@@ -96241,6 +96262,702 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GetPublisherModelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeployRequest. */
+                interface IDeployRequest {
+
+                    /** DeployRequest publisherModelName */
+                    publisherModelName?: (string|null);
+
+                    /** DeployRequest huggingFaceModelId */
+                    huggingFaceModelId?: (string|null);
+
+                    /** DeployRequest destination */
+                    destination?: (string|null);
+
+                    /** DeployRequest modelConfig */
+                    modelConfig?: (google.cloud.aiplatform.v1.DeployRequest.IModelConfig|null);
+
+                    /** DeployRequest endpointConfig */
+                    endpointConfig?: (google.cloud.aiplatform.v1.DeployRequest.IEndpointConfig|null);
+
+                    /** DeployRequest deployConfig */
+                    deployConfig?: (google.cloud.aiplatform.v1.DeployRequest.IDeployConfig|null);
+                }
+
+                /** Represents a DeployRequest. */
+                class DeployRequest implements IDeployRequest {
+
+                    /**
+                     * Constructs a new DeployRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IDeployRequest);
+
+                    /** DeployRequest publisherModelName. */
+                    public publisherModelName?: (string|null);
+
+                    /** DeployRequest huggingFaceModelId. */
+                    public huggingFaceModelId?: (string|null);
+
+                    /** DeployRequest destination. */
+                    public destination: string;
+
+                    /** DeployRequest modelConfig. */
+                    public modelConfig?: (google.cloud.aiplatform.v1.DeployRequest.IModelConfig|null);
+
+                    /** DeployRequest endpointConfig. */
+                    public endpointConfig?: (google.cloud.aiplatform.v1.DeployRequest.IEndpointConfig|null);
+
+                    /** DeployRequest deployConfig. */
+                    public deployConfig?: (google.cloud.aiplatform.v1.DeployRequest.IDeployConfig|null);
+
+                    /** DeployRequest artifacts. */
+                    public artifacts?: ("publisherModelName"|"huggingFaceModelId");
+
+                    /**
+                     * Creates a new DeployRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeployRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IDeployRequest): google.cloud.aiplatform.v1.DeployRequest;
+
+                    /**
+                     * Encodes the specified DeployRequest message. Does not implicitly {@link google.cloud.aiplatform.v1.DeployRequest.verify|verify} messages.
+                     * @param message DeployRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IDeployRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeployRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.DeployRequest.verify|verify} messages.
+                     * @param message DeployRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IDeployRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeployRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeployRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.DeployRequest;
+
+                    /**
+                     * Decodes a DeployRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeployRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.DeployRequest;
+
+                    /**
+                     * Verifies a DeployRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeployRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeployRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.DeployRequest;
+
+                    /**
+                     * Creates a plain object from a DeployRequest message. Also converts values to other types if specified.
+                     * @param message DeployRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.DeployRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeployRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeployRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DeployRequest {
+
+                    /** Properties of a ModelConfig. */
+                    interface IModelConfig {
+
+                        /** ModelConfig acceptEula */
+                        acceptEula?: (boolean|null);
+
+                        /** ModelConfig huggingFaceAccessToken */
+                        huggingFaceAccessToken?: (string|null);
+
+                        /** ModelConfig huggingFaceCacheEnabled */
+                        huggingFaceCacheEnabled?: (boolean|null);
+
+                        /** ModelConfig modelDisplayName */
+                        modelDisplayName?: (string|null);
+
+                        /** ModelConfig containerSpec */
+                        containerSpec?: (google.cloud.aiplatform.v1.IModelContainerSpec|null);
+                    }
+
+                    /** Represents a ModelConfig. */
+                    class ModelConfig implements IModelConfig {
+
+                        /**
+                         * Constructs a new ModelConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.DeployRequest.IModelConfig);
+
+                        /** ModelConfig acceptEula. */
+                        public acceptEula: boolean;
+
+                        /** ModelConfig huggingFaceAccessToken. */
+                        public huggingFaceAccessToken: string;
+
+                        /** ModelConfig huggingFaceCacheEnabled. */
+                        public huggingFaceCacheEnabled: boolean;
+
+                        /** ModelConfig modelDisplayName. */
+                        public modelDisplayName: string;
+
+                        /** ModelConfig containerSpec. */
+                        public containerSpec?: (google.cloud.aiplatform.v1.IModelContainerSpec|null);
+
+                        /**
+                         * Creates a new ModelConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ModelConfig instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.DeployRequest.IModelConfig): google.cloud.aiplatform.v1.DeployRequest.ModelConfig;
+
+                        /**
+                         * Encodes the specified ModelConfig message. Does not implicitly {@link google.cloud.aiplatform.v1.DeployRequest.ModelConfig.verify|verify} messages.
+                         * @param message ModelConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.DeployRequest.IModelConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ModelConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.DeployRequest.ModelConfig.verify|verify} messages.
+                         * @param message ModelConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.DeployRequest.IModelConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ModelConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ModelConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.DeployRequest.ModelConfig;
+
+                        /**
+                         * Decodes a ModelConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ModelConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.DeployRequest.ModelConfig;
+
+                        /**
+                         * Verifies a ModelConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ModelConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ModelConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.DeployRequest.ModelConfig;
+
+                        /**
+                         * Creates a plain object from a ModelConfig message. Also converts values to other types if specified.
+                         * @param message ModelConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.DeployRequest.ModelConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ModelConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ModelConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an EndpointConfig. */
+                    interface IEndpointConfig {
+
+                        /** EndpointConfig endpointDisplayName */
+                        endpointDisplayName?: (string|null);
+
+                        /** EndpointConfig dedicatedEndpointEnabled */
+                        dedicatedEndpointEnabled?: (boolean|null);
+                    }
+
+                    /** Represents an EndpointConfig. */
+                    class EndpointConfig implements IEndpointConfig {
+
+                        /**
+                         * Constructs a new EndpointConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.DeployRequest.IEndpointConfig);
+
+                        /** EndpointConfig endpointDisplayName. */
+                        public endpointDisplayName: string;
+
+                        /** EndpointConfig dedicatedEndpointEnabled. */
+                        public dedicatedEndpointEnabled: boolean;
+
+                        /**
+                         * Creates a new EndpointConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EndpointConfig instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.DeployRequest.IEndpointConfig): google.cloud.aiplatform.v1.DeployRequest.EndpointConfig;
+
+                        /**
+                         * Encodes the specified EndpointConfig message. Does not implicitly {@link google.cloud.aiplatform.v1.DeployRequest.EndpointConfig.verify|verify} messages.
+                         * @param message EndpointConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.DeployRequest.IEndpointConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EndpointConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.DeployRequest.EndpointConfig.verify|verify} messages.
+                         * @param message EndpointConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.DeployRequest.IEndpointConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EndpointConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EndpointConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.DeployRequest.EndpointConfig;
+
+                        /**
+                         * Decodes an EndpointConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EndpointConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.DeployRequest.EndpointConfig;
+
+                        /**
+                         * Verifies an EndpointConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EndpointConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EndpointConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.DeployRequest.EndpointConfig;
+
+                        /**
+                         * Creates a plain object from an EndpointConfig message. Also converts values to other types if specified.
+                         * @param message EndpointConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.DeployRequest.EndpointConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EndpointConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EndpointConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeployConfig. */
+                    interface IDeployConfig {
+
+                        /** DeployConfig dedicatedResources */
+                        dedicatedResources?: (google.cloud.aiplatform.v1.IDedicatedResources|null);
+
+                        /** DeployConfig fastTryoutEnabled */
+                        fastTryoutEnabled?: (boolean|null);
+
+                        /** DeployConfig systemLabels */
+                        systemLabels?: ({ [k: string]: string }|null);
+                    }
+
+                    /** Represents a DeployConfig. */
+                    class DeployConfig implements IDeployConfig {
+
+                        /**
+                         * Constructs a new DeployConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.DeployRequest.IDeployConfig);
+
+                        /** DeployConfig dedicatedResources. */
+                        public dedicatedResources?: (google.cloud.aiplatform.v1.IDedicatedResources|null);
+
+                        /** DeployConfig fastTryoutEnabled. */
+                        public fastTryoutEnabled: boolean;
+
+                        /** DeployConfig systemLabels. */
+                        public systemLabels: { [k: string]: string };
+
+                        /**
+                         * Creates a new DeployConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeployConfig instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.DeployRequest.IDeployConfig): google.cloud.aiplatform.v1.DeployRequest.DeployConfig;
+
+                        /**
+                         * Encodes the specified DeployConfig message. Does not implicitly {@link google.cloud.aiplatform.v1.DeployRequest.DeployConfig.verify|verify} messages.
+                         * @param message DeployConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.DeployRequest.IDeployConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeployConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.DeployRequest.DeployConfig.verify|verify} messages.
+                         * @param message DeployConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.DeployRequest.IDeployConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeployConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeployConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.DeployRequest.DeployConfig;
+
+                        /**
+                         * Decodes a DeployConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeployConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.DeployRequest.DeployConfig;
+
+                        /**
+                         * Verifies a DeployConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeployConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeployConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.DeployRequest.DeployConfig;
+
+                        /**
+                         * Creates a plain object from a DeployConfig message. Also converts values to other types if specified.
+                         * @param message DeployConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.DeployRequest.DeployConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeployConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeployConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a DeployResponse. */
+                interface IDeployResponse {
+
+                    /** DeployResponse publisherModel */
+                    publisherModel?: (string|null);
+
+                    /** DeployResponse endpoint */
+                    endpoint?: (string|null);
+
+                    /** DeployResponse model */
+                    model?: (string|null);
+                }
+
+                /** Represents a DeployResponse. */
+                class DeployResponse implements IDeployResponse {
+
+                    /**
+                     * Constructs a new DeployResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IDeployResponse);
+
+                    /** DeployResponse publisherModel. */
+                    public publisherModel: string;
+
+                    /** DeployResponse endpoint. */
+                    public endpoint: string;
+
+                    /** DeployResponse model. */
+                    public model: string;
+
+                    /**
+                     * Creates a new DeployResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeployResponse instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IDeployResponse): google.cloud.aiplatform.v1.DeployResponse;
+
+                    /**
+                     * Encodes the specified DeployResponse message. Does not implicitly {@link google.cloud.aiplatform.v1.DeployResponse.verify|verify} messages.
+                     * @param message DeployResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IDeployResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeployResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.DeployResponse.verify|verify} messages.
+                     * @param message DeployResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IDeployResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeployResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeployResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.DeployResponse;
+
+                    /**
+                     * Decodes a DeployResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeployResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.DeployResponse;
+
+                    /**
+                     * Verifies a DeployResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeployResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeployResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.DeployResponse;
+
+                    /**
+                     * Creates a plain object from a DeployResponse message. Also converts values to other types if specified.
+                     * @param message DeployResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.DeployResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeployResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeployResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeployOperationMetadata. */
+                interface IDeployOperationMetadata {
+
+                    /** DeployOperationMetadata genericMetadata */
+                    genericMetadata?: (google.cloud.aiplatform.v1.IGenericOperationMetadata|null);
+
+                    /** DeployOperationMetadata publisherModel */
+                    publisherModel?: (string|null);
+
+                    /** DeployOperationMetadata destination */
+                    destination?: (string|null);
+
+                    /** DeployOperationMetadata projectNumber */
+                    projectNumber?: (number|Long|string|null);
+
+                    /** DeployOperationMetadata modelId */
+                    modelId?: (string|null);
+                }
+
+                /** Represents a DeployOperationMetadata. */
+                class DeployOperationMetadata implements IDeployOperationMetadata {
+
+                    /**
+                     * Constructs a new DeployOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IDeployOperationMetadata);
+
+                    /** DeployOperationMetadata genericMetadata. */
+                    public genericMetadata?: (google.cloud.aiplatform.v1.IGenericOperationMetadata|null);
+
+                    /** DeployOperationMetadata publisherModel. */
+                    public publisherModel: string;
+
+                    /** DeployOperationMetadata destination. */
+                    public destination: string;
+
+                    /** DeployOperationMetadata projectNumber. */
+                    public projectNumber: (number|Long|string);
+
+                    /** DeployOperationMetadata modelId. */
+                    public modelId: string;
+
+                    /**
+                     * Creates a new DeployOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeployOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IDeployOperationMetadata): google.cloud.aiplatform.v1.DeployOperationMetadata;
+
+                    /**
+                     * Encodes the specified DeployOperationMetadata message. Does not implicitly {@link google.cloud.aiplatform.v1.DeployOperationMetadata.verify|verify} messages.
+                     * @param message DeployOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IDeployOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeployOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.DeployOperationMetadata.verify|verify} messages.
+                     * @param message DeployOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IDeployOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeployOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeployOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.DeployOperationMetadata;
+
+                    /**
+                     * Decodes a DeployOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeployOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.DeployOperationMetadata;
+
+                    /**
+                     * Verifies a DeployOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeployOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeployOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.DeployOperationMetadata;
+
+                    /**
+                     * Creates a plain object from a DeployOperationMetadata message. Also converts values to other types if specified.
+                     * @param message DeployOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.DeployOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeployOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeployOperationMetadata
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

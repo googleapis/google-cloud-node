@@ -2235,6 +2235,11 @@
               "methods": [
                 "getPublisherModel"
               ]
+            },
+            "Deploy": {
+              "methods": [
+                "deploy"
+              ]
             }
           }
         },
@@ -2244,6 +2249,11 @@
             "GetPublisherModel": {
               "methods": [
                 "getPublisherModel"
+              ]
+            },
+            "Deploy": {
+              "methods": [
+                "deploy"
               ]
             }
           }
