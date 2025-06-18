@@ -22,7 +22,7 @@ import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOption
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -191,8 +191,17 @@ export class DataStoreServiceClient {
       enginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}'
       ),
+      identityMappingStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/identityMappingStores/{identity_mapping_store}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
+      ),
+      projectLocationCmekConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cmekConfig'
+      ),
+      projectLocationCmekConfigsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cmekConfigs/{cmek_config}'
       ),
       projectLocationCollectionDataStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}'
@@ -303,7 +312,7 @@ export class DataStoreServiceClient {
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dataStores')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
@@ -313,7 +322,7 @@ export class DataStoreServiceClient {
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/operations/*}:cancel',body: '*',},{post: '/v1/{name=projects/*/locations/*/dataStores/*/branches/*/operations/*}:cancel',body: '*',}],
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/operations/*}:cancel',body: '*',},{post: '/v1/{name=projects/*/locations/*/collections/*/engines/*/operations/*}:cancel',body: '*',},{post: '/v1/{name=projects/*/locations/*/dataStores/*/branches/*/operations/*}:cancel',body: '*',}],
       },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/operations/*}',additional_bindings: [{get: '/v1/{name=projects/*/locations/*/collections/*/dataConnector/operations/*}',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/models/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/operations/*}',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/targetSites/operations/*}',},{get: '/v1/{name=projects/*/locations/*/collections/*/engines/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/collections/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/dataStores/*/branches/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/dataStores/*/models/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/dataStores/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/identityMappingStores/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/operations/*}',},{get: '/v1/{name=projects/*/operations/*}',}],
       },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*}/operations',additional_bindings: [{get: '/v1/{name=projects/*/locations/*/collections/*/dataConnector}/operations',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*}/operations',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/models/*}/operations',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*}/operations',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/targetSites}/operations',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine}/operations',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*}/operations',},{get: '/v1/{name=projects/*/locations/*/collections/*/engines/*}/operations',},{get: '/v1/{name=projects/*/locations/*/collections/*}/operations',},{get: '/v1/{name=projects/*/locations/*/dataStores/*/branches/*}/operations',},{get: '/v1/{name=projects/*/locations/*/dataStores/*/models/*}/operations',},{get: '/v1/{name=projects/*/locations/*/dataStores/*}/operations',},{get: '/v1/{name=projects/*/locations/*/identityMappingStores/*}/operations',},{get: '/v1/{name=projects/*/locations/*}/operations',},{get: '/v1/{name=projects/*}/operations',}],
       }];
@@ -581,6 +590,12 @@ export class DataStoreServiceClient {
       ]) => {
         this._log.info('getDataStore response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -683,6 +698,12 @@ export class DataStoreServiceClient {
       ]) => {
         this._log.info('updateDataStore response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 
@@ -697,6 +718,12 @@ export class DataStoreServiceClient {
  *
  * @param {Object} request
  *   The request object that will be sent.
+ * @param {string} request.cmekConfigName
+ *   Resource name of the CmekConfig to use for protecting this DataStore.
+ * @param {boolean} request.disableCmek
+ *   DataStore without CMEK protections. If a default CmekConfig is set for
+ *   the project, setting this field will override the default CmekConfig as
+ *   well.
  * @param {string} request.parent
  *   Required. The parent resource name, such as
  *   `projects/{project}/locations/{location}/collections/{collection}`.
@@ -1619,6 +1646,55 @@ export class DataStoreServiceClient {
   }
 
   /**
+   * Return a fully-qualified identityMappingStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} identity_mapping_store
+   * @returns {string} Resource name string.
+   */
+  identityMappingStorePath(project:string,location:string,identityMappingStore:string) {
+    return this.pathTemplates.identityMappingStorePathTemplate.render({
+      project: project,
+      location: location,
+      identity_mapping_store: identityMappingStore,
+    });
+  }
+
+  /**
+   * Parse the project from IdentityMappingStore resource.
+   *
+   * @param {string} identityMappingStoreName
+   *   A fully-qualified path representing IdentityMappingStore resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromIdentityMappingStoreName(identityMappingStoreName: string) {
+    return this.pathTemplates.identityMappingStorePathTemplate.match(identityMappingStoreName).project;
+  }
+
+  /**
+   * Parse the location from IdentityMappingStore resource.
+   *
+   * @param {string} identityMappingStoreName
+   *   A fully-qualified path representing IdentityMappingStore resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromIdentityMappingStoreName(identityMappingStoreName: string) {
+    return this.pathTemplates.identityMappingStorePathTemplate.match(identityMappingStoreName).location;
+  }
+
+  /**
+   * Parse the identity_mapping_store from IdentityMappingStore resource.
+   *
+   * @param {string} identityMappingStoreName
+   *   A fully-qualified path representing IdentityMappingStore resource.
+   * @returns {string} A string representing the identity_mapping_store.
+   */
+  matchIdentityMappingStoreFromIdentityMappingStoreName(identityMappingStoreName: string) {
+    return this.pathTemplates.identityMappingStorePathTemplate.match(identityMappingStoreName).identity_mapping_store;
+  }
+
+  /**
    * Return a fully-qualified project resource name string.
    *
    * @param {string} project
@@ -1639,6 +1715,91 @@ export class DataStoreServiceClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCmekConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  projectLocationCmekConfigPath(project:string,location:string) {
+    return this.pathTemplates.projectLocationCmekConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationCmekConfig resource.
+   *
+   * @param {string} projectLocationCmekConfigName
+   *   A fully-qualified path representing project_location_cmekConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCmekConfigName(projectLocationCmekConfigName: string) {
+    return this.pathTemplates.projectLocationCmekConfigPathTemplate.match(projectLocationCmekConfigName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCmekConfig resource.
+   *
+   * @param {string} projectLocationCmekConfigName
+   *   A fully-qualified path representing project_location_cmekConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCmekConfigName(projectLocationCmekConfigName: string) {
+    return this.pathTemplates.projectLocationCmekConfigPathTemplate.match(projectLocationCmekConfigName).location;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCmekConfigs resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cmek_config
+   * @returns {string} Resource name string.
+   */
+  projectLocationCmekConfigsPath(project:string,location:string,cmekConfig:string) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.render({
+      project: project,
+      location: location,
+      cmek_config: cmekConfig,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationCmekConfigs resource.
+   *
+   * @param {string} projectLocationCmekConfigsName
+   *   A fully-qualified path representing project_location_cmekConfigs resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCmekConfigsName(projectLocationCmekConfigsName: string) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.match(projectLocationCmekConfigsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCmekConfigs resource.
+   *
+   * @param {string} projectLocationCmekConfigsName
+   *   A fully-qualified path representing project_location_cmekConfigs resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCmekConfigsName(projectLocationCmekConfigsName: string) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.match(projectLocationCmekConfigsName).location;
+  }
+
+  /**
+   * Parse the cmek_config from ProjectLocationCmekConfigs resource.
+   *
+   * @param {string} projectLocationCmekConfigsName
+   *   A fully-qualified path representing project_location_cmekConfigs resource.
+   * @returns {string} A string representing the cmek_config.
+   */
+  matchCmekConfigFromProjectLocationCmekConfigsName(projectLocationCmekConfigsName: string) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.match(projectLocationCmekConfigsName).cmek_config;
   }
 
   /**

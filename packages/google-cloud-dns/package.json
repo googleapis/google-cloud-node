@@ -53,7 +53,7 @@
     "@google-cloud/promisify": "^5.0.0",
     "arrify": "^2.0.0",
     "dns-zonefile": "0.2.10",
-    "google-gax": "^5.0.1-rc.0",
+    "google-gax": "^5.0.0",
     "lodash.groupby": "^4.6.0",
     "string-format-obj": "^1.1.1"
   },

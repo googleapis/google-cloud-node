@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const channel = require('@google-cloud/channel');
 
 function main() {
-  const cloudChannelReportsServiceClient =
-    new channel.CloudChannelReportsServiceClient();
+  const cloudChannelReportsServiceClient = new channel.CloudChannelReportsServiceClient();
   const cloudChannelServiceClient = new channel.CloudChannelServiceClient();
 }
 

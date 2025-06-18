@@ -151,12 +151,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessDimension.decode = function decode(reader, length) {
+                        AccessDimension.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessDimension();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.dimensionName = reader.string();
@@ -354,12 +356,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessMetric.decode = function decode(reader, length) {
+                        AccessMetric.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessMetric();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.metricName = reader.string();
@@ -568,12 +572,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessDateRange.decode = function decode(reader, length) {
+                        AccessDateRange.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessDateRange();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.startDate = reader.string();
@@ -831,12 +837,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessFilterExpression.decode = function decode(reader, length) {
+                        AccessFilterExpression.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessFilterExpression();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.andGroup = $root.google.analytics.admin.v1alpha.AccessFilterExpressionList.decode(reader, reader.uint32());
@@ -1118,12 +1126,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessFilterExpressionList.decode = function decode(reader, length) {
+                        AccessFilterExpressionList.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessFilterExpressionList();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.expressions && message.expressions.length))
@@ -1398,12 +1408,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessFilter.decode = function decode(reader, length) {
+                        AccessFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.stringFilter = $root.google.analytics.admin.v1alpha.AccessStringFilter.decode(reader, reader.uint32());
@@ -1718,12 +1730,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessStringFilter.decode = function decode(reader, length) {
+                        AccessStringFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessStringFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.matchType = reader.int32();
@@ -2027,12 +2041,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessInListFilter.decode = function decode(reader, length) {
+                        AccessInListFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessInListFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.values && message.values.length))
@@ -2268,12 +2284,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessNumericFilter.decode = function decode(reader, length) {
+                        AccessNumericFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessNumericFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.operation = reader.int32();
@@ -2561,12 +2579,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessBetweenFilter.decode = function decode(reader, length) {
+                        AccessBetweenFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessBetweenFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.fromValue = $root.google.analytics.admin.v1alpha.NumericValue.decode(reader, reader.uint32());
@@ -2812,12 +2832,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        NumericValue.decode = function decode(reader, length) {
+                        NumericValue.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.NumericValue();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.int64Value = reader.int64();
@@ -3083,12 +3105,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessOrderBy.decode = function decode(reader, length) {
+                        AccessOrderBy.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessOrderBy();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.metric = $root.google.analytics.admin.v1alpha.AccessOrderBy.MetricOrderBy.decode(reader, reader.uint32());
@@ -3330,12 +3354,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            MetricOrderBy.decode = function decode(reader, length) {
+                            MetricOrderBy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessOrderBy.MetricOrderBy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.metricName = reader.string();
@@ -3544,12 +3570,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DimensionOrderBy.decode = function decode(reader, length) {
+                            DimensionOrderBy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessOrderBy.DimensionOrderBy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.dimensionName = reader.string();
@@ -3810,12 +3838,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessDimensionHeader.decode = function decode(reader, length) {
+                        AccessDimensionHeader.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessDimensionHeader();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.dimensionName = reader.string();
@@ -4013,12 +4043,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessMetricHeader.decode = function decode(reader, length) {
+                        AccessMetricHeader.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessMetricHeader();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.metricName = reader.string();
@@ -4231,12 +4263,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessRow.decode = function decode(reader, length) {
+                        AccessRow.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessRow();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.dimensionValues && message.dimensionValues.length))
@@ -4485,12 +4519,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessDimensionValue.decode = function decode(reader, length) {
+                        AccessDimensionValue.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessDimensionValue();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.value = reader.string();
@@ -4688,12 +4724,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessMetricValue.decode = function decode(reader, length) {
+                        AccessMetricValue.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessMetricValue();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.value = reader.string();
@@ -4935,12 +4973,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessQuota.decode = function decode(reader, length) {
+                        AccessQuota.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessQuota();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tokensPerDay = $root.google.analytics.admin.v1alpha.AccessQuotaStatus.decode(reader, reader.uint32());
@@ -5223,12 +5263,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessQuotaStatus.decode = function decode(reader, length) {
+                        AccessQuotaStatus.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessQuotaStatus();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.consumed = reader.int32();
@@ -10534,6 +10576,105 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|listSubpropertySyncConfigs}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef ListSubpropertySyncConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse} [response] ListSubpropertySyncConfigsResponse
+                         */
+    
+                        /**
+                         * Calls ListSubpropertySyncConfigs.
+                         * @function listSubpropertySyncConfigs
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IListSubpropertySyncConfigsRequest} request ListSubpropertySyncConfigsRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.ListSubpropertySyncConfigsCallback} callback Node-style callback called with the error, if any, and ListSubpropertySyncConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.listSubpropertySyncConfigs = function listSubpropertySyncConfigs(request, callback) {
+                            return this.rpcCall(listSubpropertySyncConfigs, $root.google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest, $root.google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse, request, callback);
+                        }, "name", { value: "ListSubpropertySyncConfigs" });
+    
+                        /**
+                         * Calls ListSubpropertySyncConfigs.
+                         * @function listSubpropertySyncConfigs
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IListSubpropertySyncConfigsRequest} request ListSubpropertySyncConfigsRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|updateSubpropertySyncConfig}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef UpdateSubpropertySyncConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.SubpropertySyncConfig} [response] SubpropertySyncConfig
+                         */
+    
+                        /**
+                         * Calls UpdateSubpropertySyncConfig.
+                         * @function updateSubpropertySyncConfig
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IUpdateSubpropertySyncConfigRequest} request UpdateSubpropertySyncConfigRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateSubpropertySyncConfigCallback} callback Node-style callback called with the error, if any, and SubpropertySyncConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.updateSubpropertySyncConfig = function updateSubpropertySyncConfig(request, callback) {
+                            return this.rpcCall(updateSubpropertySyncConfig, $root.google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest, $root.google.analytics.admin.v1alpha.SubpropertySyncConfig, request, callback);
+                        }, "name", { value: "UpdateSubpropertySyncConfig" });
+    
+                        /**
+                         * Calls UpdateSubpropertySyncConfig.
+                         * @function updateSubpropertySyncConfig
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IUpdateSubpropertySyncConfigRequest} request UpdateSubpropertySyncConfigRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.SubpropertySyncConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|getSubpropertySyncConfig}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef GetSubpropertySyncConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.SubpropertySyncConfig} [response] SubpropertySyncConfig
+                         */
+    
+                        /**
+                         * Calls GetSubpropertySyncConfig.
+                         * @function getSubpropertySyncConfig
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetSubpropertySyncConfigRequest} request GetSubpropertySyncConfigRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.GetSubpropertySyncConfigCallback} callback Node-style callback called with the error, if any, and SubpropertySyncConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.getSubpropertySyncConfig = function getSubpropertySyncConfig(request, callback) {
+                            return this.rpcCall(getSubpropertySyncConfig, $root.google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest, $root.google.analytics.admin.v1alpha.SubpropertySyncConfig, request, callback);
+                        }, "name", { value: "GetSubpropertySyncConfig" });
+    
+                        /**
+                         * Calls GetSubpropertySyncConfig.
+                         * @function getSubpropertySyncConfig
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetSubpropertySyncConfigRequest} request GetSubpropertySyncConfigRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.SubpropertySyncConfig>} Promise
+                         * @variation 2
+                         */
+    
                         return AnalyticsAdminService;
                     })();
     
@@ -10762,12 +10903,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RunAccessReportRequest.decode = function decode(reader, length) {
+                        RunAccessReportRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.RunAccessReportRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.entity = reader.string();
@@ -11276,12 +11419,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RunAccessReportResponse.decode = function decode(reader, length) {
+                        RunAccessReportResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.RunAccessReportResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.dimensionHeaders && message.dimensionHeaders.length))
@@ -11592,12 +11737,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetAccountRequest.decode = function decode(reader, length) {
+                        GetAccountRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetAccountRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -11817,12 +11964,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListAccountsRequest.decode = function decode(reader, length) {
+                        ListAccountsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListAccountsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.pageSize = reader.int32();
@@ -12058,12 +12207,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListAccountsResponse.decode = function decode(reader, length) {
+                        ListAccountsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListAccountsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.accounts && message.accounts.length))
@@ -12293,12 +12444,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteAccountRequest.decode = function decode(reader, length) {
+                        DeleteAccountRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteAccountRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -12507,12 +12660,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateAccountRequest.decode = function decode(reader, length) {
+                        UpdateAccountRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateAccountRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.account = $root.google.analytics.admin.v1alpha.Account.decode(reader, reader.uint32());
@@ -12744,12 +12899,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ProvisionAccountTicketRequest.decode = function decode(reader, length) {
+                        ProvisionAccountTicketRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ProvisionAccountTicketRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.account = $root.google.analytics.admin.v1alpha.Account.decode(reader, reader.uint32());
@@ -12965,12 +13122,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ProvisionAccountTicketResponse.decode = function decode(reader, length) {
+                        ProvisionAccountTicketResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ProvisionAccountTicketResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.accountTicketId = reader.string();
@@ -13168,12 +13327,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetPropertyRequest.decode = function decode(reader, length) {
+                        GetPropertyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetPropertyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -13404,12 +13565,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListPropertiesRequest.decode = function decode(reader, length) {
+                        ListPropertiesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListPropertiesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.filter = reader.string();
@@ -13657,12 +13820,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListPropertiesResponse.decode = function decode(reader, length) {
+                        ListPropertiesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListPropertiesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.properties && message.properties.length))
@@ -13903,12 +14068,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdatePropertyRequest.decode = function decode(reader, length) {
+                        UpdatePropertyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdatePropertyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.property = $root.google.analytics.admin.v1alpha.Property.decode(reader, reader.uint32());
@@ -14129,12 +14296,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreatePropertyRequest.decode = function decode(reader, length) {
+                        CreatePropertyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreatePropertyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.property = $root.google.analytics.admin.v1alpha.Property.decode(reader, reader.uint32());
@@ -14337,12 +14506,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeletePropertyRequest.decode = function decode(reader, length) {
+                        DeletePropertyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeletePropertyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -14551,12 +14722,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateFirebaseLinkRequest.decode = function decode(reader, length) {
+                        CreateFirebaseLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateFirebaseLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -14772,12 +14945,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteFirebaseLinkRequest.decode = function decode(reader, length) {
+                        DeleteFirebaseLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteFirebaseLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -14997,12 +15172,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFirebaseLinksRequest.decode = function decode(reader, length) {
+                        ListFirebaseLinksRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListFirebaseLinksRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -15238,12 +15415,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFirebaseLinksResponse.decode = function decode(reader, length) {
+                        ListFirebaseLinksResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListFirebaseLinksResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.firebaseLinks && message.firebaseLinks.length))
@@ -15473,12 +15652,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetGlobalSiteTagRequest.decode = function decode(reader, length) {
+                        GetGlobalSiteTagRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetGlobalSiteTagRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -15687,12 +15868,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateGoogleAdsLinkRequest.decode = function decode(reader, length) {
+                        CreateGoogleAdsLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateGoogleAdsLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -15919,12 +16102,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateGoogleAdsLinkRequest.decode = function decode(reader, length) {
+                        UpdateGoogleAdsLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateGoogleAdsLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.googleAdsLink = $root.google.analytics.admin.v1alpha.GoogleAdsLink.decode(reader, reader.uint32());
@@ -16145,12 +16330,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteGoogleAdsLinkRequest.decode = function decode(reader, length) {
+                        DeleteGoogleAdsLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteGoogleAdsLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -16370,12 +16557,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListGoogleAdsLinksRequest.decode = function decode(reader, length) {
+                        ListGoogleAdsLinksRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListGoogleAdsLinksRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -16611,12 +16800,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListGoogleAdsLinksResponse.decode = function decode(reader, length) {
+                        ListGoogleAdsLinksResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListGoogleAdsLinksResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.googleAdsLinks && message.googleAdsLinks.length))
@@ -16846,12 +17037,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetDataSharingSettingsRequest.decode = function decode(reader, length) {
+                        GetDataSharingSettingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetDataSharingSettingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -17060,12 +17253,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListAccountSummariesRequest.decode = function decode(reader, length) {
+                        ListAccountSummariesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListAccountSummariesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.pageSize = reader.int32();
@@ -17289,12 +17484,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListAccountSummariesResponse.decode = function decode(reader, length) {
+                        ListAccountSummariesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListAccountSummariesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.accountSummaries && message.accountSummaries.length))
@@ -17535,12 +17732,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AcknowledgeUserDataCollectionRequest.decode = function decode(reader, length) {
+                        AcknowledgeUserDataCollectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.property = reader.string();
@@ -17740,12 +17939,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AcknowledgeUserDataCollectionResponse.decode = function decode(reader, length) {
+                        AcknowledgeUserDataCollectionResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -18026,12 +18227,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchChangeHistoryEventsRequest.decode = function decode(reader, length) {
+                        SearchChangeHistoryEventsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.account = reader.string();
@@ -18161,6 +18364,7 @@
                                     case 30:
                                     case 31:
                                     case 32:
+                                    case 33:
                                         break;
                                     }
                             }
@@ -18342,6 +18546,10 @@
                                     case "REPORTING_DATA_ANNOTATION":
                                     case 32:
                                         message.resourceType[i] = 32;
+                                        break;
+                                    case "SUBPROPERTY_SYNC_CONFIG":
+                                    case 33:
+                                        message.resourceType[i] = 33;
                                         break;
                                     }
                             }
@@ -18581,12 +18789,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchChangeHistoryEventsResponse.decode = function decode(reader, length) {
+                        SearchChangeHistoryEventsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.SearchChangeHistoryEventsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.changeHistoryEvents && message.changeHistoryEvents.length))
@@ -18816,12 +19026,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetMeasurementProtocolSecretRequest.decode = function decode(reader, length) {
+                        GetMeasurementProtocolSecretRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -19030,12 +19242,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateMeasurementProtocolSecretRequest.decode = function decode(reader, length) {
+                        CreateMeasurementProtocolSecretRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -19251,12 +19465,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteMeasurementProtocolSecretRequest.decode = function decode(reader, length) {
+                        DeleteMeasurementProtocolSecretRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -19465,12 +19681,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateMeasurementProtocolSecretRequest.decode = function decode(reader, length) {
+                        UpdateMeasurementProtocolSecretRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.measurementProtocolSecret = $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.decode(reader, reader.uint32());
@@ -19713,12 +19931,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListMeasurementProtocolSecretsRequest.decode = function decode(reader, length) {
+                        ListMeasurementProtocolSecretsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -19954,12 +20174,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListMeasurementProtocolSecretsResponse.decode = function decode(reader, length) {
+                        ListMeasurementProtocolSecretsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.measurementProtocolSecrets && message.measurementProtocolSecrets.length))
@@ -20189,12 +20411,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetSKAdNetworkConversionValueSchemaRequest.decode = function decode(reader, length) {
+                        GetSKAdNetworkConversionValueSchemaRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetSKAdNetworkConversionValueSchemaRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -20403,12 +20627,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateSKAdNetworkConversionValueSchemaRequest.decode = function decode(reader, length) {
+                        CreateSKAdNetworkConversionValueSchemaRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateSKAdNetworkConversionValueSchemaRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -20624,12 +20850,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteSKAdNetworkConversionValueSchemaRequest.decode = function decode(reader, length) {
+                        DeleteSKAdNetworkConversionValueSchemaRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteSKAdNetworkConversionValueSchemaRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -20838,12 +21066,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateSKAdNetworkConversionValueSchemaRequest.decode = function decode(reader, length) {
+                        UpdateSKAdNetworkConversionValueSchemaRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateSKAdNetworkConversionValueSchemaRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.skadnetworkConversionValueSchema = $root.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema.decode(reader, reader.uint32());
@@ -21086,12 +21316,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListSKAdNetworkConversionValueSchemasRequest.decode = function decode(reader, length) {
+                        ListSKAdNetworkConversionValueSchemasRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -21327,12 +21559,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListSKAdNetworkConversionValueSchemasResponse.decode = function decode(reader, length) {
+                        ListSKAdNetworkConversionValueSchemasResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.skadnetworkConversionValueSchemas && message.skadnetworkConversionValueSchemas.length))
@@ -21562,12 +21796,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetGoogleSignalsSettingsRequest.decode = function decode(reader, length) {
+                        GetGoogleSignalsSettingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -21776,12 +22012,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateGoogleSignalsSettingsRequest.decode = function decode(reader, length) {
+                        UpdateGoogleSignalsSettingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.googleSignalsSettings = $root.google.analytics.admin.v1alpha.GoogleSignalsSettings.decode(reader, reader.uint32());
@@ -22013,12 +22251,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateConversionEventRequest.decode = function decode(reader, length) {
+                        CreateConversionEventRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateConversionEventRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.conversionEvent = $root.google.analytics.admin.v1alpha.ConversionEvent.decode(reader, reader.uint32());
@@ -22245,12 +22485,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateConversionEventRequest.decode = function decode(reader, length) {
+                        UpdateConversionEventRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateConversionEventRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.conversionEvent = $root.google.analytics.admin.v1alpha.ConversionEvent.decode(reader, reader.uint32());
@@ -22471,12 +22713,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetConversionEventRequest.decode = function decode(reader, length) {
+                        GetConversionEventRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetConversionEventRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -22674,12 +22918,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteConversionEventRequest.decode = function decode(reader, length) {
+                        DeleteConversionEventRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteConversionEventRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -22899,12 +23145,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListConversionEventsRequest.decode = function decode(reader, length) {
+                        ListConversionEventsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListConversionEventsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -23140,12 +23388,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListConversionEventsResponse.decode = function decode(reader, length) {
+                        ListConversionEventsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListConversionEventsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.conversionEvents && message.conversionEvents.length))
@@ -23386,12 +23636,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateKeyEventRequest.decode = function decode(reader, length) {
+                        CreateKeyEventRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateKeyEventRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.keyEvent = $root.google.analytics.admin.v1alpha.KeyEvent.decode(reader, reader.uint32());
@@ -23618,12 +23870,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateKeyEventRequest.decode = function decode(reader, length) {
+                        UpdateKeyEventRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateKeyEventRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.keyEvent = $root.google.analytics.admin.v1alpha.KeyEvent.decode(reader, reader.uint32());
@@ -23844,12 +24098,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetKeyEventRequest.decode = function decode(reader, length) {
+                        GetKeyEventRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetKeyEventRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -24047,12 +24303,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteKeyEventRequest.decode = function decode(reader, length) {
+                        DeleteKeyEventRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteKeyEventRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -24272,12 +24530,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListKeyEventsRequest.decode = function decode(reader, length) {
+                        ListKeyEventsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListKeyEventsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -24513,12 +24773,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListKeyEventsResponse.decode = function decode(reader, length) {
+                        ListKeyEventsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListKeyEventsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.keyEvents && message.keyEvents.length))
@@ -24748,12 +25010,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetDisplayVideo360AdvertiserLinkRequest.decode = function decode(reader, length) {
+                        GetDisplayVideo360AdvertiserLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -24973,12 +25237,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListDisplayVideo360AdvertiserLinksRequest.decode = function decode(reader, length) {
+                        ListDisplayVideo360AdvertiserLinksRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -25214,12 +25480,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListDisplayVideo360AdvertiserLinksResponse.decode = function decode(reader, length) {
+                        ListDisplayVideo360AdvertiserLinksResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.displayVideo_360AdvertiserLinks && message.displayVideo_360AdvertiserLinks.length))
@@ -25460,12 +25728,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateDisplayVideo360AdvertiserLinkRequest.decode = function decode(reader, length) {
+                        CreateDisplayVideo360AdvertiserLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -25681,12 +25951,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteDisplayVideo360AdvertiserLinkRequest.decode = function decode(reader, length) {
+                        DeleteDisplayVideo360AdvertiserLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -25895,12 +26167,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateDisplayVideo360AdvertiserLinkRequest.decode = function decode(reader, length) {
+                        UpdateDisplayVideo360AdvertiserLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.displayVideo_360AdvertiserLink = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.decode(reader, reader.uint32());
@@ -26121,12 +26395,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetDisplayVideo360AdvertiserLinkProposalRequest.decode = function decode(reader, length) {
+                        GetDisplayVideo360AdvertiserLinkProposalRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -26346,12 +26622,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListDisplayVideo360AdvertiserLinkProposalsRequest.decode = function decode(reader, length) {
+                        ListDisplayVideo360AdvertiserLinkProposalsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -26587,12 +26865,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListDisplayVideo360AdvertiserLinkProposalsResponse.decode = function decode(reader, length) {
+                        ListDisplayVideo360AdvertiserLinkProposalsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.displayVideo_360AdvertiserLinkProposals && message.displayVideo_360AdvertiserLinkProposals.length))
@@ -26833,12 +27113,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateDisplayVideo360AdvertiserLinkProposalRequest.decode = function decode(reader, length) {
+                        CreateDisplayVideo360AdvertiserLinkProposalRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -27054,12 +27336,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteDisplayVideo360AdvertiserLinkProposalRequest.decode = function decode(reader, length) {
+                        DeleteDisplayVideo360AdvertiserLinkProposalRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -27257,12 +27541,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ApproveDisplayVideo360AdvertiserLinkProposalRequest.decode = function decode(reader, length) {
+                        ApproveDisplayVideo360AdvertiserLinkProposalRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -27460,12 +27746,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ApproveDisplayVideo360AdvertiserLinkProposalResponse.decode = function decode(reader, length) {
+                        ApproveDisplayVideo360AdvertiserLinkProposalResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.displayVideo_360AdvertiserLink = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.decode(reader, reader.uint32());
@@ -27668,12 +27956,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CancelDisplayVideo360AdvertiserLinkProposalRequest.decode = function decode(reader, length) {
+                        CancelDisplayVideo360AdvertiserLinkProposalRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -27871,12 +28161,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetSearchAds360LinkRequest.decode = function decode(reader, length) {
+                        GetSearchAds360LinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetSearchAds360LinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -28096,12 +28388,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListSearchAds360LinksRequest.decode = function decode(reader, length) {
+                        ListSearchAds360LinksRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListSearchAds360LinksRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -28337,12 +28631,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListSearchAds360LinksResponse.decode = function decode(reader, length) {
+                        ListSearchAds360LinksResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListSearchAds360LinksResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.searchAds_360Links && message.searchAds_360Links.length))
@@ -28583,12 +28879,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateSearchAds360LinkRequest.decode = function decode(reader, length) {
+                        CreateSearchAds360LinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateSearchAds360LinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -28804,12 +29102,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteSearchAds360LinkRequest.decode = function decode(reader, length) {
+                        DeleteSearchAds360LinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteSearchAds360LinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -29018,12 +29318,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateSearchAds360LinkRequest.decode = function decode(reader, length) {
+                        UpdateSearchAds360LinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateSearchAds360LinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.searchAds_360Link = $root.google.analytics.admin.v1alpha.SearchAds360Link.decode(reader, reader.uint32());
@@ -29255,12 +29557,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateCustomDimensionRequest.decode = function decode(reader, length) {
+                        CreateCustomDimensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateCustomDimensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -29487,12 +29791,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateCustomDimensionRequest.decode = function decode(reader, length) {
+                        UpdateCustomDimensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateCustomDimensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.customDimension = $root.google.analytics.admin.v1alpha.CustomDimension.decode(reader, reader.uint32());
@@ -29735,12 +30041,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCustomDimensionsRequest.decode = function decode(reader, length) {
+                        ListCustomDimensionsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListCustomDimensionsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -29976,12 +30284,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCustomDimensionsResponse.decode = function decode(reader, length) {
+                        ListCustomDimensionsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListCustomDimensionsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.customDimensions && message.customDimensions.length))
@@ -30211,12 +30521,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ArchiveCustomDimensionRequest.decode = function decode(reader, length) {
+                        ArchiveCustomDimensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -30414,12 +30726,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetCustomDimensionRequest.decode = function decode(reader, length) {
+                        GetCustomDimensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetCustomDimensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -30628,12 +30942,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateCustomMetricRequest.decode = function decode(reader, length) {
+                        CreateCustomMetricRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateCustomMetricRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -30860,12 +31176,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateCustomMetricRequest.decode = function decode(reader, length) {
+                        UpdateCustomMetricRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateCustomMetricRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.customMetric = $root.google.analytics.admin.v1alpha.CustomMetric.decode(reader, reader.uint32());
@@ -31108,12 +31426,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCustomMetricsRequest.decode = function decode(reader, length) {
+                        ListCustomMetricsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListCustomMetricsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -31349,12 +31669,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCustomMetricsResponse.decode = function decode(reader, length) {
+                        ListCustomMetricsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListCustomMetricsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.customMetrics && message.customMetrics.length))
@@ -31584,12 +31906,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ArchiveCustomMetricRequest.decode = function decode(reader, length) {
+                        ArchiveCustomMetricRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ArchiveCustomMetricRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -31787,12 +32111,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetCustomMetricRequest.decode = function decode(reader, length) {
+                        GetCustomMetricRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetCustomMetricRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -32012,12 +32338,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateCalculatedMetricRequest.decode = function decode(reader, length) {
+                        CreateCalculatedMetricRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateCalculatedMetricRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -32256,12 +32584,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateCalculatedMetricRequest.decode = function decode(reader, length) {
+                        UpdateCalculatedMetricRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateCalculatedMetricRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.calculatedMetric = $root.google.analytics.admin.v1alpha.CalculatedMetric.decode(reader, reader.uint32());
@@ -32482,12 +32812,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteCalculatedMetricRequest.decode = function decode(reader, length) {
+                        DeleteCalculatedMetricRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteCalculatedMetricRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -32707,12 +33039,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCalculatedMetricsRequest.decode = function decode(reader, length) {
+                        ListCalculatedMetricsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListCalculatedMetricsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -32948,12 +33282,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCalculatedMetricsResponse.decode = function decode(reader, length) {
+                        ListCalculatedMetricsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListCalculatedMetricsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.calculatedMetrics && message.calculatedMetrics.length))
@@ -33183,12 +33519,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetCalculatedMetricRequest.decode = function decode(reader, length) {
+                        GetCalculatedMetricRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetCalculatedMetricRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -33386,12 +33724,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetDataRetentionSettingsRequest.decode = function decode(reader, length) {
+                        GetDataRetentionSettingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -33600,12 +33940,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateDataRetentionSettingsRequest.decode = function decode(reader, length) {
+                        UpdateDataRetentionSettingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.dataRetentionSettings = $root.google.analytics.admin.v1alpha.DataRetentionSettings.decode(reader, reader.uint32());
@@ -33837,12 +34179,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateDataStreamRequest.decode = function decode(reader, length) {
+                        CreateDataStreamRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateDataStreamRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -34058,12 +34402,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteDataStreamRequest.decode = function decode(reader, length) {
+                        DeleteDataStreamRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteDataStreamRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -34272,12 +34618,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateDataStreamRequest.decode = function decode(reader, length) {
+                        UpdateDataStreamRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateDataStreamRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.dataStream = $root.google.analytics.admin.v1alpha.DataStream.decode(reader, reader.uint32());
@@ -34520,12 +34868,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListDataStreamsRequest.decode = function decode(reader, length) {
+                        ListDataStreamsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListDataStreamsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -34761,12 +35111,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListDataStreamsResponse.decode = function decode(reader, length) {
+                        ListDataStreamsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListDataStreamsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.dataStreams && message.dataStreams.length))
@@ -34996,12 +35348,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetDataStreamRequest.decode = function decode(reader, length) {
+                        GetDataStreamRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetDataStreamRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -35199,12 +35553,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetAudienceRequest.decode = function decode(reader, length) {
+                        GetAudienceRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetAudienceRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -35424,12 +35780,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListAudiencesRequest.decode = function decode(reader, length) {
+                        ListAudiencesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListAudiencesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -35665,12 +36023,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListAudiencesResponse.decode = function decode(reader, length) {
+                        ListAudiencesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListAudiencesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.audiences && message.audiences.length))
@@ -35911,12 +36271,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateAudienceRequest.decode = function decode(reader, length) {
+                        CreateAudienceRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateAudienceRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -36143,12 +36505,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateAudienceRequest.decode = function decode(reader, length) {
+                        UpdateAudienceRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateAudienceRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.audience = $root.google.analytics.admin.v1alpha.Audience.decode(reader, reader.uint32());
@@ -36369,12 +36733,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ArchiveAudienceRequest.decode = function decode(reader, length) {
+                        ArchiveAudienceRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ArchiveAudienceRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -36572,12 +36938,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetAttributionSettingsRequest.decode = function decode(reader, length) {
+                        GetAttributionSettingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetAttributionSettingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -36786,12 +37154,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateAttributionSettingsRequest.decode = function decode(reader, length) {
+                        UpdateAttributionSettingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateAttributionSettingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.attributionSettings = $root.google.analytics.admin.v1alpha.AttributionSettings.decode(reader, reader.uint32());
@@ -37012,12 +37382,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetAccessBindingRequest.decode = function decode(reader, length) {
+                        GetAccessBindingRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetAccessBindingRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -37228,12 +37600,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchGetAccessBindingsRequest.decode = function decode(reader, length) {
+                        BatchGetAccessBindingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.BatchGetAccessBindingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -37460,12 +37834,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchGetAccessBindingsResponse.decode = function decode(reader, length) {
+                        BatchGetAccessBindingsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.BatchGetAccessBindingsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.accessBindings && message.accessBindings.length))
@@ -37704,12 +38080,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListAccessBindingsRequest.decode = function decode(reader, length) {
+                        ListAccessBindingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListAccessBindingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -37945,12 +38323,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListAccessBindingsResponse.decode = function decode(reader, length) {
+                        ListAccessBindingsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListAccessBindingsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.accessBindings && message.accessBindings.length))
@@ -38191,12 +38571,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateAccessBindingRequest.decode = function decode(reader, length) {
+                        CreateAccessBindingRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateAccessBindingRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -38425,12 +38807,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchCreateAccessBindingsRequest.decode = function decode(reader, length) {
+                        BatchCreateAccessBindingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.BatchCreateAccessBindingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -38662,12 +39046,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchCreateAccessBindingsResponse.decode = function decode(reader, length) {
+                        BatchCreateAccessBindingsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.BatchCreateAccessBindingsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.accessBindings && message.accessBindings.length))
@@ -38884,12 +39270,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateAccessBindingRequest.decode = function decode(reader, length) {
+                        UpdateAccessBindingRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateAccessBindingRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.accessBinding = $root.google.analytics.admin.v1alpha.AccessBinding.decode(reader, reader.uint32());
@@ -39105,12 +39493,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchUpdateAccessBindingsRequest.decode = function decode(reader, length) {
+                        BatchUpdateAccessBindingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.BatchUpdateAccessBindingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -39342,12 +39732,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchUpdateAccessBindingsResponse.decode = function decode(reader, length) {
+                        BatchUpdateAccessBindingsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.BatchUpdateAccessBindingsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.accessBindings && message.accessBindings.length))
@@ -39564,12 +39956,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteAccessBindingRequest.decode = function decode(reader, length) {
+                        DeleteAccessBindingRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteAccessBindingRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -39780,12 +40174,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchDeleteAccessBindingsRequest.decode = function decode(reader, length) {
+                        BatchDeleteAccessBindingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.BatchDeleteAccessBindingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -40026,12 +40422,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateExpandedDataSetRequest.decode = function decode(reader, length) {
+                        CreateExpandedDataSetRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateExpandedDataSetRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -40258,12 +40656,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateExpandedDataSetRequest.decode = function decode(reader, length) {
+                        UpdateExpandedDataSetRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateExpandedDataSetRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.expandedDataSet = $root.google.analytics.admin.v1alpha.ExpandedDataSet.decode(reader, reader.uint32());
@@ -40484,12 +40884,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteExpandedDataSetRequest.decode = function decode(reader, length) {
+                        DeleteExpandedDataSetRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteExpandedDataSetRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -40687,12 +41089,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetExpandedDataSetRequest.decode = function decode(reader, length) {
+                        GetExpandedDataSetRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetExpandedDataSetRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -40912,12 +41316,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListExpandedDataSetsRequest.decode = function decode(reader, length) {
+                        ListExpandedDataSetsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListExpandedDataSetsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -41153,12 +41559,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListExpandedDataSetsResponse.decode = function decode(reader, length) {
+                        ListExpandedDataSetsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListExpandedDataSetsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.expandedDataSets && message.expandedDataSets.length))
@@ -41399,12 +41807,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateChannelGroupRequest.decode = function decode(reader, length) {
+                        CreateChannelGroupRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateChannelGroupRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -41631,12 +42041,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateChannelGroupRequest.decode = function decode(reader, length) {
+                        UpdateChannelGroupRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateChannelGroupRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.channelGroup = $root.google.analytics.admin.v1alpha.ChannelGroup.decode(reader, reader.uint32());
@@ -41857,12 +42269,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteChannelGroupRequest.decode = function decode(reader, length) {
+                        DeleteChannelGroupRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteChannelGroupRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -42060,12 +42474,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetChannelGroupRequest.decode = function decode(reader, length) {
+                        GetChannelGroupRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetChannelGroupRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -42285,12 +42701,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListChannelGroupsRequest.decode = function decode(reader, length) {
+                        ListChannelGroupsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListChannelGroupsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -42526,12 +42944,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListChannelGroupsResponse.decode = function decode(reader, length) {
+                        ListChannelGroupsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListChannelGroupsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.channelGroups && message.channelGroups.length))
@@ -42772,12 +43192,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SetAutomatedGa4ConfigurationOptOutRequest.decode = function decode(reader, length) {
+                        SetAutomatedGa4ConfigurationOptOutRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.property = reader.string();
@@ -42977,12 +43399,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SetAutomatedGa4ConfigurationOptOutResponse.decode = function decode(reader, length) {
+                        SetAutomatedGa4ConfigurationOptOutResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -43163,12 +43587,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchAutomatedGa4ConfigurationOptOutRequest.decode = function decode(reader, length) {
+                        FetchAutomatedGa4ConfigurationOptOutRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.property = reader.string();
@@ -43366,12 +43792,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchAutomatedGa4ConfigurationOptOutResponse.decode = function decode(reader, length) {
+                        FetchAutomatedGa4ConfigurationOptOutResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.optOut = reader.bool();
@@ -43580,12 +44008,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateBigQueryLinkRequest.decode = function decode(reader, length) {
+                        CreateBigQueryLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateBigQueryLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -43801,12 +44231,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetBigQueryLinkRequest.decode = function decode(reader, length) {
+                        GetBigQueryLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetBigQueryLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -44026,12 +44458,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListBigQueryLinksRequest.decode = function decode(reader, length) {
+                        ListBigQueryLinksRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListBigQueryLinksRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -44267,12 +44701,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListBigQueryLinksResponse.decode = function decode(reader, length) {
+                        ListBigQueryLinksResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListBigQueryLinksResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.bigqueryLinks && message.bigqueryLinks.length))
@@ -44513,12 +44949,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateBigQueryLinkRequest.decode = function decode(reader, length) {
+                        UpdateBigQueryLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateBigQueryLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.bigqueryLink = $root.google.analytics.admin.v1alpha.BigQueryLink.decode(reader, reader.uint32());
@@ -44739,12 +45177,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteBigQueryLinkRequest.decode = function decode(reader, length) {
+                        DeleteBigQueryLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteBigQueryLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -44942,12 +45382,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetEnhancedMeasurementSettingsRequest.decode = function decode(reader, length) {
+                        GetEnhancedMeasurementSettingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -45156,12 +45598,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateEnhancedMeasurementSettingsRequest.decode = function decode(reader, length) {
+                        UpdateEnhancedMeasurementSettingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.enhancedMeasurementSettings = $root.google.analytics.admin.v1alpha.EnhancedMeasurementSettings.decode(reader, reader.uint32());
@@ -45382,12 +45826,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetDataRedactionSettingsRequest.decode = function decode(reader, length) {
+                        GetDataRedactionSettingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetDataRedactionSettingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -45596,12 +46042,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateDataRedactionSettingsRequest.decode = function decode(reader, length) {
+                        UpdateDataRedactionSettingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateDataRedactionSettingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.dataRedactionSettings = $root.google.analytics.admin.v1alpha.DataRedactionSettings.decode(reader, reader.uint32());
@@ -45833,12 +46281,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateConnectedSiteTagRequest.decode = function decode(reader, length) {
+                        CreateConnectedSiteTagRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.property = reader.string();
@@ -46043,12 +46493,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateConnectedSiteTagResponse.decode = function decode(reader, length) {
+                        CreateConnectedSiteTagResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -46240,12 +46692,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteConnectedSiteTagRequest.decode = function decode(reader, length) {
+                        DeleteConnectedSiteTagRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.property = reader.string();
@@ -46456,12 +46910,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListConnectedSiteTagsRequest.decode = function decode(reader, length) {
+                        ListConnectedSiteTagsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.property = reader.string();
@@ -46661,12 +47117,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListConnectedSiteTagsResponse.decode = function decode(reader, length) {
+                        ListConnectedSiteTagsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.connectedSiteTags && message.connectedSiteTags.length))
@@ -46894,12 +47352,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateAdSenseLinkRequest.decode = function decode(reader, length) {
+                        CreateAdSenseLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateAdSenseLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -47115,12 +47575,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetAdSenseLinkRequest.decode = function decode(reader, length) {
+                        GetAdSenseLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetAdSenseLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -47318,12 +47780,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteAdSenseLinkRequest.decode = function decode(reader, length) {
+                        DeleteAdSenseLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteAdSenseLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -47543,12 +48007,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListAdSenseLinksRequest.decode = function decode(reader, length) {
+                        ListAdSenseLinksRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListAdSenseLinksRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -47784,12 +48250,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListAdSenseLinksResponse.decode = function decode(reader, length) {
+                        ListAdSenseLinksResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListAdSenseLinksResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.adsenseLinks && message.adsenseLinks.length))
@@ -48019,12 +48487,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchConnectedGa4PropertyRequest.decode = function decode(reader, length) {
+                        FetchConnectedGa4PropertyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.property = reader.string();
@@ -48222,12 +48692,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchConnectedGa4PropertyResponse.decode = function decode(reader, length) {
+                        FetchConnectedGa4PropertyResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.property = reader.string();
@@ -48436,12 +48908,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateEventCreateRuleRequest.decode = function decode(reader, length) {
+                        CreateEventCreateRuleRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateEventCreateRuleRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -48668,12 +49142,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateEventCreateRuleRequest.decode = function decode(reader, length) {
+                        UpdateEventCreateRuleRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateEventCreateRuleRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.eventCreateRule = $root.google.analytics.admin.v1alpha.EventCreateRule.decode(reader, reader.uint32());
@@ -48894,12 +49370,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteEventCreateRuleRequest.decode = function decode(reader, length) {
+                        DeleteEventCreateRuleRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteEventCreateRuleRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -49097,12 +49575,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetEventCreateRuleRequest.decode = function decode(reader, length) {
+                        GetEventCreateRuleRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetEventCreateRuleRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -49322,12 +49802,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListEventCreateRulesRequest.decode = function decode(reader, length) {
+                        ListEventCreateRulesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListEventCreateRulesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -49563,12 +50045,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListEventCreateRulesResponse.decode = function decode(reader, length) {
+                        ListEventCreateRulesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListEventCreateRulesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.eventCreateRules && message.eventCreateRules.length))
@@ -49809,12 +50293,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateEventEditRuleRequest.decode = function decode(reader, length) {
+                        CreateEventEditRuleRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateEventEditRuleRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -50041,12 +50527,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateEventEditRuleRequest.decode = function decode(reader, length) {
+                        UpdateEventEditRuleRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateEventEditRuleRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.eventEditRule = $root.google.analytics.admin.v1alpha.EventEditRule.decode(reader, reader.uint32());
@@ -50267,12 +50755,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteEventEditRuleRequest.decode = function decode(reader, length) {
+                        DeleteEventEditRuleRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteEventEditRuleRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -50470,12 +50960,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetEventEditRuleRequest.decode = function decode(reader, length) {
+                        GetEventEditRuleRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetEventEditRuleRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -50695,12 +51187,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListEventEditRulesRequest.decode = function decode(reader, length) {
+                        ListEventEditRulesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListEventEditRulesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -50936,12 +51430,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListEventEditRulesResponse.decode = function decode(reader, length) {
+                        ListEventEditRulesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListEventEditRulesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.eventEditRules && message.eventEditRules.length))
@@ -51184,12 +51680,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ReorderEventEditRulesRequest.decode = function decode(reader, length) {
+                        ReorderEventEditRulesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ReorderEventEditRulesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -51427,12 +51925,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateRollupPropertyRequest.decode = function decode(reader, length) {
+                        CreateRollupPropertyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateRollupPropertyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.rollupProperty = $root.google.analytics.admin.v1alpha.Property.decode(reader, reader.uint32());
@@ -51675,12 +52175,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateRollupPropertyResponse.decode = function decode(reader, length) {
+                        CreateRollupPropertyResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateRollupPropertyResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.rollupProperty = $root.google.analytics.admin.v1alpha.Property.decode(reader, reader.uint32());
@@ -51915,12 +52417,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetRollupPropertySourceLinkRequest.decode = function decode(reader, length) {
+                        GetRollupPropertySourceLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetRollupPropertySourceLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -52140,12 +52644,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListRollupPropertySourceLinksRequest.decode = function decode(reader, length) {
+                        ListRollupPropertySourceLinksRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListRollupPropertySourceLinksRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -52381,12 +52887,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListRollupPropertySourceLinksResponse.decode = function decode(reader, length) {
+                        ListRollupPropertySourceLinksResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListRollupPropertySourceLinksResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.rollupPropertySourceLinks && message.rollupPropertySourceLinks.length))
@@ -52627,12 +53135,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateRollupPropertySourceLinkRequest.decode = function decode(reader, length) {
+                        CreateRollupPropertySourceLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateRollupPropertySourceLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -52848,12 +53358,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteRollupPropertySourceLinkRequest.decode = function decode(reader, length) {
+                        DeleteRollupPropertySourceLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteRollupPropertySourceLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -52974,6 +53486,7 @@
                          * @interface IProvisionSubpropertyRequest
                          * @property {google.analytics.admin.v1alpha.IProperty|null} [subproperty] ProvisionSubpropertyRequest subproperty
                          * @property {google.analytics.admin.v1alpha.ISubpropertyEventFilter|null} [subpropertyEventFilter] ProvisionSubpropertyRequest subpropertyEventFilter
+                         * @property {google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode|null} [customDimensionAndMetricSynchronizationMode] ProvisionSubpropertyRequest customDimensionAndMetricSynchronizationMode
                          */
     
                         /**
@@ -53008,6 +53521,14 @@
                         ProvisionSubpropertyRequest.prototype.subpropertyEventFilter = null;
     
                         /**
+                         * ProvisionSubpropertyRequest customDimensionAndMetricSynchronizationMode.
+                         * @member {google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode} customDimensionAndMetricSynchronizationMode
+                         * @memberof google.analytics.admin.v1alpha.ProvisionSubpropertyRequest
+                         * @instance
+                         */
+                        ProvisionSubpropertyRequest.prototype.customDimensionAndMetricSynchronizationMode = 0;
+    
+                        /**
                          * Creates a new ProvisionSubpropertyRequest instance using the specified properties.
                          * @function create
                          * @memberof google.analytics.admin.v1alpha.ProvisionSubpropertyRequest
@@ -53035,6 +53556,8 @@
                                 $root.google.analytics.admin.v1alpha.Property.encode(message.subproperty, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.subpropertyEventFilter != null && Object.hasOwnProperty.call(message, "subpropertyEventFilter"))
                                 $root.google.analytics.admin.v1alpha.SubpropertyEventFilter.encode(message.subpropertyEventFilter, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.customDimensionAndMetricSynchronizationMode != null && Object.hasOwnProperty.call(message, "customDimensionAndMetricSynchronizationMode"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.customDimensionAndMetricSynchronizationMode);
                             return writer;
                         };
     
@@ -53062,12 +53585,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ProvisionSubpropertyRequest.decode = function decode(reader, length) {
+                        ProvisionSubpropertyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ProvisionSubpropertyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.subproperty = $root.google.analytics.admin.v1alpha.Property.decode(reader, reader.uint32());
@@ -53075,6 +53600,10 @@
                                     }
                                 case 3: {
                                         message.subpropertyEventFilter = $root.google.analytics.admin.v1alpha.SubpropertyEventFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.customDimensionAndMetricSynchronizationMode = reader.int32();
                                         break;
                                     }
                                 default:
@@ -53122,6 +53651,15 @@
                                 if (error)
                                     return "subpropertyEventFilter." + error;
                             }
+                            if (message.customDimensionAndMetricSynchronizationMode != null && message.hasOwnProperty("customDimensionAndMetricSynchronizationMode"))
+                                switch (message.customDimensionAndMetricSynchronizationMode) {
+                                default:
+                                    return "customDimensionAndMetricSynchronizationMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -53147,6 +53685,26 @@
                                     throw TypeError(".google.analytics.admin.v1alpha.ProvisionSubpropertyRequest.subpropertyEventFilter: object expected");
                                 message.subpropertyEventFilter = $root.google.analytics.admin.v1alpha.SubpropertyEventFilter.fromObject(object.subpropertyEventFilter);
                             }
+                            switch (object.customDimensionAndMetricSynchronizationMode) {
+                            default:
+                                if (typeof object.customDimensionAndMetricSynchronizationMode === "number") {
+                                    message.customDimensionAndMetricSynchronizationMode = object.customDimensionAndMetricSynchronizationMode;
+                                    break;
+                                }
+                                break;
+                            case "SYNCHRONIZATION_MODE_UNSPECIFIED":
+                            case 0:
+                                message.customDimensionAndMetricSynchronizationMode = 0;
+                                break;
+                            case "NONE":
+                            case 1:
+                                message.customDimensionAndMetricSynchronizationMode = 1;
+                                break;
+                            case "ALL":
+                            case 2:
+                                message.customDimensionAndMetricSynchronizationMode = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -53166,11 +53724,14 @@
                             if (options.defaults) {
                                 object.subproperty = null;
                                 object.subpropertyEventFilter = null;
+                                object.customDimensionAndMetricSynchronizationMode = options.enums === String ? "SYNCHRONIZATION_MODE_UNSPECIFIED" : 0;
                             }
                             if (message.subproperty != null && message.hasOwnProperty("subproperty"))
                                 object.subproperty = $root.google.analytics.admin.v1alpha.Property.toObject(message.subproperty, options);
                             if (message.subpropertyEventFilter != null && message.hasOwnProperty("subpropertyEventFilter"))
                                 object.subpropertyEventFilter = $root.google.analytics.admin.v1alpha.SubpropertyEventFilter.toObject(message.subpropertyEventFilter, options);
+                            if (message.customDimensionAndMetricSynchronizationMode != null && message.hasOwnProperty("customDimensionAndMetricSynchronizationMode"))
+                                object.customDimensionAndMetricSynchronizationMode = options.enums === String ? $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode[message.customDimensionAndMetricSynchronizationMode] === undefined ? message.customDimensionAndMetricSynchronizationMode : $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode[message.customDimensionAndMetricSynchronizationMode] : message.customDimensionAndMetricSynchronizationMode;
                             return object;
                         };
     
@@ -53299,12 +53860,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ProvisionSubpropertyResponse.decode = function decode(reader, length) {
+                        ProvisionSubpropertyResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ProvisionSubpropertyResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.subproperty = $root.google.analytics.admin.v1alpha.Property.decode(reader, reader.uint32());
@@ -53536,12 +54099,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateSubpropertyEventFilterRequest.decode = function decode(reader, length) {
+                        CreateSubpropertyEventFilterRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateSubpropertyEventFilterRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -53757,12 +54322,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetSubpropertyEventFilterRequest.decode = function decode(reader, length) {
+                        GetSubpropertyEventFilterRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetSubpropertyEventFilterRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -53982,12 +54549,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListSubpropertyEventFiltersRequest.decode = function decode(reader, length) {
+                        ListSubpropertyEventFiltersRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListSubpropertyEventFiltersRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -54223,12 +54792,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListSubpropertyEventFiltersResponse.decode = function decode(reader, length) {
+                        ListSubpropertyEventFiltersResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListSubpropertyEventFiltersResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.subpropertyEventFilters && message.subpropertyEventFilters.length))
@@ -54469,12 +55040,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateSubpropertyEventFilterRequest.decode = function decode(reader, length) {
+                        UpdateSubpropertyEventFilterRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateSubpropertyEventFilterRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.subpropertyEventFilter = $root.google.analytics.admin.v1alpha.SubpropertyEventFilter.decode(reader, reader.uint32());
@@ -54695,12 +55268,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteSubpropertyEventFilterRequest.decode = function decode(reader, length) {
+                        DeleteSubpropertyEventFilterRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteSubpropertyEventFilterRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -54909,12 +55484,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateReportingDataAnnotationRequest.decode = function decode(reader, length) {
+                        CreateReportingDataAnnotationRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateReportingDataAnnotationRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -55130,12 +55707,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetReportingDataAnnotationRequest.decode = function decode(reader, length) {
+                        GetReportingDataAnnotationRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetReportingDataAnnotationRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -55366,12 +55945,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListReportingDataAnnotationsRequest.decode = function decode(reader, length) {
+                        ListReportingDataAnnotationsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -55619,12 +56200,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListReportingDataAnnotationsResponse.decode = function decode(reader, length) {
+                        ListReportingDataAnnotationsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListReportingDataAnnotationsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.reportingDataAnnotations && message.reportingDataAnnotations.length))
@@ -55865,12 +56448,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateReportingDataAnnotationRequest.decode = function decode(reader, length) {
+                        UpdateReportingDataAnnotationRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateReportingDataAnnotationRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.reportingDataAnnotation = $root.google.analytics.admin.v1alpha.ReportingDataAnnotation.decode(reader, reader.uint32());
@@ -56091,12 +56676,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteReportingDataAnnotationRequest.decode = function decode(reader, length) {
+                        DeleteReportingDataAnnotationRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteReportingDataAnnotationRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -56352,12 +56939,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SubmitUserDeletionRequest.decode = function decode(reader, length) {
+                        SubmitUserDeletionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.SubmitUserDeletionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.userId = reader.string();
@@ -56626,12 +57215,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SubmitUserDeletionResponse.decode = function decode(reader, length) {
+                        SubmitUserDeletionResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.SubmitUserDeletionResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.deletionRequestTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -56747,6 +57338,952 @@
                         };
     
                         return SubmitUserDeletionResponse;
+                    })();
+    
+                    v1alpha.GetSubpropertySyncConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a GetSubpropertySyncConfigRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IGetSubpropertySyncConfigRequest
+                         * @property {string|null} [name] GetSubpropertySyncConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetSubpropertySyncConfigRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a GetSubpropertySyncConfigRequest.
+                         * @implements IGetSubpropertySyncConfigRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IGetSubpropertySyncConfigRequest=} [properties] Properties to set
+                         */
+                        function GetSubpropertySyncConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetSubpropertySyncConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest
+                         * @instance
+                         */
+                        GetSubpropertySyncConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetSubpropertySyncConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetSubpropertySyncConfigRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest} GetSubpropertySyncConfigRequest instance
+                         */
+                        GetSubpropertySyncConfigRequest.create = function create(properties) {
+                            return new GetSubpropertySyncConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetSubpropertySyncConfigRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetSubpropertySyncConfigRequest} message GetSubpropertySyncConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSubpropertySyncConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetSubpropertySyncConfigRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetSubpropertySyncConfigRequest} message GetSubpropertySyncConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSubpropertySyncConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetSubpropertySyncConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest} GetSubpropertySyncConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSubpropertySyncConfigRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetSubpropertySyncConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest} GetSubpropertySyncConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSubpropertySyncConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetSubpropertySyncConfigRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetSubpropertySyncConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetSubpropertySyncConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest} GetSubpropertySyncConfigRequest
+                         */
+                        GetSubpropertySyncConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetSubpropertySyncConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest} message GetSubpropertySyncConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetSubpropertySyncConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetSubpropertySyncConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetSubpropertySyncConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetSubpropertySyncConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetSubpropertySyncConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest";
+                        };
+    
+                        return GetSubpropertySyncConfigRequest;
+                    })();
+    
+                    v1alpha.ListSubpropertySyncConfigsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListSubpropertySyncConfigsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IListSubpropertySyncConfigsRequest
+                         * @property {string|null} [parent] ListSubpropertySyncConfigsRequest parent
+                         * @property {number|null} [pageSize] ListSubpropertySyncConfigsRequest pageSize
+                         * @property {string|null} [pageToken] ListSubpropertySyncConfigsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSubpropertySyncConfigsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a ListSubpropertySyncConfigsRequest.
+                         * @implements IListSubpropertySyncConfigsRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IListSubpropertySyncConfigsRequest=} [properties] Properties to set
+                         */
+                        function ListSubpropertySyncConfigsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSubpropertySyncConfigsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest
+                         * @instance
+                         */
+                        ListSubpropertySyncConfigsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListSubpropertySyncConfigsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest
+                         * @instance
+                         */
+                        ListSubpropertySyncConfigsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListSubpropertySyncConfigsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest
+                         * @instance
+                         */
+                        ListSubpropertySyncConfigsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListSubpropertySyncConfigsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListSubpropertySyncConfigsRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest} ListSubpropertySyncConfigsRequest instance
+                         */
+                        ListSubpropertySyncConfigsRequest.create = function create(properties) {
+                            return new ListSubpropertySyncConfigsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSubpropertySyncConfigsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListSubpropertySyncConfigsRequest} message ListSubpropertySyncConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSubpropertySyncConfigsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSubpropertySyncConfigsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListSubpropertySyncConfigsRequest} message ListSubpropertySyncConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSubpropertySyncConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSubpropertySyncConfigsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest} ListSubpropertySyncConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSubpropertySyncConfigsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSubpropertySyncConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest} ListSubpropertySyncConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSubpropertySyncConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSubpropertySyncConfigsRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSubpropertySyncConfigsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSubpropertySyncConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest} ListSubpropertySyncConfigsRequest
+                         */
+                        ListSubpropertySyncConfigsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSubpropertySyncConfigsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest} message ListSubpropertySyncConfigsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSubpropertySyncConfigsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSubpropertySyncConfigsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSubpropertySyncConfigsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSubpropertySyncConfigsRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSubpropertySyncConfigsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest";
+                        };
+    
+                        return ListSubpropertySyncConfigsRequest;
+                    })();
+    
+                    v1alpha.ListSubpropertySyncConfigsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListSubpropertySyncConfigsResponse.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IListSubpropertySyncConfigsResponse
+                         * @property {Array.<google.analytics.admin.v1alpha.ISubpropertySyncConfig>|null} [subpropertySyncConfigs] ListSubpropertySyncConfigsResponse subpropertySyncConfigs
+                         * @property {string|null} [nextPageToken] ListSubpropertySyncConfigsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSubpropertySyncConfigsResponse.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a ListSubpropertySyncConfigsResponse.
+                         * @implements IListSubpropertySyncConfigsResponse
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IListSubpropertySyncConfigsResponse=} [properties] Properties to set
+                         */
+                        function ListSubpropertySyncConfigsResponse(properties) {
+                            this.subpropertySyncConfigs = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSubpropertySyncConfigsResponse subpropertySyncConfigs.
+                         * @member {Array.<google.analytics.admin.v1alpha.ISubpropertySyncConfig>} subpropertySyncConfigs
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse
+                         * @instance
+                         */
+                        ListSubpropertySyncConfigsResponse.prototype.subpropertySyncConfigs = $util.emptyArray;
+    
+                        /**
+                         * ListSubpropertySyncConfigsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse
+                         * @instance
+                         */
+                        ListSubpropertySyncConfigsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListSubpropertySyncConfigsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListSubpropertySyncConfigsResponse=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse} ListSubpropertySyncConfigsResponse instance
+                         */
+                        ListSubpropertySyncConfigsResponse.create = function create(properties) {
+                            return new ListSubpropertySyncConfigsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSubpropertySyncConfigsResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListSubpropertySyncConfigsResponse} message ListSubpropertySyncConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSubpropertySyncConfigsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.subpropertySyncConfigs != null && message.subpropertySyncConfigs.length)
+                                for (var i = 0; i < message.subpropertySyncConfigs.length; ++i)
+                                    $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.encode(message.subpropertySyncConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSubpropertySyncConfigsResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListSubpropertySyncConfigsResponse} message ListSubpropertySyncConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSubpropertySyncConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSubpropertySyncConfigsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse} ListSubpropertySyncConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSubpropertySyncConfigsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.subpropertySyncConfigs && message.subpropertySyncConfigs.length))
+                                            message.subpropertySyncConfigs = [];
+                                        message.subpropertySyncConfigs.push($root.google.analytics.admin.v1alpha.SubpropertySyncConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSubpropertySyncConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse} ListSubpropertySyncConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSubpropertySyncConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSubpropertySyncConfigsResponse message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSubpropertySyncConfigsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.subpropertySyncConfigs != null && message.hasOwnProperty("subpropertySyncConfigs")) {
+                                if (!Array.isArray(message.subpropertySyncConfigs))
+                                    return "subpropertySyncConfigs: array expected";
+                                for (var i = 0; i < message.subpropertySyncConfigs.length; ++i) {
+                                    var error = $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.verify(message.subpropertySyncConfigs[i]);
+                                    if (error)
+                                        return "subpropertySyncConfigs." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSubpropertySyncConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse} ListSubpropertySyncConfigsResponse
+                         */
+                        ListSubpropertySyncConfigsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse();
+                            if (object.subpropertySyncConfigs) {
+                                if (!Array.isArray(object.subpropertySyncConfigs))
+                                    throw TypeError(".google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse.subpropertySyncConfigs: array expected");
+                                message.subpropertySyncConfigs = [];
+                                for (var i = 0; i < object.subpropertySyncConfigs.length; ++i) {
+                                    if (typeof object.subpropertySyncConfigs[i] !== "object")
+                                        throw TypeError(".google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse.subpropertySyncConfigs: object expected");
+                                    message.subpropertySyncConfigs[i] = $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.fromObject(object.subpropertySyncConfigs[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSubpropertySyncConfigsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse} message ListSubpropertySyncConfigsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSubpropertySyncConfigsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.subpropertySyncConfigs = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.subpropertySyncConfigs && message.subpropertySyncConfigs.length) {
+                                object.subpropertySyncConfigs = [];
+                                for (var j = 0; j < message.subpropertySyncConfigs.length; ++j)
+                                    object.subpropertySyncConfigs[j] = $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.toObject(message.subpropertySyncConfigs[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSubpropertySyncConfigsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSubpropertySyncConfigsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSubpropertySyncConfigsResponse
+                         * @function getTypeUrl
+                         * @memberof google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSubpropertySyncConfigsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse";
+                        };
+    
+                        return ListSubpropertySyncConfigsResponse;
+                    })();
+    
+                    v1alpha.UpdateSubpropertySyncConfigRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateSubpropertySyncConfigRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IUpdateSubpropertySyncConfigRequest
+                         * @property {google.analytics.admin.v1alpha.ISubpropertySyncConfig|null} [subpropertySyncConfig] UpdateSubpropertySyncConfigRequest subpropertySyncConfig
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateSubpropertySyncConfigRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateSubpropertySyncConfigRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents an UpdateSubpropertySyncConfigRequest.
+                         * @implements IUpdateSubpropertySyncConfigRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IUpdateSubpropertySyncConfigRequest=} [properties] Properties to set
+                         */
+                        function UpdateSubpropertySyncConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateSubpropertySyncConfigRequest subpropertySyncConfig.
+                         * @member {google.analytics.admin.v1alpha.ISubpropertySyncConfig|null|undefined} subpropertySyncConfig
+                         * @memberof google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest
+                         * @instance
+                         */
+                        UpdateSubpropertySyncConfigRequest.prototype.subpropertySyncConfig = null;
+    
+                        /**
+                         * UpdateSubpropertySyncConfigRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest
+                         * @instance
+                         */
+                        UpdateSubpropertySyncConfigRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateSubpropertySyncConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateSubpropertySyncConfigRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest} UpdateSubpropertySyncConfigRequest instance
+                         */
+                        UpdateSubpropertySyncConfigRequest.create = function create(properties) {
+                            return new UpdateSubpropertySyncConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSubpropertySyncConfigRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateSubpropertySyncConfigRequest} message UpdateSubpropertySyncConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSubpropertySyncConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.subpropertySyncConfig != null && Object.hasOwnProperty.call(message, "subpropertySyncConfig"))
+                                $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.encode(message.subpropertySyncConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSubpropertySyncConfigRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateSubpropertySyncConfigRequest} message UpdateSubpropertySyncConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSubpropertySyncConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateSubpropertySyncConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest} UpdateSubpropertySyncConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSubpropertySyncConfigRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.subpropertySyncConfig = $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateSubpropertySyncConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest} UpdateSubpropertySyncConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSubpropertySyncConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateSubpropertySyncConfigRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateSubpropertySyncConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.subpropertySyncConfig != null && message.hasOwnProperty("subpropertySyncConfig")) {
+                                var error = $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.verify(message.subpropertySyncConfig);
+                                if (error)
+                                    return "subpropertySyncConfig." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateSubpropertySyncConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest} UpdateSubpropertySyncConfigRequest
+                         */
+                        UpdateSubpropertySyncConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest();
+                            if (object.subpropertySyncConfig != null) {
+                                if (typeof object.subpropertySyncConfig !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest.subpropertySyncConfig: object expected");
+                                message.subpropertySyncConfig = $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.fromObject(object.subpropertySyncConfig);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateSubpropertySyncConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest} message UpdateSubpropertySyncConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateSubpropertySyncConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.subpropertySyncConfig = null;
+                                object.updateMask = null;
+                            }
+                            if (message.subpropertySyncConfig != null && message.hasOwnProperty("subpropertySyncConfig"))
+                                object.subpropertySyncConfig = $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.toObject(message.subpropertySyncConfig, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateSubpropertySyncConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateSubpropertySyncConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateSubpropertySyncConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateSubpropertySyncConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest";
+                        };
+    
+                        return UpdateSubpropertySyncConfigRequest;
                     })();
     
                     /**
@@ -56932,12 +58469,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AudienceDimensionOrMetricFilter.decode = function decode(reader, length) {
+                        AudienceDimensionOrMetricFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.stringFilter = $root.google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.StringFilter.decode(reader, reader.uint32());
@@ -57274,12 +58813,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            StringFilter.decode = function decode(reader, length) {
+                            StringFilter.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.StringFilter();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.matchType = reader.int32();
@@ -57576,12 +59117,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            InListFilter.decode = function decode(reader, length) {
+                            InListFilter.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.InListFilter();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.values && message.values.length))
@@ -57831,12 +59374,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            NumericValue.decode = function decode(reader, length) {
+                            NumericValue.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericValue();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.int64Value = reader.int64();
@@ -58077,12 +59622,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            NumericFilter.decode = function decode(reader, length) {
+                            NumericFilter.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericFilter();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.operation = reader.int32();
@@ -58356,12 +59903,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            BetweenFilter.decode = function decode(reader, length) {
+                            BetweenFilter.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.BetweenFilter();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.fromValue = $root.google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericValue.decode(reader, reader.uint32());
@@ -58596,12 +60145,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AudienceEventFilter.decode = function decode(reader, length) {
+                        AudienceEventFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AudienceEventFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.eventName = reader.string();
@@ -58875,12 +60426,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AudienceFilterExpression.decode = function decode(reader, length) {
+                        AudienceFilterExpression.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AudienceFilterExpression();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.andGroup = $root.google.analytics.admin.v1alpha.AudienceFilterExpressionList.decode(reader, reader.uint32());
@@ -59186,12 +60739,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AudienceFilterExpressionList.decode = function decode(reader, length) {
+                        AudienceFilterExpressionList.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AudienceFilterExpressionList();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.filterExpressions && message.filterExpressions.length))
@@ -59419,12 +60974,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AudienceSimpleFilter.decode = function decode(reader, length) {
+                        AudienceSimpleFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AudienceSimpleFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.scope = reader.int32();
@@ -59693,12 +61250,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AudienceSequenceFilter.decode = function decode(reader, length) {
+                        AudienceSequenceFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AudienceSequenceFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.scope = reader.int32();
@@ -60005,12 +61564,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            AudienceSequenceStep.decode = function decode(reader, length) {
+                            AudienceSequenceStep.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AudienceSequenceFilter.AudienceSequenceStep();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.scope = reader.int32();
@@ -60323,12 +61884,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AudienceFilterClause.decode = function decode(reader, length) {
+                        AudienceFilterClause.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AudienceFilterClause();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.simpleFilter = $root.google.analytics.admin.v1alpha.AudienceSimpleFilter.decode(reader, reader.uint32());
@@ -60624,12 +62187,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AudienceEventTrigger.decode = function decode(reader, length) {
+                        AudienceEventTrigger.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AudienceEventTrigger();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.eventName = reader.string();
@@ -60970,12 +62535,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Audience.decode = function decode(reader, length) {
+                        Audience.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.Audience();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -61376,12 +62943,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ChannelGroupFilter.decode = function decode(reader, length) {
+                        ChannelGroupFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ChannelGroupFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.stringFilter = $root.google.analytics.admin.v1alpha.ChannelGroupFilter.StringFilter.decode(reader, reader.uint32());
@@ -61634,12 +63203,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            StringFilter.decode = function decode(reader, length) {
+                            StringFilter.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ChannelGroupFilter.StringFilter();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.matchType = reader.int32();
@@ -61920,12 +63491,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            InListFilter.decode = function decode(reader, length) {
+                            InListFilter.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ChannelGroupFilter.InListFilter();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.values && message.values.length))
@@ -62187,12 +63760,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ChannelGroupFilterExpression.decode = function decode(reader, length) {
+                        ChannelGroupFilterExpression.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ChannelGroupFilterExpression();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.andGroup = $root.google.analytics.admin.v1alpha.ChannelGroupFilterExpressionList.decode(reader, reader.uint32());
@@ -62474,12 +64049,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ChannelGroupFilterExpressionList.decode = function decode(reader, length) {
+                        ChannelGroupFilterExpressionList.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ChannelGroupFilterExpressionList();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.filterExpressions && message.filterExpressions.length))
@@ -62707,12 +64284,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GroupingRule.decode = function decode(reader, length) {
+                        GroupingRule.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GroupingRule();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.displayName = reader.string();
@@ -62985,12 +64564,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ChannelGroup.decode = function decode(reader, length) {
+                        ChannelGroup.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ChannelGroup();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -63280,12 +64861,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ParameterMutation.decode = function decode(reader, length) {
+                        ParameterMutation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ParameterMutation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parameter = reader.string();
@@ -63544,12 +65127,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EventCreateRule.decode = function decode(reader, length) {
+                        EventCreateRule.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.EventCreateRule();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -63884,12 +65469,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EventEditRule.decode = function decode(reader, length) {
+                        EventEditRule.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.EventEditRule();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -64223,12 +65810,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MatchingCondition.decode = function decode(reader, length) {
+                        MatchingCondition.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.MatchingCondition();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.field = reader.string();
@@ -64623,12 +66212,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExpandedDataSetFilter.decode = function decode(reader, length) {
+                        ExpandedDataSetFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ExpandedDataSetFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.stringFilter = $root.google.analytics.admin.v1alpha.ExpandedDataSetFilter.StringFilter.decode(reader, reader.uint32());
@@ -64892,12 +66483,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            StringFilter.decode = function decode(reader, length) {
+                            StringFilter.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ExpandedDataSetFilter.StringFilter();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.matchType = reader.int32();
@@ -65173,12 +66766,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            InListFilter.decode = function decode(reader, length) {
+                            InListFilter.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ExpandedDataSetFilter.InListFilter();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.values && message.values.length))
@@ -65442,12 +67037,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExpandedDataSetFilterExpression.decode = function decode(reader, length) {
+                        ExpandedDataSetFilterExpression.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ExpandedDataSetFilterExpression();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.andGroup = $root.google.analytics.admin.v1alpha.ExpandedDataSetFilterExpressionList.decode(reader, reader.uint32());
@@ -65705,12 +67302,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExpandedDataSetFilterExpressionList.decode = function decode(reader, length) {
+                        ExpandedDataSetFilterExpressionList.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ExpandedDataSetFilterExpressionList();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.filterExpressions && message.filterExpressions.length))
@@ -65997,12 +67596,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExpandedDataSet.decode = function decode(reader, length) {
+                        ExpandedDataSet.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ExpandedDataSet();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -66376,6 +67977,7 @@
                      * @property {number} KEY_EVENT=30 KEY_EVENT value
                      * @property {number} CALCULATED_METRIC=31 CALCULATED_METRIC value
                      * @property {number} REPORTING_DATA_ANNOTATION=32 REPORTING_DATA_ANNOTATION value
+                     * @property {number} SUBPROPERTY_SYNC_CONFIG=33 SUBPROPERTY_SYNC_CONFIG value
                      */
                     v1alpha.ChangeHistoryResourceType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -66407,6 +68009,7 @@
                         values[valuesById[30] = "KEY_EVENT"] = 30;
                         values[valuesById[31] = "CALCULATED_METRIC"] = 31;
                         values[valuesById[32] = "REPORTING_DATA_ANNOTATION"] = 32;
+                        values[valuesById[33] = "SUBPROPERTY_SYNC_CONFIG"] = 33;
                         return values;
                     })();
     
@@ -66669,12 +68272,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Account.decode = function decode(reader, length) {
+                        Account.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.Account();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -67087,12 +68692,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Property.decode = function decode(reader, length) {
+                        Property.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.Property();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -67743,12 +69350,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DataStream.decode = function decode(reader, length) {
+                        DataStream.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DataStream();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 6: {
                                         message.webStreamData = $root.google.analytics.admin.v1alpha.DataStream.WebStreamData.decode(reader, reader.uint32());
@@ -68124,12 +69733,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            WebStreamData.decode = function decode(reader, length) {
+                            WebStreamData.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DataStream.WebStreamData();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.measurementId = reader.string();
@@ -68363,12 +69974,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            AndroidAppStreamData.decode = function decode(reader, length) {
+                            AndroidAppStreamData.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DataStream.AndroidAppStreamData();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.firebaseAppId = reader.string();
@@ -68590,12 +70203,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            IosAppStreamData.decode = function decode(reader, length) {
+                            IosAppStreamData.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DataStream.IosAppStreamData();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.firebaseAppId = reader.string();
@@ -68849,12 +70464,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FirebaseLink.decode = function decode(reader, length) {
+                        FirebaseLink.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.FirebaseLink();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -69093,12 +70710,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GlobalSiteTag.decode = function decode(reader, length) {
+                        GlobalSiteTag.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GlobalSiteTag();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -69375,12 +70994,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GoogleAdsLink.decode = function decode(reader, length) {
+                        GoogleAdsLink.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GoogleAdsLink();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -69721,12 +71342,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DataSharingSettings.decode = function decode(reader, length) {
+                        DataSharingSettings.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DataSharingSettings();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -70020,12 +71643,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccountSummary.decode = function decode(reader, length) {
+                        AccountSummary.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccountSummary();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -70313,12 +71938,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PropertySummary.decode = function decode(reader, length) {
+                        PropertySummary.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.PropertySummary();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.property = reader.string();
@@ -70604,12 +72231,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MeasurementProtocolSecret.decode = function decode(reader, length) {
+                        MeasurementProtocolSecret.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -70876,12 +72505,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SKAdNetworkConversionValueSchema.decode = function decode(reader, length) {
+                        SKAdNetworkConversionValueSchema.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -71156,12 +72787,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PostbackWindow.decode = function decode(reader, length) {
+                        PostbackWindow.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.PostbackWindow();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.conversionValues && message.conversionValues.length))
@@ -71378,12 +73011,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * ConversionValues _fineValue.
-                         * @member {"fineValue"|undefined} _fineValue
-                         * @memberof google.analytics.admin.v1alpha.ConversionValues
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(ConversionValues.prototype, "_fineValue", {
                             get: $util.oneOfGetter($oneOfFields = ["fineValue"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -71451,12 +73079,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ConversionValues.decode = function decode(reader, length) {
+                        ConversionValues.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ConversionValues();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.displayName = reader.string();
@@ -71743,45 +73373,25 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * EventMapping _minEventCount.
-                         * @member {"minEventCount"|undefined} _minEventCount
-                         * @memberof google.analytics.admin.v1alpha.EventMapping
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(EventMapping.prototype, "_minEventCount", {
                             get: $util.oneOfGetter($oneOfFields = ["minEventCount"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * EventMapping _maxEventCount.
-                         * @member {"maxEventCount"|undefined} _maxEventCount
-                         * @memberof google.analytics.admin.v1alpha.EventMapping
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(EventMapping.prototype, "_maxEventCount", {
                             get: $util.oneOfGetter($oneOfFields = ["maxEventCount"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * EventMapping _minEventValue.
-                         * @member {"minEventValue"|undefined} _minEventValue
-                         * @memberof google.analytics.admin.v1alpha.EventMapping
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(EventMapping.prototype, "_minEventValue", {
                             get: $util.oneOfGetter($oneOfFields = ["minEventValue"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * EventMapping _maxEventValue.
-                         * @member {"maxEventValue"|undefined} _maxEventValue
-                         * @memberof google.analytics.admin.v1alpha.EventMapping
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(EventMapping.prototype, "_maxEventValue", {
                             get: $util.oneOfGetter($oneOfFields = ["maxEventValue"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -71848,12 +73458,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EventMapping.decode = function decode(reader, length) {
+                        EventMapping.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.EventMapping();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.eventName = reader.string();
@@ -72193,12 +73805,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ChangeHistoryEvent.decode = function decode(reader, length) {
+                        ChangeHistoryEvent.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ChangeHistoryEvent();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.id = reader.string();
@@ -72544,12 +74158,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ChangeHistoryChange.decode = function decode(reader, length) {
+                        ChangeHistoryChange.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ChangeHistoryChange();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.resource = reader.string();
@@ -72768,6 +74384,7 @@
                              * @property {google.analytics.admin.v1alpha.IKeyEvent|null} [keyEvent] ChangeHistoryResource keyEvent
                              * @property {google.analytics.admin.v1alpha.ICalculatedMetric|null} [calculatedMetric] ChangeHistoryResource calculatedMetric
                              * @property {google.analytics.admin.v1alpha.IReportingDataAnnotation|null} [reportingDataAnnotation] ChangeHistoryResource reportingDataAnnotation
+                             * @property {google.analytics.admin.v1alpha.ISubpropertySyncConfig|null} [subpropertySyncConfig] ChangeHistoryResource subpropertySyncConfig
                              */
     
                             /**
@@ -73001,17 +74618,25 @@
                              */
                             ChangeHistoryResource.prototype.reportingDataAnnotation = null;
     
+                            /**
+                             * ChangeHistoryResource subpropertySyncConfig.
+                             * @member {google.analytics.admin.v1alpha.ISubpropertySyncConfig|null|undefined} subpropertySyncConfig
+                             * @memberof google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource
+                             * @instance
+                             */
+                            ChangeHistoryResource.prototype.subpropertySyncConfig = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * ChangeHistoryResource resource.
-                             * @member {"account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"channelGroup"|"bigqueryLink"|"enhancedMeasurementSettings"|"dataRedactionSettings"|"skadnetworkConversionValueSchema"|"adsenseLink"|"audience"|"eventCreateRule"|"keyEvent"|"calculatedMetric"|"reportingDataAnnotation"|undefined} resource
+                             * @member {"account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"channelGroup"|"bigqueryLink"|"enhancedMeasurementSettings"|"dataRedactionSettings"|"skadnetworkConversionValueSchema"|"adsenseLink"|"audience"|"eventCreateRule"|"keyEvent"|"calculatedMetric"|"reportingDataAnnotation"|"subpropertySyncConfig"|undefined} resource
                              * @memberof google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource
                              * @instance
                              */
                             Object.defineProperty(ChangeHistoryResource.prototype, "resource", {
-                                get: $util.oneOfGetter($oneOfFields = ["account", "property", "firebaseLink", "googleAdsLink", "googleSignalsSettings", "displayVideo_360AdvertiserLink", "displayVideo_360AdvertiserLinkProposal", "conversionEvent", "measurementProtocolSecret", "customDimension", "customMetric", "dataRetentionSettings", "searchAds_360Link", "dataStream", "attributionSettings", "expandedDataSet", "channelGroup", "bigqueryLink", "enhancedMeasurementSettings", "dataRedactionSettings", "skadnetworkConversionValueSchema", "adsenseLink", "audience", "eventCreateRule", "keyEvent", "calculatedMetric", "reportingDataAnnotation"]),
+                                get: $util.oneOfGetter($oneOfFields = ["account", "property", "firebaseLink", "googleAdsLink", "googleSignalsSettings", "displayVideo_360AdvertiserLink", "displayVideo_360AdvertiserLinkProposal", "conversionEvent", "measurementProtocolSecret", "customDimension", "customMetric", "dataRetentionSettings", "searchAds_360Link", "dataStream", "attributionSettings", "expandedDataSet", "channelGroup", "bigqueryLink", "enhancedMeasurementSettings", "dataRedactionSettings", "skadnetworkConversionValueSchema", "adsenseLink", "audience", "eventCreateRule", "keyEvent", "calculatedMetric", "reportingDataAnnotation", "subpropertySyncConfig"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -73093,6 +74718,8 @@
                                     $root.google.analytics.admin.v1alpha.CalculatedMetric.encode(message.calculatedMetric, writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
                                 if (message.reportingDataAnnotation != null && Object.hasOwnProperty.call(message, "reportingDataAnnotation"))
                                     $root.google.analytics.admin.v1alpha.ReportingDataAnnotation.encode(message.reportingDataAnnotation, writer.uint32(/* id 32, wireType 2 =*/258).fork()).ldelim();
+                                if (message.subpropertySyncConfig != null && Object.hasOwnProperty.call(message, "subpropertySyncConfig"))
+                                    $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.encode(message.subpropertySyncConfig, writer.uint32(/* id 33, wireType 2 =*/266).fork()).ldelim();
                                 return writer;
                             };
     
@@ -73120,12 +74747,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ChangeHistoryResource.decode = function decode(reader, length) {
+                            ChangeHistoryResource.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.account = $root.google.analytics.admin.v1alpha.Account.decode(reader, reader.uint32());
@@ -73233,6 +74862,10 @@
                                         }
                                     case 32: {
                                             message.reportingDataAnnotation = $root.google.analytics.admin.v1alpha.ReportingDataAnnotation.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 33: {
+                                            message.subpropertySyncConfig = $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -73539,6 +75172,16 @@
                                             return "reportingDataAnnotation." + error;
                                     }
                                 }
+                                if (message.subpropertySyncConfig != null && message.hasOwnProperty("subpropertySyncConfig")) {
+                                    if (properties.resource === 1)
+                                        return "resource: multiple values";
+                                    properties.resource = 1;
+                                    {
+                                        var error = $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.verify(message.subpropertySyncConfig);
+                                        if (error)
+                                            return "subpropertySyncConfig." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -73688,6 +75331,11 @@
                                     if (typeof object.reportingDataAnnotation !== "object")
                                         throw TypeError(".google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource.reportingDataAnnotation: object expected");
                                     message.reportingDataAnnotation = $root.google.analytics.admin.v1alpha.ReportingDataAnnotation.fromObject(object.reportingDataAnnotation);
+                                }
+                                if (object.subpropertySyncConfig != null) {
+                                    if (typeof object.subpropertySyncConfig !== "object")
+                                        throw TypeError(".google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource.subpropertySyncConfig: object expected");
+                                    message.subpropertySyncConfig = $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.fromObject(object.subpropertySyncConfig);
                                 }
                                 return message;
                             };
@@ -73839,6 +75487,11 @@
                                     object.reportingDataAnnotation = $root.google.analytics.admin.v1alpha.ReportingDataAnnotation.toObject(message.reportingDataAnnotation, options);
                                     if (options.oneofs)
                                         object.resource = "reportingDataAnnotation";
+                                }
+                                if (message.subpropertySyncConfig != null && message.hasOwnProperty("subpropertySyncConfig")) {
+                                    object.subpropertySyncConfig = $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.toObject(message.subpropertySyncConfig, options);
+                                    if (options.oneofs)
+                                        object.resource = "subpropertySyncConfig";
                                 }
                                 return object;
                             };
@@ -74015,12 +75668,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DisplayVideo360AdvertiserLink.decode = function decode(reader, length) {
+                        DisplayVideo360AdvertiserLink.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -74371,12 +76026,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DisplayVideo360AdvertiserLinkProposal.decode = function decode(reader, length) {
+                        DisplayVideo360AdvertiserLinkProposal.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -74745,12 +76402,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchAds360Link.decode = function decode(reader, length) {
+                        SearchAds360Link.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.SearchAds360Link();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -75063,12 +76722,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        LinkProposalStatusDetails.decode = function decode(reader, length) {
+                        LinkProposalStatusDetails.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.LinkProposalStatusDetails();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.linkProposalInitiatingProduct = reader.int32();
@@ -75363,12 +77024,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * ConversionEvent _defaultConversionValue.
-                         * @member {"defaultConversionValue"|undefined} _defaultConversionValue
-                         * @memberof google.analytics.admin.v1alpha.ConversionEvent
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(ConversionEvent.prototype, "_defaultConversionValue", {
                             get: $util.oneOfGetter($oneOfFields = ["defaultConversionValue"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -75439,12 +77095,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ConversionEvent.decode = function decode(reader, length) {
+                        ConversionEvent.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ConversionEvent();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -75711,23 +77369,13 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * DefaultConversionValue _value.
-                             * @member {"value"|undefined} _value
-                             * @memberof google.analytics.admin.v1alpha.ConversionEvent.DefaultConversionValue
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(DefaultConversionValue.prototype, "_value", {
                                 get: $util.oneOfGetter($oneOfFields = ["value"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * DefaultConversionValue _currencyCode.
-                             * @member {"currencyCode"|undefined} _currencyCode
-                             * @memberof google.analytics.admin.v1alpha.ConversionEvent.DefaultConversionValue
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(DefaultConversionValue.prototype, "_currencyCode", {
                                 get: $util.oneOfGetter($oneOfFields = ["currencyCode"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -75788,12 +77436,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DefaultConversionValue.decode = function decode(reader, length) {
+                            DefaultConversionValue.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ConversionEvent.DefaultConversionValue();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.value = reader.double();
@@ -76096,12 +77746,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        KeyEvent.decode = function decode(reader, length) {
+                        KeyEvent.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.KeyEvent();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -76414,12 +78066,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DefaultValue.decode = function decode(reader, length) {
+                            DefaultValue.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.KeyEvent.DefaultValue();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.numericValue = reader.double();
@@ -76671,12 +78325,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GoogleSignalsSettings.decode = function decode(reader, length) {
+                        GoogleSignalsSettings.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GoogleSignalsSettings();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -77002,12 +78658,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CustomDimension.decode = function decode(reader, length) {
+                        CustomDimension.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CustomDimension();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -77384,12 +79042,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CustomMetric.decode = function decode(reader, length) {
+                        CustomMetric.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CustomMetric();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -77931,12 +79591,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CalculatedMetric.decode = function decode(reader, length) {
+                        CalculatedMetric.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CalculatedMetric();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -78408,12 +80070,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DataRetentionSettings.decode = function decode(reader, length) {
+                        DataRetentionSettings.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DataRetentionSettings();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -78792,12 +80456,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AttributionSettings.decode = function decode(reader, length) {
+                        AttributionSettings.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AttributionSettings();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -79263,12 +80929,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessBinding.decode = function decode(reader, length) {
+                        AccessBinding.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccessBinding();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.user = reader.string();
@@ -79613,12 +81281,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BigQueryLink.decode = function decode(reader, length) {
+                        BigQueryLink.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.BigQueryLink();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -80070,12 +81740,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EnhancedMeasurementSettings.decode = function decode(reader, length) {
+                        EnhancedMeasurementSettings.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.EnhancedMeasurementSettings();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -80405,12 +82077,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ConnectedSiteTag.decode = function decode(reader, length) {
+                        ConnectedSiteTag.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ConnectedSiteTag();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.displayName = reader.string();
@@ -80656,12 +82330,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DataRedactionSettings.decode = function decode(reader, length) {
+                        DataRedactionSettings.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DataRedactionSettings();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -80922,12 +82598,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AdSenseLink.decode = function decode(reader, length) {
+                        AdSenseLink.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AdSenseLink();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -81149,12 +82827,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RollupPropertySourceLink.decode = function decode(reader, length) {
+                        RollupPropertySourceLink.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.RollupPropertySourceLink();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -81445,12 +83125,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ReportingDataAnnotation.decode = function decode(reader, length) {
+                        ReportingDataAnnotation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ReportingDataAnnotation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 4: {
                                         message.annotationDate = $root.google.type.Date.decode(reader, reader.uint32());
@@ -81801,12 +83483,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DateRange.decode = function decode(reader, length) {
+                            DateRange.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ReportingDataAnnotation.DateRange();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.startDate = $root.google.type.Date.decode(reader, reader.uint32());
@@ -81971,6 +83655,298 @@
                         return ReportingDataAnnotation;
                     })();
     
+                    v1alpha.SubpropertySyncConfig = (function() {
+    
+                        /**
+                         * Properties of a SubpropertySyncConfig.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface ISubpropertySyncConfig
+                         * @property {string|null} [name] SubpropertySyncConfig name
+                         * @property {string|null} [applyToProperty] SubpropertySyncConfig applyToProperty
+                         * @property {google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode|null} [customDimensionAndMetricSyncMode] SubpropertySyncConfig customDimensionAndMetricSyncMode
+                         */
+    
+                        /**
+                         * Constructs a new SubpropertySyncConfig.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a SubpropertySyncConfig.
+                         * @implements ISubpropertySyncConfig
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.ISubpropertySyncConfig=} [properties] Properties to set
+                         */
+                        function SubpropertySyncConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SubpropertySyncConfig name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.SubpropertySyncConfig
+                         * @instance
+                         */
+                        SubpropertySyncConfig.prototype.name = "";
+    
+                        /**
+                         * SubpropertySyncConfig applyToProperty.
+                         * @member {string} applyToProperty
+                         * @memberof google.analytics.admin.v1alpha.SubpropertySyncConfig
+                         * @instance
+                         */
+                        SubpropertySyncConfig.prototype.applyToProperty = "";
+    
+                        /**
+                         * SubpropertySyncConfig customDimensionAndMetricSyncMode.
+                         * @member {google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode} customDimensionAndMetricSyncMode
+                         * @memberof google.analytics.admin.v1alpha.SubpropertySyncConfig
+                         * @instance
+                         */
+                        SubpropertySyncConfig.prototype.customDimensionAndMetricSyncMode = 0;
+    
+                        /**
+                         * Creates a new SubpropertySyncConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.SubpropertySyncConfig
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ISubpropertySyncConfig=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.SubpropertySyncConfig} SubpropertySyncConfig instance
+                         */
+                        SubpropertySyncConfig.create = function create(properties) {
+                            return new SubpropertySyncConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SubpropertySyncConfig message. Does not implicitly {@link google.analytics.admin.v1alpha.SubpropertySyncConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.SubpropertySyncConfig
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ISubpropertySyncConfig} message SubpropertySyncConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SubpropertySyncConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.applyToProperty != null && Object.hasOwnProperty.call(message, "applyToProperty"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.applyToProperty);
+                            if (message.customDimensionAndMetricSyncMode != null && Object.hasOwnProperty.call(message, "customDimensionAndMetricSyncMode"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.customDimensionAndMetricSyncMode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SubpropertySyncConfig message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.SubpropertySyncConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.SubpropertySyncConfig
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ISubpropertySyncConfig} message SubpropertySyncConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SubpropertySyncConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SubpropertySyncConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.SubpropertySyncConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.SubpropertySyncConfig} SubpropertySyncConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SubpropertySyncConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.SubpropertySyncConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.applyToProperty = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.customDimensionAndMetricSyncMode = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SubpropertySyncConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.SubpropertySyncConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.SubpropertySyncConfig} SubpropertySyncConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SubpropertySyncConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SubpropertySyncConfig message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.SubpropertySyncConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SubpropertySyncConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.applyToProperty != null && message.hasOwnProperty("applyToProperty"))
+                                if (!$util.isString(message.applyToProperty))
+                                    return "applyToProperty: string expected";
+                            if (message.customDimensionAndMetricSyncMode != null && message.hasOwnProperty("customDimensionAndMetricSyncMode"))
+                                switch (message.customDimensionAndMetricSyncMode) {
+                                default:
+                                    return "customDimensionAndMetricSyncMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SubpropertySyncConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.SubpropertySyncConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.SubpropertySyncConfig} SubpropertySyncConfig
+                         */
+                        SubpropertySyncConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.SubpropertySyncConfig)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.SubpropertySyncConfig();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.applyToProperty != null)
+                                message.applyToProperty = String(object.applyToProperty);
+                            switch (object.customDimensionAndMetricSyncMode) {
+                            default:
+                                if (typeof object.customDimensionAndMetricSyncMode === "number") {
+                                    message.customDimensionAndMetricSyncMode = object.customDimensionAndMetricSyncMode;
+                                    break;
+                                }
+                                break;
+                            case "SYNCHRONIZATION_MODE_UNSPECIFIED":
+                            case 0:
+                                message.customDimensionAndMetricSyncMode = 0;
+                                break;
+                            case "NONE":
+                            case 1:
+                                message.customDimensionAndMetricSyncMode = 1;
+                                break;
+                            case "ALL":
+                            case 2:
+                                message.customDimensionAndMetricSyncMode = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SubpropertySyncConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.SubpropertySyncConfig
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.SubpropertySyncConfig} message SubpropertySyncConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SubpropertySyncConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.applyToProperty = "";
+                                object.customDimensionAndMetricSyncMode = options.enums === String ? "SYNCHRONIZATION_MODE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.applyToProperty != null && message.hasOwnProperty("applyToProperty"))
+                                object.applyToProperty = message.applyToProperty;
+                            if (message.customDimensionAndMetricSyncMode != null && message.hasOwnProperty("customDimensionAndMetricSyncMode"))
+                                object.customDimensionAndMetricSyncMode = options.enums === String ? $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode[message.customDimensionAndMetricSyncMode] === undefined ? message.customDimensionAndMetricSyncMode : $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode[message.customDimensionAndMetricSyncMode] : message.customDimensionAndMetricSyncMode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SubpropertySyncConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.SubpropertySyncConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SubpropertySyncConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SubpropertySyncConfig
+                         * @function getTypeUrl
+                         * @memberof google.analytics.admin.v1alpha.SubpropertySyncConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SubpropertySyncConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.SubpropertySyncConfig";
+                        };
+    
+                        /**
+                         * SynchronizationMode enum.
+                         * @name google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode
+                         * @enum {number}
+                         * @property {number} SYNCHRONIZATION_MODE_UNSPECIFIED=0 SYNCHRONIZATION_MODE_UNSPECIFIED value
+                         * @property {number} NONE=1 NONE value
+                         * @property {number} ALL=2 ALL value
+                         */
+                        SubpropertySyncConfig.SynchronizationMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SYNCHRONIZATION_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NONE"] = 1;
+                            values[valuesById[2] = "ALL"] = 2;
+                            return values;
+                        })();
+    
+                        return SubpropertySyncConfig;
+                    })();
+    
                     v1alpha.SubpropertyEventFilterCondition = (function() {
     
                         /**
@@ -82092,12 +84068,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SubpropertyEventFilterCondition.decode = function decode(reader, length) {
+                        SubpropertyEventFilterCondition.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.SubpropertyEventFilterCondition();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.nullFilter = reader.bool();
@@ -82355,12 +84333,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            StringFilter.decode = function decode(reader, length) {
+                            StringFilter.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.SubpropertyEventFilterCondition.StringFilter();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.matchType = reader.int32();
@@ -82690,12 +84670,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SubpropertyEventFilterExpression.decode = function decode(reader, length) {
+                        SubpropertyEventFilterExpression.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.SubpropertyEventFilterExpression();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.orGroup = $root.google.analytics.admin.v1alpha.SubpropertyEventFilterExpressionList.decode(reader, reader.uint32());
@@ -82953,12 +84935,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SubpropertyEventFilterExpressionList.decode = function decode(reader, length) {
+                        SubpropertyEventFilterExpressionList.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.SubpropertyEventFilterExpressionList();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.filterExpressions && message.filterExpressions.length))
@@ -83186,12 +85170,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SubpropertyEventFilterClause.decode = function decode(reader, length) {
+                        SubpropertyEventFilterClause.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.SubpropertyEventFilterClause();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.filterClauseType = reader.int32();
@@ -83416,12 +85402,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * SubpropertyEventFilter _applyToProperty.
-                         * @member {"applyToProperty"|undefined} _applyToProperty
-                         * @memberof google.analytics.admin.v1alpha.SubpropertyEventFilter
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(SubpropertyEventFilter.prototype, "_applyToProperty", {
                             get: $util.oneOfGetter($oneOfFields = ["applyToProperty"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -83485,12 +85466,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SubpropertyEventFilter.decode = function decode(reader, length) {
+                        SubpropertyEventFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.SubpropertyEventFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -83749,12 +85732,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessDimension.decode = function decode(reader, length) {
+                        AccessDimension.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccessDimension();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.dimensionName = reader.string();
@@ -83952,12 +85937,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessMetric.decode = function decode(reader, length) {
+                        AccessMetric.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccessMetric();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.metricName = reader.string();
@@ -84166,12 +86153,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessDateRange.decode = function decode(reader, length) {
+                        AccessDateRange.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccessDateRange();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.startDate = reader.string();
@@ -84429,12 +86418,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessFilterExpression.decode = function decode(reader, length) {
+                        AccessFilterExpression.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccessFilterExpression();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.andGroup = $root.google.analytics.admin.v1beta.AccessFilterExpressionList.decode(reader, reader.uint32());
@@ -84716,12 +86707,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessFilterExpressionList.decode = function decode(reader, length) {
+                        AccessFilterExpressionList.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccessFilterExpressionList();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.expressions && message.expressions.length))
@@ -84996,12 +86989,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessFilter.decode = function decode(reader, length) {
+                        AccessFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccessFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.stringFilter = $root.google.analytics.admin.v1beta.AccessStringFilter.decode(reader, reader.uint32());
@@ -85316,12 +87311,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessStringFilter.decode = function decode(reader, length) {
+                        AccessStringFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccessStringFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.matchType = reader.int32();
@@ -85625,12 +87622,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessInListFilter.decode = function decode(reader, length) {
+                        AccessInListFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccessInListFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.values && message.values.length))
@@ -85866,12 +87865,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessNumericFilter.decode = function decode(reader, length) {
+                        AccessNumericFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccessNumericFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.operation = reader.int32();
@@ -86159,12 +88160,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessBetweenFilter.decode = function decode(reader, length) {
+                        AccessBetweenFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccessBetweenFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.fromValue = $root.google.analytics.admin.v1beta.NumericValue.decode(reader, reader.uint32());
@@ -86410,12 +88413,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        NumericValue.decode = function decode(reader, length) {
+                        NumericValue.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.NumericValue();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.int64Value = reader.int64();
@@ -86681,12 +88686,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessOrderBy.decode = function decode(reader, length) {
+                        AccessOrderBy.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccessOrderBy();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.metric = $root.google.analytics.admin.v1beta.AccessOrderBy.MetricOrderBy.decode(reader, reader.uint32());
@@ -86928,12 +88935,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            MetricOrderBy.decode = function decode(reader, length) {
+                            MetricOrderBy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccessOrderBy.MetricOrderBy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.metricName = reader.string();
@@ -87142,12 +89151,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DimensionOrderBy.decode = function decode(reader, length) {
+                            DimensionOrderBy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccessOrderBy.DimensionOrderBy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.dimensionName = reader.string();
@@ -87408,12 +89419,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessDimensionHeader.decode = function decode(reader, length) {
+                        AccessDimensionHeader.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccessDimensionHeader();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.dimensionName = reader.string();
@@ -87611,12 +89624,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessMetricHeader.decode = function decode(reader, length) {
+                        AccessMetricHeader.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccessMetricHeader();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.metricName = reader.string();
@@ -87829,12 +89844,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessRow.decode = function decode(reader, length) {
+                        AccessRow.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccessRow();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.dimensionValues && message.dimensionValues.length))
@@ -88083,12 +90100,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessDimensionValue.decode = function decode(reader, length) {
+                        AccessDimensionValue.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccessDimensionValue();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.value = reader.string();
@@ -88286,12 +90305,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessMetricValue.decode = function decode(reader, length) {
+                        AccessMetricValue.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccessMetricValue();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.value = reader.string();
@@ -88533,12 +90554,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessQuota.decode = function decode(reader, length) {
+                        AccessQuota.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccessQuota();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tokensPerDay = $root.google.analytics.admin.v1beta.AccessQuotaStatus.decode(reader, reader.uint32());
@@ -88821,12 +90844,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessQuotaStatus.decode = function decode(reader, length) {
+                        AccessQuotaStatus.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccessQuotaStatus();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.consumed = reader.int32();
@@ -90994,12 +93019,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RunAccessReportRequest.decode = function decode(reader, length) {
+                        RunAccessReportRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.RunAccessReportRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.entity = reader.string();
@@ -91508,12 +93535,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RunAccessReportResponse.decode = function decode(reader, length) {
+                        RunAccessReportResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.RunAccessReportResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.dimensionHeaders && message.dimensionHeaders.length))
@@ -91824,12 +93853,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetAccountRequest.decode = function decode(reader, length) {
+                        GetAccountRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.GetAccountRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -92049,12 +94080,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListAccountsRequest.decode = function decode(reader, length) {
+                        ListAccountsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListAccountsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.pageSize = reader.int32();
@@ -92290,12 +94323,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListAccountsResponse.decode = function decode(reader, length) {
+                        ListAccountsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListAccountsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.accounts && message.accounts.length))
@@ -92525,12 +94560,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteAccountRequest.decode = function decode(reader, length) {
+                        DeleteAccountRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.DeleteAccountRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -92739,12 +94776,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateAccountRequest.decode = function decode(reader, length) {
+                        UpdateAccountRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.UpdateAccountRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.account = $root.google.analytics.admin.v1beta.Account.decode(reader, reader.uint32());
@@ -92976,12 +95015,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ProvisionAccountTicketRequest.decode = function decode(reader, length) {
+                        ProvisionAccountTicketRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ProvisionAccountTicketRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.account = $root.google.analytics.admin.v1beta.Account.decode(reader, reader.uint32());
@@ -93197,12 +95238,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ProvisionAccountTicketResponse.decode = function decode(reader, length) {
+                        ProvisionAccountTicketResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ProvisionAccountTicketResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.accountTicketId = reader.string();
@@ -93400,12 +95443,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetPropertyRequest.decode = function decode(reader, length) {
+                        GetPropertyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.GetPropertyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -93636,12 +95681,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListPropertiesRequest.decode = function decode(reader, length) {
+                        ListPropertiesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListPropertiesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.filter = reader.string();
@@ -93889,12 +95936,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListPropertiesResponse.decode = function decode(reader, length) {
+                        ListPropertiesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListPropertiesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.properties && message.properties.length))
@@ -94135,12 +96184,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdatePropertyRequest.decode = function decode(reader, length) {
+                        UpdatePropertyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.UpdatePropertyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.property = $root.google.analytics.admin.v1beta.Property.decode(reader, reader.uint32());
@@ -94361,12 +96412,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreatePropertyRequest.decode = function decode(reader, length) {
+                        CreatePropertyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.CreatePropertyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.property = $root.google.analytics.admin.v1beta.Property.decode(reader, reader.uint32());
@@ -94569,12 +96622,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeletePropertyRequest.decode = function decode(reader, length) {
+                        DeletePropertyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.DeletePropertyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -94783,12 +96838,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateFirebaseLinkRequest.decode = function decode(reader, length) {
+                        CreateFirebaseLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.CreateFirebaseLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -95004,12 +97061,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteFirebaseLinkRequest.decode = function decode(reader, length) {
+                        DeleteFirebaseLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.DeleteFirebaseLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -95229,12 +97288,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFirebaseLinksRequest.decode = function decode(reader, length) {
+                        ListFirebaseLinksRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListFirebaseLinksRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -95470,12 +97531,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFirebaseLinksResponse.decode = function decode(reader, length) {
+                        ListFirebaseLinksResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListFirebaseLinksResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.firebaseLinks && message.firebaseLinks.length))
@@ -95716,12 +97779,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateGoogleAdsLinkRequest.decode = function decode(reader, length) {
+                        CreateGoogleAdsLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.CreateGoogleAdsLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -95948,12 +98013,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateGoogleAdsLinkRequest.decode = function decode(reader, length) {
+                        UpdateGoogleAdsLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.UpdateGoogleAdsLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.googleAdsLink = $root.google.analytics.admin.v1beta.GoogleAdsLink.decode(reader, reader.uint32());
@@ -96174,12 +98241,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteGoogleAdsLinkRequest.decode = function decode(reader, length) {
+                        DeleteGoogleAdsLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.DeleteGoogleAdsLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -96399,12 +98468,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListGoogleAdsLinksRequest.decode = function decode(reader, length) {
+                        ListGoogleAdsLinksRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListGoogleAdsLinksRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -96640,12 +98711,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListGoogleAdsLinksResponse.decode = function decode(reader, length) {
+                        ListGoogleAdsLinksResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListGoogleAdsLinksResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.googleAdsLinks && message.googleAdsLinks.length))
@@ -96875,12 +98948,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetDataSharingSettingsRequest.decode = function decode(reader, length) {
+                        GetDataSharingSettingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.GetDataSharingSettingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -97089,12 +99164,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListAccountSummariesRequest.decode = function decode(reader, length) {
+                        ListAccountSummariesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListAccountSummariesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.pageSize = reader.int32();
@@ -97318,12 +99395,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListAccountSummariesResponse.decode = function decode(reader, length) {
+                        ListAccountSummariesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListAccountSummariesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.accountSummaries && message.accountSummaries.length))
@@ -97564,12 +99643,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AcknowledgeUserDataCollectionRequest.decode = function decode(reader, length) {
+                        AcknowledgeUserDataCollectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AcknowledgeUserDataCollectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.property = reader.string();
@@ -97769,12 +99850,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AcknowledgeUserDataCollectionResponse.decode = function decode(reader, length) {
+                        AcknowledgeUserDataCollectionResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AcknowledgeUserDataCollectionResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -98055,12 +100138,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchChangeHistoryEventsRequest.decode = function decode(reader, length) {
+                        SearchChangeHistoryEventsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.SearchChangeHistoryEventsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.account = reader.string();
@@ -98545,12 +100630,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchChangeHistoryEventsResponse.decode = function decode(reader, length) {
+                        SearchChangeHistoryEventsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.SearchChangeHistoryEventsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.changeHistoryEvents && message.changeHistoryEvents.length))
@@ -98780,12 +100867,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetMeasurementProtocolSecretRequest.decode = function decode(reader, length) {
+                        GetMeasurementProtocolSecretRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.GetMeasurementProtocolSecretRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -98994,12 +101083,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateMeasurementProtocolSecretRequest.decode = function decode(reader, length) {
+                        CreateMeasurementProtocolSecretRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.CreateMeasurementProtocolSecretRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -99215,12 +101306,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteMeasurementProtocolSecretRequest.decode = function decode(reader, length) {
+                        DeleteMeasurementProtocolSecretRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.DeleteMeasurementProtocolSecretRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -99429,12 +101522,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateMeasurementProtocolSecretRequest.decode = function decode(reader, length) {
+                        UpdateMeasurementProtocolSecretRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.UpdateMeasurementProtocolSecretRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.measurementProtocolSecret = $root.google.analytics.admin.v1beta.MeasurementProtocolSecret.decode(reader, reader.uint32());
@@ -99677,12 +101772,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListMeasurementProtocolSecretsRequest.decode = function decode(reader, length) {
+                        ListMeasurementProtocolSecretsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListMeasurementProtocolSecretsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -99918,12 +102015,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListMeasurementProtocolSecretsResponse.decode = function decode(reader, length) {
+                        ListMeasurementProtocolSecretsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListMeasurementProtocolSecretsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.measurementProtocolSecrets && message.measurementProtocolSecrets.length))
@@ -100164,12 +102263,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateConversionEventRequest.decode = function decode(reader, length) {
+                        CreateConversionEventRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.CreateConversionEventRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.conversionEvent = $root.google.analytics.admin.v1beta.ConversionEvent.decode(reader, reader.uint32());
@@ -100396,12 +102497,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateConversionEventRequest.decode = function decode(reader, length) {
+                        UpdateConversionEventRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.UpdateConversionEventRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.conversionEvent = $root.google.analytics.admin.v1beta.ConversionEvent.decode(reader, reader.uint32());
@@ -100622,12 +102725,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetConversionEventRequest.decode = function decode(reader, length) {
+                        GetConversionEventRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.GetConversionEventRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -100825,12 +102930,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteConversionEventRequest.decode = function decode(reader, length) {
+                        DeleteConversionEventRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.DeleteConversionEventRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -101050,12 +103157,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListConversionEventsRequest.decode = function decode(reader, length) {
+                        ListConversionEventsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListConversionEventsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -101291,12 +103400,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListConversionEventsResponse.decode = function decode(reader, length) {
+                        ListConversionEventsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListConversionEventsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.conversionEvents && message.conversionEvents.length))
@@ -101537,12 +103648,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateKeyEventRequest.decode = function decode(reader, length) {
+                        CreateKeyEventRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.CreateKeyEventRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.keyEvent = $root.google.analytics.admin.v1beta.KeyEvent.decode(reader, reader.uint32());
@@ -101769,12 +103882,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateKeyEventRequest.decode = function decode(reader, length) {
+                        UpdateKeyEventRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.UpdateKeyEventRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.keyEvent = $root.google.analytics.admin.v1beta.KeyEvent.decode(reader, reader.uint32());
@@ -101995,12 +104110,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetKeyEventRequest.decode = function decode(reader, length) {
+                        GetKeyEventRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.GetKeyEventRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -102198,12 +104315,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteKeyEventRequest.decode = function decode(reader, length) {
+                        DeleteKeyEventRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.DeleteKeyEventRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -102423,12 +104542,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListKeyEventsRequest.decode = function decode(reader, length) {
+                        ListKeyEventsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListKeyEventsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -102664,12 +104785,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListKeyEventsResponse.decode = function decode(reader, length) {
+                        ListKeyEventsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListKeyEventsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.keyEvents && message.keyEvents.length))
@@ -102910,12 +105033,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateCustomDimensionRequest.decode = function decode(reader, length) {
+                        CreateCustomDimensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.CreateCustomDimensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -103142,12 +105267,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateCustomDimensionRequest.decode = function decode(reader, length) {
+                        UpdateCustomDimensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.UpdateCustomDimensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.customDimension = $root.google.analytics.admin.v1beta.CustomDimension.decode(reader, reader.uint32());
@@ -103390,12 +105517,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCustomDimensionsRequest.decode = function decode(reader, length) {
+                        ListCustomDimensionsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListCustomDimensionsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -103631,12 +105760,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCustomDimensionsResponse.decode = function decode(reader, length) {
+                        ListCustomDimensionsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListCustomDimensionsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.customDimensions && message.customDimensions.length))
@@ -103866,12 +105997,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ArchiveCustomDimensionRequest.decode = function decode(reader, length) {
+                        ArchiveCustomDimensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ArchiveCustomDimensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -104069,12 +106202,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetCustomDimensionRequest.decode = function decode(reader, length) {
+                        GetCustomDimensionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.GetCustomDimensionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -104283,12 +106418,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateCustomMetricRequest.decode = function decode(reader, length) {
+                        CreateCustomMetricRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.CreateCustomMetricRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -104515,12 +106652,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateCustomMetricRequest.decode = function decode(reader, length) {
+                        UpdateCustomMetricRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.UpdateCustomMetricRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.customMetric = $root.google.analytics.admin.v1beta.CustomMetric.decode(reader, reader.uint32());
@@ -104763,12 +106902,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCustomMetricsRequest.decode = function decode(reader, length) {
+                        ListCustomMetricsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListCustomMetricsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -105004,12 +107145,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCustomMetricsResponse.decode = function decode(reader, length) {
+                        ListCustomMetricsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListCustomMetricsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.customMetrics && message.customMetrics.length))
@@ -105239,12 +107382,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ArchiveCustomMetricRequest.decode = function decode(reader, length) {
+                        ArchiveCustomMetricRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ArchiveCustomMetricRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -105442,12 +107587,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetCustomMetricRequest.decode = function decode(reader, length) {
+                        GetCustomMetricRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.GetCustomMetricRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -105645,12 +107792,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetDataRetentionSettingsRequest.decode = function decode(reader, length) {
+                        GetDataRetentionSettingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.GetDataRetentionSettingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -105859,12 +108008,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateDataRetentionSettingsRequest.decode = function decode(reader, length) {
+                        UpdateDataRetentionSettingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.UpdateDataRetentionSettingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.dataRetentionSettings = $root.google.analytics.admin.v1beta.DataRetentionSettings.decode(reader, reader.uint32());
@@ -106096,12 +108247,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateDataStreamRequest.decode = function decode(reader, length) {
+                        CreateDataStreamRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.CreateDataStreamRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -106317,12 +108470,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteDataStreamRequest.decode = function decode(reader, length) {
+                        DeleteDataStreamRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.DeleteDataStreamRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -106531,12 +108686,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateDataStreamRequest.decode = function decode(reader, length) {
+                        UpdateDataStreamRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.UpdateDataStreamRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.dataStream = $root.google.analytics.admin.v1beta.DataStream.decode(reader, reader.uint32());
@@ -106779,12 +108936,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListDataStreamsRequest.decode = function decode(reader, length) {
+                        ListDataStreamsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListDataStreamsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -107020,12 +109179,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListDataStreamsResponse.decode = function decode(reader, length) {
+                        ListDataStreamsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ListDataStreamsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.dataStreams && message.dataStreams.length))
@@ -107255,12 +109416,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetDataStreamRequest.decode = function decode(reader, length) {
+                        GetDataStreamRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.GetDataStreamRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -107698,12 +109861,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Account.decode = function decode(reader, length) {
+                        Account.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.Account();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -108116,12 +110281,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Property.decode = function decode(reader, length) {
+                        Property.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.Property();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -108772,12 +110939,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DataStream.decode = function decode(reader, length) {
+                        DataStream.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.DataStream();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 6: {
                                         message.webStreamData = $root.google.analytics.admin.v1beta.DataStream.WebStreamData.decode(reader, reader.uint32());
@@ -109153,12 +111322,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            WebStreamData.decode = function decode(reader, length) {
+                            WebStreamData.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.DataStream.WebStreamData();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.measurementId = reader.string();
@@ -109392,12 +111563,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            AndroidAppStreamData.decode = function decode(reader, length) {
+                            AndroidAppStreamData.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.DataStream.AndroidAppStreamData();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.firebaseAppId = reader.string();
@@ -109619,12 +111792,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            IosAppStreamData.decode = function decode(reader, length) {
+                            IosAppStreamData.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.DataStream.IosAppStreamData();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.firebaseAppId = reader.string();
@@ -109878,12 +112053,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FirebaseLink.decode = function decode(reader, length) {
+                        FirebaseLink.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.FirebaseLink();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -110177,12 +112354,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GoogleAdsLink.decode = function decode(reader, length) {
+                        GoogleAdsLink.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.GoogleAdsLink();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -110523,12 +112702,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DataSharingSettings.decode = function decode(reader, length) {
+                        DataSharingSettings.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.DataSharingSettings();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -110822,12 +113003,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccountSummary.decode = function decode(reader, length) {
+                        AccountSummary.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.AccountSummary();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -111115,12 +113298,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PropertySummary.decode = function decode(reader, length) {
+                        PropertySummary.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.PropertySummary();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.property = reader.string();
@@ -111406,12 +113591,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MeasurementProtocolSecret.decode = function decode(reader, length) {
+                        MeasurementProtocolSecret.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.MeasurementProtocolSecret();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -111691,12 +113878,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ChangeHistoryEvent.decode = function decode(reader, length) {
+                        ChangeHistoryEvent.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ChangeHistoryEvent();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.id = reader.string();
@@ -112042,12 +114231,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ChangeHistoryChange.decode = function decode(reader, length) {
+                        ChangeHistoryChange.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ChangeHistoryChange();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.resource = reader.string();
@@ -112409,12 +114600,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ChangeHistoryResource.decode = function decode(reader, length) {
+                            ChangeHistoryResource.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ChangeHistoryChange.ChangeHistoryResource();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.account = $root.google.analytics.admin.v1beta.Account.decode(reader, reader.uint32());
@@ -112797,12 +114990,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * ConversionEvent _defaultConversionValue.
-                         * @member {"defaultConversionValue"|undefined} _defaultConversionValue
-                         * @memberof google.analytics.admin.v1beta.ConversionEvent
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(ConversionEvent.prototype, "_defaultConversionValue", {
                             get: $util.oneOfGetter($oneOfFields = ["defaultConversionValue"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -112873,12 +115061,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ConversionEvent.decode = function decode(reader, length) {
+                        ConversionEvent.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ConversionEvent();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -113145,23 +115335,13 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * DefaultConversionValue _value.
-                             * @member {"value"|undefined} _value
-                             * @memberof google.analytics.admin.v1beta.ConversionEvent.DefaultConversionValue
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(DefaultConversionValue.prototype, "_value", {
                                 get: $util.oneOfGetter($oneOfFields = ["value"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * DefaultConversionValue _currencyCode.
-                             * @member {"currencyCode"|undefined} _currencyCode
-                             * @memberof google.analytics.admin.v1beta.ConversionEvent.DefaultConversionValue
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(DefaultConversionValue.prototype, "_currencyCode", {
                                 get: $util.oneOfGetter($oneOfFields = ["currencyCode"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -113222,12 +115402,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DefaultConversionValue.decode = function decode(reader, length) {
+                            DefaultConversionValue.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.ConversionEvent.DefaultConversionValue();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.value = reader.double();
@@ -113530,12 +115712,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        KeyEvent.decode = function decode(reader, length) {
+                        KeyEvent.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.KeyEvent();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -113848,12 +116032,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DefaultValue.decode = function decode(reader, length) {
+                            DefaultValue.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.KeyEvent.DefaultValue();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.numericValue = reader.double();
@@ -114138,12 +116324,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CustomDimension.decode = function decode(reader, length) {
+                        CustomDimension.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.CustomDimension();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -114520,12 +116708,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CustomMetric.decode = function decode(reader, length) {
+                        CustomMetric.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.CustomMetric();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -115018,12 +117208,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DataRetentionSettings.decode = function decode(reader, length) {
+                        DataRetentionSettings.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1beta.DataRetentionSettings();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -115477,12 +117669,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length) {
+                ResourceDescriptor.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -115872,12 +118066,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length) {
+                ResourceReference.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -116101,12 +118297,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length) {
+                Http.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.rules && message.rules.length))
@@ -116451,12 +118649,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length) {
+                HttpRule.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -116835,12 +119035,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length) {
+                CustomHttpPattern.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.kind = reader.string();
@@ -117067,12 +119269,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length) {
+                CommonLanguageSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.referenceDocsUri = reader.string();
@@ -117436,12 +119640,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length) {
+                ClientLibrarySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.version = reader.string();
@@ -117780,6 +119986,7 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
+                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -117881,6 +120088,14 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
+                 * Publishing restReferenceDocumentationUri.
+                 * @member {string} restReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.restReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -117927,6 +120142,8 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
+                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -117954,12 +120171,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length) {
+                Publishing.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
@@ -118005,6 +120224,10 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
+                                break;
+                            }
+                        case 111: {
+                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -118099,6 +120322,9 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        if (!$util.isString(message.restReferenceDocumentationUri))
+                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -118193,6 +120419,8 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
+                    if (object.restReferenceDocumentationUri != null)
+                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -118222,6 +120450,7 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
+                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -118252,6 +120481,8 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -118393,12 +120624,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length) {
+                JavaSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.libraryPackage = reader.string();
@@ -118660,12 +120893,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length) {
+                CppSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -118868,12 +121103,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length) {
+                PhpSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -119076,12 +121313,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length) {
+                PythonSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -119284,12 +121523,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length) {
+                NodeSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -119557,12 +121798,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length) {
+                DotnetSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -119936,12 +122179,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length) {
+                RubySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -120144,12 +122389,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length) {
+                GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -120376,12 +122623,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length) {
+                MethodSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -120654,12 +122903,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length) {
+                    LongRunning.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -120994,12 +123245,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length) {
+                FileDescriptorSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.file && message.file.length))
@@ -121394,12 +123647,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length) {
+                FileDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -122061,12 +124316,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length) {
+                DescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -122546,12 +124803,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length) {
+                    ExtensionRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -122790,12 +125049,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length) {
+                    ReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -123046,12 +125307,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
@@ -123391,12 +125654,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length) {
+                    Declaration.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.number = reader.int32();
@@ -123770,12 +126035,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length) {
+                FieldDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -124295,12 +126562,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length) {
+                OneofDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -124566,12 +126835,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length) {
+                EnumDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -124885,12 +127156,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length) {
+                    EnumReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -125126,12 +127399,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -125383,12 +127658,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -125691,12 +127968,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length) {
+                MethodDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -126195,12 +128474,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length) {
+                FileOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.javaPackage = reader.string();
@@ -126815,12 +129096,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length) {
+                MessageOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.messageSetWireFormat = reader.bool();
@@ -127263,12 +129546,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
-                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.int32(message[".google.api.fieldBehavior"][i]);
-                        writer.ldelim();
-                    }
+                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
@@ -127298,12 +129578,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length) {
+                FieldOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.ctype = reader.int32();
@@ -128029,12 +130311,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length) {
+                    EditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -128325,12 +130609,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length) {
+                OneofOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -128611,12 +130897,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length) {
+                EnumOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 message.allowAlias = reader.bool();
@@ -128923,12 +131211,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length) {
+                EnumValueOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
@@ -129114,6 +131404,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
+                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -129173,6 +131464,14 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
+                 * ServiceOptions .google.api.apiVersion.
+                 * @member {string} .google.api.apiVersion
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.apiVersion"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -129207,6 +131506,8 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
+                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -129234,12 +131535,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length) {
+                ServiceOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 34: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -129261,6 +131564,10 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
+                        case 525000001: {
+                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -129321,6 +131628,9 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        if (!$util.isString(message[".google.api.apiVersion"]))
+                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -129357,6 +131667,8 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
+                    if (object[".google.api.apiVersion"] != null)
+                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -129380,6 +131692,7 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
+                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -129394,6 +131707,8 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -129570,12 +131885,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length) {
+                MethodOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 33: {
                                 message.deprecated = reader.bool();
@@ -129987,12 +132304,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length) {
+                UninterpretedOption.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.name && message.name.length))
@@ -130326,12 +132645,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length) {
+                    NamePart.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.namePart = reader.string();
@@ -130602,12 +132923,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length) {
+                FeatureSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.fieldPresence = reader.int32();
@@ -131137,12 +133460,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length) {
+                FeatureSetDefaults.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
@@ -131521,12 +133846,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -131811,12 +134138,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length) {
+                SourceCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.location && message.location.length))
@@ -132086,12 +134415,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length) {
+                    Location.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -132397,12 +134728,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
@@ -132665,12 +134998,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length) {
+                    Annotation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -132991,12 +135326,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length) {
+                Duration.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -133232,12 +135569,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length) {
+                Timestamp.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -133462,12 +135801,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DoubleValue.decode = function decode(reader, length) {
+                DoubleValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DoubleValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.double();
@@ -133665,12 +136006,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FloatValue.decode = function decode(reader, length) {
+                FloatValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FloatValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.float();
@@ -133868,12 +136211,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Int64Value.decode = function decode(reader, length) {
+                Int64Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Int64Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.int64();
@@ -134085,12 +136430,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UInt64Value.decode = function decode(reader, length) {
+                UInt64Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UInt64Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.uint64();
@@ -134302,12 +136649,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Int32Value.decode = function decode(reader, length) {
+                Int32Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Int32Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.int32();
@@ -134505,12 +136854,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UInt32Value.decode = function decode(reader, length) {
+                UInt32Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UInt32Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.uint32();
@@ -134708,12 +137059,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                BoolValue.decode = function decode(reader, length) {
+                BoolValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.BoolValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.bool();
@@ -134911,12 +137264,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                StringValue.decode = function decode(reader, length) {
+                StringValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.StringValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.string();
@@ -135114,12 +137469,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                BytesValue.decode = function decode(reader, length) {
+                BytesValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.BytesValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.bytes();
@@ -135315,12 +137672,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length) {
+                Empty.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -135503,12 +137862,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length) {
+                FieldMask.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.paths && message.paths.length))
@@ -135754,12 +138115,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Date.decode = function decode(reader, length) {
+                Date.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Date();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.year = reader.int32();

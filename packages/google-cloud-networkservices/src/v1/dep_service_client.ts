@@ -18,20 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  IamClient,
-  IamProtos,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -116,41 +103,20 @@ export class DepServiceClient {
    *     const client = new DepServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DepServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'networkservices.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -176,7 +142,7 @@ export class DepServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -189,14 +155,18 @@ export class DepServiceClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-
+  
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -223,6 +193,9 @@ export class DepServiceClient {
       gatewayPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/gateways/{gateway}'
       ),
+      gatewayRouteViewPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/gateways/{gateway}/routeViews/{route_view}'
+      ),
       grpcRoutePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/grpcRoutes/{grpc_route}'
       ),
@@ -241,11 +214,17 @@ export class DepServiceClient {
       meshPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/meshes/{mesh}'
       ),
+      meshRouteViewPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/meshes/{mesh}/routeViews/{route_view}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
       serviceBindingPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/serviceBindings/{service_binding}'
+      ),
+      serviceLbPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/serviceLbPolicies/{service_lb_policy}'
       ),
       tcpRoutePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/tcpRoutes/{tcp_route}'
@@ -259,16 +238,10 @@ export class DepServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listLbTrafficExtensions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'lbTrafficExtensions'
-      ),
-      listLbRouteExtensions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'lbRouteExtensions'
-      ),
+      listLbTrafficExtensions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'lbTrafficExtensions'),
+      listLbRouteExtensions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'lbRouteExtensions')
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -277,228 +250,72 @@ export class DepServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          get: '/v1/{resource=projects/*/locations/*/edgeCacheKeysets/*}:getIamPolicy',
-          additional_bindings: [
-            {
-              get: '/v1/{resource=projects/*/locations/*/edgeCacheOrigins/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/edgeCacheServices/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/endpointPolicies/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/serviceBindings/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/meshes/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/gateways/*}:getIamPolicy',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1/{resource=projects/*/locations/*/edgeCacheKeysets/*}:setIamPolicy',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/edgeCacheOrigins/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/edgeCacheServices/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/endpointPolicies/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/serviceBindings/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/meshes/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/gateways/*}:setIamPolicy',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1/{resource=projects/*/locations/*/edgeCacheKeysets/*}:testIamPermissions',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/edgeCacheOrigins/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/edgeCacheServices/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/endpointPolicies/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/serviceBindings/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/meshes/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/gateways/*}:testIamPermissions',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/edgeCacheKeysets/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/edgeCacheOrigins/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/edgeCacheServices/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/endpointPolicies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/serviceBindings/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/meshes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/gateways/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/edgeCacheKeysets/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/edgeCacheOrigins/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/edgeCacheServices/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/endpointPolicies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceBindings/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/meshes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/gateways/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/edgeCacheKeysets/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/edgeCacheOrigins/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/edgeCacheServices/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/endpointPolicies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceBindings/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/meshes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/gateways/*}:testIamPermissions',body: '*',}],
+      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createLbTrafficExtensionResponse = protoFilesRoot.lookup(
-      '.google.cloud.networkservices.v1.LbTrafficExtension'
-    ) as gax.protobuf.Type;
+      '.google.cloud.networkservices.v1.LbTrafficExtension') as gax.protobuf.Type;
     const createLbTrafficExtensionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.networkservices.v1.OperationMetadata') as gax.protobuf.Type;
     const updateLbTrafficExtensionResponse = protoFilesRoot.lookup(
-      '.google.cloud.networkservices.v1.LbTrafficExtension'
-    ) as gax.protobuf.Type;
+      '.google.cloud.networkservices.v1.LbTrafficExtension') as gax.protobuf.Type;
     const updateLbTrafficExtensionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.networkservices.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteLbTrafficExtensionResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteLbTrafficExtensionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.networkservices.v1.OperationMetadata') as gax.protobuf.Type;
     const createLbRouteExtensionResponse = protoFilesRoot.lookup(
-      '.google.cloud.networkservices.v1.LbRouteExtension'
-    ) as gax.protobuf.Type;
+      '.google.cloud.networkservices.v1.LbRouteExtension') as gax.protobuf.Type;
     const createLbRouteExtensionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.networkservices.v1.OperationMetadata') as gax.protobuf.Type;
     const updateLbRouteExtensionResponse = protoFilesRoot.lookup(
-      '.google.cloud.networkservices.v1.LbRouteExtension'
-    ) as gax.protobuf.Type;
+      '.google.cloud.networkservices.v1.LbRouteExtension') as gax.protobuf.Type;
     const updateLbRouteExtensionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.networkservices.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteLbRouteExtensionResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteLbRouteExtensionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkservices.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.networkservices.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createLbTrafficExtension: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createLbTrafficExtensionResponse.decode.bind(
-          createLbTrafficExtensionResponse
-        ),
-        createLbTrafficExtensionMetadata.decode.bind(
-          createLbTrafficExtensionMetadata
-        )
-      ),
+        createLbTrafficExtensionResponse.decode.bind(createLbTrafficExtensionResponse),
+        createLbTrafficExtensionMetadata.decode.bind(createLbTrafficExtensionMetadata)),
       updateLbTrafficExtension: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateLbTrafficExtensionResponse.decode.bind(
-          updateLbTrafficExtensionResponse
-        ),
-        updateLbTrafficExtensionMetadata.decode.bind(
-          updateLbTrafficExtensionMetadata
-        )
-      ),
+        updateLbTrafficExtensionResponse.decode.bind(updateLbTrafficExtensionResponse),
+        updateLbTrafficExtensionMetadata.decode.bind(updateLbTrafficExtensionMetadata)),
       deleteLbTrafficExtension: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteLbTrafficExtensionResponse.decode.bind(
-          deleteLbTrafficExtensionResponse
-        ),
-        deleteLbTrafficExtensionMetadata.decode.bind(
-          deleteLbTrafficExtensionMetadata
-        )
-      ),
+        deleteLbTrafficExtensionResponse.decode.bind(deleteLbTrafficExtensionResponse),
+        deleteLbTrafficExtensionMetadata.decode.bind(deleteLbTrafficExtensionMetadata)),
       createLbRouteExtension: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createLbRouteExtensionResponse.decode.bind(
-          createLbRouteExtensionResponse
-        ),
-        createLbRouteExtensionMetadata.decode.bind(
-          createLbRouteExtensionMetadata
-        )
-      ),
+        createLbRouteExtensionResponse.decode.bind(createLbRouteExtensionResponse),
+        createLbRouteExtensionMetadata.decode.bind(createLbRouteExtensionMetadata)),
       updateLbRouteExtension: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateLbRouteExtensionResponse.decode.bind(
-          updateLbRouteExtensionResponse
-        ),
-        updateLbRouteExtensionMetadata.decode.bind(
-          updateLbRouteExtensionMetadata
-        )
-      ),
+        updateLbRouteExtensionResponse.decode.bind(updateLbRouteExtensionResponse),
+        updateLbRouteExtensionMetadata.decode.bind(updateLbRouteExtensionMetadata)),
       deleteLbRouteExtension: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteLbRouteExtensionResponse.decode.bind(
-          deleteLbRouteExtensionResponse
-        ),
-        deleteLbRouteExtensionMetadata.decode.bind(
-          deleteLbRouteExtensionMetadata
-        )
-      ),
+        deleteLbRouteExtensionResponse.decode.bind(deleteLbRouteExtensionResponse),
+        deleteLbRouteExtensionMetadata.decode.bind(deleteLbRouteExtensionMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.networkservices.v1.DepService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.networkservices.v1.DepService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -529,44 +346,28 @@ export class DepServiceClient {
     // Put together the "service stub" for
     // google.cloud.networkservices.v1.DepService.
     this.depServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.networkservices.v1.DepService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.networkservices.v1.DepService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.networkservices.v1.DepService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const depServiceStubMethods = [
-      'listLbTrafficExtensions',
-      'getLbTrafficExtension',
-      'createLbTrafficExtension',
-      'updateLbTrafficExtension',
-      'deleteLbTrafficExtension',
-      'listLbRouteExtensions',
-      'getLbRouteExtension',
-      'createLbRouteExtension',
-      'updateLbRouteExtension',
-      'deleteLbRouteExtension',
-    ];
+    const depServiceStubMethods =
+        ['listLbTrafficExtensions', 'getLbTrafficExtension', 'createLbTrafficExtension', 'updateLbTrafficExtension', 'deleteLbTrafficExtension', 'listLbRouteExtensions', 'getLbRouteExtension', 'createLbRouteExtension', 'updateLbRouteExtension', 'deleteLbRouteExtension'];
     for (const methodName of depServiceStubMethods) {
       const callPromise = this.depServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -591,14 +392,8 @@ export class DepServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'networkservices.googleapis.com';
   }
@@ -609,14 +404,8 @@ export class DepServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'networkservices.googleapis.com';
   }
@@ -647,7 +436,9 @@ export class DepServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -656,9 +447,8 @@ export class DepServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -669,1505 +459,1030 @@ export class DepServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets details of the specified `LbTrafficExtension` resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. A name of the `LbTrafficExtension` resource to get. Must be in
-   *   the format
-   *   `projects/{project}/locations/{location}/lbTrafficExtensions/{lb_traffic_extension}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.networkservices.v1.LbTrafficExtension|LbTrafficExtension}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/dep_service.get_lb_traffic_extension.js</caption>
-   * region_tag:networkservices_v1_generated_DepService_GetLbTrafficExtension_async
-   */
+/**
+ * Gets details of the specified `LbTrafficExtension` resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the `LbTrafficExtension` resource to get. Must be in
+ *   the format
+ *   `projects/{project}/locations/{location}/lbTrafficExtensions/{lb_traffic_extension}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.networkservices.v1.LbTrafficExtension|LbTrafficExtension}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.get_lb_traffic_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_GetLbTrafficExtension_async
+ */
   getLbTrafficExtension(
-    request?: protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-      (
-        | protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networkservices.v1.ILbTrafficExtension,
+        protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest|undefined, {}|undefined
+      ]>;
   getLbTrafficExtension(
-    request: protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-      | protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getLbTrafficExtension(
-    request: protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest,
-    callback: Callback<
-      protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-      | protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getLbTrafficExtension(
-    request?: protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-          | protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-      | protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-      (
-        | protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getLbTrafficExtension(
+      request: protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest,
+      callback: Callback<
+          protos.google.cloud.networkservices.v1.ILbTrafficExtension,
+          protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getLbTrafficExtension(
+      request?: protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.networkservices.v1.ILbTrafficExtension,
+          protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.networkservices.v1.ILbTrafficExtension,
+          protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.networkservices.v1.ILbTrafficExtension,
+        protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getLbTrafficExtension request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-          | protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.networkservices.v1.ILbTrafficExtension,
+        protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getLbTrafficExtension response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getLbTrafficExtension(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-          (
-            | protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getLbTrafficExtension response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getLbTrafficExtension(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.networkservices.v1.ILbTrafficExtension,
+        protos.google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getLbTrafficExtension response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets details of the specified `LbRouteExtension` resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. A name of the `LbRouteExtension` resource to get. Must be in the
-   *   format
-   *   `projects/{project}/locations/{location}/lbRouteExtensions/{lb_route_extension}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.networkservices.v1.LbRouteExtension|LbRouteExtension}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/dep_service.get_lb_route_extension.js</caption>
-   * region_tag:networkservices_v1_generated_DepService_GetLbRouteExtension_async
-   */
+/**
+ * Gets details of the specified `LbRouteExtension` resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the `LbRouteExtension` resource to get. Must be in the
+ *   format
+ *   `projects/{project}/locations/{location}/lbRouteExtensions/{lb_route_extension}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.networkservices.v1.LbRouteExtension|LbRouteExtension}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.get_lb_route_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_GetLbRouteExtension_async
+ */
   getLbRouteExtension(
-    request?: protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.networkservices.v1.ILbRouteExtension,
-      (
-        | protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networkservices.v1.ILbRouteExtension,
+        protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest|undefined, {}|undefined
+      ]>;
   getLbRouteExtension(
-    request: protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.networkservices.v1.ILbRouteExtension,
-      | protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getLbRouteExtension(
-    request: protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest,
-    callback: Callback<
-      protos.google.cloud.networkservices.v1.ILbRouteExtension,
-      | protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getLbRouteExtension(
-    request?: protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.networkservices.v1.ILbRouteExtension,
-          | protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.networkservices.v1.ILbRouteExtension,
-      | protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.networkservices.v1.ILbRouteExtension,
-      (
-        | protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getLbRouteExtension(
+      request: protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest,
+      callback: Callback<
+          protos.google.cloud.networkservices.v1.ILbRouteExtension,
+          protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getLbRouteExtension(
+      request?: protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.networkservices.v1.ILbRouteExtension,
+          protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.networkservices.v1.ILbRouteExtension,
+          protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.networkservices.v1.ILbRouteExtension,
+        protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getLbRouteExtension request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.networkservices.v1.ILbRouteExtension,
-          | protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.networkservices.v1.ILbRouteExtension,
+        protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getLbRouteExtension response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getLbRouteExtension(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.networkservices.v1.ILbRouteExtension,
-          (
-            | protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getLbRouteExtension response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getLbRouteExtension(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.networkservices.v1.ILbRouteExtension,
+        protos.google.cloud.networkservices.v1.IGetLbRouteExtensionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getLbRouteExtension response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 
-  /**
-   * Creates a new `LbTrafficExtension` resource in a given project and
-   * location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource of the `LbTrafficExtension` resource. Must be
-   *   in the format `projects/{project}/locations/{location}`.
-   * @param {string} request.lbTrafficExtensionId
-   *   Required. User-provided ID of the `LbTrafficExtension` resource to be
-   *   created.
-   * @param {google.cloud.networkservices.v1.LbTrafficExtension} request.lbTrafficExtension
-   *   Required. `LbTrafficExtension` resource to be created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server can ignore
-   *   the request if it has already been completed. The server guarantees
-   *   that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, ignores the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/dep_service.create_lb_traffic_extension.js</caption>
-   * region_tag:networkservices_v1_generated_DepService_CreateLbTrafficExtension_async
-   */
+/**
+ * Creates a new `LbTrafficExtension` resource in a given project and
+ * location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the `LbTrafficExtension` resource. Must be
+ *   in the format `projects/{project}/locations/{location}`.
+ * @param {string} request.lbTrafficExtensionId
+ *   Required. User-provided ID of the `LbTrafficExtension` resource to be
+ *   created.
+ * @param {google.cloud.networkservices.v1.LbTrafficExtension} request.lbTrafficExtension
+ *   Required. `LbTrafficExtension` resource to be created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server can ignore
+ *   the request if it has already been completed. The server guarantees
+ *   that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, ignores the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.create_lb_traffic_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_CreateLbTrafficExtension_async
+ */
   createLbTrafficExtension(
-    request?: protos.google.cloud.networkservices.v1.ICreateLbTrafficExtensionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.networkservices.v1.ICreateLbTrafficExtensionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.ILbTrafficExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createLbTrafficExtension(
-    request: protos.google.cloud.networkservices.v1.ICreateLbTrafficExtensionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkservices.v1.ICreateLbTrafficExtensionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbTrafficExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createLbTrafficExtension(
-    request: protos.google.cloud.networkservices.v1.ICreateLbTrafficExtensionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkservices.v1.ICreateLbTrafficExtensionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbTrafficExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createLbTrafficExtension(
-    request?: protos.google.cloud.networkservices.v1.ICreateLbTrafficExtensionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-            protos.google.cloud.networkservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.networkservices.v1.ICreateLbTrafficExtensionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbTrafficExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbTrafficExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.ILbTrafficExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-            protos.google.cloud.networkservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbTrafficExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createLbTrafficExtension response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createLbTrafficExtension request %j', request);
-    return this.innerApiCalls
-      .createLbTrafficExtension(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-            protos.google.cloud.networkservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createLbTrafficExtension response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createLbTrafficExtension(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networkservices.v1.ILbTrafficExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createLbTrafficExtension response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createLbTrafficExtension()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/dep_service.create_lb_traffic_extension.js</caption>
-   * region_tag:networkservices_v1_generated_DepService_CreateLbTrafficExtension_async
-   */
-  async checkCreateLbTrafficExtensionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.networkservices.v1.LbTrafficExtension,
-      protos.google.cloud.networkservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createLbTrafficExtension()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.create_lb_traffic_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_CreateLbTrafficExtension_async
+ */
+  async checkCreateLbTrafficExtensionProgress(name: string): Promise<LROperation<protos.google.cloud.networkservices.v1.LbTrafficExtension, protos.google.cloud.networkservices.v1.OperationMetadata>>{
     this._log.info('createLbTrafficExtension long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createLbTrafficExtension,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.networkservices.v1.LbTrafficExtension,
-      protos.google.cloud.networkservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createLbTrafficExtension, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networkservices.v1.LbTrafficExtension, protos.google.cloud.networkservices.v1.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of the specified `LbTrafficExtension` resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Used to specify the fields to be overwritten in the
-   *   `LbTrafficExtension` resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field is overwritten if it is in the mask. If the
-   *   user does not specify a mask, then all fields are overwritten.
-   * @param {google.cloud.networkservices.v1.LbTrafficExtension} request.lbTrafficExtension
-   *   Required. `LbTrafficExtension` resource being updated.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server can ignore
-   *   the request if it has already been completed. The server guarantees
-   *   that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, ignores the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/dep_service.update_lb_traffic_extension.js</caption>
-   * region_tag:networkservices_v1_generated_DepService_UpdateLbTrafficExtension_async
-   */
+/**
+ * Updates the parameters of the specified `LbTrafficExtension` resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Used to specify the fields to be overwritten in the
+ *   `LbTrafficExtension` resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field is overwritten if it is in the mask. If the
+ *   user does not specify a mask, then all fields are overwritten.
+ * @param {google.cloud.networkservices.v1.LbTrafficExtension} request.lbTrafficExtension
+ *   Required. `LbTrafficExtension` resource being updated.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server can ignore
+ *   the request if it has already been completed. The server guarantees
+ *   that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, ignores the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.update_lb_traffic_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_UpdateLbTrafficExtension_async
+ */
   updateLbTrafficExtension(
-    request?: protos.google.cloud.networkservices.v1.IUpdateLbTrafficExtensionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.networkservices.v1.IUpdateLbTrafficExtensionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.ILbTrafficExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateLbTrafficExtension(
-    request: protos.google.cloud.networkservices.v1.IUpdateLbTrafficExtensionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkservices.v1.IUpdateLbTrafficExtensionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbTrafficExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateLbTrafficExtension(
-    request: protos.google.cloud.networkservices.v1.IUpdateLbTrafficExtensionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkservices.v1.IUpdateLbTrafficExtensionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbTrafficExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateLbTrafficExtension(
-    request?: protos.google.cloud.networkservices.v1.IUpdateLbTrafficExtensionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-            protos.google.cloud.networkservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.networkservices.v1.IUpdateLbTrafficExtensionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbTrafficExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbTrafficExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.ILbTrafficExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'lb_traffic_extension.name': request.lbTrafficExtension!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'lb_traffic_extension.name': request.lbTrafficExtension!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-            protos.google.cloud.networkservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbTrafficExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateLbTrafficExtension response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateLbTrafficExtension request %j', request);
-    return this.innerApiCalls
-      .updateLbTrafficExtension(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.networkservices.v1.ILbTrafficExtension,
-            protos.google.cloud.networkservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateLbTrafficExtension response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateLbTrafficExtension(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networkservices.v1.ILbTrafficExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateLbTrafficExtension response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateLbTrafficExtension()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/dep_service.update_lb_traffic_extension.js</caption>
-   * region_tag:networkservices_v1_generated_DepService_UpdateLbTrafficExtension_async
-   */
-  async checkUpdateLbTrafficExtensionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.networkservices.v1.LbTrafficExtension,
-      protos.google.cloud.networkservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateLbTrafficExtension()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.update_lb_traffic_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_UpdateLbTrafficExtension_async
+ */
+  async checkUpdateLbTrafficExtensionProgress(name: string): Promise<LROperation<protos.google.cloud.networkservices.v1.LbTrafficExtension, protos.google.cloud.networkservices.v1.OperationMetadata>>{
     this._log.info('updateLbTrafficExtension long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateLbTrafficExtension,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.networkservices.v1.LbTrafficExtension,
-      protos.google.cloud.networkservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateLbTrafficExtension, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networkservices.v1.LbTrafficExtension, protos.google.cloud.networkservices.v1.OperationMetadata>;
   }
-  /**
-   * Deletes the specified `LbTrafficExtension` resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the `LbTrafficExtension` resource to delete. Must be
-   *   in the format
-   *   `projects/{project}/locations/{location}/lbTrafficExtensions/{lb_traffic_extension}`.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server can ignore
-   *   the request if it has already been completed. The server guarantees
-   *   that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, ignores the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/dep_service.delete_lb_traffic_extension.js</caption>
-   * region_tag:networkservices_v1_generated_DepService_DeleteLbTrafficExtension_async
-   */
+/**
+ * Deletes the specified `LbTrafficExtension` resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the `LbTrafficExtension` resource to delete. Must be
+ *   in the format
+ *   `projects/{project}/locations/{location}/lbTrafficExtensions/{lb_traffic_extension}`.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server can ignore
+ *   the request if it has already been completed. The server guarantees
+ *   that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, ignores the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.delete_lb_traffic_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_DeleteLbTrafficExtension_async
+ */
   deleteLbTrafficExtension(
-    request?: protos.google.cloud.networkservices.v1.IDeleteLbTrafficExtensionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.networkservices.v1.IDeleteLbTrafficExtensionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteLbTrafficExtension(
-    request: protos.google.cloud.networkservices.v1.IDeleteLbTrafficExtensionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkservices.v1.IDeleteLbTrafficExtensionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteLbTrafficExtension(
-    request: protos.google.cloud.networkservices.v1.IDeleteLbTrafficExtensionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkservices.v1.IDeleteLbTrafficExtensionRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteLbTrafficExtension(
-    request?: protos.google.cloud.networkservices.v1.IDeleteLbTrafficExtensionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.networkservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.networkservices.v1.IDeleteLbTrafficExtensionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.networkservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteLbTrafficExtension response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteLbTrafficExtension request %j', request);
-    return this.innerApiCalls
-      .deleteLbTrafficExtension(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.networkservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteLbTrafficExtension response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteLbTrafficExtension(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteLbTrafficExtension response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteLbTrafficExtension()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/dep_service.delete_lb_traffic_extension.js</caption>
-   * region_tag:networkservices_v1_generated_DepService_DeleteLbTrafficExtension_async
-   */
-  async checkDeleteLbTrafficExtensionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.networkservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteLbTrafficExtension()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.delete_lb_traffic_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_DeleteLbTrafficExtension_async
+ */
+  async checkDeleteLbTrafficExtensionProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkservices.v1.OperationMetadata>>{
     this._log.info('deleteLbTrafficExtension long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteLbTrafficExtension,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.networkservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteLbTrafficExtension, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkservices.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new `LbRouteExtension` resource in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource of the `LbRouteExtension` resource. Must be
-   *   in the format `projects/{project}/locations/{location}`.
-   * @param {string} request.lbRouteExtensionId
-   *   Required. User-provided ID of the `LbRouteExtension` resource to be
-   *   created.
-   * @param {google.cloud.networkservices.v1.LbRouteExtension} request.lbRouteExtension
-   *   Required. `LbRouteExtension` resource to be created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server can ignore
-   *   the request if it has already been completed. The server guarantees
-   *   that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, ignores the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/dep_service.create_lb_route_extension.js</caption>
-   * region_tag:networkservices_v1_generated_DepService_CreateLbRouteExtension_async
-   */
+/**
+ * Creates a new `LbRouteExtension` resource in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the `LbRouteExtension` resource. Must be
+ *   in the format `projects/{project}/locations/{location}`.
+ * @param {string} request.lbRouteExtensionId
+ *   Required. User-provided ID of the `LbRouteExtension` resource to be
+ *   created.
+ * @param {google.cloud.networkservices.v1.LbRouteExtension} request.lbRouteExtension
+ *   Required. `LbRouteExtension` resource to be created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server can ignore
+ *   the request if it has already been completed. The server guarantees
+ *   that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, ignores the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.create_lb_route_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_CreateLbRouteExtension_async
+ */
   createLbRouteExtension(
-    request?: protos.google.cloud.networkservices.v1.ICreateLbRouteExtensionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkservices.v1.ILbRouteExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.networkservices.v1.ICreateLbRouteExtensionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.ILbRouteExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createLbRouteExtension(
-    request: protos.google.cloud.networkservices.v1.ICreateLbRouteExtensionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkservices.v1.ILbRouteExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkservices.v1.ICreateLbRouteExtensionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbRouteExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createLbRouteExtension(
-    request: protos.google.cloud.networkservices.v1.ICreateLbRouteExtensionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkservices.v1.ILbRouteExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkservices.v1.ICreateLbRouteExtensionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbRouteExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createLbRouteExtension(
-    request?: protos.google.cloud.networkservices.v1.ICreateLbRouteExtensionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.networkservices.v1.ILbRouteExtension,
-            protos.google.cloud.networkservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.networkservices.v1.ILbRouteExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkservices.v1.ILbRouteExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.networkservices.v1.ICreateLbRouteExtensionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbRouteExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbRouteExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.ILbRouteExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.networkservices.v1.ILbRouteExtension,
-            protos.google.cloud.networkservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbRouteExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createLbRouteExtension response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createLbRouteExtension request %j', request);
-    return this.innerApiCalls
-      .createLbRouteExtension(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.networkservices.v1.ILbRouteExtension,
-            protos.google.cloud.networkservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createLbRouteExtension response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createLbRouteExtension(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networkservices.v1.ILbRouteExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createLbRouteExtension response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createLbRouteExtension()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/dep_service.create_lb_route_extension.js</caption>
-   * region_tag:networkservices_v1_generated_DepService_CreateLbRouteExtension_async
-   */
-  async checkCreateLbRouteExtensionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.networkservices.v1.LbRouteExtension,
-      protos.google.cloud.networkservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createLbRouteExtension()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.create_lb_route_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_CreateLbRouteExtension_async
+ */
+  async checkCreateLbRouteExtensionProgress(name: string): Promise<LROperation<protos.google.cloud.networkservices.v1.LbRouteExtension, protos.google.cloud.networkservices.v1.OperationMetadata>>{
     this._log.info('createLbRouteExtension long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createLbRouteExtension,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.networkservices.v1.LbRouteExtension,
-      protos.google.cloud.networkservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createLbRouteExtension, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networkservices.v1.LbRouteExtension, protos.google.cloud.networkservices.v1.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of the specified `LbRouteExtension` resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Used to specify the fields to be overwritten in the
-   *   `LbRouteExtension` resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field is overwritten if it is in the mask. If the
-   *   user does not specify a mask, then all fields are overwritten.
-   * @param {google.cloud.networkservices.v1.LbRouteExtension} request.lbRouteExtension
-   *   Required. `LbRouteExtension` resource being updated.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server can ignore
-   *   the request if it has already been completed. The server guarantees
-   *   that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, ignores the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/dep_service.update_lb_route_extension.js</caption>
-   * region_tag:networkservices_v1_generated_DepService_UpdateLbRouteExtension_async
-   */
+/**
+ * Updates the parameters of the specified `LbRouteExtension` resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Used to specify the fields to be overwritten in the
+ *   `LbRouteExtension` resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field is overwritten if it is in the mask. If the
+ *   user does not specify a mask, then all fields are overwritten.
+ * @param {google.cloud.networkservices.v1.LbRouteExtension} request.lbRouteExtension
+ *   Required. `LbRouteExtension` resource being updated.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server can ignore
+ *   the request if it has already been completed. The server guarantees
+ *   that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, ignores the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.update_lb_route_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_UpdateLbRouteExtension_async
+ */
   updateLbRouteExtension(
-    request?: protos.google.cloud.networkservices.v1.IUpdateLbRouteExtensionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkservices.v1.ILbRouteExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.networkservices.v1.IUpdateLbRouteExtensionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.ILbRouteExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateLbRouteExtension(
-    request: protos.google.cloud.networkservices.v1.IUpdateLbRouteExtensionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkservices.v1.ILbRouteExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkservices.v1.IUpdateLbRouteExtensionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbRouteExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateLbRouteExtension(
-    request: protos.google.cloud.networkservices.v1.IUpdateLbRouteExtensionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkservices.v1.ILbRouteExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkservices.v1.IUpdateLbRouteExtensionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbRouteExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateLbRouteExtension(
-    request?: protos.google.cloud.networkservices.v1.IUpdateLbRouteExtensionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.networkservices.v1.ILbRouteExtension,
-            protos.google.cloud.networkservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.networkservices.v1.ILbRouteExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkservices.v1.ILbRouteExtension,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.networkservices.v1.IUpdateLbRouteExtensionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbRouteExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbRouteExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.ILbRouteExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'lb_route_extension.name': request.lbRouteExtension!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'lb_route_extension.name': request.lbRouteExtension!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.networkservices.v1.ILbRouteExtension,
-            protos.google.cloud.networkservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbRouteExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateLbRouteExtension response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateLbRouteExtension request %j', request);
-    return this.innerApiCalls
-      .updateLbRouteExtension(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.networkservices.v1.ILbRouteExtension,
-            protos.google.cloud.networkservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateLbRouteExtension response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateLbRouteExtension(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networkservices.v1.ILbRouteExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateLbRouteExtension response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateLbRouteExtension()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/dep_service.update_lb_route_extension.js</caption>
-   * region_tag:networkservices_v1_generated_DepService_UpdateLbRouteExtension_async
-   */
-  async checkUpdateLbRouteExtensionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.networkservices.v1.LbRouteExtension,
-      protos.google.cloud.networkservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateLbRouteExtension()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.update_lb_route_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_UpdateLbRouteExtension_async
+ */
+  async checkUpdateLbRouteExtensionProgress(name: string): Promise<LROperation<protos.google.cloud.networkservices.v1.LbRouteExtension, protos.google.cloud.networkservices.v1.OperationMetadata>>{
     this._log.info('updateLbRouteExtension long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateLbRouteExtension,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.networkservices.v1.LbRouteExtension,
-      protos.google.cloud.networkservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateLbRouteExtension, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networkservices.v1.LbRouteExtension, protos.google.cloud.networkservices.v1.OperationMetadata>;
   }
-  /**
-   * Deletes the specified `LbRouteExtension` resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the `LbRouteExtension` resource to delete. Must be in
-   *   the format
-   *   `projects/{project}/locations/{location}/lbRouteExtensions/{lb_route_extension}`.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server can ignore
-   *   the request if it has already been completed. The server guarantees
-   *   that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, ignores the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/dep_service.delete_lb_route_extension.js</caption>
-   * region_tag:networkservices_v1_generated_DepService_DeleteLbRouteExtension_async
-   */
+/**
+ * Deletes the specified `LbRouteExtension` resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the `LbRouteExtension` resource to delete. Must be in
+ *   the format
+ *   `projects/{project}/locations/{location}/lbRouteExtensions/{lb_route_extension}`.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server can ignore
+ *   the request if it has already been completed. The server guarantees
+ *   that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, ignores the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.delete_lb_route_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_DeleteLbRouteExtension_async
+ */
   deleteLbRouteExtension(
-    request?: protos.google.cloud.networkservices.v1.IDeleteLbRouteExtensionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.networkservices.v1.IDeleteLbRouteExtensionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteLbRouteExtension(
-    request: protos.google.cloud.networkservices.v1.IDeleteLbRouteExtensionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkservices.v1.IDeleteLbRouteExtensionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteLbRouteExtension(
-    request: protos.google.cloud.networkservices.v1.IDeleteLbRouteExtensionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkservices.v1.IDeleteLbRouteExtensionRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteLbRouteExtension(
-    request?: protos.google.cloud.networkservices.v1.IDeleteLbRouteExtensionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.networkservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkservices.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.networkservices.v1.IDeleteLbRouteExtensionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.networkservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteLbRouteExtension response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteLbRouteExtension request %j', request);
-    return this.innerApiCalls
-      .deleteLbRouteExtension(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.networkservices.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteLbRouteExtension response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteLbRouteExtension(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteLbRouteExtension response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteLbRouteExtension()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/dep_service.delete_lb_route_extension.js</caption>
-   * region_tag:networkservices_v1_generated_DepService_DeleteLbRouteExtension_async
-   */
-  async checkDeleteLbRouteExtensionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.networkservices.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteLbRouteExtension()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.delete_lb_route_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_DeleteLbRouteExtension_async
+ */
+  async checkDeleteLbRouteExtensionProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkservices.v1.OperationMetadata>>{
     this._log.info('deleteLbRouteExtension long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteLbRouteExtension,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.networkservices.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteLbRouteExtension, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkservices.v1.OperationMetadata>;
   }
-  /**
-   * Lists `LbTrafficExtension` resources in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the `LbTrafficExtension`
-   *   resources are listed, specified in the following format:
-   *   `projects/{project}/locations/{location}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. The server might return fewer items than
-   *   requested. If unspecified, the server picks an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results that the server returns.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.networkservices.v1.LbTrafficExtension|LbTrafficExtension}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listLbTrafficExtensionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists `LbTrafficExtension` resources in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the `LbTrafficExtension`
+ *   resources are listed, specified in the following format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server might return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results that the server returns.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.networkservices.v1.LbTrafficExtension|LbTrafficExtension}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listLbTrafficExtensionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listLbTrafficExtensions(
-    request?: protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.networkservices.v1.ILbTrafficExtension[],
-      protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest | null,
-      protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networkservices.v1.ILbTrafficExtension[],
+        protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest|null,
+        protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse
+      ]>;
   listLbTrafficExtensions(
-    request: protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
-      | protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.networkservices.v1.ILbTrafficExtension
-    >
-  ): void;
-  listLbTrafficExtensions(
-    request: protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
-      | protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.networkservices.v1.ILbTrafficExtension
-    >
-  ): void;
-  listLbTrafficExtensions(
-    request?: protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
-          | protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.networkservices.v1.ILbTrafficExtension
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
-      | protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.networkservices.v1.ILbTrafficExtension
-    >
-  ): Promise<
-    [
-      protos.google.cloud.networkservices.v1.ILbTrafficExtension[],
-      protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest | null,
-      protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.ILbTrafficExtension>): void;
+  listLbTrafficExtensions(
+      request: protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
+          protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.ILbTrafficExtension>): void;
+  listLbTrafficExtensions(
+      request?: protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
+          protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.ILbTrafficExtension>,
+      callback?: PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
+          protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.ILbTrafficExtension>):
+      Promise<[
+        protos.google.cloud.networkservices.v1.ILbTrafficExtension[],
+        protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest|null,
+        protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
-          | protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.networkservices.v1.ILbTrafficExtension
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
+      protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse|null|undefined,
+      protos.google.cloud.networkservices.v1.ILbTrafficExtension>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listLbTrafficExtensions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2176,63 +1491,60 @@ export class DepServiceClient {
     this._log.info('listLbTrafficExtensions request %j', request);
     return this.innerApiCalls
       .listLbTrafficExtensions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.networkservices.v1.ILbTrafficExtension[],
-          protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest | null,
-          protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse,
-        ]) => {
-          this._log.info('listLbTrafficExtensions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.networkservices.v1.ILbTrafficExtension[],
+        protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest|null,
+        protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse
+      ]) => {
+        this._log.info('listLbTrafficExtensions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listLbTrafficExtensions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the `LbTrafficExtension`
-   *   resources are listed, specified in the following format:
-   *   `projects/{project}/locations/{location}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. The server might return fewer items than
-   *   requested. If unspecified, the server picks an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results that the server returns.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.networkservices.v1.LbTrafficExtension|LbTrafficExtension} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listLbTrafficExtensionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listLbTrafficExtensions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the `LbTrafficExtension`
+ *   resources are listed, specified in the following format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server might return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results that the server returns.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.networkservices.v1.LbTrafficExtension|LbTrafficExtension} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listLbTrafficExtensionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listLbTrafficExtensionsStream(
-    request?: protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listLbTrafficExtensions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listLbTrafficExtensions stream %j', request);
     return this.descriptors.page.listLbTrafficExtensions.createStream(
       this.innerApiCalls.listLbTrafficExtensions as GaxCall,
@@ -2241,54 +1553,53 @@ export class DepServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listLbTrafficExtensions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the `LbTrafficExtension`
-   *   resources are listed, specified in the following format:
-   *   `projects/{project}/locations/{location}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. The server might return fewer items than
-   *   requested. If unspecified, the server picks an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results that the server returns.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.networkservices.v1.LbTrafficExtension|LbTrafficExtension}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/dep_service.list_lb_traffic_extensions.js</caption>
-   * region_tag:networkservices_v1_generated_DepService_ListLbTrafficExtensions_async
-   */
+/**
+ * Equivalent to `listLbTrafficExtensions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the `LbTrafficExtension`
+ *   resources are listed, specified in the following format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server might return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results that the server returns.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.networkservices.v1.LbTrafficExtension|LbTrafficExtension}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.list_lb_traffic_extensions.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_ListLbTrafficExtensions_async
+ */
   listLbTrafficExtensionsAsync(
-    request?: protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.networkservices.v1.ILbTrafficExtension> {
+      request?: protos.google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.networkservices.v1.ILbTrafficExtension>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listLbTrafficExtensions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listLbTrafficExtensions iterate %j', request);
     return this.descriptors.page.listLbTrafficExtensions.asyncIterate(
       this.innerApiCalls['listLbTrafficExtensions'] as GaxCall,
@@ -2296,119 +1607,94 @@ export class DepServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.networkservices.v1.ILbTrafficExtension>;
   }
-  /**
-   * Lists `LbRouteExtension` resources in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the `LbRouteExtension`
-   *   resources are listed, specified in the following format:
-   *   `projects/{project}/locations/{location}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. The server might return fewer items than
-   *   requested. If unspecified, the server picks an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results that the server returns.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.networkservices.v1.LbRouteExtension|LbRouteExtension}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listLbRouteExtensionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists `LbRouteExtension` resources in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the `LbRouteExtension`
+ *   resources are listed, specified in the following format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server might return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results that the server returns.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.networkservices.v1.LbRouteExtension|LbRouteExtension}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listLbRouteExtensionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listLbRouteExtensions(
-    request?: protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.networkservices.v1.ILbRouteExtension[],
-      protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest | null,
-      protos.google.cloud.networkservices.v1.IListLbRouteExtensionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networkservices.v1.ILbRouteExtension[],
+        protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest|null,
+        protos.google.cloud.networkservices.v1.IListLbRouteExtensionsResponse
+      ]>;
   listLbRouteExtensions(
-    request: protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
-      | protos.google.cloud.networkservices.v1.IListLbRouteExtensionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.networkservices.v1.ILbRouteExtension
-    >
-  ): void;
-  listLbRouteExtensions(
-    request: protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
-      | protos.google.cloud.networkservices.v1.IListLbRouteExtensionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.networkservices.v1.ILbRouteExtension
-    >
-  ): void;
-  listLbRouteExtensions(
-    request?: protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
-          | protos.google.cloud.networkservices.v1.IListLbRouteExtensionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.networkservices.v1.ILbRouteExtension
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
-      | protos.google.cloud.networkservices.v1.IListLbRouteExtensionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.networkservices.v1.ILbRouteExtension
-    >
-  ): Promise<
-    [
-      protos.google.cloud.networkservices.v1.ILbRouteExtension[],
-      protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest | null,
-      protos.google.cloud.networkservices.v1.IListLbRouteExtensionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.networkservices.v1.IListLbRouteExtensionsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.ILbRouteExtension>): void;
+  listLbRouteExtensions(
+      request: protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
+          protos.google.cloud.networkservices.v1.IListLbRouteExtensionsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.ILbRouteExtension>): void;
+  listLbRouteExtensions(
+      request?: protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
+          protos.google.cloud.networkservices.v1.IListLbRouteExtensionsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.ILbRouteExtension>,
+      callback?: PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
+          protos.google.cloud.networkservices.v1.IListLbRouteExtensionsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.ILbRouteExtension>):
+      Promise<[
+        protos.google.cloud.networkservices.v1.ILbRouteExtension[],
+        protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest|null,
+        protos.google.cloud.networkservices.v1.IListLbRouteExtensionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
-          | protos.google.cloud.networkservices.v1.IListLbRouteExtensionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.networkservices.v1.ILbRouteExtension
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
+      protos.google.cloud.networkservices.v1.IListLbRouteExtensionsResponse|null|undefined,
+      protos.google.cloud.networkservices.v1.ILbRouteExtension>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listLbRouteExtensions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2417,63 +1703,60 @@ export class DepServiceClient {
     this._log.info('listLbRouteExtensions request %j', request);
     return this.innerApiCalls
       .listLbRouteExtensions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.networkservices.v1.ILbRouteExtension[],
-          protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest | null,
-          protos.google.cloud.networkservices.v1.IListLbRouteExtensionsResponse,
-        ]) => {
-          this._log.info('listLbRouteExtensions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.networkservices.v1.ILbRouteExtension[],
+        protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest|null,
+        protos.google.cloud.networkservices.v1.IListLbRouteExtensionsResponse
+      ]) => {
+        this._log.info('listLbRouteExtensions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listLbRouteExtensions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the `LbRouteExtension`
-   *   resources are listed, specified in the following format:
-   *   `projects/{project}/locations/{location}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. The server might return fewer items than
-   *   requested. If unspecified, the server picks an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results that the server returns.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.networkservices.v1.LbRouteExtension|LbRouteExtension} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listLbRouteExtensionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listLbRouteExtensions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the `LbRouteExtension`
+ *   resources are listed, specified in the following format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server might return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results that the server returns.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.networkservices.v1.LbRouteExtension|LbRouteExtension} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listLbRouteExtensionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listLbRouteExtensionsStream(
-    request?: protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listLbRouteExtensions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listLbRouteExtensions stream %j', request);
     return this.descriptors.page.listLbRouteExtensions.createStream(
       this.innerApiCalls.listLbRouteExtensions as GaxCall,
@@ -2482,54 +1765,53 @@ export class DepServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listLbRouteExtensions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the `LbRouteExtension`
-   *   resources are listed, specified in the following format:
-   *   `projects/{project}/locations/{location}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. The server might return fewer items than
-   *   requested. If unspecified, the server picks an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results that the server returns.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.networkservices.v1.LbRouteExtension|LbRouteExtension}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/dep_service.list_lb_route_extensions.js</caption>
-   * region_tag:networkservices_v1_generated_DepService_ListLbRouteExtensions_async
-   */
+/**
+ * Equivalent to `listLbRouteExtensions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the `LbRouteExtension`
+ *   resources are listed, specified in the following format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server might return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results that the server returns.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.networkservices.v1.LbRouteExtension|LbRouteExtension}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.list_lb_route_extensions.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_ListLbRouteExtensions_async
+ */
   listLbRouteExtensionsAsync(
-    request?: protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.networkservices.v1.ILbRouteExtension> {
+      request?: protos.google.cloud.networkservices.v1.IListLbRouteExtensionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.networkservices.v1.ILbRouteExtension>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listLbRouteExtensions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listLbRouteExtensions iterate %j', request);
     return this.descriptors.page.listLbRouteExtensions.asyncIterate(
       this.innerApiCalls['listLbRouteExtensions'] as GaxCall,
@@ -2537,31 +1819,31 @@ export class DepServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.networkservices.v1.ILbRouteExtension>;
   }
-  /**
-   * Gets the access control policy for a resource. Returns an empty policy
-   * if the resource exists and does not have a policy set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {Object} [request.options]
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   *
-   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Gets the access control policy for a resource. Returns an empty policy
+ * if the resource exists and does not have a policy set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {Object} [request.options]
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`. This field is only used by Cloud IAM.
+ *
+ *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -2576,39 +1858,39 @@ export class DepServiceClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -2623,40 +1905,40 @@ export class DepServiceClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ *
+ */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -2671,11 +1953,11 @@ export class DepServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -2715,7 +1997,7 @@ export class DepServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -2753,7 +2035,7 @@ export class DepServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -2798,20 +2080,20 @@ export class DepServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2848,13 +2130,13 @@ export class DepServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2888,7 +2170,7 @@ export class DepServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -2903,20 +2185,20 @@ export class DepServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2960,20 +2242,20 @@ export class DepServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2989,11 +2271,7 @@ export class DepServiceClient {
    * @param {string} endpoint_policy
    * @returns {string} Resource name string.
    */
-  endpointPolicyPath(
-    project: string,
-    location: string,
-    endpointPolicy: string
-  ) {
+  endpointPolicyPath(project:string,location:string,endpointPolicy:string) {
     return this.pathTemplates.endpointPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -3009,9 +2287,7 @@ export class DepServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEndpointPolicyName(endpointPolicyName: string) {
-    return this.pathTemplates.endpointPolicyPathTemplate.match(
-      endpointPolicyName
-    ).project;
+    return this.pathTemplates.endpointPolicyPathTemplate.match(endpointPolicyName).project;
   }
 
   /**
@@ -3022,9 +2298,7 @@ export class DepServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEndpointPolicyName(endpointPolicyName: string) {
-    return this.pathTemplates.endpointPolicyPathTemplate.match(
-      endpointPolicyName
-    ).location;
+    return this.pathTemplates.endpointPolicyPathTemplate.match(endpointPolicyName).location;
   }
 
   /**
@@ -3035,9 +2309,7 @@ export class DepServiceClient {
    * @returns {string} A string representing the endpoint_policy.
    */
   matchEndpointPolicyFromEndpointPolicyName(endpointPolicyName: string) {
-    return this.pathTemplates.endpointPolicyPathTemplate.match(
-      endpointPolicyName
-    ).endpoint_policy;
+    return this.pathTemplates.endpointPolicyPathTemplate.match(endpointPolicyName).endpoint_policy;
   }
 
   /**
@@ -3048,7 +2320,7 @@ export class DepServiceClient {
    * @param {string} gateway
    * @returns {string} Resource name string.
    */
-  gatewayPath(project: string, location: string, gateway: string) {
+  gatewayPath(project:string,location:string,gateway:string) {
     return this.pathTemplates.gatewayPathTemplate.render({
       project: project,
       location: location,
@@ -3090,6 +2362,68 @@ export class DepServiceClient {
   }
 
   /**
+   * Return a fully-qualified gatewayRouteView resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} gateway
+   * @param {string} route_view
+   * @returns {string} Resource name string.
+   */
+  gatewayRouteViewPath(project:string,location:string,gateway:string,routeView:string) {
+    return this.pathTemplates.gatewayRouteViewPathTemplate.render({
+      project: project,
+      location: location,
+      gateway: gateway,
+      route_view: routeView,
+    });
+  }
+
+  /**
+   * Parse the project from GatewayRouteView resource.
+   *
+   * @param {string} gatewayRouteViewName
+   *   A fully-qualified path representing GatewayRouteView resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGatewayRouteViewName(gatewayRouteViewName: string) {
+    return this.pathTemplates.gatewayRouteViewPathTemplate.match(gatewayRouteViewName).project;
+  }
+
+  /**
+   * Parse the location from GatewayRouteView resource.
+   *
+   * @param {string} gatewayRouteViewName
+   *   A fully-qualified path representing GatewayRouteView resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGatewayRouteViewName(gatewayRouteViewName: string) {
+    return this.pathTemplates.gatewayRouteViewPathTemplate.match(gatewayRouteViewName).location;
+  }
+
+  /**
+   * Parse the gateway from GatewayRouteView resource.
+   *
+   * @param {string} gatewayRouteViewName
+   *   A fully-qualified path representing GatewayRouteView resource.
+   * @returns {string} A string representing the gateway.
+   */
+  matchGatewayFromGatewayRouteViewName(gatewayRouteViewName: string) {
+    return this.pathTemplates.gatewayRouteViewPathTemplate.match(gatewayRouteViewName).gateway;
+  }
+
+  /**
+   * Parse the route_view from GatewayRouteView resource.
+   *
+   * @param {string} gatewayRouteViewName
+   *   A fully-qualified path representing GatewayRouteView resource.
+   * @returns {string} A string representing the route_view.
+   */
+  matchRouteViewFromGatewayRouteViewName(gatewayRouteViewName: string) {
+    return this.pathTemplates.gatewayRouteViewPathTemplate.match(gatewayRouteViewName).route_view;
+  }
+
+  /**
    * Return a fully-qualified grpcRoute resource name string.
    *
    * @param {string} project
@@ -3097,7 +2431,7 @@ export class DepServiceClient {
    * @param {string} grpc_route
    * @returns {string} Resource name string.
    */
-  grpcRoutePath(project: string, location: string, grpcRoute: string) {
+  grpcRoutePath(project:string,location:string,grpcRoute:string) {
     return this.pathTemplates.grpcRoutePathTemplate.render({
       project: project,
       location: location,
@@ -3113,8 +2447,7 @@ export class DepServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGrpcRouteName(grpcRouteName: string) {
-    return this.pathTemplates.grpcRoutePathTemplate.match(grpcRouteName)
-      .project;
+    return this.pathTemplates.grpcRoutePathTemplate.match(grpcRouteName).project;
   }
 
   /**
@@ -3125,8 +2458,7 @@ export class DepServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGrpcRouteName(grpcRouteName: string) {
-    return this.pathTemplates.grpcRoutePathTemplate.match(grpcRouteName)
-      .location;
+    return this.pathTemplates.grpcRoutePathTemplate.match(grpcRouteName).location;
   }
 
   /**
@@ -3137,8 +2469,7 @@ export class DepServiceClient {
    * @returns {string} A string representing the grpc_route.
    */
   matchGrpcRouteFromGrpcRouteName(grpcRouteName: string) {
-    return this.pathTemplates.grpcRoutePathTemplate.match(grpcRouteName)
-      .grpc_route;
+    return this.pathTemplates.grpcRoutePathTemplate.match(grpcRouteName).grpc_route;
   }
 
   /**
@@ -3149,7 +2480,7 @@ export class DepServiceClient {
    * @param {string} http_route
    * @returns {string} Resource name string.
    */
-  httpRoutePath(project: string, location: string, httpRoute: string) {
+  httpRoutePath(project:string,location:string,httpRoute:string) {
     return this.pathTemplates.httpRoutePathTemplate.render({
       project: project,
       location: location,
@@ -3165,8 +2496,7 @@ export class DepServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromHttpRouteName(httpRouteName: string) {
-    return this.pathTemplates.httpRoutePathTemplate.match(httpRouteName)
-      .project;
+    return this.pathTemplates.httpRoutePathTemplate.match(httpRouteName).project;
   }
 
   /**
@@ -3177,8 +2507,7 @@ export class DepServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromHttpRouteName(httpRouteName: string) {
-    return this.pathTemplates.httpRoutePathTemplate.match(httpRouteName)
-      .location;
+    return this.pathTemplates.httpRoutePathTemplate.match(httpRouteName).location;
   }
 
   /**
@@ -3189,8 +2518,7 @@ export class DepServiceClient {
    * @returns {string} A string representing the http_route.
    */
   matchHttpRouteFromHttpRouteName(httpRouteName: string) {
-    return this.pathTemplates.httpRoutePathTemplate.match(httpRouteName)
-      .http_route;
+    return this.pathTemplates.httpRoutePathTemplate.match(httpRouteName).http_route;
   }
 
   /**
@@ -3201,11 +2529,7 @@ export class DepServiceClient {
    * @param {string} lb_route_extension
    * @returns {string} Resource name string.
    */
-  lbRouteExtensionPath(
-    project: string,
-    location: string,
-    lbRouteExtension: string
-  ) {
+  lbRouteExtensionPath(project:string,location:string,lbRouteExtension:string) {
     return this.pathTemplates.lbRouteExtensionPathTemplate.render({
       project: project,
       location: location,
@@ -3221,9 +2545,7 @@ export class DepServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromLbRouteExtensionName(lbRouteExtensionName: string) {
-    return this.pathTemplates.lbRouteExtensionPathTemplate.match(
-      lbRouteExtensionName
-    ).project;
+    return this.pathTemplates.lbRouteExtensionPathTemplate.match(lbRouteExtensionName).project;
   }
 
   /**
@@ -3234,9 +2556,7 @@ export class DepServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromLbRouteExtensionName(lbRouteExtensionName: string) {
-    return this.pathTemplates.lbRouteExtensionPathTemplate.match(
-      lbRouteExtensionName
-    ).location;
+    return this.pathTemplates.lbRouteExtensionPathTemplate.match(lbRouteExtensionName).location;
   }
 
   /**
@@ -3247,9 +2567,7 @@ export class DepServiceClient {
    * @returns {string} A string representing the lb_route_extension.
    */
   matchLbRouteExtensionFromLbRouteExtensionName(lbRouteExtensionName: string) {
-    return this.pathTemplates.lbRouteExtensionPathTemplate.match(
-      lbRouteExtensionName
-    ).lb_route_extension;
+    return this.pathTemplates.lbRouteExtensionPathTemplate.match(lbRouteExtensionName).lb_route_extension;
   }
 
   /**
@@ -3260,11 +2578,7 @@ export class DepServiceClient {
    * @param {string} lb_traffic_extension
    * @returns {string} Resource name string.
    */
-  lbTrafficExtensionPath(
-    project: string,
-    location: string,
-    lbTrafficExtension: string
-  ) {
+  lbTrafficExtensionPath(project:string,location:string,lbTrafficExtension:string) {
     return this.pathTemplates.lbTrafficExtensionPathTemplate.render({
       project: project,
       location: location,
@@ -3280,9 +2594,7 @@ export class DepServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromLbTrafficExtensionName(lbTrafficExtensionName: string) {
-    return this.pathTemplates.lbTrafficExtensionPathTemplate.match(
-      lbTrafficExtensionName
-    ).project;
+    return this.pathTemplates.lbTrafficExtensionPathTemplate.match(lbTrafficExtensionName).project;
   }
 
   /**
@@ -3293,9 +2605,7 @@ export class DepServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromLbTrafficExtensionName(lbTrafficExtensionName: string) {
-    return this.pathTemplates.lbTrafficExtensionPathTemplate.match(
-      lbTrafficExtensionName
-    ).location;
+    return this.pathTemplates.lbTrafficExtensionPathTemplate.match(lbTrafficExtensionName).location;
   }
 
   /**
@@ -3305,12 +2615,8 @@ export class DepServiceClient {
    *   A fully-qualified path representing LbTrafficExtension resource.
    * @returns {string} A string representing the lb_traffic_extension.
    */
-  matchLbTrafficExtensionFromLbTrafficExtensionName(
-    lbTrafficExtensionName: string
-  ) {
-    return this.pathTemplates.lbTrafficExtensionPathTemplate.match(
-      lbTrafficExtensionName
-    ).lb_traffic_extension;
+  matchLbTrafficExtensionFromLbTrafficExtensionName(lbTrafficExtensionName: string) {
+    return this.pathTemplates.lbTrafficExtensionPathTemplate.match(lbTrafficExtensionName).lb_traffic_extension;
   }
 
   /**
@@ -3320,7 +2626,7 @@ export class DepServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -3357,7 +2663,7 @@ export class DepServiceClient {
    * @param {string} mesh
    * @returns {string} Resource name string.
    */
-  meshPath(project: string, location: string, mesh: string) {
+  meshPath(project:string,location:string,mesh:string) {
     return this.pathTemplates.meshPathTemplate.render({
       project: project,
       location: location,
@@ -3399,12 +2705,74 @@ export class DepServiceClient {
   }
 
   /**
+   * Return a fully-qualified meshRouteView resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} mesh
+   * @param {string} route_view
+   * @returns {string} Resource name string.
+   */
+  meshRouteViewPath(project:string,location:string,mesh:string,routeView:string) {
+    return this.pathTemplates.meshRouteViewPathTemplate.render({
+      project: project,
+      location: location,
+      mesh: mesh,
+      route_view: routeView,
+    });
+  }
+
+  /**
+   * Parse the project from MeshRouteView resource.
+   *
+   * @param {string} meshRouteViewName
+   *   A fully-qualified path representing MeshRouteView resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMeshRouteViewName(meshRouteViewName: string) {
+    return this.pathTemplates.meshRouteViewPathTemplate.match(meshRouteViewName).project;
+  }
+
+  /**
+   * Parse the location from MeshRouteView resource.
+   *
+   * @param {string} meshRouteViewName
+   *   A fully-qualified path representing MeshRouteView resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMeshRouteViewName(meshRouteViewName: string) {
+    return this.pathTemplates.meshRouteViewPathTemplate.match(meshRouteViewName).location;
+  }
+
+  /**
+   * Parse the mesh from MeshRouteView resource.
+   *
+   * @param {string} meshRouteViewName
+   *   A fully-qualified path representing MeshRouteView resource.
+   * @returns {string} A string representing the mesh.
+   */
+  matchMeshFromMeshRouteViewName(meshRouteViewName: string) {
+    return this.pathTemplates.meshRouteViewPathTemplate.match(meshRouteViewName).mesh;
+  }
+
+  /**
+   * Parse the route_view from MeshRouteView resource.
+   *
+   * @param {string} meshRouteViewName
+   *   A fully-qualified path representing MeshRouteView resource.
+   * @returns {string} A string representing the route_view.
+   */
+  matchRouteViewFromMeshRouteViewName(meshRouteViewName: string) {
+    return this.pathTemplates.meshRouteViewPathTemplate.match(meshRouteViewName).route_view;
+  }
+
+  /**
    * Return a fully-qualified project resource name string.
    *
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -3429,11 +2797,7 @@ export class DepServiceClient {
    * @param {string} service_binding
    * @returns {string} Resource name string.
    */
-  serviceBindingPath(
-    project: string,
-    location: string,
-    serviceBinding: string
-  ) {
+  serviceBindingPath(project:string,location:string,serviceBinding:string) {
     return this.pathTemplates.serviceBindingPathTemplate.render({
       project: project,
       location: location,
@@ -3449,9 +2813,7 @@ export class DepServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServiceBindingName(serviceBindingName: string) {
-    return this.pathTemplates.serviceBindingPathTemplate.match(
-      serviceBindingName
-    ).project;
+    return this.pathTemplates.serviceBindingPathTemplate.match(serviceBindingName).project;
   }
 
   /**
@@ -3462,9 +2824,7 @@ export class DepServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServiceBindingName(serviceBindingName: string) {
-    return this.pathTemplates.serviceBindingPathTemplate.match(
-      serviceBindingName
-    ).location;
+    return this.pathTemplates.serviceBindingPathTemplate.match(serviceBindingName).location;
   }
 
   /**
@@ -3475,9 +2835,56 @@ export class DepServiceClient {
    * @returns {string} A string representing the service_binding.
    */
   matchServiceBindingFromServiceBindingName(serviceBindingName: string) {
-    return this.pathTemplates.serviceBindingPathTemplate.match(
-      serviceBindingName
-    ).service_binding;
+    return this.pathTemplates.serviceBindingPathTemplate.match(serviceBindingName).service_binding;
+  }
+
+  /**
+   * Return a fully-qualified serviceLbPolicy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} service_lb_policy
+   * @returns {string} Resource name string.
+   */
+  serviceLbPolicyPath(project:string,location:string,serviceLbPolicy:string) {
+    return this.pathTemplates.serviceLbPolicyPathTemplate.render({
+      project: project,
+      location: location,
+      service_lb_policy: serviceLbPolicy,
+    });
+  }
+
+  /**
+   * Parse the project from ServiceLbPolicy resource.
+   *
+   * @param {string} serviceLbPolicyName
+   *   A fully-qualified path representing ServiceLbPolicy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServiceLbPolicyName(serviceLbPolicyName: string) {
+    return this.pathTemplates.serviceLbPolicyPathTemplate.match(serviceLbPolicyName).project;
+  }
+
+  /**
+   * Parse the location from ServiceLbPolicy resource.
+   *
+   * @param {string} serviceLbPolicyName
+   *   A fully-qualified path representing ServiceLbPolicy resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromServiceLbPolicyName(serviceLbPolicyName: string) {
+    return this.pathTemplates.serviceLbPolicyPathTemplate.match(serviceLbPolicyName).location;
+  }
+
+  /**
+   * Parse the service_lb_policy from ServiceLbPolicy resource.
+   *
+   * @param {string} serviceLbPolicyName
+   *   A fully-qualified path representing ServiceLbPolicy resource.
+   * @returns {string} A string representing the service_lb_policy.
+   */
+  matchServiceLbPolicyFromServiceLbPolicyName(serviceLbPolicyName: string) {
+    return this.pathTemplates.serviceLbPolicyPathTemplate.match(serviceLbPolicyName).service_lb_policy;
   }
 
   /**
@@ -3488,7 +2895,7 @@ export class DepServiceClient {
    * @param {string} tcp_route
    * @returns {string} Resource name string.
    */
-  tcpRoutePath(project: string, location: string, tcpRoute: string) {
+  tcpRoutePath(project:string,location:string,tcpRoute:string) {
     return this.pathTemplates.tcpRoutePathTemplate.render({
       project: project,
       location: location,
@@ -3526,8 +2933,7 @@ export class DepServiceClient {
    * @returns {string} A string representing the tcp_route.
    */
   matchTcpRouteFromTcpRouteName(tcpRouteName: string) {
-    return this.pathTemplates.tcpRoutePathTemplate.match(tcpRouteName)
-      .tcp_route;
+    return this.pathTemplates.tcpRoutePathTemplate.match(tcpRouteName).tcp_route;
   }
 
   /**
@@ -3538,7 +2944,7 @@ export class DepServiceClient {
    * @param {string} tls_route
    * @returns {string} Resource name string.
    */
-  tlsRoutePath(project: string, location: string, tlsRoute: string) {
+  tlsRoutePath(project:string,location:string,tlsRoute:string) {
     return this.pathTemplates.tlsRoutePathTemplate.render({
       project: project,
       location: location,
@@ -3576,8 +2982,7 @@ export class DepServiceClient {
    * @returns {string} A string representing the tls_route.
    */
   matchTlsRouteFromTlsRouteName(tlsRouteName: string) {
-    return this.pathTemplates.tlsRoutePathTemplate.match(tlsRouteName)
-      .tls_route;
+    return this.pathTemplates.tlsRoutePathTemplate.match(tlsRouteName).tls_route;
   }
 
   /**
@@ -3592,12 +2997,8 @@ export class DepServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {
-          throw err;
-        });
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.iamClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }
