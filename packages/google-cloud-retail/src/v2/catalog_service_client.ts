@@ -32,7 +32,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -251,7 +251,7 @@ export class CatalogServiceClient {
       ),
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
@@ -587,42 +587,59 @@ export class CatalogServiceClient {
           this._log.info('updateCatalog response %j', response);
           return [response, options, rawResponse];
         }
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Set a specified branch id as default branch. API methods such as
-   * {@link protos.google.cloud.retail.v2.SearchService.Search|SearchService.Search},
-   * {@link protos.google.cloud.retail.v2.ProductService.GetProduct|ProductService.GetProduct},
-   * {@link protos.google.cloud.retail.v2.ProductService.ListProducts|ProductService.ListProducts}
-   * will treat requests using "default_branch" to the actual branch id set as
-   * default.
+   *  {@link protos.google.cloud.retail.v2.SearchService.Search|SearchService.Search},
+   *  {@link protos.google.cloud.retail.v2.ProductService.GetProduct|ProductService.GetProduct},
+   *  {@link protos.google.cloud.retail.v2.ProductService.ListProducts|ProductService.ListProducts}
+   *  will treat requests using "default_branch" to the actual branch id set as
+   *  default.
    *
-   * For example, if `projects/* /locations/* /catalogs/* /branches/1` is set as
-   * default, setting
-   * {@link protos.google.cloud.retail.v2.SearchRequest.branch|SearchRequest.branch} to
-   * `projects/* /locations/* /catalogs/* /branches/default_branch` is equivalent
-   * to setting
-   * {@link protos.google.cloud.retail.v2.SearchRequest.branch|SearchRequest.branch} to
-   * `projects/* /locations/* /catalogs/* /branches/1`.
+   *  For example, if `projects/* /locations/* /catalogs/* /branches/1` is set as
+   *  default, setting
+   *  {@link protos.google.cloud.retail.v2.SearchRequest.branch|SearchRequest.branch} to
+   *  `projects/* /locations/* /catalogs/* /branches/default_branch` is equivalent
+   *  to setting
+   *  {@link protos.google.cloud.retail.v2.SearchRequest.branch|SearchRequest.branch} to
+   *  `projects/* /locations/* /catalogs/* /branches/1`.
    *
-   * Using multiple branches can be useful when developers would like
-   * to have a staging branch to test and verify for future usage. When it
-   * becomes ready, developers switch on the staging branch using this API while
-   * keeping using `projects/* /locations/* /catalogs/* /branches/default_branch`
-   * as {@link protos.google.cloud.retail.v2.SearchRequest.branch|SearchRequest.branch} to
-   * route the traffic to this staging branch.
+   *  Using multiple branches can be useful when developers would like
+   *  to have a staging branch to test and verify for future usage. When it
+   *  becomes ready, developers switch on the staging branch using this API
+   *  while keeping using
+   *  `projects/* /locations/* /catalogs/* /branches/default_branch` as
+   *  {@link protos.google.cloud.retail.v2.SearchRequest.branch|SearchRequest.branch} to
+   *  route the traffic to this staging branch.
    *
-   * CAUTION: If you have live predict/search traffic, switching the default
-   * branch could potentially cause outages if the ID space of the new branch is
-   * very different from the old one.
+   *  CAUTION: If you have live predict/search traffic, switching the default
+   *  branch could potentially cause outages if the ID space of the new branch
+   *  is very different from the old one.
    *
-   * More specifically:
+   *  More specifically:
    *
-   * * PredictionService will only return product IDs from branch {newBranch}.
-   * * SearchService will only return product IDs from branch {newBranch}
-   *   (if branch is not explicitly set).
-   * * UserEventService will only join events with products from branch
-   *   {newBranch}.
+   *  * PredictionService will only return product IDs from branch {newBranch}.
+   *  * SearchService will only return product IDs from branch {newBranch}
+   *    (if branch is not explicitly set).
+   *  * UserEventService will only join events with products from branch
+   *    {newBranch}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -752,12 +769,28 @@ export class CatalogServiceClient {
           this._log.info('setDefaultBranch response %j', response);
           return [response, options, rawResponse];
         }
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Get which branch is currently default branch set by
-   * {@link protos.google.cloud.retail.v2.CatalogService.SetDefaultBranch|CatalogService.SetDefaultBranch}
-   * method under a specified parent catalog.
+   *  {@link protos.google.cloud.retail.v2.CatalogService.SetDefaultBranch|CatalogService.SetDefaultBranch}
+   *  method under a specified parent catalog.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -867,7 +900,23 @@ export class CatalogServiceClient {
           this._log.info('getDefaultBranch response %j', response);
           return [response, options, rawResponse];
         }
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Gets a {@link protos.google.cloud.retail.v2.CompletionConfig|CompletionConfig}.
@@ -986,7 +1035,23 @@ export class CatalogServiceClient {
           this._log.info('getCompletionConfig response %j', response);
           return [response, options, rawResponse];
         }
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Updates the {@link protos.google.cloud.retail.v2.CompletionConfig|CompletionConfig}s.
@@ -1126,7 +1191,23 @@ export class CatalogServiceClient {
           this._log.info('updateCompletionConfig response %j', response);
           return [response, options, rawResponse];
         }
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Gets an {@link protos.google.cloud.retail.v2.AttributesConfig|AttributesConfig}.
@@ -1245,7 +1326,23 @@ export class CatalogServiceClient {
           this._log.info('getAttributesConfig response %j', response);
           return [response, options, rawResponse];
         }
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Updates the {@link protos.google.cloud.retail.v2.AttributesConfig|AttributesConfig}.
@@ -1382,7 +1479,23 @@ export class CatalogServiceClient {
           this._log.info('updateAttributesConfig response %j', response);
           return [response, options, rawResponse];
         }
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Adds the specified
@@ -1509,7 +1622,23 @@ export class CatalogServiceClient {
           this._log.info('addCatalogAttribute response %j', response);
           return [response, options, rawResponse];
         }
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Removes the specified
@@ -1639,7 +1768,23 @@ export class CatalogServiceClient {
           this._log.info('removeCatalogAttribute response %j', response);
           return [response, options, rawResponse];
         }
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Replaces the specified
@@ -1779,7 +1924,23 @@ export class CatalogServiceClient {
           this._log.info('replaceCatalogAttribute response %j', response);
           return [response, options, rawResponse];
         }
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos
+          );
+        }
+        throw error;
+      });
   }
 
   /**
@@ -2912,8 +3073,10 @@ export class CatalogServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
-        this.operationsClient.close();
+        this.locationsClient.close().catch(err => {
+          throw err;
+        });
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();
